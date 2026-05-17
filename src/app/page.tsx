@@ -1,65 +1,42 @@
-import Image from "next/image";
+import { CalculatorExplorer } from "@/components/calculator-explorer";
+import { getAllCalculatorMeta } from "@/lib/calculators";
 
-export default function Home() {
+const calculators = getAllCalculatorMeta();
+const calculatorIds = calculators.map((c) => c.id);
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="relative">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[min(520px,75vh)] bg-[radial-gradient(ellipse_80%_55%_at_50%_-15%,oklch(0.55_0.16_250/0.18),transparent)]"
+      />
+      <div className="relative mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
+        <section className="mx-auto max-w-2xl text-center">
+          <p className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500 text-sm font-medium tracking-wide text-primary">
+            Battery &amp; power math, instantly
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <h1 className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:delay-75 mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl sm:leading-[1.08]">
+            Ultra-fast micro-calculators for batteries &amp; power
+          </h1>
+          <p className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:delay-150 mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {calculators.length} focused tools. No sign-up, no submit buttons—type
+            and get answers in milliseconds.
+          </p>
+        </section>
+
+        <section id="calculators" className="mt-12 sm:mt-16">
+          <div className="mb-6 space-y-1">
+            <h2 className="text-lg font-semibold tracking-tight sm:text-xl">
+              All calculators
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Search or filter by category
+            </p>
+          </div>
+          <CalculatorExplorer ids={calculatorIds} />
+        </section>
+      </div>
     </div>
   );
 }
