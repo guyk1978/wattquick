@@ -5,6 +5,9 @@ export type CalculatorCategory =
   | "battery"
   | "power"
   | "solar"
+  | "ev"
+  | "appliance"
+  | "sizing"
   | "cost"
   | "backup";
 
@@ -17,10 +20,19 @@ export type CalculatorId =
   | "watts-to-amps"
   | "amps-to-watts"
   | "solar-panel-size"
+  | "solar-battery-bank"
+  | "solar-daily-yield"
   | "battery-cost"
-  | "ups-runtime";
+  | "ups-runtime"
+  | "ev-charging-cost"
+  | "ev-charge-time"
+  | "appliance-daily-cost"
+  | "appliance-monthly-energy"
+  | "kva-to-kw"
+  | "kw-to-hp"
+  | "battery-bank-size"
+  | "inverter-sizing";
 
-/** Lightweight metadata for cards, nav, and SEO. */
 export interface CalculatorMeta {
   id: CalculatorId;
   href: string;
@@ -62,7 +74,6 @@ export interface CalculatorSeoContent {
   sections: CalculatorSeoSection[];
 }
 
-/** Full calculator definition — add a file in `definitions/` and register it. */
 export interface CalculatorDefinition extends CalculatorMeta {
   fields: CalculatorFieldDef[];
   result: CalculatorResultConfig;
@@ -88,6 +99,21 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   battery: "Battery",
   power: "Power",
   solar: "Solar",
+  ev: "EV Charging",
+  appliance: "Appliances",
+  sizing: "Battery Sizing",
   cost: "Cost",
   backup: "Backup",
+};
+
+export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string> = {
+  convert: "Ah, Wh, kVA, and unit conversions",
+  battery: "Runtime, charging, and charge level",
+  power: "Watts, amps, and electrical power",
+  solar: "Panels, yield, and off-grid storage",
+  ev: "Home charging time and cost",
+  appliance: "Daily use and electricity cost",
+  sizing: "Banks, inverters, and system sizing",
+  cost: "Battery pack pricing estimates",
+  backup: "UPS and backup runtime",
 };

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { createPageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,13 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "WattQuick — Battery & Power Calculators",
+    description:
+      "Ultra-fast battery, solar, EV, and power micro-calculators. 20+ free tools with instant results and minimal inputs.",
+    path: "",
+  }),
   title: {
     default: "WattQuick — Battery & Power Calculators",
     template: "%s | WattQuick",
   },
-  description:
-    "Ultra-fast battery and power micro-calculators. Runtime, charging, Ah/Wh, solar sizing, UPS backup, and more—instant answers with minimal inputs.",
-  metadataBase: new URL("https://wattquick.com"),
 };
 
 export default function RootLayout({

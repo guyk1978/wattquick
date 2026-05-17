@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { getSuggestions, type CalculatorMeta } from "@/lib/calculators";
+import { getRelatedCalculators, type CalculatorMeta } from "@/lib/calculators";
 import { SuggestedCalculators } from "./suggested-calculators";
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,7 @@ export function CalculatorLayout({
   className,
 }: CalculatorLayoutProps) {
   const Icon = calculator.icon;
-  const suggestions = getSuggestions(calculator.suggestions);
+  const suggestions = getRelatedCalculators(calculator.id);
 
   return (
     <div

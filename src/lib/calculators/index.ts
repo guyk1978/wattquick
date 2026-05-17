@@ -9,15 +9,23 @@ export type {
   CalculatorSeoContent,
   CalculatorSeoSection,
 } from "./types";
-export { CALCULATOR_CATEGORY_LABELS, toMeta } from "./types";
 export {
+  CALCULATOR_CATEGORY_DESCRIPTIONS,
+  CALCULATOR_CATEGORY_LABELS,
+  toMeta,
+} from "./types";
+export {
+  CALCULATOR_ORDER,
   getAllCalculatorDefinitions,
   getAllCalculatorMeta,
   getCalculatorDefinition,
   getCalculatorMeta,
+  getCalculatorsByCategory,
   getSuggestions,
 } from "./registry";
+export { getRelatedCalculators } from "./related";
 export { isCalculatorId } from "./utils";
+export { isCalculatorCategory } from "./categories";
 
 import { getAllCalculatorMeta as _getAllCalculatorMeta } from "./registry";
 

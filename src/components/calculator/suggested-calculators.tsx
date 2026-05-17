@@ -10,7 +10,7 @@ interface SuggestedCalculatorsProps {
 
 export function SuggestedCalculators({
   calculators,
-  title = "Suggested next",
+  title = "Related calculators",
   className,
 }: SuggestedCalculatorsProps) {
   if (calculators.length === 0) return null;
@@ -25,7 +25,7 @@ export function SuggestedCalculators({
           {title}
         </h2>
         <p className="text-sm text-muted-foreground">
-          Continue with a related calculator
+          More tools in this category and beyond
         </p>
       </div>
       <ul className="grid list-none gap-3 p-0 sm:grid-cols-2 sm:gap-4">

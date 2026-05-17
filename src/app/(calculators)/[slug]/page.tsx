@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CalculatorPage } from "@/components/calculator/calculator-page";
 import {
-  getAllCalculatorMeta,
+  CALCULATOR_ORDER,
   getCalculatorMeta,
   isCalculatorId,
 } from "@/lib/calculators";
+import { createPageMetadata } from "@/lib/seo";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return getAllCalculatorMeta().map((calc) => ({ slug: calc.id }));
+  return CALCULATOR_ORDER.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -20,14 +21,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!isCalculatorId(slug)) return {};
 
   const meta = getCalculatorMeta(slug);
-  return {
+  return createPageMetadata({
     title: meta.title,
     description: meta.description,
-    openGraph: {
-      title: `${meta.title} | WattQuick`,
-      description: meta.description,
-    },
-  };
+    path: meta.href,
+  });
 }
 
 export default async function CalculatorRoutePage({ params }: PageProps) {

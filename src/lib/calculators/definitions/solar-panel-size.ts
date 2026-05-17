@@ -11,7 +11,7 @@ export const solarPanelSizeDefinition: CalculatorDefinition = {
   icon: Sun,
   tag: "Solar",
   category: "solar",
-  suggestions: ["battery-runtime", "battery-cost", "ah-to-wh"],
+  suggestions: ["solar-daily-yield", "solar-battery-bank", "battery-bank-size"],
   fields: [
     {
       id: "dailyWh",
