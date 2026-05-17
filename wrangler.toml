@@ -1,0 +1,5 @@
+# Optional: local preview with `npx wrangler pages dev out`
+# Cloudflare Pages dashboard should use build output directory: out
+name = "wattquick"
+compatibility_date = "2024-08-01"
+pages_build_output_dir = "out"

@@ -5,6 +5,9 @@ import { PageShell } from "@/components/page-shell";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
 
+export const dynamicParams = false;
+export const dynamic = "force-static";
+
 type PageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {

@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 import {
   CALCULATOR_CATEGORY_LABELS,

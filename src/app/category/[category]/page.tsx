@@ -11,6 +11,9 @@ import {
 import { isCalculatorCategory } from "@/lib/calculators/categories";
 import { createPageMetadata } from "@/lib/seo";
 
+export const dynamicParams = false;
+export const dynamic = "force-static";
+
 type PageProps = { params: Promise<{ category: string }> };
 
 export function generateStaticParams() {

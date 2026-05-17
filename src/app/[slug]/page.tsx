@@ -12,7 +12,7 @@ import { createPageMetadata } from "@/lib/seo";
 /** Only pre-rendered calculator slugs; unknown slugs return 404 at build time. */
 export const dynamicParams = false;
 
-/** Force static HTML generation (Cloudflare Pages / next-on-pages). */
+/** Force static HTML generation (Cloudflare Pages static export). */
 export const dynamic = "force-static";
 
 type PageProps = {
