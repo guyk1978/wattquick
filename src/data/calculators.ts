@@ -8,6 +8,7 @@ import {
   parsePositive,
 } from "@/lib/format";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
+import { calculatorsExtra } from "@/data/calculators-extra";
 
 /**
  * Single source of truth for all calculator tools.
@@ -1025,7 +1026,8 @@ export const calculators = [
       detail: `${formatNumber(wh, { maxDecimals: 0 })} Wh ÷ ${formatNumber(load, { maxDecimals: 0 })} W · ${duration.detail}`,
     };
   },
-}
+},
+  ...calculatorsExtra,
 ] as const satisfies readonly CalculatorDataEntry[];
 
 export type CalculatorSlug = (typeof calculators)[number]["slug"];

@@ -7,7 +7,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "All Calculators",
   description:
-    "Browse 20+ free battery, solar, EV, and power micro-calculators. Instant results with minimal inputs.",
+    "Browse 40+ free battery, solar, EV, and power micro-calculators. Instant results with minimal inputs.",
   path: "/calculators",
 });
 

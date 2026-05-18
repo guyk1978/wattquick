@@ -14,6 +14,14 @@ export function parseNonNegative(value: string): number | null {
   return num;
 }
 
+export function parseLatitude(value: string): number | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  const num = Number(trimmed);
+  if (!Number.isFinite(num) || Math.abs(num) > 90) return null;
+  return num;
+}
+
 export function parsePercent(value: string): number | null {
   const num = parsePositive(value);
   if (num === null || num > 100) return null;
