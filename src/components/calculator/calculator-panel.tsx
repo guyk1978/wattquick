@@ -4,6 +4,7 @@ import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { useMemo } from "react";
+import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { cn } from "@/lib/utils";
@@ -46,6 +47,8 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
         detail={result.detail}
         emptyMessage={definition.result.emptyMessage}
       />
+
+      <ShareButtons title={definition.title} className="pt-1" />
     </div>
   );
 }
