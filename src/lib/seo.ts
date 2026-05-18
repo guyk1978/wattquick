@@ -19,12 +19,14 @@ export function createPageMetadata({
   title,
   description,
   path = "",
+  keywords,
   noIndex = false,
   ogImage = DEFAULT_OG_IMAGE,
 }: {
   title: string;
   description: string;
   path?: string;
+  keywords?: string[];
   noIndex?: boolean;
   ogImage?: string;
 }): Metadata {
@@ -34,6 +36,7 @@ export function createPageMetadata({
   return {
     title,
     description,
+    ...(keywords?.length ? { keywords } : {}),
     alternates: { canonical: url },
     openGraph: {
       title: fullTitle,

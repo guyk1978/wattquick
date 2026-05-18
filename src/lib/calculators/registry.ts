@@ -1,23 +1,4 @@
-import { ahToWhDefinition } from "./definitions/ah-to-wh";
-import { ampsToWattsDefinition } from "./definitions/amps-to-watts";
-import { applianceDailyCostDefinition } from "./definitions/appliance-daily-cost";
-import { applianceMonthlyEnergyDefinition } from "./definitions/appliance-monthly-energy";
-import { batteryBankSizeDefinition } from "./definitions/battery-bank-size";
-import { batteryChargingTimeDefinition } from "./definitions/battery-charging-time";
-import { batteryCostDefinition } from "./definitions/battery-cost";
-import { batteryPercentageDefinition } from "./definitions/battery-percentage";
-import { batteryRuntimeDefinition } from "./definitions/battery-runtime";
-import { evChargeTimeDefinition } from "./definitions/ev-charge-time";
-import { evChargingCostDefinition } from "./definitions/ev-charging-cost";
-import { inverterSizingDefinition } from "./definitions/inverter-sizing";
-import { kvaToKwDefinition } from "./definitions/kva-to-kw";
-import { kwToHpDefinition } from "./definitions/kw-to-hp";
-import { solarBatteryBankDefinition } from "./definitions/solar-battery-bank";
-import { solarDailyYieldDefinition } from "./definitions/solar-daily-yield";
-import { solarPanelSizeDefinition } from "./definitions/solar-panel-size";
-import { upsRuntimeDefinition } from "./definitions/ups-runtime";
-import { wattsToAmpsDefinition } from "./definitions/watts-to-amps";
-import { whToAhDefinition } from "./definitions/wh-to-ah";
+import { calculators, CALCULATOR_SLUGS } from "@/data/calculators";
 import {
   toMeta,
   type CalculatorCategory,
@@ -26,51 +7,32 @@ import {
   type CalculatorMeta,
 } from "./types";
 
-const DEFINITIONS = {
-  "ah-to-wh": ahToWhDefinition,
-  "wh-to-ah": whToAhDefinition,
-  "battery-percentage": batteryPercentageDefinition,
-  "battery-charging-time": batteryChargingTimeDefinition,
-  "battery-runtime": batteryRuntimeDefinition,
-  "watts-to-amps": wattsToAmpsDefinition,
-  "amps-to-watts": ampsToWattsDefinition,
-  "kva-to-kw": kvaToKwDefinition,
-  "kw-to-hp": kwToHpDefinition,
-  "solar-panel-size": solarPanelSizeDefinition,
-  "solar-battery-bank": solarBatteryBankDefinition,
-  "solar-daily-yield": solarDailyYieldDefinition,
-  "ev-charging-cost": evChargingCostDefinition,
-  "ev-charge-time": evChargeTimeDefinition,
-  "appliance-daily-cost": applianceDailyCostDefinition,
-  "appliance-monthly-energy": applianceMonthlyEnergyDefinition,
-  "battery-bank-size": batteryBankSizeDefinition,
-  "inverter-sizing": inverterSizingDefinition,
-  "battery-cost": batteryCostDefinition,
-  "ups-runtime": upsRuntimeDefinition,
-} as const satisfies Record<CalculatorId, CalculatorDefinition>;
+function toDefinition(
+  entry: (typeof calculators)[number]
+): CalculatorDefinition {
+  return {
+    id: entry.slug as CalculatorId,
+    href: entry.href,
+    title: entry.title,
+    description: entry.description,
+    keywords: entry.keywords,
+    icon: entry.icon,
+    tag: entry.tag,
+    category: entry.category,
+    suggestions: entry.suggestions as CalculatorId[],
+    fields: entry.fields,
+    result: entry.result,
+    seo: entry.seo,
+    compute: entry.compute,
+  };
+}
 
-export const CALCULATOR_ORDER: CalculatorId[] = [
-  "ah-to-wh",
-  "wh-to-ah",
-  "kva-to-kw",
-  "kw-to-hp",
-  "watts-to-amps",
-  "amps-to-watts",
-  "battery-percentage",
-  "battery-runtime",
-  "battery-charging-time",
-  "battery-bank-size",
-  "solar-panel-size",
-  "solar-daily-yield",
-  "solar-battery-bank",
-  "ev-charging-cost",
-  "ev-charge-time",
-  "appliance-daily-cost",
-  "appliance-monthly-energy",
-  "inverter-sizing",
-  "battery-cost",
-  "ups-runtime",
-];
+const DEFINITIONS = Object.fromEntries(
+  calculators.map((entry) => [entry.slug, toDefinition(entry)])
+) as Record<CalculatorId, CalculatorDefinition>;
+
+/** Display order for calculators across the site */
+export const CALCULATOR_ORDER: CalculatorId[] = [...CALCULATOR_SLUGS];
 
 export function getCalculatorDefinition(id: CalculatorId): CalculatorDefinition {
   return DEFINITIONS[id];

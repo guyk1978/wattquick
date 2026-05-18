@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CalculatorPage } from "@/components/calculator/calculator-page";
+import { CALCULATOR_SLUGS } from "@/data/calculators";
 import {
-  CALCULATOR_ORDER,
   getCalculatorMeta,
   isCalculatorId,
   type CalculatorId,
@@ -19,12 +19,9 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-/**
- * All calculator slugs from src/lib/calculators/registry.ts (CALCULATOR_ORDER).
- * Keep in sync with DEFINITIONS — every slug must be listed here for static export.
- */
+/** Calculator slugs from data/calculators.ts (single source of truth). */
 export function generateStaticParams(): { slug: CalculatorId }[] {
-  return CALCULATOR_ORDER.map((slug) => ({ slug }));
+  return CALCULATOR_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -39,6 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: meta.title,
     description: meta.description,
     path: meta.href,
+    keywords: meta.keywords,
   });
 }
 

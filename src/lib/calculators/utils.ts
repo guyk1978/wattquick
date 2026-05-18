@@ -1,6 +1,6 @@
-import { CALCULATOR_ORDER } from "./registry";
+import { CALCULATOR_SLUGS } from "@/data/calculators";
 import type { CalculatorId } from "./types";
 
 export function isCalculatorId(value: string): value is CalculatorId {
-  return (CALCULATOR_ORDER as readonly string[]).includes(value);
+  return (CALCULATOR_SLUGS as readonly string[]).includes(value);
 }

@@ -2,14 +2,12 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 import { getAllBlogPosts } from "@/lib/blog/posts";
-import {
-  CALCULATOR_CATEGORY_LABELS,
-  getAllCalculatorMeta,
-} from "@/lib/calculators";
+import { calculators } from "@/data/calculators";
+import { CALCULATOR_CATEGORY_LABELS } from "@/lib/calculators";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const calculators = getAllCalculatorMeta();
+  const calculatorPages = calculators;
   const posts = getAllBlogPosts();
   const categories = Object.keys(CALCULATOR_CATEGORY_LABELS);
 
@@ -36,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.75,
     })),
-    ...calculators.map((calc) => ({
+    ...calculatorPages.map((calc) => ({
       url: `${SITE_URL}${calc.href}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,

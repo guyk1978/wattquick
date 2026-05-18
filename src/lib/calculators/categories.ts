@@ -1,5 +1,7 @@
-import type { CalculatorCategory } from "./types";
-import { CALCULATOR_CATEGORY_LABELS } from "./types";
+import {
+  CALCULATOR_CATEGORY_LABELS,
+  type CalculatorCategory,
+} from "@/data/calculator-types";
 
 const CATEGORIES = Object.keys(
   CALCULATOR_CATEGORY_LABELS

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { CalculatorExplorer } from "@/components/calculator-explorer";
+import { CALCULATOR_SLUGS } from "@/data/calculators";
 import {
   CALCULATOR_CATEGORY_LABELS,
-  CALCULATOR_ORDER,
   getAllCalculatorMeta,
 } from "@/lib/calculators";
 import type { CalculatorCategory } from "@/lib/calculators";
@@ -79,7 +79,7 @@ export default function HomePage() {
               Search or filter—all tools update live
             </p>
           </div>
-          <CalculatorExplorer ids={[...CALCULATOR_ORDER]} />
+          <CalculatorExplorer ids={[...CALCULATOR_SLUGS]} />
         </section>
       </div>
     </div>

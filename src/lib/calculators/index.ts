@@ -1,5 +1,6 @@
 export type {
   CalculatorCategory,
+  CalculatorComputeFn,
   CalculatorDefinition,
   CalculatorFieldDef,
   CalculatorId,
@@ -9,6 +10,11 @@ export type {
   CalculatorSeoContent,
   CalculatorSeoSection,
 } from "./types";
+export {
+  calculators,
+  CALCULATOR_SLUGS,
+  type CalculatorSlug,
+} from "@/data/calculators";
 export {
   CALCULATOR_CATEGORY_DESCRIPTIONS,
   CALCULATOR_CATEGORY_LABELS,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CalculatorExplorer } from "@/components/calculator-explorer";
 import { PageHeader, PageShell } from "@/components/page-shell";
-import { CALCULATOR_ORDER } from "@/lib/calculators";
+import { CALCULATOR_SLUGS } from "@/data/calculators";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -18,7 +18,7 @@ export default function CalculatorsPage() {
         title="All calculators"
         description="Search or filter by category. Every tool updates live as you type."
       />
-      <CalculatorExplorer ids={[...CALCULATOR_ORDER]} />
+      <CalculatorExplorer ids={[...CALCULATOR_SLUGS]} />
     </PageShell>
   );
 }
