@@ -14,6 +14,8 @@ export type {
   CalculatorCategory,
   CalculatorComputeFn,
   CalculatorFieldDef,
+  CalculatorFieldInputType,
+  CalculatorFieldOption,
   CalculatorResultConfig,
   CalculatorResultDisplay,
   CalculatorSeoContent,

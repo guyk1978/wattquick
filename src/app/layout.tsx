@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "WattQuick — Battery & Power Calculators",
     description:
-      "Ultra-fast battery, solar, EV, and power micro-calculators. 40+ free tools with instant results and minimal inputs.",
+      "Ultra-fast battery, solar, EV, and power micro-calculators. 60+ free tools with instant results and minimal inputs.",
     path: "",
   }),
   title: {

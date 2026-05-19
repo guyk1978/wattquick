@@ -18,7 +18,7 @@ export default function BlogPage() {
     <PageShell className="max-w-3xl">
       <PageHeader
         title="Blog"
-        description="Short guides to help you get more from our calculators."
+        description="Expert guides on EV charging, solar, batteries, and home energy—each paired with interactive WattQuick tools."
       />
       <ul className="space-y-6">
         {posts.map((post) => (

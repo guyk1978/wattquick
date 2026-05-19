@@ -9,6 +9,10 @@ import {
 } from "@/lib/format";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 import { calculatorsExtra } from "@/data/calculators-extra";
+import { calculatorsEv } from "@/data/calculators-ev";
+import { calculatorsSolar } from "@/data/calculators-solar";
+import { calculatorsBattery } from "@/data/calculators-battery";
+import { calculatorsAppliances } from "@/data/calculators-appliances";
 
 /**
  * Single source of truth for all calculator tools.
@@ -1028,6 +1032,10 @@ export const calculators = [
   },
 },
   ...calculatorsExtra,
+  ...calculatorsEv,
+  ...calculatorsSolar,
+  ...calculatorsBattery,
+  ...calculatorsAppliances,
 ] as const satisfies readonly CalculatorDataEntry[];
 
 export type CalculatorSlug = (typeof calculators)[number]["slug"];

@@ -11,6 +11,13 @@ export type CalculatorCategory =
   | "cost"
   | "backup";
 
+export type CalculatorFieldInputType = "text" | "select" | "range";
+
+export interface CalculatorFieldOption {
+  value: string;
+  label: string;
+}
+
 export interface CalculatorFieldDef {
   id: string;
   label: string;
@@ -19,6 +26,12 @@ export interface CalculatorFieldDef {
   hint?: string;
   defaultValue?: string;
   colSpan?: 1 | 2;
+  /** Defaults to `text` */
+  inputType?: CalculatorFieldInputType;
+  options?: CalculatorFieldOption[];
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 export interface CalculatorResultDisplay {

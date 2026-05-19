@@ -3,6 +3,8 @@ export type {
   CalculatorComputeFn,
   CalculatorDefinition,
   CalculatorFieldDef,
+  CalculatorFieldInputType,
+  CalculatorFieldOption,
   CalculatorId,
   CalculatorMeta,
   CalculatorResultConfig,

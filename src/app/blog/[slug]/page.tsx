@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogContent } from "@/components/blog/blog-content";
 import { PageShell } from "@/components/page-shell";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
@@ -60,25 +61,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
           </h1>
           <p className="text-lg text-muted-foreground">{post.description}</p>
         </header>
-        <div className="space-y-8">
-          {post.content.map((section, i) => (
-            <section key={i} className="space-y-3">
-              {section.heading ? (
-                <h2 className="text-lg font-semibold text-foreground">
-                  {section.heading}
-                </h2>
-              ) : null}
-              {section.paragraphs.map((p, j) => (
-                <p
-                  key={j}
-                  className="text-base leading-relaxed text-muted-foreground"
-                >
-                  {p}
-                </p>
-              ))}
-            </section>
-          ))}
-        </div>
+        <BlogContent content={post.content} />
       </article>
     </PageShell>
   );
