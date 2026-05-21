@@ -4,6 +4,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   getAllCalculatorMeta,
 } from "@/lib/calculators";
+import { FOOTER_NETWORK_PARTNERS } from "@/lib/partners";
 import { FOOTER_CALCULATOR_CATEGORIES, FOOTER_LINKS } from "@/lib/site";
 
 export function SiteFooter() {
@@ -81,7 +82,27 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p className="mt-10 border-t border-border/40 pt-8 text-center text-xs text-muted-foreground">
+        <div className="mt-10 border-t border-border/40 pt-8">
+          <h2 className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Network partners
+          </h2>
+          <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
+            {FOOTER_NETWORK_PARTNERS.map((partner) => (
+              <li key={partner.href}>
+                <a
+                  href={partner.href}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {partner.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="mt-8 text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} WattQuick. All calculators are estimates—for
           planning only, not professional engineering advice.
         </p>
