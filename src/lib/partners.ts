@@ -1,0 +1,3 @@
+/** Partner platform URLs for WattQuick cross-links */
+export const CALNEX_APP_URL = "https://www.calnexapp.com/";
+export const JOIN_MY_PDF_URL = "https://www.joinmypdf.com/";

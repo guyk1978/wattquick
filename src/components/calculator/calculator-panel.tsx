@@ -4,6 +4,7 @@ import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { useMemo } from "react";
+import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
@@ -22,6 +23,11 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   const result = useMemo(
     () => definition.compute(values),
     [definition, values]
+  );
+
+  const fieldLabels = useMemo(
+    () => Object.fromEntries(definition.fields.map((f) => [f.id, f.label])),
+    [definition.fields]
   );
 
   return (
@@ -46,6 +52,16 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
         unit={result.unit}
         detail={result.detail}
         emptyMessage={definition.result.emptyMessage}
+      />
+
+      <JoinMyPdfSaveReport
+        calculatorTitle={definition.title}
+        resultLabel={definition.result.label}
+        value={result.value}
+        unit={result.unit}
+        detail={result.detail}
+        values={values}
+        fieldLabels={fieldLabels}
       />
 
       <ShareButtons title={definition.title} className="pt-1" />

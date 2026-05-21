@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CalnexAppCallout } from "@/components/CalnexAppCallout";
 import { CalculatorExplorer } from "@/components/calculator-explorer";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import {
@@ -69,6 +70,8 @@ export default function HomePage() {
             ))}
           </ul>
         </section>
+
+        <CalnexAppCallout className="mt-8 sm:mt-10" />
 
         <section id="calculators" className="mt-14 sm:mt-16">
           <div className="mb-6 space-y-1">
