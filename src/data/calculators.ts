@@ -8,15 +8,15 @@ import {
   parsePositive,
 } from "@/lib/format";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
-import { calculatorsExtra } from "@/data/calculators-extra";
-import { calculatorsEv } from "@/data/calculators-ev";
-import { calculatorsSolar } from "@/data/calculators-solar";
-import { calculatorsBattery } from "@/data/calculators-battery";
 import { calculatorsAppliances } from "@/data/calculators-appliances";
+import { calculatorsBattery } from "@/data/calculators-battery";
 import { calculatorsCommercialEv } from "@/data/calculators-commercial-ev";
-import { calculatorsRvMarine } from "@/data/calculators-rv-marine";
-import { calculatorsTariffs } from "@/data/calculators-tariffs";
+import { calculatorsEv } from "@/data/calculators-ev";
+import { calculatorsExtra } from "@/data/calculators-extra";
 import { calculatorsGreenHome } from "@/data/calculators-green-home";
+import { calculatorsRvMarine } from "@/data/calculators-rv-marine";
+import { calculatorsSolar } from "@/data/calculators-solar";
+import { calculatorsTariffs } from "@/data/calculators-tariffs";
 
 /**
  * Single source of truth for all calculator tools.
@@ -1035,11 +1035,14 @@ export const calculators = [
     };
   },
 },
+  // Batches 2–3: extra tools, EV, solar
   ...calculatorsExtra,
   ...calculatorsEv,
   ...calculatorsSolar,
+  // Batch 5–6: battery & appliances
   ...calculatorsBattery,
   ...calculatorsAppliances,
+  // Batch 4: commercial EV, RV/marine, tariffs, green home (19 tools)
   ...calculatorsCommercialEv,
   ...calculatorsRvMarine,
   ...calculatorsTariffs,
