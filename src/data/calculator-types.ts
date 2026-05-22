@@ -9,7 +9,11 @@ export type CalculatorCategory =
   | "appliance"
   | "sizing"
   | "cost"
-  | "backup";
+  | "backup"
+  | "commercial-ev"
+  | "rv-marine"
+  | "tariffs"
+  | "green-home";
 
 export type CalculatorFieldInputType = "text" | "select" | "range";
 
@@ -85,6 +89,10 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   sizing: "Battery Sizing",
   cost: "Cost",
   backup: "Backup",
+  "commercial-ev": "Commercial EV",
+  "rv-marine": "RV & Marine",
+  tariffs: "Utility Tariffs",
+  "green-home": "Green Home",
 };
 
 export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string> = {
@@ -97,4 +105,8 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   sizing: "Banks, inverters, and system sizing",
   cost: "Battery pack pricing estimates",
   backup: "UPS and backup runtime",
+  "commercial-ev": "Fleet trucks, vans, buses, and industrial EV",
+  "rv-marine": "RV solar, marine banks, camping and portable power",
+  tariffs: "TOU rates, demand charges, V2G, and arbitrage",
+  "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
 };

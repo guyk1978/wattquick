@@ -13,6 +13,10 @@ import { calculatorsEv } from "@/data/calculators-ev";
 import { calculatorsSolar } from "@/data/calculators-solar";
 import { calculatorsBattery } from "@/data/calculators-battery";
 import { calculatorsAppliances } from "@/data/calculators-appliances";
+import { calculatorsCommercialEv } from "@/data/calculators-commercial-ev";
+import { calculatorsRvMarine } from "@/data/calculators-rv-marine";
+import { calculatorsTariffs } from "@/data/calculators-tariffs";
+import { calculatorsGreenHome } from "@/data/calculators-green-home";
 
 /**
  * Single source of truth for all calculator tools.
@@ -1036,6 +1040,10 @@ export const calculators = [
   ...calculatorsSolar,
   ...calculatorsBattery,
   ...calculatorsAppliances,
+  ...calculatorsCommercialEv,
+  ...calculatorsRvMarine,
+  ...calculatorsTariffs,
+  ...calculatorsGreenHome,
 ] as const satisfies readonly CalculatorDataEntry[];
 
 export type CalculatorSlug = (typeof calculators)[number]["slug"];
