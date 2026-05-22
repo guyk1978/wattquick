@@ -9,7 +9,11 @@ export type BlogCategory =
   | "Battery"
   | "Appliances"
   | "Guides"
-  | "Tips";
+  | "Tips"
+  | "Commercial EV"
+  | "RV & Marine"
+  | "Utility Tariffs"
+  | "Green Home";
 
 export interface BlogPost {
   slug: string;
