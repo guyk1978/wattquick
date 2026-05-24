@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CalnexAppCallout } from "@/components/CalnexAppCallout";
+import { HeroBatteryBadge } from "@/components/animated-battery";
 import { CalculatorExplorer } from "@/components/calculator-explorer";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import {
@@ -27,9 +28,7 @@ export default function HomePage() {
       />
       <div className="relative mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-16 lg:py-20">
         <section className="mx-auto max-w-2xl text-center">
-          <p className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500 text-sm font-medium tracking-wide text-primary">
-            Battery &amp; power micro-tools
-          </p>
+          <HeroBatteryBadge className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-500" />
           <h1 className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:delay-75 mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-5xl sm:leading-[1.08]">
             Instant answers for batteries, solar &amp; EV
           </h1>

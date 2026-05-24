@@ -112,3 +112,63 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+@keyframes header-charge-cycle {
+  0% {
+    width: 0%;
+    background-color: #ef4444;
+  }
+  20% {
+    background-color: #f97316;
+  }
+  40% {
+    background-color: #eab308;
+  }
+  60%,
+  80% {
+    width: 100%;
+    background-color: #22c55e;
+  }
+  90% {
+    width: 30%;
+    background-color: #f97316;
+  }
+  100% {
+    width: 0%;
+    background-color: #ef4444;
+  }
+}
+
+@keyframes hero-charge-cycle {
+  0% {
+    width: 0%;
+    background-color: #ef4444;
+  }
+  20% {
+    background-color: #f97316;
+  }
+  40% {
+    background-color: #eab308;
+  }
+  60%,
+  80% {
+    width: 100%;
+    background-color: #22c55e;
+  }
+  90% {
+    width: 30%;
+    background-color: #f97316;
+  }
+  100% {
+    width: 0%;
+    background-color: #ef4444;
+  }
+}
+
+.battery-level-mini {
+  animation: header-charge-cycle 4s infinite ease-in-out;
+}
+
+.battery-level {
+  animation: hero-charge-cycle 4s infinite ease-in-out;
+}

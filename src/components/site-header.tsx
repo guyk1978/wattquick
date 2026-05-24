@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Zap } from "lucide-react";
 import { MobileNav } from "@/components/mobile-nav";
+import { AnimatedBattery } from "@/components/animated-battery";
 import { MAIN_NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +17,7 @@ export function SiteHeader() {
             <Zap className="size-4" strokeWidth={2.5} />
           </span>
           <span className="text-base font-semibold tracking-tight">WattQuick</span>
+          <AnimatedBattery variant="mini" />
         </Link>
 
         <nav
