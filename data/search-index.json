@@ -1,0 +1,1763 @@
+{
+  "version": 1,
+  "generatedAt": "2026-05-25T12:24:18.639Z",
+  "popular": [
+    {
+      "id": "battery-runtime",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Runtime",
+      "description": "Estimate how long a battery lasts at a given power draw.",
+      "href": "/battery-runtime/",
+      "tag": "Runtime",
+      "keywords": [
+        "battery runtime",
+        "battery life calculator",
+        "how long battery lasts"
+      ]
+    },
+    {
+      "id": "ah-to-wh",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Ah to Wh Converter",
+      "description": "Convert amp-hours to watt-hours using battery voltage.",
+      "href": "/ah-to-wh/",
+      "tag": "Convert",
+      "keywords": [
+        "ah to wh",
+        "amp hours to watt hours",
+        "battery energy converter"
+      ]
+    },
+    {
+      "id": "ev-charging-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Charging Cost",
+      "description": "Estimate home charging cost from energy used and your utility rate.",
+      "href": "/ev-charging-cost/",
+      "tag": "EV",
+      "keywords": [
+        "ev charging cost",
+        "electric car charging cost",
+        "home ev charging"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "ah-to-wh",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Ah to Wh Converter",
+      "description": "Convert amp-hours to watt-hours using battery voltage.",
+      "href": "/ah-to-wh/",
+      "tag": "Convert",
+      "keywords": [
+        "ah to wh",
+        "amp hours to watt hours",
+        "battery energy converter"
+      ]
+    },
+    {
+      "id": "wh-to-ah",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Wh to Ah Converter",
+      "description": "Convert watt-hours to amp-hours using system voltage.",
+      "href": "/wh-to-ah/",
+      "tag": "Convert",
+      "keywords": [
+        "wh to ah",
+        "watt hours to amp hours",
+        "battery capacity converter"
+      ]
+    },
+    {
+      "id": "kva-to-kw",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "kVA to kW Converter",
+      "description": "Convert apparent power (kVA) to real power (kW) using power factor.",
+      "href": "/kva-to-kw/",
+      "tag": "Convert",
+      "keywords": [
+        "kva to kw",
+        "apparent power converter",
+        "power factor calculator"
+      ]
+    },
+    {
+      "id": "kw-to-hp",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "kW to HP Converter",
+      "description": "Convert kilowatts to mechanical horsepower instantly.",
+      "href": "/kw-to-hp/",
+      "tag": "Convert",
+      "keywords": [
+        "kw to hp",
+        "kilowatt to horsepower",
+        "motor hp calculator"
+      ]
+    },
+    {
+      "id": "watts-to-amps",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Watts to Amps",
+      "description": "Convert electrical power (watts) to current (amps) at a given voltage.",
+      "href": "/watts-to-amps/",
+      "tag": "Power",
+      "keywords": [
+        "watts to amps",
+        "power to current",
+        "dc amps calculator"
+      ]
+    },
+    {
+      "id": "amps-to-watts",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Amps to Watts",
+      "description": "Convert current (amps) and voltage into power (watts).",
+      "href": "/amps-to-watts/",
+      "tag": "Power",
+      "keywords": [
+        "amps to watts",
+        "current to power",
+        "wattage calculator"
+      ]
+    },
+    {
+      "id": "battery-percentage",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Percentage",
+      "description": "Find remaining charge as a percentage of full capacity.",
+      "href": "/battery-percentage/",
+      "tag": "Battery",
+      "keywords": [
+        "battery percentage",
+        "state of charge",
+        "battery level calculator"
+      ]
+    },
+    {
+      "id": "battery-runtime",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Runtime",
+      "description": "Estimate how long a battery lasts at a given power draw.",
+      "href": "/battery-runtime/",
+      "tag": "Runtime",
+      "keywords": [
+        "battery runtime",
+        "battery life calculator",
+        "how long battery lasts"
+      ]
+    },
+    {
+      "id": "battery-charging-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Charging Time",
+      "description": "Calculate how long it takes to charge a battery at a given current.",
+      "href": "/battery-charging-time/",
+      "tag": "Charging",
+      "keywords": [
+        "battery charging time",
+        "charge time calculator",
+        "mAh charging"
+      ]
+    },
+    {
+      "id": "battery-bank-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery Sizing",
+      "title": "Battery Bank Size (Ah)",
+      "description": "Size a battery bank in amp-hours from load, runtime, and voltage.",
+      "href": "/battery-bank-size/",
+      "tag": "Sizing",
+      "keywords": [
+        "battery bank ah",
+        "battery bank sizing",
+        "amp hour bank"
+      ]
+    },
+    {
+      "id": "solar-panel-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Size",
+      "description": "Estimate minimum panel wattage from daily energy use and sun hours.",
+      "href": "/solar-panel-size/",
+      "tag": "Solar",
+      "keywords": [
+        "solar panel size",
+        "solar panel calculator",
+        "pv sizing"
+      ]
+    },
+    {
+      "id": "solar-daily-yield",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Daily Yield",
+      "description": "Estimate daily energy output from panel wattage and sun hours.",
+      "href": "/solar-daily-yield/",
+      "tag": "Solar",
+      "keywords": [
+        "solar daily yield",
+        "solar output calculator",
+        "panel output wh"
+      ]
+    },
+    {
+      "id": "solar-battery-bank",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Battery Bank Size",
+      "description": "Size an off-grid battery bank from daily use and backup days.",
+      "href": "/solar-battery-bank/",
+      "tag": "Solar",
+      "keywords": [
+        "solar battery bank",
+        "off grid battery size",
+        "solar storage"
+      ]
+    },
+    {
+      "id": "ev-charging-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Charging Cost",
+      "description": "Estimate home charging cost from energy used and your utility rate.",
+      "href": "/ev-charging-cost/",
+      "tag": "EV",
+      "keywords": [
+        "ev charging cost",
+        "electric car charging cost",
+        "home ev charging"
+      ]
+    },
+    {
+      "id": "ev-charge-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Charge Time",
+      "description": "Estimate how long an EV charge takes at a given charger power.",
+      "href": "/ev-charge-time/",
+      "tag": "EV",
+      "keywords": [
+        "ev charge time",
+        "electric car charge time",
+        "level 2 charging time"
+      ]
+    },
+    {
+      "id": "appliance-daily-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Appliance Daily Cost",
+      "description": "Calculate daily electricity cost for any appliance from watts and runtime.",
+      "href": "/appliance-daily-cost/",
+      "tag": "Appliance",
+      "keywords": [
+        "appliance daily cost",
+        "electricity cost per day",
+        "power cost"
+      ]
+    },
+    {
+      "id": "appliance-monthly-energy",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Appliance Monthly Energy",
+      "description": "Convert appliance watts and daily use into monthly kWh.",
+      "href": "/appliance-monthly-energy/",
+      "tag": "Appliance",
+      "keywords": [
+        "appliance monthly kwh",
+        "monthly energy use",
+        "kwh per month"
+      ]
+    },
+    {
+      "id": "inverter-sizing",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery Sizing",
+      "title": "Inverter Sizing",
+      "description": "Find minimum inverter size from peak load and safety margin.",
+      "href": "/inverter-sizing/",
+      "tag": "Sizing",
+      "keywords": [
+        "inverter sizing",
+        "inverter size calculator",
+        "inverter watts"
+      ]
+    },
+    {
+      "id": "battery-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Cost",
+      "title": "Battery Cost Estimator",
+      "description": "Estimate pack cost from capacity, voltage, and price per watt-hour.",
+      "href": "/battery-cost/",
+      "tag": "Cost",
+      "keywords": [
+        "battery cost",
+        "battery price calculator",
+        "cost per wh"
+      ]
+    },
+    {
+      "id": "ups-runtime",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Backup",
+      "title": "UPS Runtime",
+      "description": "Estimate backup time from battery energy and load power.",
+      "href": "/ups-runtime/",
+      "tag": "Backup",
+      "keywords": [
+        "ups runtime",
+        "backup time calculator",
+        "ups battery life"
+      ]
+    },
+    {
+      "id": "ohms-law",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Ohm's Law Calculator",
+      "description": "Find voltage, current, or resistance when you know any two values (V = I × R).",
+      "href": "/ohms-law/",
+      "tag": "Power",
+      "keywords": [
+        "ohms law calculator",
+        "voltage current resistance",
+        "ohm law"
+      ]
+    },
+    {
+      "id": "volts-to-watts",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Volts to Watts Calculator",
+      "description": "Convert voltage and current into electrical power in watts.",
+      "href": "/volts-to-watts/",
+      "tag": "Power",
+      "keywords": [
+        "volts to watts",
+        "voltage amps to watts",
+        "power calculator"
+      ]
+    },
+    {
+      "id": "watts-to-volts",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Watts to Volts Calculator",
+      "description": "Find voltage from power and current (V = W ÷ A).",
+      "href": "/watts-to-volts/",
+      "tag": "Power",
+      "keywords": [
+        "watts to volts",
+        "power to voltage",
+        "voltage from watts"
+      ]
+    },
+    {
+      "id": "power-factor",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Power Factor Calculator",
+      "description": "Calculate power factor from real power (kW) and apparent power (kVA).",
+      "href": "/power-factor/",
+      "tag": "Power",
+      "keywords": [
+        "power factor calculator",
+        "kw kva power factor",
+        "pf calculator"
+      ]
+    },
+    {
+      "id": "energy-consumption",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Energy Consumption Calculator",
+      "description": "Estimate total kWh from watts, hours per day, and number of days.",
+      "href": "/energy-consumption/",
+      "tag": "Appliance",
+      "keywords": [
+        "energy consumption calculator",
+        "kwh usage",
+        "watts to kwh"
+      ]
+    },
+    {
+      "id": "battery-energy",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Energy Calculator",
+      "description": "Calculate battery energy in watt-hours from amp-hours and voltage.",
+      "href": "/battery-energy/",
+      "tag": "Battery",
+      "keywords": [
+        "battery energy calculator",
+        "wh from ah",
+        "battery wh"
+      ]
+    },
+    {
+      "id": "battery-depth-of-discharge",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Depth of Discharge Calculator",
+      "description": "Calculate how much of a battery's capacity has been used (DoD %).",
+      "href": "/battery-depth-of-discharge/",
+      "tag": "Battery",
+      "keywords": [
+        "depth of discharge",
+        "battery dod calculator",
+        "discharge percentage"
+      ]
+    },
+    {
+      "id": "battery-efficiency",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Efficiency Calculator",
+      "description": "Calculate round-trip efficiency from energy out and energy in.",
+      "href": "/battery-efficiency/",
+      "tag": "Battery",
+      "keywords": [
+        "battery efficiency calculator",
+        "round trip efficiency",
+        "battery loss"
+      ]
+    },
+    {
+      "id": "solar-charge-controller-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Charge Controller Size Calculator",
+      "description": "Estimate minimum charge controller amperage from panel watts and system voltage.",
+      "href": "/solar-charge-controller-size/",
+      "tag": "Solar",
+      "keywords": [
+        "solar charge controller size",
+        "mppt sizing",
+        "controller amps"
+      ]
+    },
+    {
+      "id": "solar-inverter-efficiency",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Inverter Efficiency Calculator",
+      "description": "Calculate inverter efficiency from AC output and DC input power.",
+      "href": "/solar-inverter-efficiency/",
+      "tag": "Solar",
+      "keywords": [
+        "inverter efficiency calculator",
+        "solar inverter loss",
+        "dc to ac efficiency"
+      ]
+    },
+    {
+      "id": "solar-array-current",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Array Current Calculator",
+      "description": "Estimate array current from total panel watts and system voltage.",
+      "href": "/solar-array-current/",
+      "tag": "Solar",
+      "keywords": [
+        "solar array current",
+        "pv string current",
+        "panel amps calculator"
+      ]
+    },
+    {
+      "id": "solar-panel-tilt",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Tilt Calculator",
+      "description": "Recommended panel tilt angle based on your latitude (year-round estimate).",
+      "href": "/solar-panel-tilt/",
+      "tag": "Solar",
+      "keywords": [
+        "solar panel tilt angle",
+        "optimal tilt calculator",
+        "panel angle latitude"
+      ]
+    },
+    {
+      "id": "ev-cost-per-mile",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Cost Per Mile Calculator",
+      "description": "Estimate driving cost from electricity rate and energy used per mile.",
+      "href": "/ev-cost-per-mile/",
+      "tag": "EV",
+      "keywords": [
+        "ev cost per mile",
+        "electric car cost mile",
+        "ev charging cost mile"
+      ]
+    },
+    {
+      "id": "ev-battery-range",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Battery Range Calculator",
+      "description": "Estimate driving range from battery size, efficiency, and consumption.",
+      "href": "/ev-battery-range/",
+      "tag": "EV",
+      "keywords": [
+        "ev range calculator",
+        "electric car range",
+        "battery range miles"
+      ]
+    },
+    {
+      "id": "ev-level1-vs-level2",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "Level 1 vs Level 2 EV Charging Time",
+      "description": "Compare how long the same charge takes on Level 1 and Level 2 home charging.",
+      "href": "/ev-level1-vs-level2/",
+      "tag": "EV",
+      "keywords": [
+        "level 1 vs level 2 charging",
+        "ev charge time comparison",
+        "home ev charging"
+      ]
+    },
+    {
+      "id": "electricity-bill",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Cost",
+      "title": "Electricity Bill Estimator",
+      "description": "Estimate your bill from total kWh usage and rate per kWh.",
+      "href": "/electricity-bill/",
+      "tag": "Cost",
+      "keywords": [
+        "electricity bill calculator",
+        "kwh bill estimate",
+        "utility bill estimator"
+      ]
+    },
+    {
+      "id": "heater-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Electric Heater Cost Calculator",
+      "description": "Estimate heating cost from wattage, run hours, days, and electricity rate.",
+      "href": "/heater-cost/",
+      "tag": "Appliance",
+      "keywords": [
+        "electric heater cost",
+        "space heater cost calculator",
+        "heating cost kwh"
+      ]
+    },
+    {
+      "id": "ac-energy-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Air Conditioner Energy Cost Calculator",
+      "description": "Estimate monthly AC electricity cost from watts, daily hours, and rate.",
+      "href": "/ac-energy-cost/",
+      "tag": "Appliance",
+      "keywords": [
+        "ac energy cost",
+        "air conditioner cost calculator",
+        "cooling cost kwh"
+      ]
+    },
+    {
+      "id": "fridge-energy-usage",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Refrigerator Energy Usage Calculator",
+      "description": "Estimate refrigerator kWh and cost from wattage and electricity rate.",
+      "href": "/fridge-energy-usage/",
+      "tag": "Appliance",
+      "keywords": [
+        "refrigerator energy calculator",
+        "fridge kwh usage",
+        "fridge electricity cost"
+      ]
+    },
+    {
+      "id": "dc-cable-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery Sizing",
+      "title": "DC Cable Size Calculator",
+      "description": "Recommend DC wire gauge from current, one-way length, and system voltage.",
+      "href": "/dc-cable-size/",
+      "tag": "Sizing",
+      "keywords": [
+        "dc wire size calculator",
+        "dc cable gauge",
+        "battery wire sizing"
+      ]
+    },
+    {
+      "id": "ev-fast-charging-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV DC Fast Charging Calculator (10–80%)",
+      "description": "Estimate DC fast-charge time with taper above 80% SOC—live as you adjust pack size and charger power.",
+      "href": "/ev-fast-charging-time/",
+      "tag": "EV",
+      "keywords": [
+        "ev fast charging time",
+        "dc fast charge calculator",
+        "10 to 80 charging time"
+      ]
+    },
+    {
+      "id": "ev-winter-range-loss",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Winter Range Loss Calculator",
+      "description": "Estimate cold-weather driving range from EPA rating, temperature, and cabin heat use.",
+      "href": "/ev-winter-range-loss/",
+      "tag": "EV",
+      "keywords": [
+        "ev winter range loss",
+        "cold weather ev range",
+        "ev range in winter"
+      ]
+    },
+    {
+      "id": "ev-vs-gas-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV vs. Gas Car Savings Calculator",
+      "description": "Compare monthly and yearly fuel costs between gasoline and electric driving.",
+      "href": "/ev-vs-gas-savings/",
+      "tag": "EV",
+      "keywords": [
+        "ev vs gas savings",
+        "electric vs gas cost",
+        "ev fuel savings calculator"
+      ]
+    },
+    {
+      "id": "ev-battery-degradation",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Battery Health & Degradation Estimator",
+      "description": "Rough state-of-health estimate from age, mileage, and DC fast-charging habits.",
+      "href": "/ev-battery-degradation/",
+      "tag": "EV",
+      "keywords": [
+        "ev battery degradation",
+        "battery health estimator",
+        "ev soh calculator"
+      ]
+    },
+    {
+      "id": "ev-public-charging-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Public Charging & Idle Fee Calculator",
+      "description": "Total session cost including energy, connection fee, and idle penalties—updates live.",
+      "href": "/ev-public-charging-cost/",
+      "tag": "EV",
+      "keywords": [
+        "ev public charging cost",
+        "idle fee calculator",
+        "dc charging session cost"
+      ]
+    },
+    {
+      "id": "solar-roof-space",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Roof Space Calculator",
+      "description": "Estimate how many panels fit on your roof and total system size in kW—updates live.",
+      "href": "/solar-roof-space/",
+      "tag": "Solar",
+      "keywords": [
+        "solar roof space calculator",
+        "how many solar panels fit on roof",
+        "roof solar capacity"
+      ]
+    },
+    {
+      "id": "solar-payback-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Payback Period (ROI) Calculator",
+      "description": "Estimate payback time and 25-year savings from system cost, production, and electricity rates.",
+      "href": "/solar-payback-roi/",
+      "tag": "Solar",
+      "keywords": [
+        "solar payback calculator",
+        "solar roi calculator",
+        "solar break even"
+      ]
+    },
+    {
+      "id": "solar-angle-optimizer",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Angle & Tilt Optimizer",
+      "description": "Optimal tilt and azimuth from latitude and season—fixed, summer, or winter mounting.",
+      "href": "/solar-angle-optimizer/",
+      "tag": "Solar",
+      "keywords": [
+        "solar panel angle optimizer",
+        "optimal tilt azimuth",
+        "solar panel orientation"
+      ]
+    },
+    {
+      "id": "solar-net-metering",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Grid-Tie Net Metering Calculator",
+      "description": "Compare monthly bills with solar: self-use, export credits, and grid imports.",
+      "href": "/solar-net-metering/",
+      "tag": "Solar",
+      "keywords": [
+        "net metering calculator",
+        "solar grid tie savings",
+        "solar export credit"
+      ]
+    },
+    {
+      "id": "solar-degradation",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Degradation Calculator",
+      "description": "Estimate remaining annual output and capacity after years of panel degradation.",
+      "href": "/solar-degradation/",
+      "tag": "Solar",
+      "keywords": [
+        "solar panel degradation",
+        "pv output loss over time",
+        "solar panel lifespan"
+      ]
+    },
+    {
+      "id": "battery-series-parallel",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Series & Parallel Calculator",
+      "description": "Calculate pack voltage, amp-hours, and watt-hours from series/parallel cell layout.",
+      "href": "/battery-series-parallel/",
+      "tag": "Battery",
+      "keywords": [
+        "battery series parallel",
+        "battery bank wiring",
+        "series parallel ah voltage"
+      ]
+    },
+    {
+      "id": "battery-c-rate",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery C-Rate Calculator",
+      "description": "Find discharge C-rate and runtime from capacity and load current—updates live.",
+      "href": "/battery-c-rate/",
+      "tag": "Battery",
+      "keywords": [
+        "battery c rate calculator",
+        "discharge rate ah",
+        "battery discharge time"
+      ]
+    },
+    {
+      "id": "inverter-loss-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Inverter Loss Calculator",
+      "description": "Convert DC input watts to AC output and show power lost as heat in the inverter.",
+      "href": "/inverter-loss-calculator/",
+      "tag": "Battery",
+      "keywords": [
+        "inverter loss calculator",
+        "inverter efficiency watts",
+        "dc to ac loss"
+      ]
+    },
+    {
+      "id": "home-backup-sizing",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Home Backup Battery Sizing Calculator",
+      "description": "Size a backup battery bank for essential loads, runtime, voltage, and depth of discharge.",
+      "href": "/home-backup-sizing/",
+      "tag": "Battery",
+      "keywords": [
+        "home backup battery sizing",
+        "off grid backup ah",
+        "emergency battery bank"
+      ]
+    },
+    {
+      "id": "battery-voltage-drop",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Voltage Drop Calculator",
+      "description": "Estimate DC wire voltage drop and voltage at the load from amps, length, and system voltage.",
+      "href": "/battery-voltage-drop/",
+      "tag": "Battery",
+      "keywords": [
+        "battery voltage drop calculator",
+        "dc wire voltage drop",
+        "battery cable loss"
+      ]
+    },
+    {
+      "id": "crypto-mining-power",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Crypto Mining Power Calculator",
+      "description": "Estimate kWh and electricity cost for GPU/ASIC rigs by wattage and run hours.",
+      "href": "/crypto-mining-power/",
+      "tag": "Appliance",
+      "keywords": [
+        "crypto mining power calculator",
+        "mining rig electricity cost",
+        "gpu mining kwh"
+      ]
+    },
+    {
+      "id": "standby-power-waste",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Standby Power Waste Calculator",
+      "description": "Quantify phantom load cost from devices left plugged in 24/7 on standby.",
+      "href": "/standby-power-waste/",
+      "tag": "Appliance",
+      "keywords": [
+        "standby power calculator",
+        "phantom load cost",
+        "vampire power waste"
+      ]
+    },
+    {
+      "id": "generator-fuel-consumption",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Generator Fuel Consumption Calculator",
+      "description": "Estimate fuel use per hour and runtime from tank size at your load level.",
+      "href": "/generator-fuel-consumption/",
+      "tag": "Appliance",
+      "keywords": [
+        "generator fuel consumption calculator",
+        "generator gallons per hour",
+        "generator runtime fuel"
+      ]
+    },
+    {
+      "id": "heat-pump-vs-resistance",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Heat Pump vs. Resistance Heat Calculator",
+      "description": "Compare electric heating cost: resistance strips (COP 1) vs. heat pump COP.",
+      "href": "/heat-pump-vs-resistance/",
+      "tag": "Appliance",
+      "keywords": [
+        "heat pump vs electric heat",
+        "heat pump cop savings",
+        "resistance heat cost"
+      ]
+    },
+    {
+      "id": "whole-house-energy-budget",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Whole House Energy Budget Calculator",
+      "description": "Sum daily kWh by category and estimate monthly and annual electricity cost.",
+      "href": "/whole-house-energy-budget/",
+      "tag": "Appliance",
+      "keywords": [
+        "whole house energy budget",
+        "home kwh estimate",
+        "monthly electricity budget"
+      ]
+    },
+    {
+      "id": "ev-truck-range",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "EV Truck Range vs. Payload Calculator",
+      "description": "Estimate how cargo weight reduces electric truck range from rated empty miles.",
+      "href": "/ev-truck-range/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "ev truck range payload",
+        "electric truck range loss",
+        "cargo weight ev"
+      ]
+    },
+    {
+      "id": "ev-fleet-tco",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "EV Fleet TCO vs. Gas Calculator",
+      "description": "Compare annual fuel energy cost for gas and electric fleets by mileage.",
+      "href": "/ev-fleet-tco/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "ev fleet tco",
+        "electric fleet vs gas cost",
+        "fleet operating cost"
+      ]
+    },
+    {
+      "id": "ev-bus-battery",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "Transit Bus Battery kWh per Mile",
+      "description": "Calculate energy intensity from route miles and metered kWh use.",
+      "href": "/ev-bus-battery/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "electric bus kwh per mile",
+        "transit bus energy",
+        "city bus battery"
+      ]
+    },
+    {
+      "id": "ev-forklift-runtime",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "Electric Forklift Shift Runtime Calculator",
+      "description": "Estimate shift hours from industrial battery Ah, voltage, and average load amps.",
+      "href": "/ev-forklift-runtime/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "electric forklift runtime",
+        "forklift battery shift",
+        "warehouse ev forklift"
+      ]
+    },
+    {
+      "id": "ev-delivery-van-efficiency",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "Delivery Van Stop-and-Go Efficiency",
+      "description": "Model urban kWh/mile from highway baseline and stops per mile.",
+      "href": "/ev-delivery-van-efficiency/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "delivery van ev efficiency",
+        "stop and go ev kwh",
+        "urban courier van"
+      ]
+    },
+    {
+      "id": "rv-solar-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "RV Solar & House Battery Calculator",
+      "description": "Match rooftop panel yield to daily 12V/24V loads and bank Ah shortfall.",
+      "href": "/rv-solar-calculator/",
+      "tag": "RV Solar",
+      "keywords": [
+        "rv solar calculator",
+        "rv house battery sizing",
+        "camper solar ah"
+      ]
+    },
+    {
+      "id": "marine-battery-bank",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "Marine Trolling Motor Runtime Calculator",
+      "description": "Continuous amp draw vs. bank Ah for trolling and house loads.",
+      "href": "/marine-battery-bank/",
+      "tag": "Marine",
+      "keywords": [
+        "trolling motor battery runtime",
+        "marine battery bank ah",
+        "boat motor amps"
+      ]
+    },
+    {
+      "id": "portable-power-station-recharge",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "Portable Power Station Recharge Times",
+      "description": "Compare wall AC, car 12V, and solar MPPT hours to refill Wh capacity.",
+      "href": "/portable-power-station-recharge/",
+      "tag": "Portable",
+      "keywords": [
+        "portable power station charge time",
+        "jackery recharge solar",
+        "power station hours"
+      ]
+    },
+    {
+      "id": "12v-to-120v-inverter",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "12V to 120V Inverter Load Planner",
+      "description": "Check continuous and surge loads against inverter ratings.",
+      "href": "/12v-to-120v-inverter/",
+      "tag": "Inverter",
+      "keywords": [
+        "inverter surge watts",
+        "12v inverter sizing",
+        "continuous vs surge load"
+      ]
+    },
+    {
+      "id": "camping-fridge-runtime",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "12V Camping Fridge Runtime Calculator",
+      "description": "Ambient temperature effect on compressor duty cycle and battery days.",
+      "href": "/camping-fridge-runtime/",
+      "tag": "Camping",
+      "keywords": [
+        "12v fridge runtime",
+        "camping fridge battery",
+        "compressor fridge ah"
+      ]
+    },
+    {
+      "id": "tou-shifting-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "Time-of-Use Load Shifting Savings",
+      "description": "Savings from moving kWh from peak to off-peak rate periods.",
+      "href": "/tou-shifting-savings/",
+      "tag": "TOU",
+      "keywords": [
+        "time of use savings",
+        "peak off peak shifting",
+        "tou rate calculator"
+      ]
+    },
+    {
+      "id": "demand-charge-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "Commercial Demand Charge Calculator",
+      "description": "Monthly penalty from peak kW demand and $/kW tariff.",
+      "href": "/demand-charge-calculator/",
+      "tag": "Demand",
+      "keywords": [
+        "demand charge calculator",
+        "peak kw penalty",
+        "commercial demand ratchet"
+      ]
+    },
+    {
+      "id": "v2g-financial-return",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "V2G Grid Buyback Revenue Calculator",
+      "description": "Estimate monthly revenue from bidirectional EV export at utility buyback rates.",
+      "href": "/v2g-financial-return/",
+      "tag": "V2G",
+      "keywords": [
+        "v2g revenue",
+        "vehicle to grid payment",
+        "ev grid export credit"
+      ]
+    },
+    {
+      "id": "battery-arbitrage-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "Home Battery Arbitrage ROI Calculator",
+      "description": "Profit from charging on cheap night rates and discharging at peak.",
+      "href": "/battery-arbitrage-roi/",
+      "tag": "Arbitrage",
+      "keywords": [
+        "battery arbitrage",
+        "time of use battery profit",
+        "peak shaving battery roi"
+      ]
+    },
+    {
+      "id": "carbon-footprint-offset",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "Solar & EV Carbon Offset Calculator",
+      "description": "kg CO₂ avoided from clean kWh vs. grid emissions factor.",
+      "href": "/carbon-footprint-offset/",
+      "tag": "Carbon",
+      "keywords": [
+        "carbon offset calculator",
+        "solar co2 savings",
+        "ev emissions offset"
+      ]
+    },
+    {
+      "id": "heat-loss-insulation",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "Building Heat Loss & Insulation Calculator",
+      "description": "Estimate heat loss watts from envelope area, ΔT, and R-value.",
+      "href": "/heat-loss-insulation/",
+      "tag": "Envelope",
+      "keywords": [
+        "heat loss calculator",
+        "r value heat loss",
+        "building envelope btu"
+      ]
+    },
+    {
+      "id": "led-vs-incandescent-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "LED vs. Incandescent ROI Calculator",
+      "description": "Energy and bulb replacement savings when matching lumens with lower watts.",
+      "href": "/led-vs-incandescent-roi/",
+      "tag": "Lighting",
+      "keywords": [
+        "led vs incandescent savings",
+        "led roi calculator",
+        "light bulb payback"
+      ]
+    },
+    {
+      "id": "smart-thermostat-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "Smart Thermostat Savings Calculator",
+      "description": "HVAC kWh reduction from setback schedules and seasonal rates.",
+      "href": "/smart-thermostat-savings/",
+      "tag": "HVAC",
+      "keywords": [
+        "smart thermostat savings",
+        "hvac setback calculator",
+        "nest savings kwh"
+      ]
+    },
+    {
+      "id": "window-solar-heat-gain",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "Window Solar Heat Gain (SHGC) Calculator",
+      "description": "Cooling load from glazing SHGC, area, and sun exposure.",
+      "href": "/window-solar-heat-gain/",
+      "tag": "Windows",
+      "keywords": [
+        "shgc calculator",
+        "window heat gain",
+        "solar heat gain cooling load"
+      ]
+    },
+    {
+      "id": "calculating-home-heat-loss-insulation",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "Calculating Home Heat Loss and Insulation Upgrades",
+      "description": "R-values, envelope leaks, and heating load reduction—how better insulation lowers BTU demand before you upsize HVAC.",
+      "href": "/blog/calculating-home-heat-loss-insulation/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "crypto-mining-electricity-profitability",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Appliances",
+      "title": "Crypto Mining Electricity Costs vs. Profitability Basics",
+      "description": "How to model rig watts, uptime, and $/kWh before hash rate ever enters the spreadsheet.",
+      "href": "/blog/crypto-mining-electricity-profitability/",
+      "tag": "Appliances",
+      "keywords": [
+        "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "cutting-bills-with-time-of-use-shifting",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Utility Tariffs",
+      "title": "Cutting Electric Bills With Time-of-Use Load Shifting",
+      "description": "Move EV charging, laundry, and dishwashers into off-peak windows—and when home batteries earn arbitrage on top of TOU.",
+      "href": "/blog/cutting-bills-with-time-of-use-shifting/",
+      "tag": "Utility Tariffs",
+      "keywords": [
+        "Utility Tariffs",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "daily-watt-hour-budget-sustainable-home",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Appliances",
+      "title": "Building a Daily Watt-Hour Budget for a Sustainable Home",
+      "description": "Split household use into categories, sum kWh, and connect daily budgets to bills and solar sizing.",
+      "href": "/blog/daily-watt-hour-budget-sustainable-home/",
+      "tag": "Appliances",
+      "keywords": [
+        "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "electric-vs-gas-fleet-tco-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Commercial EV",
+      "title": "Electric vs. Gas Fleet TCO: A Logistics Owner's Workbook",
+      "description": "Per-mile energy, maintenance intervals, and depot charging capex—how to compare diesel vans and electric delivery fleets on one spreadsheet.",
+      "href": "/blog/electric-vs-gas-fleet-tco-guide/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "Commercial EV",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ev-home-charging-cost",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "How to Estimate EV Home Charging Cost",
+      "description": "Calculate what it costs to charge your EV at home using kWh and your utility rate.",
+      "href": "/blog/ev-home-charging-cost/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ev-truck-payload-range-impact",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Commercial EV",
+      "title": "How Payload Weight Steals Range From Electric Semi-Trucks",
+      "description": "Cargo mass, rolling resistance, and aerodynamic drag compound on highway EV trucks—how to model real-world range before you dispatch a load.",
+      "href": "/blog/ev-truck-payload-range-impact/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "Commercial EV",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "heat-pumps-vs-electric-heaters-efficiency",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Appliances",
+      "title": "Heat Pumps vs. Electric Resistance Heat: Efficiency Compared",
+      "description": "COP explains why heat pumps move more BTUs per kWh than baseboard strips—and when resistance still appears.",
+      "href": "/blog/heat-pumps-vs-electric-heaters-efficiency/",
+      "tag": "Appliances",
+      "keywords": [
+        "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "hidden-costs-public-ev-charging",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "Hidden Costs of Public EV Charging (Session Fees, Idle Penalties, and More)",
+      "description": "Per-kWh rates are only part of the story—learn how session fees and idle charges inflate real public charging cost.",
+      "href": "/blog/hidden-costs-public-ev-charging/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "how-fast-can-you-dc-charge",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "How Fast Can You DC Charge an EV? The 10–80% Window Explained",
+      "description": "Learn why DC fast charging slows after 80% SOC, how taper curves work, and how to estimate session time without guesswork.",
+      "href": "/blog/how-fast-can-you-dc-charge/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "hvac-savings-with-smart-thermostats",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "HVAC Savings With Smart Thermostats and Window Solar Control",
+      "description": "Temperature setbacks, summer peak cooling loads, and how window SHGC cuts heat gain before your AC runs longer.",
+      "href": "/blog/hvac-savings-with-smart-thermostats/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "is-ev-cheaper-than-gas",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "Is an EV Cheaper Than Gas? A Straightforward Cost Comparison",
+      "description": "Compare per-mile energy cost, home charging rates, and when electric driving beats gasoline for your actual mileage.",
+      "href": "/blog/is-ev-cheaper-than-gas/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "led-lighting-retrofit-roi-calculator",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "LED Lighting Retrofit ROI for Residential Upgrades",
+      "description": "Lumen matching, watt reduction, and payback timelines when you replace incandescent and halogen with modern LEDs.",
+      "href": "/blog/led-lighting-retrofit-roi-calculator/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "making-money-with-v2g-charging",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Utility Tariffs",
+      "title": "Making Money With Vehicle-to-Grid (V2G) Charging",
+      "description": "Bidirectional EV exports, grid services revenue, and how carbon offsets stack on top of tariff arbitrage.",
+      "href": "/blog/making-money-with-v2g-charging/",
+      "tag": "Utility Tariffs",
+      "keywords": [
+        "Utility Tariffs",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "managing-inverter-efficiency-losses",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Battery",
+      "title": "Managing Inverter Efficiency Losses in Off-Grid and Backup Systems",
+      "description": "Why DC-to-AC conversion eats watts, how to size input power, and where efficiency curves matter.",
+      "href": "/blog/managing-inverter-efficiency-losses/",
+      "tag": "Battery",
+      "keywords": [
+        "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "marine-trolling-motor-battery-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "RV & Marine",
+      "title": "Marine Trolling Motor Batteries: Amp Draw, Chemistry, and Safety",
+      "description": "Continuous amp draw on lakes and rivers, AGM vs LiFePO4 tradeoffs, and how to avoid a dead bank miles from the ramp.",
+      "href": "/blog/marine-trolling-motor-battery-guide/",
+      "tag": "RV & Marine",
+      "keywords": [
+        "RV & Marine",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "optimize-solar-panel-tilt-angle",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "How to Optimize Solar Panel Tilt and Angle for Your Latitude",
+      "description": "Year-round vs. seasonal tilt, azimuth basics, and when roof pitch already gives you a free optimization.",
+      "href": "/blog/optimize-solar-panel-tilt-angle/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "planning-electric-bus-transit-routes",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Commercial EV",
+      "title": "Planning Electric Bus Routes and Warehouse Shift Charging",
+      "description": "Municipal bus battery sizing, inter-shift charging windows, and forklift cycle economics for electrified depots.",
+      "href": "/blog/planning-electric-bus-transit-routes/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "Commercial EV",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "portable-generator-fuel-consumption-runtime",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Appliances",
+      "title": "Portable Generator Fuel Consumption and Runtime Planning",
+      "description": "Estimate gallons per hour and tank runtime from load watts and manufacturer fuel curves.",
+      "href": "/blog/portable-generator-fuel-consumption-runtime/",
+      "tag": "Appliances",
+      "keywords": [
+        "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "preventing-inverter-surge-overload-camping",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "RV & Marine",
+      "title": "Preventing Inverter Surge Overload While Camping",
+      "description": "Continuous vs peak watts, 12 V to 120 V conversion losses, and why your fridge and coffee maker cannot share the same blind plug.",
+      "href": "/blog/preventing-inverter-surge-overload-camping/",
+      "tag": "RV & Marine",
+      "keywords": [
+        "RV & Marine",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "prolong-ev-battery-life",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "How to Prolong EV Battery Life: Habits That Actually Matter",
+      "description": "Daily charge limits, DC fast-charging frequency, and temperature habits that slow degradation—without myth-heavy advice.",
+      "href": "/blog/prolong-ev-battery-life/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "series-vs-parallel-battery-configurations",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Battery",
+      "title": "Series vs. Parallel Battery Configurations Explained",
+      "description": "How 4S2P wiring changes voltage and amp-hours, and why matched cells matter for DIY packs.",
+      "href": "/blog/series-vs-parallel-battery-configurations/",
+      "tag": "Battery",
+      "keywords": [
+        "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "size-home-emergency-backup-battery",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Battery",
+      "title": "How to Size a Home Emergency Backup Battery Bank",
+      "description": "Essential loads, hours of autonomy, depth of discharge, and inverter losses in one sizing path.",
+      "href": "/blog/size-home-emergency-backup-battery/",
+      "tag": "Battery",
+      "keywords": [
+        "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "solar-panel-degradation-expectations",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Solar Panel Degradation: What to Expect Over 25 Years",
+      "description": "First-year stabilization, annual fade rates, and how degradation affects long-term ROI planning.",
+      "href": "/blog/solar-panel-degradation-expectations/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "solar-panel-roof-space-requirements",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Solar Panel Roof Space Requirements: How Many Modules Fit?",
+      "description": "Roof area, setbacks, panel dimensions, and usable coverage—how to estimate max array size before you order gear.",
+      "href": "/blog/solar-panel-roof-space-requirements/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "solar-panel-sizing-basics",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Solar Panel Sizing Basics for Off-Grid Systems",
+      "description": "How peak sun hours, daily energy use, and system efficiency determine the panel wattage you need.",
+      "href": "/blog/solar-panel-sizing-basics/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "solar-roi-payback-period-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Solar ROI and Payback Period: A Practical Guide for Homeowners",
+      "description": "Turn installed cost, incentives, and annual kWh into a realistic payback timeline—without sales-deck optimism.",
+      "href": "/blog/solar-roi-payback-period-guide/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ultimate-guide-rv-solar-sizing",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "RV & Marine",
+      "title": "The Ultimate Guide to RV Solar Sizing (Roof Space and Daily Load)",
+      "description": "Audit boondocking loads, usable roof area, and portable power station recharge times before you drill the first mounting hole.",
+      "href": "/blog/ultimate-guide-rv-solar-sizing/",
+      "tag": "RV & Marine",
+      "keywords": [
+        "RV & Marine",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "understanding-battery-voltage-sag",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Battery",
+      "title": "Understanding Battery Voltage Sag Under Load",
+      "description": "Why voltage drops on DC cables and heavy loads, and how to keep inverters online.",
+      "href": "/blog/understanding-battery-voltage-sag/",
+      "tag": "Battery",
+      "keywords": [
+        "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "understanding-battery-watt-hours",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Guides",
+      "title": "Understanding Battery Watt-Hours (Wh)",
+      "description": "What watt-hours mean, how to convert from Ah, and why Wh matters for solar and EV planning.",
+      "href": "/blog/understanding-battery-watt-hours/",
+      "tag": "Guides",
+      "keywords": [
+        "Guides",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "understanding-commercial-demand-charges",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Utility Tariffs",
+      "title": "Understanding Commercial Demand Charges on Your Power Bill",
+      "description": "Peak kW billing, concurrent motor startups, and strategies to flatten your facility load profile without throttling production.",
+      "href": "/blog/understanding-commercial-demand-charges/",
+      "tag": "Utility Tariffs",
+      "keywords": [
+        "Utility Tariffs",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "understanding-net-metering-solar",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Understanding Net Metering for Home Solar (Credits, Exports, and Bills)",
+      "description": "How grid-tied billing treats exported kWh, import charges, and why NEM policy changes your payback.",
+      "href": "/blog/understanding-net-metering-solar/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "vampire-energy-standby-power-waste",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Appliances",
+      "title": "Vampire Energy and Standby Power Waste in the Home",
+      "description": "Find phantom loads, estimate annual cost, and cut waste without living like it's 1899.",
+      "href": "/blog/vampire-energy-standby-power-waste/",
+      "tag": "Appliances",
+      "keywords": [
+        "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "what-is-battery-c-rate",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Battery",
+      "title": "What Is Battery C-Rate? Discharge Speed in Plain Language",
+      "description": "Convert between amps, capacity, and how long a pack can sustain a load at 1C, 2C, or higher.",
+      "href": "/blog/what-is-battery-c-rate/",
+      "tag": "Battery",
+      "keywords": [
+        "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "why-ev-range-drops-in-winter",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "Why EV Range Drops in Winter (and What You Can Do About It)",
+      "description": "Cold batteries, cabin heat, and winter driving physics explain seasonal range loss—and how to plan realistic winter miles.",
+      "href": "/blog/why-ev-range-drops-in-winter/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    }
+  ]
+}

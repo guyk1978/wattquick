@@ -8,8 +8,10 @@
     "preview": "npx serve@14 out",
     "lint": "eslint .",
     "generate:calculators": "tsx scripts/generate-calculators-md.ts",
-    "prebuild": "npm run generate:calculators",
-    "predev": "npm run generate:calculators"
+    "search:build": "node scripts/build-search-index.js",
+    "fuse:vendor": "esbuild node_modules/fuse.js/dist/fuse.min.mjs --format=iife --global-name=Fuse --outfile=assets/js/vendor/fuse.min.js --minify",
+    "prebuild": "npm run generate:calculators && npm run search:build",
+    "predev": "npm run generate:calculators && npm run search:build"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -33,6 +35,7 @@
     "@types/react-dom": "^18",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
+    "fuse.js": "^7.3.0",
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
     "typescript": "^5"

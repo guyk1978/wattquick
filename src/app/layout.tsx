@@ -42,6 +42,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
+      <head>
+        <link rel="stylesheet" href="/assets/css/site-search.css" />
+      </head>
       <body className="flex min-h-full flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>
@@ -58,6 +61,9 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+        <Script src="/assets/js/vendor/fuse.min.js" strategy="beforeInteractive" />
+        <Script src="/assets/js/site-search.js" strategy="afterInteractive" />
+        <Script src="/assets/js/app.js" strategy="afterInteractive" />
       </body>
     </html>
   );
