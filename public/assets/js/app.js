@@ -16,8 +16,8 @@
       header.firstElementChild;
     if (!row) return;
 
-    var mobileNav =
-      row.querySelector('[class*="sm:hidden"]') || row.lastElementChild;
+    var actions =
+      row.querySelector("[data-header-actions]") || row.lastElementChild;
     var trigger = window.WattQuickSiteSearch.createTrigger();
 
     if (typeof window.WattQuickSiteSearch === "undefined") return;
@@ -31,8 +31,8 @@
       if (searchInstance) searchInstance.open();
     });
 
-    if (mobileNav && mobileNav.parentNode === row) {
-      row.insertBefore(trigger, mobileNav);
+    if (actions) {
+      actions.insertBefore(trigger, actions.firstChild);
     } else {
       row.appendChild(trigger);
     }

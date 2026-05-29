@@ -36,6 +36,22 @@
       .replace(/"/g, "&quot;");
   }
 
+  /** Resolve Fuse constructor from IIFE global (may be { default: Fuse }). */
+  function resolveFuseConstructor() {
+    var root =
+      typeof global !== "undefined"
+        ? global
+        : typeof window !== "undefined"
+          ? window
+          : null;
+    if (!root || root.Fuse === undefined) return null;
+
+    var fuseRef = root.Fuse;
+    if (typeof fuseRef === "function") return fuseRef;
+    if (fuseRef && typeof fuseRef.default === "function") return fuseRef.default;
+    return null;
+  }
+
   function SiteSearch(options) {
     this.options = options || {};
     this.index = null;
@@ -72,21 +88,35 @@
   };
 
   SiteSearch.prototype.setupFuse = function () {
-    if (!this.index || typeof Fuse === "undefined") return;
+    if (!this.index || !Array.isArray(this.index.items)) {
+      console.warn("[WattQuick] Search index is missing or has no items");
+      return;
+    }
 
-    this.fuse = new Fuse(this.index.items, {
-      keys: [
-        { name: "title", weight: 0.45 },
-        { name: "description", weight: 0.25 },
-        { name: "keywords", weight: 0.15 },
-        { name: "tag", weight: 0.08 },
-        { name: "group", weight: 0.07 },
-      ],
-      threshold: 0.38,
-      ignoreLocation: true,
-      includeScore: true,
-      minMatchCharLength: 2,
-    });
+    var FuseCtor = resolveFuseConstructor();
+    if (typeof FuseCtor !== "function") {
+      console.error("[WattQuick] Fuse is not loaded properly");
+      return;
+    }
+
+    try {
+      this.fuse = new FuseCtor(this.index.items, {
+        keys: [
+          { name: "title", weight: 0.45 },
+          { name: "description", weight: 0.25 },
+          { name: "keywords", weight: 0.15 },
+          { name: "tag", weight: 0.08 },
+          { name: "group", weight: 0.07 },
+        ],
+        threshold: 0.38,
+        ignoreLocation: true,
+        includeScore: true,
+        minMatchCharLength: 2,
+      });
+    } catch (err) {
+      console.error("[WattQuick] Failed to initialize Fuse search", err);
+      this.fuse = null;
+    }
   };
 
   SiteSearch.prototype.buildModal = function () {

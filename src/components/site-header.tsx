@@ -1,45 +1,39 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
+import { EnergyStrip } from "@/components/energy-strip";
+import { HeaderNav } from "@/components/header-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { AnimatedBattery } from "@/components/animated-battery";
-import { MAIN_NAV } from "@/lib/site";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-xl backdrop-saturate-150">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
+    <header className="glass-header sticky top-0 z-50 overflow-visible">
+      <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 overflow-visible px-4 sm:gap-4 sm:px-6">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2 text-foreground transition-opacity hover:opacity-85"
+          className={cn(
+            "group shrink-0 text-xl leading-none tracking-tight md:text-2xl",
+            "transition-colors duration-200"
+          )}
         >
-          <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
-            <Zap className="size-4" strokeWidth={2.5} />
+          <span className="font-black text-slate-900 transition-colors duration-200 group-hover:text-blue-500 dark:text-white dark:group-hover:text-blue-400">
+            Watt
           </span>
-          <span className="text-base font-semibold tracking-tight">WattQuick</span>
-          <AnimatedBattery variant="mini" />
+          <span className="font-light text-slate-500 transition-colors duration-200 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300">
+            Quick
+          </span>
         </Link>
 
-        <nav
-          className="hidden items-center gap-1 sm:flex"
-          aria-label="Main navigation"
-        >
-          {MAIN_NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground",
-                "transition-colors hover:bg-muted/50 hover:text-foreground"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <HeaderNav />
 
-        <MobileNav />
+        <div className="ml-auto flex items-center gap-2 sm:ml-0">
+          <div data-header-actions className="flex items-center gap-2">
+            <ThemeToggle />
+          </div>
+          <MobileNav />
+        </div>
       </div>
+      <EnergyStrip />
     </header>
   );
 }

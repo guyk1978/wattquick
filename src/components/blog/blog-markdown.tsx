@@ -1,58 +1,80 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import type { Components } from "react-markdown";
+import { cn } from "@/lib/utils";
 
 const components: Components = {
   h2: ({ children }) => (
-    <h2 className="mt-10 scroll-mt-20 text-xl font-semibold tracking-tight text-foreground first:mt-0 sm:text-2xl">
+    <h2
+      className={cn(
+        "mt-12 mb-4 scroll-mt-24 text-2xl font-bold tracking-tight md:text-3xl",
+        "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-600 bg-clip-text text-transparent",
+        "dark:from-white dark:via-slate-100 dark:to-slate-300",
+        "first:mt-0"
+      )}
+    >
       {children}
     </h2>
   ),
   h3: ({ children }) => (
-    <h3 className="mt-8 text-lg font-semibold tracking-tight text-foreground">
+    <h3 className="mt-10 mb-3 scroll-mt-24 text-xl font-bold tracking-tight text-slate-900 dark:text-white md:text-2xl">
       {children}
     </h3>
   ),
   p: ({ children }) => (
-    <p className="text-base leading-relaxed text-muted-foreground">{children}</p>
+    <p className="text-lg leading-relaxed text-slate-800 dark:text-slate-200">
+      {children}
+    </p>
   ),
   ul: ({ children }) => (
-    <ul className="list-disc space-y-2 pl-5 text-base leading-relaxed text-muted-foreground">
+    <ul className="list-disc space-y-2 pl-6 text-lg leading-relaxed text-slate-800 dark:text-slate-200">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal space-y-2 pl-5 text-base leading-relaxed text-muted-foreground">
+    <ol className="list-decimal space-y-2 pl-6 text-lg leading-relaxed text-slate-800 dark:text-slate-200">
       {children}
     </ol>
   ),
-  li: ({ children }) => <li>{children}</li>,
+  li: ({ children }) => <li className="pl-1">{children}</li>,
   strong: ({ children }) => (
-    <strong className="font-semibold text-foreground">{children}</strong>
+    <strong className="font-semibold text-slate-900 dark:text-white">{children}</strong>
   ),
   a: ({ href, children }) => (
     <a
       href={href}
-      className="font-medium text-primary underline-offset-4 hover:underline"
+      className="font-medium text-primary underline-offset-4 transition-colors hover:text-primary/80 hover:underline"
     >
       {children}
     </a>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="border-l-2 border-primary/40 pl-4 text-muted-foreground italic">
+    <blockquote className="my-8 border-l-4 border-primary/40 bg-slate-50/80 py-1 pl-5 text-lg leading-relaxed text-slate-700 italic dark:border-primary/50 dark:bg-slate-900/40 dark:text-slate-300">
       {children}
     </blockquote>
+  ),
+  hr: () => (
+    <hr className="my-12 border-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-700" />
   ),
 };
 
 interface BlogMarkdownProps {
   content: string;
+  className?: string;
 }
 
-export function BlogMarkdown({ content }: BlogMarkdownProps) {
+export function BlogMarkdown({ content, className }: BlogMarkdownProps) {
   return (
-    <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
-      {content}
-    </ReactMarkdown>
+    <div
+      className={cn(
+        "blog-prose space-y-6",
+        "prose-p:text-lg prose-p:leading-relaxed",
+        className
+      )}
+    >
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
+        {content}
+      </ReactMarkdown>
+    </div>
   );
 }

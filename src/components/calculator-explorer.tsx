@@ -10,6 +10,7 @@ import {
   type CalculatorId,
 } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
+import { glassInsetInput, glassNeon, glassNeonAccent, glassSurface } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const ALL_CATEGORY = "all" as const;
@@ -61,7 +62,7 @@ export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
             placeholder="Search calculators…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="h-11 rounded-xl border-border/60 bg-card/80 pl-10 shadow-sm"
+            className={cn(glassInsetInput, "h-11 rounded-xl pl-10")}
             aria-label="Search calculators"
           />
         </div>
@@ -71,7 +72,7 @@ export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
       </div>
 
       <div
-        className="flex flex-wrap gap-2"
+        className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible"
         role="tablist"
         aria-label="Filter by category"
       >
@@ -93,7 +94,7 @@ export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-border/60 py-12 text-center text-sm text-muted-foreground">
+        <p className={cn(glassSurface, "rounded-2xl border border-dashed border-border/40 py-12 text-center text-sm text-muted-foreground")}>
           No calculators match your search.
         </p>
       ) : (
@@ -129,10 +130,21 @@ function CategoryChip({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-xs font-semibold transition-all duration-200",
+        "shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 sm:text-sm",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         active
-          ? "border-primary/40 bg-primary/15 text-foreground"
-          : "border-border/60 bg-card/50 text-muted-foreground hover:border-border hover:text-foreground"
+          ? cn(
+              glassSurface,
+              glassNeon,
+              glassNeonAccent("primary"),
+              "scale-[1.02] text-foreground shadow-md"
+            )
+          : cn(
+              glassInsetInput,
+              "text-slate-600 hover:scale-[1.04] hover:bg-white/80 hover:text-slate-900",
+              "dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-slate-100",
+              "active:scale-[0.98]"
+            )
       )}
     >
       {children}

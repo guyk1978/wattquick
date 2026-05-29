@@ -1,0 +1,144 @@
+"use client";
+
+import type { CalculatorId } from "@/lib/calculators";
+import { deriveBatteryDashboardMetrics } from "@/lib/battery-dashboard";
+import { AnimatedCounter } from "@/components/calculator/animated-counter";
+import { BatteryVisual } from "@/components/calculator/battery-visual";
+import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import { neonHeroNumber } from "@/lib/glass-ui";
+import { cn } from "@/lib/utils";
+
+export interface BatteryGamifiedResultProps {
+  calculatorId: CalculatorId;
+  label: string;
+  value: string | null;
+  unit?: string;
+  detail?: string | null;
+  emptyMessage?: string;
+  className?: string;
+}
+
+export function BatteryGamifiedResult({
+  calculatorId,
+  label,
+  value,
+  unit,
+  detail,
+  emptyMessage = "Enter values to calculate",
+  className,
+}: BatteryGamifiedResultProps) {
+  const hasResult = value !== null;
+  const metrics = hasResult
+    ? deriveBatteryDashboardMetrics(calculatorId, label, value, unit, detail)
+    : null;
+
+  const resultKey = hasResult ? `${value}-${unit ?? ""}-${detail ?? ""}` : "empty";
+  const showDashboard = hasResult && metrics !== null;
+  const displayValue = value ?? "";
+  const isCompositeDuration = /^\d+\s*h\s*\d+\s*m/i.test(displayValue);
+
+  return (
+    <GamifiedDashboardFrame
+      accent="battery"
+      label={label}
+      ambientClassName="bg-[#22C55E]/[0.12] dark:bg-[#22C55E]/[0.2]"
+      className={className}
+    >
+      <div
+        key={resultKey}
+        className={cn(
+          "mt-5 transition-opacity duration-200",
+          "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-300 motion-safe:fill-mode-both",
+          !hasResult && "opacity-70"
+        )}
+      >
+        {!hasResult ? (
+          <p className="text-xl font-medium leading-snug text-muted-foreground sm:text-2xl">
+            {emptyMessage}
+          </p>
+        ) : showDashboard ? (
+          <div className="grid gap-8 sm:grid-cols-[minmax(140px,180px)_1fr] sm:items-center sm:gap-6">
+            <BatteryVisual
+              fillPercent={metrics.fillPercent}
+              glow={metrics.glow}
+              className="sm:justify-self-center"
+            />
+
+            <div className="flex min-w-0 flex-col gap-4">
+              <div
+                className={cn(
+                  "neon-badge inline-flex w-fit max-w-full items-center gap-2 rounded-full px-3 py-1.5",
+                  "text-xs font-semibold leading-snug sm:text-sm",
+                  metrics.glow === "caution" && "glass-neon--cost",
+                  metrics.glow === "critical" &&
+                    "[--neon-from:#ef4444] [--neon-to:#f97316] [--neon-glow:rgba(239,68,68,0.5)]"
+                )}
+              >
+                <span aria-hidden className="text-base">
+                  {metrics.emoji}
+                </span>
+                <span>{metrics.microcopy}</span>
+              </div>
+
+              <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                {isCompositeDuration ? (
+                  <span className={neonHeroNumber}>{displayValue}</span>
+                ) : metrics.countTarget !== null ? (
+                  <span className={neonHeroNumber}>
+                    <AnimatedCounter
+                      target={metrics.countTarget}
+                      decimals={metrics.countDecimals}
+                    />
+                  </span>
+                ) : (
+                  <span className={neonHeroNumber}>{displayValue}</span>
+                )}
+                {unit ? (
+                  <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
+                    {unit}
+                  </span>
+                ) : null}
+              </div>
+
+              {detail ? (
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {detail}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        ) : (
+          <FallbackResult value={displayValue} unit={unit} detail={detail} />
+        )}
+      </div>
+    </GamifiedDashboardFrame>
+  );
+}
+
+function FallbackResult({
+  value,
+  unit,
+  detail,
+}: {
+  value: string;
+  unit?: string;
+  detail?: string | null;
+}) {
+  return (
+    <>
+      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+        <span className={neonHeroNumber}>{value}</span>
+        {unit ? (
+          <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
+            {unit}
+          </span>
+        ) : null}
+      </div>
+      {detail ? (
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {detail}
+        </p>
+      ) : null}
+    </>
+  );
+}

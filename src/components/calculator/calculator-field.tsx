@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { CalculatorFieldDef } from "@/lib/calculators";
+import { glassInsetInput } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface CalculatorFieldProps {
@@ -14,9 +15,9 @@ interface CalculatorFieldProps {
 }
 
 const controlClassName = cn(
-  "h-12 w-full rounded-xl border border-border/70 bg-background/80 px-3.5 text-base shadow-sm",
-  "transition-[border-color,box-shadow,background-color] duration-200",
-  "focus-visible:border-primary/40 focus-visible:bg-background focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/10"
+  glassInsetInput,
+  "h-12 w-full rounded-xl px-3.5 text-base",
+  "focus-visible:outline-none"
 );
 
 const rangeClassName = cn(

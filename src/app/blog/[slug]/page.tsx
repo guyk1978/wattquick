@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogArticleHeader } from "@/components/blog/blog-article-header";
+import { BlogBackLink } from "@/components/blog/blog-back-link";
 import { BlogContent } from "@/components/blog/blog-content";
-import { PageShell } from "@/components/page-shell";
+import { CalculatorSpotlight } from "@/components/blog/calculator-spotlight";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -32,37 +33,28 @@ export default async function BlogArticlePage({ params }: PageProps) {
   const post = getBlogPost(slug);
   if (!post) notFound();
 
+  const primaryCalculator = post.calculatorSlugs[0];
+
   return (
-    <PageShell narrow>
-      <Link
-        href="/blog"
-        className="mb-8 inline-block text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-      >
-        ← Back to blog
-      </Link>
-      <article>
-        <header className="mb-10 space-y-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-muted-foreground">
-            <span className="rounded-full bg-muted/50 px-2.5 py-0.5">
-              {post.category}
-            </span>
-            <time dateTime={post.publishedAt}>
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-            <span>·</span>
-            <span>{post.readMinutes} min read</span>
-          </div>
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            {post.title}
-          </h1>
-          <p className="text-lg text-muted-foreground">{post.description}</p>
-        </header>
-        <BlogContent content={post.content} />
-      </article>
-    </PageShell>
+    <div className="mx-auto max-w-6xl px-4 pt-8 pb-16 lg:px-6">
+      <div className="mx-auto max-w-3xl">
+        <BlogBackLink />
+        <BlogArticleHeader post={post} />
+      </div>
+
+      <div className="lg:grid lg:grid-cols-[minmax(0,48rem)_minmax(260px,1fr)] lg:items-start lg:gap-12 lg:justify-center">
+        <article className="mx-auto min-w-0 max-w-3xl">
+          <BlogContent content={post.content} />
+        </article>
+
+        {primaryCalculator ? (
+          <aside className="mx-auto hidden w-full max-w-sm lg:mx-0 lg:block">
+            <div className="sticky top-24">
+              <CalculatorSpotlight slug={primaryCalculator} compact />
+            </div>
+          </aside>
+        ) : null}
+      </div>
+    </div>
   );
 }

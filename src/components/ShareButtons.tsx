@@ -2,6 +2,7 @@
 
 import { Check, Copy, Share2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { glassNeon, glassNeonAccent, glassSurface, neonPillBtn } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const SHARE_MESSAGE = "Try this free calculator on WattQuick";
@@ -78,9 +79,12 @@ export function ShareButtons({ title, className }: ShareButtonsProps) {
   };
 
   const iconButtonClass = cn(
-    "inline-flex size-9 items-center justify-center rounded-lg border border-border/60",
-    "bg-muted/30 text-muted-foreground transition-colors",
-    "hover:border-primary/30 hover:bg-primary/10 hover:text-foreground",
+    glassSurface,
+    glassNeon,
+    glassNeonAccent("primary"),
+    neonPillBtn,
+    "inline-flex size-10 items-center justify-center text-muted-foreground",
+    "hover:text-foreground",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
   );
 
@@ -102,9 +106,11 @@ export function ShareButtons({ title, className }: ShareButtonsProps) {
             type="button"
             onClick={handleNativeShare}
             className={cn(
-              "inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl",
-              "border border-border/60 bg-muted/30 text-sm font-medium text-foreground",
-              "transition-colors hover:border-primary/30 hover:bg-primary/10",
+              glassSurface,
+              glassNeon,
+              glassNeonAccent("primary"),
+              neonPillBtn,
+              "inline-flex h-11 w-full items-center justify-center gap-2 text-sm font-semibold text-foreground",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             )}
           >

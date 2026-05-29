@@ -1,7 +1,10 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { estimateReadMinutes } from "@/lib/blog/parse-content";
+import {
+  estimateReadMinutes,
+  extractCalculatorSlugs,
+} from "@/lib/blog/parse-content";
 
 export type BlogCategory =
   | "EV Charging"
@@ -23,6 +26,8 @@ export interface BlogPost {
   readMinutes: number;
   category: BlogCategory;
   content: string;
+  /** Calculator tools embedded in the article body */
+  calculatorSlugs: string[];
 }
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
@@ -51,6 +56,7 @@ function readMarkdownPosts(): BlogPost[] {
         publishedAt,
         content: content.trim(),
         readMinutes: estimateReadMinutes(content),
+        calculatorSlugs: extractCalculatorSlugs(content),
       };
     });
 }

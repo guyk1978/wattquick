@@ -53,12 +53,20 @@ export function HeroBatteryBadge({ className }: HeroBatteryBadgeProps) {
   return (
     <div
       className={cn(
-        "battery-badge mb-6 inline-flex items-center gap-2.5 rounded-full border border-sky-400/20 bg-sky-400/[0.08] px-3.5 py-1.5 text-sm font-medium tracking-wide text-sky-400",
+        "hero-badge hero-badge-glow relative inline-flex items-center gap-2.5 rounded-full",
+        "border border-cyan-500/35 bg-white/70 px-4 py-2 text-sm font-semibold tracking-wide",
+        "text-cyan-800 shadow-[0_0_28px_-8px_rgba(34,211,238,0.45)] backdrop-blur-md",
+        "dark:border-cyan-400/45 dark:bg-slate-900/55 dark:text-cyan-300",
+        "dark:shadow-[0_0_32px_-6px_rgba(34,211,238,0.35)]",
         className
       )}
     >
-      <AnimatedBattery variant="hero" />
-      <span>Battery &amp; power micro-tools</span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-emerald-500/10"
+      />
+      <AnimatedBattery variant="hero" className="relative z-[1]" />
+      <span className="relative z-[1]">Battery &amp; power micro-tools</span>
     </div>
   );
 }

@@ -37,3 +37,14 @@ export function estimateReadMinutes(content: string): number {
   const words = content.split(/\s+/).filter(Boolean).length;
   return Math.max(3, Math.round(words / 220));
 }
+
+/** First-party calculator slugs referenced via `<CalculatorEmbed />` in markdown. */
+export function extractCalculatorSlugs(content: string): string[] {
+  const slugs: string[] = [];
+  const regex = new RegExp(EMBED_REGEX.source, "g");
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(content)) !== null) {
+    if (!slugs.includes(match[1])) slugs.push(match[1]);
+  }
+  return slugs;
+}

@@ -6,8 +6,15 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { useMemo } from "react";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import { usesBatteryDashboard } from "@/lib/battery-dashboard";
+import { usesCostDashboard } from "@/lib/cost-dashboard";
+import { usesEvDashboard } from "@/lib/ev-dashboard";
+import { BatteryGamifiedResult } from "./battery-gamified-result";
+import { CostGamifiedResult } from "./cost-gamified-result";
+import { EvGamifiedResult } from "./ev-gamified-result";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
+import { glassPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface CalculatorPanelProps {
@@ -31,13 +38,8 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   );
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-6 rounded-2xl border border-border/60 bg-card/80 p-4 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)]",
-        "sm:gap-8 sm:rounded-3xl sm:p-6",
-        className
-      )}
-    >
+    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
       <CalculatorInputs
         fields={definition.fields}
         values={values}
@@ -46,13 +48,42 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
 
       <div className="h-px bg-border/60" aria-hidden />
 
-      <CalculatorResult
-        label={definition.result.label}
-        value={result.value}
-        unit={result.unit}
-        detail={result.detail}
-        emptyMessage={definition.result.emptyMessage}
-      />
+      {usesBatteryDashboard(definition.category, id) ? (
+        <BatteryGamifiedResult
+          calculatorId={id}
+          label={definition.result.label}
+          value={result.value}
+          unit={result.unit}
+          detail={result.detail}
+          emptyMessage={definition.result.emptyMessage}
+        />
+      ) : usesCostDashboard(definition.category, id) ? (
+        <CostGamifiedResult
+          calculatorId={id}
+          label={definition.result.label}
+          value={result.value}
+          unit={result.unit}
+          detail={result.detail}
+          emptyMessage={definition.result.emptyMessage}
+        />
+      ) : usesEvDashboard(definition.category, id) ? (
+        <EvGamifiedResult
+          calculatorId={id}
+          label={definition.result.label}
+          value={result.value}
+          unit={result.unit}
+          detail={result.detail}
+          emptyMessage={definition.result.emptyMessage}
+        />
+      ) : (
+        <CalculatorResult
+          label={definition.result.label}
+          value={result.value}
+          unit={result.unit}
+          detail={result.detail}
+          emptyMessage={definition.result.emptyMessage}
+        />
+      )}
 
       <JoinMyPdfSaveReport
         calculatorTitle={definition.title}
@@ -65,6 +96,7 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
       />
 
       <ShareButtons title={definition.title} className="pt-1" />
+      </div>
     </div>
   );
 }

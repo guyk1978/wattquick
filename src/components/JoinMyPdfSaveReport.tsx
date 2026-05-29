@@ -3,6 +3,7 @@
 import { FileDown } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { JOIN_MY_PDF_URL } from "@/lib/partners";
+import { glassNeon, glassNeonAccent, glassSurface, neonPillBtn } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface JoinMyPdfSaveReportProps {
@@ -113,13 +114,10 @@ export function JoinMyPdfSaveReport({
 
   return (
     <section
-      className={cn(
-        "rounded-xl border border-border/50 bg-muted/20 px-4 py-3",
-        className
-      )}
+      className={cn(glassSurface, glassNeon, glassNeonAccent("primary"), "rounded-2xl px-4 py-4", className)}
       aria-label="Save calculation report"
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="glass-neon__inner flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">Save Report:</span>{" "}
           Download your battery and solar calculation specs as a private PDF via{" "}
@@ -134,10 +132,11 @@ export function JoinMyPdfSaveReport({
           type="button"
           onClick={handleSaveReport}
           className={cn(
-            "inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold",
-            "border border-primary/30 bg-primary/10 text-foreground",
-            "shadow-[0_0_20px_-6px_rgba(59,130,246,0.5)] transition-colors",
-            "hover:border-primary/50 hover:bg-primary/20",
+            glassSurface,
+            glassNeon,
+            glassNeonAccent("ev"),
+            neonPillBtn,
+            "inline-flex h-11 shrink-0 items-center justify-center gap-2 px-5 text-sm font-bold text-foreground",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
         >
