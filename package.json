@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build.mjs",
+    "build:joinmypdf": "node scripts/build.mjs",
     "preview": "npx serve@14 out",
     "lint": "eslint .",
     "generate:calculators": "tsx scripts/generate-calculators-md.ts",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
+    "@cloudflare/next-on-pages": "^1.13.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",

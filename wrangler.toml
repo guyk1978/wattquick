@@ -1,5 +1,12 @@
-# Optional: local preview with `npx wrangler pages dev out`
-# Cloudflare Pages dashboard should use build output directory: out
+# wattquick.com — static site (default build, no ENABLE_API_ROUTES)
+# Cloudflare Pages dashboard: build output directory = out
 name = "wattquick"
 compatibility_date = "2024-08-01"
 pages_build_output_dir = "out"
+
+# joinmypdf.com — server/API deploy (ENABLE_API_ROUTES=1 + next-on-pages adapter)
+# Create a separate Cloudflare Pages project with:
+#   Environment variable: ENABLE_API_ROUTES=1
+#   Build command:        npm run build
+#   Build output dir:     .vercel/output/static
+# See wrangler.joinmypdf.toml for a joinmypdf-specific template.
