@@ -1,10 +1,11 @@
-import { Cable, Cpu, Home, Layers, Gauge } from "lucide-react";
+import { Cable, Calendar, Cpu, Home, Layers, Gauge } from "lucide-react";
 import {
   formatNumber,
   parseNonNegative,
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateBatteryCalendarAging,
   calculateBatteryVoltageDrop,
   calculateCrate,
   calculateHomeBackupSizing,
@@ -340,6 +341,101 @@ export const calculatorsBattery = [
         value: formatNumber(result.voltageAtLoad, { maxDecimals: 2 }),
         unit: "V",
         detail: `${result.dropPercent}% drop (${result.dropVolts} V) · ${result.recommendedAwg} AWG recommended`,
+      };
+    },
+  },
+  {
+    slug: "battery-calendar-aging",
+    href: "/battery-calendar-aging",
+    title: "Battery Calendar Aging Calculator",
+    description:
+      "Estimate Li-ion capacity fade from storage temperature, average SOC, and pack age—calendar loss % and remaining SoH.",
+    keywords: [
+      "battery calendar aging",
+      "storage soc degradation",
+      "li-ion shelf life calculator",
+      "battery state of health storage",
+      "lfp nmc calendar fade",
+    ],
+    icon: Calendar,
+    tag: "Battery",
+    category: "battery",
+    suggestions: [
+      "battery-percentage",
+      "battery-depth-of-discharge",
+      "ev-battery-degradation",
+    ],
+    fields: [
+      {
+        id: "avgStorageTempC",
+        label: "Avg storage temperature",
+        unit: "°C",
+        placeholder: "25",
+        hint: "Ambient where the pack spends most idle hours",
+      },
+      {
+        id: "avgSocPercent",
+        label: "Average charge level",
+        unit: "% SOC",
+        placeholder: "50",
+        hint: "Mean state of charge while stored—not peak trips",
+      },
+      {
+        id: "batteryAgeYears",
+        label: "Pack age",
+        unit: "years",
+        placeholder: "3",
+        defaultValue: "0",
+      },
+    ],
+    result: {
+      label: "Remaining SoH",
+      emptyMessage: "Enter storage °C, avg SOC % & age",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why calendar aging happens",
+          body: "Li-ion cells degrade electrochemically even at zero cycles—SEI growth, electrolyte oxidation, and electrode interactions continue. Heat and high state-of-charge accelerate side reactions. That is calendar aging, distinct from cycle (throughput) aging.",
+        },
+        {
+          heading: "Model assumptions",
+          body: "Baseline ~2%/year fade at 25 °C and 50% SOC. Rate scales ~2× per 10 °C above 25 °C and rises sharply when average SOC stays above 80–100%. Planning estimate only—chemistries (LFP vs. NMC) and BMS differ.",
+        },
+        {
+          heading: "Storage best practices",
+          body: "For long idle periods: ~50% SOC, cool and dry (15–25 °C ideal), avoid hot garages at 100%. Re-check SoH before returning backup or seasonal vehicles to service.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include driving cycles? A: No—this is calendar-only; add cycle wear separately. Q: Can SoH recover? A: No—fade is largely irreversible. Q: Cold storage? A: Slows calendar fade vs. hot, but avoid charging lithium below 0 °C.",
+        },
+      ],
+    },
+    compute(values) {
+      const tempRaw = values.avgStorageTempC?.trim() ?? "";
+      const avgStorageTempC =
+        tempRaw === "" || tempRaw === "-" ? null : Number(tempRaw);
+      const avgSocPercent = parsePositive(values.avgSocPercent ?? "");
+      const batteryAgeYears = parseNonNegative(values.batteryAgeYears ?? "");
+      if (
+        avgStorageTempC === null ||
+        !Number.isFinite(avgStorageTempC) ||
+        avgSocPercent === null ||
+        avgSocPercent > 100 ||
+        batteryAgeYears === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateBatteryCalendarAging({
+        avgStorageTempC,
+        avgSocPercent,
+        batteryAgeYears,
+      });
+      return {
+        value: formatNumber(result.remainingSoh, { maxDecimals: 1 }),
+        unit: "% SoH",
+        detail: `${result.calendarLossPercent}% calendar loss · ${result.annualLossPercent}%/yr at ${avgStorageTempC}°C & ${avgSocPercent}% avg SOC`,
       };
     },
   },

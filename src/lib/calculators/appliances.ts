@@ -139,7 +139,72 @@ export function calculateWholeHouseEnergyBudget({
     dailyKwh: parseFloat(dailyKwh.toFixed(1)),
     monthlyKwh: Math.round(monthlyKwh),
     annualKwh: Math.round(annualKwh),
-    monthlyCost: parseFloat(monthlyCost.toFixed(2)),
     annualCost: parseFloat(annualCost.toFixed(2)),
+    monthlyCost: parseFloat(monthlyCost.toFixed(2)),
+  };
+}
+
+/** NEC-style continuous load cap for lighting circuits (3+ hours on). */
+export const LIGHTING_CONTINUOUS_LOAD_FACTOR = 0.8;
+
+export type LightingCircuitLoadStatus =
+  | "ok"
+  | "near-limit"
+  | "over-80"
+  | "overloaded";
+
+export interface LightingCircuitLoadInput {
+  fixtureCount: number;
+  wattsPerFixture: number;
+  circuitVoltage: number;
+  breakerAmps: number;
+}
+
+export function calculateLightingCircuitLoad({
+  fixtureCount,
+  wattsPerFixture,
+  circuitVoltage,
+  breakerAmps,
+}: LightingCircuitLoadInput) {
+  const totalWatts = fixtureCount * wattsPerFixture;
+  const loadAmps = totalWatts / circuitVoltage;
+  const utilizationPercent = (loadAmps / breakerAmps) * 100;
+  const continuousMaxAmps = breakerAmps * LIGHTING_CONTINUOUS_LOAD_FACTOR;
+  const continuousMaxWatts = continuousMaxAmps * circuitVoltage;
+  const headroomAmps = continuousMaxAmps - loadAmps;
+  const exceedsContinuous = loadAmps > continuousMaxAmps;
+  const exceedsBreaker = loadAmps > breakerAmps;
+
+  let status: LightingCircuitLoadStatus = "ok";
+  if (exceedsBreaker) status = "overloaded";
+  else if (exceedsContinuous) status = "over-80";
+  else if (utilizationPercent >= 65) status = "near-limit";
+
+  let recommendation: string;
+  if (status === "overloaded") {
+    recommendation =
+      "Load exceeds breaker rating—split circuits or reduce fixtures immediately.";
+  } else if (status === "over-80") {
+    recommendation =
+      "Above 80% continuous-load limit—add a circuit or reduce load before nuisance trips.";
+  } else if (status === "near-limit") {
+    recommendation =
+      "Approaching 80% guideline—leave headroom for inrush on some LED drivers.";
+  } else {
+    recommendation = "Within 80% continuous-load guideline for this breaker.";
+  }
+
+  return {
+    totalWatts: Math.round(totalWatts),
+    loadAmps: parseFloat(loadAmps.toFixed(2)),
+    utilizationPercent: parseFloat(utilizationPercent.toFixed(1)),
+    continuousMaxAmps: parseFloat(continuousMaxAmps.toFixed(1)),
+    continuousMaxWatts: Math.round(continuousMaxWatts),
+    headroomAmps: parseFloat(headroomAmps.toFixed(2)),
+    exceedsContinuous,
+    exceedsBreaker,
+    status,
+    recommendation,
+    gaugeFillPercent: Math.min(100, Math.max(4, utilizationPercent)),
   };
 }

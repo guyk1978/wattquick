@@ -106,3 +106,170 @@ export function formatOhmsDetail(result: OhmsLawResult): string {
       return `R = V ÷ I → ${v} Ω`;
   }
 }
+
+/** Copper conductor resistance (Ω/m) per conductor at ~20 °C — one-way. */
+export const AC_WIRE_OHM_PER_M = {
+  "awg-14": 0.008286,
+  "awg-12": 0.005211,
+  "awg-10": 0.003277,
+  "awg-8": 0.002061,
+  "awg-6": 0.001296,
+  "mm2-1.5": 0.0121,
+  "mm2-2.5": 0.00741,
+  "mm2-4": 0.00461,
+  "mm2-6": 0.00308,
+  "mm2-10": 0.00183,
+  "mm2-16": 0.00115,
+} as const;
+
+export type AcWireSizeKey = keyof typeof AC_WIRE_OHM_PER_M;
+
+export type VoltageDropCompliance = "within-3" | "within-5" | "excessive";
+
+export interface ResidentialVoltageDropInput {
+  supplyVoltage: number;
+  loadAmps: number;
+  oneWayLengthM: number;
+  wireSize: AcWireSizeKey;
+}
+
+export function isAcWireSizeKey(value: string): value is AcWireSizeKey {
+  return value in AC_WIRE_OHM_PER_M;
+}
+
+export function calculateResidentialVoltageDrop({
+  supplyVoltage,
+  loadAmps,
+  oneWayLengthM,
+  wireSize,
+}: ResidentialVoltageDropInput) {
+  const ohmPerM = AC_WIRE_OHM_PER_M[wireSize];
+  const roundTripOhms = ohmPerM * oneWayLengthM * 2;
+  const dropVolts = loadAmps * roundTripOhms;
+  const dropPercent = (dropVolts / supplyVoltage) * 100;
+  const voltageAtLoad = supplyVoltage - dropVolts;
+
+  let compliance: VoltageDropCompliance;
+  let recommendation: string;
+  if (dropPercent <= 3) {
+    compliance = "within-3";
+    recommendation =
+      "Within the common 3% branch-circuit guideline—good for motors and chargers.";
+  } else if (dropPercent <= 5) {
+    compliance = "within-5";
+    recommendation =
+      "Within a 5% planning limit—acceptable for many loads; consider upsizing for heavy motors.";
+  } else {
+    compliance = "excessive";
+    recommendation =
+      "Exceeds 5%—upsize wire gauge, shorten the run, or split loads across circuits.";
+  }
+
+  const wireLabel = wireSize.startsWith("awg-")
+    ? `${wireSize.replace("awg-", "")} AWG`
+    : `${wireSize.replace("mm2-", "")} mm²`;
+
+  return {
+    dropVolts: parseFloat(dropVolts.toFixed(2)),
+    dropPercent: parseFloat(dropPercent.toFixed(2)),
+    voltageAtLoad: parseFloat(Math.max(0, voltageAtLoad).toFixed(2)),
+    compliance,
+    recommendation,
+    wireLabel,
+    roundTripOhms: parseFloat(roundTripOhms.toFixed(4)),
+    lossPercentVisual: Math.min(100, Math.max(0, dropPercent)),
+  };
+}
+
+/** Common residential / light commercial breaker handle ratings (A). */
+export const STANDARD_AC_BREAKER_AMPS = [
+  15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 100, 125, 150, 200,
+] as const;
+
+export type BreakerCurveType = "Type B" | "Type C" | "Type D";
+
+export interface AcInrushCurrentInput {
+  nominalPowerW: number;
+  operatingVoltageV: number;
+  inrushFactor: number;
+}
+
+export interface AcInrushCurrentResult {
+  nominalAmps: number;
+  peakInrushAmps: number;
+  recommendedBreakerAmps: number;
+  recommendedCurveType: BreakerCurveType;
+  minBreakerForLoadAmps: number;
+  magneticTripMultiple: number;
+  inrushRatio: number;
+  nominalBarPercent: number;
+  recommendation: string;
+}
+
+function nextStandardBreakerAmps(requiredAmps: number): number {
+  const need = Math.max(requiredAmps, 15);
+  for (const size of STANDARD_AC_BREAKER_AMPS) {
+    if (size >= need - 0.01) return size;
+  }
+  return STANDARD_AC_BREAKER_AMPS[STANDARD_AC_BREAKER_AMPS.length - 1];
+}
+
+function suggestBreakerCurve(inrushFactor: number): BreakerCurveType {
+  if (inrushFactor >= 8) return "Type D";
+  if (inrushFactor >= 4) return "Type C";
+  return "Type B";
+}
+
+/** Magnetic trip multiplier (IEC-style planning) for curve type. */
+export function breakerMagneticMultiple(curve: BreakerCurveType): number {
+  switch (curve) {
+    case "Type B":
+      return 5;
+    case "Type C":
+      return 7.5;
+    case "Type D":
+      return 12.5;
+  }
+}
+
+/**
+ * AC inrush planning: I = P/V, peak = I × inrush factor, breaker sized for
+ * 125% continuous load and short magnetic inrush allowance on curve type.
+ */
+export function calculateAcInrushCurrent({
+  nominalPowerW,
+  operatingVoltageV,
+  inrushFactor,
+}: AcInrushCurrentInput): AcInrushCurrentResult {
+  const nominalAmps = nominalPowerW / operatingVoltageV;
+  const peakInrushAmps = nominalAmps * inrushFactor;
+  const inrushRatio = inrushFactor;
+
+  const recommendedCurveType = suggestBreakerCurve(inrushFactor);
+  const magneticTripMultiple = breakerMagneticMultiple(recommendedCurveType);
+
+  const minBreakerForLoadAmps = nominalAmps * 1.25;
+  const minBreakerForInrushAmps = peakInrushAmps / magneticTripMultiple;
+  const requiredAmps = Math.max(minBreakerForLoadAmps, minBreakerForInrushAmps);
+  const recommendedBreakerAmps = nextStandardBreakerAmps(requiredAmps);
+
+  const recommendation =
+    peakInrushAmps > recommendedBreakerAmps * magneticTripMultiple
+      ? `Consider ${recommendedCurveType} curve or soft-start—peak may trip Type B on some breakers`
+      : `${recommendedBreakerAmps} A ${recommendedCurveType} typical for ${formatNumber(inrushFactor, { maxDecimals: 1 })}× inrush`;
+
+  const nominalBarPercent =
+    peakInrushAmps > 0 ? (nominalAmps / peakInrushAmps) * 100 : 100;
+
+  return {
+    nominalAmps: parseFloat(nominalAmps.toFixed(2)),
+    peakInrushAmps: parseFloat(peakInrushAmps.toFixed(1)),
+    recommendedBreakerAmps,
+    recommendedCurveType,
+    minBreakerForLoadAmps: parseFloat(minBreakerForLoadAmps.toFixed(2)),
+    magneticTripMultiple,
+    inrushRatio: parseFloat(inrushRatio.toFixed(1)),
+    nominalBarPercent: parseFloat(nominalBarPercent.toFixed(1)),
+    recommendation,
+  };
+}

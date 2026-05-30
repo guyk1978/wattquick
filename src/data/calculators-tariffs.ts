@@ -1,11 +1,22 @@
-import { ArrowLeftRight, Battery, Clock, Gauge, Leaf } from "lucide-react";
+import {
+  Activity,
+  ArrowLeftRight,
+  Battery,
+  Clock,
+  Gauge,
+  Leaf,
+  TrendingDown,
+} from "lucide-react";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import {
   calculateBatteryArbitrage,
   calculateCarbonOffset,
   calculateDemandCharge,
+  calculateGridFrequencyReward,
+  calculatePeakShavingPotential,
   calculateTouShiftingSavings,
   calculateV2gReturn,
+  type GridFrequencyRateType,
 } from "@/lib/calculators/tariffs";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
@@ -202,6 +213,246 @@ export const calculatorsTariffs = [
         value: formatNumber(r.kgCo2Avoided, { maxDecimals: 0 }),
         unit: "kg CO₂",
         detail: `${r.lbsCo2} lbs · ~${r.milesEquivalentCar} mi car-equivalent`,
+      };
+    },
+  },
+  {
+    slug: "grid-frequency-reward",
+    href: "/grid-frequency-reward",
+    title: "Grid Frequency Response Reward Calculator",
+    description:
+      "Estimate monthly and annual revenue from battery or DER frequency-response programs—capacity kW, participation hours, and availability.",
+    keywords: [
+      "grid frequency response reward",
+      "ancillary services battery revenue",
+      "FCR FRR compensation calculator",
+      "VPP grid services payment",
+      "battery grid stability earnings",
+    ],
+    icon: Activity,
+    tag: "Grid Services",
+    category: "tariffs",
+    suggestions: [
+      "battery-arbitrage-roi",
+      "v2g-financial-return",
+      "demand-charge-calculator",
+    ],
+    fields: [
+      {
+        id: "availableKw",
+        label: "Available grid-service capacity",
+        unit: "kW",
+        placeholder: "5",
+        hint: "Power you can commit for frequency regulation",
+      },
+      {
+        id: "participationHours",
+        label: "Participation hours",
+        unit: "hrs/day",
+        placeholder: "18",
+        hint: "Hours per day enrolled and responsive",
+      },
+      {
+        id: "rateType",
+        label: "Reward rate type",
+        inputType: "select",
+        defaultValue: "kw-month",
+        options: [
+          { value: "kw-month", label: "Capacity ($/kW-month)" },
+          { value: "kwh", label: "Energy ($/kWh dispatched)" },
+        ],
+        colSpan: 2,
+      },
+      {
+        id: "rewardRate",
+        label: "Average reward rate",
+        unit: "$",
+        placeholder: "8",
+        hint: "Program average—check aggregator or ISO tariff sheet",
+      },
+      {
+        id: "availabilityPercent",
+        label: "Availability",
+        inputType: "range",
+        min: 50,
+        max: 100,
+        step: 5,
+        defaultValue: "90",
+        unit: "%",
+        colSpan: 2,
+        hint: "Uptime / compliance factor applied to payments",
+      },
+    ],
+    result: {
+      label: "Estimated monthly revenue",
+      emptyMessage: "Enter kW, hours, rate & availability",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why frequency response pays",
+          body: "Grid operators need fast up/down power when frequency drifts from 50 or 60 Hz. Batteries and aggregated DER can respond in seconds—programs compensate enrolled capacity ($/kW-month), dispatched energy ($/kWh), or both through utilities and VPP aggregators.",
+        },
+        {
+          heading: "How this estimate works",
+          body: "Effective kW = available kW × (availability % ÷ 100) × min(1, participation hours ÷ 24). Capacity mode: monthly $ = effective kW × $/kW-month. Energy mode: monthly kWh ≈ effective kW × hours × 30 days × ~12% activation duty × $/kWh. Annual = monthly × 12.",
+        },
+        {
+          heading: "Availability scenarios",
+          body: "The calculator table compares 60–100% availability so you can see how compliance penalties or outages affect revenue. Real programs may also require minimum response time and SOC windows.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Same as TOU arbitrage? A: No—frequency services are grid-stability products, not retail rate spreads. Q: Home battery eligible? A: Only where utility or VPP enrollment exists—check interconnection. Q: Include battery wear? A: Pair with degradation cost in planning; this tool shows gross revenue only.",
+        },
+      ],
+    },
+    compute(values) {
+      const availableKw = parsePositive(values.availableKw ?? "");
+      const participationHours = parsePositive(values.participationHours ?? "");
+      const rewardRate = parsePositive(values.rewardRate ?? "");
+      const rateType = values.rateType as GridFrequencyRateType;
+      const availabilityPercent = Number(
+        values.availabilityPercent?.trim() || "90"
+      );
+      if (
+        availableKw === null ||
+        participationHours === null ||
+        rewardRate === null ||
+        !["kw-month", "kwh"].includes(rateType) ||
+        !Number.isFinite(availabilityPercent) ||
+        availabilityPercent < 0 ||
+        availabilityPercent > 100
+      ) {
+        return { value: null };
+      }
+      const result = calculateGridFrequencyReward({
+        availableKw,
+        participationHoursPerDay: participationHours,
+        rewardRate,
+        rateType,
+        availabilityPercent,
+      });
+      const rateLabel = rateType === "kw-month" ? "$/kW-mo" : "$/kWh";
+      return {
+        value: formatCurrency(result.monthlyRevenue),
+        unit: "/mo",
+        detail: `${formatCurrency(result.annualRevenue)}/yr · ${result.effectiveKw} kW effective · ${rateLabel} @ ${formatNumber(rewardRate, { maxDecimals: 2 })}`,
+      };
+    },
+  },
+  {
+    slug: "peak-shaving-potential",
+    href: "/peak-shaving-potential",
+    title: "Peak Shaving Potential Calculator",
+    description:
+      "Estimate monthly and annual TOU savings from shifting peak kWh to off-peak—compare bills before and after load shifting.",
+    keywords: [
+      "peak shaving calculator",
+      "load shifting savings",
+      "time of use bill reduction",
+      "peak off peak kwh",
+      "tou peak shaving home",
+    ],
+    icon: TrendingDown,
+    tag: "Peak Shaving",
+    category: "tariffs",
+    suggestions: [
+      "tou-shifting-savings",
+      "electricity-bill",
+      "battery-arbitrage-roi",
+    ],
+    fields: [
+      {
+        id: "peakKwh",
+        label: "Peak-hour use",
+        unit: "kWh/mo",
+        placeholder: "420",
+        hint: "Average kWh billed on-peak each month",
+      },
+      {
+        id: "offPeakKwh",
+        label: "Off-peak use",
+        unit: "kWh/mo",
+        placeholder: "680",
+      },
+      {
+        id: "peakRate",
+        label: "Peak rate",
+        unit: "$/kWh",
+        placeholder: "0.38",
+      },
+      {
+        id: "offPeakRate",
+        label: "Off-peak rate",
+        unit: "$/kWh",
+        placeholder: "0.11",
+      },
+      {
+        id: "shiftablePercent",
+        label: "Shiftable share of peak load",
+        inputType: "range",
+        min: 0,
+        max: 100,
+        step: 5,
+        defaultValue: "40",
+        unit: "%",
+        colSpan: 2,
+        hint: "EV, laundry, dishwasher, pool pump—flexible peak kWh",
+      },
+    ],
+    result: {
+      label: "Monthly savings",
+      emptyMessage: "Enter peak/off-peak kWh, rates & shift %",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why peak shaving matters",
+          body: "TOU tariffs charge more when the grid is stressed. Peak shaving moves flexible loads into cheap off-peak windows—same comfort, lower weighted $/kWh. Savings scale with your rate spread and how much peak energy you can reschedule.",
+        },
+        {
+          heading: "Bill before vs. after",
+          body: "Before = peak kWh × peak $/kWh + off-peak kWh × off-peak $/kWh. After moves (peak kWh × shift %) from peak to off-peak buckets. Monthly savings = before − after; annual = monthly × 12.",
+        },
+        {
+          heading: "Home vs. commercial",
+          body: "Homes usually optimize energy $/kWh. Businesses may also face demand kW charges—pair with Demand Charge Calculator when ratchets apply.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Different from TOU Shifting Savings? A: That tool takes shiftable kWh directly; this one starts from your peak/off-peak split and a shift %. Q: 100% shift realistic? A: Rare—HVAC and cooking often stay on-peak. Q: Super-off-peak tiers? A: Use your lowest overnight rate in off-peak field.",
+        },
+      ],
+    },
+    compute(values) {
+      const peakKwh = parsePositive(values.peakKwh ?? "");
+      const offPeakKwh = parsePositive(values.offPeakKwh ?? "");
+      const peakRate = parsePositive(values.peakRate ?? "");
+      const offPeakRate = parsePositive(values.offPeakRate ?? "");
+      const shiftablePercent = Number(values.shiftablePercent?.trim() || "40");
+      if (
+        peakKwh === null ||
+        offPeakKwh === null ||
+        peakRate === null ||
+        offPeakRate === null ||
+        !Number.isFinite(shiftablePercent) ||
+        shiftablePercent < 0 ||
+        shiftablePercent > 100
+      ) {
+        return { value: null };
+      }
+      const result = calculatePeakShavingPotential({
+        peakKwh,
+        offPeakKwh,
+        peakRatePerKwh: peakRate,
+        offPeakRatePerKwh: offPeakRate,
+        shiftablePercent,
+      });
+      return {
+        value: formatCurrency(result.monthlySavings),
+        unit: "/mo",
+        detail: `${formatCurrency(result.annualSavings)}/yr · ${formatCurrency(result.beforeCost)} → ${formatCurrency(result.afterCost)} bill · ${result.shiftableKwh} kWh shifted`,
       };
     },
   },

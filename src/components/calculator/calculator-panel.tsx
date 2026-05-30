@@ -3,7 +3,8 @@
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { usesBatteryDashboard } from "@/lib/battery-dashboard";
@@ -12,6 +13,21 @@ import { usesEvDashboard } from "@/lib/ev-dashboard";
 import { BatteryGamifiedResult } from "./battery-gamified-result";
 import { CostGamifiedResult } from "./cost-gamified-result";
 import { EvGamifiedResult } from "./ev-gamified-result";
+import { EvPreconditioningCostCalculator } from "@/components/calculators/EvPreconditioningCostCalculator";
+import { EvTireWearCostCalculator } from "@/components/calculators/EvTireWearCostCalculator";
+import { GeneratorVsSolarHybridCalculator } from "@/components/calculators/GeneratorVsSolarHybridCalculator";
+import { WaterPumpSolarSizingCalculator } from "@/components/calculators/WaterPumpSolarSizingCalculator";
+import { GridFrequencyRewardCalculator } from "@/components/calculators/GridFrequencyRewardCalculator";
+import { ResidentialVoltageDropCalculator } from "@/components/calculators/ResidentialVoltageDropCalculator";
+import { BessCarbonCostCalculator } from "@/components/calculators/BessCarbonCostCalculator";
+import { LightingCircuitLoadCalculator } from "@/components/calculators/LightingCircuitLoadCalculator";
+import { MicrogridRoiCalculator } from "@/components/calculators/MicrogridRoiCalculator";
+import { SolarWaterHeaterEfficiencyCalculator } from "@/components/calculators/SolarWaterHeaterEfficiencyCalculator";
+import { PeakShavingPotentialCalculator } from "@/components/calculators/PeakShavingPotentialCalculator";
+import { EvChargingCableLossCalculator } from "@/components/calculators/EvChargingCableLossCalculator";
+import { BatteryCalendarAgingCalculator } from "@/components/calculators/BatteryCalendarAgingCalculator";
+import { SmallWindTurbineYieldCalculator } from "@/components/calculators/SmallWindTurbineYieldCalculator";
+import { AcInrushCurrentCalculator } from "@/components/calculators/AcInrushCurrentCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -24,6 +40,52 @@ interface CalculatorPanelProps {
 
 /** Interactive calculator body: inputs + live result. */
 export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
+  if (id === "microgrid-roi") {
+    return <MicrogridRoiCalculator className={className} />;
+  }
+  if (id === "ev-preconditioning-cost") {
+    return <EvPreconditioningCostCalculator className={className} />;
+  }
+  if (id === "ev-tire-wear-cost") {
+    return <EvTireWearCostCalculator className={className} />;
+  }
+  if (id === "generator-vs-solar-hybrid") {
+    return <GeneratorVsSolarHybridCalculator className={className} />;
+  }
+  if (id === "water-pump-solar-sizing") {
+    return <WaterPumpSolarSizingCalculator className={className} />;
+  }
+  if (id === "grid-frequency-reward") {
+    return <GridFrequencyRewardCalculator className={className} />;
+  }
+  if (id === "residential-voltage-drop") {
+    return <ResidentialVoltageDropCalculator className={className} />;
+  }
+  if (id === "bess-carbon-cost") {
+    return <BessCarbonCostCalculator className={className} />;
+  }
+  if (id === "lighting-circuit-load") {
+    return <LightingCircuitLoadCalculator className={className} />;
+  }
+  if (id === "solar-water-heater-efficiency") {
+    return <SolarWaterHeaterEfficiencyCalculator className={className} />;
+  }
+  if (id === "peak-shaving-potential") {
+    return <PeakShavingPotentialCalculator className={className} />;
+  }
+  if (id === "ev-charging-cable-loss") {
+    return <EvChargingCableLossCalculator className={className} />;
+  }
+  if (id === "battery-calendar-aging") {
+    return <BatteryCalendarAgingCalculator className={className} />;
+  }
+  if (id === "small-wind-turbine-yield") {
+    return <SmallWindTurbineYieldCalculator className={className} />;
+  }
+  if (id === "ac-inrush-current") {
+    return <AcInrushCurrentCalculator className={className} />;
+  }
+
   const definition = getCalculatorDefinition(id);
   const { values, setValue } = useCalculatorForm(definition.fields);
 
@@ -36,6 +98,34 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
     () => Object.fromEntries(definition.fields.map((f) => [f.id, f.label])),
     [definition.fields]
   );
+
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
+
+  const handleSaveToPDF = useCallback(async () => {
+    if (!result.value) return;
+
+    setPdfLoading(true);
+    setPdfError(null);
+    try {
+      await generatePDFReport(definition.title, buildPdfInputs(values, fieldLabels), buildPdfResults({
+          [definition.result.label]: { value: result.value, unit: result.unit },
+          ...(result.detail ? { Notes: result.detail } : {}),
+        }));
+    } catch {
+      setPdfError("Could not generate PDF. Please try again.");
+    } finally {
+      setPdfLoading(false);
+    }
+  }, [
+    definition.result.label,
+    definition.title,
+    fieldLabels,
+    result.detail,
+    result.unit,
+    result.value,
+    values,
+  ]);
 
   return (
     <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
@@ -93,6 +183,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
         detail={result.detail}
         values={values}
         fieldLabels={fieldLabels}
+        onSaveToPdf={handleSaveToPDF}
+        isSaving={pdfLoading}
+        saveError={pdfError}
       />
 
       <ShareButtons title={definition.title} className="pt-1" />

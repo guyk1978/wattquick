@@ -18,6 +18,62 @@ export function calculateTouShiftingSavings({
   };
 }
 
+export interface PeakShavingPotentialInput {
+  peakKwh: number;
+  offPeakKwh: number;
+  peakRatePerKwh: number;
+  offPeakRatePerKwh: number;
+  shiftablePercent: number;
+}
+
+export interface PeakShavingPotentialResult {
+  shiftableKwh: number;
+  beforeCost: number;
+  afterCost: number;
+  monthlySavings: number;
+  annualSavings: number;
+  savingsPerKwh: number;
+  billReductionPercent: number;
+  beforeBarPercent: number;
+  afterBarPercent: number;
+}
+
+/**
+ * Models TOU bill before/after moving a share of peak kWh into off-peak windows.
+ */
+export function calculatePeakShavingPotential({
+  peakKwh,
+  offPeakKwh,
+  peakRatePerKwh,
+  offPeakRatePerKwh,
+  shiftablePercent,
+}: PeakShavingPotentialInput): PeakShavingPotentialResult {
+  const shiftPct = Math.min(100, Math.max(0, shiftablePercent)) / 100;
+  const shiftableKwh = peakKwh * shiftPct;
+  const beforeCost = peakKwh * peakRatePerKwh + offPeakKwh * offPeakRatePerKwh;
+  const afterPeakKwh = peakKwh - shiftableKwh;
+  const afterOffPeakKwh = offPeakKwh + shiftableKwh;
+  const afterCost =
+    afterPeakKwh * peakRatePerKwh + afterOffPeakKwh * offPeakRatePerKwh;
+  const monthlySavings = Math.max(0, beforeCost - afterCost);
+  const savingsPerKwh = Math.max(0, peakRatePerKwh - offPeakRatePerKwh);
+  const maxCost = Math.max(beforeCost, afterCost, 1);
+  const billReductionPercent =
+    beforeCost > 0 ? (monthlySavings / beforeCost) * 100 : 0;
+
+  return {
+    shiftableKwh: parseFloat(shiftableKwh.toFixed(1)),
+    beforeCost: parseFloat(beforeCost.toFixed(2)),
+    afterCost: parseFloat(afterCost.toFixed(2)),
+    monthlySavings: parseFloat(monthlySavings.toFixed(2)),
+    annualSavings: parseFloat((monthlySavings * 12).toFixed(0)),
+    savingsPerKwh: parseFloat(savingsPerKwh.toFixed(3)),
+    billReductionPercent: parseFloat(billReductionPercent.toFixed(1)),
+    beforeBarPercent: parseFloat(((beforeCost / maxCost) * 100).toFixed(1)),
+    afterBarPercent: parseFloat(((afterCost / maxCost) * 100).toFixed(1)),
+  };
+}
+
 export interface DemandChargeInput {
   peakKw: number;
   demandChargePerKw: number;
@@ -95,4 +151,95 @@ export function calculateCarbonOffset({
     lbsCo2: parseFloat(lbsCo2.toFixed(0)),
     milesEquivalentCar: Math.round(kgCo2Avoided / 0.404),
   };
+}
+
+export type GridFrequencyRateType = "kw-month" | "kwh";
+
+/** Typical share of committed hours with measurable energy exchange (FCR/FRR). */
+export const GRID_FREQUENCY_ACTIVATION_DUTY = 0.12;
+
+export const GRID_FREQUENCY_DAYS_PER_MONTH = 30;
+
+export interface GridFrequencyRewardInput {
+  availableKw: number;
+  participationHoursPerDay: number;
+  rewardRate: number;
+  rateType: GridFrequencyRateType;
+  availabilityPercent: number;
+}
+
+export interface GridFrequencyRewardResult {
+  effectiveKw: number;
+  hoursFactor: number;
+  monthlyRevenue: number;
+  annualRevenue: number;
+  rateType: GridFrequencyRateType;
+  monthlyKwh: number | null;
+}
+
+export function calculateGridFrequencyReward({
+  availableKw,
+  participationHoursPerDay,
+  rewardRate,
+  rateType,
+  availabilityPercent,
+}: GridFrequencyRewardInput): GridFrequencyRewardResult {
+  const hoursFactor = Math.min(1, participationHoursPerDay / 24);
+  const availability = Math.min(100, Math.max(0, availabilityPercent)) / 100;
+  const effectiveKw = availableKw * availability * hoursFactor;
+
+  let monthlyRevenue: number;
+  let monthlyKwh: number | null = null;
+
+  if (rateType === "kw-month") {
+    monthlyRevenue = effectiveKw * rewardRate;
+  } else {
+    monthlyKwh =
+      effectiveKw *
+      participationHoursPerDay *
+      GRID_FREQUENCY_DAYS_PER_MONTH *
+      GRID_FREQUENCY_ACTIVATION_DUTY;
+    monthlyRevenue = monthlyKwh * rewardRate;
+  }
+
+  return {
+    effectiveKw: parseFloat(effectiveKw.toFixed(2)),
+    hoursFactor: parseFloat(hoursFactor.toFixed(3)),
+    monthlyRevenue: parseFloat(monthlyRevenue.toFixed(2)),
+    annualRevenue: parseFloat((monthlyRevenue * 12).toFixed(0)),
+    rateType,
+    monthlyKwh:
+      monthlyKwh !== null ? parseFloat(monthlyKwh.toFixed(0)) : null,
+  };
+}
+
+export interface GridFrequencyScenarioRow {
+  availabilityPercent: number;
+  monthlyRevenue: number;
+  annualRevenue: number;
+  isUserScenario: boolean;
+}
+
+/** Availability scenarios for side-by-side comparison (includes user value when unique). */
+export function buildGridFrequencyAvailabilityScenarios(
+  input: GridFrequencyRewardInput,
+  userAvailabilityPercent: number
+): GridFrequencyScenarioRow[] {
+  const base = [60, 75, 90, 95, 100];
+  const availabilities = base.includes(userAvailabilityPercent)
+    ? base
+    : [...base, userAvailabilityPercent].sort((a, b) => a - b);
+
+  return availabilities.map((availabilityPercent) => {
+    const result = calculateGridFrequencyReward({
+      ...input,
+      availabilityPercent,
+    });
+    return {
+      availabilityPercent,
+      monthlyRevenue: result.monthlyRevenue,
+      annualRevenue: result.annualRevenue,
+      isUserScenario: availabilityPercent === userAvailabilityPercent,
+    };
+  });
 }

@@ -151,3 +151,154 @@ export function calculatePublicChargingCost({
     effectivePricePerKwh: parseFloat(effectivePricePerKwh.toFixed(2)),
   };
 }
+
+export type EvThermalMode = "heating" | "cooling" | "maintaining";
+
+export interface EvPreconditioningInput {
+  externalTempC: number;
+  bmsPowerKw: number;
+  durationMinutes: number;
+  ratePerKwh: number;
+}
+
+/** Typical pack thermal band for DC fast charge (~15–35 °C). */
+export function getEvThermalMode(externalTempC: number): EvThermalMode {
+  if (externalTempC < 10) return "heating";
+  if (externalTempC > 30) return "cooling";
+  return "maintaining";
+}
+
+export function calculateEvPreconditioningCost({
+  externalTempC,
+  bmsPowerKw,
+  durationMinutes,
+  ratePerKwh,
+}: EvPreconditioningInput) {
+  const hours = durationMinutes / 60;
+  const energyKwh = bmsPowerKw * hours;
+  const totalCost = energyKwh * ratePerKwh;
+  const mode = getEvThermalMode(externalTempC);
+
+  const modeLabel =
+    mode === "heating"
+      ? "Battery heating"
+      : mode === "cooling"
+        ? "Battery cooling"
+        : "Thermal maintenance";
+
+  return {
+    energyKwh: parseFloat(energyKwh.toFixed(3)),
+    totalCost: parseFloat(totalCost.toFixed(2)),
+    mode,
+    modeLabel,
+    durationMinutes,
+    externalTempC,
+  };
+}
+
+export interface EvTireWearCostInput {
+  annualKm: number;
+  tireSetCost: number;
+  iceTireLifeKm: number;
+  /** Extra wear vs. comparable ICE tire life (e.g. 25 = 25% faster wear). */
+  evWearPercent: number;
+}
+
+export function calculateEvTireWearCost({
+  annualKm,
+  tireSetCost,
+  iceTireLifeKm,
+  evWearPercent,
+}: EvTireWearCostInput) {
+  const wearFactor = 1 + Math.max(0, evWearPercent) / 100;
+  const evTireLifeKm = iceTireLifeKm / wearFactor;
+  const iceSetsPerYear = annualKm / iceTireLifeKm;
+  const evSetsPerYear = annualKm / evTireLifeKm;
+  const iceAnnualCost = iceSetsPerYear * tireSetCost;
+  const evAnnualCost = evSetsPerYear * tireSetCost;
+  const extraCostVsIce = evAnnualCost - iceAnnualCost;
+
+  const iceTreadRemainingPercent = Math.max(
+    0,
+    Math.min(100, (1 - iceSetsPerYear % 1) * 100)
+  );
+  const evTreadRemainingPercent = Math.max(
+    0,
+    Math.min(100, (1 - evSetsPerYear % 1) * 100)
+  );
+
+  return {
+    iceAnnualCost: parseFloat(iceAnnualCost.toFixed(2)),
+    evAnnualCost: parseFloat(evAnnualCost.toFixed(2)),
+    extraCostVsIce: parseFloat(extraCostVsIce.toFixed(2)),
+    evTireLifeKm: Math.round(evTireLifeKm),
+    iceTireLifeKm,
+    evSetsPerYear: parseFloat(evSetsPerYear.toFixed(2)),
+    iceSetsPerYear: parseFloat(iceSetsPerYear.toFixed(2)),
+    costPerKmEv: parseFloat((evAnnualCost / annualKm).toFixed(3)),
+    costPerKmIce: parseFloat((iceAnnualCost / annualKm).toFixed(3)),
+    wearFactor: parseFloat(wearFactor.toFixed(2)),
+    iceTreadRemainingPercent: parseFloat(iceTreadRemainingPercent.toFixed(0)),
+    evTreadRemainingPercent: parseFloat(evTreadRemainingPercent.toFixed(0)),
+  };
+}
+
+/** Copper resistivity at ~20 °C (Ω·mm²/m) — IEC copper conductor planning. */
+export const COPPER_RESISTIVITY_OHM_MM2_M = 0.0175;
+
+/** Assumed AC line voltage for loss-as-% of charge power (L-N). */
+export const EV_CABLE_LOSS_REFERENCE_VOLTAGE = 230;
+
+export const EV_CABLE_DEFAULT_RATE_PER_KWH = 0.14;
+
+export interface EvChargingCableLossInput {
+  chargeAmps: number;
+  cableLengthM: number;
+  crossSectionMm2: number;
+  chargeHours: number;
+  ratePerKwh?: number;
+}
+
+export interface EvChargingCableLossResult {
+  roundTripOhms: number;
+  powerLossW: number;
+  energyLossKwh: number;
+  sessionCost: number;
+  lossPercentOfChargePower: number;
+  heatVisualFillPercent: number;
+  wireLabel: string;
+}
+
+/**
+ * I²R loss in a copper EV extension or portable cable (round-trip conductor path).
+ */
+export function calculateEvChargingCableLoss({
+  chargeAmps,
+  cableLengthM,
+  crossSectionMm2,
+  chargeHours,
+  ratePerKwh = EV_CABLE_DEFAULT_RATE_PER_KWH,
+}: EvChargingCableLossInput): EvChargingCableLossResult {
+  const oneWayOhms =
+    (COPPER_RESISTIVITY_OHM_MM2_M * cableLengthM) / crossSectionMm2;
+  const roundTripOhms = oneWayOhms * 2;
+  const powerLossW = chargeAmps * chargeAmps * roundTripOhms;
+  const energyLossKwh = (powerLossW * chargeHours) / 1000;
+  const sessionCost = energyLossKwh * ratePerKwh;
+  const chargePowerW = chargeAmps * EV_CABLE_LOSS_REFERENCE_VOLTAGE;
+  const lossPercentOfChargePower =
+    chargePowerW > 0 ? (powerLossW / chargePowerW) * 100 : 0;
+
+  return {
+    roundTripOhms: parseFloat(roundTripOhms.toFixed(4)),
+    powerLossW: parseFloat(powerLossW.toFixed(1)),
+    energyLossKwh: parseFloat(energyLossKwh.toFixed(3)),
+    sessionCost: parseFloat(sessionCost.toFixed(2)),
+    lossPercentOfChargePower: parseFloat(lossPercentOfChargePower.toFixed(2)),
+    heatVisualFillPercent: Math.min(
+      100,
+      Math.max(6, (powerLossW / 150) * 100)
+    ),
+    wireLabel: `${crossSectionMm2} mm² copper`,
+  };
+}

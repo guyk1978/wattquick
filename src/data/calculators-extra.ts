@@ -1,5 +1,6 @@
 import {
   Activity,
+  Bolt,
   Battery,
   BatteryLow,
   Cable,
@@ -22,6 +23,7 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateAcInrushCurrent,
   dcVoltageDropPercent,
   formatOhmsDetail,
   ohmsLawLabel,
@@ -960,6 +962,99 @@ export const calculatorsExtra = [
         value: awg,
         unit: "AWG",
         detail: `${formatNumber(amps, { maxDecimals: 0 })} A · ${length} ft one-way @ ${voltage} V${dropNote}`,
+      };
+    },
+  },
+  {
+    slug: "ac-inrush-current",
+    href: "/ac-inrush-current",
+    title: "AC Inrush Current Limit Calculator",
+    description:
+      "Find nominal amps, peak motor inrush, and recommended breaker size with B/C/D curve guidance.",
+    keywords: [
+      "inrush current calculator",
+      "motor starting amps",
+      "breaker sizing inrush",
+      "type c breaker motor",
+      "nuisance trip breaker",
+    ],
+    icon: Bolt,
+    tag: "Power",
+    category: "power",
+    suggestions: [
+      "watts-to-amps",
+      "amps-to-watts",
+      "residential-voltage-drop",
+    ],
+    fields: [
+      {
+        id: "nominalPowerW",
+        label: "Nominal power",
+        unit: "W",
+        placeholder: "1800",
+        hint: "Running or nameplate steady-state watts",
+      },
+      {
+        id: "operatingVoltageV",
+        label: "Operating voltage",
+        unit: "V",
+        placeholder: "120",
+        hint: "Line voltage the load sees (120 or 230/240)",
+      },
+      {
+        id: "inrushFactor",
+        label: "Inrush factor",
+        unit: "×",
+        placeholder: "6",
+        defaultValue: "6",
+        hint: "Peak ÷ running current — motors often 5–7×",
+      },
+    ],
+    result: {
+      label: "Peak inrush current",
+      emptyMessage: "Enter watts, voltage & inrush factor",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why inrush trips breakers",
+          body: "Motors, transformers, and SMPS draw brief startup current many times higher than running amps. Thermal breaker curves allow short magnetic overload—if inrush exceeds the magnetic trip band, the breaker opens even though steady-state amps are fine.",
+        },
+        {
+          heading: "Formulas",
+          body: "I_run = P ÷ V. I_peak = I_run × inrush factor. Breaker ≥ max(1.25 × I_run, I_peak ÷ magnetic multiple for curve type). Type B ~5×, Type C ~7.5×, Type D ~12.5× rated current for instantaneous region (planning).",
+        },
+        {
+          heading: "Curve selection",
+          body: "Resistive loads: Type B. Small motors and compressors: Type C. High inrush tools and large motors: Type D. Always verify local code, manufacturer data, and coordinated protection.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Duration of inrush? A: Often 50–200 ms—this tool sizes breaker class, not time-current curves. Q: Power factor? A: Use nameplate running watts/amps when available. Q: Soft-start? A: Lowers effective inrush factor—enter reduced multiplier.",
+        },
+      ],
+    },
+    compute(values) {
+      const nominalPowerW = parsePositive(values.nominalPowerW ?? "");
+      const operatingVoltageV = parsePositive(values.operatingVoltageV ?? "");
+      const inrushFactor = parsePositive(values.inrushFactor ?? "");
+      if (
+        nominalPowerW === null ||
+        operatingVoltageV === null ||
+        inrushFactor === null ||
+        inrushFactor < 1
+      ) {
+        return { value: null };
+      }
+      const result = calculateAcInrushCurrent({
+        nominalPowerW,
+        operatingVoltageV,
+        inrushFactor,
+      });
+      return {
+        value: formatNumber(result.peakInrushAmps, { maxDecimals: 1 }),
+        unit: "A",
+        detail: `${result.nominalAmps} A run · ${result.recommendedBreakerAmps} A ${result.recommendedCurveType} breaker`,
       };
     },
   },

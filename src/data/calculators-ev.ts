@@ -1,8 +1,11 @@
 import {
   Battery,
+  Cable,
   Car,
+  LifeBuoy,
   Plug,
   Snowflake,
+  Thermometer,
   Zap,
 } from "lucide-react";
 import {
@@ -12,6 +15,9 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateEvChargingCableLoss,
+  calculateEvPreconditioningCost,
+  calculateEvTireWearCost,
   calculateEvVsGasSavings,
   calculateFastChargeTime,
   calculatePublicChargingCost,
@@ -461,6 +467,319 @@ export const calculatorsEv = [
         value: formatCurrency(result.totalCost),
         unit: "",
         detail: `Energy ${formatCurrency(result.energyCost)} · Idle ${formatCurrency(result.totalIdleCost)} · Effective $${result.effectivePricePerKwh}/kWh`,
+      };
+    },
+  },
+  {
+    slug: "ev-preconditioning-cost",
+    href: "/ev-preconditioning-cost",
+    title: "EV Battery Pre-conditioning Cost Calculator",
+    description:
+      "Estimate electricity cost to heat or cool your pack before DC fast charging—from BMS draw, runtime, and your kWh rate.",
+    keywords: [
+      "ev preconditioning cost",
+      "battery thermal management cost",
+      "ev winter charging cost",
+      "dc fast charge battery heat",
+    ],
+    icon: Thermometer,
+    tag: "EV",
+    category: "ev",
+    suggestions: [
+      "ev-fast-charging-time",
+      "ev-winter-range-loss",
+      "ev-charging-cost",
+    ],
+    fields: [
+      {
+        id: "externalTempC",
+        label: "Outside temperature",
+        unit: "°C",
+        placeholder: "-5",
+        hint: "Ambient air temperature at the charger",
+      },
+      {
+        id: "bmsPowerKw",
+        label: "BMS thermal power",
+        unit: "kW",
+        placeholder: "5",
+        hint: "Typical 3–8 kW while conditioning the pack",
+      },
+      {
+        id: "durationMinutes",
+        label: "Pre-conditioning time",
+        unit: "min",
+        placeholder: "25",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+      },
+    ],
+    result: {
+      label: "Pre-conditioning cost",
+      emptyMessage: "Enter temperature, kW, minutes & rate",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Thermal cost formula",
+          body: "Energy (kWh) = thermal power (kW) × time (hours). Cost = kWh × $/kWh. Precondition while plugged in so this energy comes from the grid (or home solar) instead of your driving range.",
+        },
+        {
+          heading: "Why temperature matters for DC fast charging",
+          body: "Cold packs charge slowly until heated; hot packs may throttle or cool before accepting full power. Automakers often run the thermal system 15–45 minutes before a planned fast-charge session.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Where do I find kW draw? A: Some EV apps show conditioning power; otherwise use 4–6 kW as a planning estimate. Q: Does this include charging? A: No—only thermal management before or during the wait to charge.",
+        },
+      ],
+    },
+    compute(values) {
+      const tempRaw = values.externalTempC?.trim() ?? "";
+      const tempC = tempRaw === "" || tempRaw === "-" ? null : Number(tempRaw);
+      const bmsPowerKw = parsePositive(values.bmsPowerKw ?? "");
+      const durationMinutes = parsePositive(values.durationMinutes ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      if (
+        tempC === null ||
+        !Number.isFinite(tempC) ||
+        bmsPowerKw === null ||
+        durationMinutes === null ||
+        ratePerKwh === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateEvPreconditioningCost({
+        externalTempC: tempC,
+        bmsPowerKw,
+        durationMinutes,
+        ratePerKwh,
+      });
+      return {
+        value: formatCurrency(result.totalCost),
+        unit: "",
+        detail: `${result.modeLabel} · ${formatNumber(result.energyKwh, { maxDecimals: 2 })} kWh · ${result.durationMinutes} min @ ${formatNumber(bmsPowerKw, { maxDecimals: 1 })} kW`,
+      };
+    },
+  },
+  {
+    slug: "ev-tire-wear-cost",
+    href: "/ev-tire-wear-cost",
+    title: "EV Tire Wear Cost Calculator",
+    description:
+      "Estimate annual tire depreciation for electric vehicles vs. comparable gas cars—km driven, set cost, ICE tire life, and EV wear factor.",
+    keywords: [
+      "ev tire wear cost",
+      "electric vehicle tire replacement",
+      "ev vs ice tire life",
+      "ev torque tire wear",
+      "fleet ev maintenance tires",
+    ],
+    icon: LifeBuoy,
+    tag: "Maintenance",
+    category: "ev",
+    suggestions: [
+      "ev-cost-per-mile",
+      "ev-vs-gas-savings",
+      "ev-fleet-tco",
+    ],
+    fields: [
+      {
+        id: "annualKm",
+        label: "Annual distance",
+        unit: "km/yr",
+        placeholder: "18000",
+        hint: "~11,200 mi at 18,000 km",
+      },
+      {
+        id: "tireSetCost",
+        label: "Tire set cost (4 tires)",
+        unit: "$",
+        placeholder: "800",
+      },
+      {
+        id: "iceTireLifeKm",
+        label: "Typical ICE tire life",
+        unit: "km",
+        placeholder: "50000",
+        defaultValue: "50000",
+        hint: "Comparable gas car on same routes",
+      },
+      {
+        id: "evWearPercent",
+        label: "EV extra wear factor",
+        inputType: "range",
+        min: 0,
+        max: 50,
+        step: 5,
+        defaultValue: "25",
+        unit: "%",
+        colSpan: 2,
+        hint: "Studies often cite 20–30% faster wear from torque & mass",
+      },
+    ],
+    result: {
+      label: "Annual EV tire depreciation",
+      emptyMessage: "Enter km, tire cost, ICE life & EV wear %",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why EV tire economics differ",
+          body: "Instant torque, higher vehicle mass, and low rolling-resistance compounds can shorten tread life versus a similar ICE car on the same roads. This tool converts that wear premium into annual dollars.",
+        },
+        {
+          heading: "How the estimate works",
+          body: "ICE annual cost = (km ÷ ICE tire life km) × set cost. EV tire life = ICE life ÷ (1 + extra wear %). EV annual cost uses the shorter life. The difference is the hidden maintenance gap in TCO spreadsheets.",
+        },
+        {
+          heading: "Pressure and alignment matter",
+          body: "Under-inflated EV tires overheat and cup faster—especially on heavy crossovers. Check door-jamb PSI monthly; rotate per OEM schedule to avoid one-sided wear from regen bias.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include installation? A: Enter installed set price if you want all-in cost. Q: Fleet vehicles? A: Same math per vehicle—multiply by fleet count outside this tool. Q: Winter tires? A: Model summer set only or add a second set in your budget.",
+        },
+      ],
+    },
+    compute(values) {
+      const annualKm = parsePositive(values.annualKm ?? "");
+      const tireSetCost = parsePositive(values.tireSetCost ?? "");
+      const iceTireLifeKm = parsePositive(values.iceTireLifeKm ?? "");
+      const evWearPercent = Number(values.evWearPercent?.trim() || "25");
+      if (
+        annualKm === null ||
+        tireSetCost === null ||
+        iceTireLifeKm === null ||
+        !Number.isFinite(evWearPercent) ||
+        evWearPercent < 0
+      ) {
+        return { value: null };
+      }
+      const result = calculateEvTireWearCost({
+        annualKm,
+        tireSetCost,
+        iceTireLifeKm,
+        evWearPercent,
+      });
+      return {
+        value: formatCurrency(result.evAnnualCost),
+        unit: "/yr",
+        detail: `ICE ${formatCurrency(result.iceAnnualCost)}/yr · +${formatCurrency(result.extraCostVsIce)}/yr EV premium · ${result.evTireLifeKm} km EV life`,
+      };
+    },
+  },
+  {
+    slug: "ev-charging-cable-loss",
+    href: "/ev-charging-cable-loss",
+    title: "EV Charging Cable Power Loss Calculator",
+    description:
+      "Estimate I²R heat loss in copper charging cables from amps, length, mm² cross-section, and session hours.",
+    keywords: [
+      "ev charging cable loss",
+      "extension cord ev charging heat",
+      "cable resistance kwh waste",
+      "level 2 cable gauge loss",
+      "i2r charging loss calculator",
+    ],
+    icon: Cable,
+    tag: "Charging",
+    category: "ev",
+    suggestions: [
+      "ev-charging-cost",
+      "ev-charge-time",
+      "residential-voltage-drop",
+    ],
+    fields: [
+      {
+        id: "chargeAmps",
+        label: "Charging current",
+        unit: "A",
+        placeholder: "32",
+        hint: "Sustained AC current during the session",
+      },
+      {
+        id: "cableLengthM",
+        label: "Cable length",
+        unit: "m",
+        placeholder: "10",
+        hint: "One-way run from panel or EVSE to vehicle",
+      },
+      {
+        id: "crossSectionMm2",
+        label: "Conductor size",
+        unit: "mm²",
+        placeholder: "6",
+        hint: "Copper L+N equivalent—common: 2.5, 4, 6, 10 mm²",
+      },
+      {
+        id: "chargeHours",
+        label: "Charge time",
+        unit: "hrs",
+        placeholder: "6",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+        hint: "Cost of wasted heat energy",
+      },
+    ],
+    result: {
+      label: "Cable power loss",
+      emptyMessage: "Enter amps, length, mm² & charge hours",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why cable resistance wastes money",
+          body: "Every amp through copper creates I²R heat in the conductors. Long thin extension cords add resistance in series with the charger—energy becomes warmth in the jacket instead of kilowatt-hours in the pack. You still pay the utility for those losses.",
+        },
+        {
+          heading: "Loss formulas",
+          body: "Round-trip Ω ≈ 2 × (0.0175 × length m ÷ mm²). Loss W = I² × Ω. Wasted kWh = W × hours ÷ 1000. Session $ = kWh × your rate. Loss % compares to I × 230 V reference charge power.",
+        },
+        {
+          heading: "Pick the right gauge",
+          body: "Upsize mm² or shorten the run before buying a longer cord. Warm plugs after a session signal excessive loss—match OEM cable rating and avoid daisy-chained household extensions on sustained 32 A loads.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: DC fast charging? A: This models AC cord I²R; DC pins have separate contact resistance. Q: Aluminum? A: Use ~1.6× copper Ω for the same mm². Q: Include charger efficiency? A: Add 5–10% on top for inverter loss in total wall-to-pack budget.",
+        },
+      ],
+    },
+    compute(values) {
+      const chargeAmps = parsePositive(values.chargeAmps ?? "");
+      const cableLengthM = parsePositive(values.cableLengthM ?? "");
+      const crossSectionMm2 = parsePositive(values.crossSectionMm2 ?? "");
+      const chargeHours = parsePositive(values.chargeHours ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "") ?? 0.14;
+      if (
+        chargeAmps === null ||
+        cableLengthM === null ||
+        crossSectionMm2 === null ||
+        chargeHours === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateEvChargingCableLoss({
+        chargeAmps,
+        cableLengthM,
+        crossSectionMm2,
+        chargeHours,
+        ratePerKwh,
+      });
+      return {
+        value: formatNumber(result.powerLossW, { maxDecimals: 1 }),
+        unit: "W",
+        detail: `${result.energyLossKwh} kWh wasted · ${formatCurrency(result.sessionCost)}/session · ${result.roundTripOhms} Ω`,
       };
     },
   },

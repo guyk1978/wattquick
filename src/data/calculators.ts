@@ -1,6 +1,10 @@
 import {
-  ArrowRightLeft, Battery, BatteryCharging, Car, Cpu, DollarSign, Percent, Refrigerator, Shield, Sun, Zap,
+  ArrowRightLeft, Battery, BatteryCharging, Cable, Car, Cpu, DollarSign, Percent, Refrigerator, Shield, Sun, Zap,
 } from "lucide-react";
+import {
+  calculateResidentialVoltageDrop,
+  isAcWireSizeKey,
+} from "@/lib/calculators/electrical";
 import {
   formatCurrency,
   formatDuration,
@@ -289,6 +293,110 @@ export const calculators = [
     };
   },
 },
+  {
+    slug: "residential-voltage-drop",
+    href: "/residential-voltage-drop",
+    title: "Residential AC Voltage Drop Calculator",
+    description:
+      "Calculate AC voltage drop in home wiring from supply voltage, amps, cable length (m), and AWG or mm² copper size.",
+    keywords: [
+      "residential voltage drop calculator",
+      "ac wire voltage drop",
+      "voltage drop awg mm2",
+      "home electrical wire sizing",
+      "nec 3 percent voltage drop",
+    ],
+    icon: Cable,
+    tag: "Power",
+    category: "power",
+    suggestions: ["watts-to-amps", "dc-cable-size", "battery-voltage-drop"],
+    fields: [
+      {
+        id: "supplyVoltage",
+        label: "Supply voltage",
+        unit: "V",
+        placeholder: "120",
+        hint: "Line-to-neutral (120 V) or line voltage (230 V) for your circuit",
+      },
+      { id: "loadAmps", label: "Load current", unit: "A", placeholder: "20" },
+      {
+        id: "oneWayLengthM",
+        label: "One-way cable length",
+        unit: "m",
+        placeholder: "25",
+        hint: "Panel to outlet/appliance — one-way distance",
+      },
+      {
+        id: "wireSize",
+        label: "Copper conductor",
+        inputType: "select",
+        defaultValue: "awg-12",
+        options: [
+          { value: "awg-14", label: "14 AWG (2.08 mm²)" },
+          { value: "awg-12", label: "12 AWG (3.31 mm²)" },
+          { value: "awg-10", label: "10 AWG (5.26 mm²)" },
+          { value: "awg-8", label: "8 AWG (8.37 mm²)" },
+          { value: "awg-6", label: "6 AWG (13.3 mm²)" },
+          { value: "mm2-1.5", label: "1.5 mm²" },
+          { value: "mm2-2.5", label: "2.5 mm²" },
+          { value: "mm2-4", label: "4 mm²" },
+          { value: "mm2-6", label: "6 mm²" },
+          { value: "mm2-10", label: "10 mm²" },
+          { value: "mm2-16", label: "16 mm²" },
+        ],
+        colSpan: 2,
+      },
+    ],
+    result: {
+      label: "Voltage drop",
+      emptyMessage: "Enter voltage, amps, length & wire size",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why voltage drop matters at home",
+          body: "Long or undersized copper runs add resistance. Loads see less than nominal voltage—motors overheat, chargers throttle, and lights dim. Most guides target ≤3% drop on branch circuits and ≤5% total feeder plus branch.",
+        },
+        {
+          heading: "AC drop formula (copper)",
+          body: "Drop (V) = current (A) × resistance × 2 (out-and-back) × one-way length (m). Drop % = 100 × drop ÷ supply voltage. Uses typical copper Ω/m at 20 °C for AWG or mm².",
+        },
+        {
+          heading: "AWG vs. mm²",
+          body: "Pick the conductor you are installing. Metric installs use mm²; North American branch wiring often lists AWG. When in doubt, size up one step for continuous loads (EVSE, HVAC, heat pump).",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: 120 V or 240 V? A: Use the voltage the load actually sees (usually 120 V line-to-neutral in US branch circuits). Q: Power factor? A: This is a resistive planning estimate—inductive motor starts may need larger wire. Q: Aluminum wire? A: Copper only here; AL needs larger area.",
+        },
+      ],
+    },
+    compute(values) {
+      const supplyVoltage = parsePositive(values.supplyVoltage ?? "");
+      const loadAmps = parsePositive(values.loadAmps ?? "");
+      const oneWayLengthM = parsePositive(values.oneWayLengthM ?? "");
+      const wireSize = values.wireSize ?? "";
+      if (
+        supplyVoltage === null ||
+        loadAmps === null ||
+        oneWayLengthM === null ||
+        !isAcWireSizeKey(wireSize)
+      ) {
+        return { value: null };
+      }
+      const result = calculateResidentialVoltageDrop({
+        supplyVoltage,
+        loadAmps,
+        oneWayLengthM,
+        wireSize,
+      });
+      return {
+        value: formatNumber(result.dropVolts, { maxDecimals: 2 }),
+        unit: "V",
+        detail: `${result.dropPercent}% drop · ${result.voltageAtLoad} V at load · ${result.recommendation}`,
+      };
+    },
+  },
   {
     slug: "battery-percentage",
     href: "/battery-percentage",

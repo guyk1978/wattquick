@@ -1,3 +1,4 @@
+import type { BatteryGlow } from "@/lib/battery-dashboard";
 import {
   dcVoltageDropPercent,
   recommendDcAwg,
@@ -114,5 +115,74 @@ export function calculateBatteryVoltageDrop({
     dropPercent: parseFloat(dropPercent.toFixed(2)),
     dropVolts: parseFloat(dropVolts.toFixed(2)),
     voltageAtLoad: parseFloat(voltageAtLoad.toFixed(2)),
+  };
+}
+
+/** Calendar fade (%/yr) at 25 °C and 50 % average SOC — planning midpoint for Li-ion. */
+export const CALENDAR_AGING_BASE_PERCENT_PER_YEAR = 2;
+
+export interface BatteryCalendarAgingInput {
+  avgStorageTempC: number;
+  avgSocPercent: number;
+  batteryAgeYears: number;
+}
+
+export interface BatteryCalendarAgingResult {
+  calendarLossPercent: number;
+  remainingSoh: number;
+  annualLossPercent: number;
+  tempFactor: number;
+  socFactor: number;
+  glow: BatteryGlow;
+  statusLabel: string;
+}
+
+/**
+ * Estimates capacity fade from calendar (storage) aging vs. temperature, SOC, and time.
+ * Cycle aging is not included—use for parked EV, backup banks, or spares.
+ */
+export function calculateBatteryCalendarAging({
+  avgStorageTempC,
+  avgSocPercent,
+  batteryAgeYears,
+}: BatteryCalendarAgingInput): BatteryCalendarAgingResult {
+  const soc = Math.min(100, Math.max(0, avgSocPercent));
+  const years = Math.max(0, batteryAgeYears);
+
+  const tempFactor =
+    avgStorageTempC >= 25
+      ? 2 ** ((avgStorageTempC - 25) / 10)
+      : 0.65 ** ((25 - avgStorageTempC) / 10);
+
+  const socFactor =
+    soc <= 50
+      ? 0.55 + (soc / 50) * 0.45
+      : 1 + ((soc - 50) / 50) ** 2 * 2.2;
+
+  const annualLossPercent =
+    CALENDAR_AGING_BASE_PERCENT_PER_YEAR * tempFactor * socFactor;
+  const calendarLossPercent = Math.min(80, annualLossPercent * years);
+  const remainingSoh = Math.max(20, 100 - calendarLossPercent);
+
+  const glow: BatteryGlow =
+    remainingSoh >= 85 ? "healthy" : remainingSoh >= 70 ? "caution" : "critical";
+
+  const statusLabel =
+    remainingSoh >= 90
+      ? "Excellent storage profile"
+      : remainingSoh >= 80
+        ? "Moderate calendar fade"
+        : remainingSoh >= 70
+          ? "Elevated storage stress"
+          : "Severe calendar aging risk";
+
+  return {
+    calendarLossPercent: parseFloat(calendarLossPercent.toFixed(1)),
+    remainingSoh: parseFloat(remainingSoh.toFixed(1)),
+    annualLossPercent: parseFloat(annualLossPercent.toFixed(2)),
+    tempFactor: parseFloat(tempFactor.toFixed(2)),
+    socFactor: parseFloat(socFactor.toFixed(2)),
+    glow,
+    statusLabel,
   };
 }

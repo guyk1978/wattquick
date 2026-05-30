@@ -20,6 +20,7 @@ const EV_COST_IDS = new Set<CalculatorId>([
   "ev-public-charging-cost",
   "ev-cost-per-mile",
   "ev-vs-gas-savings",
+  "ev-preconditioning-cost",
 ]);
 
 const EXCLUDED_COST_IDS = new Set<CalculatorId>([]);
@@ -167,6 +168,26 @@ export function deriveCostDashboardMetrics(
 
   const currencyAmount = parseCurrency(value);
   const numeric = parseNumeric(value);
+
+  if (calculatorId === "ev-preconditioning-cost" && currencyAmount !== null) {
+    const tier: CostTier =
+      currencyAmount < 0.5 ? "eco" : currencyAmount < 2 ? "standard" : "hog";
+    const microcopy =
+      tier === "eco"
+        ? "Low thermal cost — short conditioning at a good rate."
+        : tier === "standard"
+          ? "Typical pack heat/cool before fast charge."
+          : "Heavy conditioning — check kW draw and minutes.";
+    return {
+      tier,
+      needlePercent: needleFromDailyUsd(currencyAmount),
+      microcopy,
+      emoji: tier === "hog" ? "🌡️" : "🔋",
+      countTarget: currencyAmount,
+      countDecimals: 2,
+      isCurrency: true,
+    };
+  }
 
   if (calculatorId === "ev-vs-gas-savings" && currencyAmount !== null) {
     const { text, emoji, tier } = savingsMicrocopy(currencyAmount);

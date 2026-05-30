@@ -1,5 +1,7 @@
 import {
   Compass,
+  Droplets,
+  Fuel,
   Home,
   LineChart,
   Network,
@@ -13,6 +15,8 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateGeneratorVsSolarHybrid,
+  calculateWaterPumpSolarSizing,
   calculateNetMetering,
   calculateOptimalAngles,
   calculatePanelDegradation,
@@ -490,6 +494,231 @@ export const calculatorsSolar = [
         value: formatNumber(result.currentAnnualKwh, { maxDecimals: 0 }),
         unit: "kWh/yr",
         detail: `${result.capacityRemainingPercent}% of year-1 · −${result.totalLossKwh} kWh vs. new`,
+      };
+    },
+  },
+  {
+    slug: "generator-vs-solar-hybrid",
+    href: "/generator-vs-solar-hybrid",
+    title: "Off-Grid Generator vs. Solar Hybrid Calculator",
+    description:
+      "Compare 5- and 10-year cumulative costs of diesel generator-only power vs. a solar+battery hybrid—and estimate annual savings.",
+    keywords: [
+      "generator vs solar off grid",
+      "solar hybrid payback",
+      "diesel generator cost calculator",
+      "off grid solar comparison",
+    ],
+    icon: Fuel,
+    tag: "Off-Grid",
+    category: "solar",
+    suggestions: [
+      "solar-battery-bank",
+      "solar-panel-size",
+      "solar-payback-roi",
+    ],
+    fields: [
+      {
+        id: "dailyKwh",
+        label: "Daily energy use",
+        unit: "kWh/day",
+        placeholder: "18",
+      },
+      {
+        id: "fuelCostPerLiter",
+        label: "Fuel price",
+        unit: "$/L",
+        placeholder: "1.45",
+      },
+      {
+        id: "generatorLitersPerHour",
+        label: "Generator fuel use",
+        unit: "L/hr",
+        placeholder: "2.5",
+        hint: "At typical load while running",
+      },
+      {
+        id: "hybridSetupCost",
+        label: "Hybrid solar setup cost",
+        unit: "$",
+        placeholder: "28000",
+        hint: "Panels, batteries, inverter, install",
+      },
+      {
+        id: "generatorMaintenanceAnnual",
+        label: "Generator maintenance",
+        unit: "$/yr",
+        placeholder: "450",
+      },
+      {
+        id: "hybridMaintenanceAnnual",
+        label: "Hybrid maintenance",
+        unit: "$/yr",
+        placeholder: "200",
+      },
+    ],
+    result: {
+      label: "Estimated annual savings (hybrid)",
+      emptyMessage: "Enter daily kWh, fuel, costs & maintenance",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "How the comparison works",
+          body: "Generator-only cost = daily fuel (from kWh ÷ ~2.8 kWh/L) × 365 + maintenance. Hybrid adds upfront capex but assumes ~88% of energy from solar+battery, with ~12% backup fuel.",
+        },
+        {
+          heading: "CAPEX vs. OPEX",
+          body: "Generators look cheap to buy but burn fuel forever. Hybrid shifts spend to equipment; cumulative curves cross when fuel savings repay the install.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include generator purchase? A: Model existing genset OPEX only—add purchase price to hybrid side if replacing hardware. Q: Cloudy weeks? A: Adjust backup fraction in advanced planning; 12% is a moderate off-grid default.",
+        },
+      ],
+    },
+    compute(values) {
+      const dailyKwh = parsePositive(values.dailyKwh ?? "");
+      const fuelCostPerLiter = parsePositive(values.fuelCostPerLiter ?? "");
+      const generatorLitersPerHour = parsePositive(
+        values.generatorLitersPerHour ?? ""
+      );
+      const hybridSetupCost = parsePositive(values.hybridSetupCost ?? "");
+      const generatorMaintenanceAnnual = parseNonNegative(
+        values.generatorMaintenanceAnnual ?? ""
+      );
+      const hybridMaintenanceAnnual = parseNonNegative(
+        values.hybridMaintenanceAnnual ?? ""
+      );
+      if (
+        dailyKwh === null ||
+        fuelCostPerLiter === null ||
+        generatorLitersPerHour === null ||
+        hybridSetupCost === null ||
+        generatorMaintenanceAnnual === null ||
+        hybridMaintenanceAnnual === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateGeneratorVsSolarHybrid({
+        dailyKwh,
+        fuelCostPerLiter,
+        generatorLitersPerHour,
+        hybridSetupCost,
+        generatorMaintenanceAnnual,
+        hybridMaintenanceAnnual,
+      });
+      if (result.annualSavings <= 0) {
+        return {
+          value: formatCurrency(0),
+          unit: "/yr",
+          detail: "Hybrid OPEX exceeds generator-only at these inputs—recheck sizing or fuel price",
+        };
+      }
+      return {
+        value: formatCurrency(result.annualSavings),
+        unit: "/yr",
+        detail: `Gen ${formatCurrency(result.generator5Year)} vs hybrid ${formatCurrency(result.hybrid5Year)} (5 yr) · payback ~${result.paybackYears ?? "—"} yr`,
+      };
+    },
+  },
+  {
+    slug: "water-pump-solar-sizing",
+    href: "/water-pump-solar-sizing",
+    title: "Water Pump Solar Sizing Calculator",
+    description:
+      "Size a solar array for irrigation or well pumps—kWp, panel count, and MPPT guidance from pump watts, run hours, lift, and peak sun.",
+    keywords: [
+      "water pump solar sizing",
+      "solar pump calculator",
+      "irrigation solar panel size",
+      "solar well pump kwp",
+      "mppt water pump",
+    ],
+    icon: Droplets,
+    tag: "Solar",
+    category: "solar",
+    suggestions: [
+      "solar-panel-size",
+      "solar-charge-controller-size",
+      "solar-battery-bank",
+    ],
+    fields: [
+      {
+        id: "pumpWatts",
+        label: "Pump power",
+        unit: "W",
+        placeholder: "750",
+        hint: "Nameplate or measured running watts at your head",
+      },
+      {
+        id: "dailyHours",
+        label: "Daily run time",
+        unit: "hrs/day",
+        placeholder: "6",
+      },
+      {
+        id: "headMeters",
+        label: "Pumping head",
+        unit: "m",
+        placeholder: "25",
+        hint: "Static lift + friction (total dynamic head)",
+      },
+      {
+        id: "peakSunHours",
+        label: "Peak sun hours",
+        unit: "hrs",
+        placeholder: "5",
+        hint: "Average full-sun equivalent hours for your site",
+      },
+    ],
+    result: {
+      label: "Required solar array",
+      emptyMessage: "Enter pump watts, hours, head & peak sun hours",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why size solar for water pumps",
+          body: "Off-grid and agricultural pumps run on predictable daily energy. Undersized arrays leave tanks empty; oversized arrays waste capex. This tool links pump load, lift, and local sun hours to kWp and panel count.",
+        },
+        {
+          heading: "Sizing formula",
+          body: "Daily Wh = pump W × run hours × (1 + 0.6% × head in meters). kWp = daily kWh ÷ (peak sun hours × ~80% system efficiency). Panel count = ceil(kWp × 1,000 ÷ module watts). Add 20–30% margin for cloudy days if you need battery backup.",
+        },
+        {
+          heading: "MPPT vs. PWM",
+          body: "MPPT controllers harvest more energy when array voltage differs from battery voltage or in cold weather. We recommend MPPT for most pump systems above ~150 W or 12 m head; very small 12 V direct pumps may use PWM.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: DC pump or AC? A: DC solar pumps skip inverter losses; AC needs inverter surge for motor starts—size accordingly. Q: Is head already in pump watts? A: If your wattage is measured at actual head, reduce the head field toward zero. Q: Battery storage? A: This estimates array for daily energy; add battery bank sizing for night or cloudy autonomy.",
+        },
+      ],
+    },
+    compute(values) {
+      const pumpWatts = parsePositive(values.pumpWatts ?? "");
+      const dailyHours = parsePositive(values.dailyHours ?? "");
+      const headMeters = parseNonNegative(values.headMeters ?? "");
+      const peakSunHours = parsePositive(values.peakSunHours ?? "");
+      if (
+        pumpWatts === null ||
+        dailyHours === null ||
+        headMeters === null ||
+        peakSunHours === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateWaterPumpSolarSizing({
+        pumpWatts,
+        dailyHours,
+        headMeters,
+        peakSunHours,
+      });
+      return {
+        value: formatNumber(result.kWp, { maxDecimals: 2 }),
+        unit: "kWp",
+        detail: `${result.panelCount} × ${result.panelWatts} W panels · ${result.dailyKwh} kWh/day · ${result.mpptLabel}`,
       };
     },
   },

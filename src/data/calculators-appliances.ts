@@ -1,4 +1,4 @@
-import { Bitcoin, Fuel, Home, Moon, Thermometer } from "lucide-react";
+import { Bitcoin, Fuel, Home, Lamp, Moon, Thermometer } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -9,6 +9,7 @@ import {
   calculateCryptoMiningPower,
   calculateGeneratorFuelConsumption,
   calculateHeatPumpVsResistance,
+  calculateLightingCircuitLoad,
   calculateStandbyPowerWaste,
   calculateWholeHouseEnergyBudget,
 } from "@/lib/calculators/appliances";
@@ -396,6 +397,107 @@ export const calculatorsAppliances = [
         value: formatCurrency(result.monthlyCost),
         unit: "/mo",
         detail: `${result.dailyKwh} kWh/day · ${result.monthlyKwh} kWh/mo · ${formatCurrency(result.annualCost)}/yr`,
+      };
+    },
+  },
+  {
+    slug: "lighting-circuit-load",
+    href: "/lighting-circuit-load",
+    title: "Lighting Circuit Load Calculator",
+    description:
+      "Sum fixture watts, compute circuit amps, and check breaker utilization against the 80% continuous-load guideline.",
+    keywords: [
+      "lighting circuit load calculator",
+      "lighting breaker sizing",
+      "80 percent continuous load",
+      "led circuit ampacity",
+      "lighting panel load",
+    ],
+    icon: Lamp,
+    tag: "Lighting",
+    category: "appliance",
+    suggestions: [
+      "watts-to-amps",
+      "residential-voltage-drop",
+      "led-vs-incandescent-roi",
+    ],
+    fields: [
+      {
+        id: "fixtureCount",
+        label: "Number of fixtures",
+        unit: "#",
+        placeholder: "12",
+      },
+      {
+        id: "wattsPerFixture",
+        label: "Power per fixture",
+        unit: "W",
+        placeholder: "9",
+        hint: "Nameplate or LED driver rating",
+      },
+      {
+        id: "circuitVoltage",
+        label: "Circuit voltage",
+        unit: "V",
+        placeholder: "120",
+        defaultValue: "120",
+      },
+      {
+        id: "breakerAmps",
+        label: "Breaker rating",
+        unit: "A",
+        placeholder: "15",
+        defaultValue: "15",
+        hint: "Common lighting circuits: 15 A or 20 A",
+      },
+    ],
+    result: {
+      label: "Circuit load",
+      emptyMessage: "Enter fixtures, watts, voltage & breaker",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why lighting load planning matters",
+          body: "Lighting circuits run for hours—often treated as continuous loads. Loading a breaker past 80% of its rating risks heat, nuisance trips, and dimming when other loads share the neutral. Count every luminaire on the branch before you close the drywall.",
+        },
+        {
+          heading: "Load math",
+          body: "Total W = fixtures × W each. Amps = W ÷ V. Utilization % = 100 × amps ÷ breaker amps. Compare to 80% of breaker amps (12 A on a 15 A breaker, 16 A on 20 A) for continuous-load headroom.",
+        },
+        {
+          heading: "LED vs. legacy watts",
+          body: "LED retrofits cut amps dramatically—do not size new breakers using old incandescent nameplates on the same fixture count. Use actual driver watts from cut sheets.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: 240 V lighting? A: Enter line voltage the circuit uses; amps = W ÷ V. Q: Dimming? A: Plan for rated wattage, not dimmed level. Q: Code compliance? A: Planning tool—follow local NEC or IEC and licensed design for permits.",
+        },
+      ],
+    },
+    compute(values) {
+      const fixtureCount = parsePositive(values.fixtureCount ?? "");
+      const wattsPerFixture = parsePositive(values.wattsPerFixture ?? "");
+      const circuitVoltage = parsePositive(values.circuitVoltage ?? "");
+      const breakerAmps = parsePositive(values.breakerAmps ?? "");
+      if (
+        fixtureCount === null ||
+        wattsPerFixture === null ||
+        circuitVoltage === null ||
+        breakerAmps === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateLightingCircuitLoad({
+        fixtureCount,
+        wattsPerFixture,
+        circuitVoltage,
+        breakerAmps,
+      });
+      return {
+        value: formatNumber(result.loadAmps, { maxDecimals: 2 }),
+        unit: "A",
+        detail: `${result.totalWatts} W · ${result.utilizationPercent}% of ${breakerAmps} A breaker · ${result.recommendation}`,
       };
     },
   },
