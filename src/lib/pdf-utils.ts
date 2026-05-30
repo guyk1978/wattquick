@@ -1,4 +1,4 @@
-export const PDF_GENERATE_URL = "http://localhost:3000/api/generate-report";
+export const PDF_GENERATE_URL = "https://joinmypdf.com/api/generate-report";
 
 export type PdfPrimitive = string | number;
 
