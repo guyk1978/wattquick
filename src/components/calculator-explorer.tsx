@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { CalculatorCard } from "@/components/calculator-card";
+import { CalculatorListItem } from "@/components/calculator-list-item";
 import { Input } from "@/components/ui/input";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -10,7 +10,6 @@ import {
   type CalculatorId,
 } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
-import { glassInsetInput, glassNeon, glassNeonAccent, glassSurface } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const ALL_CATEGORY = "all" as const;
@@ -18,16 +17,34 @@ type FilterCategory = CalculatorCategory | typeof ALL_CATEGORY;
 
 interface CalculatorExplorerProps {
   ids: CalculatorId[];
+  /** Initial search from URL (e.g. linked from home). */
+  initialQuery?: string;
+  /** Initial category filter from URL. */
+  initialCategory?: CalculatorCategory;
 }
 
-export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
+export function CalculatorExplorer({
+  ids,
+  initialQuery = "",
+  initialCategory,
+}: CalculatorExplorerProps) {
   const calculators = useMemo(
     () => ids.map((id) => getCalculatorMeta(id)),
     [ids]
   );
 
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<FilterCategory>(ALL_CATEGORY);
+  const [query, setQuery] = useState(initialQuery);
+  const [category, setCategory] = useState<FilterCategory>(
+    initialCategory ?? ALL_CATEGORY
+  );
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
+
+  useEffect(() => {
+    setCategory(initialCategory ?? ALL_CATEGORY);
+  }, [initialCategory]);
 
   const categories = useMemo(() => {
     const set = new Set(calculators.map((c) => c.category));
@@ -62,7 +79,7 @@ export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
             placeholder="Search calculators…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className={cn(glassInsetInput, "h-11 rounded-xl pl-10")}
+            className="h-11 rounded-xl border-border bg-card pl-10 shadow-sm dark:bg-card/90"
             aria-label="Search calculators"
           />
         </div>
@@ -94,19 +111,16 @@ export function CalculatorExplorer({ ids }: CalculatorExplorerProps) {
       </div>
 
       {filtered.length === 0 ? (
-        <p className={cn(glassSurface, "rounded-2xl border border-dashed border-border/40 py-12 text-center text-sm text-muted-foreground")}>
+        <p className="rounded-xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground">
           No calculators match your search.
         </p>
       ) : (
-        <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-          {filtered.map((calc, i) => (
-            <li
-              key={calc.id}
-              className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:fill-mode-both motion-safe:duration-300"
-              style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}
-            >
-              <CalculatorCard calculator={calc} />
-            </li>
+        <ul
+          className="divide-y divide-border/70 rounded-xl border border-border/80 bg-card/50 p-1 dark:bg-card/30"
+          role="list"
+        >
+          {filtered.map((calc) => (
+            <CalculatorListItem key={calc.id} calculator={calc} />
           ))}
         </ul>
       )}
@@ -130,21 +144,11 @@ function CategoryChip({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "shrink-0 rounded-full px-4 py-2 text-xs font-bold transition-all duration-200 sm:text-sm",
+        "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors duration-150 sm:text-sm",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         active
-          ? cn(
-              glassSurface,
-              glassNeon,
-              glassNeonAccent("primary"),
-              "scale-[1.02] text-foreground shadow-md"
-            )
-          : cn(
-              glassInsetInput,
-              "text-slate-600 hover:scale-[1.04] hover:bg-white/80 hover:text-slate-900",
-              "dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-slate-100",
-              "active:scale-[0.98]"
-            )
+          ? "border border-primary/35 bg-primary/10 text-primary dark:bg-primary/15"
+          : "border border-transparent bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground dark:bg-muted/50"
       )}
     >
       {children}

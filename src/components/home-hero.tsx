@@ -37,10 +37,10 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
         <p
           className={cn(
             "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:delay-150",
-            "mx-auto mt-6 max-w-2xl text-lg text-slate-600 dark:text-slate-300 md:text-xl"
+            "mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
           )}
         >
-          <span className="font-semibold text-slate-800 dark:text-slate-100">
+          <span className="font-semibold text-foreground">
             {calculatorCount} free calculators.
           </span>{" "}
           No sign-up, no submit buttons—type and get results in milliseconds.
@@ -53,28 +53,27 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
           )}
         >
           <Link
-            href="/calculators/"
+            href="#calculators"
             className={cn(
-              "inline-flex h-12 items-center rounded-xl px-6 text-sm font-bold text-white",
+              "inline-flex h-12 items-center rounded-xl px-6 text-sm font-bold text-primary-foreground",
               "bg-gradient-to-r from-primary via-blue-600 to-indigo-600",
               "shadow-lg shadow-primary/25",
               "transition-[transform,box-shadow,filter] duration-300",
               "hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.99]"
             )}
           >
-            Browse all calculators
+            Search calculators ↓
           </Link>
           <Link
-            href="#calculators"
+            href="/calculators/"
             className={cn(
-              "inline-flex h-12 items-center rounded-xl border border-slate-200/80 bg-white/70 px-6 text-sm font-semibold text-slate-800",
-              "backdrop-blur-md shadow-sm",
-              "transition-all duration-300",
-              "hover:scale-[1.03] hover:border-primary/30 hover:shadow-md",
-              "dark:border-slate-700/60 dark:bg-slate-900/60 dark:text-slate-100"
+              "inline-flex h-12 items-center rounded-xl border border-border bg-card px-6 text-sm font-semibold text-foreground",
+              "shadow-sm transition-all duration-300",
+              "hover:border-primary/30 hover:bg-muted/50",
+              "dark:hover:bg-muted/30"
             )}
           >
-            Explore below ↓
+            View all {calculatorCount}
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-30T10:24:42.779Z",
+  "generatedAt": "2026-06-02T20:24:35.862Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -45,6 +45,113 @@
         "ev charging cost",
         "electric car charging cost",
         "home ev charging"
+      ]
+    },
+    {
+      "id": "watts-to-amps",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Watts to Amps",
+      "description": "Convert electrical power (watts) to current (amps) at a given voltage.",
+      "href": "/watts-to-amps/",
+      "tag": "Power",
+      "keywords": [
+        "watts to amps",
+        "power to current",
+        "dc amps calculator"
+      ]
+    },
+    {
+      "id": "battery-bank-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery Sizing",
+      "title": "Battery Bank Size (Ah)",
+      "description": "Size a battery bank in amp-hours from load, runtime, and voltage.",
+      "href": "/battery-bank-size/",
+      "tag": "Sizing",
+      "keywords": [
+        "battery bank ah",
+        "battery bank sizing",
+        "amp hour bank"
+      ]
+    },
+    {
+      "id": "battery-charging-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Battery Charging Time",
+      "description": "Calculate how long it takes to charge a battery at a given current.",
+      "href": "/battery-charging-time/",
+      "tag": "Charging",
+      "keywords": [
+        "battery charging time",
+        "charge time calculator",
+        "mAh charging"
+      ]
+    },
+    {
+      "id": "solar-daily-yield",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Daily Yield",
+      "description": "Estimate daily energy output from panel wattage and sun hours.",
+      "href": "/solar-daily-yield/",
+      "tag": "Solar",
+      "keywords": [
+        "solar daily yield",
+        "solar output calculator",
+        "panel output wh"
+      ]
+    },
+    {
+      "id": "solar-panel-size",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Panel Size",
+      "description": "Estimate minimum panel wattage from daily energy use and sun hours.",
+      "href": "/solar-panel-size/",
+      "tag": "Solar",
+      "keywords": [
+        "solar panel size",
+        "solar panel calculator",
+        "pv sizing"
+      ]
+    },
+    {
+      "id": "residential-voltage-drop",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Power",
+      "title": "Residential AC Voltage Drop Calculator",
+      "description": "Calculate AC voltage drop in home wiring from supply voltage, amps, cable length (m), and AWG or mm² copper size.",
+      "href": "/residential-voltage-drop/",
+      "tag": "Power",
+      "keywords": [
+        "residential voltage drop calculator",
+        "ac wire voltage drop",
+        "voltage drop awg mm2",
+        "home electrical wire sizing",
+        "nec 3 percent voltage drop"
+      ]
+    },
+    {
+      "id": "solar-payback-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Payback Period (ROI) Calculator",
+      "description": "Estimate payback time and 25-year savings from system cost, production, and electricity rates.",
+      "href": "/solar-payback-roi/",
+      "tag": "Solar",
+      "keywords": [
+        "solar payback calculator",
+        "solar roi calculator",
+        "solar break even"
       ]
     }
   ],

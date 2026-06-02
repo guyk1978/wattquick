@@ -3,8 +3,9 @@
  */
 import { calculators } from "../src/data/calculators";
 import { CALCULATOR_CATEGORY_LABELS } from "../src/data/calculator-types";
+import { POPULAR_CALCULATOR_SLUGS } from "../src/data/popular-calculators";
 
-const POPULAR_SLUGS = ["battery-runtime", "ah-to-wh", "ev-charging-cost"] as const;
+const POPULAR_SLUGS = POPULAR_CALCULATOR_SLUGS;
 
 const items = calculators.map((calc) => ({
   id: calc.slug,

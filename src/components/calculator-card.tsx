@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 interface CalculatorCardProps {
   calculator: CalculatorMeta;
-  variant?: "default" | "compact";
+  variant?: "default" | "compact" | "minimal";
   className?: string;
 }
 
@@ -24,7 +24,46 @@ export function CalculatorCard({
 }: CalculatorCardProps) {
   const Icon = calculator.icon;
   const isCompact = variant === "compact";
+  const isMinimal = variant === "minimal";
   const theme = getCategoryTheme(calculator.category);
+
+  if (isMinimal) {
+    return (
+      <Link
+        href={calculator.href}
+        style={categoryThemeVars(theme)}
+        className={cn(
+          "calc-card group flex h-full flex-col gap-2 rounded-xl border p-3 transition-colors duration-150",
+          "border-border/80 bg-card shadow-sm",
+          "hover:border-[color-mix(in_srgb,var(--cat)_35%,transparent)] hover:bg-muted/30",
+          "dark:border-border dark:bg-card/90",
+          "dark:hover:border-[color-mix(in_srgb,var(--cat)_40%,transparent)]",
+          "dark:hover:bg-[color-mix(in_srgb,var(--cat)_8%,var(--card))]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          className
+        )}
+      >
+        <span
+          className={cn(
+            "flex size-8 shrink-0 items-center justify-center rounded-lg border",
+            "border-[color-mix(in_srgb,var(--cat)_25%,transparent)] bg-background text-[var(--cat)]",
+            "dark:border-[color-mix(in_srgb,var(--cat)_38%,transparent)]",
+            "dark:bg-[color-mix(in_srgb,var(--cat)_14%,var(--card))]"
+          )}
+        >
+          <Icon className="size-4" strokeWidth={2} aria-hidden />
+        </span>
+        <div className="min-w-0 space-y-0.5">
+          <h3 className="text-sm font-semibold leading-snug text-foreground">
+            {calculator.title}
+          </h3>
+          <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+            {calculator.description}
+          </p>
+        </div>
+      </Link>
+    );
+  }
 
   return (
     <Link
