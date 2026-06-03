@@ -11,6 +11,7 @@ import {
   Shield,
   Ship,
   Sun,
+  Waves,
   Zap,
 } from "lucide-react";
 import type { CalculatorCategory } from "@/data/calculator-types";
@@ -61,6 +62,14 @@ export const MEGA_MENU_CATEGORIES: MegaMenuCategory[] = [
     href: "/category/appliance",
     icon: Zap,
     color: "#F97316",
+  },
+  {
+    category: "pool",
+    label: CALCULATOR_CATEGORY_LABELS.pool,
+    description: CALCULATOR_CATEGORY_DESCRIPTIONS.pool,
+    href: "/category/pool",
+    icon: Waves,
+    color: "#06B6D4",
   },
   {
     category: "cost",

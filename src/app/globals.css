@@ -339,6 +339,19 @@
   font-weight: 700;
 }
 
+/* Chart column amounts — single line, smaller than hero result cards */
+.calculator-chart-value {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font-size: clamp(0.8125rem, 2.8vw, 1.25rem);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Calculator result card shell */
 .calculator-result-card {
   min-width: 0;

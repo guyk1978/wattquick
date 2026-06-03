@@ -779,7 +779,7 @@ export const calculatorsAppliances = [
     ],
     icon: Waves,
     tag: "Pool",
-    category: "appliance",
+    category: "pool",
     suggestions: [
       "ac-inverter-savings",
       "heat-pump-vs-resistance",

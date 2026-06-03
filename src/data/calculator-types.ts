@@ -13,7 +13,8 @@ export type CalculatorCategory =
   | "commercial-ev"
   | "rv-marine"
   | "tariffs"
-  | "green-home";
+  | "green-home"
+  | "pool";
 
 export type CalculatorFieldInputType = "text" | "select" | "range";
 
@@ -93,6 +94,7 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   "rv-marine": "RV & Marine",
   tariffs: "Utility Tariffs",
   "green-home": "Green Home",
+  pool: "Pool",
 };
 
 export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string> = {
@@ -109,4 +111,5 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   "rv-marine": "RV solar, marine banks, camping and portable power",
   tariffs: "TOU rates, demand charges, V2G, and arbitrage",
   "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
+  pool: "Pool pumps, heating, covers, and seasonal operating cost",
 };

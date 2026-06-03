@@ -34,6 +34,7 @@ export const CALCULATOR_CATEGORY_THEME: Record<CalculatorCategory, CategoryTheme
       colorDark: "#65A30D",
       ctaText: "#18181B",
     },
+    pool: { color: "#06B6D4", colorDark: "#0891B2", ctaText: "#FFFFFF" },
   };
 
 export function getCategoryTheme(category: CalculatorCategory): CategoryTheme {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T10:09:05.693Z",
+  "generatedAt": "2026-06-03T10:15:05.603Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1261,7 +1261,7 @@
       "id": "pool-energy-thermal-cover",
       "type": "calculator",
       "category": "Calculators",
-      "group": "Appliances",
+      "group": "Pool",
       "title": "Pool Energy Cost & Thermal Cover Savings Calculator",
       "description": "Pool pump and heating cost by technology (resistance vs. heat pump COP) plus thermal cover savings on evaporation load.",
       "href": "/pool-energy-thermal-cover/",
