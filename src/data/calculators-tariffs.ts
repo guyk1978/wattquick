@@ -35,7 +35,7 @@ export const calculatorsTariffs = [
     keywords: ["time of use savings", "peak off peak shifting", "tou rate calculator"],
     icon: Clock,
     tag: "TOU",
-    category: "tariffs",
+    category: "tou",
     suggestions: [
       "electricity-rate-plan",
       "electricity-bill",
@@ -78,7 +78,7 @@ export const calculatorsTariffs = [
     keywords: ["demand charge calculator", "peak kw penalty", "commercial demand ratchet"],
     icon: Gauge,
     tag: "Demand",
-    category: "tariffs",
+    category: "tou",
     suggestions: ["tou-shifting-savings", "energy-consumption", "electricity-bill"],
     fields: [
       { id: "peakKw", label: "Peak demand", unit: "kW", placeholder: "85" },
@@ -110,7 +110,7 @@ export const calculatorsTariffs = [
     keywords: ["v2g revenue", "vehicle to grid payment", "ev grid export credit"],
     icon: ArrowLeftRight,
     tag: "V2G",
-    category: "tariffs",
+    category: "tou",
     suggestions: ["solar-net-metering", "battery-arbitrage-roi", "ev-charging-cost"],
     fields: [
       { id: "kwhExported", label: "kWh per session", unit: "kWh", placeholder: "15" },
@@ -148,7 +148,7 @@ export const calculatorsTariffs = [
     keywords: ["battery arbitrage", "time of use battery profit", "peak shaving battery roi"],
     icon: Battery,
     tag: "Arbitrage",
-    category: "tariffs",
+    category: "tou",
     suggestions: ["tou-shifting-savings", "solar-battery-bank", "battery-cost"],
     fields: [
       { id: "batteryKwh", label: "Usable battery", unit: "kWh", placeholder: "10" },
@@ -193,7 +193,7 @@ export const calculatorsTariffs = [
     keywords: ["carbon offset calculator", "solar co2 savings", "ev emissions offset"],
     icon: Leaf,
     tag: "Carbon",
-    category: "tariffs",
+    category: "tou",
     suggestions: ["solar-daily-yield", "energy-consumption", "ev-cost-per-mile"],
     fields: [
       { id: "cleanKwh", label: "Clean energy used", unit: "kWh", placeholder: "900" },
@@ -238,7 +238,7 @@ export const calculatorsTariffs = [
     ],
     icon: Activity,
     tag: "Grid Services",
-    category: "tariffs",
+    category: "tou",
     suggestions: [
       "battery-arbitrage-roi",
       "v2g-financial-return",
@@ -363,7 +363,7 @@ export const calculatorsTariffs = [
     ],
     icon: TrendingDown,
     tag: "Peak Shaving",
-    category: "tariffs",
+    category: "tou",
     suggestions: [
       "tou-shifting-savings",
       "electricity-bill",
@@ -478,7 +478,7 @@ export const calculatorsTariffs = [
     ],
     icon: Scale,
     tag: "TOU",
-    category: "tariffs",
+    category: "tou",
     suggestions: [
       "tou-shifting-savings",
       "peak-shaving-potential",

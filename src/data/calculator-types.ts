@@ -12,7 +12,7 @@ export type CalculatorCategory =
   | "backup"
   | "commercial-ev"
   | "rv-marine"
-  | "tariffs"
+  | "tou"
   | "green-home"
   | "pool";
 
@@ -92,7 +92,7 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   backup: "Backup",
   "commercial-ev": "Commercial EV",
   "rv-marine": "RV & Marine",
-  tariffs: "Utility Tariffs",
+  tou: "TOU",
   "green-home": "Green Home",
   pool: "Pool",
 };
@@ -109,7 +109,7 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   backup: "UPS and backup runtime",
   "commercial-ev": "Fleet trucks, vans, buses, and industrial EV",
   "rv-marine": "RV solar, marine banks, camping and portable power",
-  tariffs: "TOU rates, demand charges, V2G, and arbitrage",
+  tou: "Time-of-use rates, peak shaving, demand charges, and arbitrage",
   "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
   pool: "Pool pumps, heating, covers, and seasonal operating cost",
 };

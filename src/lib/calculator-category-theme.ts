@@ -17,7 +17,7 @@ export const CALCULATOR_CATEGORY_THEME: Record<CalculatorCategory, CategoryTheme
     solar: { color: "#F59E0B", colorDark: "#D97706", ctaText: "#FFFFFF" },
     ev: { color: "#3B82F6", colorDark: "#2563EB", ctaText: "#FFFFFF" },
     power: { color: "#A855F7", colorDark: "#9333EA", ctaText: "#FFFFFF" },
-    tariffs: { color: "#A855F7", colorDark: "#7C3AED", ctaText: "#FFFFFF" },
+    tou: { color: "#8B5CF6", colorDark: "#7C3AED", ctaText: "#FFFFFF" },
     cost: { color: "#FACC15", colorDark: "#EAB308", ctaText: "#18181B" },
     convert: { color: "#06B6D4", colorDark: "#0891B2", ctaText: "#FFFFFF" },
     appliance: { color: "#F97316", colorDark: "#EA580C", ctaText: "#FFFFFF" },
