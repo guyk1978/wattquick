@@ -230,6 +230,88 @@ export interface BatteryHealthInput {
   fastChargingFrequency: "never" | "rarely" | "often";
 }
 
+/** Industry planning average for Li-ion calendar fade (% capacity per year). */
+export const EV_BATTERY_ANNUAL_CALENDAR_LOSS_PCT = 2.3;
+
+/** Share of vehicle MSRP commonly attributed to the traction pack (planning). */
+export const EV_BATTERY_VALUE_SHARE_OF_VEHICLE = 0.38;
+
+export const EV_DC_FAST_CHARGE_DEGRADATION = {
+  never: { label: "Never / almost never", extraAnnualPct: 0 },
+  rarely: { label: "Rarely (road trips)", extraAnnualPct: 0.5 },
+  often: { label: "Often (weekly+)", extraAnnualPct: 1.4 },
+} as const;
+
+export type EvDcFastChargeFrequency = keyof typeof EV_DC_FAST_CHARGE_DEGRADATION;
+
+export interface EvBatteryDepletionValueLossInput {
+  purchasePrice: number;
+  currentMileage: number;
+  vehicleAgeYears: number;
+  fastChargingFrequency: EvDcFastChargeFrequency;
+}
+
+export function calculateEvBatteryDepletionValueLoss({
+  purchasePrice,
+  currentMileage,
+  vehicleAgeYears,
+  fastChargingFrequency,
+}: EvBatteryDepletionValueLossInput) {
+  const calendarLossPct = vehicleAgeYears * EV_BATTERY_ANNUAL_CALENDAR_LOSS_PCT;
+  const mileageLossPct = (currentMileage / 30_000) * 1.0;
+  const fastChargeLossPct =
+    vehicleAgeYears * EV_DC_FAST_CHARGE_DEGRADATION[fastChargingFrequency].extraAnnualPct;
+
+  const totalCapacityLossPct = Math.min(
+    50,
+    calendarLossPct + mileageLossPct + fastChargeLossPct
+  );
+  const batteryHealthPercent = Math.max(
+    50,
+    parseFloat((100 - totalCapacityLossPct).toFixed(1))
+  );
+  const capacityLossFromNewPct = parseFloat(
+    (100 - batteryHealthPercent).toFixed(1)
+  );
+
+  const valueLostDueToBattery = parseFloat(
+    (
+      purchasePrice *
+      EV_BATTERY_VALUE_SHARE_OF_VEHICLE *
+      (capacityLossFromNewPct / 100)
+    ).toFixed(0)
+  );
+  const estimatedCurrentValue = Math.max(
+    0,
+    parseFloat((purchasePrice - valueLostDueToBattery).toFixed(0))
+  );
+
+  const healthStatus =
+    batteryHealthPercent > 90
+      ? "Excellent"
+      : batteryHealthPercent > 80
+        ? "Good"
+        : batteryHealthPercent > 70
+          ? "Fair"
+          : "Degraded";
+
+  return {
+    batteryHealthPercent,
+    capacityLossFromNewPct,
+    valueLostDueToBattery,
+    estimatedCurrentValue,
+    healthStatus,
+    calendarLossPct: parseFloat(calendarLossPct.toFixed(1)),
+    mileageLossPct: parseFloat(mileageLossPct.toFixed(1)),
+    fastChargeLossPct: parseFloat(fastChargeLossPct.toFixed(1)),
+    purchasePrice,
+    currentMileage,
+    vehicleAgeYears,
+    fastChargingFrequency,
+    batteryValueShare: EV_BATTERY_VALUE_SHARE_OF_VEHICLE,
+  };
+}
+
 export function estimateBatteryHealth({
   vehicleAgeYears,
   totalMileage,

@@ -6,6 +6,7 @@ import {
   Plug,
   Snowflake,
   Thermometer,
+  TrendingDown,
   Wrench,
   Zap,
 } from "lucide-react";
@@ -16,6 +17,7 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateEvBatteryDepletionValueLoss,
   calculateEvChargingCableLoss,
   calculateEvChargingTemperatureImpact,
   calculateEvPreconditioningCost,
@@ -27,6 +29,7 @@ import {
   estimateBatteryHealth,
   EV_CHARGING_BATTERY_PRESETS,
   EV_CHARGING_TEMP_SCENARIOS,
+  EV_DC_FAST_CHARGE_DEGRADATION,
   type WinterRangeInput,
 } from "@/lib/calculators/ev";
 import {
@@ -567,6 +570,7 @@ export const calculatorsEv = [
     tag: "EV",
     category: "ev",
     suggestions: [
+      "ev-battery-depletion-value-loss",
       "ev-battery-range",
       "battery-efficiency",
       "ev-fast-charging-time",
@@ -641,6 +645,112 @@ export const calculatorsEv = [
         value: formatNumber(result.stateOfHealthPercentage, { maxDecimals: 1 }),
         unit: "% SoH",
         detail: `Status: ${result.status} · ${vehicleAgeYears} yr · ${formatNumber(totalMileage, { maxDecimals: 0 })} mi`,
+      };
+    },
+  },
+  {
+    slug: "ev-battery-depletion-value-loss",
+    href: "/ev-battery-depletion-value-loss",
+    title: "EV Battery Depletion & Value Loss Calculator",
+    description:
+      "Estimate battery SoH from age, mileage, and DC fast-charging habits—then convert capacity fade to dollar value lost and resale value.",
+    keywords: [
+      "ev battery value loss",
+      "ev depreciation calculator",
+      "battery depletion resale",
+      "ev soh value",
+      "fast charging battery wear cost",
+    ],
+    icon: TrendingDown,
+    tag: "EV",
+    category: "ev",
+    suggestions: [
+      "ev-battery-degradation",
+      "ev-vs-ice-maintenance",
+      "ev-charging-temperature-impact",
+      "ev-fast-charging-time",
+    ],
+    fields: [
+      {
+        id: "purchasePrice",
+        label: "Original purchase price",
+        unit: "$",
+        placeholder: "45000",
+        defaultValue: "45000",
+      },
+      {
+        id: "currentMileage",
+        label: "Current mileage",
+        unit: "miles",
+        placeholder: "52000",
+        defaultValue: "52000",
+      },
+      {
+        id: "vehicleAgeYears",
+        label: "Vehicle age",
+        unit: "years",
+        placeholder: "4",
+        defaultValue: "4",
+      },
+      {
+        id: "fastChargingFrequency",
+        label: "DC fast charging frequency",
+        inputType: "select",
+        defaultValue: "rarely",
+        options: Object.entries(EV_DC_FAST_CHARGE_DEGRADATION).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+        colSpan: 2,
+        hint: "Frequent DC sessions accelerate capacity fade",
+      },
+    ],
+    result: {
+      label: "Estimated current value",
+      emptyMessage: "Enter purchase price, mileage, age & charging habits",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "From SoH to dollars",
+          body: "We model capacity loss with ~2.3% calendar fade per year plus mileage and DC fast-charge stress, then apply a typical 38% pack share of MSRP to estimate how much battery depletion reduces resale value versus your purchase price.",
+        },
+        {
+          heading: "Not a formal appraisal",
+          body: "Real market prices depend on trim, region, incentives at purchase, and OEM battery warranties. Use this for planning and comparison—pair with our EV vs ICE maintenance calculator for service and replacement costs.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: What is SoH? A: State of health—remaining battery capacity vs. new. Q: Why fast charging matters? A: High C-rates heat cells and accelerate fade when used as primary fueling. Q: Can I improve SoH? A: You can slow further loss with gentler charging; lost capacity does not return.",
+        },
+      ],
+    },
+    compute(values) {
+      const purchasePrice = parsePositive(values.purchasePrice ?? "");
+      const currentMileage = parseNonNegative(values.currentMileage ?? "");
+      const vehicleAgeYears = parseNonNegative(values.vehicleAgeYears ?? "");
+      const fastChargingFrequency = values.fastChargingFrequency as
+        | keyof typeof EV_DC_FAST_CHARGE_DEGRADATION
+        | undefined;
+      if (
+        purchasePrice === null ||
+        currentMileage === null ||
+        vehicleAgeYears === null ||
+        !fastChargingFrequency ||
+        !(fastChargingFrequency in EV_DC_FAST_CHARGE_DEGRADATION)
+      ) {
+        return { value: null };
+      }
+      const result = calculateEvBatteryDepletionValueLoss({
+        purchasePrice,
+        currentMileage,
+        vehicleAgeYears,
+        fastChargingFrequency,
+      });
+      return {
+        value: formatCurrency(result.estimatedCurrentValue),
+        unit: "",
+        detail: `SoH ${formatNumber(result.batteryHealthPercent, { maxDecimals: 1 })}% · Battery value lost ${formatCurrency(result.valueLostDueToBattery)}`,
       };
     },
   },

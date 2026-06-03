@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T12:23:03.289Z",
+  "generatedAt": "2026-06-03T13:39:55.795Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -882,6 +882,23 @@
         "ev battery degradation",
         "battery health estimator",
         "ev soh calculator"
+      ]
+    },
+    {
+      "id": "ev-battery-depletion-value-loss",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Battery Depletion & Value Loss Calculator",
+      "description": "Estimate battery SoH from age, mileage, and DC fast-charging habits—then convert capacity fade to dollar value lost and resale value.",
+      "href": "/ev-battery-depletion-value-loss/",
+      "tag": "EV",
+      "keywords": [
+        "ev battery value loss",
+        "ev depreciation calculator",
+        "battery depletion resale",
+        "ev soh value",
+        "fast charging battery wear cost"
       ]
     },
     {
