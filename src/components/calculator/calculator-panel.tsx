@@ -41,6 +41,7 @@ import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVo
 import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
+import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -94,6 +95,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "bess-carbon-cost") {
     return <BessCarbonCostCalculator className={className} />;
+  }
+  if (id === "bess-roi") {
+    return <BessRoiCalculator className={className} />;
   }
   if (id === "lighting-circuit-load") {
     return <LightingCircuitLoadCalculator className={className} />;

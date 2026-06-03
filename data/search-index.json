@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T14:59:50.814Z",
+  "generatedAt": "2026-06-03T15:13:09.311Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1232,6 +1232,24 @@
         "li-ion shelf life calculator",
         "battery state of health storage",
         "lfp nmc calendar fade"
+      ]
+    },
+    {
+      "id": "bess-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "BESS ROI Calculator (Battery Energy Storage System)",
+      "description": "See if adding battery storage to existing solar pays back from peak vs. off-peak TOU arbitrage—daily savings, payback years, and LCOS.",
+      "href": "/bess-roi/",
+      "tag": "BESS ROI",
+      "keywords": [
+        "bess roi calculator",
+        "battery energy storage system roi",
+        "solar battery payback",
+        "tou battery arbitrage",
+        "levelized cost of storage lcos",
+        "peak off peak battery savings"
       ]
     },
     {

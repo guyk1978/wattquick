@@ -1,5 +1,6 @@
-import { Cable, Calendar, Cpu, Gauge, Home, Layers, Zap } from "lucide-react";
+import { BatteryCharging, Cable, Calendar, Cpu, Gauge, Home, Layers, Zap } from "lucide-react";
 import {
+  formatCurrency,
   formatNumber,
   parseNonNegative,
   parsePositive,
@@ -7,6 +8,7 @@ import {
 import {
   calculateBatteryCalendarAging,
   calculateBatteryVoltageDrop,
+  calculateBessRoi,
   calculateCrate,
   calculateHomeBackupSizing,
   calculateInverterLoss,
@@ -619,6 +621,163 @@ export const calculatorsBattery = [
         value: formatNumber(result.remainingSoh, { maxDecimals: 1 }),
         unit: "% SoH",
         detail: `${result.calendarLossPercent}% calendar loss · ${result.annualLossPercent}%/yr at ${avgStorageTempC}°C & ${avgSocPercent}% avg SOC`,
+      };
+    },
+  },
+  {
+    slug: "bess-roi",
+    href: "/bess-roi",
+    title: "BESS ROI Calculator (Battery Energy Storage System)",
+    description:
+      "See if adding battery storage to existing solar pays back from peak vs. off-peak TOU arbitrage—daily savings, payback years, and LCOS.",
+    keywords: [
+      "bess roi calculator",
+      "battery energy storage system roi",
+      "solar battery payback",
+      "tou battery arbitrage",
+      "levelized cost of storage lcos",
+      "peak off peak battery savings",
+    ],
+    icon: BatteryCharging,
+    tag: "BESS ROI",
+    category: "battery",
+    suggestions: [
+      "electricity-rate-plan",
+      "battery-arbitrage-roi",
+      "solar-degradation-20-year-roi",
+      "battery-cost",
+    ],
+    fields: [
+      {
+        id: "batteryCapacityKwh",
+        label: "Battery capacity",
+        unit: "kWh",
+        placeholder: "13.5",
+        hint: "Nameplate usable nameplate (e.g. Powerwall 13.5 kWh)",
+      },
+      {
+        id: "batteryInstallCost",
+        label: "Battery cost (installed)",
+        unit: "$",
+        placeholder: "12000",
+        hint: "Hardware + installation before incentives",
+      },
+      {
+        id: "peakRatePerKwh",
+        label: "Peak electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.38",
+        hint: "On-peak or summer peak ¢/kWh from your TOU plan",
+      },
+      {
+        id: "offPeakRatePerKwh",
+        label: "Off-peak electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.09",
+        hint: "Night / super-off-peak rate you charge from",
+      },
+      {
+        id: "cyclesPerDay",
+        label: "Cycles per day",
+        unit: "#",
+        placeholder: "1",
+        defaultValue: "1",
+        hint: "Full charge–discharge arbitrage cycles per day",
+      },
+      {
+        id: "batteryLifeYears",
+        label: "Battery life",
+        unit: "years",
+        placeholder: "10",
+        hint: "Planning horizon or warranty period for LCOS",
+      },
+      {
+        id: "depthOfDischargePercent",
+        label: "Depth of discharge (DoD)",
+        unit: "%",
+        placeholder: "90",
+        defaultValue: "90",
+        hint: "Usable fraction of nameplate per cycle",
+      },
+      {
+        id: "roundTripEfficiencyPercent",
+        label: "Round-trip efficiency",
+        unit: "%",
+        placeholder: "90",
+        defaultValue: "90",
+        hint: "AC charge + discharge losses (inverter + BMS)",
+      },
+    ],
+    result: {
+      label: "Payback period",
+      emptyMessage: "Enter capacity, cost, TOU rates & battery life",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "When BESS arbitrage pays",
+          body: "Daily savings ≈ (peak − off-peak) × kWh shifted per cycle × cycles/day. kWh shifted = capacity × DoD × round-trip efficiency. Without a wide TOU spread, payback stretches—compare your tariff first with the Electricity Rate Plan calculator.",
+        },
+        {
+          heading: "Payback & LCOS",
+          body: "Payback years = installed cost ÷ annual savings. LCOS (levelized cost of storage) = installed cost ÷ total kWh delivered over battery life—useful to compare against buying peak energy from the grid.",
+        },
+        {
+          heading: "Depth of discharge",
+          body: "Higher DoD yields more arbitrage kWh but increases cycle aging. Many lithium warranties cap daily DoD (e.g. 80–90%). Model conservatively if you also use the pack for backup.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include solar self-consumption? A: This tool is TOU spread + cycles; add avoided export/import separately. Q: Tax credits? A: Subtract incentives from install cost before payback. Q: vs. Battery Arbitrage ROI? A: That tool estimates profit without install cost or LCOS.",
+        },
+      ],
+    },
+    compute(values) {
+      const batteryCapacityKwh = parsePositive(values.batteryCapacityKwh ?? "");
+      const batteryInstallCost = parsePositive(values.batteryInstallCost ?? "");
+      const peakRatePerKwh = parsePositive(values.peakRatePerKwh ?? "");
+      const offPeakRatePerKwh = parsePositive(values.offPeakRatePerKwh ?? "");
+      const cyclesPerDay = parsePositive(values.cyclesPerDay ?? "");
+      const batteryLifeYears = parsePositive(values.batteryLifeYears ?? "");
+      const depthOfDischargePercent = Number(
+        values.depthOfDischargePercent?.trim() ?? ""
+      );
+      const roundTripEfficiencyPercent = parsePositive(
+        values.roundTripEfficiencyPercent ?? ""
+      );
+      if (
+        batteryCapacityKwh === null ||
+        batteryInstallCost === null ||
+        peakRatePerKwh === null ||
+        offPeakRatePerKwh === null ||
+        cyclesPerDay === null ||
+        batteryLifeYears === null ||
+        roundTripEfficiencyPercent === null ||
+        !Number.isFinite(depthOfDischargePercent) ||
+        depthOfDischargePercent <= 0 ||
+        depthOfDischargePercent > 100 ||
+        roundTripEfficiencyPercent <= 0 ||
+        roundTripEfficiencyPercent > 100
+      ) {
+        return { value: null };
+      }
+      const result = calculateBessRoi({
+        batteryCapacityKwh,
+        batteryInstallCost,
+        peakRatePerKwh,
+        offPeakRatePerKwh,
+        cyclesPerDay,
+        batteryLifeYears,
+        depthOfDischargePercent,
+        roundTripEfficiencyPercent,
+      });
+      return {
+        value:
+          result.paybackYears !== null
+            ? formatNumber(result.paybackYears, { maxDecimals: 1 })
+            : "—",
+        unit: result.paybackYears !== null ? "yr" : undefined,
+        detail: `${formatCurrency(result.dailySavings)}/day · LCOS $${formatNumber(result.lcosPerKwh, { maxDecimals: 3 })}/kWh`,
       };
     },
   },

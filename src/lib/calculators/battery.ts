@@ -186,3 +186,76 @@ export function calculateBatteryCalendarAging({
     statusLabel,
   };
 }
+
+export interface BessRoiInput {
+  batteryCapacityKwh: number;
+  batteryInstallCost: number;
+  peakRatePerKwh: number;
+  offPeakRatePerKwh: number;
+  cyclesPerDay: number;
+  batteryLifeYears: number;
+  depthOfDischargePercent: number;
+  roundTripEfficiencyPercent: number;
+}
+
+export interface BessRoiResult {
+  dailySavings: number;
+  annualSavings: number;
+  paybackYears: number | null;
+  lcosPerKwh: number;
+  priceSpreadPerKwh: number;
+  shiftedKwhPerCycle: number;
+  lifetimeDischargedKwh: number;
+  totalCyclesLifetime: number;
+  monthlySavings: number;
+  isProfitable: boolean;
+}
+
+/**
+ * BESS TOU arbitrage: charge off-peak, discharge at peak.
+ * LCOS = installed cost ÷ lifetime kWh delivered (after DoD & round-trip).
+ */
+export function calculateBessRoi({
+  batteryCapacityKwh,
+  batteryInstallCost,
+  peakRatePerKwh,
+  offPeakRatePerKwh,
+  cyclesPerDay,
+  batteryLifeYears,
+  depthOfDischargePercent,
+  roundTripEfficiencyPercent,
+}: BessRoiInput): BessRoiResult {
+  const dod = Math.min(100, Math.max(0, depthOfDischargePercent)) / 100;
+  const eff = Math.min(100, Math.max(0, roundTripEfficiencyPercent)) / 100;
+  const spread = peakRatePerKwh - offPeakRatePerKwh;
+
+  const shiftedKwhPerCycle = batteryCapacityKwh * dod * eff;
+  const dailySavings = Math.max(0, spread * shiftedKwhPerCycle * cyclesPerDay);
+  const annualSavings = dailySavings * 365;
+  const monthlySavings = dailySavings * (365 / 12);
+
+  const paybackYears =
+    annualSavings > 0 && batteryInstallCost > 0
+      ? parseFloat((batteryInstallCost / annualSavings).toFixed(1))
+      : null;
+
+  const totalCyclesLifetime = cyclesPerDay * 365 * batteryLifeYears;
+  const lifetimeDischargedKwh = shiftedKwhPerCycle * totalCyclesLifetime;
+  const lcosPerKwh =
+    lifetimeDischargedKwh > 0
+      ? parseFloat((batteryInstallCost / lifetimeDischargedKwh).toFixed(3))
+      : 0;
+
+  return {
+    dailySavings: parseFloat(dailySavings.toFixed(2)),
+    annualSavings: parseFloat(annualSavings.toFixed(0)),
+    monthlySavings: parseFloat(monthlySavings.toFixed(0)),
+    paybackYears,
+    lcosPerKwh,
+    priceSpreadPerKwh: parseFloat(spread.toFixed(3)),
+    shiftedKwhPerCycle: parseFloat(shiftedKwhPerCycle.toFixed(2)),
+    lifetimeDischargedKwh: parseFloat(lifetimeDischargedKwh.toFixed(0)),
+    totalCyclesLifetime: Math.round(totalCyclesLifetime),
+    isProfitable: spread > 0 && dailySavings > 0,
+  };
+}
