@@ -490,3 +490,119 @@ export function calculateAcInverterSavings({
     savingsPercentApplied: inverterSavingsPercent,
   };
 }
+
+export const POOL_THERMAL_COVER_SAVINGS_OPTIONS = [30, 35, 40, 45, 50] as const;
+
+export type PoolThermalCoverSavingsPercent =
+  (typeof POOL_THERMAL_COVER_SAVINGS_OPTIONS)[number];
+
+/** Daily evaporation / heat-loss energy modeled vs. pump run energy (open pool). */
+export const POOL_THERMAL_LOAD_RATIO = 1;
+
+export const POOL_DAYS_PER_MONTH = 30;
+
+export interface PoolEnergyThermalCoverInput {
+  pumpKw: number;
+  hoursPerDay: number;
+  ratePerKwh: number;
+  useThermalCover: boolean;
+  coverSavingsPercent: PoolThermalCoverSavingsPercent;
+}
+
+export interface PoolEnergyThermalCoverResult {
+  dailyPumpKwh: number;
+  dailyThermalKwh: number;
+  dailyKwhWithoutCover: number;
+  dailyKwhWithCover: number;
+  dailyCostWithoutCover: number;
+  dailyCostWithCover: number;
+  dailySavings: number;
+  monthlyCostWithoutCover: number;
+  monthlyCostWithCover: number;
+  monthlySavings: number;
+  monthlyKwhSaved: number;
+  annualSavings: number;
+  annualKwhSaved: number;
+  coverSavingsPercent: number;
+  useThermalCover: boolean;
+}
+
+/**
+ * Pool pump energy plus modeled thermal/evaporation load; cover reduces thermal portion only.
+ */
+export function calculatePoolEnergyThermalCover({
+  pumpKw,
+  hoursPerDay,
+  ratePerKwh,
+  useThermalCover,
+  coverSavingsPercent,
+}: PoolEnergyThermalCoverInput): PoolEnergyThermalCoverResult | null {
+  if (
+    pumpKw <= 0 ||
+    hoursPerDay <= 0 ||
+    hoursPerDay > 24 ||
+    ratePerKwh <= 0 ||
+    !POOL_THERMAL_COVER_SAVINGS_OPTIONS.includes(coverSavingsPercent)
+  ) {
+    return null;
+  }
+
+  const dailyPumpKwh = parseFloat((pumpKw * hoursPerDay).toFixed(2));
+  const dailyThermalKwh = parseFloat(
+    (dailyPumpKwh * POOL_THERMAL_LOAD_RATIO).toFixed(2)
+  );
+
+  const thermalReduction = useThermalCover ? coverSavingsPercent / 100 : 0;
+  const dailyThermalWithCover = parseFloat(
+    (dailyThermalKwh * (1 - thermalReduction)).toFixed(2)
+  );
+
+  const dailyKwhWithoutCover = parseFloat(
+    (dailyPumpKwh + dailyThermalKwh).toFixed(2)
+  );
+  const dailyKwhWithCover = parseFloat(
+    (dailyPumpKwh + dailyThermalWithCover).toFixed(2)
+  );
+
+  const dailyCostWithoutCover = parseFloat(
+    (dailyKwhWithoutCover * ratePerKwh).toFixed(2)
+  );
+  const dailyCostWithCover = parseFloat((dailyKwhWithCover * ratePerKwh).toFixed(2));
+  const dailySavings = parseFloat(
+    Math.max(0, dailyCostWithoutCover - dailyCostWithCover).toFixed(2)
+  );
+
+  const monthlyCostWithoutCover = parseFloat(
+    (dailyCostWithoutCover * POOL_DAYS_PER_MONTH).toFixed(2)
+  );
+  const monthlyCostWithCover = parseFloat(
+    (dailyCostWithCover * POOL_DAYS_PER_MONTH).toFixed(2)
+  );
+  const monthlySavings = parseFloat((dailySavings * POOL_DAYS_PER_MONTH).toFixed(2));
+  const monthlyKwhSaved = parseFloat(
+    ((dailyKwhWithoutCover - dailyKwhWithCover) * POOL_DAYS_PER_MONTH).toFixed(1)
+  );
+
+  const annualSavings = parseFloat((dailySavings * 365).toFixed(2));
+  const annualKwhSaved = parseFloat(
+    ((dailyKwhWithoutCover - dailyKwhWithCover) * 365).toFixed(0)
+  );
+
+  return {
+    dailyPumpKwh,
+    dailyThermalKwh,
+    dailyKwhWithoutCover,
+    dailyKwhWithCover,
+    dailyCostWithoutCover,
+    dailyCostWithCover,
+    dailySavings,
+    monthlyCostWithoutCover,
+    monthlyCostWithCover,
+    monthlySavings,
+    monthlyKwhSaved,
+    annualSavings,
+    annualKwhSaved,
+    coverSavingsPercent: useThermalCover ? coverSavingsPercent : 0,
+    useThermalCover,
+  };
+}

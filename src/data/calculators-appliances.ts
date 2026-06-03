@@ -1,4 +1,4 @@
-import { Bitcoin, Fuel, Home, Lamp, Moon, PlugZap, Snowflake, Thermometer } from "lucide-react";
+import { Bitcoin, Fuel, Home, Lamp, Moon, PlugZap, Snowflake, Thermometer, Waves } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -11,10 +11,12 @@ import {
   calculateGeneratorFuelConsumption,
   calculateHeatPumpVsResistance,
   calculateLightingCircuitLoad,
+  calculatePoolEnergyThermalCover,
   calculateStandbyPowerWaste,
   calculateVampirePowerCost,
   calculateWholeHouseEnergyBudget,
   INVERTER_SAVINGS_PERCENT_OPTIONS,
+  POOL_THERMAL_COVER_SAVINGS_OPTIONS,
   VAMPIRE_DEVICE_PRESETS,
 } from "@/lib/calculators/appliances";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
@@ -757,6 +759,123 @@ export const calculatorsAppliances = [
         value: label,
         unit: "",
         detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatCurrency(result.annualSavings)}/yr · on/off ${formatCurrency(result.monthlyCostRegular)}/mo vs inverter ${formatCurrency(result.monthlyCostInverter)}/mo`,
+      };
+    },
+  },
+  {
+    slug: "pool-energy-thermal-cover",
+    href: "/pool-energy-thermal-cover",
+    title: "Pool Energy Cost & Thermal Cover Savings Calculator",
+    description:
+      "Estimate daily pool pump electricity cost and monthly/annual savings from a thermal cover on evaporation and heating load.",
+    keywords: [
+      "pool energy cost calculator",
+      "pool pump electricity cost",
+      "thermal pool cover savings",
+      "pool heating cost",
+      "pool evaporation savings",
+    ],
+    icon: Waves,
+    tag: "Pool",
+    category: "appliance",
+    suggestions: [
+      "ac-energy-cost",
+      "home-insulation-savings",
+      "appliance-daily-cost",
+      "electricity-bill",
+    ],
+    fields: [
+      {
+        id: "pumpKw",
+        label: "Pool pump power",
+        unit: "kW",
+        placeholder: "1.5",
+        defaultValue: "1.5",
+        hint: "Nameplate or metered draw while running",
+      },
+      {
+        id: "hoursPerDay",
+        label: "Pump run hours",
+        unit: "hrs/day",
+        placeholder: "8",
+        defaultValue: "8",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+      {
+        id: "useThermalCover",
+        label: "Thermal cover in use",
+        inputType: "select",
+        defaultValue: "yes",
+        options: [
+          { value: "yes", label: "Yes — cover on when pool idle" },
+          { value: "no", label: "No — open pool" },
+        ],
+      },
+      {
+        id: "coverSavingsPercent",
+        label: "Cover thermal savings",
+        inputType: "select",
+        defaultValue: "40",
+        options: POOL_THERMAL_COVER_SAVINGS_OPTIONS.map((pct) => ({
+          value: String(pct),
+          label: `${pct}% less evaporation / heat loss`,
+        })),
+        hint: "Typical range 30–50% on thermal load (not pump kWh)",
+      },
+    ],
+    result: {
+      label: "Annual savings",
+      emptyMessage: "Enter pump kW, hours & electricity rate",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "What we model",
+          body: "Daily pump kWh = kW × hours. We add a thermal/evaporation load equal to pump energy for an open pool, then reduce that portion by your cover savings %. Pump energy is unchanged—covers mainly cut heat and water loss.",
+        },
+        {
+          heading: "Cover benefits beyond kWh",
+          body: "Less evaporation means fewer top-offs and more stable chemistry. Shoulder-season gas or heat-pump pool heaters also run fewer hours with a blanket on.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Heated pool? A: Savings scale with thermal load—covers help most when you heat or in windy/sun-exposed sites. Q: Solar cover vs. winter cover? A: Use the % that matches your cover type. Q: Home envelope? A: Pair with Home Insulation Savings for whole-property efficiency.",
+        },
+      ],
+    },
+    compute(values) {
+      const pumpKw = parsePositive(values.pumpKw ?? "");
+      const hoursPerDay = parsePositive(values.hoursPerDay ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const useThermalCover = (values.useThermalCover ?? "no") === "yes";
+      const savingsRaw = parsePositive(values.coverSavingsPercent ?? "");
+      if (
+        pumpKw === null ||
+        hoursPerDay === null ||
+        ratePerKwh === null ||
+        savingsRaw === null ||
+        !(POOL_THERMAL_COVER_SAVINGS_OPTIONS as readonly number[]).includes(savingsRaw)
+      ) {
+        return { value: null };
+      }
+      const result = calculatePoolEnergyThermalCover({
+        pumpKw,
+        hoursPerDay,
+        ratePerKwh,
+        useThermalCover,
+        coverSavingsPercent: savingsRaw as (typeof POOL_THERMAL_COVER_SAVINGS_OPTIONS)[number],
+      });
+      if (!result) return { value: null };
+      return {
+        value: formatCurrency(result.annualSavings),
+        unit: "/yr",
+        detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatCurrency(result.dailyCostWithoutCover)}/day open pool`,
       };
     },
   },
