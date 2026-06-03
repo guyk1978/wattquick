@@ -31,6 +31,7 @@ import { AcInrushCurrentCalculator } from "@/components/calculators/AcInrushCurr
 import { VampirePowerCostCalculator } from "@/components/calculators/VampirePowerCostCalculator";
 import { LedSavingsRoiCalculator } from "@/components/calculators/LedSavingsRoiCalculator";
 import { HomeInsulationSavingsCalculator } from "@/components/calculators/HomeInsulationSavingsCalculator";
+import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverterSavingsCalculator";
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
@@ -97,6 +98,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "home-insulation-savings") {
     return <HomeInsulationSavingsCalculator className={className} />;
+  }
+  if (id === "ac-inverter-savings") {
+    return <AcInverterSavingsCalculator className={className} />;
   }
   if (id === "ev-vs-ice-maintenance") {
     return <EvVsIceMaintenanceCalculator className={className} />;

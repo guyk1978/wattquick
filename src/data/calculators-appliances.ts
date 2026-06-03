@@ -1,4 +1,4 @@
-import { Bitcoin, Fuel, Home, Lamp, Moon, PlugZap, Thermometer } from "lucide-react";
+import { Bitcoin, Fuel, Home, Lamp, Moon, PlugZap, Snowflake, Thermometer } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -6,6 +6,7 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateAcInverterSavings,
   calculateCryptoMiningPower,
   calculateGeneratorFuelConsumption,
   calculateHeatPumpVsResistance,
@@ -13,6 +14,7 @@ import {
   calculateStandbyPowerWaste,
   calculateVampirePowerCost,
   calculateWholeHouseEnergyBudget,
+  INVERTER_SAVINGS_PERCENT_OPTIONS,
   VAMPIRE_DEVICE_PRESETS,
 } from "@/lib/calculators/appliances";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
@@ -601,6 +603,160 @@ export const calculatorsAppliances = [
         value: formatNumber(result.loadAmps, { maxDecimals: 2 }),
         unit: "A",
         detail: `${result.totalWatts} W · ${result.utilizationPercent}% of ${breakerAmps} A breaker · ${result.recommendation}`,
+      };
+    },
+  },
+  {
+    slug: "ac-inverter-savings",
+    href: "/ac-inverter-savings",
+    title: "AC Efficiency & Inverter Savings Calculator",
+    description:
+      "Compare on/off vs. inverter air conditioner monthly electricity cost, energy savings, and purchase payback period.",
+    keywords: [
+      "inverter ac savings calculator",
+      "ac efficiency calculator",
+      "inverter vs regular ac cost",
+      "air conditioner payback",
+      "cooling electricity savings",
+    ],
+    icon: Snowflake,
+    tag: "Cooling",
+    category: "appliance",
+    suggestions: [
+      "ac-energy-cost",
+      "home-insulation-savings",
+      "heat-pump-vs-resistance",
+      "smart-thermostat-savings",
+    ],
+    fields: [
+      {
+        id: "capacityUnit",
+        label: "Capacity unit",
+        inputType: "select",
+        defaultValue: "hp",
+        options: [
+          { value: "hp", label: "Horsepower (HP)" },
+          { value: "btu", label: "BTU/h" },
+        ],
+      },
+      {
+        id: "capacityValue",
+        label: "AC capacity",
+        placeholder: "1.5",
+        defaultValue: "1.5",
+        hint: "Typical room unit: 1–2 HP (9,000–18,000 BTU/h)",
+      },
+      {
+        id: "hoursPerDay",
+        label: "Daily run hours (summer)",
+        unit: "hrs",
+        placeholder: "8",
+        defaultValue: "8",
+        hint: "Average hours the AC runs on hot days",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+      {
+        id: "inverterSavingsPercent",
+        label: "Inverter energy savings",
+        inputType: "select",
+        defaultValue: "35",
+        options: INVERTER_SAVINGS_PERCENT_OPTIONS.map((pct) => ({
+          value: String(pct),
+          label: `${pct}% less than on/off`,
+        })),
+        hint: "Typical inverter savings vs. fixed-speed unit",
+      },
+      {
+        id: "regularAcPrice",
+        label: "On/Off AC price",
+        unit: "$",
+        placeholder: "650",
+        defaultValue: "650",
+      },
+      {
+        id: "inverterAcPrice",
+        label: "Inverter AC price",
+        unit: "$",
+        placeholder: "950",
+        defaultValue: "950",
+      },
+    ],
+    result: {
+      label: "Payback period",
+      emptyMessage: "Enter capacity, hours, rates & purchase prices",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "On/off vs. inverter",
+          body: "Fixed-speed compressors run at full power then stop; inverter drives modulate RPM to match load. Field studies often show 30–40% lower kWh for comparable comfort.",
+        },
+        {
+          heading: "Monthly cost formula",
+          body: "Average watts ≈ (BTU/h ÷ EER ÷ 3.412) × duty cycle. Monthly kWh = watts × hours/day × 30 ÷ 1,000. Inverter kWh = on/off kWh × (1 − savings %). Cost = kWh × $/kWh.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: HP or BTU? A: 1 HP ≈ 9,000 BTU/h for room AC. Q: Payback? A: (Inverter price − on/off price) ÷ monthly savings. Q: Pair with envelope work? A: Better insulation lowers load for any AC type—see Home Insulation Savings.",
+        },
+      ],
+    },
+    compute(values) {
+      const capacityValue = parsePositive(values.capacityValue ?? "");
+      const hoursPerDay = parsePositive(values.hoursPerDay ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const regularAcPrice = parseNonNegative(values.regularAcPrice ?? "");
+      const inverterAcPrice = parseNonNegative(values.inverterAcPrice ?? "");
+      const capacityUnit = values.capacityUnit === "btu" ? "btu" : "hp";
+      const savingsRaw = parsePositive(values.inverterSavingsPercent ?? "");
+      if (
+        capacityValue === null ||
+        hoursPerDay === null ||
+        ratePerKwh === null ||
+        regularAcPrice === null ||
+        inverterAcPrice === null ||
+        savingsRaw === null ||
+        !(INVERTER_SAVINGS_PERCENT_OPTIONS as readonly number[]).includes(savingsRaw)
+      ) {
+        return { value: null };
+      }
+      const result = calculateAcInverterSavings({
+        capacityValue,
+        capacityUnit,
+        hoursPerDay,
+        ratePerKwh,
+        regularAcPrice,
+        inverterAcPrice,
+        inverterSavingsPercent: savingsRaw as (typeof INVERTER_SAVINGS_PERCENT_OPTIONS)[number],
+      });
+      if (!result) return { value: null };
+      if (result.paybackMonths === null) {
+        return {
+          value: null,
+          detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatNumber(result.monthlyKwhSaved, { maxDecimals: 1 })} kWh saved`,
+        };
+      }
+      if (result.paybackMonths === 0 && (result.paybackYears ?? 0) === 0) {
+        return {
+          value: "Immediate",
+          unit: "",
+          detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatCurrency(result.annualSavings)}/yr`,
+        };
+      }
+      const label =
+        result.paybackYears !== null && result.paybackYears > 0
+          ? `${result.paybackYears} yr ${formatNumber(result.paybackMonths, { maxDecimals: 0 })} mo`
+          : `${formatNumber(result.paybackMonths, { maxDecimals: 1 })} months`;
+      return {
+        value: label,
+        unit: "",
+        detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatCurrency(result.annualSavings)}/yr · on/off ${formatCurrency(result.monthlyCostRegular)}/mo vs inverter ${formatCurrency(result.monthlyCostInverter)}/mo`,
       };
     },
   },

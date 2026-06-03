@@ -320,3 +320,173 @@ export function calculateLightingCircuitLoad({
     gaugeFillPercent: Math.min(100, Math.max(4, utilizationPercent)),
   };
 }
+
+export type AcCapacityUnit = "hp" | "btu";
+
+export const AC_BTU_PER_HP = 9000;
+
+/** Typical EER for fixed-speed (on/off) room AC at rated load. */
+export const ON_OFF_AC_EER = 9;
+
+/** Compressor duty while the unit is scheduled to run (cycles on/off). */
+export const AC_COMPRESSOR_DUTY = 0.72;
+
+export const AC_SUMMER_DAYS_PER_MONTH = 30;
+
+export const INVERTER_SAVINGS_PERCENT_OPTIONS = [30, 35, 40] as const;
+
+export type InverterSavingsPercent = (typeof INVERTER_SAVINGS_PERCENT_OPTIONS)[number];
+
+export interface AcInverterSavingsInput {
+  capacityValue: number;
+  capacityUnit: AcCapacityUnit;
+  hoursPerDay: number;
+  ratePerKwh: number;
+  regularAcPrice: number;
+  inverterAcPrice: number;
+  inverterSavingsPercent: InverterSavingsPercent;
+}
+
+export interface AcInverterSavingsResult {
+  btuPerHour: number;
+  hpEquivalent: number;
+  avgWattsRegular: number;
+  avgWattsInverter: number;
+  monthlyKwhRegular: number;
+  monthlyKwhInverter: number;
+  monthlyCostRegular: number;
+  monthlyCostInverter: number;
+  monthlySavings: number;
+  monthlyKwhSaved: number;
+  annualSavings: number;
+  pricePremium: number;
+  paybackMonths: number | null;
+  paybackYears: number | null;
+  paybackDays: number | null;
+  regularBarPercent: number;
+  inverterBarPercent: number;
+  savingsPercentApplied: number;
+}
+
+export function btuFromAcCapacity(
+  capacityValue: number,
+  capacityUnit: AcCapacityUnit
+): number {
+  return capacityUnit === "hp" ? capacityValue * AC_BTU_PER_HP : capacityValue;
+}
+
+function formatPaybackParts(totalMonths: number): {
+  paybackMonths: number;
+  paybackYears: number | null;
+  paybackDays: number;
+} {
+  const paybackDays = Math.round(totalMonths * 30.44);
+  if (totalMonths < 12) {
+    return {
+      paybackMonths: parseFloat(totalMonths.toFixed(1)),
+      paybackYears: null,
+      paybackDays,
+    };
+  }
+  const years = Math.floor(totalMonths / 12);
+  const months = parseFloat((totalMonths % 12).toFixed(1));
+  return {
+    paybackMonths: months,
+    paybackYears: years,
+    paybackDays,
+  };
+}
+
+/**
+ * Compares monthly cooling energy for on/off vs. inverter AC from capacity (HP or BTU/h),
+ * then payback on the purchase premium from electricity savings.
+ */
+export function calculateAcInverterSavings({
+  capacityValue,
+  capacityUnit,
+  hoursPerDay,
+  ratePerKwh,
+  regularAcPrice,
+  inverterAcPrice,
+  inverterSavingsPercent,
+}: AcInverterSavingsInput): AcInverterSavingsResult | null {
+  if (
+    capacityValue <= 0 ||
+    hoursPerDay <= 0 ||
+    hoursPerDay > 24 ||
+    ratePerKwh <= 0 ||
+    regularAcPrice < 0 ||
+    inverterAcPrice < 0 ||
+    !INVERTER_SAVINGS_PERCENT_OPTIONS.includes(inverterSavingsPercent)
+  ) {
+    return null;
+  }
+
+  const btuPerHour = btuFromAcCapacity(capacityValue, capacityUnit);
+  const hpEquivalent = parseFloat((btuPerHour / AC_BTU_PER_HP).toFixed(2));
+
+  const fullLoadWatts = btuPerHour / (ON_OFF_AC_EER * 3.412);
+  const avgWattsRegular = fullLoadWatts * AC_COMPRESSOR_DUTY;
+  const savingsFraction = inverterSavingsPercent / 100;
+  const avgWattsInverter = avgWattsRegular * (1 - savingsFraction);
+
+  const monthlyKwhRegular = parseFloat(
+    ((avgWattsRegular * hoursPerDay * AC_SUMMER_DAYS_PER_MONTH) / 1000).toFixed(1)
+  );
+  const monthlyKwhInverter = parseFloat(
+    ((avgWattsInverter * hoursPerDay * AC_SUMMER_DAYS_PER_MONTH) / 1000).toFixed(1)
+  );
+
+  const monthlyCostRegular = parseFloat((monthlyKwhRegular * ratePerKwh).toFixed(2));
+  const monthlyCostInverter = parseFloat((monthlyKwhInverter * ratePerKwh).toFixed(2));
+  const monthlySavings = parseFloat(
+    Math.max(0, monthlyCostRegular - monthlyCostInverter).toFixed(2)
+  );
+  const monthlyKwhSaved = parseFloat(
+    Math.max(0, monthlyKwhRegular - monthlyKwhInverter).toFixed(1)
+  );
+  const annualSavings = parseFloat((monthlySavings * 12).toFixed(2));
+
+  const pricePremium = parseFloat((inverterAcPrice - regularAcPrice).toFixed(2));
+
+  let paybackMonths: number | null = null;
+  let paybackYears: number | null = null;
+  let paybackDays: number | null = null;
+
+  if (monthlySavings > 0 && pricePremium > 0) {
+    const totalMonths = pricePremium / monthlySavings;
+    const parts = formatPaybackParts(totalMonths);
+    paybackMonths = parts.paybackMonths;
+    paybackYears = parts.paybackYears;
+    paybackDays = parts.paybackDays;
+  } else if (pricePremium <= 0 && monthlySavings > 0) {
+    paybackMonths = 0;
+    paybackYears = 0;
+    paybackDays = 0;
+  }
+
+  const maxCost = Math.max(monthlyCostRegular, monthlyCostInverter, 1);
+  const regularBarPercent = Math.min(100, Math.max(8, (monthlyCostRegular / maxCost) * 100));
+  const inverterBarPercent = Math.min(100, Math.max(8, (monthlyCostInverter / maxCost) * 100));
+
+  return {
+    btuPerHour: Math.round(btuPerHour),
+    hpEquivalent,
+    avgWattsRegular: parseFloat(avgWattsRegular.toFixed(0)),
+    avgWattsInverter: parseFloat(avgWattsInverter.toFixed(0)),
+    monthlyKwhRegular,
+    monthlyKwhInverter,
+    monthlyCostRegular,
+    monthlyCostInverter,
+    monthlySavings,
+    monthlyKwhSaved,
+    annualSavings,
+    pricePremium,
+    paybackMonths,
+    paybackYears,
+    paybackDays,
+    regularBarPercent,
+    inverterBarPercent,
+    savingsPercentApplied: inverterSavingsPercent,
+  };
+}

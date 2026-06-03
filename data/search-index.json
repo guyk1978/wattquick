@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T09:27:55.545Z",
+  "generatedAt": "2026-06-03T09:38:51.042Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1238,6 +1238,23 @@
         "80 percent continuous load",
         "led circuit ampacity",
         "lighting panel load"
+      ]
+    },
+    {
+      "id": "ac-inverter-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "AC Efficiency & Inverter Savings Calculator",
+      "description": "Compare on/off vs. inverter air conditioner monthly electricity cost, energy savings, and purchase payback period.",
+      "href": "/ac-inverter-savings/",
+      "tag": "Cooling",
+      "keywords": [
+        "inverter ac savings calculator",
+        "ac efficiency calculator",
+        "inverter vs regular ac cost",
+        "air conditioner payback",
+        "cooling electricity savings"
       ]
     },
     {
