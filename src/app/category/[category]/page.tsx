@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { CategoryCalculatorGrid } from "@/components/category-calculator-grid";
 import { PageHeader, PageShell } from "@/components/page-shell";
 import {
@@ -16,30 +16,39 @@ export const dynamic = "force-static";
 
 type PageProps = { params: Promise<{ category: string }> };
 
+const LEGACY_CATEGORY_REDIRECTS: Record<string, string> = {
+  tariffs: "tou",
+};
+
 export function generateStaticParams() {
-  return Object.keys(CALCULATOR_CATEGORY_LABELS).map((category) => ({
-    category,
-  }));
+  const categories = Object.keys(CALCULATOR_CATEGORY_LABELS);
+  const legacy = Object.keys(LEGACY_CATEGORY_REDIRECTS);
+  return [...categories, ...legacy].map((category) => ({ category }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { category } = await params;
-  if (!isCalculatorCategory(category)) return {};
+  const resolved = LEGACY_CATEGORY_REDIRECTS[category] ?? category;
+  if (!isCalculatorCategory(resolved)) return {};
 
-  const label = CALCULATOR_CATEGORY_LABELS[category];
-  const description = CALCULATOR_CATEGORY_DESCRIPTIONS[category];
+  const label = CALCULATOR_CATEGORY_LABELS[resolved];
+  const description = CALCULATOR_CATEGORY_DESCRIPTIONS[resolved];
 
   return createPageMetadata({
     title: `${label} Calculators`,
     description: `Free ${label.toLowerCase()} calculators: ${description}. Instant results on WattQuick.`,
-    path: `/category/${category}`,
+    path: `/category/${resolved}`,
   });
 }
 
 export default async function CategoryPage({ params }: PageProps) {
   const { category } = await params;
+  const legacyTarget = LEGACY_CATEGORY_REDIRECTS[category];
+  if (legacyTarget) {
+    permanentRedirect(`/category/${legacyTarget}/`);
+  }
   if (!isCalculatorCategory(category)) notFound();
 
   const calculators = getCalculatorsByCategory(category);
