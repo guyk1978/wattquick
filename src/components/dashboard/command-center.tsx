@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { LayoutDashboard } from "lucide-react";
 import { CalculatorModal } from "@/components/dashboard/calculator-modal";
 import { DashboardWidgets } from "@/components/dashboard/dashboard-widgets";
@@ -11,10 +11,15 @@ import {
   DEFAULT_ENERGY_PROFILE,
   getProfileConfig,
   type EnergySystemProfile,
+  type FlowNodeId,
 } from "@/lib/dashboard-config";
+import { getAddedNodeIds, getNodeIds } from "@/lib/dashboard-scenario";
 import {
   loadEnergyProfile,
   loadRecentCalculators,
+  loadVisitedNodeKeys,
+  markNodeVisited,
+  nodeVisitKey,
   saveEnergyProfile,
   type RecentCalculatorEntry,
 } from "@/lib/dashboard-storage";
@@ -28,29 +33,76 @@ export function CommandCenter() {
   const [hydrated, setHydrated] = useState(false);
   const [recent, setRecent] = useState<RecentCalculatorEntry[]>([]);
   const [modalCalc, setModalCalc] = useState<CalculatorId | null>(null);
-
-  useEffect(() => {
-    const stored = loadEnergyProfile();
-    if (stored) setProfile(stored);
-    setRecent(loadRecentCalculators());
-    setHydrated(true);
-  }, []);
+  const [visitedKeys, setVisitedKeys] = useState<Set<string>>(new Set());
+  const [newNodeIds, setNewNodeIds] = useState<Set<FlowNodeId>>(new Set());
+  const prevNodeIdsRef = useRef<FlowNodeId[]>(
+    getNodeIds(getProfileConfig(DEFAULT_ENERGY_PROFILE).nodes)
+  );
 
   const profileConfig = getProfileConfig(profile);
 
+  const unvisitedNodeIds = useMemo(() => {
+    const unvisited = new Set<FlowNodeId>();
+    for (const node of profileConfig.nodes) {
+      const key = nodeVisitKey(profile, node.id);
+      if (!visitedKeys.has(key)) unvisited.add(node.id);
+    }
+    return unvisited;
+  }, [profile, profileConfig.nodes, visitedKeys]);
+
+  useEffect(() => {
+    const stored = loadEnergyProfile();
+    if (stored) {
+      setProfile(stored);
+      prevNodeIdsRef.current = getNodeIds(getProfileConfig(stored).nodes);
+    }
+    setRecent(loadRecentCalculators());
+    setVisitedKeys(loadVisitedNodeKeys());
+    setHydrated(true);
+  }, []);
+
   const handleProfileChange = useCallback((next: EnergySystemProfile) => {
+    const nextConfig = getProfileConfig(next);
+    const nextIds = getNodeIds(nextConfig.nodes);
+    const added = getAddedNodeIds(prevNodeIdsRef.current, nextIds);
+    prevNodeIdsRef.current = nextIds;
+    setNewNodeIds(new Set(added));
     setProfile(next);
     saveEnergyProfile(next);
+  }, []);
+
+  useEffect(() => {
+    if (newNodeIds.size === 0) return;
+    const t = window.setTimeout(() => setNewNodeIds(new Set()), 8000);
+    return () => window.clearTimeout(t);
+  }, [newNodeIds, profile]);
+
+  const refreshRecent = useCallback(() => {
+    setRecent(loadRecentCalculators());
   }, []);
 
   const openCalculator = useCallback((id: CalculatorId) => {
     setModalCalc(id);
   }, []);
 
+  const openFromNode = useCallback(
+    (id: CalculatorId, nodeId: FlowNodeId) => {
+      markNodeVisited(profile, nodeId);
+      setVisitedKeys(loadVisitedNodeKeys());
+      setNewNodeIds((prev) => {
+        const next = new Set(prev);
+        next.delete(nodeId);
+        return next;
+      });
+      setModalCalc(id);
+    },
+    [profile]
+  );
+
   const closeModal = useCallback(() => {
     setModalCalc(null);
-    setRecent(loadRecentCalculators());
-  }, []);
+    refreshRecent();
+  }, [refreshRecent]);
 
   return (
     <div className="command-center dark text-foreground">
@@ -70,7 +122,8 @@ export function CommandCenter() {
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
           {hydrated ? profileConfig.description : "Loading your energy profile…"}{" "}
-          Tap any node to launch its calculator without leaving the dashboard.
+          Pick a scenario—nodes and flows update live. Pulsing nodes are new or not
+          yet opened.
         </p>
         {hydrated ? (
           <EnergyProfilePicker value={profile} onChange={handleProfileChange} />
@@ -79,7 +132,11 @@ export function CommandCenter() {
         )}
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_minmax(220px,280px)] lg:gap-8">
+      <div
+        className="grid gap-6 lg:grid-cols-[1fr_minmax(200px,240px)] lg:gap-8"
+        aria-live="polite"
+        aria-atomic="false"
+      >
         <section
           className={cn(
             glassDashboard("primary"),
@@ -92,17 +149,33 @@ export function CommandCenter() {
             aria-hidden
           />
           <div className="glass-neon__inner relative">
-            <EnergyFlowDiagram
-              profile={profileConfig}
-              onOpenCalculator={openCalculator}
-            />
+            {hydrated ? (
+              <EnergyFlowDiagram
+                profile={profileConfig}
+                scenarioKey={profile}
+                onOpenCalculator={openFromNode}
+                newNodeIds={newNodeIds}
+                unvisitedNodeIds={unvisitedNodeIds}
+              />
+            ) : (
+              <div
+                className="flex aspect-[4/3] min-h-[280px] items-center justify-center text-sm text-slate-500"
+                aria-hidden
+              >
+                Loading scenario…
+              </div>
+            )}
           </div>
         </section>
 
         <DashboardWidgets recent={recent} onOpenCalculator={openCalculator} />
       </div>
 
-      <CalculatorModal calculatorId={modalCalc} onClose={closeModal} />
+      <CalculatorModal
+        calculatorId={modalCalc}
+        onClose={closeModal}
+        onOpenCalculator={openCalculator}
+      />
     </div>
   );
 }

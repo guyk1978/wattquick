@@ -1,26 +1,52 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
-import { recordCalculatorUse } from "@/lib/dashboard-storage";
+import { getNextCalculatorStep } from "@/lib/dashboard-chaining";
+import { getDefaultResultSnapshot } from "@/lib/dashboard-snapshot";
+import {
+  recordCalculatorUse,
+  updateRecentSnapshot,
+} from "@/lib/dashboard-storage";
 import { cn } from "@/lib/utils";
 
 interface CalculatorModalProps {
   calculatorId: CalculatorId | null;
   onClose: () => void;
+  onOpenCalculator: (id: CalculatorId) => void;
 }
 
-export function CalculatorModal({ calculatorId, onClose }: CalculatorModalProps) {
+export function CalculatorModal({
+  calculatorId,
+  onClose,
+  onOpenCalculator,
+}: CalculatorModalProps) {
   const meta = calculatorId ? getCalculatorMeta(calculatorId) : null;
+  const nextStep = calculatorId ? getNextCalculatorStep(calculatorId) : null;
+  const snapshotRef = useRef<string | null>(null);
+  const [liveSnapshot, setLiveSnapshot] = useState<string | null>(null);
 
   useEffect(() => {
     if (!calculatorId) return;
-    recordCalculatorUse(calculatorId);
+    const fallback = getDefaultResultSnapshot(calculatorId);
+    snapshotRef.current = fallback;
+    setLiveSnapshot(fallback);
+    recordCalculatorUse(calculatorId, fallback);
   }, [calculatorId]);
+
+  const handleSnapshot = useCallback(
+    (snapshot: string | null) => {
+      if (!calculatorId || !snapshot) return;
+      snapshotRef.current = snapshot;
+      setLiveSnapshot(snapshot);
+      updateRecentSnapshot(calculatorId, snapshot);
+    },
+    [calculatorId]
+  );
 
   useEffect(() => {
     if (!calculatorId) return;
@@ -33,6 +59,9 @@ export function CalculatorModal({ calculatorId, onClose }: CalculatorModalProps)
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
+      if (calculatorId && snapshotRef.current) {
+        recordCalculatorUse(calculatorId, snapshotRef.current);
+      }
     };
   }, [calculatorId, onClose]);
 
@@ -42,6 +71,11 @@ export function CalculatorModal({ calculatorId, onClose }: CalculatorModalProps)
     },
     [onClose]
   );
+
+  const handleNextStep = useCallback(() => {
+    if (!nextStep) return;
+    onOpenCalculator(nextStep.nextId);
+  }, [nextStep, onOpenCalculator]);
 
   return (
     <AnimatePresence>
@@ -85,6 +119,15 @@ export function CalculatorModal({ calculatorId, onClose }: CalculatorModalProps)
                 >
                   {meta.title}
                 </h2>
+                {liveSnapshot ? (
+                  <p
+                    className={cn(
+                      "neon-hero-number dashboard-modal-stat mt-1 text-cyan-300/90"
+                    )}
+                  >
+                    {liveSnapshot}
+                  </p>
+                ) : null}
               </div>
               <button
                 type="button"
@@ -96,8 +139,41 @@ export function CalculatorModal({ calculatorId, onClose }: CalculatorModalProps)
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
-              <CalculatorPanel id={calculatorId} />
+              <CalculatorPanel
+                id={calculatorId}
+                onResultSnapshot={handleSnapshot}
+              />
             </div>
+
+            {nextStep ? (
+              <div className="shrink-0 border-t border-white/10 bg-slate-900/50 px-4 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400/90">
+                  Next steps
+                </p>
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className={cn(
+                    "mt-2 flex w-full items-center justify-between gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-left",
+                    "transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
+                  )}
+                >
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-semibold text-white">
+                      {nextStep.title}
+                    </span>
+                    <span className="mt-0.5 block text-xs text-slate-400">
+                      {nextStep.reason}
+                    </span>
+                  </span>
+                  <ArrowRight
+                    className="size-4 shrink-0 text-emerald-400"
+                    aria-hidden
+                  />
+                </button>
+              </div>
+            ) : null}
           </motion.div>
         </motion.div>
       ) : null}

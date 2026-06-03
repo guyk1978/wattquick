@@ -56,9 +56,9 @@ const NODE = {
     calculatorId: calc,
     accent: "amber",
   }),
-  ev: (calc: CalculatorId): FlowNodeConfig => ({
+  ev: (calc: CalculatorId, label = "EV charging"): FlowNodeConfig => ({
     id: "ev",
-    label: "EV charging",
+    label,
     calculatorId: calc,
     accent: "violet",
   }),
@@ -109,7 +109,7 @@ export const ENERGY_PROFILES: EnergyProfileConfig[] = [
     description: "Charging cost, cable loss, and whole-home kWh planning.",
     nodes: [
       NODE.grid("electricity-rate-plan"),
-      NODE.ev("ev-charging-cost"),
+      NODE.ev("ev-charging-cost", "EV charger"),
       NODE.load("energy-consumption"),
       NODE.solar("solar-daily-yield"),
     ],

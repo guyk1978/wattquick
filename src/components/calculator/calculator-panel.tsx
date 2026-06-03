@@ -3,7 +3,7 @@
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -50,10 +50,16 @@ import { cn } from "@/lib/utils";
 interface CalculatorPanelProps {
   id: CalculatorId;
   className?: string;
+  /** Command Center: persist live result text for recent widgets */
+  onResultSnapshot?: (snapshot: string | null) => void;
 }
 
 /** Interactive calculator body: inputs + live result. */
-export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
+export function CalculatorPanel({
+  id,
+  className,
+  onResultSnapshot,
+}: CalculatorPanelProps) {
   if (id === "microgrid-roi") {
     return <MicrogridRoiCalculator className={className} />;
   }
@@ -149,6 +155,14 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
     () => definition.compute(values),
     [definition, values]
   );
+
+  useEffect(() => {
+    if (!onResultSnapshot) return;
+    const snapshot = result.value
+      ? `${result.value}${result.unit ? ` ${result.unit}` : ""}`.trim()
+      : null;
+    onResultSnapshot(snapshot);
+  }, [onResultSnapshot, result.unit, result.value]);
 
   const fieldLabels = useMemo(
     () => Object.fromEntries(definition.fields.map((f) => [f.id, f.label])),
