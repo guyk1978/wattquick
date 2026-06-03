@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T13:39:55.795Z",
+  "generatedAt": "2026-06-03T14:03:28.115Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1072,6 +1072,23 @@
         "irrigation solar panel size",
         "solar well pump kwp",
         "mppt water pump"
+      ]
+    },
+    {
+      "id": "dc-cable-voltage-drop",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "DC Cable Size & Voltage Drop Calculator",
+      "description": "Size copper DC homeruns from panels to charge controller—minimum mm² / AWG for amp load, length in meters, and max voltage drop.",
+      "href": "/dc-cable-voltage-drop/",
+      "tag": "Solar",
+      "keywords": [
+        "dc cable size calculator",
+        "solar voltage drop calculator",
+        "pv wire sizing mm2",
+        "dc voltage drop percent",
+        "solar array cable gauge"
       ]
     },
     {

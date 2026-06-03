@@ -60,6 +60,114 @@ export function recommendDcAwg(amps: number): string {
   return "2/0+";
 }
 
+/** Copper resistivity at ~20 °C (Ω·mm²/m) — IEC conductor planning. */
+export const DC_COPPER_RESISTIVITY_OHM_MM2_M = 0.0175;
+
+/** Standard metric DC solar / battery copper sizes with conservative ampacity. */
+export const DC_SOLAR_COPPER_CABLES = [
+  { mm2: 1.5, awg: "16", maxAmps: 10, label: "1.5 mm² (≈16 AWG)" },
+  { mm2: 2.5, awg: "14", maxAmps: 16, label: "2.5 mm² (≈14 AWG)" },
+  { mm2: 4, awg: "12", maxAmps: 24, label: "4 mm² (≈12 AWG)" },
+  { mm2: 6, awg: "10", maxAmps: 32, label: "6 mm² (≈10 AWG)" },
+  { mm2: 10, awg: "8", maxAmps: 45, label: "10 mm² (≈8 AWG)" },
+  { mm2: 16, awg: "6", maxAmps: 60, label: "16 mm² (≈6 AWG)" },
+  { mm2: 25, awg: "4", maxAmps: 80, label: "25 mm² (≈4 AWG)" },
+  { mm2: 35, awg: "2", maxAmps: 100, label: "35 mm² (≈2 AWG)" },
+  { mm2: 50, awg: "1/0", maxAmps: 125, label: "50 mm² (≈1/0 AWG)" },
+] as const;
+
+export type DcSolarCableSize = (typeof DC_SOLAR_COPPER_CABLES)[number];
+
+export interface DcCableVoltageDropInput {
+  loadAmps: number;
+  systemVoltageV: number;
+  oneWayLengthM: number;
+  maxDropPercent?: number;
+}
+
+export function dcRoundTripOhms(mm2: number, oneWayLengthM: number): number {
+  return (2 * DC_COPPER_RESISTIVITY_OHM_MM2_M * oneWayLengthM) / mm2;
+}
+
+export function minDcCableMm2ForDrop({
+  loadAmps,
+  systemVoltageV,
+  oneWayLengthM,
+  maxDropPercent,
+}: DcCableVoltageDropInput): number {
+  const maxDropV = systemVoltageV * (maxDropPercent ?? 3) / 100;
+  if (maxDropV <= 0) return Infinity;
+  return (2 * DC_COPPER_RESISTIVITY_OHM_MM2_M * oneWayLengthM * loadAmps) / maxDropV;
+}
+
+export function pickDcSolarCable(
+  loadAmps: number,
+  minMm2ForDrop: number
+): DcSolarCableSize {
+  const match = DC_SOLAR_COPPER_CABLES.find(
+    (c) => c.mm2 >= minMm2ForDrop && c.maxAmps >= loadAmps
+  );
+  if (match) return match;
+  const ampacityOnly = DC_SOLAR_COPPER_CABLES.find((c) => c.maxAmps >= loadAmps);
+  if (ampacityOnly) return ampacityOnly;
+  return DC_SOLAR_COPPER_CABLES[DC_SOLAR_COPPER_CABLES.length - 1];
+}
+
+export type DcVoltageDropCompliance = "within-limit" | "marginal" | "excessive";
+
+export function calculateDcCableVoltageDrop({
+  loadAmps,
+  systemVoltageV,
+  oneWayLengthM,
+  maxDropPercent = 3,
+}: DcCableVoltageDropInput) {
+  const minMm2ForDrop = minDcCableMm2ForDrop({
+    loadAmps,
+    systemVoltageV,
+    oneWayLengthM,
+    maxDropPercent,
+  });
+  const recommended = pickDcSolarCable(loadAmps, minMm2ForDrop);
+
+  const roundTripOhms = dcRoundTripOhms(recommended.mm2, oneWayLengthM);
+  const dropVolts = loadAmps * roundTripOhms;
+  const dropPercent = (dropVolts / systemVoltageV) * 100;
+  const powerLossWatts = loadAmps * loadAmps * roundTripOhms;
+  const voltageAtLoad = systemVoltageV - dropVolts;
+
+  let compliance: DcVoltageDropCompliance;
+  let recommendation: string;
+  if (dropPercent <= maxDropPercent) {
+    compliance = "within-limit";
+    recommendation = `Within your ${formatNumber(maxDropPercent, { maxDecimals: 1 })}% DC drop target—good for MPPT and charge controllers.`;
+  } else if (dropPercent <= maxDropPercent + 2) {
+    compliance = "marginal";
+    recommendation = `Slightly above ${formatNumber(maxDropPercent, { maxDecimals: 1 })}%—consider the next larger mm² size for hot runs.`;
+  } else {
+    compliance = "excessive";
+    recommendation = "Drop exceeds target—upsizing cable, shortening the run, or raising system voltage reduces loss.";
+  }
+
+  return {
+    recommendedCableLabel: recommended.label,
+    recommendedMm2: recommended.mm2,
+    recommendedAwg: recommended.awg,
+    minMm2ForDrop: parseFloat(minMm2ForDrop.toFixed(2)),
+    dropVolts: parseFloat(dropVolts.toFixed(2)),
+    dropPercent: parseFloat(dropPercent.toFixed(2)),
+    powerLossWatts: parseFloat(powerLossWatts.toFixed(1)),
+    voltageAtLoad: parseFloat(Math.max(0, voltageAtLoad).toFixed(2)),
+    roundTripOhms: parseFloat(roundTripOhms.toFixed(4)),
+    maxDropPercent,
+    compliance,
+    recommendation,
+    loadAmps,
+    systemVoltageV,
+    oneWayLengthM,
+    lossPercentVisual: Math.min(100, Math.max(0, (dropPercent / maxDropPercent) * 100)),
+  };
+}
+
 /** Voltage drop % for copper DC (one-way length in feet). */
 export function dcVoltageDropPercent(
   amps: number,

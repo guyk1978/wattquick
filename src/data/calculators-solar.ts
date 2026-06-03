@@ -1,4 +1,5 @@
 import {
+  Cable,
   Compass,
   Droplets,
   Fuel,
@@ -24,6 +25,7 @@ import {
   calculateRoofSpace,
   type SeasonMode,
 } from "@/lib/calculators/solar";
+import { calculateDcCableVoltageDrop } from "@/lib/calculators/electrical";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
 /** Solar micro-calculators (batch 4) */
@@ -719,6 +721,114 @@ export const calculatorsSolar = [
         value: formatNumber(result.kWp, { maxDecimals: 2 }),
         unit: "kWp",
         detail: `${result.panelCount} × ${result.panelWatts} W panels · ${result.dailyKwh} kWh/day · ${result.mpptLabel}`,
+      };
+    },
+  },
+  {
+    slug: "dc-cable-voltage-drop",
+    href: "/dc-cable-voltage-drop",
+    title: "DC Cable Size & Voltage Drop Calculator",
+    description:
+      "Size copper DC homeruns from panels to charge controller—minimum mm² / AWG for amp load, length in meters, and max voltage drop.",
+    keywords: [
+      "dc cable size calculator",
+      "solar voltage drop calculator",
+      "pv wire sizing mm2",
+      "dc voltage drop percent",
+      "solar array cable gauge",
+    ],
+    icon: Cable,
+    tag: "Solar",
+    category: "solar",
+    suggestions: [
+      "solar-panel-size",
+      "solar-array-current",
+      "solar-charge-controller-size",
+      "dc-cable-size",
+    ],
+    fields: [
+      {
+        id: "loadAmps",
+        label: "System current",
+        unit: "A",
+        placeholder: "12",
+        defaultValue: "12",
+        hint: "Array or string Isc / operating amps to controller",
+      },
+      {
+        id: "systemVoltageV",
+        label: "System voltage",
+        unit: "V",
+        placeholder: "48",
+        defaultValue: "48",
+        hint: "Nominal DC bus (12, 24, 48 V common off-grid)",
+      },
+      {
+        id: "oneWayLengthM",
+        label: "One-way cable length",
+        unit: "m",
+        placeholder: "15",
+        defaultValue: "15",
+        hint: "Panels to charge controller / MPPT (one conductor path)",
+      },
+      {
+        id: "maxDropPercent",
+        label: "Max voltage drop allowed",
+        inputType: "range",
+        min: 1,
+        max: 5,
+        step: 0.5,
+        defaultValue: "3",
+        unit: "%",
+        colSpan: 2,
+        hint: "3% is typical for DC solar homeruns",
+      },
+    ],
+    result: {
+      label: "Recommended cable size",
+      emptyMessage: "Enter amps, voltage, length & max drop %",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "DC drop and solar yield",
+          body: "Voltage drop on the PV homerun reduces power available to the controller. This tool computes minimum copper cross-section for your max drop %, then reports actual drop and I²R watts on the recommended standard cable.",
+        },
+        {
+          heading: "Sizing assumptions",
+          body: "Copper at ~20 °C, round-trip path (out and return). Ampacity limits are conservative planning values—follow local code and manufacturer tables for final installs.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: One-way or round-trip length? A: Enter one-way meters; resistance uses both conductors. Q: mm² or AWG? A: We show both on standard sizes. Q: Full system design? A: Pair with Solar Panel Size for array wattage.",
+        },
+      ],
+    },
+    compute(values) {
+      const loadAmps = parsePositive(values.loadAmps ?? "");
+      const systemVoltageV = parsePositive(values.systemVoltageV ?? "");
+      const oneWayLengthM = parsePositive(values.oneWayLengthM ?? "");
+      const maxDropRaw = values.maxDropPercent?.trim() ?? "3";
+      const maxDropPercent = Number(maxDropRaw);
+      if (
+        loadAmps === null ||
+        systemVoltageV === null ||
+        oneWayLengthM === null ||
+        !Number.isFinite(maxDropPercent) ||
+        maxDropPercent <= 0
+      ) {
+        return { value: null };
+      }
+      const result = calculateDcCableVoltageDrop({
+        loadAmps,
+        systemVoltageV,
+        oneWayLengthM,
+        maxDropPercent,
+      });
+      return {
+        value: result.recommendedCableLabel,
+        unit: "",
+        detail: `${formatNumber(result.dropPercent, { maxDecimals: 2 })}% drop · ${formatNumber(result.powerLossWatts, { maxDecimals: 1 })} W loss`,
       };
     },
   },

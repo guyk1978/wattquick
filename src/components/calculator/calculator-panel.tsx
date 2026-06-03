@@ -36,6 +36,7 @@ import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverter
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
 import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/EvChargingTemperatureImpactCalculator";
 import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/EvBatteryDepletionValueLossCalculator";
+import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -74,6 +75,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "residential-voltage-drop") {
     return <ResidentialVoltageDropCalculator className={className} />;
+  }
+  if (id === "dc-cable-voltage-drop") {
+    return <DcCableVoltageDropCalculator className={className} />;
   }
   if (id === "bess-carbon-cost") {
     return <BessCarbonCostCalculator className={className} />;
