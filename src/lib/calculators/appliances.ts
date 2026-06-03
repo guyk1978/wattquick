@@ -23,6 +23,43 @@ export function calculateCryptoMiningPower({
   };
 }
 
+export type VampireDeviceType =
+  | "tv"
+  | "gaming_console"
+  | "phone_charger"
+  | "converter"
+  | "smart_kettle";
+
+export const VAMPIRE_DEVICE_PRESETS: Record<
+  VampireDeviceType,
+  { label: string; standbyWatts: number }
+> = {
+  tv: { label: "Television", standbyWatts: 5 },
+  gaming_console: { label: "Gaming console", standbyWatts: 8 },
+  phone_charger: { label: "Phone charger", standbyWatts: 1 },
+  converter: { label: "AC adapter / converter", standbyWatts: 2 },
+  smart_kettle: { label: "Smart kettle", standbyWatts: 2 },
+};
+
+export interface VampirePowerCostInput {
+  standbyWattsPerDevice: number;
+  deviceCount: number;
+  ratePerKwh: number;
+}
+
+/** Annual phantom / standby load cost for one device profile × quantity. */
+export function calculateVampirePowerCost({
+  standbyWattsPerDevice,
+  deviceCount,
+  ratePerKwh,
+}: VampirePowerCostInput) {
+  return calculateStandbyPowerWaste({
+    standbyWattsPerDevice,
+    deviceCount,
+    ratePerKwh,
+  });
+}
+
 export interface StandbyPowerInput {
   standbyWattsPerDevice: number;
   deviceCount: number;

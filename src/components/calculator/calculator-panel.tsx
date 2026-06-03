@@ -28,6 +28,7 @@ import { EvChargingCableLossCalculator } from "@/components/calculators/EvChargi
 import { BatteryCalendarAgingCalculator } from "@/components/calculators/BatteryCalendarAgingCalculator";
 import { SmallWindTurbineYieldCalculator } from "@/components/calculators/SmallWindTurbineYieldCalculator";
 import { AcInrushCurrentCalculator } from "@/components/calculators/AcInrushCurrentCalculator";
+import { VampirePowerCostCalculator } from "@/components/calculators/VampirePowerCostCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -84,6 +85,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "ac-inrush-current") {
     return <AcInrushCurrentCalculator className={className} />;
+  }
+  if (id === "vampire-power-cost") {
+    return <VampirePowerCostCalculator className={className} />;
   }
 
   const definition = getCalculatorDefinition(id);

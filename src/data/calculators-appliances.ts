@@ -1,4 +1,4 @@
-import { Bitcoin, Fuel, Home, Lamp, Moon, Thermometer } from "lucide-react";
+import { Bitcoin, Fuel, Home, Lamp, Moon, PlugZap, Thermometer } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -11,7 +11,9 @@ import {
   calculateHeatPumpVsResistance,
   calculateLightingCircuitLoad,
   calculateStandbyPowerWaste,
+  calculateVampirePowerCost,
   calculateWholeHouseEnergyBudget,
+  VAMPIRE_DEVICE_PRESETS,
 } from "@/lib/calculators/appliances";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
@@ -80,6 +82,101 @@ export const calculatorsAppliances = [
     },
   },
   {
+    slug: "vampire-power-cost",
+    href: "/vampire-power-cost",
+    title: "Vampire Power Cost Calculator",
+    description:
+      "Estimate yearly electricity cost for TVs, chargers, and other devices drawing power in standby.",
+    keywords: [
+      "vampire power calculator",
+      "phantom load cost",
+      "standby power annual cost",
+      "vampire energy calculator",
+    ],
+    icon: PlugZap,
+    tag: "Appliance",
+    category: "appliance",
+    suggestions: [
+      "standby-power-waste",
+      "energy-consumption",
+      "whole-house-energy-budget",
+      "electricity-bill",
+    ],
+    fields: [
+      {
+        id: "deviceType",
+        label: "Common device",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "tv",
+        options: Object.entries(VAMPIRE_DEVICE_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+      {
+        id: "standbyWattsPerDevice",
+        label: "Standby power draw",
+        unit: "W",
+        placeholder: "5",
+        defaultValue: "5",
+        hint: "Updates when you pick a device—override with a plug meter reading if you have one.",
+      },
+      {
+        id: "deviceCount",
+        label: "Number of devices",
+        unit: "#",
+        placeholder: "1",
+        defaultValue: "1",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+    ],
+    result: {
+      label: "Annual vampire power cost",
+      emptyMessage: "Enter standby watts, device count & rate",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Phantom load formula",
+          body: "Annual kWh = (standby watts × device count × 24 h × 365 days) ÷ 1,000. Annual cost = kWh × your $/kWh rate. Devices that look “off” often still draw 1–10 W.",
+        },
+        {
+          heading: "Typical standby draws",
+          body: "TVs and game consoles often land at 3–10 W; phone chargers and adapters at 0.5–3 W. Smart appliances vary—measure with a plug meter for your home.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Is vampire power worth fixing? A: One device may be pennies; a dozen adds up. Q: How do I stop it? A: Smart strips, unplugging idle chargers, and disabling quick-start on TVs cut standby without major lifestyle changes.",
+        },
+      ],
+    },
+    compute(values) {
+      const standbyWattsPerDevice = parsePositive(values.standbyWattsPerDevice ?? "");
+      const deviceCount = parsePositive(values.deviceCount ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      if (standbyWattsPerDevice === null || deviceCount === null || ratePerKwh === null) {
+        return { value: null };
+      }
+      const result = calculateVampirePowerCost({
+        standbyWattsPerDevice,
+        deviceCount,
+        ratePerKwh,
+      });
+      return {
+        value: formatCurrency(result.annualCost),
+        unit: "/yr",
+        detail: `${result.annualKwh} kWh/yr · ${formatCurrency(result.monthlyCost)}/mo · ${result.totalStandbyWatts} W total standby`,
+      };
+    },
+  },
+  {
     slug: "standby-power-waste",
     href: "/standby-power-waste",
     title: "Standby Power Waste Calculator",
@@ -93,7 +190,12 @@ export const calculatorsAppliances = [
     icon: Moon,
     tag: "Appliance",
     category: "appliance",
-    suggestions: ["energy-consumption", "electricity-bill", "fridge-energy-usage"],
+    suggestions: [
+      "vampire-power-cost",
+      "energy-consumption",
+      "electricity-bill",
+      "fridge-energy-usage",
+    ],
     fields: [
       {
         id: "standbyWattsPerDevice",
@@ -314,6 +416,7 @@ export const calculatorsAppliances = [
     tag: "Appliance",
     category: "appliance",
     suggestions: [
+      "vampire-power-cost",
       "electricity-bill",
       "energy-consumption",
       "appliance-monthly-energy",

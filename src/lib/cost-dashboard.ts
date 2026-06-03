@@ -85,8 +85,12 @@ function normalizeDailyUsd(
   if (combined.includes("/day") || combined.includes("daily")) {
     return amount;
   }
-  if (combined.includes("standby") || combined.includes("period")) {
-    return amount / 30;
+  if (
+    combined.includes("standby") ||
+    combined.includes("period") ||
+    combined.includes("vampire")
+  ) {
+    return amount / 365;
   }
   return amount / 30;
 }

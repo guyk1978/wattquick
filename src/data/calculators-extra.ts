@@ -220,7 +220,12 @@ export const calculatorsExtra = [
     icon: Plug,
     tag: "Appliance",
     category: "appliance",
-    suggestions: ["appliance-monthly-energy", "electricity-bill", "appliance-daily-cost"],
+    suggestions: [
+      "vampire-power-cost",
+      "appliance-monthly-energy",
+      "electricity-bill",
+      "appliance-daily-cost",
+    ],
     fields: [
       { id: "watts", label: "Power draw", unit: "W", placeholder: "1500" },
       { id: "hoursPerDay", label: "Hours per day", unit: "hrs", placeholder: "8" },
@@ -235,7 +240,7 @@ export const calculatorsExtra = [
         },
         {
           heading: "Plan your bill",
-          body: "Multiply kWh by your utility rate in the Electricity Bill Estimator, or use Appliance Daily Cost for single-day estimates.",
+          body: "Multiply kWh by your utility rate in the Electricity Bill Estimator, or use the Vampire Power Cost Calculator for 24/7 standby loads and Appliance Daily Cost for single-day estimates.",
         },
         {
           heading: "Frequently asked questions",

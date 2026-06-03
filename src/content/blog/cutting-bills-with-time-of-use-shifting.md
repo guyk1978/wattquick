@@ -24,6 +24,8 @@ Smart breakers, appliance delay buttons, and charger apps that respect off-peak 
 
 One shifted EV session might save three to eight dollars per fill depending on tier spreads. Add dryer and dishwasher overnight on the same super-off-peak block and savings climb without new hardware—provided your panel and noise rules allow it.
 
+Baseload that never shifts—TVs, consoles, and chargers on standby—still runs every hour. Estimate that drag with the [Vampire Power Cost Calculator](/vampire-power-cost/) before you optimize only the flexible loads.
+
 ### When shifting is not worth it
 
 Flat legacy rates, weak peak/off-peak spreads, or demand charges on commercial service change the playbook—kW peaks may dominate kWh timing.

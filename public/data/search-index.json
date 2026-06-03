@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-02T20:24:35.862Z",
+  "generatedAt": "2026-06-03T07:36:16.903Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1128,6 +1128,22 @@
         "crypto mining power calculator",
         "mining rig electricity cost",
         "gpu mining kwh"
+      ]
+    },
+    {
+      "id": "vampire-power-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Appliances",
+      "title": "Vampire Power Cost Calculator",
+      "description": "Estimate yearly electricity cost for TVs, chargers, and other devices drawing power in standby.",
+      "href": "/vampire-power-cost/",
+      "tag": "Appliance",
+      "keywords": [
+        "vampire power calculator",
+        "phantom load cost",
+        "standby power annual cost",
+        "vampire energy calculator"
       ]
     },
     {

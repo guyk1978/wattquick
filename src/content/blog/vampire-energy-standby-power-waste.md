@@ -12,7 +12,9 @@ Vampire, phantom, standby—labels for the same trickle: devices that draw power
 
 Televisions with instant-on, game consoles, cable boxes, microwave clocks, printer sleep modes, and USB chargers with nothing plugged in. One to ten watts each adds up across a dozen devices.
 
-<CalculatorEmbed slug="standby-power-waste" />
+<CalculatorEmbed slug="vampire-power-cost" />
+
+For whole-home totals across many devices, use the [Standby Power Waste Calculator](/standby-power-waste/).
 
 ## Measure, do not guess
 

@@ -60,7 +60,12 @@ export const calculatorsGreenHome = [
     icon: Lamp,
     tag: "Lighting",
     category: "green-home",
-    suggestions: ["electricity-bill", "energy-consumption", "standby-power-waste"],
+    suggestions: [
+      "electricity-bill",
+      "energy-consumption",
+      "vampire-power-cost",
+      "standby-power-waste",
+    ],
     fields: [
       { id: "bulbCount", label: "Bulbs", unit: "#", placeholder: "20" },
       { id: "incandW", label: "Incandescent W", unit: "W", placeholder: "60" },

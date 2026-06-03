@@ -26,6 +26,8 @@ Utilities bill monthly; solar and batteries think daily and seasonal. Convert: m
 
 Once kitchen and water heater dominate, you know where heat-pump upgrades or timer switches pay. Once EV charging dominates, you know where off-peak rates matter.
 
+Plug loads and phantom standby belong in the budget too—quantify them with the [Vampire Power Cost Calculator](/vampire-power-cost/).
+
 <CalculatorEmbed slug="appliance-daily-cost" />
 
 A watt-hour budget is a map, not a lecture. Build it once a year, embed calculators where math helps, and your home stops being a black box that only surprises you when the bill arrives.
