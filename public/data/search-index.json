@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T08:42:06.218Z",
+  "generatedAt": "2026-06-03T09:27:55.545Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1515,6 +1515,23 @@
       ]
     },
     {
+      "id": "home-insulation-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "Home Insulation Savings Calculator",
+      "description": "Estimate annual heating and cooling savings from upgrading wall insulation and windows—before/after energy use and efficiency score.",
+      "href": "/home-insulation-savings/",
+      "tag": "Envelope",
+      "keywords": [
+        "home insulation savings calculator",
+        "insulation energy savings",
+        "u value calculator",
+        "hvac savings insulation",
+        "window upgrade savings"
+      ]
+    },
+    {
       "id": "led-savings-roi",
       "type": "calculator",
       "category": "Calculators",
@@ -2614,6 +2631,21 @@
       "tag": "Solar",
       "keywords": [
         "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "thermal-insulation-home-energy-bills",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "The impact of thermal insulation on home energy bills",
+      "description": "How U-value, air sealing, and glazing upgrades translate envelope improvements into lower annual heating and cooling spend.",
+      "href": "/blog/thermal-insulation-home-energy-bills/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
         "blog",
         "article"
       ]

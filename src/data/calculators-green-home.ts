@@ -3,11 +3,15 @@ import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import {
   calculateBessCarbonCost,
   calculateHeatLoss,
+  calculateHomeInsulationSavings,
   calculateLedRoi,
   calculateLedSavingsRoi,
   calculateMicrogridRoi,
   GRID_CO2_REGION_PRESETS,
+  INSULATION_CLIMATE_PRESETS,
+  INSULATION_LEVEL_PRESETS,
   LEGACY_BULB_PRESETS,
+  WINDOW_GLAZING_PRESETS,
   calculateSmallWindTurbineYield,
   calculateSolarWaterHeaterEfficiency,
   calculateThermostatSavings,
@@ -51,6 +55,129 @@ export const calculatorsGreenHome = [
         value: formatNumber(res.kw, { maxDecimals: 2 }),
         unit: "kW",
         detail: `${res.btuPerHour} BTU/hr · ${res.watts} W steady loss`,
+      };
+    },
+  },
+  {
+    slug: "home-insulation-savings",
+    href: "/home-insulation-savings",
+    title: "Home Insulation Savings Calculator",
+    description:
+      "Estimate annual heating and cooling savings from upgrading wall insulation and windows—before/after energy use and efficiency score.",
+    keywords: [
+      "home insulation savings calculator",
+      "insulation energy savings",
+      "u value calculator",
+      "hvac savings insulation",
+      "window upgrade savings",
+    ],
+    icon: Home,
+    tag: "Envelope",
+    category: "green-home",
+    suggestions: [
+      "heat-loss-insulation",
+      "smart-thermostat-savings",
+      "heater-cost",
+      "heat-pump-vs-resistance",
+    ],
+    fields: [
+      {
+        id: "floorAreaM2",
+        label: "Conditioned floor area",
+        unit: "m²",
+        placeholder: "120",
+        defaultValue: "120",
+        hint: "Heated/cooled living space",
+      },
+      {
+        id: "insulationLevel",
+        label: "Current wall insulation",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "standard",
+        options: Object.entries(INSULATION_LEVEL_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+      {
+        id: "windowType",
+        label: "Window glazing",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "double",
+        options: Object.entries(WINDOW_GLAZING_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+      {
+        id: "climateZone",
+        label: "Climate zone",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "moderate",
+        options: Object.entries(INSULATION_CLIMATE_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+        hint: "Auto-detected from your location when available",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+    ],
+    result: {
+      label: "Annual HVAC savings",
+      emptyMessage: "Enter floor area, envelope details & rate",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "What we model",
+          body: "Composite U-value from wall insulation and window type drives estimated annual HVAC kWh for your climate. The upgrade scenario targets advanced insulation plus Low-E glazing—typical deep retrofit targets.",
+        },
+        {
+          heading: "U-value and savings",
+          body: "Lower U means less heat loss and gain. Moving from standard walls to high-performance insulation often cuts HVAC energy 20–30% when paired with better glazing. Results are planning estimates—air sealing and HVAC efficiency also matter.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Gas heat? A: Savings scale similarly in BTU terms—enter your blended $/kWh equivalent. Q: Only walls? A: Window type is included; attic work adds savings beyond this model. Q: Climate default? A: We suggest a zone from browser location when permitted.",
+        },
+      ],
+    },
+    compute(values) {
+      const floorAreaM2 = parsePositive(values.floorAreaM2 ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const insulationLevel = values.insulationLevel ?? "standard";
+      const windowType = values.windowType ?? "double";
+      const climateZone = values.climateZone ?? "moderate";
+      if (
+        floorAreaM2 === null ||
+        ratePerKwh === null ||
+        !(insulationLevel in INSULATION_LEVEL_PRESETS) ||
+        !(windowType in WINDOW_GLAZING_PRESETS) ||
+        !(climateZone in INSULATION_CLIMATE_PRESETS)
+      ) {
+        return { value: null };
+      }
+      const result = calculateHomeInsulationSavings({
+        floorAreaM2,
+        insulationLevel: insulationLevel as keyof typeof INSULATION_LEVEL_PRESETS,
+        windowType: windowType as keyof typeof WINDOW_GLAZING_PRESETS,
+        climateZone: climateZone as keyof typeof INSULATION_CLIMATE_PRESETS,
+        ratePerKwh,
+      });
+      if (!result) return { value: null };
+      return {
+        value: formatCurrency(result.annualSavings),
+        unit: "/yr",
+        detail: `${formatNumber(result.savingsPercent, { maxDecimals: 1 })}% · score ${formatNumber(result.efficiencyScoreBefore, { maxDecimals: 1 })}→${formatNumber(result.efficiencyScoreAfter, { maxDecimals: 1 })}/10`,
       };
     },
   },

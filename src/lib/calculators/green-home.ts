@@ -565,3 +565,198 @@ export function calculateSmallWindTurbineYield({
     powerClassLabel,
   };
 }
+
+export type InsulationLevel = "bare_block" | "standard" | "advanced";
+
+export type WindowGlazing = "single" | "double" | "low_e";
+
+export type InsulationClimateZone = "hot" | "moderate" | "cold";
+
+export const INSULATION_LEVEL_PRESETS: Record<
+  InsulationLevel,
+  { label: string; wallU: number; rValueMetric: number }
+> = {
+  bare_block: {
+    label: "Exposed block / minimal insulation",
+    wallU: 1.75,
+    rValueMetric: 0.57,
+  },
+  standard: {
+    label: "Standard insulation (typical code)",
+    wallU: 0.42,
+    rValueMetric: 2.4,
+  },
+  advanced: {
+    label: "Advanced insulation (high performance)",
+    wallU: 0.17,
+    rValueMetric: 5.9,
+  },
+};
+
+export const WINDOW_GLAZING_PRESETS: Record<
+  WindowGlazing,
+  { label: string; windowU: number }
+> = {
+  single: { label: "Single pane", windowU: 5.7 },
+  double: { label: "Double glazing", windowU: 2.7 },
+  low_e: { label: "Low-E double glazing", windowU: 1.3 },
+};
+
+export const INSULATION_CLIMATE_PRESETS: Record<
+  InsulationClimateZone,
+  { label: string; hvacKwhPerM2: number; designDeltaTK: number }
+> = {
+  hot: { label: "Hot climate (cooling-heavy)", hvacKwhPerM2: 92, designDeltaTK: 18 },
+  moderate: { label: "Temperate / mixed", hvacKwhPerM2: 72, designDeltaTK: 22 },
+  cold: { label: "Cold climate (heating-heavy)", hvacKwhPerM2: 105, designDeltaTK: 28 },
+};
+
+/** Glazing share of opaque+glazed envelope used for composite U-value. */
+const ENVELOPE_WINDOW_FRACTION = 0.18;
+
+const REFERENCE_WALL_U = INSULATION_LEVEL_PRESETS.standard.wallU;
+const REFERENCE_WINDOW_U = WINDOW_GLAZING_PRESETS.double.windowU;
+
+export function inferInsulationClimateFromLatitude(latitude: number): InsulationClimateZone {
+  const absLat = Math.abs(latitude);
+  if (absLat >= 42) return "cold";
+  if (absLat <= 28) return "hot";
+  return "moderate";
+}
+
+function compositeEnvelopeU(wallU: number, windowU: number): number {
+  return (
+    (1 - ENVELOPE_WINDOW_FRACTION) * wallU + ENVELOPE_WINDOW_FRACTION * windowU
+  );
+}
+
+function envelopeLossMultiplier(wallU: number, windowU: number): number {
+  const reference = compositeEnvelopeU(REFERENCE_WALL_U, REFERENCE_WINDOW_U);
+  return compositeEnvelopeU(wallU, windowU) / reference;
+}
+
+/** Map U-value (W/m²·K) to a 1–10 efficiency score — lower U is better. */
+function uValueToScore(u: number, bestU: number, worstU: number): number {
+  const clamped = Math.min(worstU, Math.max(bestU, u));
+  const raw = (10 * (worstU - clamped)) / (worstU - bestU);
+  return parseFloat(Math.min(10, Math.max(1, raw)).toFixed(1));
+}
+
+export function insulationEfficiencyScore(wallU: number, windowU: number): number {
+  const wallScore = uValueToScore(wallU, 0.15, 2.0);
+  const windowScore = uValueToScore(windowU, 1.0, 6.0);
+  return parseFloat((0.65 * wallScore + 0.35 * windowScore).toFixed(1));
+}
+
+/** Approximate above-grade envelope area (m²) from conditioned floor area. */
+function estimateEnvelopeAreaM2(floorAreaM2: number): number {
+  return 3.2 * Math.sqrt(Math.max(1, floorAreaM2));
+}
+
+export interface HomeInsulationSavingsInput {
+  floorAreaM2: number;
+  insulationLevel: InsulationLevel;
+  windowType: WindowGlazing;
+  climateZone: InsulationClimateZone;
+  ratePerKwh: number;
+}
+
+export interface HomeInsulationSavingsResult {
+  floorAreaM2: number;
+  compositeUBefore: number;
+  compositeUAfter: number;
+  heatLossKwBefore: number;
+  heatLossKwAfter: number;
+  annualKwhBefore: number;
+  annualKwhAfter: number;
+  annualCostBefore: number;
+  annualCostAfter: number;
+  annualSavings: number;
+  savingsPercent: number;
+  efficiencyScoreBefore: number;
+  efficiencyScoreAfter: number;
+  beforeBarPercent: number;
+  afterBarPercent: number;
+  upgradeInsulationLabel: string;
+  upgradeWindowLabel: string;
+}
+
+/**
+ * Estimates HVAC kWh and cost before vs. after a high-performance envelope upgrade
+ * (advanced insulation + Low-E glazing). Uses composite U-value and climate intensity.
+ */
+export function calculateHomeInsulationSavings({
+  floorAreaM2,
+  insulationLevel,
+  windowType,
+  climateZone,
+  ratePerKwh,
+}: HomeInsulationSavingsInput): HomeInsulationSavingsResult | null {
+  if (floorAreaM2 <= 0 || ratePerKwh <= 0) return null;
+
+  const wallU = INSULATION_LEVEL_PRESETS[insulationLevel].wallU;
+  const windowU = WINDOW_GLAZING_PRESETS[windowType].windowU;
+  const climate = INSULATION_CLIMATE_PRESETS[climateZone];
+
+  const afterWallU = INSULATION_LEVEL_PRESETS.advanced.wallU;
+  const afterWindowU = WINDOW_GLAZING_PRESETS.low_e.windowU;
+
+  const multiplierBefore = envelopeLossMultiplier(wallU, windowU);
+  const multiplierAfter = envelopeLossMultiplier(afterWallU, afterWindowU);
+
+  const annualKwhBefore = parseFloat(
+    (floorAreaM2 * climate.hvacKwhPerM2 * multiplierBefore).toFixed(0)
+  );
+  const annualKwhAfter = parseFloat(
+    (floorAreaM2 * climate.hvacKwhPerM2 * multiplierAfter).toFixed(0)
+  );
+
+  const annualSavings = parseFloat(
+    Math.max(0, annualKwhBefore - annualKwhAfter).toFixed(2)
+  );
+  const savingsPercent =
+    annualKwhBefore > 0
+      ? parseFloat(((annualSavings / annualKwhBefore) * 100).toFixed(1))
+      : 0;
+
+  const envelopeAreaM2 = estimateEnvelopeAreaM2(floorAreaM2);
+  const compositeUBefore = parseFloat(compositeEnvelopeU(wallU, windowU).toFixed(2));
+  const compositeUAfter = parseFloat(compositeEnvelopeU(afterWallU, afterWindowU).toFixed(2));
+
+  const heatLossKwBefore = parseFloat(
+    ((compositeUBefore * envelopeAreaM2 * climate.designDeltaTK) / 1000).toFixed(2)
+  );
+  const heatLossKwAfter = parseFloat(
+    ((compositeUAfter * envelopeAreaM2 * climate.designDeltaTK) / 1000).toFixed(2)
+  );
+
+  const annualCostBefore = parseFloat((annualKwhBefore * ratePerKwh).toFixed(2));
+  const annualCostAfter = parseFloat((annualKwhAfter * ratePerKwh).toFixed(2));
+
+  const efficiencyScoreBefore = insulationEfficiencyScore(wallU, windowU);
+  const efficiencyScoreAfter = insulationEfficiencyScore(afterWallU, afterWindowU);
+
+  const maxKwh = Math.max(annualKwhBefore, annualKwhAfter, 1);
+  const beforeBarPercent = Math.min(100, Math.max(8, (annualKwhBefore / maxKwh) * 100));
+  const afterBarPercent = Math.min(100, Math.max(8, (annualKwhAfter / maxKwh) * 100));
+
+  return {
+    floorAreaM2,
+    compositeUBefore,
+    compositeUAfter,
+    heatLossKwBefore,
+    heatLossKwAfter,
+    annualKwhBefore,
+    annualKwhAfter,
+    annualCostBefore,
+    annualCostAfter,
+    annualSavings: parseFloat((annualCostBefore - annualCostAfter).toFixed(2)),
+    savingsPercent,
+    efficiencyScoreBefore,
+    efficiencyScoreAfter,
+    beforeBarPercent,
+    afterBarPercent,
+    upgradeInsulationLabel: INSULATION_LEVEL_PRESETS.advanced.label,
+    upgradeWindowLabel: WINDOW_GLAZING_PRESETS.low_e.label,
+  };
+}
