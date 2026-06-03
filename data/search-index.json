@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T14:18:05.690Z",
+  "generatedAt": "2026-06-03T14:27:49.298Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1151,6 +1151,23 @@
         "inverter loss calculator",
         "inverter efficiency watts",
         "dc to ac loss"
+      ]
+    },
+    {
+      "id": "inverter-peak-load-surge",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Inverter Peak Load & Surge Calculator",
+      "description": "Sum motor running watts and staggered surge demand—get continuous load, peak W, and a recommended pure-sine inverter tier.",
+      "href": "/inverter-peak-load-surge/",
+      "tag": "Battery",
+      "keywords": [
+        "inverter surge calculator",
+        "motor starting watts inverter",
+        "peak load inverter sizing",
+        "inrush inverter backup",
+        "refrigerator ac pump surge"
       ]
     },
     {

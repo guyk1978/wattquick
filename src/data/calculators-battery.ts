@@ -1,4 +1,4 @@
-import { Cable, Calendar, Cpu, Home, Layers, Gauge } from "lucide-react";
+import { Cable, Calendar, Cpu, Gauge, Home, Layers, Zap } from "lucide-react";
 import {
   formatNumber,
   parseNonNegative,
@@ -12,7 +12,46 @@ import {
   calculateInverterLoss,
   calculateSeriesParallel,
 } from "@/lib/calculators/battery";
+import {
+  calculateInverterPeakLoadSurge,
+  INVERTER_MOTOR_LOAD_PRESETS,
+  type InverterMotorLoad,
+  type InverterMotorLoadPreset,
+} from "@/lib/calculators/electrical";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
+
+const INVERTER_LOAD_PRESET_OPTIONS = Object.entries(INVERTER_MOTOR_LOAD_PRESETS).map(
+  ([value, preset]) => ({
+    value,
+    label: preset.label,
+  })
+);
+
+function parseInverterLoadsFromValues(
+  values: Record<string, string | undefined>
+): InverterMotorLoad[] | null {
+  const loads: InverterMotorLoad[] = [];
+  for (const slot of [1, 2, 3, 4] as const) {
+    const preset = values[`appliance${slot}Preset`] as
+      | InverterMotorLoadPreset
+      | undefined;
+    if (!preset || preset === "none" || !(preset in INVERTER_MOTOR_LOAD_PRESETS)) {
+      continue;
+    }
+    const runningWatts = parsePositive(values[`appliance${slot}RunningW`] ?? "");
+    const surgeFactor = parsePositive(values[`appliance${slot}Surge`] ?? "");
+    if (
+      runningWatts === null ||
+      surgeFactor === null ||
+      surgeFactor < 1 ||
+      surgeFactor > 12
+    ) {
+      return null;
+    }
+    loads.push({ preset, runningWatts, surgeFactor });
+  }
+  return loads.length > 0 ? loads : null;
+}
 
 /** Battery micro-calculators (batch 5) */
 export const calculatorsBattery = [
@@ -195,6 +234,144 @@ export const calculatorsBattery = [
     },
   },
   {
+    slug: "inverter-peak-load-surge",
+    href: "/inverter-peak-load-surge",
+    title: "Inverter Peak Load & Surge Calculator",
+    description:
+      "Sum motor running watts and staggered surge demand—get continuous load, peak W, and a recommended pure-sine inverter tier.",
+    keywords: [
+      "inverter surge calculator",
+      "motor starting watts inverter",
+      "peak load inverter sizing",
+      "inrush inverter backup",
+      "refrigerator ac pump surge",
+    ],
+    icon: Zap,
+    tag: "Battery",
+    category: "battery",
+    suggestions: [
+      "home-backup-sizing",
+      "inverter-sizing",
+      "inverter-loss-calculator",
+      "ac-inrush-current",
+    ],
+    fields: [
+      {
+        id: "appliance1Preset",
+        label: "Load 1 — appliance",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "refrigerator",
+        options: INVERTER_LOAD_PRESET_OPTIONS,
+      },
+      {
+        id: "appliance1RunningW",
+        label: "Load 1 — running watts",
+        unit: "W",
+        defaultValue: "150",
+      },
+      {
+        id: "appliance1Surge",
+        label: "Load 1 — surge factor",
+        unit: "×",
+        defaultValue: "3",
+        hint: "Typical motors 3×–7× running",
+      },
+      {
+        id: "appliance2Preset",
+        label: "Load 2 — appliance",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "air_conditioner",
+        options: INVERTER_LOAD_PRESET_OPTIONS,
+      },
+      {
+        id: "appliance2RunningW",
+        label: "Load 2 — running watts",
+        unit: "W",
+        defaultValue: "1200",
+      },
+      {
+        id: "appliance2Surge",
+        label: "Load 2 — surge factor",
+        unit: "×",
+        defaultValue: "5",
+      },
+      {
+        id: "appliance3Preset",
+        label: "Load 3 — appliance",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "water_pump",
+        options: INVERTER_LOAD_PRESET_OPTIONS,
+      },
+      {
+        id: "appliance3RunningW",
+        label: "Load 3 — running watts",
+        unit: "W",
+        defaultValue: "750",
+      },
+      {
+        id: "appliance3Surge",
+        label: "Load 3 — surge factor",
+        unit: "×",
+        defaultValue: "4",
+      },
+      {
+        id: "appliance4Preset",
+        label: "Load 4 — appliance (optional)",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "none",
+        options: INVERTER_LOAD_PRESET_OPTIONS,
+      },
+      {
+        id: "appliance4RunningW",
+        label: "Load 4 — running watts",
+        unit: "W",
+        placeholder: "0",
+        defaultValue: "0",
+      },
+      {
+        id: "appliance4Surge",
+        label: "Load 4 — surge factor",
+        unit: "×",
+        defaultValue: "3",
+      },
+    ],
+    result: {
+      label: "Recommended inverter",
+      emptyMessage: "Select at least one load with running watts",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Continuous vs. peak",
+          body: "Continuous watts are the sum of running loads. Peak watts add the largest motor surge margin (running × (factor − 1)) plus 35% of the second-largest—modeling staggered starts instead of every motor at once.",
+        },
+        {
+          heading: "Picking an inverter",
+          body: "We snap to standard pure-sine tiers with ~2× surge rating and 15% continuous headroom. Verify manufacturer surge seconds and LRA on motor nameplates.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: All motors start together? A: Use naive sum (set one load with combined watts) or add a higher surge factor. Q: vs. AC inrush tool? A: That sizes breakers in amps; this sizes inverters in watts. Q: Battery bank? A: Pair with Home Backup Sizing after you know AC load.",
+        },
+      ],
+    },
+    compute(values) {
+      const loads = parseInverterLoadsFromValues(values);
+      if (!loads) return { value: null };
+      const result = calculateInverterPeakLoadSurge({ loads });
+      if (!result) return { value: null };
+      return {
+        value: formatNumber(result.recommendedContinuousW, { maxDecimals: 0 }),
+        unit: "W",
+        detail: `${formatNumber(result.continuousW, { maxDecimals: 0 })} W cont · ${formatNumber(result.peakW, { maxDecimals: 0 })} W peak · ${result.recommendedSurgeW} W surge class`,
+      };
+    },
+  },
+  {
     slug: "home-backup-sizing",
     href: "/home-backup-sizing",
     title: "Home Backup Battery Sizing Calculator",
@@ -209,6 +386,7 @@ export const calculatorsBattery = [
     tag: "Battery",
     category: "battery",
     suggestions: [
+      "inverter-peak-load-surge",
       "generator-runtime-savings",
       "battery-bank-size",
       "ups-runtime",

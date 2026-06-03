@@ -381,3 +381,109 @@ export function calculateAcInrushCurrent({
     recommendation,
   };
 }
+
+export const INVERTER_MOTOR_LOAD_PRESETS = {
+  none: { label: "— Not used —", defaultRunningW: 0, defaultSurge: 1 },
+  refrigerator: { label: "Refrigerator / freezer", defaultRunningW: 150, defaultSurge: 3 },
+  air_conditioner: { label: "Air conditioner", defaultRunningW: 1200, defaultSurge: 5 },
+  water_pump: { label: "Water pump", defaultRunningW: 750, defaultSurge: 4 },
+  well_pump: { label: "Well pump", defaultRunningW: 1500, defaultSurge: 5 },
+  power_tools: { label: "Power tools / workshop", defaultRunningW: 900, defaultSurge: 4 },
+  custom: { label: "Custom motor load", defaultRunningW: 500, defaultSurge: 3 },
+} as const;
+
+export type InverterMotorLoadPreset = keyof typeof INVERTER_MOTOR_LOAD_PRESETS;
+
+export interface InverterMotorLoad {
+  preset: InverterMotorLoadPreset;
+  runningWatts: number;
+  surgeFactor: number;
+}
+
+export interface InverterPeakLoadSurgeInput {
+  loads: InverterMotorLoad[];
+}
+
+/** Common off-grid / backup pure-sine continuous ratings (W). */
+export const STANDARD_INVERTER_CONTINUOUS_WATTS = [
+  600, 1000, 1500, 2000, 3000, 4000, 5000, 6000, 8000, 10000, 12000,
+] as const;
+
+/** Typical surge capability as multiple of continuous rating (pure sine). */
+export const STANDARD_INVERTER_SURGE_MULTIPLIER = 2;
+
+const CONTINUOUS_HEADROOM = 1.15;
+const PEAK_HEADROOM = 1.05;
+
+function nextStandardInverter(continuousW: number, peakW: number) {
+  const needContinuous = continuousW * CONTINUOUS_HEADROOM;
+  const needPeak = peakW * PEAK_HEADROOM;
+
+  for (const cont of STANDARD_INVERTER_CONTINUOUS_WATTS) {
+    const surge = cont * STANDARD_INVERTER_SURGE_MULTIPLIER;
+    if (cont >= needContinuous && surge >= needPeak) {
+      return {
+        recommendedContinuousW: cont,
+        recommendedSurgeW: surge,
+        label: `${cont} W continuous / ${surge} W surge`,
+      };
+    }
+  }
+
+  const cont =
+    STANDARD_INVERTER_CONTINUOUS_WATTS[STANDARD_INVERTER_CONTINUOUS_WATTS.length - 1];
+  const surge = Math.ceil(needPeak / 100) * 100;
+  return {
+    recommendedContinuousW: cont,
+    recommendedSurgeW: surge,
+    label: `${cont}+ W — stack inverters or split loads`,
+  };
+}
+
+/**
+ * Off-grid inverter sizing: sum running watts; peak assumes one motor surges
+ * at a time (largest increment above running) plus 35% of the second-largest
+ * surge margin for staggered but overlapping starts.
+ */
+export function calculateInverterPeakLoadSurge({ loads }: InverterPeakLoadSurgeInput) {
+  const active = loads.filter(
+    (l) => l.preset !== "none" && l.runningWatts > 0 && l.surgeFactor >= 1
+  );
+
+  if (active.length === 0) {
+    return null;
+  }
+
+  const continuousW = active.reduce((sum, l) => sum + l.runningWatts, 0);
+  const surgeMargins = active
+    .map((l) => l.runningWatts * (l.surgeFactor - 1))
+    .sort((a, b) => b - a);
+
+  const largestMargin = surgeMargins[0] ?? 0;
+  const secondMargin = surgeMargins[1] ?? 0;
+  const peakW = Math.round(continuousW + largestMargin + secondMargin * 0.35);
+
+  const inverter = nextStandardInverter(continuousW, peakW);
+  const naivePeakW = active.reduce(
+    (sum, l) => sum + l.runningWatts * l.surgeFactor,
+    0
+  );
+
+  return {
+    continuousW: Math.round(continuousW),
+    peakW,
+    naivePeakW: Math.round(naivePeakW),
+    diversitySavingsW: Math.round(naivePeakW - peakW),
+    largestMotorSurgeW: Math.round(
+      Math.max(...active.map((l) => l.runningWatts * l.surgeFactor))
+    ),
+    activeLoadCount: active.length,
+    recommendedContinuousW: inverter.recommendedContinuousW,
+    recommendedSurgeW: inverter.recommendedSurgeW,
+    recommendedInverterLabel: inverter.label,
+    recommendation:
+      peakW <= inverter.recommendedSurgeW
+        ? "Sized for one full motor start plus partial overlap—verify nameplate LRA when available."
+        : "Very high peak—confirm split-phase or load sequencing.",
+  };
+}

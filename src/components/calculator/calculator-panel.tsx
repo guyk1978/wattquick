@@ -38,6 +38,7 @@ import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMa
 import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/EvChargingTemperatureImpactCalculator";
 import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/EvBatteryDepletionValueLossCalculator";
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
+import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -79,6 +80,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "residential-voltage-drop") {
     return <ResidentialVoltageDropCalculator className={className} />;
+  }
+  if (id === "inverter-peak-load-surge") {
+    return <InverterPeakLoadSurgeCalculator className={className} />;
   }
   if (id === "dc-cable-voltage-drop") {
     return <DcCableVoltageDropCalculator className={className} />;
