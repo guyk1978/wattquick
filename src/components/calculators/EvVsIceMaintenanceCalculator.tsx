@@ -196,14 +196,24 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
                 Potential battery cost
               </p>
               <p className="mt-2 font-mono text-xl font-bold tabular-nums text-amber-900 dark:text-amber-100">
-                {parsed.batteryCostInPeriod > 0
-                  ? formatCurrency(parsed.batteryCostInPeriod)
-                  : "—"}
+                {formatCurrency(parsed.batteryReplacementCost)}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                {parsed.batteryDueWithinPeriod
-                  ? `Due at year ${parsed.batteryReplacementYear}`
-                  : `After ${parsed.batteryLifeYears} yr — outside window`}
+                {parsed.batteryDueWithinPeriod ? (
+                  <>
+                    <span className="font-medium text-amber-900 dark:text-amber-100">
+                      {formatCurrency(parsed.batteryCostInPeriod)} in your {years}-yr window
+                    </span>
+                    {parsed.batteryReplacementYear !== null
+                      ? ` · due year ${parsed.batteryReplacementYear}`
+                      : null}
+                  </>
+                ) : (
+                  <>
+                    Not subtracted in {years} yr — modeled at year {parsed.batteryLifeYears}. Shorten
+                    battery life below {years} to stress-test net savings.
+                  </>
+                )}
               </p>
             </div>
             <div

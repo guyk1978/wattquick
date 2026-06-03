@@ -97,7 +97,7 @@ export const calculatorsEv = [
         unit: "yrs",
         placeholder: "12",
         defaultValue: String(DEFAULT_BATTERY_LIFE_YEARS),
-        hint: "When a full pack replacement might be needed",
+        hint: "If shorter than comparison period, cost is included in net savings",
       },
       {
         id: "batteryReplacementCost",
