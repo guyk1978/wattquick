@@ -4,6 +4,7 @@ description: "Calculate what it costs to charge your EV at home using kWh and yo
 slug: "ev-home-charging-cost"
 category: "EV Charging"
 date: "2026-02-05"
+relatedToolId: "ev-charging-cost"
 ---
 
 Home charging cost is straightforward: multiply the energy delivered (kWh) by your electricity rate ($/kWh). A 60 kWh charge at $0.15/kWh costs about $9 before fees.

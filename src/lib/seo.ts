@@ -22,6 +22,9 @@ export function createPageMetadata({
   keywords,
   noIndex = false,
   ogImage = DEFAULT_OG_IMAGE,
+  openGraphType = "website",
+  articlePublishedTime,
+  ogTitle,
 }: {
   title: string;
   description: string;
@@ -29,9 +32,21 @@ export function createPageMetadata({
   keywords?: string[];
   noIndex?: boolean;
   ogImage?: string;
+  openGraphType?: "website" | "article";
+  articlePublishedTime?: string;
+  /** Override OG/Twitter headline (defaults to title | site) */
+  ogTitle?: string;
 }): Metadata {
   const url = absoluteUrl(path);
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
+  const shareTitle = ogTitle
+    ? ogTitle.includes(SITE_NAME)
+      ? ogTitle
+      : `${ogTitle} | ${SITE_NAME}`
+    : fullTitle;
+  const imageUrl = ogImage.startsWith("http")
+    ? ogImage
+    : absoluteUrl(ogImage.startsWith("/") ? ogImage : `/${ogImage}`);
 
   return {
     title,
@@ -39,25 +54,28 @@ export function createPageMetadata({
     ...(keywords?.length ? { keywords } : {}),
     alternates: { canonical: url },
     openGraph: {
-      title: fullTitle,
+      title: shareTitle,
       description,
       url,
       siteName: SITE_NAME,
-      type: "website",
+      type: openGraphType,
+      ...(openGraphType === "article" && articlePublishedTime
+        ? { publishedTime: articlePublishedTime }
+        : {}),
       images: [
         {
-          url: ogImage,
+          url: imageUrl,
           width: 1200,
           height: 630,
-          alt: `${SITE_NAME} — battery & power calculators`,
+          alt: shareTitle,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: fullTitle,
+      title: shareTitle,
       description,
-      images: [ogImage],
+      images: [imageUrl],
     },
     robots: noIndex ? { index: false, follow: false } : { index: true, follow: true },
   };
