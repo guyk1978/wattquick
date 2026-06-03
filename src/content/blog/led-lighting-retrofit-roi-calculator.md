@@ -16,7 +16,9 @@ Old habits equated "60 W bulb" with brightness. LEDs advertise lumens and effica
 
 A 60 W incandescent near 800 lm at roughly 13 lm/W. A 9 W LED at 800 lm is near 90 lm/W—seven× less power for the same light if drivers are honest.
 
-<CalculatorEmbed slug="led-vs-incandescent-roi" />
+<CalculatorEmbed slug="led-savings-roi" />
+
+For many bulbs and replacement schedules, use the [LED vs. Incandescent ROI Calculator](/led-vs-incandescent-roi/).
 
 ## Bill impact and payback
 
@@ -36,7 +38,5 @@ Cheap LEDs on old triac dimmers flicker; buy dimmer-rated SKUs or replace switch
 ## Beyond payback
 
 Lower waste heat reduces summer cooling load slightly—secondary savings on AC-heavy climates. Fewer ladder trips because you are not relamping incandescents every year.
-
-<CalculatorEmbed slug="led-vs-incandescent-roi" />
 
 LED retrofits are spreadsheet-friendly efficiency. Match lumens, cut watts, run the payback with your real rates and hours—then buy once instead of experimenting aisle by aisle.

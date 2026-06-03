@@ -30,6 +30,109 @@ export interface LedRoiInput {
   incandLifeHours: number;
 }
 
+export type LegacyBulbType = "incandescent" | "halogen" | "cfl";
+
+export const LEGACY_BULB_PRESETS: Record<
+  LegacyBulbType,
+  { label: string; defaultWatts: number; suggestedLedWatts: number }
+> = {
+  incandescent: { label: "Incandescent", defaultWatts: 60, suggestedLedWatts: 9 },
+  halogen: { label: "Halogen", defaultWatts: 43, suggestedLedWatts: 7 },
+  cfl: { label: "CFL (compact fluorescent)", defaultWatts: 13, suggestedLedWatts: 9 },
+};
+
+export interface LedSavingsRoiInput {
+  legacyWatts: number;
+  ledWatts: number;
+  ledBulbPrice: number;
+  hoursPerDay: number;
+  ratePerKwh: number;
+}
+
+export interface LedSavingsRoiResult {
+  wattSavings: number;
+  dailyCostLegacy: number;
+  dailyCostLed: number;
+  dailySavings: number;
+  monthlyCostLegacy: number;
+  monthlyCostLed: number;
+  monthlySavings: number;
+  annualCostLegacy: number;
+  annualCostLed: number;
+  annualSavings: number;
+  paybackDays: number | null;
+  paybackMonths: number | null;
+  legacyBarPercent: number;
+  ledBarPercent: number;
+}
+
+const DAYS_PER_MONTH = 365 / 12;
+
+/** Operating-cost savings and simple bulb payback (price ÷ daily $ saved). */
+export function calculateLedSavingsRoi({
+  legacyWatts,
+  ledWatts,
+  ledBulbPrice,
+  hoursPerDay,
+  ratePerKwh,
+}: LedSavingsRoiInput): LedSavingsRoiResult | null {
+  if (
+    legacyWatts <= 0 ||
+    ledWatts <= 0 ||
+    hoursPerDay <= 0 ||
+    ratePerKwh <= 0 ||
+    ledBulbPrice < 0
+  ) {
+    return null;
+  }
+
+  const dailyKwhLegacy = (legacyWatts * hoursPerDay) / 1000;
+  const dailyKwhLed = (ledWatts * hoursPerDay) / 1000;
+  const dailyCostLegacy = dailyKwhLegacy * ratePerKwh;
+  const dailyCostLed = dailyKwhLed * ratePerKwh;
+  const dailySavings = dailyCostLegacy - dailyCostLed;
+
+  const monthlyCostLegacy = dailyCostLegacy * DAYS_PER_MONTH;
+  const monthlyCostLed = dailyCostLed * DAYS_PER_MONTH;
+  const monthlySavings = dailySavings * DAYS_PER_MONTH;
+
+  const annualCostLegacy = dailyCostLegacy * 365;
+  const annualCostLed = dailyCostLed * 365;
+  const annualSavings = dailySavings * 365;
+
+  const maxAnnual = Math.max(annualCostLegacy, annualCostLed, 0.0001);
+  const legacyBarPercent = Math.min(
+    100,
+    Math.max(4, (annualCostLegacy / maxAnnual) * 100)
+  );
+  const ledBarPercent = Math.min(100, Math.max(4, (annualCostLed / maxAnnual) * 100));
+
+  const paybackDays =
+    dailySavings > 0 ? ledBulbPrice / dailySavings : null;
+  const paybackMonths =
+    paybackDays !== null ? paybackDays / DAYS_PER_MONTH : null;
+
+  const roundMoney = (n: number) => parseFloat(n.toFixed(2));
+  const roundDays = (n: number) => parseFloat(n.toFixed(1));
+
+  return {
+    wattSavings: Math.max(0, legacyWatts - ledWatts),
+    dailyCostLegacy: roundMoney(dailyCostLegacy),
+    dailyCostLed: roundMoney(dailyCostLed),
+    dailySavings: roundMoney(Math.max(0, dailySavings)),
+    monthlyCostLegacy: roundMoney(monthlyCostLegacy),
+    monthlyCostLed: roundMoney(monthlyCostLed),
+    monthlySavings: roundMoney(Math.max(0, monthlySavings)),
+    annualCostLegacy: roundMoney(annualCostLegacy),
+    annualCostLed: roundMoney(annualCostLed),
+    annualSavings: roundMoney(Math.max(0, annualSavings)),
+    paybackDays: paybackDays !== null ? roundDays(paybackDays) : null,
+    paybackMonths: paybackMonths !== null ? parseFloat(paybackMonths.toFixed(1)) : null,
+    legacyBarPercent,
+    ledBarPercent,
+  };
+}
+
 export function calculateLedRoi({
   bulbCount,
   incandescentWatts,

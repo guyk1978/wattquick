@@ -4,7 +4,9 @@ import {
   calculateBessCarbonCost,
   calculateHeatLoss,
   calculateLedRoi,
+  calculateLedSavingsRoi,
   calculateMicrogridRoi,
+  LEGACY_BULB_PRESETS,
   calculateSmallWindTurbineYield,
   calculateSolarWaterHeaterEfficiency,
   calculateThermostatSavings,
@@ -52,6 +54,120 @@ export const calculatorsGreenHome = [
     },
   },
   {
+    slug: "led-savings-roi",
+    href: "/led-savings-roi",
+    title: "LED Savings & ROI Calculator",
+    description:
+      "Compare legacy bulb vs. LED operating costs and see how fast a single LED pays for itself.",
+    keywords: [
+      "led savings calculator",
+      "led roi calculator",
+      "led payback period",
+      "light bulb energy savings",
+    ],
+    icon: Lamp,
+    tag: "Lighting",
+    category: "green-home",
+    suggestions: [
+      "led-vs-incandescent-roi",
+      "lighting-circuit-load",
+      "electricity-bill",
+      "energy-consumption",
+    ],
+    fields: [
+      {
+        id: "legacyBulbType",
+        label: "Existing bulb type",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "incandescent",
+        options: Object.entries(LEGACY_BULB_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+      {
+        id: "legacyWatts",
+        label: "Existing bulb watts",
+        unit: "W",
+        placeholder: "60",
+        defaultValue: "60",
+      },
+      {
+        id: "ledWatts",
+        label: "LED replacement watts",
+        unit: "W",
+        placeholder: "9",
+        defaultValue: "9",
+      },
+      {
+        id: "ledBulbPrice",
+        label: "LED bulb price",
+        unit: "$",
+        placeholder: "4",
+        defaultValue: "4",
+      },
+      {
+        id: "hoursPerDay",
+        label: "Hours of use per day",
+        unit: "hrs",
+        placeholder: "5",
+        defaultValue: "5",
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+    ],
+    result: {
+      label: "Time to break even",
+      emptyMessage: "Enter bulb watts, price, hours & rate",
+    },
+    seo: seo(
+      "Payback math",
+      "Daily savings = (legacy W − LED W) × hours ÷ 1,000 × $/kWh. Payback days = LED bulb price ÷ daily savings. Operating cost ignores bulb replacements—use LED vs. Incandescent ROI for lifetime bulb economics.",
+      "Q: LED uses more watts? A: No payback on energy—pick a lower-watt LED with matched lumens. Q: Whole home? A: Add one row per fixture or use the retrofit ROI calculator for many bulbs."
+    ),
+    compute(values) {
+      const legacyWatts = parsePositive(values.legacyWatts ?? "");
+      const ledWatts = parsePositive(values.ledWatts ?? "");
+      const ledBulbPrice = parsePositive(values.ledBulbPrice ?? "");
+      const hoursPerDay = parsePositive(values.hoursPerDay ?? "");
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      if (
+        legacyWatts === null ||
+        ledWatts === null ||
+        ledBulbPrice === null ||
+        hoursPerDay === null ||
+        ratePerKwh === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateLedSavingsRoi({
+        legacyWatts,
+        ledWatts,
+        ledBulbPrice,
+        hoursPerDay,
+        ratePerKwh,
+      });
+      if (!result || result.paybackMonths === null) {
+        return { value: null, detail: "LED must use fewer watts than the existing bulb" };
+      }
+      const monthsLabel =
+        result.paybackMonths < 1
+          ? `${formatNumber(result.paybackDays ?? 0, { maxDecimals: 0 })} days`
+          : `${formatNumber(result.paybackMonths, { maxDecimals: 1 })} months`;
+      return {
+        value: monthsLabel,
+        unit: "",
+        detail: `${formatCurrency(result.annualSavings)}/yr saved · ${formatCurrency(result.dailySavings)}/day · ${result.wattSavings} W saved`,
+      };
+    },
+  },
+  {
     slug: "led-vs-incandescent-roi",
     href: "/led-vs-incandescent-roi",
     title: "LED vs. Incandescent ROI Calculator",
@@ -61,10 +177,10 @@ export const calculatorsGreenHome = [
     tag: "Lighting",
     category: "green-home",
     suggestions: [
+      "led-savings-roi",
       "electricity-bill",
       "energy-consumption",
-      "vampire-power-cost",
-      "standby-power-waste",
+      "lighting-circuit-load",
     ],
     fields: [
       { id: "bulbCount", label: "Bulbs", unit: "#", placeholder: "20" },

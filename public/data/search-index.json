@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T07:50:22.753Z",
+  "generatedAt": "2026-06-03T08:01:23.487Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1498,6 +1498,22 @@
       ]
     },
     {
+      "id": "led-savings-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "LED Savings & ROI Calculator",
+      "description": "Compare legacy bulb vs. LED operating costs and see how fast a single LED pays for itself.",
+      "href": "/led-savings-roi/",
+      "tag": "Lighting",
+      "keywords": [
+        "led savings calculator",
+        "led roi calculator",
+        "led payback period",
+        "light bulb energy savings"
+      ]
+    },
+    {
       "id": "led-vs-incandescent-roi",
       "type": "calculator",
       "category": "Calculators",
@@ -2760,6 +2776,21 @@
       "tag": "Power",
       "keywords": [
         "Power",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "why-led-best-investment-home-energy-efficiency",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "Why LED is the best investment for your home's energy efficiency",
+      "description": "Low payback, lower operating cost, and side benefits that make LED retrofits one of the smartest home energy upgrades.",
+      "href": "/blog/why-led-best-investment-home-energy-efficiency/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
         "blog",
         "article"
       ]

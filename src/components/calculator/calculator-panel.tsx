@@ -29,6 +29,7 @@ import { BatteryCalendarAgingCalculator } from "@/components/calculators/Battery
 import { SmallWindTurbineYieldCalculator } from "@/components/calculators/SmallWindTurbineYieldCalculator";
 import { AcInrushCurrentCalculator } from "@/components/calculators/AcInrushCurrentCalculator";
 import { VampirePowerCostCalculator } from "@/components/calculators/VampirePowerCostCalculator";
+import { LedSavingsRoiCalculator } from "@/components/calculators/LedSavingsRoiCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -88,6 +89,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "vampire-power-cost") {
     return <VampirePowerCostCalculator className={className} />;
+  }
+  if (id === "led-savings-roi") {
+    return <LedSavingsRoiCalculator className={className} />;
   }
 
   const definition = getCalculatorDefinition(id);
