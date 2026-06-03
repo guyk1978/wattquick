@@ -6,6 +6,7 @@ import {
   calculateLedRoi,
   calculateLedSavingsRoi,
   calculateMicrogridRoi,
+  GRID_CO2_REGION_PRESETS,
   LEGACY_BULB_PRESETS,
   calculateSmallWindTurbineYield,
   calculateSolarWaterHeaterEfficiency,
@@ -58,12 +59,13 @@ export const calculatorsGreenHome = [
     href: "/led-savings-roi",
     title: "LED Savings & ROI Calculator",
     description:
-      "Compare legacy bulb vs. LED operating costs and see how fast a single LED pays for itself.",
+      "Compare legacy bulb vs. LED costs, CO₂ savings, and payback time for a single fixture.",
     keywords: [
       "led savings calculator",
       "led roi calculator",
       "led payback period",
       "light bulb energy savings",
+      "led carbon savings",
     ],
     icon: Lamp,
     tag: "Lighting",
@@ -121,6 +123,26 @@ export const calculatorsGreenHome = [
         placeholder: "0.14",
         defaultValue: "0.14",
       },
+      {
+        id: "gridCarbonRegion",
+        label: "Grid carbon intensity",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "global",
+        options: Object.entries(GRID_CO2_REGION_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+        hint: "Average kg CO₂ per kWh for your region—used for footprint estimates.",
+      },
+      {
+        id: "co2KgPerKwh",
+        label: "CO₂ per kWh",
+        unit: "kg",
+        placeholder: "0.5",
+        defaultValue: "0.5",
+        hint: "Updates with region—override if you have utility-specific data.",
+      },
     ],
     result: {
       label: "Time to break even",
@@ -137,12 +159,14 @@ export const calculatorsGreenHome = [
       const ledBulbPrice = parsePositive(values.ledBulbPrice ?? "");
       const hoursPerDay = parsePositive(values.hoursPerDay ?? "");
       const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const co2KgPerKwh = parsePositive(values.co2KgPerKwh ?? "");
       if (
         legacyWatts === null ||
         ledWatts === null ||
         ledBulbPrice === null ||
         hoursPerDay === null ||
-        ratePerKwh === null
+        ratePerKwh === null ||
+        co2KgPerKwh === null
       ) {
         return { value: null };
       }
@@ -152,6 +176,7 @@ export const calculatorsGreenHome = [
         ledBulbPrice,
         hoursPerDay,
         ratePerKwh,
+        co2KgPerKwh,
       });
       if (!result || result.paybackMonths === null) {
         return { value: null, detail: "LED must use fewer watts than the existing bulb" };
@@ -163,7 +188,7 @@ export const calculatorsGreenHome = [
       return {
         value: monthsLabel,
         unit: "",
-        detail: `${formatCurrency(result.annualSavings)}/yr saved · ${formatCurrency(result.dailySavings)}/day · ${result.wattSavings} W saved`,
+        detail: `${formatCurrency(result.annualSavings)}/yr · ${formatNumber(result.annualCo2SavedKg, { maxDecimals: 1 })} kg CO₂/yr avoided · ${result.wattSavings} W saved`,
       };
     },
   },

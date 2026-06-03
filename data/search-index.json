@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T08:01:23.487Z",
+  "generatedAt": "2026-06-03T08:19:43.328Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1503,14 +1503,15 @@
       "category": "Calculators",
       "group": "Green Home",
       "title": "LED Savings & ROI Calculator",
-      "description": "Compare legacy bulb vs. LED operating costs and see how fast a single LED pays for itself.",
+      "description": "Compare legacy bulb vs. LED costs, CO₂ savings, and payback time for a single fixture.",
       "href": "/led-savings-roi/",
       "tag": "Lighting",
       "keywords": [
         "led savings calculator",
         "led roi calculator",
         "led payback period",
-        "light bulb energy savings"
+        "light bulb energy savings",
+        "led carbon savings"
       ]
     },
     {

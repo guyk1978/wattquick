@@ -41,16 +41,44 @@ export const LEGACY_BULB_PRESETS: Record<
   cfl: { label: "CFL (compact fluorescent)", defaultWatts: 13, suggestedLedWatts: 9 },
 };
 
+export type GridCarbonRegion =
+  | "global"
+  | "us"
+  | "eu"
+  | "uk"
+  | "india"
+  | "china"
+  | "custom";
+
+/** Grid-average CO₂ intensity presets (kg CO₂ per kWh). */
+export const GRID_CO2_REGION_PRESETS: Record<
+  GridCarbonRegion,
+  { label: string; kgCo2PerKwh: number }
+> = {
+  global: { label: "Global average", kgCo2PerKwh: 0.5 },
+  us: { label: "United States", kgCo2PerKwh: 0.38 },
+  eu: { label: "European Union", kgCo2PerKwh: 0.25 },
+  uk: { label: "United Kingdom", kgCo2PerKwh: 0.23 },
+  india: { label: "India", kgCo2PerKwh: 0.71 },
+  china: { label: "China", kgCo2PerKwh: 0.55 },
+  custom: { label: "Custom factor", kgCo2PerKwh: 0.5 },
+};
+
 export interface LedSavingsRoiInput {
   legacyWatts: number;
   ledWatts: number;
   ledBulbPrice: number;
   hoursPerDay: number;
   ratePerKwh: number;
+  /** kg CO₂ emitted per kWh of grid electricity */
+  co2KgPerKwh: number;
 }
 
 export interface LedSavingsRoiResult {
   wattSavings: number;
+  annualKwhLegacy: number;
+  annualKwhLed: number;
+  annualKwhSaved: number;
   dailyCostLegacy: number;
   dailyCostLed: number;
   dailySavings: number;
@@ -60,10 +88,16 @@ export interface LedSavingsRoiResult {
   annualCostLegacy: number;
   annualCostLed: number;
   annualSavings: number;
+  annualCo2LegacyKg: number;
+  annualCo2LedKg: number;
+  annualCo2SavedKg: number;
+  monthlyCo2SavedKg: number;
   paybackDays: number | null;
   paybackMonths: number | null;
   legacyBarPercent: number;
   ledBarPercent: number;
+  legacyCo2BarPercent: number;
+  ledCo2BarPercent: number;
 }
 
 const DAYS_PER_MONTH = 365 / 12;
@@ -75,19 +109,26 @@ export function calculateLedSavingsRoi({
   ledBulbPrice,
   hoursPerDay,
   ratePerKwh,
+  co2KgPerKwh,
 }: LedSavingsRoiInput): LedSavingsRoiResult | null {
   if (
     legacyWatts <= 0 ||
     ledWatts <= 0 ||
     hoursPerDay <= 0 ||
     ratePerKwh <= 0 ||
-    ledBulbPrice < 0
+    ledBulbPrice < 0 ||
+    co2KgPerKwh <= 0
   ) {
     return null;
   }
 
   const dailyKwhLegacy = (legacyWatts * hoursPerDay) / 1000;
   const dailyKwhLed = (ledWatts * hoursPerDay) / 1000;
+  const dailyKwhSaved = Math.max(0, dailyKwhLegacy - dailyKwhLed);
+  const annualKwhLegacy = dailyKwhLegacy * 365;
+  const annualKwhLed = dailyKwhLed * 365;
+  const annualKwhSaved = dailyKwhSaved * 365;
+
   const dailyCostLegacy = dailyKwhLegacy * ratePerKwh;
   const dailyCostLed = dailyKwhLed * ratePerKwh;
   const dailySavings = dailyCostLegacy - dailyCostLed;
@@ -100,12 +141,27 @@ export function calculateLedSavingsRoi({
   const annualCostLed = dailyCostLed * 365;
   const annualSavings = dailySavings * 365;
 
+  const annualCo2LegacyKg = annualKwhLegacy * co2KgPerKwh;
+  const annualCo2LedKg = annualKwhLed * co2KgPerKwh;
+  const annualCo2SavedKg = annualKwhSaved * co2KgPerKwh;
+  const monthlyCo2SavedKg = annualCo2SavedKg / 12;
+
   const maxAnnual = Math.max(annualCostLegacy, annualCostLed, 0.0001);
   const legacyBarPercent = Math.min(
     100,
     Math.max(4, (annualCostLegacy / maxAnnual) * 100)
   );
   const ledBarPercent = Math.min(100, Math.max(4, (annualCostLed / maxAnnual) * 100));
+
+  const maxCo2 = Math.max(annualCo2LegacyKg, annualCo2LedKg, 0.0001);
+  const legacyCo2BarPercent = Math.min(
+    100,
+    Math.max(4, (annualCo2LegacyKg / maxCo2) * 100)
+  );
+  const ledCo2BarPercent = Math.min(
+    100,
+    Math.max(4, (annualCo2LedKg / maxCo2) * 100)
+  );
 
   const paybackDays =
     dailySavings > 0 ? ledBulbPrice / dailySavings : null;
@@ -114,9 +170,14 @@ export function calculateLedSavingsRoi({
 
   const roundMoney = (n: number) => parseFloat(n.toFixed(2));
   const roundDays = (n: number) => parseFloat(n.toFixed(1));
+  const roundKg = (n: number) => parseFloat(n.toFixed(2));
+  const roundKwh = (n: number) => parseFloat(n.toFixed(2));
 
   return {
     wattSavings: Math.max(0, legacyWatts - ledWatts),
+    annualKwhLegacy: roundKwh(annualKwhLegacy),
+    annualKwhLed: roundKwh(annualKwhLed),
+    annualKwhSaved: roundKwh(annualKwhSaved),
     dailyCostLegacy: roundMoney(dailyCostLegacy),
     dailyCostLed: roundMoney(dailyCostLed),
     dailySavings: roundMoney(Math.max(0, dailySavings)),
@@ -126,10 +187,16 @@ export function calculateLedSavingsRoi({
     annualCostLegacy: roundMoney(annualCostLegacy),
     annualCostLed: roundMoney(annualCostLed),
     annualSavings: roundMoney(Math.max(0, annualSavings)),
+    annualCo2LegacyKg: roundKg(annualCo2LegacyKg),
+    annualCo2LedKg: roundKg(annualCo2LedKg),
+    annualCo2SavedKg: roundKg(annualCo2SavedKg),
+    monthlyCo2SavedKg: roundKg(monthlyCo2SavedKg),
     paybackDays: paybackDays !== null ? roundDays(paybackDays) : null,
     paybackMonths: paybackMonths !== null ? parseFloat(paybackMonths.toFixed(1)) : null,
     legacyBarPercent,
     ledBarPercent,
+    legacyCo2BarPercent,
+    ledCo2BarPercent,
   };
 }
 
