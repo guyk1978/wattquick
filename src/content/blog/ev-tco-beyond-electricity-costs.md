@@ -1,9 +1,12 @@
 ---
-title: "EV Total Cost of Ownership: Beyond Electricity"
-description: "Fuel and oil savings vs. variable costs like tires—use the EV tire wear calculator to expose the hidden line item in private and fleet TCO."
-slug: "ev-tco-beyond-electricity-costs"
-category: "EV Charging"
-date: "2026-05-30"
+title: 'EV Total Cost of Ownership: Beyond Electricity'
+description: >-
+  Fuel and oil savings vs. variable costs like tires—use the EV tire wear
+  calculator to expose the hidden line item in private and fleet TCO.
+slug: ev-tco-beyond-electricity-costs
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-vs-ice-maintenance
 ---
 
 EV TCO conversations stop at $/kWh. Fleet spreadsheets add purchase price and incentives. Both often skip **variable maintenance that moved** when you dropped gasoline—tires first, brakes second (often slower), tires again when torque meets mass.

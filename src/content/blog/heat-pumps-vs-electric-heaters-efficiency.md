@@ -1,9 +1,12 @@
 ---
-title: "Heat Pumps vs. Electric Resistance Heat: Efficiency Compared"
-description: "COP explains why heat pumps move more BTUs per kWh than baseboard strips—and when resistance still appears."
-slug: "heat-pumps-vs-electric-heaters-efficiency"
-category: "Appliances"
-date: "2026-02-18"
+title: 'Heat Pumps vs. Electric Resistance Heat: Efficiency Compared'
+description: >-
+  COP explains why heat pumps move more BTUs per kWh than baseboard strips—and
+  when resistance still appears.
+slug: heat-pumps-vs-electric-heaters-efficiency
+category: Appliances
+date: '2026-02-18'
+relatedToolId: heat-pump-vs-resistance
 ---
 
 Resistance heat turns one kWh into one kWh of heat—COP 1 by definition. Heat pumps move heat rather than manufacture it, delivering several kWh of heat per kWh of input when conditions are favorable.

@@ -1,9 +1,12 @@
 ---
-title: "HVAC Savings With Smart Thermostats and Window Solar Control"
-description: "Temperature setbacks, summer peak cooling loads, and how window SHGC cuts heat gain before your AC runs longer."
-slug: "hvac-savings-with-smart-thermostats"
-category: "Green Home"
-date: "2026-05-23"
+title: HVAC Savings With Smart Thermostats and Window Solar Control
+description: >-
+  Temperature setbacks, summer peak cooling loads, and how window SHGC cuts heat
+  gain before your AC runs longer.
+slug: hvac-savings-with-smart-thermostats
+category: Green Home
+date: '2026-05-23'
+relatedToolId: smart-thermostat-savings
 ---
 
 Smart thermostats earn their name when setbacks align with occupancy—not when they chase weather on the app while the house sits empty. Summer heatwaves add a second lever: solar heat gain through glass can swamp sensible cooling capacity even if your SEER rating looked great on the label.

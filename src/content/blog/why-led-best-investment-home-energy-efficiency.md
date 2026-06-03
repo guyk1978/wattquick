@@ -1,9 +1,12 @@
 ---
-title: "Why LED is the best investment for your home's energy efficiency"
-description: "Low payback, lower operating cost, and side benefits that make LED retrofits one of the smartest home energy upgrades."
-slug: "why-led-best-investment-home-energy-efficiency"
-category: "Green Home"
-date: "2026-06-03"
+title: Why LED is the best investment for your home's energy efficiency
+description: >-
+  Low payback, lower operating cost, and side benefits that make LED retrofits
+  one of the smartest home energy upgrades.
+slug: why-led-best-investment-home-energy-efficiency
+category: Green Home
+date: '2026-06-03'
+relatedToolId: led-savings-roi
 ---
 
 LED is not a fad bulb format—it is a **capital decision** with a measurable payback. Unlike insulation or HVAC, you can swap a single fixture this evening and see the math on next month's bill.

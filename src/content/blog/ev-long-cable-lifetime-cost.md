@@ -1,9 +1,12 @@
 ---
-title: "Is Your EV Charging Cable Too Long? Cumulative Cost Over Vehicle Life"
-description: "Lifetime dollars lost to I²R heat in extension cords—and when relocating the EVSE beats buying a heavier cable."
-slug: "ev-long-cable-lifetime-cost"
-category: "EV Charging"
-date: "2026-05-30"
+title: Is Your EV Charging Cable Too Long? Cumulative Cost Over Vehicle Life
+description: >-
+  Lifetime dollars lost to I²R heat in extension cords—and when relocating the
+  EVSE beats buying a heavier cable.
+slug: ev-long-cable-lifetime-cost
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-charging-cable-loss
 ---
 
 A $120 “heavy duty” extension that lets you reach the far bay feels cheap once. Multiply its **I²R tax** across eight years of ownership and it competes with a **permit-grade short run** or a second EVSE mount—capital you would rather spend once than bleed every month.

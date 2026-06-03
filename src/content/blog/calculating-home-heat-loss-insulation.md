@@ -1,9 +1,12 @@
 ---
-title: "Calculating Home Heat Loss and Insulation Upgrades"
-description: "R-values, envelope leaks, and heating load reduction—how better insulation lowers BTU demand before you upsize HVAC."
-slug: "calculating-home-heat-loss-insulation"
-category: "Green Home"
-date: "2026-05-21"
+title: Calculating Home Heat Loss and Insulation Upgrades
+description: >-
+  R-values, envelope leaks, and heating load reduction—how better insulation
+  lowers BTU demand before you upsize HVAC.
+slug: calculating-home-heat-loss-insulation
+category: Green Home
+date: '2026-05-21'
+relatedToolId: heat-loss-insulation
 ---
 
 Heat loss is the gap between what your furnace or heat pump must deliver and what your rooms need to stay comfortable. Insulation raises resistance to conductive flow through walls and attics; air sealing stops convective bypasses that R-value alone cannot fix. Upgrade decisions should start with heat loss quantification, not contractor anecdotes about "what we usually do."

@@ -1,9 +1,12 @@
 ---
-title: "Wind at Home: Is a Small Turbine Actually Worth It?"
-description: "How wind speed cubed drives small turbine payback—and why tower height and obstacles matter more than brochure kW."
-slug: "small-wind-home-economics"
-category: "Green Home"
-date: "2026-05-30"
+title: 'Wind at Home: Is a Small Turbine Actually Worth It?'
+description: >-
+  How wind speed cubed drives small turbine payback—and why tower height and
+  obstacles matter more than brochure kW.
+slug: small-wind-home-economics
+category: Green Home
+date: '2026-05-30'
+relatedToolId: small-wind-turbine-yield
 ---
 
 A 3 kW nameplate on the brochure is not 3 kW at your chimney. Small wind economics live or die on **hub-height wind speed**, and hub-height wind speed obeys **v³ arithmetic**—not marketing optimism.

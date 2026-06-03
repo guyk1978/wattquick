@@ -1,9 +1,12 @@
 ---
-title: "Solar Water Heater Efficiency: Are Your Collectors at Peak Performance?"
-description: "Model thermal efficiency, absorbed kWh, and electric heating savings from tank volume, temperature rise, sun hours, and collector area."
-slug: "solar-water-heater-efficiency-guide"
-category: "Green Home"
-date: "2026-05-30"
+title: 'Solar Water Heater Efficiency: Are Your Collectors at Peak Performance?'
+description: >-
+  Model thermal efficiency, absorbed kWh, and electric heating savings from tank
+  volume, temperature rise, sun hours, and collector area.
+slug: solar-water-heater-efficiency-guide
+category: Green Home
+date: '2026-05-30'
+relatedToolId: solar-water-heater-efficiency
 ---
 
 Are your solar collectors working at peak performance? Calculate your solar water heater efficiency and unlock the secrets to truly free hot water.

@@ -1,9 +1,12 @@
 ---
-title: "Portable Generator Fuel Consumption and Runtime Planning"
-description: "Estimate gallons per hour and tank runtime from load watts and manufacturer fuel curves."
-slug: "portable-generator-fuel-consumption-runtime"
-category: "Appliances"
-date: "2026-02-22"
+title: Portable Generator Fuel Consumption and Runtime Planning
+description: >-
+  Estimate gallons per hour and tank runtime from load watts and manufacturer
+  fuel curves.
+slug: portable-generator-fuel-consumption-runtime
+category: Appliances
+date: '2026-02-22'
+relatedToolId: generator-fuel-consumption
 ---
 
 Generators are sold on peak watts and tank size. Outages ask a different question: how long will this tank last at my actual load? Answer that with fuel consumption at load, not brochure extremes.

@@ -1,9 +1,12 @@
 ---
-title: "Small Wind Turbine Yield: Is Breeze Power Right for Your Property?"
-description: "Estimate watts, daily kWh, and annual output from rotor diameter, average wind speed, and system efficiency."
-slug: "small-wind-turbine-yield-guide"
-category: "Green Home"
-date: "2026-05-30"
+title: 'Small Wind Turbine Yield: Is Breeze Power Right for Your Property?'
+description: >-
+  Estimate watts, daily kWh, and annual output from rotor diameter, average wind
+  speed, and system efficiency.
+slug: small-wind-turbine-yield-guide
+category: Green Home
+date: '2026-05-30'
+relatedToolId: small-wind-turbine-yield
 ---
 
 Harness the power of the breeze—calculate your small wind turbine's potential yield and see if wind energy is the right fit for your property.

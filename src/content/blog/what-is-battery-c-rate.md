@@ -1,9 +1,12 @@
 ---
-title: "What Is Battery C-Rate? Discharge Speed in Plain Language"
-description: "Convert between amps, capacity, and how long a pack can sustain a load at 1C, 2C, or higher."
-slug: "what-is-battery-c-rate"
-category: "Battery"
-date: "2026-03-10"
+title: What Is Battery C-Rate? Discharge Speed in Plain Language
+description: >-
+  Convert between amps, capacity, and how long a pack can sustain a load at 1C,
+  2C, or higher.
+slug: what-is-battery-c-rate
+category: Battery
+date: '2026-03-10'
+relatedToolId: battery-c-rate
 ---
 
 C-rate is how engineers talk about charge and discharge speed without guessing minutes. One C means a current equal to the capacity rating—100 A from a 100 Ah pack. Half C is gentler; two C is aggressive.

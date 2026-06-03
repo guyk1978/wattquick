@@ -1,9 +1,12 @@
 ---
-title: "Marine Trolling Motor Batteries: Amp Draw, Chemistry, and Safety"
-description: "Continuous amp draw on lakes and rivers, AGM vs LiFePO4 tradeoffs, and how to avoid a dead bank miles from the ramp."
-slug: "marine-trolling-motor-battery-guide"
-category: "RV & Marine"
-date: "2026-05-16"
+title: 'Marine Trolling Motor Batteries: Amp Draw, Chemistry, and Safety'
+description: >-
+  Continuous amp draw on lakes and rivers, AGM vs LiFePO4 tradeoffs, and how to
+  avoid a dead bank miles from the ramp.
+slug: marine-trolling-motor-battery-guide
+category: RV & Marine
+date: '2026-05-16'
+relatedToolId: marine-battery-bank
 ---
 
 A trolling motor asks for steady current for hours—not a short burst like a starter crank. That duty cycle defines bank capacity, wiring gauge, and whether AGM lead-acid still makes sense against lithium iron phosphate packs that tolerate deeper discharge without sulfation drama.

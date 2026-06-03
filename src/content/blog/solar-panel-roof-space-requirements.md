@@ -1,9 +1,12 @@
 ---
-title: "Solar Panel Roof Space Requirements: How Many Modules Fit?"
-description: "Roof area, setbacks, panel dimensions, and usable coverage—how to estimate max array size before you order gear."
-slug: "solar-panel-roof-space-requirements"
-category: "Solar"
-date: "2026-03-28"
+title: 'Solar Panel Roof Space Requirements: How Many Modules Fit?'
+description: >-
+  Roof area, setbacks, panel dimensions, and usable coverage—how to estimate max
+  array size before you order gear.
+slug: solar-panel-roof-space-requirements
+category: Solar
+date: '2026-03-28'
+relatedToolId: solar-roof-space
 ---
 
 Roof space is the hard ceiling on residential solar. Production calculators can optimize tilt and azimuth, but if the modules do not fit, the project stops there. Start with geometry, then refine for shade and code setbacks.

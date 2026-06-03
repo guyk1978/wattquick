@@ -1,4 +1,5 @@
 import { calculators, CALCULATOR_SLUGS } from "@/data/calculators";
+import { getRelatedArticleForTool } from "@/data/article-tool-map";
 import {
   toMeta,
   type CalculatorCategory,
@@ -10,8 +11,11 @@ import {
 function toDefinition(
   entry: (typeof calculators)[number]
 ): CalculatorDefinition {
+  const id = entry.slug as CalculatorId;
+  const linkedArticle = getRelatedArticleForTool(id);
+
   return {
-    id: entry.slug as CalculatorId,
+    id,
     href: entry.href,
     title: entry.title,
     description: entry.description,
@@ -20,6 +24,10 @@ function toDefinition(
     tag: entry.tag,
     category: entry.category,
     suggestions: entry.suggestions as CalculatorId[],
+    relatedArticleId:
+      ("relatedArticleId" in entry && entry.relatedArticleId
+        ? entry.relatedArticleId
+        : undefined) ?? linkedArticle?.articleSlug,
     fields: entry.fields,
     result: entry.result,
     seo: entry.seo,

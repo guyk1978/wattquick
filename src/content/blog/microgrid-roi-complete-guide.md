@@ -1,9 +1,12 @@
 ---
-title: "The Complete Guide to Microgrid ROI: Costs, Benefits, and Energy Independence"
-description: "Compare upfront microgrid capex against self-generation savings, resilience value, and avoided infrastructure costs—before you sign an EPC contract."
-slug: "microgrid-roi-complete-guide"
-category: "Green Home"
-date: "2026-05-29"
+title: 'The Complete Guide to Microgrid ROI: Costs, Benefits, and Energy Independence'
+description: >-
+  Compare upfront microgrid capex against self-generation savings, resilience
+  value, and avoided infrastructure costs—before you sign an EPC contract.
+slug: microgrid-roi-complete-guide
+category: Green Home
+date: '2026-05-29'
+relatedToolId: microgrid-roi
 ---
 
 A residential or small-commercial microgrid is not a single product—it is a system: solar, batteries, controls, and sometimes backup generation tied together so critical loads stay powered when the wider grid struggles. The financial case rests on three pillars: lower energy bills from self-production, optional resilience during outages, and long-term insulation from rising retail rates. None of those benefits appear on a solar panel sticker; you model them.

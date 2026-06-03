@@ -1,9 +1,12 @@
 ---
-title: "How to Preserve Batteries for Years: Optimal Storage Tips"
-description: "Ideal storage temperatures and SOC targets for Li-ion—plus using the calendar aging calculator for backup and idle EV packs."
-slug: "battery-optimal-storage-tips"
-category: "Battery"
-date: "2026-05-30"
+title: 'How to Preserve Batteries for Years: Optimal Storage Tips'
+description: >-
+  Ideal storage temperatures and SOC targets for Li-ion—plus using the calendar
+  aging calculator for backup and idle EV packs.
+slug: battery-optimal-storage-tips
+category: Battery
+date: '2026-05-30'
+relatedToolId: battery-calendar-aging
 ---
 
 Long-life lithium storage is boring on purpose: **mid charge, cool room, periodic check-in**. Exciting storage—full bars in a hot shed—is how packs arrive at half capacity with almost no cycles on the counter.

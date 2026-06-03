@@ -1,9 +1,12 @@
 ---
-title: "Understanding Net Metering for Home Solar (Credits, Exports, and Bills)"
-description: "How grid-tied billing treats exported kWh, import charges, and why NEM policy changes your payback."
-slug: "understanding-net-metering-solar"
-category: "Solar"
-date: "2026-03-18"
+title: 'Understanding Net Metering for Home Solar (Credits, Exports, and Bills)'
+description: >-
+  How grid-tied billing treats exported kWh, import charges, and why NEM policy
+  changes your payback.
+slug: understanding-net-metering-solar
+category: Solar
+date: '2026-03-18'
+relatedToolId: solar-net-metering
 ---
 
 Net metering is the contract between your roof and the utility. It defines how exported solar energy is valued against what you draw at night. Policy names differ by state, but the mechanics rhyme.

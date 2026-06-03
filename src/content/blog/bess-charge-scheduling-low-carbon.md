@@ -1,9 +1,12 @@
 ---
-title: "From Storage to Environmental Optimization: Scheduling BESS for Low Carbon"
-description: "Use bess-carbon-cost outputs to time battery charging when grid carbon intensity is lowest—or when solar surplus is available."
-slug: "bess-charge-scheduling-low-carbon"
-category: "Green Home"
-date: "2026-05-30"
+title: 'From Storage to Environmental Optimization: Scheduling BESS for Low Carbon'
+description: >-
+  Use bess-carbon-cost outputs to time battery charging when grid carbon
+  intensity is lowest—or when solar surplus is available.
+slug: bess-charge-scheduling-low-carbon
+category: Green Home
+date: '2026-05-30'
+relatedToolId: bess-carbon-cost
 ---
 
 Installing BESS is the **storage** decision. Running it is the **environmental** decision. The same hardware can look brilliant or mediocre on carbon depending on **when** you fill the tank and **what** was on the grid at that hour.

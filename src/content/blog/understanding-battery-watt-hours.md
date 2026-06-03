@@ -4,6 +4,7 @@ description: "What watt-hours mean, how to convert from Ah, and why Wh matters f
 slug: "understanding-battery-watt-hours"
 category: "Guides"
 date: "2026-03-01"
+relatedToolId: "ah-to-wh"
 ---
 
 Watt-hours (Wh) measure energy—the total amount of work a battery can deliver. Unlike amp-hours (Ah), Wh accounts for voltage, which makes it the best unit for comparing packs of different chemistries and voltages.

@@ -1,9 +1,12 @@
 ---
-title: "Is Your Battery Really Green? Carbon Math for Storage Systems"
-description: "How round-trip energy losses create indirect CO₂ emissions—and why charging from renewables is what makes BESS carbon-neutral in operation."
-slug: "is-bess-storage-really-green"
-category: "Green Home"
-date: "2026-05-30"
+title: Is Your Battery Really Green? Carbon Math for Storage Systems
+description: >-
+  How round-trip energy losses create indirect CO₂ emissions—and why charging
+  from renewables is what makes BESS carbon-neutral in operation.
+slug: is-bess-storage-really-green
+category: Green Home
+date: '2026-05-30'
+relatedToolId: bess-carbon-cost
 ---
 
 A wall-mounted battery with a leaf logo is still a **conversion machine**. It buys kilowatt-hours, stores them imperfectly, and sells them back with a haircut. The haircut is heat—not a moral failure, just physics. The carbon question is: **what generation mix produced the extra kilowatt-hours you lost?**

@@ -1,9 +1,12 @@
 ---
-title: "Peak Shaving Potential: Shift Loads and Trim Your TOU Bill"
-description: "Model monthly and annual savings from moving peak kWh to off-peak windows—see before/after bills and your home shift potential."
-slug: "peak-shaving-potential-guide"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: 'Peak Shaving Potential: Shift Loads and Trim Your TOU Bill'
+description: >-
+  Model monthly and annual savings from moving peak kWh to off-peak windows—see
+  before/after bills and your home shift potential.
+slug: peak-shaving-potential-guide
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: peak-shaving-potential
 ---
 
 Don't pay peak prices for off-peak tasks—calculate your peak shaving potential and trim your electricity bill significantly by shifting your consumption.

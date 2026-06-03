@@ -1,9 +1,12 @@
 ---
-title: "Why Batteries Age at Rest: Understanding Calendar Aging"
-description: "Temperature- and voltage-driven side reactions in Li-ion cells—and why 100% charge in heat destroys packs fastest."
-slug: "battery-calendar-aging-explained"
-category: "Battery"
-date: "2026-05-30"
+title: 'Why Batteries Age at Rest: Understanding Calendar Aging'
+description: >-
+  Temperature- and voltage-driven side reactions in Li-ion cells—and why 100%
+  charge in heat destroys packs fastest.
+slug: battery-calendar-aging-explained
+category: Battery
+date: '2026-05-30'
+relatedToolId: battery-calendar-aging
 ---
 
 A battery on a shelf is not frozen in time—it is a chemical reactor held at a chosen temperature and voltage. **Calendar aging** is the slow loss of lithium inventory and electrode activity while you are not cycling the pack.

@@ -74,6 +74,8 @@ export interface CalculatorDataEntry {
   icon: LucideIcon;
   tag: string;
   suggestions: string[];
+  /** Primary complementary blog article slug (under /blog/) */
+  relatedArticleId?: string;
   fields: CalculatorFieldDef[];
   result: CalculatorResultConfig;
   seo: CalculatorSeoContent;

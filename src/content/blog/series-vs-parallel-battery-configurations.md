@@ -1,9 +1,12 @@
 ---
-title: "Series vs. Parallel Battery Configurations Explained"
-description: "How 4S2P wiring changes voltage and amp-hours, and why matched cells matter for DIY packs."
-slug: "series-vs-parallel-battery-configurations"
-category: "Battery"
-date: "2026-03-12"
+title: Series vs. Parallel Battery Configurations Explained
+description: >-
+  How 4S2P wiring changes voltage and amp-hours, and why matched cells matter
+  for DIY packs.
+slug: series-vs-parallel-battery-configurations
+category: Battery
+date: '2026-03-12'
+relatedToolId: battery-series-parallel
 ---
 
 DIY powerwalls, golf carts, and RV banks all boil down to two moves: series to raise voltage, parallel to raise capacity. Mix them wrong and a BMS rebellion follows.

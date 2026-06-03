@@ -1,9 +1,12 @@
 ---
-title: "Planning Electric Bus Routes and Warehouse Shift Charging"
-description: "Municipal bus battery sizing, inter-shift charging windows, and forklift cycle economics for electrified depots."
-slug: "planning-electric-bus-transit-routes"
-category: "Commercial EV"
-date: "2026-05-14"
+title: Planning Electric Bus Routes and Warehouse Shift Charging
+description: >-
+  Municipal bus battery sizing, inter-shift charging windows, and forklift cycle
+  economics for electrified depots.
+slug: planning-electric-bus-transit-routes
+category: Commercial EV
+date: '2026-05-14'
+relatedToolId: ev-bus-battery
 ---
 
 Transit electrification fails in the spreadsheet, not on the ribbon-cutting stage. A forty-foot battery-electric bus is a rolling thermal system with a schedule: peak passenger load, HVAC draw, and elevation profiles that eat kWh faster than straight-line distance suggests. Parallel warehouse fleets face the same clock—forklifts must survive a shift without stealing chargers from buses parked nose-to-tail.

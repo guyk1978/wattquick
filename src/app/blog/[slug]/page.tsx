@@ -3,6 +3,7 @@ import { BlogArticleHeader } from "@/components/blog/blog-article-header";
 import { BlogArticleLayout } from "@/components/blog/blog-article-layout";
 import { BlogBackLink } from "@/components/blog/blog-back-link";
 import { BlogContent } from "@/components/blog/blog-content";
+import { ToolLaunchProvider } from "@/components/content/tool-launch-context";
 import { createBlogPostMetadata } from "@/lib/blog/metadata";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 
@@ -35,11 +36,16 @@ export default async function BlogArticlePage({ params }: PageProps) {
         <BlogArticleHeader post={post} />
       </div>
 
-      <BlogArticleLayout post={post}>
-        <article className="mx-auto min-w-0 max-w-3xl lg:mx-0">
-          <BlogContent content={post.content} />
-        </article>
-      </BlogArticleLayout>
+      <ToolLaunchProvider
+        articleSlug={post.slug}
+        articleTitle={post.title}
+      >
+        <BlogArticleLayout post={post}>
+          <article className="mx-auto min-w-0 max-w-3xl lg:mx-0">
+            <BlogContent content={post.content} />
+          </article>
+        </BlogArticleLayout>
+      </ToolLaunchProvider>
     </div>
   );
 }

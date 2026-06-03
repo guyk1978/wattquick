@@ -1,9 +1,12 @@
 ---
-title: "Solar Panel Degradation: What to Expect Over 25 Years"
-description: "First-year stabilization, annual fade rates, and how degradation affects long-term ROI planning."
-slug: "solar-panel-degradation-expectations"
-category: "Solar"
-date: "2026-03-15"
+title: 'Solar Panel Degradation: What to Expect Over 25 Years'
+description: >-
+  First-year stabilization, annual fade rates, and how degradation affects
+  long-term ROI planning.
+slug: solar-panel-degradation-expectations
+category: Solar
+date: '2026-03-15'
+relatedToolId: solar-degradation
 ---
 
 Panels do not produce like-new forever. Manufacturers warrant a minimum output at year twenty-five—often around eighty-seven to ninety percent of nameplate depending on tier. Planning with degradation baked in keeps finance models honest.

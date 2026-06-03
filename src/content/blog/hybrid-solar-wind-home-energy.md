@@ -1,9 +1,12 @@
 ---
-title: "Hybrid Solar and Wind: A Winning Home Energy Combo?"
-description: "How wind complements solar for night and cloudy production—and using the small wind yield calculator to vet your site."
-slug: "hybrid-solar-wind-home-energy"
-category: "Green Home"
-date: "2026-05-30"
+title: 'Hybrid Solar and Wind: A Winning Home Energy Combo?'
+description: >-
+  How wind complements solar for night and cloudy production—and using the small
+  wind yield calculator to vet your site.
+slug: hybrid-solar-wind-home-energy
+category: Green Home
+date: '2026-05-30'
+relatedToolId: small-wind-turbine-yield
 ---
 
 Solar owns the afternoon. Wind sometimes owns the night. A **hybrid microgrid** tries to overlap two weather drivers so the battery sees fewer empty hours—but only when both resources are real at your address.

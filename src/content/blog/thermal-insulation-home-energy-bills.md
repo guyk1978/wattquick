@@ -1,9 +1,12 @@
 ---
-title: "The impact of thermal insulation on home energy bills"
-description: "How U-value, air sealing, and glazing upgrades translate envelope improvements into lower annual heating and cooling spend."
-slug: "thermal-insulation-home-energy-bills"
-category: "Green Home"
-date: "2026-06-03"
+title: The impact of thermal insulation on home energy bills
+description: >-
+  How U-value, air sealing, and glazing upgrades translate envelope improvements
+  into lower annual heating and cooling spend.
+slug: thermal-insulation-home-energy-bills
+category: Green Home
+date: '2026-06-03'
+relatedToolId: home-insulation-savings
 ---
 
 Your utility bill is a receipt for **heat moving through the envelope**—out in winter, in during summer. Insulation does not create energy; it slows the flow so your HVAC runs fewer hours at the same thermostat setpoint. That is why envelope work often beats gadget upgrades: the savings repeat every degree-day.

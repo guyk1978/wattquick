@@ -1,9 +1,12 @@
 ---
-title: "Preventing Inverter Surge Overload While Camping"
-description: "Continuous vs peak watts, 12 V to 120 V conversion losses, and why your fridge and coffee maker cannot share the same blind plug."
-slug: "preventing-inverter-surge-overload-camping"
-category: "RV & Marine"
-date: "2026-05-17"
+title: Preventing Inverter Surge Overload While Camping
+description: >-
+  Continuous vs peak watts, 12 V to 120 V conversion losses, and why your fridge
+  and coffee maker cannot share the same blind plug.
+slug: preventing-inverter-surge-overload-camping
+category: RV & Marine
+date: '2026-05-17'
+relatedToolId: 12v-to-120v-inverter
 ---
 
 Campers discover inverter limits at 6 a.m. when the coffee maker and electric kettle both want surge current the inverter promised in fine print it could only sustain for milliseconds. Marketing "2000 W" on the label is often peak—not what you can run continuously while a compressor fridge cycles in the background.

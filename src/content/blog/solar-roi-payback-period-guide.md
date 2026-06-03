@@ -1,9 +1,12 @@
 ---
-title: "Solar ROI and Payback Period: A Practical Guide for Homeowners"
-description: "Turn installed cost, incentives, and annual kWh into a realistic payback timeline—without sales-deck optimism."
-slug: "solar-roi-payback-period-guide"
-category: "Solar"
-date: "2026-03-25"
+title: 'Solar ROI and Payback Period: A Practical Guide for Homeowners'
+description: >-
+  Turn installed cost, incentives, and annual kWh into a realistic payback
+  timeline—without sales-deck optimism.
+slug: solar-roi-payback-period-guide
+category: Solar
+date: '2026-03-25'
+relatedToolId: solar-payback-roi
 ---
 
 Payback is the question behind every solar quote: "When does this investment break even?" The answer chains three inputs—upfront net cost, annual energy value, and whatever you assume about rate inflation—into a timeline you can sanity-check.

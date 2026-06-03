@@ -1,9 +1,12 @@
 ---
-title: "Turning Your Home Battery Into a Revenue Asset: Is It Worth It?"
-description: "Compare battery degradation cost against frequency-response and VPP revenue—use the grid frequency reward calculator to stress-test ROI."
-slug: "home-battery-grid-services-roi"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: 'Turning Your Home Battery Into a Revenue Asset: Is It Worth It?'
+description: >-
+  Compare battery degradation cost against frequency-response and VPP
+  revenue—use the grid frequency reward calculator to stress-test ROI.
+slug: home-battery-grid-services-roi
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: grid-frequency-reward
 ---
 
 A home battery can backup your fridge—or it can **bid into grid programs** when your utility and inverter ecosystem allow it. The question is not whether technology works; it is whether **net dollars after wear** beat leaving the pack at 90% SOC for outages only.

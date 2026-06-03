@@ -1,9 +1,12 @@
 ---
-title: "Maximizing Savings: Solar Water Heaters as a Green Home Strategy"
-description: "Compare system cost to monthly electric savings and use the solar water heater efficiency calculator to monitor health over time."
-slug: "solar-water-heater-green-home-savings-strategy"
-category: "Green Home"
-date: "2026-05-30"
+title: 'Maximizing Savings: Solar Water Heaters as a Green Home Strategy'
+description: >-
+  Compare system cost to monthly electric savings and use the solar water heater
+  efficiency calculator to monitor health over time.
+slug: solar-water-heater-green-home-savings-strategy
+category: Green Home
+date: '2026-05-30'
+relatedToolId: solar-water-heater-efficiency
 ---
 
 In a green home stack, solar thermal is the quiet workhorse: no inverter clipping drama, just fewer kilowatt-hours through the water heater breaker. The strategic question is not “solar yes/no” but **whether avoided resistance kWh repay capex faster than the next competing upgrade**—heat pump water heaters, envelope air sealing, or PV with shiftable loads.

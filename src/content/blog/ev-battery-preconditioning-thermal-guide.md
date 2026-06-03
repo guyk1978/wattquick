@@ -1,9 +1,13 @@
 ---
-title: "Why Your EV Battery Needs Preconditioning: A Guide to Thermal Management"
-description: "How pack temperature limits DC fast-charge speed, what BMS heating and cooling cost while you wait, and why plugged-in conditioning beats range loss on the road."
-slug: "ev-battery-preconditioning-thermal-guide"
-category: "EV Charging"
-date: "2026-05-29"
+title: 'Why Your EV Battery Needs Preconditioning: A Guide to Thermal Management'
+description: >-
+  How pack temperature limits DC fast-charge speed, what BMS heating and cooling
+  cost while you wait, and why plugged-in conditioning beats range loss on the
+  road.
+slug: ev-battery-preconditioning-thermal-guide
+category: EV Charging
+date: '2026-05-29'
+relatedToolId: ev-preconditioning-cost
 ---
 
 Stop guessing your charging efficiency – calculate the exact cost of thermal management and optimize your EV charging sessions for winter and summer extremes.

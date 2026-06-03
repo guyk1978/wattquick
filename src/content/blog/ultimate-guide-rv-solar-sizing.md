@@ -1,9 +1,12 @@
 ---
-title: "The Ultimate Guide to RV Solar Sizing (Roof Space and Daily Load)"
-description: "Audit boondocking loads, usable roof area, and portable power station recharge times before you drill the first mounting hole."
-slug: "ultimate-guide-rv-solar-sizing"
-category: "RV & Marine"
-date: "2026-05-15"
+title: The Ultimate Guide to RV Solar Sizing (Roof Space and Daily Load)
+description: >-
+  Audit boondocking loads, usable roof area, and portable power station recharge
+  times before you drill the first mounting hole.
+slug: ultimate-guide-rv-solar-sizing
+category: RV & Marine
+date: '2026-05-15'
+relatedToolId: rv-solar-calculator
 ---
 
 RV solar sizing is not "buy the biggest panel that fits." It is reconciling how many watt-hours you spend between sunrise and sunset with how many watt-hours your roof can harvest in real campground conditions—partial shade, tilt you did not bother setting, and a fridge that cycles all night on battery.

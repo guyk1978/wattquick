@@ -1,9 +1,12 @@
 ---
-title: "How to Optimize Solar Panel Tilt and Angle for Your Latitude"
-description: "Year-round vs. seasonal tilt, azimuth basics, and when roof pitch already gives you a free optimization."
-slug: "optimize-solar-panel-tilt-angle"
-category: "Solar"
-date: "2026-03-22"
+title: How to Optimize Solar Panel Tilt and Angle for Your Latitude
+description: >-
+  Year-round vs. seasonal tilt, azimuth basics, and when roof pitch already
+  gives you a free optimization.
+slug: optimize-solar-panel-tilt-angle
+category: Solar
+date: '2026-03-22'
+relatedToolId: solar-angle-optimizer
 ---
 
 Tilt and orientation translate sun into kilowatt-hours. The right angles maximize annual energy; the wrong ones leave production on the table. Fortunately, residential rules of thumb are stable even when inverter firmware gets complicated.

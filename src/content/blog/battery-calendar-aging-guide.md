@@ -1,9 +1,12 @@
 ---
-title: "Battery Calendar Aging: Storage Conditions vs. Long-Term Health"
-description: "Model Li-ion calendar fade from average temperature, SOC, and pack age—capacity loss % and remaining SoH."
-slug: "battery-calendar-aging-guide"
-category: "Battery"
-date: "2026-05-30"
+title: 'Battery Calendar Aging: Storage Conditions vs. Long-Term Health'
+description: >-
+  Model Li-ion calendar fade from average temperature, SOC, and pack
+  age—capacity loss % and remaining SoH.
+slug: battery-calendar-aging-guide
+category: Battery
+date: '2026-05-30'
+relatedToolId: battery-calendar-aging
 ---
 
 Batteries age even when you're not using them—calculate the impact of storage conditions on your battery's health and longevity.

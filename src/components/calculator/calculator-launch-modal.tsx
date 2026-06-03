@@ -1,68 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, X } from "lucide-react";
+import { ArrowLeft, BookOpen, X } from "lucide-react";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import type { CalculatorId } from "@/lib/calculators";
-import { getCalculatorMeta } from "@/lib/calculators/registry";
-import { getNextCalculatorStep } from "@/lib/dashboard-chaining";
-import { getDefaultResultSnapshot } from "@/lib/dashboard-snapshot";
-import {
-  recordCalculatorUse,
-  updateRecentSnapshot,
-} from "@/lib/dashboard-storage";
+import { getCalculatorDefinition, getCalculatorMeta } from "@/lib/calculators/registry";
 import {
   getArticleUrl,
   getToolLaunchContext,
   shouldShowBackToArticle,
+  type ToolLaunchContext,
 } from "@/lib/content-tool-link";
 import { cn } from "@/lib/utils";
 
-interface CalculatorModalProps {
+interface CalculatorLaunchModalProps {
   calculatorId: CalculatorId | null;
   onClose: () => void;
-  onOpenCalculator: (id: CalculatorId) => void;
+  /** Explicit context; falls back to sessionStorage */
+  launchContext?: ToolLaunchContext | null;
+  /** Extra footer (e.g. dashboard “Next steps”) rendered above complementary guide */
+  footer?: ReactNode;
 }
 
-export function CalculatorModal({
+export function CalculatorLaunchModal({
   calculatorId,
   onClose,
-  onOpenCalculator,
-}: CalculatorModalProps) {
+  launchContext: launchContextProp,
+  footer,
+}: CalculatorLaunchModalProps) {
   const meta = calculatorId ? getCalculatorMeta(calculatorId) : null;
-  const nextStep = calculatorId ? getNextCalculatorStep(calculatorId) : null;
-  const snapshotRef = useRef<string | null>(null);
-  const [liveSnapshot, setLiveSnapshot] = useState<string | null>(null);
-  const [launchCtx, setLaunchCtx] = useState(
-    () => (calculatorId ? getToolLaunchContext() : null)
-  );
+  const definition = calculatorId ? getCalculatorDefinition(calculatorId) : null;
+  const [ctx, setCtx] = useState<ToolLaunchContext | null>(launchContextProp ?? null);
 
   useEffect(() => {
-    if (calculatorId) setLaunchCtx(getToolLaunchContext());
-  }, [calculatorId]);
+    if (launchContextProp) {
+      setCtx(launchContextProp);
+      return;
+    }
+    if (calculatorId) setCtx(getToolLaunchContext());
+  }, [calculatorId, launchContextProp]);
 
-  const showBack =
-    calculatorId && shouldShowBackToArticle(calculatorId, launchCtx);
-
-  useEffect(() => {
-    if (!calculatorId) return;
-    const fallback = getDefaultResultSnapshot(calculatorId);
-    snapshotRef.current = fallback;
-    setLiveSnapshot(fallback);
-    recordCalculatorUse(calculatorId, fallback);
-  }, [calculatorId]);
-
-  const handleSnapshot = useCallback(
-    (snapshot: string | null) => {
-      if (!calculatorId || !snapshot) return;
-      snapshotRef.current = snapshot;
-      setLiveSnapshot(snapshot);
-      updateRecentSnapshot(calculatorId, snapshot);
-    },
-    [calculatorId]
-  );
+  const showBack = calculatorId ? shouldShowBackToArticle(calculatorId, ctx) : false;
+  const relatedArticle = definition?.relatedArticleId;
 
   useEffect(() => {
     if (!calculatorId) return;
@@ -75,9 +56,6 @@ export function CalculatorModal({
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
-      if (calculatorId && snapshotRef.current) {
-        recordCalculatorUse(calculatorId, snapshotRef.current);
-      }
     };
   }, [calculatorId, onClose]);
 
@@ -88,11 +66,6 @@ export function CalculatorModal({
     [onClose]
   );
 
-  const handleNextStep = useCallback(() => {
-    if (!nextStep) return;
-    onOpenCalculator(nextStep.nextId);
-  }, [nextStep, onOpenCalculator]);
-
   return (
     <AnimatePresence>
       {calculatorId && meta ? (
@@ -100,7 +73,7 @@ export function CalculatorModal({
           key={calculatorId}
           role="dialog"
           aria-modal="true"
-          aria-labelledby="dashboard-calc-modal-title"
+          aria-labelledby="calc-launch-modal-title"
           className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -125,9 +98,9 @@ export function CalculatorModal({
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex shrink-0 flex-col gap-3 border-b border-white/10 px-4 py-4 sm:px-6">
-              {showBack && launchCtx ? (
+              {showBack && ctx ? (
                 <Link
-                  href={getArticleUrl(launchCtx.articleSlug)}
+                  href={getArticleUrl(ctx.articleSlug)}
                   onClick={onClose}
                   className="inline-flex w-fit items-center gap-1.5 text-xs font-medium text-cyan-400/90 transition-colors hover:text-cyan-300"
                 >
@@ -138,70 +111,60 @@ export function CalculatorModal({
                 </Link>
               ) : null}
               <div className="flex items-start justify-between gap-4">
-              <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
-                  Quick launch
-                </p>
-                <h2
-                  id="dashboard-calc-modal-title"
-                  className="truncate text-lg font-semibold text-white sm:text-xl"
-                >
-                  {meta.title}
-                </h2>
-                {liveSnapshot ? (
-                  <p
-                    className={cn(
-                      "neon-hero-number dashboard-modal-stat mt-1 text-cyan-300/90"
-                    )}
-                  >
-                    {liveSnapshot}
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+                    Calculator
                   </p>
-                ) : null}
-              </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition-colors hover:border-cyan-500/40 hover:bg-white/5 hover:text-white"
-                aria-label="Close calculator"
-              >
-                <X className="size-5" />
-              </button>
-              </div>
-            </div>
-            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
-              <CalculatorPanel
-                id={calculatorId}
-                onResultSnapshot={handleSnapshot}
-              />
-            </div>
-
-            {nextStep ? (
-              <div className="shrink-0 border-t border-white/10 bg-slate-900/50 px-4 py-4 sm:px-6">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400/90">
-                  Next steps
-                </p>
+                  <h2
+                    id="calc-launch-modal-title"
+                    className="tool-preview-nowrap truncate text-lg font-semibold text-white sm:text-xl"
+                  >
+                    {meta.title}
+                  </h2>
+                </div>
                 <button
                   type="button"
-                  onClick={handleNextStep}
+                  onClick={onClose}
+                  className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition-colors hover:border-cyan-500/40 hover:bg-white/5 hover:text-white"
+                  aria-label="Close calculator"
+                >
+                  <X className="size-5" />
+                </button>
+              </div>
+            </div>
+
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6 sm:py-5">
+              <CalculatorPanel id={calculatorId} />
+            </div>
+
+            {footer ? (
+              <div className="shrink-0 border-t border-white/10">{footer}</div>
+            ) : null}
+
+            {relatedArticle ? (
+              <div className="shrink-0 border-t border-white/10 bg-slate-900/50 px-4 py-4 sm:px-6">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400/90">
+                  Complementary guide
+                </p>
+                <Link
+                  href={getArticleUrl(relatedArticle)}
+                  onClick={onClose}
                   className={cn(
-                    "mt-2 flex w-full items-center justify-between gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-left",
+                    "mt-2 flex items-center gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3",
                     "transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
                   )}
                 >
+                  <BookOpen className="size-4 shrink-0 text-emerald-400" aria-hidden />
                   <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold text-white">
-                      {nextStep.title}
+                    <span className="tool-preview-nowrap block truncate text-sm font-semibold text-white">
+                      Read the full article
                     </span>
                     <span className="mt-0.5 block text-xs text-slate-400">
-                      {nextStep.reason}
+                      Deep dive on /blog/{relatedArticle}/
                     </span>
                   </span>
-                  <ArrowRight
-                    className="size-4 shrink-0 text-emerald-400"
-                    aria-hidden
-                  />
-                </button>
+                </Link>
               </div>
             ) : null}
           </motion.div>

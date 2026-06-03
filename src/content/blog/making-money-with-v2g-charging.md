@@ -1,9 +1,12 @@
 ---
-title: "Making Money With Vehicle-to-Grid (V2G) Charging"
-description: "Bidirectional EV exports, grid services revenue, and how carbon offsets stack on top of tariff arbitrage."
-slug: "making-money-with-v2g-charging"
-category: "Utility Tariffs"
-date: "2026-05-20"
+title: Making Money With Vehicle-to-Grid (V2G) Charging
+description: >-
+  Bidirectional EV exports, grid services revenue, and how carbon offsets stack
+  on top of tariff arbitrage.
+slug: making-money-with-v2g-charging
+category: Utility Tariffs
+date: '2026-05-20'
+relatedToolId: v2g-financial-return
 ---
 
 Vehicle-to-grid turns a parked EV into a dispatchable battery—exporting DC through a bidirectional charger/inverter stack when the grid or aggregator pays more than it costs to refill later. The idea is simple; the contracts, interconnection rules, and battery warranty math are not. V2G is real economics in pilot form, not fantasy, but only where utilities and ISOs allow export and compensate it.

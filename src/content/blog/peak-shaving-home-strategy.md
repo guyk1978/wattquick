@@ -1,9 +1,13 @@
 ---
-title: "Peak Shaving: From Commercial Strategy to Home Bill Control"
-description: "Why intelligent load management beats raw consumption cuts as energy prices rise—and how to operationalize home schedules with the peak shaving calculator."
-slug: "peak-shaving-home-strategy"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: 'Peak Shaving: From Commercial Strategy to Home Bill Control'
+description: >-
+  Why intelligent load management beats raw consumption cuts as energy prices
+  rise—and how to operationalize home schedules with the peak shaving
+  calculator.
+slug: peak-shaving-home-strategy
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: peak-shaving-potential
 ---
 
 Industrial facilities have shaved peaks for decades—batteries, curtailable processes, and diesel gen-sets targeting **demand ratchets** and coincident charges. Residential tariffs are catching up through TOU and critical-peak pricing. The playbook is the same at smaller scale: **manage power when it is expensive**, not only how much you use.

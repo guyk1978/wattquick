@@ -1,9 +1,12 @@
 ---
-title: "Why Do Home Devices Struggle? Voltage Drop in Electrical Systems"
-description: "How cable resistance wastes energy as heat, why motors suffer on low voltage, and why tire pressure–level maintenance includes checking conductor size."
-slug: "why-home-voltage-drop-matters"
-category: "Power"
-date: "2026-05-30"
+title: Why Do Home Devices Struggle? Voltage Drop in Electrical Systems
+description: >-
+  How cable resistance wastes energy as heat, why motors suffer on low voltage,
+  and why tire pressure–level maintenance includes checking conductor size.
+slug: why-home-voltage-drop-matters
+category: Power
+date: '2026-05-30'
+relatedToolId: residential-voltage-drop
 ---
 
 Lights dim when the AC starts—not because the utility failed, but because **voltage sagged** on the branch circuit. Voltage drop is the gap between what leaves your breaker and what arrives at the load after fighting through copper.

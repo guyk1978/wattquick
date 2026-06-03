@@ -1,9 +1,12 @@
 ---
-title: "Where Did the Power Go? Engineering EV Charging Cable Efficiency"
-description: "Joule heating, conductor sizing, and how to pick home EV cables that stay cool under sustained Level 2 current."
-slug: "ev-charging-cable-efficiency-engineering"
-category: "EV Charging"
-date: "2026-05-30"
+title: Where Did the Power Go? Engineering EV Charging Cable Efficiency
+description: >-
+  Joule heating, conductor sizing, and how to pick home EV cables that stay cool
+  under sustained Level 2 current.
+slug: ev-charging-cable-efficiency-engineering
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-charging-cable-loss
 ---
 
 The electrons that miss your battery did not vanish—they became **heat in conductors** obeying $P = I^2 R$. EV owners see the symptom as a warm cable or sluggish charge; engineers see **resistance budget** violated somewhere between the breaker and the J1772 or Type 2 plug.

@@ -1,9 +1,12 @@
 ---
-title: "BESS Round-trip Carbon Cost: Is Your Battery Storage Truly Green?"
-description: "Quantify kg CO₂ per year from battery conversion losses and see how much carbon renewable charging avoids versus grid mix."
-slug: "bess-carbon-cost-guide"
-category: "Green Home"
-date: "2026-05-30"
+title: 'BESS Round-trip Carbon Cost: Is Your Battery Storage Truly Green?'
+description: >-
+  Quantify kg CO₂ per year from battery conversion losses and see how much
+  carbon renewable charging avoids versus grid mix.
+slug: bess-carbon-cost-guide
+category: Green Home
+date: '2026-05-30'
+relatedToolId: bess-carbon-cost
 ---
 
 Are your storage savings truly green? Calculate the lifecycle carbon impact of your battery system and optimize for a lower carbon footprint.

@@ -1,9 +1,12 @@
 ---
-title: "Electric vs. Gas Fleet TCO: A Logistics Owner's Workbook"
-description: "Per-mile energy, maintenance intervals, and depot charging capex—how to compare diesel vans and electric delivery fleets on one spreadsheet."
-slug: "electric-vs-gas-fleet-tco-guide"
-category: "Commercial EV"
-date: "2026-05-13"
+title: 'Electric vs. Gas Fleet TCO: A Logistics Owner''s Workbook'
+description: >-
+  Per-mile energy, maintenance intervals, and depot charging capex—how to
+  compare diesel vans and electric delivery fleets on one spreadsheet.
+slug: electric-vs-gas-fleet-tco-guide
+category: Commercial EV
+date: '2026-05-13'
+relatedToolId: ev-fleet-tco
 ---
 
 Total cost of ownership for commercial fleets is not purchase price divided by years. It is energy at the meter, fuel at the pump, downtime in the bay, and resale on the back end—plus the soft cost of drivers waiting on chargers that were not spec'd correctly. Electric logistics vehicles win or lose on utilization and tariff design, not on virtue signaling.

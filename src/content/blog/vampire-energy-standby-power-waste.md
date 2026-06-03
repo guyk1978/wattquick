@@ -1,9 +1,12 @@
 ---
-title: "Vampire Energy and Standby Power Waste in the Home"
-description: "Find phantom loads, estimate annual cost, and cut waste without living like it's 1899."
-slug: "vampire-energy-standby-power-waste"
-category: "Appliances"
-date: "2026-02-25"
+title: Vampire Energy and Standby Power Waste in the Home
+description: >-
+  Find phantom loads, estimate annual cost, and cut waste without living like
+  it's 1899.
+slug: vampire-energy-standby-power-waste
+category: Appliances
+date: '2026-02-25'
+relatedToolId: vampire-power-cost
 ---
 
 Vampire, phantom, standby—labels for the same trickle: devices that draw power while "off." Individually small, collectively a slice of residential use worth hunting.

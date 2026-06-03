@@ -1,9 +1,12 @@
 ---
-title: "The true cost of EV ownership vs Gas cars"
-description: "Fuel and oil are only part of TCO—compare five years of scheduled maintenance for electric vs. gasoline vehicles."
-slug: "true-cost-ev-ownership-vs-gas-cars"
-category: "EV Charging"
-date: "2026-06-03"
+title: The true cost of EV ownership vs Gas cars
+description: >-
+  Fuel and oil are only part of TCO—compare five years of scheduled maintenance
+  for electric vs. gasoline vehicles.
+slug: true-cost-ev-ownership-vs-gas-cars
+category: EV Charging
+date: '2026-06-03'
+relatedToolId: ev-vs-ice-maintenance
 ---
 
 Sticker price and $/kWh get the headlines. **Maintenance** is the quiet line item where EVs often pull ahead—fewer fluids, no ignition service, and brake pads that last longer thanks to regenerative braking.

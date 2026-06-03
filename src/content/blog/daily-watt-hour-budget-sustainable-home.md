@@ -1,9 +1,12 @@
 ---
-title: "Building a Daily Watt-Hour Budget for a Sustainable Home"
-description: "Split household use into categories, sum kWh, and connect daily budgets to bills and solar sizing."
-slug: "daily-watt-hour-budget-sustainable-home"
-category: "Appliances"
-date: "2026-02-15"
+title: Building a Daily Watt-Hour Budget for a Sustainable Home
+description: >-
+  Split household use into categories, sum kWh, and connect daily budgets to
+  bills and solar sizing.
+slug: daily-watt-hour-budget-sustainable-home
+category: Appliances
+date: '2026-02-15'
+relatedToolId: whole-house-energy-budget
 ---
 
 Sustainability starts with a number: how many watt-hours you spend per day. Not a vague "we should use less"—a ledger by category that informs solar, batteries, and behavior.

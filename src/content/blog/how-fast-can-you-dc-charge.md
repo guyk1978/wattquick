@@ -1,9 +1,12 @@
 ---
-title: "How Fast Can You DC Charge an EV? The 10–80% Window Explained"
-description: "Learn why DC fast charging slows after 80% SOC, how taper curves work, and how to estimate session time without guesswork."
-slug: "how-fast-can-you-dc-charge"
-category: "EV Charging"
-date: "2026-04-12"
+title: How Fast Can You DC Charge an EV? The 10–80% Window Explained
+description: >-
+  Learn why DC fast charging slows after 80% SOC, how taper curves work, and how
+  to estimate session time without guesswork.
+slug: how-fast-can-you-dc-charge
+category: EV Charging
+date: '2026-04-12'
+relatedToolId: ev-fast-charging-time
 ---
 
 DC fast charging feels effortless until the last twenty percent. Most drivers discover the same pattern on their first road trip: the battery rockets from a low state of charge to about eighty percent, then the station display seems to stall. That behavior is not a broken charger—it is battery management doing its job.

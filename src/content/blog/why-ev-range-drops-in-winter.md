@@ -1,9 +1,12 @@
 ---
-title: "Why EV Range Drops in Winter (and What You Can Do About It)"
-description: "Cold batteries, cabin heat, and winter driving physics explain seasonal range loss—and how to plan realistic winter miles."
-slug: "why-ev-range-drops-in-winter"
-category: "EV Charging"
-date: "2026-04-10"
+title: Why EV Range Drops in Winter (and What You Can Do About It)
+description: >-
+  Cold batteries, cabin heat, and winter driving physics explain seasonal range
+  loss—and how to plan realistic winter miles.
+slug: why-ev-range-drops-in-winter
+category: EV Charging
+date: '2026-04-10'
+relatedToolId: ev-winter-range-loss
 ---
 
 If your dashboard range estimate looked honest in July and optimistic in January, you are not alone. Winter range loss is one of the most discussed EV ownership topics—and one of the least mysterious once you separate battery chemistry from comfort loads.

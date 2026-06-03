@@ -1,9 +1,12 @@
 ---
-title: "EV Charging Cable Power Loss: Stop Paying for Heat in the Cord"
-description: "Calculate I²R watts, wasted kWh, and session cost from charging amps, cable length, and copper mm² cross-section."
-slug: "ev-charging-cable-loss-guide"
-category: "EV Charging"
-date: "2026-05-30"
+title: 'EV Charging Cable Power Loss: Stop Paying for Heat in the Cord'
+description: >-
+  Calculate I²R watts, wasted kWh, and session cost from charging amps, cable
+  length, and copper mm² cross-section.
+slug: ev-charging-cable-loss-guide
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-charging-cable-loss
 ---
 
 Don't pay for energy that turns into heat—calculate your EV charging cable power loss and choose the right gauge to maximize your charging efficiency.

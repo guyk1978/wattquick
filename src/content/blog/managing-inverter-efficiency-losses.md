@@ -1,9 +1,12 @@
 ---
-title: "Managing Inverter Efficiency Losses in Off-Grid and Backup Systems"
-description: "Why DC-to-AC conversion eats watts, how to size input power, and where efficiency curves matter."
-slug: "managing-inverter-efficiency-losses"
-category: "Battery"
-date: "2026-03-08"
+title: Managing Inverter Efficiency Losses in Off-Grid and Backup Systems
+description: >-
+  Why DC-to-AC conversion eats watts, how to size input power, and where
+  efficiency curves matter.
+slug: managing-inverter-efficiency-losses
+category: Battery
+date: '2026-03-08'
+relatedToolId: inverter-loss-calculator
 ---
 
 Every inverter turns some battery energy into heat. Efficiency in the mid-nineties sounds excellent until you multiply by years of runtime. Losses show up as extra Ah drawn from the bank, not as a line item on a screen.

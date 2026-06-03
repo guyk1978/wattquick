@@ -1,9 +1,12 @@
 ---
-title: "Lighting Design Done Right: Don't Overload the Home Breaker"
-description: "The 80% continuous-load rule for lighting branches, and why LED wattages must come from real nameplates—not old incandescent habits."
-slug: "lighting-circuit-80-percent-rule"
-category: "Appliances"
-date: "2026-05-30"
+title: 'Lighting Design Done Right: Don''t Overload the Home Breaker'
+description: >-
+  The 80% continuous-load rule for lighting branches, and why LED wattages must
+  come from real nameplates—not old incandescent habits.
+slug: lighting-circuit-80-percent-rule
+category: Appliances
+date: '2026-05-30'
+relatedToolId: lighting-circuit-load
 ---
 
 Homeowners hear “15 amp lighting circuit” and assume fifteen amps of bulbs is fine. Electricians plan **twelve** amps of continuous lighting on that breaker—because lighting stays on, breakers heat, and inspectors read **80%** as the practical ceiling.

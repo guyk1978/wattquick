@@ -1,9 +1,12 @@
 ---
-title: "Lighting Circuit Load: Safe Sizing for Home Branch Circuits"
-description: "Add fixture watts, voltage, and breaker rating—check amps and the 80% continuous-load limit before lights flicker or breakers trip."
-slug: "lighting-circuit-load-guide"
-category: "Appliances"
-date: "2026-05-30"
+title: 'Lighting Circuit Load: Safe Sizing for Home Branch Circuits'
+description: >-
+  Add fixture watts, voltage, and breaker rating—check amps and the 80%
+  continuous-load limit before lights flicker or breakers trip.
+slug: lighting-circuit-load-guide
+category: Appliances
+date: '2026-05-30'
+relatedToolId: lighting-circuit-load
 ---
 
 Avoid flickering lights and tripped breakers—calculate your lighting circuit load accurately to ensure safe and balanced electrical design.

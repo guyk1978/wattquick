@@ -1,9 +1,12 @@
 ---
-title: "How to Size a Home Emergency Backup Battery Bank"
-description: "Essential loads, hours of autonomy, depth of discharge, and inverter losses in one sizing path."
-slug: "size-home-emergency-backup-battery"
-category: "Battery"
-date: "2026-03-05"
+title: How to Size a Home Emergency Backup Battery Bank
+description: >-
+  Essential loads, hours of autonomy, depth of discharge, and inverter losses in
+  one sizing path.
+slug: size-home-emergency-backup-battery
+category: Battery
+date: '2026-03-05'
+relatedToolId: home-backup-sizing
 ---
 
 Whole-house backup sounds luxurious until you price a mansion-scale battery. Emergency sizing focuses on survival circuits: fridge, lights, router, well pump if needed. List watts, pick hours, add margin.

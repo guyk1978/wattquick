@@ -1,9 +1,12 @@
 ---
-title: "How to Calculate Break-Even on Your Microgrid: Formulas Behind the ROI Tool"
-description: "Step-by-step break-even and cumulative ROI math for solar-plus-storage microgrids—with inflation on energy savings and O&M in the cash-flow stack."
-slug: "microgrid-break-even-calculator-explained"
-category: "Green Home"
-date: "2026-05-29"
+title: 'How to Calculate Break-Even on Your Microgrid: Formulas Behind the ROI Tool'
+description: >-
+  Step-by-step break-even and cumulative ROI math for solar-plus-storage
+  microgrids—with inflation on energy savings and O&M in the cash-flow stack.
+slug: microgrid-break-even-calculator-explained
+category: Green Home
+date: '2026-05-29'
+relatedToolId: microgrid-roi
 ---
 
 Break-even is the moment cumulative cash in from your microgrid equals what you spent to build it. Everything before that date is recovery; everything after is return. The arithmetic is simple; the inputs are not. This article walks through the equations WattQuick uses so you can audit a proposal line by line.

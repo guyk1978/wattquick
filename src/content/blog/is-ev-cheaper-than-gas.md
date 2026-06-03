@@ -1,9 +1,12 @@
 ---
-title: "Is an EV Cheaper Than Gas? A Straightforward Cost Comparison"
-description: "Compare per-mile energy cost, home charging rates, and when electric driving beats gasoline for your actual mileage."
-slug: "is-ev-cheaper-than-gas"
-category: "EV Charging"
-date: "2026-04-08"
+title: Is an EV Cheaper Than Gas? A Straightforward Cost Comparison
+description: >-
+  Compare per-mile energy cost, home charging rates, and when electric driving
+  beats gasoline for your actual mileage.
+slug: is-ev-cheaper-than-gas
+category: EV Charging
+date: '2026-04-08'
+relatedToolId: ev-vs-gas-savings
 ---
 
 The honest answer to "Is an EV cheaper than gas?" is the one every engineer hates: it depends on your rates, your car, and where you fuel. The good news is that the math is simple enough to run in a few minutes once you separate purchase price from energy price.

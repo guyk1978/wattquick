@@ -1,9 +1,15 @@
 ---
-title: "Grid Frequency Response Rewards: Why Your Battery Can Earn Grid-Stability Payments"
-description: "Understand capacity and energy compensation for frequency regulation, how availability affects revenue, and how to model monthly earnings before VPP enrollment."
-slug: "grid-frequency-response-rewards-guide"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: >-
+  Grid Frequency Response Rewards: Why Your Battery Can Earn Grid-Stability
+  Payments
+description: >-
+  Understand capacity and energy compensation for frequency regulation, how
+  availability affects revenue, and how to model monthly earnings before VPP
+  enrollment.
+slug: grid-frequency-response-rewards-guide
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: grid-frequency-reward
 ---
 
 Stop letting your battery sit idle—calculate your potential earnings by providing grid frequency stability services and turning your storage into a revenue stream.

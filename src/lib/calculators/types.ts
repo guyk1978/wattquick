@@ -39,6 +39,8 @@ export interface CalculatorMeta {
   tag: string;
   category: CalculatorCategory;
   suggestions: CalculatorId[];
+  /** Blog slug for complementary guide (bidirectional content link) */
+  relatedArticleId?: string;
 }
 
 export interface CalculatorDefinition extends CalculatorMeta {
@@ -59,5 +61,6 @@ export function toMeta(definition: CalculatorDefinition): CalculatorMeta {
     tag: definition.tag,
     category: definition.category,
     suggestions: definition.suggestions,
+    relatedArticleId: definition.relatedArticleId,
   };
 }

@@ -1,9 +1,12 @@
 ---
-title: "Hidden Costs of Public EV Charging (Session Fees, Idle Penalties, and More)"
-description: "Per-kWh rates are only part of the story—learn how session fees and idle charges inflate real public charging cost."
-slug: "hidden-costs-public-ev-charging"
-category: "EV Charging"
-date: "2026-04-02"
+title: 'Hidden Costs of Public EV Charging (Session Fees, Idle Penalties, and More)'
+description: >-
+  Per-kWh rates are only part of the story—learn how session fees and idle
+  charges inflate real public charging cost.
+slug: hidden-costs-public-ev-charging
+category: EV Charging
+date: '2026-04-02'
+relatedToolId: ev-public-charging-cost
 ---
 
 Public charging price boards love bold $/kWh numbers. The receipt tells a fuller story: connection fees, minimums, idle penalties, and membership tiers can turn a cheap-looking rate into a pricey stop.

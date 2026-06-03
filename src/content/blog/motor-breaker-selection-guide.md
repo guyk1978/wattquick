@@ -1,9 +1,12 @@
 ---
-title: "Choosing Motor Breakers: Type B, C, and D Explained"
-description: "How breaker curves handle inrush peaks—and planning shop and lab panels before equipment arrives."
-slug: "motor-breaker-selection-guide"
-category: "Guides"
-date: "2026-05-30"
+title: 'Choosing Motor Breakers: Type B, C, and D Explained'
+description: >-
+  How breaker curves handle inrush peaks—and planning shop and lab panels before
+  equipment arrives.
+slug: motor-breaker-selection-guide
+category: Guides
+date: '2026-05-30'
+relatedToolId: ac-inrush-current
 ---
 
 Residential breakers in North America are often arc-fault or standard thermal-magnetic—curve letters B/C/D are more visible on **IEC-style** devices and industrial panels. Globally, the idea is the same: **instantaneous trip multiplier** must clear inrush without nuisance while thermal protection respects run amps.

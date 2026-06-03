@@ -1,9 +1,12 @@
 ---
-title: "Generator or Solar? Choosing the Right Off-Grid Backup System"
-description: "Compare diesel generator OPEX against solar hybrid CAPEX—fuel burn, maintenance, reliability, and quiet hours when you live off the grid."
-slug: "generator-vs-solar-off-grid-backup-guide"
-category: "Solar"
-date: "2026-05-29"
+title: Generator or Solar? Choosing the Right Off-Grid Backup System
+description: >-
+  Compare diesel generator OPEX against solar hybrid CAPEX—fuel burn,
+  maintenance, reliability, and quiet hours when you live off the grid.
+slug: generator-vs-solar-off-grid-backup-guide
+category: Solar
+date: '2026-05-29'
+relatedToolId: generator-vs-solar-hybrid
 ---
 
 Stop burning money on diesel—calculate your path to energy independence and see exactly when a solar hybrid system pays for itself.

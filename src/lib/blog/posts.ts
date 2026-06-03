@@ -30,11 +30,8 @@ export interface BlogPost {
   content: string;
   /** Calculator tools embedded in the article body */
   calculatorSlugs: string[];
-  /**
-   * Primary linked calculator (frontmatter `relatedToolId` or first embed).
-   * Used by Quick Launch Widget, OG tags, and Command Center.
-   */
-  relatedToolId?: CalculatorId;
+  /** Required linked calculator — frontmatter `relatedToolId` (validated at build) */
+  relatedToolId: CalculatorId;
   /** Optional per-post OG image override */
   ogImage?: string;
 }
@@ -59,6 +56,17 @@ function readMarkdownPosts(): BlogPost[] {
 
       const trimmed = content.trim();
 
+      const relatedToolId = resolveRelatedToolId(
+        data as Record<string, unknown>,
+        trimmed
+      );
+
+      if (!relatedToolId) {
+        throw new Error(
+          `Blog post "${slug}" is missing required relatedToolId in frontmatter (or a <CalculatorEmbed />).`
+        );
+      }
+
       return {
         slug,
         title,
@@ -68,10 +76,7 @@ function readMarkdownPosts(): BlogPost[] {
         content: trimmed,
         readMinutes: estimateReadMinutes(trimmed),
         calculatorSlugs: extractCalculatorSlugs(trimmed),
-        relatedToolId: resolveRelatedToolId(
-          data as Record<string, unknown>,
-          trimmed
-        ),
+        relatedToolId,
         ogImage:
           typeof data.ogImage === "string" && data.ogImage.trim()
             ? data.ogImage.trim()

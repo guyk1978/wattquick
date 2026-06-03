@@ -9,9 +9,10 @@
     "preview": "npx serve@14 out",
     "lint": "eslint .",
     "generate:calculators": "tsx scripts/generate-calculators-md.ts",
+    "generate:article-tool-map": "node scripts/generate-article-tool-map.mjs",
     "search:build": "node scripts/build-search-index.js",
     "fuse:vendor": "esbuild node_modules/fuse.js/dist/fuse.min.mjs --format=iife --global-name=Fuse --outfile=assets/js/vendor/fuse.min.js --minify --footer:js=\"if(typeof Fuse!=='undefined'&&typeof Fuse.default==='function'){Fuse=Fuse.default;}\"",
-    "prebuild": "npm run generate:calculators && npm run search:build",
+    "prebuild": "npm run generate:calculators && npm run generate:article-tool-map && npm run search:build",
     "predev": "npm run generate:calculators && npm run search:build"
   },
   "dependencies": {

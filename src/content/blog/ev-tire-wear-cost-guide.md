@@ -1,9 +1,12 @@
 ---
-title: "EV Tire Wear Economics: The Hidden Maintenance Line in Your Budget"
-description: "Why instant torque and battery mass shorten tread life—and how to model annual tire depreciation vs. a comparable gas car before you buy or fleet an EV."
-slug: "ev-tire-wear-cost-guide"
-category: "EV Charging"
-date: "2026-05-30"
+title: 'EV Tire Wear Economics: The Hidden Maintenance Line in Your Budget'
+description: >-
+  Why instant torque and battery mass shorten tread life—and how to model annual
+  tire depreciation vs. a comparable gas car before you buy or fleet an EV.
+slug: ev-tire-wear-cost-guide
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-tire-wear-cost
 ---
 
 Don't let hidden costs surprise you—calculate the real impact of EV torque on your tire lifespan and budget for maintenance accordingly.

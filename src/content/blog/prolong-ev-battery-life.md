@@ -1,9 +1,12 @@
 ---
-title: "How to Prolong EV Battery Life: Habits That Actually Matter"
-description: "Daily charge limits, DC fast-charging frequency, and temperature habits that slow degradation—without myth-heavy advice."
-slug: "prolong-ev-battery-life"
-category: "EV Charging"
-date: "2026-04-05"
+title: 'How to Prolong EV Battery Life: Habits That Actually Matter'
+description: >-
+  Daily charge limits, DC fast-charging frequency, and temperature habits that
+  slow degradation—without myth-heavy advice.
+slug: prolong-ev-battery-life
+category: EV Charging
+date: '2026-04-05'
+relatedToolId: ev-battery-degradation
 ---
 
 EV batteries are designed to last years, but they are not immortal. Capacity fades gradually as calendar time, mileage, and heat accumulate. The habits that matter are boring—and effective.

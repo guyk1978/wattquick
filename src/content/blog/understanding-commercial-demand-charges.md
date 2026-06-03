@@ -1,9 +1,12 @@
 ---
-title: "Understanding Commercial Demand Charges on Your Power Bill"
-description: "Peak kW billing, concurrent motor startups, and strategies to flatten your facility load profile without throttling production."
-slug: "understanding-commercial-demand-charges"
-category: "Utility Tariffs"
-date: "2026-05-19"
+title: Understanding Commercial Demand Charges on Your Power Bill
+description: >-
+  Peak kW billing, concurrent motor startups, and strategies to flatten your
+  facility load profile without throttling production.
+slug: understanding-commercial-demand-charges
+category: Utility Tariffs
+date: '2026-05-19'
+relatedToolId: demand-charge-calculator
 ---
 
 Commercial electric bills split into energy (kWh) and demand (kW)—the highest average power draw your facility imposed on the grid in a billing window, often fifteen minutes. You can use less total energy month over month and still pay more if everything starts at once. That is demand charge economics, and it punishes warehouses, shops, and food service harder than homeowners ever see.

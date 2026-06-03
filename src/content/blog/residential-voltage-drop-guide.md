@@ -1,9 +1,12 @@
 ---
-title: "Residential AC Voltage Drop: Why Your Cables Matter More Than You Think"
-description: "Model voltage loss in home copper runs from amps, length, and AWG or mm²—stay within 3–5% guidelines for safe appliance and EV charger operation."
-slug: "residential-voltage-drop-guide"
-category: "Power"
-date: "2026-05-30"
+title: 'Residential AC Voltage Drop: Why Your Cables Matter More Than You Think'
+description: >-
+  Model voltage loss in home copper runs from amps, length, and AWG or mm²—stay
+  within 3–5% guidelines for safe appliance and EV charger operation.
+slug: residential-voltage-drop-guide
+category: Power
+date: '2026-05-30'
+relatedToolId: residential-voltage-drop
 ---
 
 Don't let long cable runs steal your power—calculate residential voltage drop and ensure your appliances get the voltage they need for safe, efficient operation.

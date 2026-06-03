@@ -1,9 +1,12 @@
 ---
-title: "Saving Energy in Your EV: How to Cut Charging Costs in Summer and Winter"
-description: "Smart preconditioning, tariff timing, and seasonal habits that lower thermal and charging spend—plus a calculator for battery heat and cool costs."
-slug: "ev-charging-cost-summer-winter-tips"
-category: "EV Charging"
-date: "2026-05-29"
+title: 'Saving Energy in Your EV: How to Cut Charging Costs in Summer and Winter'
+description: >-
+  Smart preconditioning, tariff timing, and seasonal habits that lower thermal
+  and charging spend—plus a calculator for battery heat and cool costs.
+slug: ev-charging-cost-summer-winter-tips
+category: EV Charging
+date: '2026-05-29'
+relatedToolId: ev-preconditioning-cost
 ---
 
 Seasonal extremes hit EV wallets twice: less range per kWh while driving, and more grid energy spent conditioning the pack before fast charging. The good news is that most waste is predictable once you separate **thermal minutes** from **charge minutes**.

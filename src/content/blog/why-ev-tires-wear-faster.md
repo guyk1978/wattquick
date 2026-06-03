@@ -1,9 +1,12 @@
 ---
-title: "Why Do EV Tires Wear Out Faster?"
-description: "High instant torque, battery mass, and EV-specific compounds explain shorter tread life—and why tire pressure maintenance matters more than ever."
-slug: "why-ev-tires-wear-faster"
-category: "EV Charging"
-date: "2026-05-30"
+title: Why Do EV Tires Wear Out Faster?
+description: >-
+  High instant torque, battery mass, and EV-specific compounds explain shorter
+  tread life—and why tire pressure maintenance matters more than ever.
+slug: why-ev-tires-wear-faster
+category: EV Charging
+date: '2026-05-30'
+relatedToolId: ev-tire-wear-cost
 ---
 
 EV owners hear “fewer moving parts” and picture zero maintenance. Tires did not get that memo. Many drivers replace rubber **thousands of kilometers earlier** than on their last gas car—not because EVs are defective, but because the load case changed.

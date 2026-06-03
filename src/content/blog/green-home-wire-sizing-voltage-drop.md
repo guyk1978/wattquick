@@ -1,9 +1,12 @@
 ---
-title: "Choosing the Right Wire Size for Your Green Home Project"
-description: "Link cable length and current for HVAC, EV chargers, and solar subpanels—use the residential voltage drop calculator before you pull wire."
-slug: "green-home-wire-sizing-voltage-drop"
-category: "Power"
-date: "2026-05-30"
+title: Choosing the Right Wire Size for Your Green Home Project
+description: >-
+  Link cable length and current for HVAC, EV chargers, and solar subpanels—use
+  the residential voltage drop calculator before you pull wire.
+slug: green-home-wire-sizing-voltage-drop
+category: Power
+date: '2026-05-30'
+relatedToolId: residential-voltage-drop
 ---
 
 Green retrofits add **new continuous loads** in old envelopes: heat pumps where resistance heat lived, EV chargers where a table lamp once sat, battery inverters in garages built in 1978. Breaker space is easy to see; **copper length** is hidden until something underperforms.

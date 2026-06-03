@@ -1,9 +1,12 @@
 ---
-title: "Solar Energy for Agriculture: How to Choose a Water Pump System"
-description: "Compare DC solar pumps and AC infrastructure for farm irrigation—how pumping depth changes energy demand and what to spec before you buy panels."
-slug: "solar-water-pumping-agriculture"
-category: "Solar"
-date: "2026-05-30"
+title: 'Solar Energy for Agriculture: How to Choose a Water Pump System'
+description: >-
+  Compare DC solar pumps and AC infrastructure for farm irrigation—how pumping
+  depth changes energy demand and what to spec before you buy panels.
+slug: solar-water-pumping-agriculture
+category: Solar
+date: '2026-05-30'
+relatedToolId: water-pump-solar-sizing
 ---
 
 Farm water is not a lighting load. Pumps run in bursts, heads change with season, and a single bad afternoon without refill can stress crops or livestock. Solar for agriculture is an **energy logistics** problem: match daily Wh to sun hours, then pick hardware that survives dust, heat, and long cable runs.

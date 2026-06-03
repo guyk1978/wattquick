@@ -1,9 +1,12 @@
 ---
-title: "Crypto Mining Electricity Costs vs. Profitability Basics"
-description: "How to model rig watts, uptime, and $/kWh before hash rate ever enters the spreadsheet."
-slug: "crypto-mining-electricity-profitability"
-category: "Appliances"
-date: "2026-02-28"
+title: Crypto Mining Electricity Costs vs. Profitability Basics
+description: >-
+  How to model rig watts, uptime, and $/kWh before hash rate ever enters the
+  spreadsheet.
+slug: crypto-mining-electricity-profitability
+category: Appliances
+date: '2026-02-28'
+relatedToolId: crypto-mining-power
 ---
 
 Mining profitability debates love hash price and difficulty. Your power bill cares about simpler facts: how many watts leave the wall, how many hours they run, and what your utility charges per kilowatt-hour.

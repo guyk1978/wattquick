@@ -819,6 +819,7 @@ export const calculators = [
   icon: Car,
   tag: "EV",
   category: "ev",
+  relatedArticleId: "ev-home-charging-cost",
   suggestions: ["ev-charge-time", "appliance-daily-cost", "appliance-monthly-energy"],
   fields: [
     { id: "kwh", label: "Energy delivered", unit: "kWh", placeholder: "60" },

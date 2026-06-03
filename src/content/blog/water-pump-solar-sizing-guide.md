@@ -1,9 +1,12 @@
 ---
-title: "Solar Water Pump Sizing: Why Array kWp Matters More Than Panel Stickers"
-description: "Learn how pump watts, daily run hours, pumping head, and peak sun hours drive kWp, panel count, and MPPT controller choice for off-grid water."
-slug: "water-pump-solar-sizing-guide"
-category: "Solar"
-date: "2026-05-30"
+title: 'Solar Water Pump Sizing: Why Array kWp Matters More Than Panel Stickers'
+description: >-
+  Learn how pump watts, daily run hours, pumping head, and peak sun hours drive
+  kWp, panel count, and MPPT controller choice for off-grid water.
+slug: water-pump-solar-sizing-guide
+category: Solar
+date: '2026-05-30'
+relatedToolId: water-pump-solar-sizing
 ---
 
 Stop relying on the grid for your water needs—calculate the perfect solar array to keep your pump running efficiently all day long.

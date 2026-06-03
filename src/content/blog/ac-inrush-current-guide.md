@@ -1,9 +1,12 @@
 ---
-title: "AC Inrush Current: Size Breakers Without Nuisance Trips"
-description: "Calculate running amps, peak inrush, and recommended breaker curve from watts, voltage, and startup multiplier."
-slug: "ac-inrush-current-guide"
-category: "Guides"
-date: "2026-05-30"
+title: 'AC Inrush Current: Size Breakers Without Nuisance Trips'
+description: >-
+  Calculate running amps, peak inrush, and recommended breaker curve from watts,
+  voltage, and startup multiplier.
+slug: ac-inrush-current-guide
+category: Guides
+date: '2026-05-30'
+relatedToolId: ac-inrush-current
 ---
 
 Prevent nuisance trips—calculate the true inrush current of your equipment and select the right breaker to keep your circuits running smoothly.

@@ -1,9 +1,12 @@
 ---
-title: "What Is Frequency Response Compensation? A Guide for Energy Investors"
-description: "How batteries support grid stability, how FCR and FRR products pay, and why virtual power plants are becoming the default DER interface."
-slug: "frequency-response-compensation-investor-guide"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: What Is Frequency Response Compensation? A Guide for Energy Investors
+description: >-
+  How batteries support grid stability, how FCR and FRR products pay, and why
+  virtual power plants are becoming the default DER interface.
+slug: frequency-response-compensation-investor-guide
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: grid-frequency-reward
 ---
 
 Frequency response compensation pays assets that keep the AC system near its nominal frequency when supply and demand diverge. For energy investors, it is an **ancillary services** revenue line—distinct from energy arbitrage, capacity markets, or renewable energy credits.

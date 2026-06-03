@@ -766,6 +766,15 @@
   --neon-to: #3b82f6;
 }
 
+.tool-preview-nowrap {
+  white-space: nowrap;
+}
+
+.tool-preview-card {
+  --neon-from: #22d3ee;
+  --neon-to: #34d399;
+}
+
 .dashboard-flow-label,
 .dashboard-widget-stat,
 .dashboard-modal-stat {

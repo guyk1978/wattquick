@@ -1,9 +1,12 @@
 ---
-title: "Why Does the Breaker Trip on Startup? Inrush Current Physics"
-description: "Inrush in motors, transformers, and power supplies—and how to use the AC inrush calculator to stop nuisance AFCI/MCB trips."
-slug: "ac-inrush-current-physics"
-category: "Guides"
-date: "2026-05-30"
+title: Why Does the Breaker Trip on Startup? Inrush Current Physics
+description: >-
+  Inrush in motors, transformers, and power supplies—and how to use the AC
+  inrush calculator to stop nuisance AFCI/MCB trips.
+slug: ac-inrush-current-physics
+category: Guides
+date: '2026-05-30'
+relatedToolId: ac-inrush-current
 ---
 
 The breaker sees a fault. The motor sees Monday morning. **Inrush current** is the brief overlap where those two stories disagree.

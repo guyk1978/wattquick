@@ -1,9 +1,12 @@
 ---
-title: "Cutting Electric Bills With Time-of-Use Load Shifting"
-description: "Move EV charging, laundry, and dishwashers into off-peak windows—and when home batteries earn arbitrage on top of TOU."
-slug: "cutting-bills-with-time-of-use-shifting"
-category: "Utility Tariffs"
-date: "2026-05-18"
+title: Cutting Electric Bills With Time-of-Use Load Shifting
+description: >-
+  Move EV charging, laundry, and dishwashers into off-peak windows—and when home
+  batteries earn arbitrage on top of TOU.
+slug: cutting-bills-with-time-of-use-shifting
+category: Utility Tariffs
+date: '2026-05-18'
+relatedToolId: tou-shifting-savings
 ---
 
 Time-of-use (TOU) tariffs price electrons by the clock. Utilities recover grid stress with high on-peak cents per kWh—often late afternoon into evening when air conditioning and cooking overlap. Your job is not heroic deprivation; it is moving flexible loads into cheap hours without breaking comfort rules you actually care about.

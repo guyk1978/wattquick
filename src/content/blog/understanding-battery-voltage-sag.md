@@ -1,9 +1,12 @@
 ---
-title: "Understanding Battery Voltage Sag Under Load"
-description: "Why voltage drops on DC cables and heavy loads, and how to keep inverters online."
-slug: "understanding-battery-voltage-sag"
-category: "Battery"
-date: "2026-03-02"
+title: Understanding Battery Voltage Sag Under Load
+description: >-
+  Why voltage drops on DC cables and heavy loads, and how to keep inverters
+  online.
+slug: understanding-battery-voltage-sag
+category: Battery
+date: '2026-03-02'
+relatedToolId: battery-voltage-drop
 ---
 
 You measure 12.8 V at rest and watch 11.2 V under load—and wonder if the bank is dying. Often it is simply sag: resistance in cells, connections, and wire carrying current.

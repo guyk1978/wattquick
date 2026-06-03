@@ -1,9 +1,12 @@
 ---
-title: "LED Lighting Retrofit ROI for Residential Upgrades"
-description: "Lumen matching, watt reduction, and payback timelines when you replace incandescent and halogen with modern LEDs."
-slug: "led-lighting-retrofit-roi-calculator"
-category: "Green Home"
-date: "2026-05-22"
+title: LED Lighting Retrofit ROI for Residential Upgrades
+description: >-
+  Lumen matching, watt reduction, and payback timelines when you replace
+  incandescent and halogen with modern LEDs.
+slug: led-lighting-retrofit-roi-calculator
+category: Green Home
+date: '2026-05-22'
+relatedToolId: led-savings-roi
 ---
 
 A whole-home LED retrofit is one of the few upgrades you can finish in a weekend and verify on next month's bill. The physics is trivial—same lumens, fewer watts—but the buying decision is not: color temperature, dimmer compatibility, enclosed fixture ratings, and rebate forms all change ROI.

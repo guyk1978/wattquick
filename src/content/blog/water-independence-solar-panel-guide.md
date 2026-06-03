@@ -1,9 +1,12 @@
 ---
-title: "Water Independence: The Complete Guide to Sizing Solar Panels for Pumps"
-description: "Use the water pump solar sizing calculator for kWp and panel count, then maintain controllers and current limits for reliable field operation."
-slug: "water-independence-solar-panel-guide"
-category: "Solar"
-date: "2026-05-30"
+title: 'Water Independence: The Complete Guide to Sizing Solar Panels for Pumps'
+description: >-
+  Use the water pump solar sizing calculator for kWp and panel count, then
+  maintain controllers and current limits for reliable field operation.
+slug: water-independence-solar-panel-guide
+category: Solar
+date: '2026-05-30'
+relatedToolId: water-pump-solar-sizing
 ---
 
 Water independence means your storage tank refills without a utility bill—and without guessing how many modules “look enough” on the roof rack. Panel sizing is the bridge between **daily pump energy** and **local sun**. Get that bridge wrong and you own a expensive shade structure.

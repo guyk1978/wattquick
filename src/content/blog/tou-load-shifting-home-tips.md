@@ -1,9 +1,12 @@
 ---
-title: "Smart at Peak: Lower Your Bill by Shifting Loads at Home"
-description: "How Time-of-Use tariffs affect residential bills—and which appliances to run off-peak for the biggest TOU savings."
-slug: "tou-load-shifting-home-tips"
-category: "Utility Tariffs"
-date: "2026-05-30"
+title: 'Smart at Peak: Lower Your Bill by Shifting Loads at Home'
+description: >-
+  How Time-of-Use tariffs affect residential bills—and which appliances to run
+  off-peak for the biggest TOU savings.
+slug: tou-load-shifting-home-tips
+category: Utility Tariffs
+date: '2026-05-30'
+relatedToolId: peak-shaving-potential
 ---
 
 TOU plans do not punish total usage—they punish **when** usage happens. A home that consumes the same kWh as last year can owe less simply because the dishwasher, EV, and dryer stopped buying electrons during the expensive window.

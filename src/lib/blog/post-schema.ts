@@ -28,10 +28,10 @@ export interface BlogPostFrontmatter {
   date?: string;
   publishedAt?: string;
   /**
-   * Primary WattQuick calculator for this article.
-   * Powers Quick Launch Widget, OG copy, and Command Center deep links.
+   * Required — primary WattQuick calculator ID for this article.
+   * Powers ToolPreview, Quick Launch, OG, and bidirectional calculator links.
    */
-  relatedToolId?: CalculatorId | string;
+  relatedToolId: CalculatorId | string;
   /** @deprecated Use relatedToolId — alias for migration */
   relatedTool?: CalculatorId | string;
   /** Optional custom OG image (absolute or site-relative) */
@@ -45,10 +45,10 @@ export const BLOG_POST_REQUIRED_FIELDS = [
   "slug",
   "category",
   "date",
+  "relatedToolId",
 ] as const satisfies readonly (keyof BlogPostFrontmatter)[];
 
 export const BLOG_POST_OPTIONAL_FIELDS = [
-  "relatedToolId",
   "relatedTool",
   "ogImage",
   "publishedAt",

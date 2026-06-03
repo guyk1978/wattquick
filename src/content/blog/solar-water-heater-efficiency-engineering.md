@@ -1,9 +1,12 @@
 ---
-title: "Why Isn't the Tank Hot Enough? Engineering Solar Water Heater Efficiency"
-description: "How scale, collector tilt, and direct beam radiation affect solar thermal efficiency—and how to self-measure performance with temperature data."
-slug: "solar-water-heater-efficiency-engineering"
-category: "Green Home"
-date: "2026-05-30"
+title: Why Isn't the Tank Hot Enough? Engineering Solar Water Heater Efficiency
+description: >-
+  How scale, collector tilt, and direct beam radiation affect solar thermal
+  efficiency—and how to self-measure performance with temperature data.
+slug: solar-water-heater-efficiency-engineering
+category: Green Home
+date: '2026-05-30'
+relatedToolId: solar-water-heater-efficiency
 ---
 
 A lukewarm tank is rarely a mystery tank—it is usually a **lost fraction of incident solar** somewhere between the aperture and your shower valve. Engineering solar DHW starts with separating **resource** (sun on the plane of array) from **conversion** (fluid to store) from **delivery** (stratification, recirculation, mixing). Each stage has a signature you can spot with thermometers and a notebook.

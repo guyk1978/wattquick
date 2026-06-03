@@ -4,6 +4,7 @@ description: "How peak sun hours, daily energy use, and system efficiency determ
 slug: "solar-panel-sizing-basics"
 category: "Solar"
 date: "2026-02-18"
+relatedToolId: "solar-panel-size"
 ---
 
 Sizing solar starts with your daily energy budget in watt-hours (Wh). Add up everything you plan to run—lights, fridge, pumps, chargers—and multiply watts by hours of use per day.

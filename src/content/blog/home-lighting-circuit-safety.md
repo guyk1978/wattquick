@@ -1,9 +1,12 @@
 ---
-title: "Home Electrical Safety: Are Your Lighting Circuits Up to Code?"
-description: "Self-check steps for lighting branch loads during remodels—use the lighting circuit load calculator before you close walls."
-slug: "home-lighting-circuit-safety"
-category: "Appliances"
-date: "2026-05-30"
+title: 'Home Electrical Safety: Are Your Lighting Circuits Up to Code?'
+description: >-
+  Self-check steps for lighting branch loads during remodels—use the lighting
+  circuit load calculator before you close walls.
+slug: home-lighting-circuit-safety
+category: Appliances
+date: '2026-05-30'
+relatedToolId: lighting-circuit-load
 ---
 
 Remodels add cans, pendants, and smart switches faster than panel schedules update. **Safety** is proving each lighting branch still lives inside breaker and wire limits—not assuming the previous owner counted fixtures.

@@ -1,9 +1,12 @@
 ---
-title: "Cumulative Savings: The Economics Behind Going Solar Hybrid"
-description: "Fuel price trends, falling PV and battery costs, and how to model 5- and 10-year totals when replacing generator-first off-grid power."
-slug: "cumulative-savings-solar-hybrid-economics"
-category: "Solar"
-date: "2026-05-29"
+title: 'Cumulative Savings: The Economics Behind Going Solar Hybrid'
+description: >-
+  Fuel price trends, falling PV and battery costs, and how to model 5- and
+  10-year totals when replacing generator-first off-grid power.
+slug: cumulative-savings-solar-hybrid-economics
+category: Solar
+date: '2026-05-29'
+relatedToolId: generator-vs-solar-hybrid
 ---
 
 Diesel has a habit of getting more expensive over a decade. Solar modules, inverters, and lithium packs have mostly moved the other way. **Cumulative savings**—the gap between two cost curves over 5 and 10 years—is where generator-first plans quietly lose.

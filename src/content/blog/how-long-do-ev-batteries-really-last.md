@@ -1,9 +1,12 @@
 ---
-title: "How long do EV batteries really last?"
-description: "Calendar aging, BMS protection, warranty thresholds, and when a pack replacement actually belongs in your cost model."
-slug: "how-long-do-ev-batteries-really-last"
-category: "EV Charging"
-date: "2026-06-03"
+title: How long do EV batteries really last?
+description: >-
+  Calendar aging, BMS protection, warranty thresholds, and when a pack
+  replacement actually belongs in your cost model.
+slug: how-long-do-ev-batteries-really-last
+category: EV Charging
+date: '2026-06-03'
+relatedToolId: ev-vs-ice-maintenance
 ---
 
 The internet trades horror stories about $15,000 battery bills. The data is calmer: most modern packs are designed for **15+ years** of useful life when heat and charging habits are reasonable—and many cars still carry **8-year / 160,000 km** capacity warranties.

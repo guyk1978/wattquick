@@ -1,9 +1,12 @@
 ---
-title: "How Payload Weight Steals Range From Electric Semi-Trucks"
-description: "Cargo mass, rolling resistance, and aerodynamic drag compound on highway EV trucks—how to model real-world range before you dispatch a load."
-slug: "ev-truck-payload-range-impact"
-category: "Commercial EV"
-date: "2026-05-12"
+title: How Payload Weight Steals Range From Electric Semi-Trucks
+description: >-
+  Cargo mass, rolling resistance, and aerodynamic drag compound on highway EV
+  trucks—how to model real-world range before you dispatch a load.
+slug: ev-truck-payload-range-impact
+category: Commercial EV
+date: '2026-05-12'
+relatedToolId: ev-truck-range
 ---
 
 Fleet planners love EPA range on an empty tractor. Dispatch reality is different: forty thousand pounds on the trailer, winter headwinds, and a driver who needs to make the dock by morning. Payload is not a rounding error on electric semis—it reshapes energy per mile in ways gasoline fleets paper over with tank size.
