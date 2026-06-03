@@ -4,9 +4,12 @@ import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { getAllCalculatorMeta } from "@/lib/calculators";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
+
+const calculatorCount = getAllCalculatorMeta().length;
 
 const GA_MEASUREMENT_ID = "G-MVWDC4SXZG";
 
@@ -25,7 +28,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "WattQuick — Battery & Power Calculators",
     description:
-      "Ultra-fast battery, solar, EV, and power micro-calculators. 79+ free tools with instant results and minimal inputs.",
+      `Ultra-fast battery, solar, EV, and power micro-calculators. ${calculatorCount} free tools with instant results and minimal inputs.`,
     path: "",
   }),
   title: {

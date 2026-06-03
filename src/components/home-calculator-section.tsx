@@ -89,7 +89,7 @@ export function HomeCalculatorSection({
           <input
             id="home-calculator-search"
             type="search"
-            placeholder="Search 94 calculators — e.g. battery runtime, solar yield, EV cost…"
+            placeholder={`Search ${totalCount} calculators — e.g. battery runtime, solar yield, EV cost…`}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className={cn(
