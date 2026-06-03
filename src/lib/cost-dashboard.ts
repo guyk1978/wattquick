@@ -21,6 +21,7 @@ const EV_COST_IDS = new Set<CalculatorId>([
   "ev-cost-per-mile",
   "ev-vs-gas-savings",
   "ev-preconditioning-cost",
+  "ev-vs-ice-maintenance",
 ]);
 
 const EXCLUDED_COST_IDS = new Set<CalculatorId>([]);

@@ -30,6 +30,7 @@ import { SmallWindTurbineYieldCalculator } from "@/components/calculators/SmallW
 import { AcInrushCurrentCalculator } from "@/components/calculators/AcInrushCurrentCalculator";
 import { VampirePowerCostCalculator } from "@/components/calculators/VampirePowerCostCalculator";
 import { LedSavingsRoiCalculator } from "@/components/calculators/LedSavingsRoiCalculator";
+import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -92,6 +93,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "led-savings-roi") {
     return <LedSavingsRoiCalculator className={className} />;
+  }
+  if (id === "ev-vs-ice-maintenance") {
+    return <EvVsIceMaintenanceCalculator className={className} />;
   }
 
   const definition = getCalculatorDefinition(id);

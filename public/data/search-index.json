@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T08:19:43.328Z",
+  "generatedAt": "2026-06-03T08:33:25.742Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -788,6 +788,22 @@
         "breaker sizing inrush",
         "type c breaker motor",
         "nuisance trip breaker"
+      ]
+    },
+    {
+      "id": "ev-vs-ice-maintenance",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV vs ICE Maintenance Cost Calculator",
+      "description": "Compare 5-year scheduled maintenance for electric vs. gas vehicles—oil, brakes, belts, and cumulative savings.",
+      "href": "/ev-vs-ice-maintenance/",
+      "tag": "EV",
+      "keywords": [
+        "ev vs gas maintenance cost",
+        "ev maintenance savings",
+        "ice maintenance calculator",
+        "electric car service cost"
       ]
     },
     {
@@ -2597,6 +2613,21 @@
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "true-cost-ev-ownership-vs-gas-cars",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "The true cost of EV ownership vs Gas cars",
+      "description": "Fuel and oil are only part of TCO—compare five years of scheduled maintenance for electric vs. gasoline vehicles.",
+      "href": "/blog/true-cost-ev-ownership-vs-gas-cars/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
         "blog",
         "article"
       ]

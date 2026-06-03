@@ -25,6 +25,7 @@ const COST_ROUTED_EV_IDS = new Set<CalculatorId>([
   "ev-vs-gas-savings",
   "ev-preconditioning-cost",
   "ev-tire-wear-cost",
+  "ev-vs-ice-maintenance",
 ]);
 
 export function usesEvDashboard(

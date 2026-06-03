@@ -21,6 +21,8 @@ EV TCO conversations stop at $/kWh. Fleet spreadsheets add purchase price and in
 
 Net TCO requires **both sides** of the ledger—not charging alone.
 
+<CalculatorEmbed slug="ev-vs-ice-maintenance" />
+
 <CalculatorEmbed slug="ev-tire-wear-cost" />
 
 ## Fuel savings are visible; tires are silent

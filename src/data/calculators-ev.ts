@@ -6,6 +6,7 @@ import {
   Plug,
   Snowflake,
   Thermometer,
+  Wrench,
   Zap,
 } from "lucide-react";
 import {
@@ -25,10 +26,93 @@ import {
   estimateBatteryHealth,
   type WinterRangeInput,
 } from "@/lib/calculators/ev";
+import {
+  calculateEvVsIceMaintenance,
+  EV_ICE_VEHICLE_CLASS_PRESETS,
+  MAINTENANCE_COMPARISON_YEARS,
+  type EvIceVehicleClass,
+} from "@/lib/calculators/ev-maintenance";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
 /** EV charging micro-calculators (batch 3) */
 export const calculatorsEv = [
+  {
+    slug: "ev-vs-ice-maintenance",
+    href: "/ev-vs-ice-maintenance",
+    title: "EV vs ICE Maintenance Cost Calculator",
+    description:
+      "Compare 5-year scheduled maintenance for electric vs. gas vehicles—oil, brakes, belts, and cumulative savings.",
+    keywords: [
+      "ev vs gas maintenance cost",
+      "ev maintenance savings",
+      "ice maintenance calculator",
+      "electric car service cost",
+    ],
+    icon: Wrench,
+    tag: "EV",
+    category: "ev",
+    suggestions: [
+      "ev-vs-gas-savings",
+      "ev-tire-wear-cost",
+      "ev-cost-per-mile",
+      "ev-charging-cost",
+    ],
+    fields: [
+      {
+        id: "annualKm",
+        label: "Average annual distance",
+        unit: "km",
+        placeholder: "19312",
+        defaultValue: "19312",
+        hint: "~12,000 mi/yr — scales service intervals",
+      },
+      {
+        id: "vehicleClass",
+        label: "Vehicle type",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "sedan",
+        options: Object.entries(EV_ICE_VEHICLE_CLASS_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+    ],
+    result: {
+      label: `${MAINTENANCE_COMPARISON_YEARS}-year maintenance savings`,
+      emptyMessage: "Enter annual km and vehicle type",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "What we compare",
+          body: "ICE costs include oil, filters, spark plugs, timing belt amortization, engine fluids, and full friction brake service. EV costs include reduced brake wear (regenerative braking), brake fluid, cabin filter, battery coolant, tire rotation, and diagnostics—no engine oil or ignition service.",
+        },
+        {
+          heading: "Mileage & vehicle class",
+          body: "Costs scale from a ~19,312 km/yr baseline. SUVs and luxury classes use higher parts and labor multipliers. Results are planned-maintenance estimates—not collision repair, tires replacement, or warranty items.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Are EVs maintenance-free? A: No—tires and fluids still matter; regen mainly cuts brake pads. Q: Include tires? A: Rotation only; replacement modeled in tire wear calculators. Q: Fleet use? A: Multiply annual km to match utilization.",
+        },
+      ],
+    },
+    compute(values) {
+      const annualKm = parsePositive(values.annualKm ?? "");
+      const vehicleClass = (values.vehicleClass ?? "sedan") as EvIceVehicleClass;
+      if (annualKm === null || !(vehicleClass in EV_ICE_VEHICLE_CLASS_PRESETS)) {
+        return { value: null };
+      }
+      const result = calculateEvVsIceMaintenance({ annualKm, vehicleClass });
+      if (!result) return { value: null };
+      return {
+        value: formatCurrency(result.totalSavings),
+        unit: `/${MAINTENANCE_COMPARISON_YEARS} yr`,
+        detail: `ICE ${formatCurrency(result.iceCumulativeTotal)} vs EV ${formatCurrency(result.evCumulativeTotal)} · ${formatCurrency(result.annualSavings)}/yr`,
+      };
+    },
+  },
   {
     slug: "ev-fast-charging-time",
     href: "/ev-fast-charging-time",
