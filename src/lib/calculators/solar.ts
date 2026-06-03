@@ -136,6 +136,109 @@ export interface PanelDegradationInput {
   annualDegradationPercent: number;
 }
 
+/** Planning yield for kWh/kWp/year (site-specific; 1,200–1,600 common). */
+export const DEFAULT_KWH_PER_KWP_YEAR = 1400;
+
+export const SOLAR_DEGRADATION_ROI_YEARS = 20;
+
+export interface SolarDegradation20YearRoiInput {
+  systemKwp: number;
+  annualDegradationPercent: number;
+  installCost: number;
+  electricityRatePerKwh: number;
+  energyInflationPercent: number;
+  kwhPerKwpYear?: number;
+}
+
+export interface SolarDegradationYearPoint {
+  year: number;
+  annualKwh: number;
+  ratePerKwh: number;
+  annualSavings: number;
+  cumulativeSavings: number;
+  cumulativeKwh: number;
+}
+
+export interface SolarDegradation20YearRoiResult {
+  installCost: number;
+  year1Kwh: number;
+  total20YearKwh: number;
+  year20AnnualKwh: number;
+  total20YearSavings: number;
+  breakEvenYears: number | null;
+  capacityYear20Percent: number;
+  yearly: SolarDegradationYearPoint[];
+  warrantyComparePercent: number;
+}
+
+export function calculateSolarDegradation20YearRoi({
+  systemKwp,
+  annualDegradationPercent,
+  installCost,
+  electricityRatePerKwh,
+  energyInflationPercent,
+  kwhPerKwpYear = DEFAULT_KWH_PER_KWP_YEAR,
+}: SolarDegradation20YearRoiInput): SolarDegradation20YearRoiResult {
+  const year1Kwh = systemKwp * kwhPerKwpYear;
+  const degFactor = 1 - annualDegradationPercent / 100;
+  const inflationFactor = 1 + energyInflationPercent / 100;
+
+  const yearly: SolarDegradationYearPoint[] = [];
+  let cumulativeSavings = 0;
+  let cumulativeKwh = 0;
+  let breakEvenYears: number | null = null;
+  let prevCumulativeSavings = 0;
+
+  for (let year = 1; year <= SOLAR_DEGRADATION_ROI_YEARS; year++) {
+    const annualKwh = year1Kwh * Math.pow(degFactor, year - 1);
+    const ratePerKwh =
+      electricityRatePerKwh * Math.pow(inflationFactor, year - 1);
+    const annualSavings = annualKwh * ratePerKwh;
+    cumulativeSavings += annualSavings;
+    cumulativeKwh += annualKwh;
+
+    if (
+      breakEvenYears === null &&
+      cumulativeSavings >= installCost &&
+      installCost > 0
+    ) {
+      const yearDelta = cumulativeSavings - prevCumulativeSavings;
+      const fraction =
+        yearDelta > 0 ? (installCost - prevCumulativeSavings) / yearDelta : 1;
+      breakEvenYears = parseFloat((year - 1 + fraction).toFixed(1));
+    }
+
+    prevCumulativeSavings = cumulativeSavings;
+
+    yearly.push({
+      year,
+      annualKwh: parseFloat(annualKwh.toFixed(0)),
+      ratePerKwh: parseFloat(ratePerKwh.toFixed(4)),
+      annualSavings: parseFloat(annualSavings.toFixed(0)),
+      cumulativeSavings: parseFloat(cumulativeSavings.toFixed(0)),
+      cumulativeKwh: parseFloat(cumulativeKwh.toFixed(0)),
+    });
+  }
+
+  const capacityYear20Percent = parseFloat(
+    (Math.pow(degFactor, SOLAR_DEGRADATION_ROI_YEARS - 1) * 100).toFixed(1)
+  );
+
+  return {
+    installCost,
+    year1Kwh: Math.round(year1Kwh),
+    total20YearKwh: Math.round(cumulativeKwh),
+    year20AnnualKwh: yearly[yearly.length - 1]?.annualKwh ?? 0,
+    total20YearSavings: parseFloat(cumulativeSavings.toFixed(0)),
+    breakEvenYears,
+    capacityYear20Percent,
+    yearly,
+    warrantyComparePercent: parseFloat(
+      (Math.pow(degFactor, 24) * 100).toFixed(1)
+    ),
+  };
+}
+
 export function calculatePanelDegradation({
   ratedAnnualKwh,
   systemAgeYears,

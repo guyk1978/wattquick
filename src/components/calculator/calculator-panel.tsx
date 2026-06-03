@@ -40,6 +40,7 @@ import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
 import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
+import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -72,6 +73,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "generator-runtime-savings") {
     return <GeneratorRuntimeSavingsCalculator className={className} />;
+  }
+  if (id === "solar-degradation-20-year-roi") {
+    return <SolarDegradation20YearRoiCalculator className={className} />;
   }
   if (id === "water-pump-solar-sizing") {
     return <WaterPumpSolarSizingCalculator className={className} />;

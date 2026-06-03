@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T14:44:42.871Z",
+  "generatedAt": "2026-06-03T14:59:50.814Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1106,6 +1106,23 @@
         "pv wire sizing mm2",
         "dc voltage drop percent",
         "solar array cable gauge"
+      ]
+    },
+    {
+      "id": "solar-degradation-20-year-roi",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar System Degradation & 20-Year ROI Calculator",
+      "description": "Model 20 years of declining PV output, rising electricity rates, cumulative savings, and break-even with annual degradation.",
+      "href": "/solar-degradation-20-year-roi/",
+      "tag": "Solar",
+      "keywords": [
+        "solar degradation roi",
+        "solar 20 year savings",
+        "pv degradation payback",
+        "solar panel output loss",
+        "solar break even degradation"
       ]
     },
     {

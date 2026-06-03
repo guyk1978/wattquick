@@ -24,6 +24,7 @@ import {
   calculateOptimalAngles,
   calculatePanelDegradation,
   calculatePaybackRoi,
+  calculateSolarDegradation20YearRoi,
   calculateRoofSpace,
   type SeasonMode,
 } from "@/lib/calculators/solar";
@@ -151,6 +152,7 @@ export const calculatorsSolar = [
     tag: "Solar",
     category: "solar",
     suggestions: [
+      "solar-degradation-20-year-roi",
       "solar-daily-yield",
       "solar-net-metering",
       "electricity-bill",
@@ -199,7 +201,7 @@ export const calculatorsSolar = [
         },
         {
           heading: "ROI note",
-          body: "We also show rough 25-year net savings (no rate escalation or degradation). Use Solar Degradation to adjust long-term output.",
+          body: "We also show rough 25-year net savings (no rate escalation or degradation). Use Solar Degradation or the 20-Year Degradation ROI tool for long-term output and payback.",
         },
         {
           heading: "Frequently asked questions",
@@ -424,6 +426,7 @@ export const calculatorsSolar = [
     tag: "Solar",
     category: "solar",
     suggestions: [
+      "solar-degradation-20-year-roi",
       "solar-payback-roi",
       "solar-daily-yield",
       "solar-inverter-efficiency",
@@ -946,6 +949,146 @@ export const calculatorsSolar = [
         value: result.recommendedCableLabel,
         unit: "",
         detail: `${formatNumber(result.dropPercent, { maxDecimals: 2 })}% drop · ${formatNumber(result.powerLossWatts, { maxDecimals: 1 })} W loss`,
+      };
+    },
+  },
+  {
+    slug: "solar-degradation-20-year-roi",
+    href: "/solar-degradation-20-year-roi",
+    title: "Solar System Degradation & 20-Year ROI Calculator",
+    description:
+      "Model 20 years of declining PV output, rising electricity rates, cumulative savings, and break-even with annual degradation.",
+    keywords: [
+      "solar degradation roi",
+      "solar 20 year savings",
+      "pv degradation payback",
+      "solar panel output loss",
+      "solar break even degradation",
+    ],
+    icon: LineChart,
+    tag: "Solar",
+    category: "solar",
+    suggestions: [
+      "solar-degradation",
+      "solar-payback-roi",
+      "solar-daily-yield",
+      "solar-panel-size",
+    ],
+    fields: [
+      {
+        id: "systemKwp",
+        label: "Nominal system size",
+        unit: "kWp",
+        placeholder: "8",
+        defaultValue: "8",
+      },
+      {
+        id: "kwhPerKwpYear",
+        label: "Site yield",
+        unit: "kWh/kWp/yr",
+        placeholder: "1400",
+        defaultValue: "1400",
+        hint: "Annual kWh per kWp—adjust for your climate",
+      },
+      {
+        id: "annualDegradationPercent",
+        label: "Annual degradation",
+        inputType: "range",
+        min: 0.3,
+        max: 1,
+        step: 0.1,
+        defaultValue: "0.6",
+        unit: "%/yr",
+        colSpan: 2,
+        hint: "Tier-1 panels often 0.5–0.8%/yr",
+      },
+      {
+        id: "installCost",
+        label: "Installed system cost",
+        unit: "$",
+        placeholder: "18000",
+        defaultValue: "18000",
+      },
+      {
+        id: "electricityRatePerKwh",
+        label: "Electricity rate today",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+      {
+        id: "energyInflationPercent",
+        label: "Energy price inflation",
+        inputType: "range",
+        min: 0,
+        max: 10,
+        step: 0.5,
+        defaultValue: "3",
+        unit: "%/yr",
+        colSpan: 2,
+        hint: "Escalation applied to $/kWh each year",
+      },
+    ],
+    result: {
+      label: "Total 20-year savings",
+      emptyMessage: "Enter kWp, cost, rates & degradation %",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "20-year cashflow model",
+          body: "Year-1 kWh = kWp × site yield. Each year output = prior × (1 − degradation %). Savings = kWh × escalating $/kWh. Break-even is when cumulative savings repay installed cost.",
+        },
+        {
+          heading: "Chart",
+          body: "The line chart shows falling annual production (amber) vs. rising cumulative bill savings (green)—degradation vs. inflation working in opposite directions.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include incentives? A: Enter net installed cost after tax credits. Q: vs. simple payback? A: Solar Payback ROI ignores degradation—use both. Q: Warranty 80% at 25 yr? A: Compare to warrantyCompare in the learn section.",
+        },
+      ],
+    },
+    compute(values) {
+      const systemKwp = parsePositive(values.systemKwp ?? "");
+      const annualDegradationPercent = parsePositive(
+        values.annualDegradationPercent ?? ""
+      );
+      const installCost = parsePositive(values.installCost ?? "");
+      const electricityRatePerKwh = parsePositive(
+        values.electricityRatePerKwh ?? ""
+      );
+      const energyInflationPercent = Number(
+        values.energyInflationPercent?.trim() ?? "3"
+      );
+      const kwhPerKwpYear = parsePositive(values.kwhPerKwpYear ?? "");
+      if (
+        systemKwp === null ||
+        annualDegradationPercent === null ||
+        installCost === null ||
+        electricityRatePerKwh === null ||
+        kwhPerKwpYear === null ||
+        !Number.isFinite(energyInflationPercent) ||
+        energyInflationPercent < 0
+      ) {
+        return { value: null };
+      }
+      const result = calculateSolarDegradation20YearRoi({
+        systemKwp,
+        annualDegradationPercent,
+        installCost,
+        electricityRatePerKwh,
+        energyInflationPercent,
+        kwhPerKwpYear,
+      });
+      const breakEven =
+        result.breakEvenYears !== null
+          ? `${formatNumber(result.breakEvenYears, { maxDecimals: 1 })} yr`
+          : "20+ yr";
+      return {
+        value: formatCurrency(result.total20YearSavings),
+        unit: "",
+        detail: `Break-even ${breakEven} · ${formatNumber(result.total20YearKwh, { maxDecimals: 0 })} kWh over 20 yr`,
       };
     },
   },
