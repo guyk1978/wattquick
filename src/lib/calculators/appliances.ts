@@ -28,7 +28,25 @@ export type VampireDeviceType =
   | "gaming_console"
   | "phone_charger"
   | "converter"
-  | "smart_kettle";
+  | "smart_kettle"
+  | "cable_box"
+  | "dvr"
+  | "desktop_pc"
+  | "laptop"
+  | "printer"
+  | "router_modem"
+  | "smart_speaker"
+  | "microwave"
+  | "soundbar"
+  | "monitor"
+  | "coffee_maker"
+  | "dishwasher"
+  | "washer"
+  | "dryer"
+  | "garage_opener"
+  | "cordless_phone"
+  | "wine_cooler"
+  | "custom";
 
 export const VAMPIRE_DEVICE_PRESETS: Record<
   VampireDeviceType,
@@ -39,12 +57,69 @@ export const VAMPIRE_DEVICE_PRESETS: Record<
   phone_charger: { label: "Phone charger", standbyWatts: 1 },
   converter: { label: "AC adapter / converter", standbyWatts: 2 },
   smart_kettle: { label: "Smart kettle", standbyWatts: 2 },
+  cable_box: { label: "Cable / set-top box", standbyWatts: 18 },
+  dvr: { label: "DVR / media recorder", standbyWatts: 25 },
+  desktop_pc: { label: "Desktop computer", standbyWatts: 3 },
+  laptop: { label: "Laptop (plugged in)", standbyWatts: 1 },
+  printer: { label: "Printer / scanner", standbyWatts: 4 },
+  router_modem: { label: "Router / modem", standbyWatts: 8 },
+  smart_speaker: { label: "Smart speaker", standbyWatts: 3 },
+  microwave: { label: "Microwave (clock/display)", standbyWatts: 3 },
+  soundbar: { label: "Soundbar / AV receiver", standbyWatts: 4 },
+  monitor: { label: "Computer monitor", standbyWatts: 2 },
+  coffee_maker: { label: "Coffee maker", standbyWatts: 2 },
+  dishwasher: { label: "Dishwasher", standbyWatts: 1 },
+  washer: { label: "Clothes washer", standbyWatts: 1 },
+  dryer: { label: "Clothes dryer", standbyWatts: 1 },
+  garage_opener: { label: "Garage door opener", standbyWatts: 3 },
+  cordless_phone: { label: "Cordless phone base", standbyWatts: 2 },
+  wine_cooler: { label: "Wine / beverage cooler", standbyWatts: 4 },
+  custom: { label: "Custom device", standbyWatts: 5 },
 };
+
+export interface VampirePowerLineInput {
+  standbyWatts: number;
+  deviceCount: number;
+}
 
 export interface VampirePowerCostInput {
   standbyWattsPerDevice: number;
   deviceCount: number;
   ratePerKwh: number;
+}
+
+export interface VampirePowerMultiResult {
+  totalStandbyWatts: number;
+  annualKwh: number;
+  annualCost: number;
+  monthlyCost: number;
+  lineCount: number;
+}
+
+/** Sum annual standby cost across multiple device rows. */
+export function calculateVampirePowerMulti(
+  lines: VampirePowerLineInput[],
+  ratePerKwh: number
+): VampirePowerMultiResult | null {
+  if (lines.length === 0 || ratePerKwh <= 0) return null;
+
+  const totalStandbyWatts = lines.reduce(
+    (sum, line) => sum + line.standbyWatts * line.deviceCount,
+    0
+  );
+  if (totalStandbyWatts <= 0) return null;
+
+  const annualKwh = (totalStandbyWatts * 24 * 365) / 1000;
+  const annualCost = annualKwh * ratePerKwh;
+  const monthlyCost = annualCost / 12;
+
+  return {
+    totalStandbyWatts: Math.round(totalStandbyWatts),
+    annualKwh: Math.round(annualKwh),
+    annualCost: parseFloat(annualCost.toFixed(2)),
+    monthlyCost: parseFloat(monthlyCost.toFixed(2)),
+    lineCount: lines.length,
+  };
 }
 
 /** Annual phantom / standby load cost for one device profile × quantity. */

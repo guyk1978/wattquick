@@ -1,115 +1,209 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useMemo, useState } from "react";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { useCallback, useId, useMemo, useState } from "react";
+import { ArrowRight, ExternalLink, Plus, Trash2 } from "lucide-react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import {
-  calculateVampirePowerCost,
+  calculateVampirePowerMulti,
   VAMPIRE_DEVICE_PRESETS,
   type VampireDeviceType,
 } from "@/lib/calculators/appliances";
-import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
-import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
-import { glassPanel } from "@/lib/glass-ui";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { glassInsetInput, glassPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "vampire-power-cost" satisfies CalculatorId;
 
+const MAX_DEVICE_ROWS = 24;
+
 const LEARN_MORE_LINKS = [
   {
-    title: "Understanding Standby Power",
+    title: "3 Easy Tips to Reduce Your Standby Power Loads",
     source: "U.S. Department of Energy",
-    href: "https://www.energy.gov/energysaver/standby-power-and-home-office-equipment",
+    href: "https://www.energy.gov/energysaver/articles/3-easy-tips-reduce-your-standby-power-loads",
   },
   {
-    title: "Vampire Power: What it is and how to stop it",
+    title: "Energy Vampires: Keep Your Devices from Wasting Energy and Money",
     source: "NRDC",
-    href: "https://www.nrdc.org/stories/vampire-power-what-it-and-how-stop-it",
+    href: "https://www.nrdc.org/stories/energy-vampires-keep-your-devices-wasting-energy-and-money",
   },
   {
-    title: "Phantom Energy Loads: Calculating your home's hidden costs",
+    title: "ENERGY STAR Computers",
     source: "ENERGY STAR",
-    href: "https://www.energystar.gov/products/phantom-load",
+    href: "https://www.energystar.gov/products/computers",
+    hint: "Sleep, idle, and standby requirements for certified products",
   },
 ] as const;
 
-const RELATED_ARTICLES = [
+const RELATED_LINKS = [
   {
     title: "Vampire Energy and Standby Power Waste in the Home",
     href: "/blog/vampire-energy-standby-power-waste/",
   },
   {
-    title: "Building a Daily Watt-Hour Budget for a Sustainable Home",
-    href: "/blog/daily-watt-hour-budget-sustainable-home/",
+    title: "Whole House Energy Budget Calculator",
+    href: "/whole-house-energy-budget/",
   },
   {
-    title: "Cutting Electric Bills With Time-of-Use Load Shifting",
-    href: "/blog/cutting-bills-with-time-of-use-shifting/",
+    title: "Standby Power Waste Calculator",
+    href: "/standby-power-waste/",
+  },
+  {
+    title: "Appliance Daily Cost Calculator",
+    href: "/appliance-daily-cost/",
   },
 ] as const;
 
-interface VampirePowerCostCalculatorProps {
-  className?: string;
+const DEVICE_OPTIONS = Object.entries(VAMPIRE_DEVICE_PRESETS).map(([value, preset]) => ({
+  value: value as VampireDeviceType,
+  label: preset.label,
+}));
+
+const controlClassName = cn(
+  glassInsetInput,
+  "h-12 w-full rounded-xl px-3.5 text-base focus-visible:outline-none"
+);
+
+export interface VampireDeviceLine {
+  id: string;
+  deviceType: VampireDeviceType;
+  watts: string;
+  count: string;
 }
 
 function isVampireDeviceType(value: string): value is VampireDeviceType {
   return value in VAMPIRE_DEVICE_PRESETS;
 }
 
+function createDeviceLine(deviceType: VampireDeviceType = "tv"): VampireDeviceLine {
+  const preset = VAMPIRE_DEVICE_PRESETS[deviceType];
+  return {
+    id: crypto.randomUUID(),
+    deviceType,
+    watts: String(preset.standbyWatts),
+    count: "1",
+  };
+}
+
+interface VampirePowerCostCalculatorProps {
+  className?: string;
+}
+
 export function VampirePowerCostCalculator({ className }: VampirePowerCostCalculatorProps) {
   const definition = getCalculatorDefinition(CALCULATOR_ID);
-  const { values, setValue } = useCalculatorForm(definition.fields);
+  const rateFieldId = useId();
 
-  const handleFieldChange = useCallback(
-    (id: string, value: string) => {
-      if (id === "deviceType" && isVampireDeviceType(value)) {
-        setValue("deviceType", value);
-        setValue(
-          "standbyWattsPerDevice",
-          String(VAMPIRE_DEVICE_PRESETS[value].standbyWatts)
-        );
-        return;
-      }
-      setValue(id, value);
-    },
-    [setValue]
-  );
+  const [lines, setLines] = useState<VampireDeviceLine[]>(() => [createDeviceLine("tv")]);
+  const [ratePerKwh, setRatePerKwh] = useState("0.14");
 
-  const parsed = useMemo(() => {
-    const standbyWattsPerDevice = parsePositive(values.standbyWattsPerDevice ?? "");
-    const deviceCount = parsePositive(values.deviceCount ?? "");
-    const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
-    if (standbyWattsPerDevice === null || deviceCount === null || ratePerKwh === null) {
-      return null;
-    }
-    return calculateVampirePowerCost({
-      standbyWattsPerDevice,
-      deviceCount,
-      ratePerKwh,
+  const updateLine = useCallback((id: string, patch: Partial<VampireDeviceLine>) => {
+    setLines((prev) =>
+      prev.map((line) => (line.id === id ? { ...line, ...patch } : line))
+    );
+  }, []);
+
+  const handleDeviceTypeChange = useCallback((id: string, deviceType: string) => {
+    if (!isVampireDeviceType(deviceType)) return;
+    const preset = VAMPIRE_DEVICE_PRESETS[deviceType];
+    setLines((prev) =>
+      prev.map((line) =>
+        line.id === id
+          ? {
+              ...line,
+              deviceType,
+              watts:
+                deviceType === "custom" ? line.watts : String(preset.standbyWatts),
+            }
+          : line
+      )
+    );
+  }, []);
+
+  const addLine = useCallback(() => {
+    setLines((prev) => {
+      if (prev.length >= MAX_DEVICE_ROWS) return prev;
+      return [...prev, createDeviceLine("phone_charger")];
     });
-  }, [values]);
+  }, []);
 
-  const fieldLabels = useMemo(
-    () => Object.fromEntries(definition.fields.map((f) => [f.id, f.label])),
-    [definition.fields]
-  );
+  const removeLine = useCallback((id: string) => {
+    setLines((prev) => (prev.length <= 1 ? prev : prev.filter((line) => line.id !== id)));
+  }, []);
 
-  const deviceType = values.deviceType ?? "";
-  const deviceLabel = isVampireDeviceType(deviceType)
-    ? VAMPIRE_DEVICE_PRESETS[deviceType].label
-    : "device";
+  const { parsed, lineBreakdown } = useMemo(() => {
+    const rate = parsePositive(ratePerKwh);
+    if (rate === null) return { parsed: null, lineBreakdown: [] as const };
+
+    const breakdown: {
+      label: string;
+      watts: number;
+      count: number;
+      subtotalWatts: number;
+      annualCost: number;
+    }[] = [];
+
+    const multiLines: { standbyWatts: number; deviceCount: number }[] = [];
+
+    for (const line of lines) {
+      const watts = parsePositive(line.watts);
+      const count = parsePositive(line.count);
+      if (watts === null || count === null) continue;
+
+      multiLines.push({ standbyWatts: watts, deviceCount: count });
+      const row = calculateVampirePowerMulti([{ standbyWatts: watts, deviceCount: count }], rate);
+      const label = isVampireDeviceType(line.deviceType)
+        ? VAMPIRE_DEVICE_PRESETS[line.deviceType].label
+        : "Device";
+
+      breakdown.push({
+        label,
+        watts,
+        count,
+        subtotalWatts: watts * count,
+        annualCost: row?.annualCost ?? 0,
+      });
+    }
+
+    const parsed = calculateVampirePowerMulti(multiLines, rate);
+    return { parsed, lineBreakdown: breakdown };
+  }, [lines, ratePerKwh]);
 
   const annualValue = parsed ? formatCurrency(parsed.annualCost) : null;
   const annualDetail = parsed
-    ? `${parsed.annualKwh} kWh/yr · ${formatCurrency(parsed.monthlyCost)}/mo · ${parsed.totalStandbyWatts} W total · ${deviceLabel}`
+    ? `${parsed.annualKwh} kWh/yr · ${formatCurrency(parsed.monthlyCost)}/mo · ${parsed.totalStandbyWatts} W · ${parsed.lineCount} device row${parsed.lineCount === 1 ? "" : "s"}`
     : null;
+
+  const pdfFieldLabels = useMemo(
+    () => ({
+      ratePerKwh: "Electricity rate",
+      devices: "Devices",
+    }),
+    []
+  );
+
+  const pdfValues = useMemo(
+    () => ({
+      ratePerKwh,
+      devices: lines
+        .map((line) => {
+          const label = isVampireDeviceType(line.deviceType)
+            ? VAMPIRE_DEVICE_PRESETS[line.deviceType].label
+            : line.deviceType;
+          return `${label}: ${line.watts} W × ${line.count}`;
+        })
+        .join("; "),
+    }),
+    [lines, ratePerKwh]
+  );
 
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
@@ -120,14 +214,25 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
     setPdfLoading(true);
     setPdfError(null);
     try {
+      const lineResults = Object.fromEntries(
+        lineBreakdown.map((row, index) => [
+          `${index + 1}. ${row.label}`,
+          {
+            value: formatCurrency(row.annualCost),
+            unit: "/yr",
+          },
+        ])
+      );
+
       await generatePDFReport(
         definition.title,
-        buildPdfInputs(values, fieldLabels),
+        buildPdfInputs(pdfValues, pdfFieldLabels),
         buildPdfResults({
           [definition.result.label]: { value: annualValue, unit: "/yr" },
           "Annual energy": `${formatNumber(parsed.annualKwh, { maxDecimals: 0 })} kWh`,
           "Monthly cost": formatCurrency(parsed.monthlyCost),
           "Total standby draw": `${parsed.totalStandbyWatts} W`,
+          ...lineResults,
         })
       );
     } catch {
@@ -139,19 +244,159 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
     annualValue,
     definition.result.label,
     definition.title,
-    fieldLabels,
+    lineBreakdown,
     parsed,
-    values,
+    pdfFieldLabels.ratePerKwh,
+    pdfValues.devices,
+    ratePerKwh,
   ]);
 
   return (
     <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
+        <div className="space-y-4">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                Your standby devices
+              </h2>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                Add one row per device type. Use quantity for multiples (e.g. three phone
+                chargers).
+              </p>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={addLine}
+              disabled={lines.length >= MAX_DEVICE_ROWS}
+              className="shrink-0"
+            >
+              <Plus className="size-4" aria-hidden />
+              Add device
+            </Button>
+          </div>
+
+          <ul className="space-y-3" aria-label="Device list">
+            {lines.map((line, index) => (
+              <li
+                key={line.id}
+                className="rounded-2xl border border-border/50 bg-muted/15 p-4 sm:p-5"
+              >
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Device {index + 1}
+                  </span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-xs"
+                    onClick={() => removeLine(line.id)}
+                    disabled={lines.length <= 1}
+                    aria-label={`Remove device ${index + 1}`}
+                    className="text-muted-foreground hover:text-destructive"
+                  >
+                    <Trash2 className="size-4" aria-hidden />
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-4">
+                  <div className="space-y-2 sm:col-span-2">
+                    <Label
+                      htmlFor={`${line.id}-type`}
+                      className="text-[0.8125rem] font-medium text-foreground/90"
+                    >
+                      Device type
+                    </Label>
+                    <select
+                      id={`${line.id}-type`}
+                      value={line.deviceType}
+                      onChange={(e) => handleDeviceTypeChange(line.id, e.target.value)}
+                      className={cn(controlClassName, "cursor-pointer")}
+                    >
+                      {DEVICE_OPTIONS.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <Label
+                        htmlFor={`${line.id}-watts`}
+                        className="text-[0.8125rem] font-medium text-foreground/90"
+                      >
+                        Standby power
+                      </Label>
+                      <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        W
+                      </span>
+                    </div>
+                    <Input
+                      id={`${line.id}-watts`}
+                      type="text"
+                      inputMode="decimal"
+                      value={line.watts}
+                      onChange={(e) => updateLine(line.id, { watts: e.target.value })}
+                      className={controlClassName}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <Label
+                        htmlFor={`${line.id}-count`}
+                        className="text-[0.8125rem] font-medium text-foreground/90"
+                      >
+                        Quantity
+                      </Label>
+                      <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        #
+                      </span>
+                    </div>
+                    <Input
+                      id={`${line.id}-count`}
+                      type="text"
+                      inputMode="numeric"
+                      value={line.count}
+                      onChange={(e) => updateLine(line.id, { count: e.target.value })}
+                      className={controlClassName}
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-baseline justify-between gap-3">
+            <Label
+              htmlFor={rateFieldId}
+              className="text-[0.8125rem] font-medium tracking-tight text-foreground/90"
+            >
+              Electricity rate
+            </Label>
+            <span className="shrink-0 rounded-md bg-muted/80 px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+              $/kWh
+            </span>
+          </div>
+          <Input
+            id={rateFieldId}
+            type="text"
+            inputMode="decimal"
+            value={ratePerKwh}
+            onChange={(e) => setRatePerKwh(e.target.value)}
+            placeholder="0.14"
+            className={controlClassName}
+            autoComplete="off"
+          />
+        </div>
 
         <div className="h-px bg-border/60" aria-hidden />
 
@@ -163,6 +408,42 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
           detail={annualDetail}
           emptyMessage={definition.result.emptyMessage}
         />
+
+        {parsed && lineBreakdown.length > 0 ? (
+          <div className="overflow-hidden rounded-xl border border-border/50">
+            <table className="w-full text-left text-sm">
+              <caption className="sr-only">Cost breakdown by device row</caption>
+              <thead>
+                <tr className="border-b border-border/50 bg-muted/30 text-xs uppercase tracking-wide text-muted-foreground">
+                  <th className="px-3 py-2 font-medium">Device</th>
+                  <th className="hidden px-3 py-2 font-medium sm:table-cell">Load</th>
+                  <th className="px-3 py-2 text-right font-medium">$/yr</th>
+                </tr>
+              </thead>
+              <tbody>
+                {lineBreakdown.map((row, rowIndex) => (
+                  <tr
+                    key={`${rowIndex}-${row.label}-${row.subtotalWatts}`}
+                    className="border-b border-border/40 last:border-0"
+                  >
+                    <td className="px-3 py-2.5 text-foreground">
+                      {row.label}
+                      <span className="mt-0.5 block text-xs text-muted-foreground sm:hidden">
+                        {row.watts} W × {row.count}
+                      </span>
+                    </td>
+                    <td className="hidden px-3 py-2.5 tabular-nums text-muted-foreground sm:table-cell">
+                      {row.watts} W × {row.count} ({row.subtotalWatts} W)
+                    </td>
+                    <td className="px-3 py-2.5 text-right font-mono font-medium tabular-nums">
+                      {formatCurrency(row.annualCost)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
 
         {parsed ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -193,8 +474,8 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
           value={annualValue}
           unit="/yr"
           detail={annualDetail}
-          values={values}
-          fieldLabels={fieldLabels}
+          values={pdfValues}
+          fieldLabels={pdfFieldLabels}
           onSaveToPdf={handleSaveToPDF}
           isSaving={pdfLoading}
           saveError={pdfError}
@@ -232,6 +513,11 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
                     <span className="mt-0.5 block text-xs text-muted-foreground">
                       {link.source}
                     </span>
+                    {"hint" in link && link.hint ? (
+                      <span className="mt-1 block text-xs text-muted-foreground/90">
+                        {link.hint}
+                      </span>
+                    ) : null}
                   </span>
                   <ExternalLink
                     className="mt-0.5 size-4 shrink-0 text-muted-foreground group-hover:text-primary"
@@ -254,35 +540,25 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
             Cut hidden loads across your home
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Pair this estimate with guides on standby waste, whole-home budgets, and shifting
-            flexible loads off-peak.
+            Explore related guides and calculators on this site to shrink baseload and plug
+            loads.
           </p>
           <ul className="mt-4 space-y-2">
-            {RELATED_ARTICLES.map((article) => (
-              <li key={article.href}>
+            {RELATED_LINKS.map((item) => (
+              <li key={item.href}>
                 <Link
-                  href={article.href}
+                  href={item.href}
                   className={cn(
                     "inline-flex items-center gap-2 text-sm font-medium text-primary",
                     "underline-offset-4 hover:underline"
                   )}
                 >
-                  {article.title}
+                  {item.title}
                   <ArrowRight className="size-3.5 shrink-0" aria-hidden />
                 </Link>
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Also try the{" "}
-            <Link
-              href="/standby-power-waste/"
-              className="font-medium text-primary underline-offset-4 hover:underline"
-            >
-              Standby Power Waste Calculator
-            </Link>{" "}
-            for whole-home phantom load totals.
-          </p>
         </section>
       </div>
     </div>

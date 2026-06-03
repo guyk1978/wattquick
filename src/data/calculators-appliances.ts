@@ -139,17 +139,17 @@ export const calculatorsAppliances = [
     ],
     result: {
       label: "Annual vampire power cost",
-      emptyMessage: "Enter standby watts, device count & rate",
+      emptyMessage: "Add at least one device and enter your electricity rate",
     },
     seo: {
       sections: [
         {
           heading: "Phantom load formula",
-          body: "Annual kWh = (standby watts × device count × 24 h × 365 days) ÷ 1,000. Annual cost = kWh × your $/kWh rate. Devices that look “off” often still draw 1–10 W.",
+          body: "For each device row: annual kWh = (standby W × quantity × 24 h × 365 days) ÷ 1,000. The calculator sums every row, then multiplies total kWh by your $/kWh rate.",
         },
         {
           heading: "Typical standby draws",
-          body: "TVs and game consoles often land at 3–10 W; phone chargers and adapters at 0.5–3 W. Smart appliances vary—measure with a plug meter for your home.",
+          body: "Cable boxes and DVRs can draw 15–30 W; TVs and consoles often land at 3–10 W; chargers and adapters at 0.5–3 W. Add a row per device type and quantity, then override watts with a plug meter if you have one.",
         },
         {
           heading: "Frequently asked questions",
