@@ -782,9 +782,17 @@
   gap: 0.875rem;
 }
 
+.blog-grid-featured {
+  grid-column: 1 / -1;
+}
+
 @media (min-width: 640px) {
   .blog-compact-grid {
     gap: 1rem;
+  }
+
+  .blog-grid-featured {
+    grid-column: span 2;
   }
 }
 

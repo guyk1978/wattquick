@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BlogPostCard } from "@/components/blog/blog-post-card";
+import { BlogPostGrid } from "@/components/blog/blog-post-grid";
 import { PageHeader, PageShell } from "@/components/page-shell";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
@@ -24,13 +24,7 @@ export default function BlogPage() {
       {posts.length === 0 ? (
         <p className="text-center text-muted-foreground">No articles yet.</p>
       ) : (
-        <ul className="blog-compact-grid list-none p-0">
-          {posts.map((post) => (
-            <li key={post.slug} className="min-h-0">
-              <BlogPostCard post={post} className="h-full" />
-            </li>
-          ))}
-        </ul>
+        <BlogPostGrid posts={posts} />
       )}
     </PageShell>
   );
