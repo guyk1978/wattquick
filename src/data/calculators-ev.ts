@@ -17,6 +17,7 @@ import {
 } from "@/lib/format";
 import {
   calculateEvChargingCableLoss,
+  calculateEvChargingTemperatureImpact,
   calculateEvPreconditioningCost,
   calculateEvTireWearCost,
   calculateEvVsGasSavings,
@@ -24,6 +25,8 @@ import {
   calculatePublicChargingCost,
   calculateWinterRange,
   estimateBatteryHealth,
+  EV_CHARGING_BATTERY_PRESETS,
+  EV_CHARGING_TEMP_SCENARIOS,
   type WinterRangeInput,
 } from "@/lib/calculators/ev";
 import {
@@ -174,6 +177,7 @@ export const calculatorsEv = [
     category: "ev",
     suggestions: [
       "ev-charge-time",
+      "ev-charging-temperature-impact",
       "ev-level1-vs-level2",
       "ev-battery-range",
     ],
@@ -247,6 +251,126 @@ export const calculatorsEv = [
         value: result.formatted,
         unit: "",
         detail: `10% → ${targetChargePercentage}% · ${batteryCapacityKwh} kWh pack · ${chargerPowerKw} kW charger`,
+      };
+    },
+  },
+  {
+    slug: "ev-charging-temperature-impact",
+    href: "/ev-charging-temperature-impact",
+    title: "EV Charging Temperature Impact Calculator",
+    description:
+      "See how extreme cold or heat extends DC fast-charge time via BMS thermal limits—base 10–80% time plus added delay.",
+    keywords: [
+      "ev charging temperature",
+      "cold weather ev charging time",
+      "ev battery preconditioning",
+      "dc fast charge winter",
+      "bms thermal throttling",
+    ],
+    icon: Thermometer,
+    tag: "EV",
+    category: "ev",
+    suggestions: [
+      "ev-fast-charging-time",
+      "ev-preconditioning-cost",
+      "ev-vs-ice-maintenance",
+      "ev-winter-range-loss",
+    ],
+    fields: [
+      {
+        id: "vehiclePreset",
+        label: "Vehicle / battery type",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "midsize",
+        options: Object.entries(EV_CHARGING_BATTERY_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+        hint: "Typical usable pack sizes for planning",
+      },
+      {
+        id: "batteryCapacityKwh",
+        label: "Battery capacity",
+        unit: "kWh",
+        placeholder: "75",
+        defaultValue: "75",
+      },
+      {
+        id: "chargerPowerKw",
+        label: "Charger power",
+        unit: "kW",
+        placeholder: "150",
+        defaultValue: "150",
+        hint: "DC fast charger peak kW",
+      },
+      {
+        id: "tempScenario",
+        label: "Outside temperature",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "average",
+        options: Object.entries(EV_CHARGING_TEMP_SCENARIOS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+        hint: "Pick a scenario or fine-tune with the slider",
+      },
+      {
+        id: "externalTempC",
+        label: "Fine-tune ambient temp",
+        inputType: "range",
+        min: -20,
+        max: 45,
+        step: 1,
+        defaultValue: "20",
+        unit: "°C",
+        colSpan: 2,
+      },
+    ],
+    result: {
+      label: "Estimated charge time",
+      emptyMessage: "Select vehicle, charger kW & temperature",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Why temperature changes charge time",
+          body: "Lithium cells accept the highest DC power in a moderate temperature window. Below ~15°C the BMS heats the pack and may cap kW; above ~30°C it cools and tapers to protect longevity. Preconditioning while plugged in or en route shrinks the added delay.",
+        },
+        {
+          heading: "How we estimate",
+          body: "Base time uses the same 10–80% fast-charge model as our DC fast charging calculator at ideal thermal conditions. Added delay combines reduced effective charger kW from BMS throttling plus typical precondition minutes for cold starts.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Is this exact for my car? A: OEM curves differ—use for road-trip planning. Q: What is preconditioning? A: Heating or cooling the pack before DC so more of the session runs at peak kW. Q: Maintenance costs? A: Pair with our EV vs ICE maintenance calculator for service and battery replacement outlook.",
+        },
+      ],
+    },
+    compute(values) {
+      const batteryCapacityKwh = parsePositive(values.batteryCapacityKwh ?? "");
+      const chargerPowerKw = parsePositive(values.chargerPowerKw ?? "");
+      const tempRaw = values.externalTempC?.trim() ?? "";
+      const externalTempC =
+        tempRaw === "" || tempRaw === "-" ? null : Number(tempRaw);
+      if (
+        batteryCapacityKwh === null ||
+        chargerPowerKw === null ||
+        externalTempC === null ||
+        !Number.isFinite(externalTempC)
+      ) {
+        return { value: null };
+      }
+      const result = calculateEvChargingTemperatureImpact({
+        batteryCapacityKwh,
+        chargerPowerKw,
+        externalTempC,
+      });
+      return {
+        value: result.totalFormatted,
+        unit: "",
+        detail: `Base ${result.baseFormatted} + ${result.addedDelayFormatted} delay at ${externalTempC}°C`,
       };
     },
   },

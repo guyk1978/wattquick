@@ -34,6 +34,7 @@ import { HomeInsulationSavingsCalculator } from "@/components/calculators/HomeIn
 import { PoolEnergyThermalCoverCalculator } from "@/components/calculators/PoolEnergyThermalCoverCalculator";
 import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverterSavingsCalculator";
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
+import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/EvChargingTemperatureImpactCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -51,6 +52,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "ev-preconditioning-cost") {
     return <EvPreconditioningCostCalculator className={className} />;
+  }
+  if (id === "ev-charging-temperature-impact") {
+    return <EvChargingTemperatureImpactCalculator className={className} />;
   }
   if (id === "ev-tire-wear-cost") {
     return <EvTireWearCostCalculator className={className} />;

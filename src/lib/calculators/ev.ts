@@ -4,6 +4,139 @@ export interface FastChargeInput {
   chargerPowerKw: number;
 }
 
+export function fastChargeTotalMinutes({
+  batteryCapacityKwh,
+  targetChargePercentage,
+  chargerPowerKw,
+}: FastChargeInput): number {
+  const { hours, minutes } = calculateFastChargeTime({
+    batteryCapacityKwh,
+    targetChargePercentage,
+    chargerPowerKw,
+  });
+  return hours * 60 + minutes;
+}
+
+export function formatMinutesAsChargeTime(totalMinutes: number): string {
+  const rounded = Math.max(0, Math.round(totalMinutes));
+  const hours = Math.floor(rounded / 60);
+  const minutes = rounded % 60;
+  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+}
+
+export const EV_CHARGING_BATTERY_PRESETS = {
+  compact: { label: "Compact EV (~50 kWh)", capacityKwh: 50 },
+  midsize: { label: "Mid-size EV (~75 kWh)", capacityKwh: 75 },
+  large: { label: "Large EV / SUV (~100 kWh)", capacityKwh: 100 },
+  general: { label: "General average (~65 kWh)", capacityKwh: 65 },
+  custom: { label: "Custom pack size", capacityKwh: 0 },
+} as const;
+
+export type EvChargingBatteryPreset = keyof typeof EV_CHARGING_BATTERY_PRESETS;
+
+export const EV_CHARGING_TEMP_SCENARIOS = {
+  extreme_cold: { label: "Extreme cold (−15 °C)", tempC: -15 },
+  cold: { label: "Cold winter (0 °C)", tempC: 0 },
+  average: { label: "Average / mild (20 °C)", tempC: 20 },
+  warm: { label: "Warm summer (32 °C)", tempC: 32 },
+  extreme_hot: { label: "Extreme heat (38 °C)", tempC: 38 },
+} as const;
+
+export type EvChargingTempScenario = keyof typeof EV_CHARGING_TEMP_SCENARIOS;
+
+const IDEAL_CHARGE_TEMP_C = 20;
+const OPTIMAL_TEMP_LOW_C = 15;
+const OPTIMAL_TEMP_HIGH_C = 30;
+
+export function getEvChargingThermalFactors(externalTempC: number) {
+  if (externalTempC >= OPTIMAL_TEMP_LOW_C && externalTempC <= OPTIMAL_TEMP_HIGH_C) {
+    return {
+      powerFactor: 1,
+      preconditionMinutes: 0,
+      bmsNote: "Pack in optimal thermal window — minimal BMS intervention",
+    };
+  }
+
+  if (externalTempC < OPTIMAL_TEMP_LOW_C) {
+    const severity = Math.min(1, (OPTIMAL_TEMP_LOW_C - externalTempC) / 35);
+    return {
+      powerFactor: 1 - severity * 0.48,
+      preconditionMinutes: Math.round(severity * 18),
+      bmsNote:
+        severity > 0.55
+          ? "Heavy cell heating and DC throttling"
+          : "BMS heating limits effective charge rate",
+    };
+  }
+
+  const severity = Math.min(1, (externalTempC - OPTIMAL_TEMP_HIGH_C) / 15);
+  return {
+    powerFactor: 1 - severity * 0.38,
+    preconditionMinutes: Math.round(severity * 10),
+    bmsNote:
+      severity > 0.55
+        ? "Aggressive pack cooling and charge taper"
+        : "BMS cooling moderates DC power",
+  };
+}
+
+export interface EvChargingTemperatureImpactInput {
+  batteryCapacityKwh: number;
+  chargerPowerKw: number;
+  externalTempC: number;
+}
+
+export function calculateEvChargingTemperatureImpact({
+  batteryCapacityKwh,
+  chargerPowerKw,
+  externalTempC,
+}: EvChargingTemperatureImpactInput) {
+  const targetChargePercentage = 80;
+  const ambient = getEvChargingThermalFactors(externalTempC);
+  const mode = getEvThermalMode(externalTempC);
+
+  const baseMinutes = fastChargeTotalMinutes({
+    batteryCapacityKwh,
+    targetChargePercentage,
+    chargerPowerKw,
+  });
+
+  const effectiveChargerKw = Math.max(chargerPowerKw * ambient.powerFactor, 1);
+  const sessionChargeMinutes = fastChargeTotalMinutes({
+    batteryCapacityKwh,
+    targetChargePercentage,
+    chargerPowerKw: effectiveChargerKw,
+  });
+
+  const addedDelayMinutes = Math.max(
+    0,
+    Math.round(sessionChargeMinutes - baseMinutes + ambient.preconditionMinutes)
+  );
+  const totalMinutes = Math.round(baseMinutes + addedDelayMinutes);
+
+  return {
+    baseMinutes: Math.round(baseMinutes),
+    addedDelayMinutes,
+    totalMinutes,
+    baseFormatted: formatMinutesAsChargeTime(baseMinutes),
+    addedDelayFormatted: formatMinutesAsChargeTime(addedDelayMinutes),
+    totalFormatted: formatMinutesAsChargeTime(totalMinutes),
+    powerFactor: parseFloat(ambient.powerFactor.toFixed(2)),
+    preconditionMinutes: ambient.preconditionMinutes,
+    effectiveChargerKw: parseFloat(effectiveChargerKw.toFixed(1)),
+    mode,
+    bmsNote: ambient.bmsNote,
+    externalTempC,
+    idealTempC: IDEAL_CHARGE_TEMP_C,
+    batteryCapacityKwh,
+    chargerPowerKw,
+    addedPercentOfBase:
+      baseMinutes > 0
+        ? Math.round((addedDelayMinutes / baseMinutes) * 100)
+        : 0,
+  };
+}
+
 export function calculateFastChargeTime({
   batteryCapacityKwh,
   targetChargePercentage,

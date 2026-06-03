@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T10:15:05.603Z",
+  "generatedAt": "2026-06-03T12:23:03.289Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -820,6 +820,23 @@
         "ev fast charging time",
         "dc fast charge calculator",
         "10 to 80 charging time"
+      ]
+    },
+    {
+      "id": "ev-charging-temperature-impact",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Charging Temperature Impact Calculator",
+      "description": "See how extreme cold or heat extends DC fast-charge time via BMS thermal limits—base 10–80% time plus added delay.",
+      "href": "/ev-charging-temperature-impact/",
+      "tag": "EV",
+      "keywords": [
+        "ev charging temperature",
+        "cold weather ev charging time",
+        "ev battery preconditioning",
+        "dc fast charge winter",
+        "bms thermal throttling"
       ]
     },
     {
