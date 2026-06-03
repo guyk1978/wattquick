@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useCallback, useMemo, useState, type ComponentType } from "react";
 import {
   ArrowRight,
+  Battery,
   Car,
   CircleDot,
   Cog,
   Droplets,
   Filter,
+  Info,
   Leaf,
   Sparkles,
   Wrench,
@@ -19,7 +21,6 @@ import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import {
   calculateEvVsIceMaintenance,
   EV_ICE_VEHICLE_CLASS_PRESETS,
-  MAINTENANCE_COMPARISON_YEARS,
   type EvIceVehicleClass,
   type MaintenanceItemIcon,
 } from "@/lib/calculators/ev-maintenance";
@@ -30,15 +31,20 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { EvMaintenanceCumulativeVisual } from "@/components/calculator/ev-maintenance-cumulative-visual";
-import { glassPanel, neonHeroNumber } from "@/lib/glass-ui";
+import { glassPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
+
 const CALCULATOR_ID = "ev-vs-ice-maintenance" satisfies CalculatorId;
 
 const SUPPORTING_ARTICLE = {
   title: "The true cost of EV ownership vs Gas cars",
   href: "/blog/true-cost-ev-ownership-vs-gas-cars/",
+} as const;
+
+const BATTERY_ARTICLE = {
+  title: "How long do EV batteries really last?",
+  href: "/blog/how-long-do-ev-batteries-really-last/",
 } as const;
 
 const MAINTENANCE_ICONS: Record<
@@ -54,6 +60,7 @@ const MAINTENANCE_ICONS: Record<
   inspect: Wrench,
   coolant: Leaf,
   tires: Car,
+  battery: Battery,
 };
 
 interface EvVsIceMaintenanceCalculatorProps {
@@ -70,6 +77,14 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
 
   const handleFieldChange = useCallback(
     (id: string, value: string) => {
+      if (id === "vehicleClass" && isVehicleClass(value)) {
+        setValue("vehicleClass", value);
+        setValue(
+          "batteryReplacementCost",
+          String(EV_ICE_VEHICLE_CLASS_PRESETS[value].defaultBatteryReplacementCost)
+        );
+        return;
+      }
       setValue(id, value);
     },
     [setValue]
@@ -78,8 +93,26 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
   const parsed = useMemo(() => {
     const annualKm = parsePositive(values.annualKm ?? "");
     const vehicleClass = values.vehicleClass ?? "sedan";
-    if (annualKm === null || !isVehicleClass(vehicleClass)) return null;
-    return calculateEvVsIceMaintenance({ annualKm, vehicleClass });
+    const comparisonYears = parsePositive(values.comparisonYears ?? "");
+    const batteryLifeYears = parsePositive(values.batteryLifeYears ?? "");
+    const batteryReplacementCost = parsePositive(values.batteryReplacementCost ?? "");
+    if (
+      annualKm === null ||
+      !isVehicleClass(vehicleClass) ||
+      comparisonYears === null ||
+      (comparisonYears !== 5 && comparisonYears !== 10) ||
+      batteryLifeYears === null ||
+      batteryReplacementCost === null
+    ) {
+      return null;
+    }
+    return calculateEvVsIceMaintenance({
+      annualKm,
+      vehicleClass,
+      comparisonYears: comparisonYears as 5 | 10,
+      batteryLifeYears,
+      batteryReplacementCost,
+    });
   }, [values]);
 
   const fieldLabels = useMemo(
@@ -87,9 +120,15 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
     [definition.fields]
   );
 
-  const savingsValue = parsed ? formatCurrency(parsed.totalSavings) : null;
-  const savingsDetail = parsed
-    ? `${formatCurrency(parsed.annualSavings)}/yr · ICE ${formatCurrency(parsed.iceAnnualTotal)}/yr vs EV ${formatCurrency(parsed.evAnnualTotal)}/yr`
+  const years = parsed?.comparisonYears ?? 5;
+  const maintenanceSavingsValue = parsed
+    ? formatCurrency(parsed.maintenanceSavings)
+    : null;
+  const netSavingsValue = parsed ? formatCurrency(parsed.netSavings) : null;
+  const netDetail = parsed
+    ? parsed.netSavingsPositive
+      ? `Maintenance saves ${formatCurrency(parsed.maintenanceSavings)} over ${years} yr${parsed.batteryCostInPeriod > 0 ? ` · pack risk ${formatCurrency(parsed.batteryCostInPeriod)}` : " · no pack replacement in window"}`
+      : `Battery risk ${formatCurrency(parsed.batteryCostInPeriod)} exceeds ${formatCurrency(parsed.maintenanceSavings)} maintenance savings`
     : null;
 
   const iceOnlyItems = parsed
@@ -100,7 +139,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
   const [pdfError, setPdfError] = useState<string | null>(null);
 
   const handleSaveToPDF = useCallback(async () => {
-    if (!parsed || savingsValue === null) return;
+    if (!parsed || netSavingsValue === null) return;
 
     setPdfLoading(true);
     setPdfError(null);
@@ -109,12 +148,12 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         definition.title,
         buildPdfInputs(values, fieldLabels),
         buildPdfResults({
-          [definition.result.label]: { value: savingsValue },
-          "ICE annual maintenance": formatCurrency(parsed.iceAnnualTotal),
-          "EV annual maintenance": formatCurrency(parsed.evAnnualTotal),
-          "ICE 5-year total": formatCurrency(parsed.iceCumulativeTotal),
-          "EV 5-year total": formatCurrency(parsed.evCumulativeTotal),
-          "Annual savings": formatCurrency(parsed.annualSavings),
+          [definition.result.label]: { value: netSavingsValue },
+          "Maintenance savings": formatCurrency(parsed.maintenanceSavings),
+          "Potential battery cost": formatCurrency(parsed.batteryCostInPeriod),
+          "ICE total": formatCurrency(parsed.iceCumulativeTotal),
+          "EV maintenance total": formatCurrency(parsed.evCumulativeTotal),
+          "EV total with battery risk": formatCurrency(parsed.evCumulativeWithBatteryTotal),
         })
       );
     } catch {
@@ -126,8 +165,8 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
     definition.result.label,
     definition.title,
     fieldLabels,
+    netSavingsValue,
     parsed,
-    savingsValue,
     values,
   ]);
 
@@ -143,46 +182,93 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         <div className="h-px bg-border/60" aria-hidden />
 
         {parsed ? (
-          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/10 px-5 py-5 sm:px-6">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Total savings ({MAINTENANCE_COMPARISON_YEARS} years)
-            </p>
-            <p className={cn("mt-2 flex items-baseline gap-0.5", neonHeroNumber)}>
-              <span className="text-3xl font-bold text-emerald-700 dark:text-emerald-300 sm:text-4xl">
-                $
-              </span>
-              <AnimatedCounter target={parsed.totalSavings} decimals={0} />
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">{savingsDetail}</p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Maintenance savings ({years} yr)
+              </p>
+              <p className="mt-2 font-mono text-xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
+                {maintenanceSavingsValue}
+              </p>
+            </div>
+            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Potential battery cost
+              </p>
+              <p className="mt-2 font-mono text-xl font-bold tabular-nums text-amber-900 dark:text-amber-100">
+                {parsed.batteryCostInPeriod > 0
+                  ? formatCurrency(parsed.batteryCostInPeriod)
+                  : "—"}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {parsed.batteryDueWithinPeriod
+                  ? `Due at year ${parsed.batteryReplacementYear}`
+                  : `After ${parsed.batteryLifeYears} yr — outside window`}
+              </p>
+            </div>
+            <div
+              className={cn(
+                "rounded-xl border px-4 py-4",
+                parsed.netSavingsPositive
+                  ? "border-primary/30 bg-primary/10"
+                  : "border-red-500/30 bg-red-500/10"
+              )}
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Net savings
+              </p>
+              <p
+                className={cn(
+                  "mt-2 flex items-baseline gap-0.5 font-mono text-xl font-bold tabular-nums",
+                  parsed.netSavingsPositive
+                    ? "text-emerald-800 dark:text-emerald-200"
+                    : "text-red-800 dark:text-red-200"
+                )}
+              >
+                {parsed.netSavingsPositive ? (
+                  <>
+                    <span className="text-2xl">+</span>
+                    <AnimatedCounter target={parsed.netSavings} decimals={0} />
+                  </>
+                ) : (
+                  formatCurrency(parsed.netSavings)
+                )}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {parsed.netSavingsPositive
+                  ? "Still ahead after battery risk"
+                  : "Battery scenario exceeds service savings"}
+              </p>
+            </div>
           </div>
         ) : null}
 
         {parsed ? (
-          <div className="grid gap-8 lg:grid-cols-[minmax(240px,1fr)_minmax(180px,1fr)] lg:items-start">
-            <EvMaintenanceCumulativeVisual
-              iceCumulativeByYear={parsed.iceCumulativeByYear}
-              evCumulativeByYear={parsed.evCumulativeByYear}
-              years={MAINTENANCE_COMPARISON_YEARS}
-              totalSavings={parsed.totalSavings}
-            />
-            <CostGamifiedResult
-              calculatorId={CALCULATOR_ID}
-              label={`${MAINTENANCE_COMPARISON_YEARS}-year maintenance savings`}
-              value={savingsValue}
-              unit=""
-              detail={savingsDetail}
-              emptyMessage={definition.result.emptyMessage}
-            />
-          </div>
-        ) : (
-          <CostGamifiedResult
-            calculatorId={CALCULATOR_ID}
-            label={definition.result.label}
-            value={null}
-            detail={null}
-            emptyMessage={definition.result.emptyMessage}
+          <EvMaintenanceCumulativeVisual
+            iceCumulativeByYear={parsed.iceCumulativeByYear}
+            evCumulativeByYear={parsed.evCumulativeByYear}
+            evCumulativeWithBatteryByYear={parsed.evCumulativeWithBatteryByYear}
+            years={years}
+            maintenanceSavings={parsed.maintenanceSavings}
+            showBatteryRisk={parsed.batteryDueWithinPeriod}
           />
-        )}
+        ) : null}
+
+        <div
+          className="flex items-start gap-3 rounded-xl border border-sky-500/25 bg-sky-500/10 px-4 py-4 text-sm text-foreground/90"
+          role="note"
+        >
+          <Info className="mt-0.5 size-5 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden />
+          <div>
+            <p className="font-semibold text-foreground">Long-term battery replacement risk</p>
+            <p className="mt-2 leading-relaxed text-muted-foreground">
+              Pack replacement is a <strong className="font-medium text-foreground">low-probability</strong>{" "}
+              event for many owners—most traction batteries are engineered for 15+ years, and
+              warranties often cover 8 years or 160,000 km. We show it here so you can stress-test
+              ownership costs, not because every EV needs a new pack within your comparison window.
+            </p>
+          </div>
+        </div>
 
         {parsed ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -190,14 +276,14 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
               label="ICE annual maintenance"
               value={formatCurrency(parsed.iceAnnualTotal)}
               unit="/yr"
-              detail={`Scaled for ${formatNumber(parsed.annualKm, { maxDecimals: 0 })} km/yr`}
+              detail={`${formatNumber(parsed.annualKm, { maxDecimals: 0 })} km/yr`}
               emptyMessage="—"
             />
             <CalculatorResult
               label="EV annual maintenance"
               value={formatCurrency(parsed.evAnnualTotal)}
               unit="/yr"
-              detail="Regenerative braking lowers pad wear"
+              detail="Excludes pack replacement"
               emptyMessage="—"
             />
           </div>
@@ -254,13 +340,21 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
             Battery electric vehicles eliminate oil changes, spark plugs, timing belts, and most
-            engine fluids—there is no internal combustion engine to service. Regenerative braking
-            uses the drive motor to slow the car, so friction brakes work less often and pads last
-            longer. You still budget for tires, cabin filters, brake fluid, coolant for the battery
-            loop, and periodic health checks—but the moving-parts bill is much smaller over five
-            years.
+            engine fluids. Regenerative braking cuts friction brake wear. Every pack includes a{" "}
+            <strong className="font-medium text-foreground">Battery Management System (BMS)</strong>{" "}
+            that limits charge speed, balances cells, and guards against over-voltage—helping modern
+            packs last 15+ years in typical use. You still budget for tires, fluids, and inspections;
+            the open question is whether a one-time pack replacement ever lands inside your
+            ownership horizon.
           </p>
-          <p className="mt-4 text-sm">
+          <div className="mt-4 flex flex-col gap-2 text-sm">
+            <Link
+              href={BATTERY_ARTICLE.href}
+              className="inline-flex items-center gap-2 font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {BATTERY_ARTICLE.title}
+              <ArrowRight className="size-3.5 shrink-0" aria-hidden />
+            </Link>
             <Link
               href={SUPPORTING_ARTICLE.href}
               className="inline-flex items-center gap-2 font-medium text-primary underline-offset-4 hover:underline"
@@ -268,14 +362,14 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
               {SUPPORTING_ARTICLE.title}
               <ArrowRight className="size-3.5 shrink-0" aria-hidden />
             </Link>
-          </p>
+          </div>
         </section>
 
         <JoinMyPdfSaveReport
           calculatorTitle={definition.title}
           resultLabel={definition.result.label}
-          value={savingsValue}
-          detail={savingsDetail}
+          value={netSavingsValue}
+          detail={netDetail}
           values={values}
           fieldLabels={fieldLabels}
           onSaveToPdf={handleSaveToPDF}

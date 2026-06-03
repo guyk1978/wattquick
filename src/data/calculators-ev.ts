@@ -28,8 +28,11 @@ import {
 } from "@/lib/calculators/ev";
 import {
   calculateEvVsIceMaintenance,
+  COMPARISON_YEAR_OPTIONS,
+  DEFAULT_BATTERY_LIFE_YEARS,
+  DEFAULT_COMPARISON_YEARS,
   EV_ICE_VEHICLE_CLASS_PRESETS,
-  MAINTENANCE_COMPARISON_YEARS,
+  type ComparisonYears,
   type EvIceVehicleClass,
 } from "@/lib/calculators/ev-maintenance";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
@@ -41,12 +44,13 @@ export const calculatorsEv = [
     href: "/ev-vs-ice-maintenance",
     title: "EV vs ICE Maintenance Cost Calculator",
     description:
-      "Compare 5-year scheduled maintenance for electric vs. gas vehicles—oil, brakes, belts, and cumulative savings.",
+      "Compare scheduled maintenance for EV vs. gas cars over 5–10 years, including optional battery replacement risk.",
     keywords: [
       "ev vs gas maintenance cost",
       "ev maintenance savings",
       "ice maintenance calculator",
       "electric car service cost",
+      "ev battery replacement cost",
     ],
     icon: Wrench,
     tag: "EV",
@@ -77,39 +81,80 @@ export const calculatorsEv = [
           label: preset.label,
         })),
       },
+      {
+        id: "comparisonYears",
+        label: "Comparison period",
+        inputType: "select",
+        defaultValue: String(DEFAULT_COMPARISON_YEARS),
+        options: COMPARISON_YEAR_OPTIONS.map((years) => ({
+          value: String(years),
+          label: `${years} years`,
+        })),
+      },
+      {
+        id: "batteryLifeYears",
+        label: "Estimated battery life",
+        unit: "yrs",
+        placeholder: "12",
+        defaultValue: String(DEFAULT_BATTERY_LIFE_YEARS),
+        hint: "When a full pack replacement might be needed",
+      },
+      {
+        id: "batteryReplacementCost",
+        label: "Estimated pack replacement",
+        unit: "$",
+        placeholder: "6000",
+        defaultValue: "6000",
+        hint: "Market average often $5,000–$8,000 — varies by model",
+      },
     ],
     result: {
-      label: `${MAINTENANCE_COMPARISON_YEARS}-year maintenance savings`,
-      emptyMessage: "Enter annual km and vehicle type",
+      label: "Net maintenance savings",
+      emptyMessage: "Enter annual km, vehicle type & battery assumptions",
     },
     seo: {
       sections: [
         {
           heading: "What we compare",
-          body: "ICE costs include oil, filters, spark plugs, timing belt amortization, engine fluids, and full friction brake service. EV costs include reduced brake wear (regenerative braking), brake fluid, cabin filter, battery coolant, tire rotation, and diagnostics—no engine oil or ignition service.",
+          body: "ICE costs include oil, filters, spark plugs, timing belt amortization, engine fluids, and full friction brake service. EV costs include reduced brake wear (regenerative braking), brake fluid, cabin filter, battery coolant, tire rotation, and diagnostics. Optional battery replacement is a separate risk line—not annual service.",
         },
         {
-          heading: "Mileage & vehicle class",
-          body: "Costs scale from a ~19,312 km/yr baseline. SUVs and luxury classes use higher parts and labor multipliers. Results are planned-maintenance estimates—not collision repair, tires replacement, or warranty items.",
+          heading: "Battery replacement risk",
+          body: "If estimated pack life falls inside your 5- or 10-year window, we add the replacement cost to cumulative EV spend. Many packs last 15+ years or are covered by warranty—treat this as a stress-test scenario, not a certainty.",
         },
         {
           heading: "Frequently asked questions",
-          body: "Q: Are EVs maintenance-free? A: No—tires and fluids still matter; regen mainly cuts brake pads. Q: Include tires? A: Rotation only; replacement modeled in tire wear calculators. Q: Fleet use? A: Multiply annual km to match utilization.",
+          body: "Q: Are EVs maintenance-free? A: No—fluids and tires still matter. Q: Is battery cost included by default? A: Only when life expectancy is shorter than your comparison period. Q: Fleet use? A: Scale annual km to match utilization.",
         },
       ],
     },
     compute(values) {
       const annualKm = parsePositive(values.annualKm ?? "");
       const vehicleClass = (values.vehicleClass ?? "sedan") as EvIceVehicleClass;
-      if (annualKm === null || !(vehicleClass in EV_ICE_VEHICLE_CLASS_PRESETS)) {
+      const comparisonYears = Number(values.comparisonYears ?? DEFAULT_COMPARISON_YEARS);
+      const batteryLifeYears = parsePositive(values.batteryLifeYears ?? "");
+      const batteryReplacementCost = parsePositive(values.batteryReplacementCost ?? "");
+      if (
+        annualKm === null ||
+        !(vehicleClass in EV_ICE_VEHICLE_CLASS_PRESETS) ||
+        !COMPARISON_YEAR_OPTIONS.includes(comparisonYears as ComparisonYears) ||
+        batteryLifeYears === null ||
+        batteryReplacementCost === null
+      ) {
         return { value: null };
       }
-      const result = calculateEvVsIceMaintenance({ annualKm, vehicleClass });
+      const result = calculateEvVsIceMaintenance({
+        annualKm,
+        vehicleClass,
+        comparisonYears: comparisonYears as ComparisonYears,
+        batteryLifeYears,
+        batteryReplacementCost,
+      });
       if (!result) return { value: null };
       return {
-        value: formatCurrency(result.totalSavings),
-        unit: `/${MAINTENANCE_COMPARISON_YEARS} yr`,
-        detail: `ICE ${formatCurrency(result.iceCumulativeTotal)} vs EV ${formatCurrency(result.evCumulativeTotal)} · ${formatCurrency(result.annualSavings)}/yr`,
+        value: formatCurrency(result.netSavings),
+        unit: result.netSavingsPositive ? " net" : " net (deficit)",
+        detail: `Maintenance saved ${formatCurrency(result.maintenanceSavings)} · Battery risk ${formatCurrency(result.batteryCostInPeriod)} over ${result.comparisonYears} yr`,
       };
     },
   },

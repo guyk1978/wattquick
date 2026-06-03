@@ -22,7 +22,10 @@ You still pay for tire rotation, cabin filters, brake fluid intervals, battery t
 
 1. Enter your **annual kilometers** (fleet odometer or personal average).  
 2. Pick **vehicle class**—SUV and luxury multipliers reflect pricier parts and labor.  
-3. Read **cumulative 5-year totals** and the ICE-only line items you eliminate.
+3. Choose **5 or 10 years** and optional **battery replacement risk** to see net savings after a hypothetical pack bill.  
+4. Read cumulative totals, the dashed **EV + pack risk** line on the chart, and ICE-only line items you eliminate.
+
+Most packs last well beyond a typical loan—see [How long do EV batteries really last?](/blog/how-long-do-ev-batteries-really-last/).
 
 Pair with [EV vs. Gas Savings](/ev-vs-gas-savings/) for energy costs and [EV tire wear cost](/ev-tire-wear-cost/) for rubber—honest TCO needs all three ledgers.
 

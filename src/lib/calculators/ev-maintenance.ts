@@ -1,4 +1,8 @@
-export const MAINTENANCE_COMPARISON_YEARS = 5;
+export const DEFAULT_COMPARISON_YEARS = 5;
+
+export const COMPARISON_YEAR_OPTIONS = [5, 10] as const;
+
+export type ComparisonYears = (typeof COMPARISON_YEAR_OPTIONS)[number];
 
 /** Reference annual distance for baseline service intervals (~12,000 mi). */
 export const BASE_ANNUAL_KM = 19_312;
@@ -7,12 +11,14 @@ export type EvIceVehicleClass = "sedan" | "suv" | "luxury";
 
 export const EV_ICE_VEHICLE_CLASS_PRESETS: Record<
   EvIceVehicleClass,
-  { label: string; costMultiplier: number }
+  { label: string; costMultiplier: number; defaultBatteryReplacementCost: number }
 > = {
-  sedan: { label: "Family sedan / compact", costMultiplier: 1 },
-  suv: { label: "SUV / crossover", costMultiplier: 1.25 },
-  luxury: { label: "Luxury / premium", costMultiplier: 1.55 },
+  sedan: { label: "Family sedan / compact", costMultiplier: 1, defaultBatteryReplacementCost: 6000 },
+  suv: { label: "SUV / crossover", costMultiplier: 1.25, defaultBatteryReplacementCost: 7200 },
+  luxury: { label: "Luxury / premium", costMultiplier: 1.55, defaultBatteryReplacementCost: 8800 },
 };
+
+export const DEFAULT_BATTERY_LIFE_YEARS = 12;
 
 export type MaintenanceItemIcon =
   | "oil"
@@ -23,7 +29,8 @@ export type MaintenanceItemIcon =
   | "fluids"
   | "inspect"
   | "coolant"
-  | "tires";
+  | "tires"
+  | "battery";
 
 export interface MaintenanceLineItem {
   id: string;
@@ -132,10 +139,13 @@ export const MAINTENANCE_LINE_ITEMS: MaintenanceLineItem[] = [
 export interface EvIceMaintenanceInput {
   annualKm: number;
   vehicleClass: EvIceVehicleClass;
-  years?: number;
+  comparisonYears: ComparisonYears;
+  batteryLifeYears: number;
+  batteryReplacementCost: number;
 }
 
 export interface EvIceMaintenanceResult {
+  comparisonYears: ComparisonYears;
   annualKm: number;
   mileageFactor: number;
   classMultiplier: number;
@@ -144,7 +154,18 @@ export interface EvIceMaintenanceResult {
   annualSavings: number;
   iceCumulativeTotal: number;
   evCumulativeTotal: number;
-  totalSavings: number;
+  /** Maintenance-only gap (ICE − EV scheduled service) */
+  maintenanceSavings: number;
+  batteryLifeYears: number;
+  batteryReplacementCost: number;
+  /** Lump-sum pack replacement counted inside the comparison window */
+  batteryCostInPeriod: number;
+  batteryReplacementYear: number | null;
+  batteryDueWithinPeriod: boolean;
+  evCumulativeWithBatteryByYear: number[];
+  evCumulativeWithBatteryTotal: number;
+  netSavings: number;
+  netSavingsPositive: boolean;
   iceCumulativeByYear: number[];
   evCumulativeByYear: number[];
   lineItems: {
@@ -163,12 +184,41 @@ function scaleAnnualCost(base: number, mileageFactor: number, classMultiplier: n
   return parseFloat((base * mileageFactor * classMultiplier).toFixed(2));
 }
 
+function buildEvWithBatteryCumulative(
+  evCumulativeByYear: number[],
+  batteryLifeYears: number,
+  batteryReplacementCost: number
+): { byYear: number[]; costInPeriod: number; replacementYear: number | null } {
+  if (batteryReplacementCost <= 0) {
+    return { byYear: [...evCumulativeByYear], costInPeriod: 0, replacementYear: null };
+  }
+
+  const replacementYear =
+    batteryLifeYears > 0 && batteryLifeYears <= evCumulativeByYear.length
+      ? batteryLifeYears
+      : null;
+
+  const costInPeriod = replacementYear !== null ? batteryReplacementCost : 0;
+
+  const byYear = evCumulativeByYear.map((cum, index) => {
+    const year = index + 1;
+    if (replacementYear !== null && year >= replacementYear) {
+      return parseFloat((cum + batteryReplacementCost).toFixed(2));
+    }
+    return cum;
+  });
+
+  return { byYear, costInPeriod, replacementYear };
+}
+
 export function calculateEvVsIceMaintenance({
   annualKm,
   vehicleClass,
-  years = MAINTENANCE_COMPARISON_YEARS,
+  comparisonYears = DEFAULT_COMPARISON_YEARS,
+  batteryLifeYears,
+  batteryReplacementCost,
 }: EvIceMaintenanceInput): EvIceMaintenanceResult | null {
-  if (annualKm <= 0 || years <= 0) return null;
+  if (annualKm <= 0 || comparisonYears <= 0 || batteryLifeYears <= 0) return null;
 
   const classMultiplier = EV_ICE_VEHICLE_CLASS_PRESETS[vehicleClass].costMultiplier;
   const mileageFactor = Math.min(2.5, Math.max(0.25, annualKm / BASE_ANNUAL_KM));
@@ -195,20 +245,33 @@ export function calculateEvVsIceMaintenance({
   );
   const annualSavings = parseFloat(Math.max(0, iceAnnualTotal - evAnnualTotal).toFixed(2));
 
-  const iceCumulativeByYear = Array.from({ length: years }, (_, i) =>
+  const iceCumulativeByYear = Array.from({ length: comparisonYears }, (_, i) =>
     parseFloat((iceAnnualTotal * (i + 1)).toFixed(2))
   );
-  const evCumulativeByYear = Array.from({ length: years }, (_, i) =>
+  const evCumulativeByYear = Array.from({ length: comparisonYears }, (_, i) =>
     parseFloat((evAnnualTotal * (i + 1)).toFixed(2))
   );
 
-  const iceCumulativeTotal = iceCumulativeByYear[years - 1] ?? 0;
-  const evCumulativeTotal = evCumulativeByYear[years - 1] ?? 0;
-  const totalSavings = parseFloat(
+  const iceCumulativeTotal = iceCumulativeByYear[comparisonYears - 1] ?? 0;
+  const evCumulativeTotal = evCumulativeByYear[comparisonYears - 1] ?? 0;
+  const maintenanceSavings = parseFloat(
     Math.max(0, iceCumulativeTotal - evCumulativeTotal).toFixed(2)
   );
 
+  const battery = buildEvWithBatteryCumulative(
+    evCumulativeByYear,
+    Math.round(batteryLifeYears),
+    batteryReplacementCost
+  );
+
+  const evCumulativeWithBatteryTotal =
+    battery.byYear[comparisonYears - 1] ?? evCumulativeTotal;
+  const netSavings = parseFloat(
+    (iceCumulativeTotal - evCumulativeWithBatteryTotal).toFixed(2)
+  );
+
   return {
+    comparisonYears,
     annualKm,
     mileageFactor: parseFloat(mileageFactor.toFixed(2)),
     classMultiplier,
@@ -217,9 +280,21 @@ export function calculateEvVsIceMaintenance({
     annualSavings,
     iceCumulativeTotal,
     evCumulativeTotal,
-    totalSavings,
+    maintenanceSavings,
+    batteryLifeYears: Math.round(batteryLifeYears),
+    batteryReplacementCost: parseFloat(batteryReplacementCost.toFixed(2)),
+    batteryCostInPeriod: battery.costInPeriod,
+    batteryReplacementYear: battery.replacementYear,
+    batteryDueWithinPeriod: battery.costInPeriod > 0,
+    evCumulativeWithBatteryByYear: battery.byYear,
+    evCumulativeWithBatteryTotal,
+    netSavings,
+    netSavingsPositive: netSavings > 0,
     iceCumulativeByYear,
     evCumulativeByYear,
     lineItems,
   };
 }
+
+/** @deprecated Use DEFAULT_COMPARISON_YEARS */
+export const MAINTENANCE_COMPARISON_YEARS = DEFAULT_COMPARISON_YEARS;

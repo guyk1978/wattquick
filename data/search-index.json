@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T08:33:25.742Z",
+  "generatedAt": "2026-06-03T08:37:08.769Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -796,14 +796,15 @@
       "category": "Calculators",
       "group": "EV Charging",
       "title": "EV vs ICE Maintenance Cost Calculator",
-      "description": "Compare 5-year scheduled maintenance for electric vs. gas vehicles—oil, brakes, belts, and cumulative savings.",
+      "description": "Compare scheduled maintenance for EV vs. gas cars over 5–10 years, including optional battery replacement risk.",
       "href": "/ev-vs-ice-maintenance/",
       "tag": "EV",
       "keywords": [
         "ev vs gas maintenance cost",
         "ev maintenance savings",
         "ice maintenance calculator",
-        "electric car service cost"
+        "electric car service cost",
+        "ev battery replacement cost"
       ]
     },
     {
@@ -2100,6 +2101,21 @@
       "title": "How Fast Can You DC Charge an EV? The 10–80% Window Explained",
       "description": "Learn why DC fast charging slows after 80% SOC, how taper curves work, and how to estimate session time without guesswork.",
       "href": "/blog/how-fast-can-you-dc-charge/",
+      "tag": "EV Charging",
+      "keywords": [
+        "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "how-long-do-ev-batteries-really-last",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "EV Charging",
+      "title": "How long do EV batteries really last?",
+      "description": "Calendar aging, BMS protection, warranty thresholds, and when a pack replacement actually belongs in your cost model.",
+      "href": "/blog/how-long-do-ev-batteries-really-last/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
