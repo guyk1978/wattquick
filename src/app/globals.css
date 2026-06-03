@@ -775,6 +775,31 @@
   --neon-to: #34d399;
 }
 
+/* —— Blog index: compact light-glass grid —— */
+.blog-compact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .blog-compact-grid {
+    gap: 1rem;
+  }
+}
+
+.blog-post-card__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  max-height: calc(1.35rem * 3);
+}
+
+.blog-tool-tag__label {
+  white-space: nowrap;
+}
+
 .dashboard-flow-label,
 .dashboard-widget-stat,
 .dashboard-modal-stat {
