@@ -16,6 +16,8 @@ import {
   calculateVampirePowerCost,
   calculateWholeHouseEnergyBudget,
   INVERTER_SAVINGS_PERCENT_OPTIONS,
+  POOL_HEAT_PUMP_COP_OPTIONS,
+  POOL_HEATING_METHOD_PRESETS,
   POOL_THERMAL_COVER_SAVINGS_OPTIONS,
   VAMPIRE_DEVICE_PRESETS,
 } from "@/lib/calculators/appliances";
@@ -767,22 +769,22 @@ export const calculatorsAppliances = [
     href: "/pool-energy-thermal-cover",
     title: "Pool Energy Cost & Thermal Cover Savings Calculator",
     description:
-      "Estimate daily pool pump electricity cost and monthly/annual savings from a thermal cover on evaporation and heating load.",
+      "Pool pump and heating cost by technology (resistance vs. heat pump COP) plus thermal cover savings on evaporation load.",
     keywords: [
       "pool energy cost calculator",
-      "pool pump electricity cost",
+      "pool heat pump vs electric",
       "thermal pool cover savings",
       "pool heating cost",
-      "pool evaporation savings",
+      "pool heater COP",
     ],
     icon: Waves,
     tag: "Pool",
     category: "appliance",
     suggestions: [
-      "ac-energy-cost",
+      "ac-inverter-savings",
+      "heat-pump-vs-resistance",
       "home-insulation-savings",
-      "appliance-daily-cost",
-      "electricity-bill",
+      "ac-energy-cost",
     ],
     fields: [
       {
@@ -806,6 +808,28 @@ export const calculatorsAppliances = [
         unit: "$/kWh",
         placeholder: "0.14",
         defaultValue: "0.14",
+      },
+      {
+        id: "heatingMethod",
+        label: "Heating method",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "heat_pump",
+        options: Object.entries(POOL_HEATING_METHOD_PRESETS).map(([value, preset]) => ({
+          value,
+          label: preset.label,
+        })),
+      },
+      {
+        id: "heatPumpCop",
+        label: "Heat pump COP",
+        inputType: "select",
+        defaultValue: "5",
+        options: POOL_HEAT_PUMP_COP_OPTIONS.map((cop) => ({
+          value: String(cop),
+          label: `COP ${cop}`,
+        })),
+        hint: "Used for heat pump heating and comparison vs. resistance",
       },
       {
         id: "useThermalCover",
@@ -837,15 +861,15 @@ export const calculatorsAppliances = [
       sections: [
         {
           heading: "What we model",
-          body: "Daily pump kWh = kW × hours. We add a thermal/evaporation load equal to pump energy for an open pool, then reduce that portion by your cover savings %. Pump energy is unchanged—covers mainly cut heat and water loss.",
+          body: "Pump kWh = kW × hours. Heat demand to offset evaporation is modeled from that load; grid kWh for heating = heat demand ÷ COP (1 for resistance, 4–6 for heat pumps). Covers reduce heat demand before COP is applied.",
         },
         {
-          heading: "Cover benefits beyond kWh",
-          body: "Less evaporation means fewer top-offs and more stable chemistry. Shoulder-season gas or heat-pump pool heaters also run fewer hours with a blanket on.",
+          heading: "Heat pump vs. resistance",
+          body: "Resistance heaters deliver 1 kWh of heat per kWh of electricity. Heat pumps move heat from ambient air into the water, so the same comfort often needs 4–6× less grid energy.",
         },
         {
           heading: "Frequently asked questions",
-          body: "Q: Heated pool? A: Savings scale with thermal load—covers help most when you heat or in windy/sun-exposed sites. Q: Solar cover vs. winter cover? A: Use the % that matches your cover type. Q: Home envelope? A: Pair with Home Insulation Savings for whole-property efficiency.",
+          body: "Q: Gas heater? A: Enter an equivalent $/kWh or use resistance as a conservative electric baseline. Q: Cover %? A: Match your blanket type (30–50%). Q: Home AC? A: See AC inverter savings for related cooling efficiency.",
         },
       ],
     },
@@ -853,14 +877,19 @@ export const calculatorsAppliances = [
       const pumpKw = parsePositive(values.pumpKw ?? "");
       const hoursPerDay = parsePositive(values.hoursPerDay ?? "");
       const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const heatingMethod =
+        values.heatingMethod === "electric" ? "electric" : "heat_pump";
+      const heatPumpCopRaw = parsePositive(values.heatPumpCop ?? "");
       const useThermalCover = (values.useThermalCover ?? "no") === "yes";
       const savingsRaw = parsePositive(values.coverSavingsPercent ?? "");
       if (
         pumpKw === null ||
         hoursPerDay === null ||
         ratePerKwh === null ||
+        heatPumpCopRaw === null ||
         savingsRaw === null ||
-        !(POOL_THERMAL_COVER_SAVINGS_OPTIONS as readonly number[]).includes(savingsRaw)
+        !(POOL_THERMAL_COVER_SAVINGS_OPTIONS as readonly number[]).includes(savingsRaw) ||
+        !(POOL_HEAT_PUMP_COP_OPTIONS as readonly number[]).includes(heatPumpCopRaw)
       ) {
         return { value: null };
       }
@@ -868,14 +897,16 @@ export const calculatorsAppliances = [
         pumpKw,
         hoursPerDay,
         ratePerKwh,
+        heatingMethod,
+        heatPumpCop: heatPumpCopRaw as (typeof POOL_HEAT_PUMP_COP_OPTIONS)[number],
         useThermalCover,
         coverSavingsPercent: savingsRaw as (typeof POOL_THERMAL_COVER_SAVINGS_OPTIONS)[number],
       });
       if (!result) return { value: null };
       return {
-        value: formatCurrency(result.annualSavings),
+        value: formatCurrency(result.annualTotalSavings),
         unit: "/yr",
-        detail: `${formatCurrency(result.monthlySavings)}/mo · ${formatCurrency(result.dailyCostWithoutCover)}/day open pool`,
+        detail: `Cover ${formatCurrency(result.annualCoverSavings)}/yr · HP vs electric ${formatCurrency(result.annualHeatingSavingsHpVsElectric)}/yr`,
       };
     },
   },

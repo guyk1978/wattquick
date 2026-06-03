@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T10:05:29.232Z",
+  "generatedAt": "2026-06-03T10:09:05.693Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1263,15 +1263,15 @@
       "category": "Calculators",
       "group": "Appliances",
       "title": "Pool Energy Cost & Thermal Cover Savings Calculator",
-      "description": "Estimate daily pool pump electricity cost and monthly/annual savings from a thermal cover on evaporation and heating load.",
+      "description": "Pool pump and heating cost by technology (resistance vs. heat pump COP) plus thermal cover savings on evaporation load.",
       "href": "/pool-energy-thermal-cover/",
       "tag": "Pool",
       "keywords": [
         "pool energy cost calculator",
-        "pool pump electricity cost",
+        "pool heat pump vs electric",
         "thermal pool cover savings",
         "pool heating cost",
-        "pool evaporation savings"
+        "pool heater COP"
       ]
     },
     {

@@ -496,7 +496,29 @@ export const POOL_THERMAL_COVER_SAVINGS_OPTIONS = [30, 35, 40, 45, 50] as const;
 export type PoolThermalCoverSavingsPercent =
   (typeof POOL_THERMAL_COVER_SAVINGS_OPTIONS)[number];
 
-/** Daily evaporation / heat-loss energy modeled vs. pump run energy (open pool). */
+export const POOL_HEAT_PUMP_COP_OPTIONS = [4, 5, 6] as const;
+
+export type PoolHeatPumpCop = (typeof POOL_HEAT_PUMP_COP_OPTIONS)[number];
+
+export type PoolHeatingMethod = "electric" | "heat_pump";
+
+export const POOL_HEATING_METHOD_PRESETS: Record<
+  PoolHeatingMethod,
+  { label: string; cop: number; description: string }
+> = {
+  electric: {
+    label: "Electric resistance heater",
+    cop: 1,
+    description: "1:1 efficiency — every kWh of heat needs one kWh from the grid",
+  },
+  heat_pump: {
+    label: "Heat pump",
+    cop: 5,
+    description: "Moves heat from air to water — typical COP 4–6",
+  },
+};
+
+/** Daily heat demand (kWh thermal) modeled vs. pump run energy (open pool). */
 export const POOL_THERMAL_LOAD_RATIO = 1;
 
 export const POOL_DAYS_PER_MONTH = 30;
@@ -505,35 +527,56 @@ export interface PoolEnergyThermalCoverInput {
   pumpKw: number;
   hoursPerDay: number;
   ratePerKwh: number;
+  heatingMethod: PoolHeatingMethod;
+  heatPumpCop: PoolHeatPumpCop;
   useThermalCover: boolean;
   coverSavingsPercent: PoolThermalCoverSavingsPercent;
 }
 
 export interface PoolEnergyThermalCoverResult {
+  heatingMethod: PoolHeatingMethod;
+  activeCop: number;
+  heatPumpCop: number;
   dailyPumpKwh: number;
-  dailyThermalKwh: number;
+  dailyHeatDemandKwh: number;
+  dailyHeatingKwh: number;
   dailyKwhWithoutCover: number;
   dailyKwhWithCover: number;
   dailyCostWithoutCover: number;
   dailyCostWithCover: number;
-  dailySavings: number;
+  dailyCoverSavings: number;
   monthlyCostWithoutCover: number;
   monthlyCostWithCover: number;
-  monthlySavings: number;
-  monthlyKwhSaved: number;
-  annualSavings: number;
-  annualKwhSaved: number;
+  monthlyCoverSavings: number;
+  monthlyKwhSavedCover: number;
+  annualCoverSavings: number;
+  annualKwhSavedCover: number;
+  monthlyHeatingCostElectric: number;
+  monthlyHeatingCostHeatPump: number;
+  monthlyHeatingSavingsHpVsElectric: number;
+  annualHeatingSavingsHpVsElectric: number;
+  monthlyTotalSavings: number;
+  annualTotalSavings: number;
+  electricBarPercent: number;
+  heatPumpBarPercent: number;
   coverSavingsPercent: number;
   useThermalCover: boolean;
 }
 
+function poolHeatingKwhFromHeatDemand(heatDemandKwh: number, cop: number): number {
+  return parseFloat((heatDemandKwh / cop).toFixed(2));
+}
+
 /**
- * Pool pump energy plus modeled thermal/evaporation load; cover reduces thermal portion only.
+ * Pool pump + heating (COP-adjusted) + thermal cover on heat demand.
+ * Compares resistance vs. heat-pump heating cost for the same net load.
  */
 export function calculatePoolEnergyThermalCover({
   pumpKw,
   hoursPerDay,
   ratePerKwh,
+  heatingMethod,
+  heatPumpCop,
   useThermalCover,
   coverSavingsPercent,
 }: PoolEnergyThermalCoverInput): PoolEnergyThermalCoverResult | null {
@@ -542,33 +585,42 @@ export function calculatePoolEnergyThermalCover({
     hoursPerDay <= 0 ||
     hoursPerDay > 24 ||
     ratePerKwh <= 0 ||
-    !POOL_THERMAL_COVER_SAVINGS_OPTIONS.includes(coverSavingsPercent)
+    !POOL_THERMAL_COVER_SAVINGS_OPTIONS.includes(coverSavingsPercent) ||
+    !POOL_HEAT_PUMP_COP_OPTIONS.includes(heatPumpCop)
   ) {
     return null;
   }
 
+  const activeCop = heatingMethod === "electric" ? 1 : heatPumpCop;
+
   const dailyPumpKwh = parseFloat((pumpKw * hoursPerDay).toFixed(2));
-  const dailyThermalKwh = parseFloat(
+  const dailyHeatDemandKwh = parseFloat(
     (dailyPumpKwh * POOL_THERMAL_LOAD_RATIO).toFixed(2)
   );
 
   const thermalReduction = useThermalCover ? coverSavingsPercent / 100 : 0;
-  const dailyThermalWithCover = parseFloat(
-    (dailyThermalKwh * (1 - thermalReduction)).toFixed(2)
+  const dailyHeatDemandWithCover = parseFloat(
+    (dailyHeatDemandKwh * (1 - thermalReduction)).toFixed(2)
+  );
+
+  const dailyHeatingKwhOpen = poolHeatingKwhFromHeatDemand(dailyHeatDemandKwh, activeCop);
+  const dailyHeatingKwhCovered = poolHeatingKwhFromHeatDemand(
+    dailyHeatDemandWithCover,
+    activeCop
   );
 
   const dailyKwhWithoutCover = parseFloat(
-    (dailyPumpKwh + dailyThermalKwh).toFixed(2)
+    (dailyPumpKwh + dailyHeatingKwhOpen).toFixed(2)
   );
   const dailyKwhWithCover = parseFloat(
-    (dailyPumpKwh + dailyThermalWithCover).toFixed(2)
+    (dailyPumpKwh + dailyHeatingKwhCovered).toFixed(2)
   );
 
   const dailyCostWithoutCover = parseFloat(
     (dailyKwhWithoutCover * ratePerKwh).toFixed(2)
   );
   const dailyCostWithCover = parseFloat((dailyKwhWithCover * ratePerKwh).toFixed(2));
-  const dailySavings = parseFloat(
+  const dailyCoverSavings = parseFloat(
     Math.max(0, dailyCostWithoutCover - dailyCostWithCover).toFixed(2)
   );
 
@@ -578,30 +630,86 @@ export function calculatePoolEnergyThermalCover({
   const monthlyCostWithCover = parseFloat(
     (dailyCostWithCover * POOL_DAYS_PER_MONTH).toFixed(2)
   );
-  const monthlySavings = parseFloat((dailySavings * POOL_DAYS_PER_MONTH).toFixed(2));
-  const monthlyKwhSaved = parseFloat(
+  const monthlyCoverSavings = parseFloat(
+    (dailyCoverSavings * POOL_DAYS_PER_MONTH).toFixed(2)
+  );
+  const monthlyKwhSavedCover = parseFloat(
     ((dailyKwhWithoutCover - dailyKwhWithCover) * POOL_DAYS_PER_MONTH).toFixed(1)
   );
 
-  const annualSavings = parseFloat((dailySavings * 365).toFixed(2));
-  const annualKwhSaved = parseFloat(
+  const annualCoverSavings = parseFloat((dailyCoverSavings * 365).toFixed(2));
+  const annualKwhSavedCover = parseFloat(
     ((dailyKwhWithoutCover - dailyKwhWithCover) * 365).toFixed(0)
   );
 
+  const heatLoadForComparison = useThermalCover
+    ? dailyHeatDemandWithCover
+    : dailyHeatDemandKwh;
+  const dailyHeatingKwhElectric = poolHeatingKwhFromHeatDemand(
+    heatLoadForComparison,
+    1
+  );
+  const dailyHeatingKwhHeatPump = poolHeatingKwhFromHeatDemand(
+    heatLoadForComparison,
+    heatPumpCop
+  );
+
+  const monthlyHeatingCostElectric = parseFloat(
+    (dailyHeatingKwhElectric * POOL_DAYS_PER_MONTH * ratePerKwh).toFixed(2)
+  );
+  const monthlyHeatingCostHeatPump = parseFloat(
+    (dailyHeatingKwhHeatPump * POOL_DAYS_PER_MONTH * ratePerKwh).toFixed(2)
+  );
+  const monthlyHeatingSavingsHpVsElectric = parseFloat(
+    Math.max(0, monthlyHeatingCostElectric - monthlyHeatingCostHeatPump).toFixed(2)
+  );
+  const annualHeatingSavingsHpVsElectric = parseFloat(
+    (monthlyHeatingSavingsHpVsElectric * 12).toFixed(2)
+  );
+
+  const monthlyTotalSavings = parseFloat(
+    (monthlyCoverSavings + monthlyHeatingSavingsHpVsElectric).toFixed(2)
+  );
+  const annualTotalSavings = parseFloat(
+    (annualCoverSavings + annualHeatingSavingsHpVsElectric).toFixed(2)
+  );
+
+  const maxHeatingCost = Math.max(monthlyHeatingCostElectric, monthlyHeatingCostHeatPump, 1);
+  const electricBarPercent = Math.min(
+    100,
+    Math.max(8, (monthlyHeatingCostElectric / maxHeatingCost) * 100)
+  );
+  const heatPumpBarPercent = Math.min(
+    100,
+    Math.max(8, (monthlyHeatingCostHeatPump / maxHeatingCost) * 100)
+  );
+
   return {
+    heatingMethod,
+    activeCop,
+    heatPumpCop,
     dailyPumpKwh,
-    dailyThermalKwh,
+    dailyHeatDemandKwh,
+    dailyHeatingKwh: dailyHeatingKwhCovered,
     dailyKwhWithoutCover,
     dailyKwhWithCover,
     dailyCostWithoutCover,
     dailyCostWithCover,
-    dailySavings,
+    dailyCoverSavings,
     monthlyCostWithoutCover,
     monthlyCostWithCover,
-    monthlySavings,
-    monthlyKwhSaved,
-    annualSavings,
-    annualKwhSaved,
+    monthlyCoverSavings,
+    monthlyKwhSavedCover,
+    annualCoverSavings,
+    annualKwhSavedCover,
+    monthlyHeatingCostElectric,
+    monthlyHeatingCostHeatPump,
+    monthlyHeatingSavingsHpVsElectric,
+    annualHeatingSavingsHpVsElectric,
+    monthlyTotalSavings,
+    annualTotalSavings,
+    electricBarPercent,
+    heatPumpBarPercent,
     coverSavingsPercent: useThermalCover ? coverSavingsPercent : 0,
     useThermalCover,
   };
