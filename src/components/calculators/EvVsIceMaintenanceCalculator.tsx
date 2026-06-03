@@ -242,10 +242,10 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Net savings
               </p>
-              <p
+              <div
                 className={cn(
                   calculatorStatValue,
-                  "mt-2 flex flex-wrap items-baseline justify-center gap-0.5",
+                  "mt-2",
                   parsed.netSavingsPositive
                     ? "text-emerald-800 dark:text-emerald-200"
                     : "text-red-800 dark:text-red-200"
@@ -253,13 +253,12 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
               >
                 {parsed.netSavingsPositive ? (
                   <>
-                    <span className="text-2xl">+</span>
-                    <AnimatedCounter target={parsed.netSavings} decimals={0} />
+                    +<AnimatedCounter target={parsed.netSavings} decimals={0} />
                   </>
                 ) : (
                   formatCurrency(parsed.netSavings)
                 )}
-              </p>
+              </div>
               <p className="mt-1 text-xs text-muted-foreground">
                 {parsed.netSavingsPositive
                   ? "Still ahead after battery risk"
