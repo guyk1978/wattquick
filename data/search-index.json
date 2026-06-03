@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T14:27:49.298Z",
+  "generatedAt": "2026-06-03T14:37:09.326Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1616,6 +1616,23 @@
         "time of use bill reduction",
         "peak off peak kwh",
         "tou peak shaving home"
+      ]
+    },
+    {
+      "id": "electricity-rate-plan",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Utility Tariffs",
+      "title": "Electricity Rate Plan Calculator (TOU vs Flat)",
+      "description": "Compare flat-rate vs. time-of-use monthly bills from your kWh split and peak, shoulder, and off-peak tariffs—see annual savings.",
+      "href": "/electricity-rate-plan/",
+      "tag": "TOU",
+      "keywords": [
+        "tou vs flat rate calculator",
+        "time of use electricity plan",
+        "compare electricity rate plans",
+        "peak off peak tariff",
+        "tou bill calculator"
       ]
     },
     {

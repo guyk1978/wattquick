@@ -39,6 +39,7 @@ import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/
 import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/EvBatteryDepletionValueLossCalculator";
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
 import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
+import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
 import { CalculatorResult } from "./calculator-result";
 import { glassPanel } from "@/lib/glass-ui";
@@ -98,6 +99,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "peak-shaving-potential") {
     return <PeakShavingPotentialCalculator className={className} />;
+  }
+  if (id === "electricity-rate-plan") {
+    return <ElectricityRatePlanCalculator className={className} />;
   }
   if (id === "ev-charging-cable-loss") {
     return <EvChargingCableLossCalculator className={className} />;

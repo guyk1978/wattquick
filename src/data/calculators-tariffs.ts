@@ -5,6 +5,7 @@ import {
   Clock,
   Gauge,
   Leaf,
+  Scale,
   TrendingDown,
 } from "lucide-react";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
@@ -12,6 +13,7 @@ import {
   calculateBatteryArbitrage,
   calculateCarbonOffset,
   calculateDemandCharge,
+  calculateElectricityRatePlan,
   calculateGridFrequencyReward,
   calculatePeakShavingPotential,
   calculateTouShiftingSavings,
@@ -34,7 +36,12 @@ export const calculatorsTariffs = [
     icon: Clock,
     tag: "TOU",
     category: "tariffs",
-    suggestions: ["electricity-bill", "battery-arbitrage-roi", "appliance-daily-cost"],
+    suggestions: [
+      "electricity-rate-plan",
+      "electricity-bill",
+      "battery-arbitrage-roi",
+      "appliance-daily-cost",
+    ],
     fields: [
       { id: "shiftableKwh", label: "Shiftable load", unit: "kWh/mo", placeholder: "350" },
       { id: "peakRate", label: "Peak rate", unit: "$/kWh", placeholder: "0.42" },
@@ -453,6 +460,147 @@ export const calculatorsTariffs = [
         value: formatCurrency(result.monthlySavings),
         unit: "/mo",
         detail: `${formatCurrency(result.annualSavings)}/yr · ${formatCurrency(result.beforeCost)} → ${formatCurrency(result.afterCost)} bill · ${result.shiftableKwh} kWh shifted`,
+      };
+    },
+  },
+  {
+    slug: "electricity-rate-plan",
+    href: "/electricity-rate-plan",
+    title: "Electricity Rate Plan Calculator (TOU vs Flat)",
+    description:
+      "Compare flat-rate vs. time-of-use monthly bills from your kWh split and peak, shoulder, and off-peak tariffs—see annual savings.",
+    keywords: [
+      "tou vs flat rate calculator",
+      "time of use electricity plan",
+      "compare electricity rate plans",
+      "peak off peak tariff",
+      "tou bill calculator",
+    ],
+    icon: Scale,
+    tag: "TOU",
+    category: "tariffs",
+    suggestions: [
+      "tou-shifting-savings",
+      "peak-shaving-potential",
+      "ac-inverter-savings",
+      "electricity-bill",
+    ],
+    fields: [
+      {
+        id: "monthlyKwh",
+        label: "Average monthly use",
+        unit: "kWh/mo",
+        placeholder: "450",
+        defaultValue: "450",
+      },
+      {
+        id: "peakPercent",
+        label: "Peak-hour share",
+        inputType: "range",
+        min: 0,
+        max: 80,
+        step: 5,
+        defaultValue: "35",
+        unit: "%",
+        colSpan: 2,
+        hint: "Late afternoon / evening on-peak (utility portal)",
+      },
+      {
+        id: "shoulderPercent",
+        label: "Mid (shoulder) share",
+        inputType: "range",
+        min: 0,
+        max: 60,
+        step: 5,
+        defaultValue: "25",
+        unit: "%",
+        colSpan: 2,
+        hint: "Remaining % = off-peak",
+      },
+      {
+        id: "flatRatePerKwh",
+        label: "Flat rate",
+        unit: "per kWh",
+        placeholder: "0.52",
+        defaultValue: "0.52",
+        hint: "Single tariff (₪, $, €, etc.)",
+      },
+      {
+        id: "peakRatePerKwh",
+        label: "TOU peak rate",
+        unit: "per kWh",
+        placeholder: "0.68",
+        defaultValue: "0.68",
+      },
+      {
+        id: "shoulderRatePerKwh",
+        label: "TOU shoulder rate",
+        unit: "per kWh",
+        placeholder: "0.42",
+        defaultValue: "0.42",
+      },
+      {
+        id: "offPeakRatePerKwh",
+        label: "TOU off-peak rate",
+        unit: "per kWh",
+        placeholder: "0.22",
+        defaultValue: "0.22",
+      },
+    ],
+    result: {
+      label: "Potential annual savings",
+      emptyMessage: "Enter monthly kWh, usage split & all rates",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Flat vs. TOU math",
+          body: "Flat bill = total kWh × flat rate. TOU bill = peak kWh × peak rate + shoulder kWh × shoulder rate + off-peak kWh × off-peak rate. We show monthly costs and annual savings for whichever plan is cheaper at your current usage profile—before you change habits.",
+        },
+        {
+          heading: "Usage split",
+          body: "Estimate peak % from your utility dashboard or hourly chart. Shoulder is mid-tier hours; the remainder is off-peak. Shifting loads later can improve TOU results beyond this snapshot.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Fixed charges? A: Energy-only comparison—add monthly service fees to both plans equally. Q: Super off-peak? A: Fold into off-peak rate. Q: Shift more load? A: Use Peak Shaving Potential after you pick TOU.",
+        },
+      ],
+    },
+    compute(values) {
+      const monthlyKwh = parsePositive(values.monthlyKwh ?? "");
+      const peakPercent = Number(values.peakPercent?.trim() ?? "");
+      const shoulderPercent = Number(values.shoulderPercent?.trim() ?? "");
+      const flatRatePerKwh = parsePositive(values.flatRatePerKwh ?? "");
+      const peakRatePerKwh = parsePositive(values.peakRatePerKwh ?? "");
+      const shoulderRatePerKwh = parsePositive(values.shoulderRatePerKwh ?? "");
+      const offPeakRatePerKwh = parsePositive(values.offPeakRatePerKwh ?? "");
+      if (
+        monthlyKwh === null ||
+        flatRatePerKwh === null ||
+        peakRatePerKwh === null ||
+        shoulderRatePerKwh === null ||
+        offPeakRatePerKwh === null ||
+        !Number.isFinite(peakPercent) ||
+        !Number.isFinite(shoulderPercent) ||
+        peakPercent + shoulderPercent > 100
+      ) {
+        return { value: null };
+      }
+      const result = calculateElectricityRatePlan({
+        monthlyKwh,
+        peakPercent,
+        shoulderPercent,
+        flatRatePerKwh,
+        peakRatePerKwh,
+        shoulderRatePerKwh,
+        offPeakRatePerKwh,
+      });
+      if (!result) return { value: null };
+      return {
+        value: formatCurrency(result.annualSavings),
+        unit: "/yr",
+        detail: `${result.betterPlanLabel} · flat ${formatCurrency(result.flatMonthlyCost)}/mo vs TOU ${formatCurrency(result.touMonthlyCost)}/mo`,
       };
     },
   },

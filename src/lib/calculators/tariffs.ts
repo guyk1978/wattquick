@@ -4,6 +4,86 @@ export interface TouShiftingInput {
   offPeakRatePerKwh: number;
 }
 
+export type RatePlanWinner = "flat" | "tou";
+
+export interface ElectricityRatePlanInput {
+  monthlyKwh: number;
+  peakPercent: number;
+  shoulderPercent: number;
+  flatRatePerKwh: number;
+  peakRatePerKwh: number;
+  shoulderRatePerKwh: number;
+  offPeakRatePerKwh: number;
+}
+
+export interface ElectricityRatePlanResult {
+  flatMonthlyCost: number;
+  touMonthlyCost: number;
+  monthlySavings: number;
+  annualSavings: number;
+  betterPlan: RatePlanWinner;
+  betterPlanLabel: string;
+  peakKwh: number;
+  shoulderKwh: number;
+  offPeakKwh: number;
+  offPeakPercent: number;
+  blendedTouRate: number;
+  flatRatePerKwh: number;
+  monthlyKwh: number;
+  peakPercent: number;
+  shoulderPercent: number;
+}
+
+export function calculateElectricityRatePlan({
+  monthlyKwh,
+  peakPercent,
+  shoulderPercent,
+  flatRatePerKwh,
+  peakRatePerKwh,
+  shoulderRatePerKwh,
+  offPeakRatePerKwh,
+}: ElectricityRatePlanInput): ElectricityRatePlanResult | null {
+  const peakPct = Math.min(100, Math.max(0, peakPercent));
+  const shoulderPct = Math.min(100 - peakPct, Math.max(0, shoulderPercent));
+  const offPeakPct = 100 - peakPct - shoulderPct;
+
+  if (monthlyKwh <= 0 || offPeakPct < 0) {
+    return null;
+  }
+
+  const peakKwh = monthlyKwh * (peakPct / 100);
+  const shoulderKwh = monthlyKwh * (shoulderPct / 100);
+  const offPeakKwh = monthlyKwh * (offPeakPct / 100);
+
+  const flatMonthlyCost = monthlyKwh * flatRatePerKwh;
+  const touMonthlyCost =
+    peakKwh * peakRatePerKwh +
+    shoulderKwh * shoulderRatePerKwh +
+    offPeakKwh * offPeakRatePerKwh;
+
+  const touCheaper = touMonthlyCost < flatMonthlyCost - 0.005;
+  const betterPlan: RatePlanWinner = touCheaper ? "tou" : "flat";
+  const monthlySavings = Math.abs(flatMonthlyCost - touMonthlyCost);
+
+  return {
+    flatMonthlyCost: parseFloat(flatMonthlyCost.toFixed(2)),
+    touMonthlyCost: parseFloat(touMonthlyCost.toFixed(2)),
+    monthlySavings: parseFloat(monthlySavings.toFixed(2)),
+    annualSavings: parseFloat((monthlySavings * 12).toFixed(0)),
+    betterPlan,
+    betterPlanLabel: touCheaper ? "Time-of-use (TOU)" : "Flat rate",
+    peakKwh: parseFloat(peakKwh.toFixed(1)),
+    shoulderKwh: parseFloat(shoulderKwh.toFixed(1)),
+    offPeakKwh: parseFloat(offPeakKwh.toFixed(1)),
+    offPeakPercent: parseFloat(offPeakPct.toFixed(1)),
+    blendedTouRate: parseFloat((touMonthlyCost / monthlyKwh).toFixed(3)),
+    flatRatePerKwh,
+    monthlyKwh,
+    peakPercent: peakPct,
+    shoulderPercent: shoulderPct,
+  };
+}
+
 export function calculateTouShiftingSavings({
   shiftableKwh,
   peakRatePerKwh,
