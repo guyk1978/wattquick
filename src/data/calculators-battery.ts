@@ -208,7 +208,12 @@ export const calculatorsBattery = [
     icon: Home,
     tag: "Battery",
     category: "battery",
-    suggestions: ["battery-bank-size", "ups-runtime", "inverter-loss-calculator"],
+    suggestions: [
+      "generator-runtime-savings",
+      "battery-bank-size",
+      "ups-runtime",
+      "inverter-loss-calculator",
+    ],
     fields: [
       { id: "loadWatts", label: "Essential load", unit: "W", placeholder: "800" },
       { id: "backupHours", label: "Backup time", unit: "hrs", placeholder: "8" },

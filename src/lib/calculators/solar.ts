@@ -224,6 +224,81 @@ export function calculateGeneratorVsSolarHybrid({
   };
 }
 
+/** Typical electrical output while genset is running (kW) — planning when only hours are known. */
+export const GENERATOR_OUTPUT_KW_AT_LOAD = 3.5;
+
+/** Chain efficiency from array DC to usable AC/hybrid bus (decimal). */
+export const HYBRID_SOLAR_SYSTEM_EFFICIENCY = 0.75;
+
+/** Max battery energy credited per day toward offsetting generator run (DoD planning). */
+export const HYBRID_BATTERY_DAILY_USABLE_FRACTION = 0.85;
+
+/** Planning hours before major overhaul / replacement on maintained off-grid sets. */
+export const GENERATOR_RATED_LIFE_HOURS = 5000;
+
+export interface GeneratorRuntimeSavingsInput {
+  dailyGeneratorHours: number;
+  solarSystemKw: number;
+  batteryCapacityKwh: number;
+  peakSunHours: number;
+  maintenanceCostPerHour: number;
+}
+
+export function calculateGeneratorRuntimeSavings({
+  dailyGeneratorHours,
+  solarSystemKw,
+  batteryCapacityKwh,
+  peakSunHours,
+  maintenanceCostPerHour,
+}: GeneratorRuntimeSavingsInput) {
+  const dailyKwhFromGenerator = dailyGeneratorHours * GENERATOR_OUTPUT_KW_AT_LOAD;
+  const solarDailyKwh =
+    solarSystemKw * peakSunHours * HYBRID_SOLAR_SYSTEM_EFFICIENCY;
+  const batteryDailyKwh = batteryCapacityKwh * HYBRID_BATTERY_DAILY_USABLE_FRACTION;
+  const hybridOffsetKwh = solarDailyKwh + batteryDailyKwh;
+
+  const offsetFraction =
+    dailyKwhFromGenerator > 0
+      ? Math.min(1, hybridOffsetKwh / dailyKwhFromGenerator)
+      : 0;
+
+  const dailyHoursSaved = parseFloat(
+    (dailyGeneratorHours * offsetFraction).toFixed(2)
+  );
+  const dailyHoursAfter = parseFloat(
+    (dailyGeneratorHours - dailyHoursSaved).toFixed(2)
+  );
+
+  const dailyMaintenanceSavings = dailyHoursSaved * maintenanceCostPerHour;
+  const monthlyMaintenanceSavings = dailyMaintenanceSavings * (365 / 12);
+  const annualMaintenanceSavings = dailyMaintenanceSavings * 365;
+
+  const annualHoursBefore = dailyGeneratorHours * 365;
+  const annualHoursAfter = dailyHoursAfter * 365;
+  const lifeYearsBefore =
+    annualHoursBefore > 0 ? GENERATOR_RATED_LIFE_HOURS / annualHoursBefore : 0;
+  const lifeYearsAfter =
+    annualHoursAfter > 0 ? GENERATOR_RATED_LIFE_HOURS / annualHoursAfter : 99;
+  const generatorLifeExtensionYears = parseFloat(
+    Math.max(0, lifeYearsAfter - lifeYearsBefore).toFixed(1)
+  );
+
+  return {
+    dailyHoursSaved,
+    dailyHoursAfter,
+    monthlyMaintenanceSavings: parseFloat(monthlyMaintenanceSavings.toFixed(0)),
+    annualMaintenanceSavings: parseFloat(annualMaintenanceSavings.toFixed(0)),
+    generatorLifeExtensionYears,
+    offsetFraction: parseFloat((offsetFraction * 100).toFixed(0)),
+    hybridOffsetKwh: parseFloat(hybridOffsetKwh.toFixed(1)),
+    dailyKwhFromGenerator: parseFloat(dailyKwhFromGenerator.toFixed(1)),
+    solarDailyKwh: parseFloat(solarDailyKwh.toFixed(1)),
+    batteryDailyKwh: parseFloat(batteryDailyKwh.toFixed(1)),
+    lifeYearsBefore: parseFloat(lifeYearsBefore.toFixed(1)),
+    lifeYearsAfter: parseFloat(Math.min(lifeYearsAfter, 99).toFixed(1)),
+  };
+}
+
 /** Default module rating for panel-count estimates (W). */
 export const WATER_PUMP_DEFAULT_PANEL_WATTS = 400;
 

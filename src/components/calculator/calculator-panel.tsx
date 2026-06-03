@@ -16,6 +16,7 @@ import { EvGamifiedResult } from "./ev-gamified-result";
 import { EvPreconditioningCostCalculator } from "@/components/calculators/EvPreconditioningCostCalculator";
 import { EvTireWearCostCalculator } from "@/components/calculators/EvTireWearCostCalculator";
 import { GeneratorVsSolarHybridCalculator } from "@/components/calculators/GeneratorVsSolarHybridCalculator";
+import { GeneratorRuntimeSavingsCalculator } from "@/components/calculators/GeneratorRuntimeSavingsCalculator";
 import { WaterPumpSolarSizingCalculator } from "@/components/calculators/WaterPumpSolarSizingCalculator";
 import { GridFrequencyRewardCalculator } from "@/components/calculators/GridFrequencyRewardCalculator";
 import { ResidentialVoltageDropCalculator } from "@/components/calculators/ResidentialVoltageDropCalculator";
@@ -66,6 +67,9 @@ export function CalculatorPanel({ id, className }: CalculatorPanelProps) {
   }
   if (id === "generator-vs-solar-hybrid") {
     return <GeneratorVsSolarHybridCalculator className={className} />;
+  }
+  if (id === "generator-runtime-savings") {
+    return <GeneratorRuntimeSavingsCalculator className={className} />;
   }
   if (id === "water-pump-solar-sizing") {
     return <WaterPumpSolarSizingCalculator className={className} />;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-03T14:03:28.115Z",
+  "generatedAt": "2026-06-03T14:18:05.690Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1055,6 +1055,23 @@
         "solar hybrid payback",
         "diesel generator cost calculator",
         "off grid solar comparison"
+      ]
+    },
+    {
+      "id": "generator-runtime-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Generator Run-Time Savings Calculator",
+      "description": "Estimate daily engine hours saved with a solar+battery hybrid, maintenance dollars avoided, and longer generator life.",
+      "href": "/generator-runtime-savings/",
+      "tag": "Off-Grid",
+      "keywords": [
+        "generator runtime savings",
+        "engine hours solar hybrid",
+        "generator maintenance savings",
+        "off grid hybrid generator",
+        "reduce generator hours"
       ]
     },
     {

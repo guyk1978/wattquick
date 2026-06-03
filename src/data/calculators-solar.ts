@@ -3,6 +3,7 @@ import {
   Compass,
   Droplets,
   Fuel,
+  Gauge,
   Home,
   LineChart,
   Network,
@@ -16,6 +17,7 @@ import {
   parsePositive,
 } from "@/lib/format";
 import {
+  calculateGeneratorRuntimeSavings,
   calculateGeneratorVsSolarHybrid,
   calculateWaterPumpSolarSizing,
   calculateNetMetering,
@@ -515,6 +517,7 @@ export const calculatorsSolar = [
     tag: "Off-Grid",
     category: "solar",
     suggestions: [
+      "generator-runtime-savings",
       "solar-battery-bank",
       "solar-panel-size",
       "solar-payback-roi",
@@ -621,6 +624,120 @@ export const calculatorsSolar = [
         value: formatCurrency(result.annualSavings),
         unit: "/yr",
         detail: `Gen ${formatCurrency(result.generator5Year)} vs hybrid ${formatCurrency(result.hybrid5Year)} (5 yr) · payback ~${result.paybackYears ?? "—"} yr`,
+      };
+    },
+  },
+  {
+    slug: "generator-runtime-savings",
+    href: "/generator-runtime-savings",
+    title: "Generator Run-Time Savings Calculator",
+    description:
+      "Estimate daily engine hours saved with a solar+battery hybrid, maintenance dollars avoided, and longer generator life.",
+    keywords: [
+      "generator runtime savings",
+      "engine hours solar hybrid",
+      "generator maintenance savings",
+      "off grid hybrid generator",
+      "reduce generator hours",
+    ],
+    icon: Gauge,
+    tag: "Off-Grid",
+    category: "solar",
+    suggestions: [
+      "generator-vs-solar-hybrid",
+      "home-backup-sizing",
+      "solar-battery-bank",
+      "solar-panel-size",
+    ],
+    fields: [
+      {
+        id: "dailyGeneratorHours",
+        label: "Generator hours today",
+        unit: "hrs/day",
+        placeholder: "6",
+        defaultValue: "6",
+        hint: "Average daily run time on generator-only power",
+      },
+      {
+        id: "solarSystemKw",
+        label: "Solar array size",
+        unit: "kW",
+        placeholder: "4.5",
+        defaultValue: "4.5",
+      },
+      {
+        id: "batteryCapacityKwh",
+        label: "Battery storage",
+        unit: "kWh",
+        placeholder: "15",
+        defaultValue: "15",
+        hint: "Usable planning capacity of the hybrid bank",
+      },
+      {
+        id: "peakSunHours",
+        label: "Peak sun hours",
+        unit: "hrs/day",
+        placeholder: "5",
+        defaultValue: "5",
+        hint: "Site average full-sun equivalent hours",
+      },
+      {
+        id: "maintenanceCostPerHour",
+        label: "Maintenance cost per engine hour",
+        unit: "$/hr",
+        placeholder: "2.5",
+        defaultValue: "2.5",
+        hint: "Oil, filters, wear—spread annual service over run hours",
+      },
+    ],
+    result: {
+      label: "Annual maintenance savings",
+      emptyMessage: "Enter gen hours, solar kW, battery kWh & sun hours",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "How hours saved are estimated",
+          body: "We compare hybrid kWh available (solar kW × sun hours × 75% efficiency + 85% of battery kWh per day) against energy implied by today's generator hours (~3.5 kW electrical while running). The overlap fraction becomes hours you no longer need on the genset.",
+        },
+        {
+          heading: "Maintenance and life",
+          body: "Savings = hours saved × your $/engine-hour. Life extension uses a 5,000-hour planning life: slower annual hours push overhaul/replacement further out.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include fuel? A: This tool is maintenance-focused—use Generator vs Solar Hybrid for fuel OPEX. Q: Oversized solar? A: Offset caps at 100% of current gen energy. Q: Backup sizing? A: Pair with Home Backup Battery Sizing for essential loads.",
+        },
+      ],
+    },
+    compute(values) {
+      const dailyGeneratorHours = parsePositive(values.dailyGeneratorHours ?? "");
+      const solarSystemKw = parsePositive(values.solarSystemKw ?? "");
+      const batteryCapacityKwh = parsePositive(values.batteryCapacityKwh ?? "");
+      const peakSunHours = parsePositive(values.peakSunHours ?? "");
+      const maintenanceCostPerHour = parsePositive(
+        values.maintenanceCostPerHour ?? ""
+      );
+      if (
+        dailyGeneratorHours === null ||
+        solarSystemKw === null ||
+        batteryCapacityKwh === null ||
+        peakSunHours === null ||
+        maintenanceCostPerHour === null
+      ) {
+        return { value: null };
+      }
+      const result = calculateGeneratorRuntimeSavings({
+        dailyGeneratorHours,
+        solarSystemKw,
+        batteryCapacityKwh,
+        peakSunHours,
+        maintenanceCostPerHour,
+      });
+      return {
+        value: formatCurrency(result.annualMaintenanceSavings),
+        unit: "/yr",
+        detail: `${formatNumber(result.dailyHoursSaved, { maxDecimals: 2 })} h/day saved · life +${formatNumber(result.generatorLifeExtensionYears, { maxDecimals: 1 })} yr`,
       };
     },
   },
