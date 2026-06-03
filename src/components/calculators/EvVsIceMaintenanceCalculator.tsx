@@ -32,7 +32,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { EvMaintenanceCumulativeVisual } from "@/components/calculator/ev-maintenance-cumulative-visual";
-import { glassPanel } from "@/lib/glass-ui";
+import {
+  calculatorResultsGrid,
+  calculatorResultsGrid3,
+  calculatorStatValue,
+  glassPanel,
+} from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "ev-vs-ice-maintenance" satisfies CalculatorId;
@@ -182,20 +187,30 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         <div className="h-px bg-border/60" aria-hidden />
 
         {parsed ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
+          <div className={cn(calculatorResultsGrid3, "gap-3")}>
+            <div className="min-w-0 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Maintenance savings ({years} yr)
               </p>
-              <p className="mt-2 font-mono text-xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
+              <p
+                className={cn(
+                  calculatorStatValue,
+                  "mt-2 text-emerald-800 dark:text-emerald-200"
+                )}
+              >
                 {maintenanceSavingsValue}
               </p>
             </div>
-            <div className="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-4">
+            <div className="min-w-0 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Potential battery cost
               </p>
-              <p className="mt-2 font-mono text-xl font-bold tabular-nums text-amber-900 dark:text-amber-100">
+              <p
+                className={cn(
+                  calculatorStatValue,
+                  "mt-2 text-amber-900 dark:text-amber-100"
+                )}
+              >
                 {formatCurrency(parsed.batteryReplacementCost)}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
@@ -218,7 +233,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
             </div>
             <div
               className={cn(
-                "rounded-xl border px-4 py-4",
+                "min-w-0 rounded-xl border px-4 py-4 text-center",
                 parsed.netSavingsPositive
                   ? "border-primary/30 bg-primary/10"
                   : "border-red-500/30 bg-red-500/10"
@@ -229,7 +244,8 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
               </p>
               <p
                 className={cn(
-                  "mt-2 flex items-baseline gap-0.5 font-mono text-xl font-bold tabular-nums",
+                  calculatorStatValue,
+                  "mt-2 flex flex-wrap items-baseline justify-center gap-0.5",
                   parsed.netSavingsPositive
                     ? "text-emerald-800 dark:text-emerald-200"
                     : "text-red-800 dark:text-red-200"
@@ -281,7 +297,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         </div>
 
         {parsed ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className={calculatorResultsGrid}>
             <CalculatorResult
               label="ICE annual maintenance"
               value={formatCurrency(parsed.iceAnnualTotal)}

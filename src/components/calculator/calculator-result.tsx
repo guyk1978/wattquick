@@ -1,6 +1,11 @@
 "use client";
 
-import { glassDashboard, neonHeroNumber } from "@/lib/glass-ui";
+import {
+  calculatorResultCard,
+  calculatorResultValueRow,
+  glassDashboard,
+  neonHeroNumber,
+} from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 export interface CalculatorResultProps {
@@ -27,43 +32,48 @@ export function CalculatorResult({
     <section
       aria-live="polite"
       aria-atomic="true"
-      className={cn(glassDashboard("primary"), "p-6 sm:p-8", className)}
+      className={cn(
+        glassDashboard("primary"),
+        calculatorResultCard,
+        "p-6 sm:p-8",
+        className
+      )}
     >
       <div
         aria-hidden
         className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-primary/[0.08] blur-3xl dark:bg-primary/[0.15]"
       />
-      <div className="glass-neon__inner relative">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
+      <div className="glass-neon__inner relative min-w-0">
+        <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
           {label}
         </p>
 
         <div
           key={resultKey}
           className={cn(
-            "mt-4 min-h-[4.5rem] transition-opacity duration-200",
+            "mt-4 min-h-[4.5rem] min-w-0 transition-opacity duration-200",
             "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-300 motion-safe:fill-mode-both",
             !hasResult && "opacity-70"
           )}
         >
           {hasResult ? (
             <>
-              <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+              <div className={calculatorResultValueRow}>
                 <span className={neonHeroNumber}>{value}</span>
                 {unit ? (
-                  <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
+                  <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
                     {unit}
                   </span>
                 ) : null}
               </div>
               {detail ? (
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 text-center text-sm leading-relaxed text-muted-foreground">
                   {detail}
                 </p>
               ) : null}
             </>
           ) : (
-            <p className="text-xl font-medium leading-snug text-muted-foreground sm:text-2xl">
+            <p className="text-center text-xl font-medium leading-snug text-muted-foreground sm:text-2xl">
               {emptyMessage}
             </p>
           )}

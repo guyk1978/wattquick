@@ -5,7 +5,7 @@ import { deriveCostDashboardMetrics } from "@/lib/cost-dashboard";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CostVisual } from "@/components/calculator/cost-visual";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { neonHeroNumber } from "@/lib/glass-ui";
+import { calculatorResultValueRow, neonHeroNumber } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 export interface CostGamifiedResultProps {
@@ -82,7 +82,7 @@ export function CostGamifiedResult({
                 <span>{metrics.microcopy}</span>
               </div>
 
-              <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+              <div className={calculatorResultValueRow}>
                 {metrics.isCurrency && metrics.countTarget !== null ? (
                   <span className={neonHeroNumber}>
                     $
@@ -102,7 +102,7 @@ export function CostGamifiedResult({
                   <span className={neonHeroNumber}>{displayValue}</span>
                 )}
                 {unit ? (
-                  <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
+                  <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
                     {unit}
                   </span>
                 ) : null}
@@ -134,10 +134,10 @@ function FallbackResult({
 }) {
   return (
     <>
-      <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+      <div className={calculatorResultValueRow}>
         <span className={neonHeroNumber}>{value}</span>
         {unit ? (
-          <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
+          <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
             {unit}
           </span>
         ) : null}

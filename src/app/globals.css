@@ -318,11 +318,94 @@
     0 0 32px -4px color-mix(in srgb, var(--neon-focus, #3b82f6) 55%, transparent);
 }
 
-/* Hero result typography */
+/* Hero result typography — responsive, no clipping in narrow cards */
 .neon-hero-number {
+  font-size: clamp(1.5rem, 4vw, 3rem);
   font-weight: 700;
+  line-height: 1.15;
   letter-spacing: -0.03em;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
   text-shadow: 0 1px 0 rgb(255 255 255 / 0.25);
+}
+
+/* Inline stat numerals in multi-card calculator rows */
+.calculator-stat-value {
+  font-size: clamp(1.125rem, 3vw, 1.5rem);
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+}
+
+/* Calculator result card shell */
+.calculator-result-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.calculator-result-card .glass-neon__inner {
+  min-width: 0;
+}
+
+.calculator-result-value-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.625rem;
+  text-align: center;
+}
+
+.calculator-result-value-row > .neon-hero-number {
+  flex: 1 1 auto;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.calculator-result-unit {
+  flex-shrink: 0;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+}
+
+/* Grids of result cards (pairs / triplets) */
+.calculator-results-grid {
+  width: 100%;
+  min-width: 0;
+}
+
+.calculator-results-grid > * {
+  min-width: 0;
+}
+
+/* Fallback: calculator panel grids without explicit utility class */
+.glass-neon__inner > .grid > section,
+.glass-neon__inner .grid > section[aria-live="polite"],
+.glass-neon__inner .grid > .calculator-result-card,
+.glass-neon__inner .grid > div.min-w-0 {
+  min-width: 0;
+}
+
+/* Hero value rows inside custom calculator panels */
+.glass-neon__inner div.flex:has(.neon-hero-number) {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.625rem;
+  text-align: center;
 }
 
 .dark .neon-hero-number {

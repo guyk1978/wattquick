@@ -27,7 +27,12 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AcInverterSavingsBarVisual } from "@/components/calculator/ac-inverter-savings-bar-visual";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { glassPanel, neonHeroNumber } from "@/lib/glass-ui";
+import {
+  calculatorResultsGrid,
+  calculatorResultsGrid3,
+  glassPanel,
+  neonHeroNumber,
+} from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "ac-inverter-savings" satisfies CalculatorId;
@@ -171,18 +176,11 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
         <div className="h-px bg-border/60" aria-hidden />
 
         {parsed && paybackLabel ? (
-          <div className="rounded-2xl border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
+          <div className="calculator-result-card min-w-0 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Payback period
             </p>
-            <p
-              className={cn(
-                "mt-2 font-mono text-3xl font-bold tabular-nums sm:text-4xl",
-                neonHeroNumber
-              )}
-            >
-              {paybackLabel}
-            </p>
+            <p className={cn("mt-2", neonHeroNumber)}>{paybackLabel}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               {parsed.pricePremium > 0 ? (
                 <>
@@ -209,7 +207,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
               savingsPercentApplied={parsed.savingsPercentApplied}
             />
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className={cn(calculatorResultsGrid, "gap-3")}>
               <div className="flex gap-3 rounded-xl border border-sky-500/25 bg-sky-500/10 px-4 py-4">
                 <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-sky-500/20 text-sky-700 dark:text-sky-300">
                   <RotateCw className="size-5" aria-hidden />
@@ -240,7 +238,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className={calculatorResultsGrid3}>
               <CalculatorResult
                 label="Cooling capacity"
                 value={formatNumber(parsed.btuPerHour, { maxDecimals: 0 })}

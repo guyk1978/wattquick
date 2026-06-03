@@ -23,7 +23,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { InsulationSavingsBarVisual } from "@/components/calculator/insulation-savings-bar-visual";
-import { glassPanel } from "@/lib/glass-ui";
+import { calculatorResultsGrid, calculatorResultsGrid3, glassPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "home-insulation-savings" satisfies CalculatorId;
@@ -229,7 +229,7 @@ export function HomeInsulationSavingsCalculator({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className={calculatorResultsGrid3}>
               <CalculatorResult
                 label="Composite U-value (before)"
                 value={formatNumber(parsed.compositeUBefore, { maxDecimals: 2 })}

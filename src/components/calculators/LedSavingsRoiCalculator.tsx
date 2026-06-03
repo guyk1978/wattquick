@@ -32,7 +32,13 @@ import {
   type LedSavingsChartView,
 } from "@/components/calculator/led-savings-bar-visual";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { glassPanel, neonHeroNumber } from "@/lib/glass-ui";
+import {
+  calculatorResultValueRow,
+  calculatorResultsGrid,
+  calculatorResultsGrid3,
+  glassPanel,
+  neonHeroNumber,
+} from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "led-savings-roi" satisfies CalculatorId;
@@ -315,7 +321,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                     <p className="text-sm font-medium text-muted-foreground">
                       Time to Break Even
                     </p>
-                    <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                    <div className={calculatorResultValueRow}>
                       <span className={neonHeroNumber}>{breakEvenValue}</span>
                     </div>
                     {breakEvenDetail ? (
@@ -338,7 +344,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
         </GamifiedDashboardFrame>
 
         {parsed && hasSavings ? (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className={calculatorResultsGrid3}>
             <CalculatorResult
               label="Daily operating cost"
               value={formatCurrency(parsed.dailyCostLegacy)}

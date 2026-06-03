@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { glassDashboard, type GlassNeonAccent } from "@/lib/glass-ui";
+import { calculatorResultCard, glassDashboard, type GlassNeonAccent } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface GamifiedDashboardFrameProps {
@@ -21,7 +21,7 @@ export function GamifiedDashboardFrame({
     <section
       aria-live="polite"
       aria-atomic="true"
-      className={cn(glassDashboard(accent), "p-6 sm:p-8", className)}
+      className={cn(glassDashboard(accent), calculatorResultCard, "p-6 sm:p-8", className)}
     >
       <div
         aria-hidden
@@ -30,7 +30,7 @@ export function GamifiedDashboardFrame({
           ambientClassName
         )}
       />
-      <div className="glass-neon__inner relative">
+      <div className="glass-neon__inner relative min-w-0">
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
           {label}
         </p>
