@@ -4,6 +4,7 @@ import {
 } from "@/lib/calculators";
 
 export const MAIN_NAV = [
+  { href: "/dashboard", label: "Command Center" },
   { href: "/calculators", label: "Calculators" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
@@ -22,6 +23,7 @@ export const FOOTER_CALCULATOR_CATEGORIES: {
 
 export const FOOTER_LINKS = {
   product: [
+    { href: "/dashboard", label: "Command Center" },
     { href: "/calculators", label: "All calculators" },
     { href: "/#calculators", label: "Quick search" },
   ],

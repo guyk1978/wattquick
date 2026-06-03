@@ -725,3 +725,43 @@
     opacity: 1;
   }
 }
+
+/* —— WattQuick Command Center —— */
+.command-center-page {
+  color-scheme: dark;
+}
+
+.command-center .glass-neon--primary {
+  --neon-from: #22d3ee;
+  --neon-to: #34d399;
+  --neon-glow: rgb(34 211 238 / 0.45);
+}
+
+.command-center-diagram.glass-neon::after {
+  opacity: 0.35;
+}
+
+.command-center-widget.glass-neon__inner,
+.command-center-widget .glass-neon__inner {
+  position: relative;
+}
+
+.command-center-flow {
+  isolation: isolate;
+}
+
+.command-center-node {
+  z-index: 2;
+  max-width: 42%;
+}
+
+@media (min-width: 640px) {
+  .command-center-node {
+    max-width: none;
+  }
+}
+
+.command-center-modal .glass-neon {
+  --neon-from: #22d3ee;
+  --neon-to: #3b82f6;
+}
