@@ -1,6 +1,5 @@
 import { CalnexAppCallout } from "@/components/CalnexAppCallout";
 import { HomeCalculatorSection } from "@/components/home-calculator-section";
-import { HomeGalaxyBackdrop } from "@/components/home-galaxy-backdrop";
 import { HomeHero } from "@/components/home-hero";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import { getAllCalculatorMeta } from "@/lib/calculators";
@@ -9,8 +8,7 @@ const calculators = getAllCalculatorMeta();
 
 export default function HomePage() {
   return (
-    <div className="home-page relative bg-background dark:bg-transparent">
-      <HomeGalaxyBackdrop />
+    <div className="relative bg-background dark:bg-transparent">
       <HomeHero calculatorCount={calculators.length} />
 
       <div className="relative z-[1] mx-auto max-w-6xl px-4 pb-16 sm:px-6">

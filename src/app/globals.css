@@ -149,6 +149,7 @@
   isolation: isolate;
 }
 
+/* Fixed cosmic nebula — all pages, dark mode */
 .site-ambient::before {
   content: "";
   position: fixed;
@@ -162,12 +163,26 @@
 }
 
 .dark .site-ambient::before {
-  background:
-    radial-gradient(ellipse 30% 70% at 94% 45%, rgb(45 212 191 / 0.12), transparent 72%),
-    radial-gradient(ellipse 55% 40% at 70% 25%, rgb(99 102 241 / 0.14), transparent 60%),
-    radial-gradient(ellipse 45% 35% at 25% 40%, rgb(88 28 135 / 0.08), transparent 58%),
-    radial-gradient(ellipse 90% 55% at 50% -12%, rgb(30 58 138 / 0.28), transparent 58%),
-    linear-gradient(180deg, rgb(2 6 23) 0%, rgb(6 12 28) 50%, rgb(10 18 38) 100%);
+  background-color: rgb(2 6 23);
+  background-image:
+    linear-gradient(
+      180deg,
+      rgb(2 6 23 / 0.42) 0%,
+      rgb(2 6 23 / 0.18) 42%,
+      rgb(2 6 23 / 0.38) 100%
+    ),
+    url("/assets/images/cosmic-nebula-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dark body.site-ambient {
+  background-color: transparent;
+}
+
+.dark main {
+  background: transparent;
 }
 
 .glass-surface {
@@ -906,195 +921,8 @@
   }
 }
 
-/* Homepage hero — galaxy starfield (dark) */
-@keyframes home-galaxy-drift {
-  0%,
-  100% {
-    transform: translate(0, 0);
-    opacity: 0.92;
-  }
-  50% {
-    transform: translate(-1%, 0.5%);
-    opacity: 1;
-  }
-}
-
-.home-hero__cosmos {
-  background: linear-gradient(
-    180deg,
-    rgb(2 4 12) 0%,
-    rgb(6 11 28) 35%,
-    rgb(8 14 32) 70%,
-    rgb(4 8 20) 100%
-  );
-}
-
-.home-hero__galaxy-mist {
-  background:
-    radial-gradient(ellipse 55% 45% at 28% 38%, rgb(88 28 135 / 0.2), transparent 68%),
-    radial-gradient(ellipse 48% 42% at 48% 55%, rgb(244 114 182 / 0.08), transparent 65%),
-    radial-gradient(ellipse 50% 40% at 52% 62%, rgb(67 56 202 / 0.14), transparent 65%),
-    radial-gradient(ellipse 42% 36% at 12% 48%, rgb(251 191 36 / 0.06), transparent 62%),
-    radial-gradient(ellipse 45% 38% at 18% 72%, rgb(30 58 138 / 0.16), transparent 62%),
-    radial-gradient(ellipse 60% 50% at 72% 28%, rgb(59 130 246 / 0.12), transparent 60%);
-  filter: blur(1px);
-  animation: home-galaxy-drift 24s ease-in-out infinite;
-}
-
-.home-hero__galaxy-teal {
-  background:
-    radial-gradient(ellipse 28% 85% at 94% 48%, rgb(45 212 191 / 0.28), transparent 72%),
-    radial-gradient(ellipse 22% 55% at 88% 22%, rgb(34 211 238 / 0.18), transparent 68%),
-    radial-gradient(ellipse 30% 45% at 78% 62%, rgb(129 140 248 / 0.1), transparent 65%),
-    radial-gradient(ellipse 35% 40% at 82% 78%, rgb(56 189 248 / 0.12), transparent 65%);
-  mix-blend-mode: screen;
-  filter: blur(24px);
-  animation: home-galaxy-drift 20s ease-in-out infinite reverse;
-}
-
-/* Fine distant stars */
-.home-hero__stars-fine {
-  background-image:
-    radial-gradient(0.5px 0.5px at center, rgb(255 255 255 / 0.4) 0%, transparent 100%),
-    radial-gradient(0.35px 0.35px at center, rgb(199 210 254 / 0.28) 0%, transparent 100%),
-    radial-gradient(0.4px 0.4px at center, rgb(207 250 254 / 0.22) 0%, transparent 100%);
-  background-size: 28px 28px, 21px 21px, 34px 34px;
-  background-position: 0 0, 11px 6px, 5px 14px;
-  opacity: 0.85;
-}
-
-/* Dense repeating star grid — varied sizes */
-.home-hero__stars-dense {
-  background-image:
-    radial-gradient(1.25px 1.25px at center, rgb(255 255 255 / 0.62) 0%, transparent 100%),
-    radial-gradient(0.75px 0.75px at center, rgb(186 210 255 / 0.42) 0%, transparent 100%),
-    radial-gradient(1px 1px at center, rgb(224 231 255 / 0.38) 0%, transparent 100%),
-    radial-gradient(0.55px 0.55px at center, rgb(207 250 254 / 0.32) 0%, transparent 100%),
-    radial-gradient(0.65px 0.65px at center, rgb(233 213 255 / 0.28) 0%, transparent 100%);
-  background-size: 44px 44px, 31px 31px, 52px 52px, 24px 24px, 37px 37px;
-  background-position: 0 0, 14px 9px, 22px 4px, 8px 17px, 29px 21px;
-  opacity: 0.78;
-}
-
-.home-hero__stars-mid {
-  background-image:
-    radial-gradient(1.6px 1.6px at center, rgb(255 255 255 / 0.8) 0%, transparent 100%),
-    radial-gradient(1px 1px at center, rgb(186 230 253 / 0.55) 0%, transparent 100%),
-    radial-gradient(1.35px 1.35px at center, rgb(199 210 254 / 0.5) 0%, transparent 100%),
-    radial-gradient(0.9px 0.9px at center, rgb(254 240 138 / 0.35) 0%, transparent 100%),
-    radial-gradient(1.1px 1.1px at center, rgb(251 207 232 / 0.32) 0%, transparent 100%);
-  background-size: 72px 72px, 51px 51px, 94px 94px, 63px 63px, 81px 81px;
-  background-position: 5px 18px, 33px 7px, 48px 31px, 19px 42px, 61px 14px;
-  opacity: 0.62;
-}
-
-/* Colored star tint layer */
-.home-hero__stars-color {
-  background-image:
-    radial-gradient(0.8px 0.8px at center, rgb(125 211 252 / 0.45) 0%, transparent 100%),
-    radial-gradient(0.7px 0.7px at center, rgb(167 139 250 / 0.38) 0%, transparent 100%),
-    radial-gradient(0.6px 0.6px at center, rgb(52 211 153 / 0.28) 0%, transparent 100%),
-    radial-gradient(0.75px 0.75px at center, rgb(251 191 36 / 0.25) 0%, transparent 100%),
-    radial-gradient(0.65px 0.65px at center, rgb(244 114 182 / 0.22) 0%, transparent 100%);
-  background-size: 67px 67px, 43px 43px, 58px 58px, 49px 49px, 76px 76px;
-  background-position: 12px 3px, 27px 19px, 6px 28px, 38px 11px, 52px 36px;
-  opacity: 0.55;
-  mix-blend-mode: screen;
-}
-
-/* Brighter accent stars — mixed sizes and hues */
-.home-hero__stars-glow {
-  position: absolute;
-  background-image:
-    radial-gradient(2.5px 2.5px at 4% 10%, rgb(255 255 255 / 0.95), transparent),
-    radial-gradient(1.5px 1.5px at 9% 28%, rgb(186 230 253 / 0.8), transparent),
-    radial-gradient(1px 1px at 13% 46%, rgb(199 210 254 / 0.65), transparent),
-    radial-gradient(2px 2px at 17% 6%, rgb(255 255 255 / 0.9), transparent),
-    radial-gradient(1.25px 1.25px at 21% 64%, rgb(125 211 252 / 0.7), transparent),
-    radial-gradient(1px 1px at 25% 18%, rgb(253 230 138 / 0.55), transparent),
-    radial-gradient(1.75px 1.75px at 29% 38%, rgb(255 255 255 / 0.82), transparent),
-    radial-gradient(1px 1px at 33% 78%, rgb(244 114 182 / 0.5), transparent),
-    radial-gradient(2.25px 2.25px at 37% 12%, rgb(224 242 254 / 0.92), transparent),
-    radial-gradient(1px 1px at 41% 52%, rgb(167 139 250 / 0.6), transparent),
-    radial-gradient(1.5px 1.5px at 45% 32%, rgb(255 255 255 / 0.75), transparent),
-    radial-gradient(0.75px 0.75px at 49% 68%, rgb(186 210 255 / 0.45), transparent),
-    radial-gradient(1.25px 1.25px at 53% 8%, rgb(52 211 153 / 0.55), transparent),
-    radial-gradient(1px 1px at 57% 48%, rgb(255 255 255 / 0.55), transparent),
-    radial-gradient(2px 2px at 61% 22%, rgb(255 255 255 / 0.88), transparent),
-    radial-gradient(1px 1px at 65% 72%, rgb(56 189 248 / 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 69% 42%, rgb(233 213 255 / 0.72), transparent),
-    radial-gradient(1px 1px at 73% 4%, rgb(255 255 255 / 0.85), transparent),
-    radial-gradient(2.5px 2.5px at 77% 58%, rgb(255 255 255 / 0.98), transparent),
-    radial-gradient(1px 1px at 81% 26%, rgb(34 211 238 / 0.65), transparent),
-    radial-gradient(1.75px 1.75px at 85% 14%, rgb(251 207 232 / 0.7), transparent),
-    radial-gradient(1px 1px at 89% 44%, rgb(255 255 255 / 0.6), transparent),
-    radial-gradient(1.5px 1.5px at 93% 66%, rgb(186 230 253 / 0.78), transparent),
-    radial-gradient(1px 1px at 97% 34%, rgb(129 140 248 / 0.58), transparent),
-    radial-gradient(2px 2px at 11% 86%, rgb(255 255 255 / 0.85), transparent),
-    radial-gradient(1px 1px at 19% 92%, rgb(125 211 252 / 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 27% 74%, rgb(254 240 138 / 0.48), transparent),
-    radial-gradient(1px 1px at 35% 94%, rgb(255 255 255 / 0.42), transparent),
-    radial-gradient(1.25px 1.25px at 43% 82%, rgb(167 139 250 / 0.55), transparent),
-    radial-gradient(0.75px 0.75px at 51% 88%, rgb(224 242 254 / 0.4), transparent),
-    radial-gradient(1.5px 1.5px at 59% 76%, rgb(255 255 255 / 0.68), transparent),
-    radial-gradient(1px 1px at 67% 92%, rgb(45 212 191 / 0.45), transparent),
-    radial-gradient(2px 2px at 75% 82%, rgb(255 255 255 / 0.8), transparent),
-    radial-gradient(1px 1px at 83% 90%, rgb(199 210 254 / 0.52), transparent),
-    radial-gradient(1.25px 1.25px at 91% 78%, rgb(255 255 255 / 0.58), transparent),
-    radial-gradient(1px 1px at 6% 58%, rgb(251 191 36 / 0.42), transparent),
-    radial-gradient(1.5px 1.5px at 14% 72%, rgb(255 255 255 / 0.62), transparent),
-    radial-gradient(1px 1px at 38% 4%, rgb(56 189 248 / 0.55), transparent),
-    radial-gradient(1.75px 1.75px at 56% 62%, rgb(255 255 255 / 0.72), transparent),
-    radial-gradient(1px 1px at 72% 34%, rgb(244 114 182 / 0.48), transparent),
-    radial-gradient(2px 2px at 88% 8%, rgb(224 242 254 / 0.9), transparent);
-  background-size: 100% 100%;
-  opacity: 0.95;
-}
-
-.home-hero__stars-glow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 7% 22%, rgb(255 255 255 / 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 23% 44%, rgb(186 230 253 / 0.65), transparent),
-    radial-gradient(1px 1px at 31% 16%, rgb(167 139 250 / 0.45), transparent),
-    radial-gradient(2px 2px at 46% 58%, rgb(255 255 255 / 0.75), transparent),
-    radial-gradient(1px 1px at 54% 36%, rgb(52 211 153 / 0.4), transparent),
-    radial-gradient(1.25px 1.25px at 62% 8%, rgb(255 255 255 / 0.7), transparent),
-    radial-gradient(1px 1px at 71% 54%, rgb(129 140 248 / 0.5), transparent),
-    radial-gradient(1.5px 1.5px at 79% 72%, rgb(34 211 238 / 0.6), transparent),
-    radial-gradient(1px 1px at 86% 38%, rgb(255 255 255 / 0.55), transparent),
-    radial-gradient(1.75px 1.75px at 94% 52%, rgb(253 230 138 / 0.5), transparent),
-    radial-gradient(1px 1px at 3% 68%, rgb(199 210 254 / 0.42), transparent),
-    radial-gradient(1px 1px at 18% 54%, rgb(255 255 255 / 0.38), transparent),
-    radial-gradient(1.5px 1.5px at 48% 26%, rgb(251 207 232 / 0.48), transparent),
-    radial-gradient(1px 1px at 66% 18%, rgb(255 255 255 / 0.48), transparent),
-    radial-gradient(2px 2px at 82% 64%, rgb(186 210 255 / 0.72), transparent);
-  background-size: 100% 100%;
-  opacity: 0.85;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .home-hero__galaxy-mist,
-  .home-hero__galaxy-teal {
-    animation-play-state: running;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-hero__galaxy-mist,
-  .home-hero__galaxy-teal {
-    animation: none !important;
-  }
-}
-
-/* Homepage — galaxy continues through main content and footer */
-.dark body:has(.home-page) main {
-  background: transparent;
-}
-
-.dark body:has(.home-page) .site-footer {
+/* Site footer — translucent over cosmic background (dark) */
+.dark .site-footer {
   background: linear-gradient(
     180deg,
     rgb(8 14 32 / 0.55) 0%,
@@ -1105,7 +933,7 @@
   border-top-color: rgb(255 255 255 / 0.08);
 }
 
-.dark body:has(.home-page) .site-footer .border-t {
+.dark .site-footer .border-t {
   border-color: rgb(255 255 255 / 0.08);
 }
 
