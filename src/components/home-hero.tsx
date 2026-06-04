@@ -17,15 +17,14 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
     >
       <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="home-hero__cosmos absolute inset-0 opacity-0 dark:opacity-100" />
-        <div className="home-hero__planet absolute -right-28 -top-10 size-[30rem] opacity-0 sm:-right-20 sm:size-[34rem] dark:opacity-100" />
-        <div className="home-hero__nebula absolute -right-20 top-0 h-[28rem] w-[32rem] opacity-0 sm:h-[32rem] sm:w-[38rem] dark:opacity-100" />
-        <div className="home-hero__nebula-dust absolute -right-8 top-24 h-56 w-72 opacity-0 dark:opacity-100" />
-        <div className="home-hero__orbit-ring absolute right-[6%] top-[14%] size-44 opacity-0 sm:size-52 dark:opacity-100" />
-        <div className="home-hero__stars absolute inset-0 opacity-0 dark:opacity-100" />
-        <div className="home-hero__stars-far absolute inset-0 opacity-0 dark:opacity-100" />
-        <div className="absolute -left-24 -top-28 size-[28rem] rounded-full bg-emerald-400/10 blur-[120px] dark:opacity-40 dark:bg-emerald-400/10" />
+        <div className="home-hero__galaxy-mist absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__galaxy-teal absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__stars-dense absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__stars-mid absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__stars-glow absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="absolute -left-24 -top-28 size-[28rem] rounded-full bg-emerald-400/10 blur-[120px] dark:hidden" />
         <div className="absolute -right-20 top-0 size-[24rem] rounded-full bg-blue-500/10 blur-[120px] dark:hidden" />
-        <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-indigo-500/8 blur-[100px] dark:bg-indigo-500/12" />
+        <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-indigo-500/8 blur-[100px] dark:hidden" />
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
       </div>
 
