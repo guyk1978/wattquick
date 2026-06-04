@@ -1089,25 +1089,24 @@
   }
 }
 
-/* Homepage — galaxy atmosphere below hero in dark mode */
-.dark .home-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: min(100vh, 920px);
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 28% 65% at 96% 40%, rgb(45 212 191 / 0.1), transparent 72%),
-    radial-gradient(ellipse 50% 40% at 60% 20%, rgb(99 102 241 / 0.08), transparent 65%),
-    radial-gradient(ellipse 100% 70% at 50% -20%, rgb(30 58 138 / 0.1), transparent 60%);
+/* Homepage — galaxy continues through main content and footer */
+.dark body:has(.home-page) main {
+  background: transparent;
 }
 
-.dark .home-page > * {
-  position: relative;
-  z-index: 1;
+.dark body:has(.home-page) .site-footer {
+  background: linear-gradient(
+    180deg,
+    rgb(8 14 32 / 0.55) 0%,
+    rgb(4 8 20 / 0.72) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top-color: rgb(255 255 255 / 0.08);
+}
+
+.dark body:has(.home-page) .site-footer .border-t {
+  border-color: rgb(255 255 255 / 0.08);
 }
 
 @media (prefers-reduced-motion: reduce) {
