@@ -8,7 +8,7 @@ const calculators = getAllCalculatorMeta();
 
 export default function HomePage() {
   return (
-    <div className="relative bg-background">
+    <div className="home-page relative bg-background">
       <HomeHero calculatorCount={calculators.length} />
 
       <div className="relative mx-auto max-w-6xl px-4 pb-16 sm:px-6">

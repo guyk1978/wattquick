@@ -163,9 +163,12 @@
 
 .dark .site-ambient::before {
   background:
-    radial-gradient(ellipse 85% 50% at 50% -10%, rgb(59 130 246 / 0.22), transparent 55%),
-    radial-gradient(ellipse 55% 45% at 100% 30%, rgb(34 197 94 / 0.12), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 0% 70%, rgb(99 102 241 / 0.14), transparent 50%);
+    radial-gradient(ellipse 55% 42% at 92% 8%, rgb(167 139 250 / 0.2), transparent 58%),
+    radial-gradient(ellipse 48% 38% at 88% 22%, rgb(59 130 246 / 0.32), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 78% 32%, rgb(99 102 241 / 0.18), transparent 62%),
+    radial-gradient(ellipse 90% 55% at 50% -12%, rgb(30 58 138 / 0.35), transparent 58%),
+    radial-gradient(ellipse 50% 40% at 0% 72%, rgb(99 102 241 / 0.12), transparent 52%),
+    linear-gradient(180deg, rgb(2 6 23) 0%, rgb(8 15 35) 42%, rgb(15 23 42) 100%);
 }
 
 .glass-surface {
@@ -904,24 +907,149 @@
   }
 }
 
-/* Homepage hero — nebula + starfield (dark) */
-.home-hero__nebula {
+/* Homepage hero — planetary cosmos (dark) */
+@keyframes home-cosmos-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-1.5%, 1%) scale(1.03);
+  }
+}
+
+@keyframes home-planet-glow {
+  0%,
+  100% {
+    opacity: 0.88;
+    filter: blur(0);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+}
+
+.home-hero__cosmos {
   background:
-    radial-gradient(ellipse 70% 60% at 72% 38%, rgb(99 102 241 / 0.35), transparent 62%),
-    radial-gradient(ellipse 55% 50% at 88% 22%, rgb(59 130 246 / 0.28), transparent 58%),
-    radial-gradient(ellipse 40% 35% at 65% 55%, rgb(34 211 238 / 0.12), transparent 55%);
+    radial-gradient(ellipse 120% 90% at 50% 110%, rgb(15 23 42 / 0.9), transparent 55%),
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgb(30 58 138 / 0.15), transparent 55%),
+    linear-gradient(165deg, rgb(2 6 23 / 0.55) 0%, transparent 45%, rgb(15 23 42 / 0.35) 100%);
+}
+
+.home-hero__planet {
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 32% 38%,
+    rgb(224 242 254 / 0.42) 0%,
+    rgb(125 211 252 / 0.32) 12%,
+    rgb(59 130 246 / 0.28) 28%,
+    rgb(79 70 229 / 0.22) 42%,
+    rgb(30 58 138 / 0.14) 58%,
+    transparent 72%
+  );
+  box-shadow:
+    inset -24px -16px 48px rgb(15 23 42 / 0.5),
+    0 0 80px 12px rgb(59 130 246 / 0.22),
+    0 0 140px 32px rgb(99 102 241 / 0.15);
+  animation: home-planet-glow 8s ease-in-out infinite;
+}
+
+.home-hero__nebula {
+  filter: blur(40px);
+  background:
+    radial-gradient(ellipse 75% 65% at 68% 42%, rgb(139 92 246 / 0.45), transparent 62%),
+    radial-gradient(ellipse 60% 55% at 82% 18%, rgb(59 130 246 / 0.5), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 90% 35%, rgb(34 211 238 / 0.28), transparent 55%),
+    radial-gradient(ellipse 45% 40% at 58% 62%, rgb(99 102 241 / 0.22), transparent 52%);
+  animation: home-cosmos-drift 18s ease-in-out infinite;
+}
+
+.home-hero__nebula-dust {
+  filter: blur(28px);
+  background:
+    radial-gradient(ellipse 80% 70% at 70% 50%, rgb(192 132 252 / 0.35), transparent 68%),
+    radial-gradient(ellipse 55% 50% at 85% 40%, rgb(56 189 248 / 0.25), transparent 60%);
+  mix-blend-mode: screen;
+  animation: home-cosmos-drift 22s ease-in-out infinite reverse;
+}
+
+.home-hero__orbit-ring {
+  border-radius: 9999px;
+  border: 1px solid rgb(186 230 253 / 0.12);
+  box-shadow:
+    0 0 24px rgb(59 130 246 / 0.15),
+    inset 0 0 20px rgb(99 102 241 / 0.08);
+  transform: rotate(-18deg) scaleX(1.35);
 }
 
 .home-hero__stars {
   background-image:
-    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.55), transparent),
-    radial-gradient(1px 1px at 78% 12%, rgb(255 255 255 / 0.45), transparent),
-    radial-gradient(1.5px 1.5px at 92% 28%, rgb(186 230 253 / 0.65), transparent),
-    radial-gradient(1px 1px at 68% 42%, rgb(255 255 255 / 0.35), transparent),
-    radial-gradient(1px 1px at 85% 58%, rgb(255 255 255 / 0.4), transparent),
-    radial-gradient(1.5px 1.5px at 55% 8%, rgb(255 255 255 / 0.5), transparent),
-    radial-gradient(1px 1px at 42% 32%, rgb(255 255 255 / 0.3), transparent);
+    radial-gradient(1.5px 1.5px at 8% 14%, rgb(255 255 255 / 0.7), transparent),
+    radial-gradient(1px 1px at 22% 28%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1px 1px at 35% 8%, rgb(186 230 253 / 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 48% 22%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 62% 12%, rgb(255 255 255 / 0.4), transparent),
+    radial-gradient(2px 2px at 74% 8%, rgb(224 242 254 / 0.75), transparent),
+    radial-gradient(1px 1px at 82% 18%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 91% 26%, rgb(186 230 253 / 0.8), transparent),
+    radial-gradient(1px 1px at 68% 38%, rgb(255 255 255 / 0.38), transparent),
+    radial-gradient(1px 1px at 88% 48%, rgb(255 255 255 / 0.42), transparent),
+    radial-gradient(1.5px 1.5px at 76% 58%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 58% 42%, rgb(255 255 255 / 0.32), transparent),
+    radial-gradient(1px 1px at 94% 62%, rgb(186 230 253 / 0.45), transparent);
   background-size: 100% 100%;
+}
+
+.home-hero__stars-far {
+  background-image:
+    radial-gradient(0.5px 0.5px at 15% 45%, rgb(255 255 255 / 0.35), transparent),
+    radial-gradient(0.5px 0.5px at 28% 62%, rgb(255 255 255 / 0.25), transparent),
+    radial-gradient(0.5px 0.5px at 42% 52%, rgb(255 255 255 / 0.3), transparent),
+    radial-gradient(0.5px 0.5px at 55% 68%, rgb(255 255 255 / 0.22), transparent),
+    radial-gradient(0.5px 0.5px at 72% 72%, rgb(255 255 255 / 0.28), transparent),
+    radial-gradient(0.5px 0.5px at 86% 54%, rgb(255 255 255 / 0.32), transparent),
+    radial-gradient(0.5px 0.5px at 18% 78%, rgb(255 255 255 / 0.2), transparent),
+    radial-gradient(0.5px 0.5px at 38% 18%, rgb(255 255 255 / 0.28), transparent);
+  background-size: 200% 200%;
+  opacity: 0.65;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero__nebula,
+  .home-hero__nebula-dust,
+  .home-hero__planet {
+    animation-play-state: running;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__nebula,
+  .home-hero__nebula-dust,
+  .home-hero__planet {
+    animation: none !important;
+  }
+}
+
+/* Homepage — planetary atmosphere bleeds below hero in dark mode */
+.dark .home-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(100vh, 920px);
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 42% 36% at 96% 6%, rgb(139 92 246 / 0.14), transparent 68%),
+    radial-gradient(ellipse 55% 45% at 88% 18%, rgb(59 130 246 / 0.1), transparent 65%),
+    radial-gradient(ellipse 100% 70% at 50% -20%, rgb(30 58 138 / 0.12), transparent 60%);
+}
+
+.dark .home-page > * {
+  position: relative;
+  z-index: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
