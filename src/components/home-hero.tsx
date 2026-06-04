@@ -19,8 +19,10 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
         <div className="home-hero__cosmos absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="home-hero__galaxy-mist absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="home-hero__galaxy-teal absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__stars-fine absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="home-hero__stars-dense absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="home-hero__stars-mid absolute inset-0 opacity-0 dark:opacity-100" />
+        <div className="home-hero__stars-color absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="home-hero__stars-glow absolute inset-0 opacity-0 dark:opacity-100" />
         <div className="absolute -left-24 -top-28 size-[28rem] rounded-full bg-emerald-400/10 blur-[120px] dark:hidden" />
         <div className="absolute -right-20 top-0 size-[24rem] rounded-full bg-blue-500/10 blur-[120px] dark:hidden" />
