@@ -537,63 +537,168 @@
   }
 }
 
-/* Global header energy strip — infinite 0→100% charge loop */
-@keyframes charge-loop {
-  0% {
-    width: 0%;
-  }
-  99.999% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
-  }
-}
-
-@keyframes energy-strip-glow {
+/* Homepage hero — neon liquid glass vessel */
+@keyframes neon-liquid-pulse {
   0%,
   100% {
-    box-shadow: 0 2px 12px rgba(239, 68, 68, 0.35);
+    filter: brightness(1) saturate(1.05);
   }
-  35% {
-    box-shadow: 0 2px 12px rgba(245, 158, 11, 0.35);
-  }
-  70%,
-  99.999% {
-    box-shadow: 0 2px 14px rgba(16, 185, 129, 0.4);
+  50% {
+    filter: brightness(1.12) saturate(1.15);
   }
 }
 
-@keyframes energy-strip-gradient-shift {
+@keyframes neon-liquid-shimmer {
   0% {
-    background-position: 0% 50%;
+    transform: translateX(-8%) skewX(-4deg);
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.65;
   }
   100% {
-    background-position: 200% 50%;
+    transform: translateX(120%) skewX(-4deg);
+    opacity: 0.35;
   }
 }
 
-.energy-strip-fill.energy-strip-gradient {
-  background-size: 200% 100%;
-  animation:
-    charge-loop var(--charge-duration, 4s) linear infinite,
-    energy-strip-gradient-shift var(--charge-duration, 4s) linear infinite;
+@keyframes neon-bubble-rise {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.55);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.95;
+  }
+  70% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(calc(-100% - 2.75rem)) translateX(var(--bubble-drift, 0))
+      scale(1);
+    opacity: 0;
+  }
 }
 
-.energy-strip-glow {
-  animation: energy-strip-glow var(--charge-duration, 4s) linear infinite;
+@keyframes neon-vessel-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 28px -6px rgb(34 211 238 / 0.45),
+      0 8px 24px -10px rgb(37 99 235 / 0.35),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 40px -4px rgb(56 189 248 / 0.55),
+      0 10px 32px -8px rgb(59 130 246 / 0.45),
+      inset 0 1px 0 rgb(255 255 255 / 0.18);
+  }
+}
+
+.neon-liquid-vessel__shell {
+  animation: neon-vessel-glow 4s ease-in-out infinite;
+}
+
+.neon-liquid-vessel__glass {
+  background: rgb(15 23 42 / 0.42);
+  backdrop-filter: blur(14px) saturate(1.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.35);
+  border: 1px solid rgb(148 163 184 / 0.18);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    inset 0 -8px 16px rgb(0 0 0 / 0.25);
+}
+
+.dark .neon-liquid-vessel__glass {
+  background: rgb(15 23 42 / 0.55);
+  border-color: rgb(56 189 248 / 0.22);
+}
+
+.neon-liquid-vessel__liquid {
+  box-shadow: inset 0 2px 8px rgb(0 0 0 / 0.35);
+}
+
+.neon-liquid-vessel__fill {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgb(14 165 233 / 0.55) 0%,
+    rgb(37 99 235 / 0.85) 38%,
+    rgb(29 78 216 / 0.95) 100%
+  );
+  box-shadow:
+    inset 0 -6px 18px rgb(56 189 248 / 0.35),
+    0 0 24px -4px rgb(34 211 238 / 0.5);
+  animation: neon-liquid-pulse 3.5s ease-in-out infinite;
+}
+
+.neon-liquid-vessel__fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgb(186 230 253 / 0.35) 45%,
+    transparent 70%
+  );
+  animation: neon-liquid-shimmer 4.5s ease-in-out infinite;
+}
+
+.neon-liquid-vessel__surface {
+  background: linear-gradient(
+    180deg,
+    rgb(186 230 253 / 0.55),
+    rgb(56 189 248 / 0.15) 55%,
+    transparent
+  );
+  filter: blur(0.5px);
+}
+
+.neon-liquid-vessel__bubble {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgb(224 242 254 / 0.95),
+    rgb(125 211 252 / 0.55) 55%,
+    rgb(56 189 248 / 0.2) 100%
+  );
+  box-shadow:
+    0 0 8px rgb(34 211 238 / 0.85),
+    0 0 14px rgb(59 130 246 / 0.45),
+    inset 0 -1px 2px rgb(255 255 255 / 0.6);
+  animation: neon-bubble-rise var(--bubble-duration, 3s) ease-in infinite;
+  animation-delay: var(--bubble-delay, 0s);
+}
+
+.neon-liquid-vessel__rim {
+  border: 1px solid rgb(186 230 253 / 0.2);
+  box-shadow: inset 0 0 0 1px rgb(59 130 246 / 0.12);
+}
+
+.neon-liquid-vessel__specular {
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.22) 0%,
+    transparent 42%,
+    transparent 68%,
+    rgb(255 255 255 / 0.06) 100%
+  );
+}
+
+.neon-liquid-vessel--static .neon-liquid-vessel__shell,
+.neon-liquid-vessel--static .neon-liquid-vessel__fill,
+.neon-liquid-vessel--static .neon-liquid-vessel__fill::after,
+.neon-liquid-vessel--static .neon-liquid-vessel__bubble {
+  animation: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .energy-strip-fill,
-  .energy-strip-gradient {
-    width: 72% !important;
+  .neon-liquid-vessel__shell,
+  .neon-liquid-vessel__fill,
+  .neon-liquid-vessel__fill::after,
+  .neon-liquid-vessel__bubble {
     animation: none !important;
-  }
-
-  .energy-strip-glow {
-    animation: none !important;
-    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.25);
   }
 }
 

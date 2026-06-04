@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { NeonLiquidVessel } from "@/components/neon-liquid-vessel";
 import { cn } from "@/lib/utils";
 
 interface HomeHeroProps {
@@ -22,6 +23,8 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
       </div>
 
       <div className="relative mx-auto max-w-4xl text-center">
+        <NeonLiquidVessel />
+
         <h1
           className={cn(
             "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:fill-mode-both motion-safe:duration-500",

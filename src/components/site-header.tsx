@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { EnergyStrip } from "@/components/energy-strip";
 import { HeaderNav } from "@/components/header-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -33,7 +32,6 @@ export function SiteHeader() {
           <MobileNav />
         </div>
       </div>
-      <EnergyStrip />
     </header>
   );
 }
