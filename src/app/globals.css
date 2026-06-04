@@ -574,7 +574,7 @@
     opacity: 0.75;
   }
   100% {
-    transform: translateY(calc(-100% - 3.5rem)) translateX(var(--bubble-drift, 0))
+    transform: translateY(calc(-100% - 3rem)) translateX(var(--bubble-drift, 0))
       scale(1);
     opacity: 0;
   }
@@ -600,19 +600,52 @@
   0%,
   100% {
     box-shadow:
-      0 0 28px -6px rgb(34 211 238 / 0.45),
-      0 8px 24px -10px rgb(37 99 235 / 0.35),
-      inset 0 1px 0 rgb(255 255 255 / 0.12);
+      0 0 0 1px rgb(56 189 248 / 0.35),
+      0 0 32px 2px rgb(34 211 238 / 0.4),
+      0 0 64px 8px rgb(59 130 246 / 0.28),
+      inset 0 1px 0 rgb(255 255 255 / 0.14);
   }
   50% {
     box-shadow:
-      0 0 40px -4px rgb(56 189 248 / 0.55),
-      0 10px 32px -8px rgb(59 130 246 / 0.45),
-      inset 0 1px 0 rgb(255 255 255 / 0.18);
+      0 0 0 1.5px rgb(125 211 252 / 0.5),
+      0 0 44px 4px rgb(56 189 248 / 0.55),
+      0 0 88px 14px rgb(59 130 246 / 0.38),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
   }
 }
 
+@keyframes neon-vessel-halo-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.neon-liquid-vessel__halo {
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 100% 85% at 50% 50%,
+    rgb(56 189 248 / 0.22),
+    transparent 68%
+  );
+  box-shadow:
+    0 0 56px 10px rgb(34 211 238 / 0.28),
+    0 0 100px 24px rgb(59 130 246 / 0.18);
+  opacity: 0;
+}
+
+.dark .neon-liquid-vessel__halo {
+  opacity: 1;
+  animation: neon-vessel-halo-pulse 4s ease-in-out infinite;
+}
+
 .neon-liquid-vessel__shell {
+  z-index: 1;
   animation: neon-vessel-glow-light 4s ease-in-out infinite;
 }
 
@@ -637,11 +670,16 @@
 }
 
 .dark .neon-liquid-vessel__glass {
-  background: rgb(15 23 42 / 0.55);
-  border-color: rgb(56 189 248 / 0.22);
+  background: linear-gradient(
+    165deg,
+    rgb(51 65 85 / 0.45) 0%,
+    rgb(15 23 42 / 0.72) 48%,
+    rgb(2 6 23 / 0.82) 100%
+  );
+  border: 1.5px solid rgb(56 189 248 / 0.42);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.1),
-    inset 0 -8px 16px rgb(0 0 0 / 0.25);
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    inset 0 -10px 20px rgb(0 0 0 / 0.45);
 }
 
 .neon-liquid-vessel__liquid {
@@ -667,8 +705,9 @@
 
 .dark .neon-liquid-vessel__body {
   box-shadow:
-    inset 0 2px 0 rgb(125 211 252 / 0.35),
-    inset 0 -8px 20px rgb(0 0 0 / 0.35);
+    inset 0 2px 0 rgb(186 230 253 / 0.4),
+    inset 0 -10px 24px rgb(0 0 0 / 0.5),
+    inset 0 0 32px rgb(37 99 235 / 0.25);
 }
 
 .neon-liquid-vessel__fill {
@@ -689,13 +728,14 @@
 .dark .neon-liquid-vessel__fill {
   background: linear-gradient(
     180deg,
-    rgb(14 165 233 / 0.55) 0%,
-    rgb(37 99 235 / 0.85) 38%,
-    rgb(29 78 216 / 0.95) 100%
+    rgb(12 74 110 / 0.92) 0%,
+    rgb(29 78 216 / 0.88) 42%,
+    rgb(30 64 175 / 0.95) 100%
   );
   box-shadow:
-    inset 0 -6px 18px rgb(56 189 248 / 0.35),
-    0 0 24px -4px rgb(34 211 238 / 0.5);
+    inset 0 -8px 22px rgb(56 189 248 / 0.45),
+    inset 0 6px 16px rgb(125 211 252 / 0.12),
+    0 0 32px -2px rgb(34 211 238 / 0.55);
 }
 
 .neon-liquid-vessel__caustics {
@@ -708,8 +748,48 @@
 }
 
 .dark .neon-liquid-vessel__caustics {
-  opacity: 0.55;
+  opacity: 0.7;
   mix-blend-mode: plus-lighter;
+  background:
+    radial-gradient(ellipse 50% 38% at 30% 72%, rgb(125 211 252 / 0.45), transparent 72%),
+    radial-gradient(ellipse 42% 32% at 72% 58%, rgb(56 189 248 / 0.35), transparent 70%),
+    radial-gradient(ellipse 28% 22% at 52% 38%, rgb(224 242 254 / 0.2), transparent 75%);
+}
+
+.neon-liquid-vessel__embers::before,
+.neon-liquid-vessel__embers::after {
+  content: "";
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(1px);
+}
+
+.neon-liquid-vessel__embers::before {
+  left: 22%;
+  top: 38%;
+  width: 10px;
+  height: 10px;
+  background: rgb(224 242 254 / 0.55);
+  box-shadow: 0 0 14px rgb(186 230 253 / 0.8);
+}
+
+.neon-liquid-vessel__embers::after {
+  right: 24%;
+  top: 52%;
+  width: 7px;
+  height: 7px;
+  background: rgb(186 230 253 / 0.5);
+  box-shadow: 0 0 12px rgb(56 189 248 / 0.75);
+}
+
+.dark .neon-liquid-vessel__embers::before {
+  background: rgb(248 250 252 / 0.75);
+  box-shadow: 0 0 18px rgb(224 242 254 / 0.95);
+}
+
+.dark .neon-liquid-vessel__embers::after {
+  background: rgb(186 230 253 / 0.65);
+  box-shadow: 0 0 16px rgb(34 211 238 / 0.9);
 }
 
 .neon-liquid-vessel__fill::after {
@@ -760,14 +840,30 @@
   animation-delay: var(--bubble-delay, 0s);
 }
 
+.dark .neon-liquid-vessel__bubble {
+  background: radial-gradient(
+    circle at 28% 28%,
+    rgb(255 255 255 / 0.98),
+    rgb(186 230 253 / 0.75) 45%,
+    rgb(56 189 248 / 0.35) 100%
+  );
+  box-shadow:
+    0 0 10px rgb(248 250 252 / 0.95),
+    0 0 18px rgb(34 211 238 / 0.9),
+    0 0 28px rgb(59 130 246 / 0.5),
+    inset 0 -1px 2px rgb(255 255 255 / 0.7);
+}
+
 .neon-liquid-vessel__rim {
   border: 1px solid rgb(147 197 253 / 0.45);
   box-shadow: inset 0 0 0 1px rgb(59 130 246 / 0.18);
 }
 
 .dark .neon-liquid-vessel__rim {
-  border-color: rgb(186 230 253 / 0.2);
-  box-shadow: inset 0 0 0 1px rgb(59 130 246 / 0.12);
+  border: 1.5px solid rgb(96 165 250 / 0.35);
+  box-shadow:
+    inset 0 0 0 1px rgb(186 230 253 / 0.15),
+    0 0 12px rgb(56 189 248 / 0.25);
 }
 
 .neon-liquid-vessel__specular {
@@ -791,6 +887,7 @@
 }
 
 .neon-liquid-vessel--static .neon-liquid-vessel__shell,
+.neon-liquid-vessel--static .neon-liquid-vessel__halo,
 .neon-liquid-vessel--static .neon-liquid-vessel__fill,
 .neon-liquid-vessel--static .neon-liquid-vessel__fill::after,
 .neon-liquid-vessel--static .neon-liquid-vessel__bubble {
@@ -799,11 +896,32 @@
 
 @media (prefers-reduced-motion: reduce) {
   .neon-liquid-vessel__shell,
+  .neon-liquid-vessel__halo,
   .neon-liquid-vessel__fill,
   .neon-liquid-vessel__fill::after,
   .neon-liquid-vessel__bubble {
     animation: none !important;
   }
+}
+
+/* Homepage hero — nebula + starfield (dark) */
+.home-hero__nebula {
+  background:
+    radial-gradient(ellipse 70% 60% at 72% 38%, rgb(99 102 241 / 0.35), transparent 62%),
+    radial-gradient(ellipse 55% 50% at 88% 22%, rgb(59 130 246 / 0.28), transparent 58%),
+    radial-gradient(ellipse 40% 35% at 65% 55%, rgb(34 211 238 / 0.12), transparent 55%);
+}
+
+.home-hero__stars {
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 78% 12%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 92% 28%, rgb(186 230 253 / 0.65), transparent),
+    radial-gradient(1px 1px at 68% 42%, rgb(255 255 255 / 0.35), transparent),
+    radial-gradient(1px 1px at 85% 58%, rgb(255 255 255 / 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 55% 8%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 42% 32%, rgb(255 255 255 / 0.3), transparent);
+  background-size: 100% 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
