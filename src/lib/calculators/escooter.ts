@@ -33,28 +33,55 @@ export const ESCOOTER_VOLTAGE_PRESETS = {
 
 export type EscooterNominalVoltage = keyof typeof ESCOOTER_VOLTAGE_PRESETS;
 
-/** ~50 % SOC under load — same amp draw hurts lower-voltage packs more */
-const MID_SOC_SAG_MULTIPLIER = 1.15;
+const SOC_MIN = 20;
+const SOC_MAX = 100;
+const SOC_DEFAULT = 50;
+
+/** Sag scales with SOC: full pack ≈ 0.6× base sag; 20 % SOC ≈ 2× base sag */
+export function socSagMultiplier(socPercent: number): number {
+  const soc = Math.min(SOC_MAX, Math.max(SOC_MIN, socPercent));
+  if (soc >= 100) return 0.6;
+  if (soc >= 50) return 0.6 + ((100 - soc) / 50) * 0.4;
+  return 1 + ((50 - soc) / 30) * 1;
+}
+
+export function parseEscooterSoc(values: Record<string, string>): number {
+  const raw = parsePositive(values.stateOfCharge ?? "");
+  if (raw === null) return SOC_DEFAULT;
+  return Math.min(SOC_MAX, Math.max(SOC_MIN, raw));
+}
 
 export function calculateEscooterVoltageSagImpact(
   nominalVoltageKey: string,
-  loadSagVolts: number
+  loadSagVolts: number,
+  socPercent: number = SOC_DEFAULT
 ) {
   const preset =
     ESCOOTER_VOLTAGE_PRESETS[nominalVoltageKey as EscooterNominalVoltage] ??
     ESCOOTER_VOLTAGE_PRESETS["36"];
-  const effectiveSagV = loadSagVolts * MID_SOC_SAG_MULTIPLIER;
+  const soc = Math.min(SOC_MAX, Math.max(SOC_MIN, socPercent));
+  const socMult = socSagMultiplier(soc);
+  const effectiveSagV = loadSagVolts * socMult;
   const sagPercent = (effectiveSagV / preset.nominal) * 100;
   const powerRetention = Math.max(0, 1 - effectiveSagV / preset.nominal);
   const powerLossPercent = (1 - powerRetention) * 100;
   const voltageEfficiencyLossPercent = powerLossPercent * preset.sagImpactFactor;
+  const voltageEfficiency = Math.max(
+    0,
+    1 - voltageEfficiencyLossPercent / 100
+  );
+  const estimatedCurrentPowerPercent = (soc / 100) * voltageEfficiency * 100;
 
   return {
     nominal: preset.nominal,
+    socPercent: soc,
+    socSagMultiplier: socMult,
     effectiveSagV,
     sagPercent,
     powerLossPercent,
     voltageEfficiencyLossPercent,
+    voltageEfficiency,
+    estimatedCurrentPowerPercent,
     sagImpactFactor: preset.sagImpactFactor,
   };
 }
@@ -74,11 +101,12 @@ export function calculateEscooterRange(values: Record<string, string>) {
   const massPenalty = Math.max(0, (riderMassKg + scooterMassKg - 75) / 10) * 0.15;
   const baseWhPerKm = 14 + pressurePenalty + massPenalty;
   const voltageKey = values.nominalVoltage ?? "36";
-  const voltageSag = calculateEscooterVoltageSagImpact(voltageKey, 2);
+  const socPercent = parseEscooterSoc(values);
+  const voltageSag = calculateEscooterVoltageSagImpact(voltageKey, 2, socPercent);
   const voltagePenaltyWhPerKm =
     baseWhPerKm * (voltageSag.voltageEfficiencyLossPercent / 100);
   const adjustedWhPerKm = baseWhPerKm + voltagePenaltyWhPerKm;
-  const usableWh = batteryWh * packEfficiency;
+  const usableWh = batteryWh * (socPercent / 100) * packEfficiency;
   const rangeKm = usableWh / adjustedWhPerKm;
 
   return {
@@ -90,6 +118,7 @@ export function calculateEscooterRange(values: Record<string, string>) {
     massPenalty,
     voltagePenaltyWhPerKm,
     voltageSag,
+    socPercent,
     totalMassKg: riderMassKg + scooterMassKg,
   };
 }
@@ -135,12 +164,12 @@ export function calculateEscooterHillClimb(values: Record<string, string>) {
   if (motorWatts === null || totalMassKg === null) return null;
 
   const voltageKey = values.nominalVoltage ?? "36";
-  const voltageSag = calculateEscooterVoltageSagImpact(voltageKey, 3);
-  const torqueRetention = Math.max(
-    0,
-    1 - voltageSag.voltageEfficiencyLossPercent / 100
-  );
-  const effectiveMotorWatts = motorWatts * torqueRetention;
+  const socPercent = parseEscooterSoc(values);
+  const voltageSag = calculateEscooterVoltageSagImpact(voltageKey, 3, socPercent);
+  const effectiveMotorWatts =
+    motorWatts * (socPercent / 100) * voltageSag.voltageEfficiency;
+  const torqueDropPercent =
+    100 - voltageSag.estimatedCurrentPowerPercent;
 
   const vMs = (minClimbSpeedKmh * 1000) / 3600;
   const sinThetaNominal =
@@ -152,7 +181,6 @@ export function calculateEscooterHillClimb(values: Record<string, string>) {
   const gradePercent = Math.tan(Math.asin(clampedSin)) * 100;
   const gradePercentNominal = Math.tan(Math.asin(clampedSinNominal)) * 100;
   const climbPowerW = totalMassKg * GRAVITY * Math.sin(Math.asin(clampedSin)) * vMs;
-  const torqueDropPercent = 100 - torqueRetention * 100;
 
   return {
     gradePercent,
@@ -164,6 +192,7 @@ export function calculateEscooterHillClimb(values: Record<string, string>) {
     effectiveMotorWatts,
     torqueDropPercent,
     voltageSag,
+    socPercent,
   };
 }
 
@@ -298,7 +327,17 @@ export function buildEscooterRangeRows(
 ): CalculatorResultRow[] {
   return [
     { label: "Estimated range", value: formatNumber(p.rangeKm, { maxDecimals: 1 }), unit: "km" },
+    {
+      label: "Estimated current power",
+      value: formatNumber(p.voltageSag.estimatedCurrentPowerPercent, { maxDecimals: 0 }),
+      unit: "%",
+    },
     { label: "Consumption", value: formatNumber(p.adjustedWhPerKm, { maxDecimals: 1 }), unit: "Wh/km" },
+    {
+      label: "State of charge",
+      value: formatNumber(p.socPercent, { maxDecimals: 0 }),
+      unit: "%",
+    },
     {
       label: "Voltage efficiency loss",
       value: formatNumber(p.voltageSag.voltageEfficiencyLossPercent, { maxDecimals: 1 }),
@@ -348,6 +387,16 @@ export function buildEscooterHillClimbRows(
 ): CalculatorResultRow[] {
   return [
     { label: "Max climb grade", value: formatNumber(p.gradePercent, { maxDecimals: 1 }), unit: "%" },
+    {
+      label: "Estimated current power",
+      value: formatNumber(p.voltageSag.estimatedCurrentPowerPercent, { maxDecimals: 0 }),
+      unit: "%",
+    },
+    {
+      label: "State of charge",
+      value: formatNumber(p.socPercent, { maxDecimals: 0 }),
+      unit: "%",
+    },
     {
       label: "Voltage efficiency loss",
       value: formatNumber(p.voltageSag.voltageEfficiencyLossPercent, { maxDecimals: 1 }),
@@ -525,7 +574,7 @@ export const ESCOOTER_HANDLERS: Record<EscooterCalculatorSlug, EscooterHandler> 
   "escooter-range": {
     calculate: calculateEscooterRange,
     buildRows: (p) => buildEscooterRangeRows(p as NonNullable<ReturnType<typeof calculateEscooterRange>>),
-    note: "Models ~50 % SOC with ~2.3 V loaded sag. 36 V packs lose more range per volt dropped than 48 V or 52 V — same amp draw at lower voltage means higher I²R stress and Wh/km penalty.",
+    note: "SOC slider models the dynamic power curve: P_eff = P_nom × (SOC/100) × voltage efficiency. Sag scales from 0.6× at 100 % SOC to 2× at 20 % — lower voltage packs (36 V) suffer higher % loss per volt dropped.",
   },
   "escooter-tire-pressure": {
     calculate: calculateEscooterTirePressure,
@@ -541,7 +590,7 @@ export const ESCOOTER_HANDLERS: Record<EscooterCalculatorSlug, EscooterHandler> 
   "escooter-hill-climb": {
     calculate: calculateEscooterHillClimb,
     buildRows: (p) => buildEscooterHillClimbRows(p as NonNullable<ReturnType<typeof calculateEscooterHillClimb>>),
-    note: "Hill climb applies ~3.5 V effective sag at mid-SOC under load. Torque drop is steeper on 36 V (higher sag % and impact factor) — explains slowdown on hills when the pack is half empty.",
+    note: "Effective climb power = motor W × (SOC/100) × voltage efficiency under load sag. Slide SOC to 20 % to see when hill torque collapses — common cause of 'my scooter won't climb at half battery'.",
   },
   "escooter-tire-wear": {
     calculate: calculateEscooterTireWear,

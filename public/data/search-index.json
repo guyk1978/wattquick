@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T10:50:15.819Z",
+  "generatedAt": "2026-06-05T10:54:53.678Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1994,7 +1994,7 @@
       "category": "Calculators",
       "group": "E-Scooter",
       "title": "E-Scooter Range Calculator",
-      "description": "Estimate range with standing-rider drag, tyre pressure, and voltage sag impact at 36 / 48 / 52 V.",
+      "description": "Estimate remaining range with SOC slider, tyre pressure, and voltage sag at 36 / 48 / 52 V.",
       "href": "/escooter-range/",
       "tag": "E-Scooter",
       "keywords": [
@@ -2039,7 +2039,7 @@
       "category": "Calculators",
       "group": "E-Scooter",
       "title": "E-Scooter Hill Climb Grade Calculator",
-      "description": "Maximum climb grade with voltage sag torque drop at 36 / 48 / 52 V and mid-SOC load.",
+      "description": "Maximum climb grade with dynamic SOC (20–100 %) and voltage sag torque drop at 36 / 48 / 52 V.",
       "href": "/escooter-hill-climb/",
       "tag": "E-Scooter",
       "keywords": [
