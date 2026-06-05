@@ -1,4 +1,12 @@
+import {
+  DEFAULT_PROJECT_CURRENCY,
+  resolveProjectCurrency,
+  type ProjectCurrency,
+} from "@/lib/project-currency";
+
 export const PROJECTS_STORAGE_KEY = "wattquick_projects";
+
+export type { ProjectCurrency };
 
 export interface ProjectSnapshot {
   id: string;
@@ -19,6 +27,8 @@ export interface WattQuickProject {
   snapshots: ProjectSnapshot[];
   /** Per BOM line unit prices keyed by BomLineId */
   costPrices?: Record<string, string>;
+  /** Quote currency for BOM worksheet and PDF export */
+  currency?: ProjectCurrency;
 }
 
 export type ProjectSavePayload = {
@@ -37,13 +47,18 @@ function readProjectsRaw(): WattQuickProject[] {
     if (!raw) return [];
     const parsed = JSON.parse(raw) as WattQuickProject[];
     if (!Array.isArray(parsed)) return [];
-    return parsed.filter(
-      (project) =>
-        project &&
-        typeof project.id === "string" &&
-        typeof project.name === "string" &&
-        Array.isArray(project.snapshots)
-    );
+    return parsed
+      .filter(
+        (project) =>
+          project &&
+          typeof project.id === "string" &&
+          typeof project.name === "string" &&
+          Array.isArray(project.snapshots)
+      )
+      .map((project) => ({
+        ...project,
+        currency: resolveProjectCurrency(project.currency),
+      }));
   } catch {
     return [];
   }
@@ -83,6 +98,7 @@ export function createProject(name: string): WattQuickProject {
     createdAt: now,
     updatedAt: now,
     snapshots: [],
+    currency: DEFAULT_PROJECT_CURRENCY,
   };
 
   const projects = listProjects();
@@ -135,6 +151,23 @@ export function addSnapshotToProject(
     ...projects[index]!,
     updatedAt: snapshot.timestamp,
     snapshots: [snapshot, ...projects[index]!.snapshots],
+  };
+  writeProjects(projects);
+  return projects[index]!;
+}
+
+export function updateProjectCurrency(
+  projectId: string,
+  currency: ProjectCurrency
+): WattQuickProject | null {
+  const projects = listProjects();
+  const index = projects.findIndex((project) => project.id === projectId);
+  if (index < 0) return null;
+
+  projects[index] = {
+    ...projects[index]!,
+    currency,
+    updatedAt: new Date().toISOString(),
   };
   writeProjects(projects);
   return projects[index]!;

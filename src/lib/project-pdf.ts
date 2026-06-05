@@ -4,10 +4,13 @@ import {
   type PdfPrimitive,
 } from "@/lib/pdf-utils";
 import {
+  formatProjectCurrency,
+  getProjectCurrency,
+} from "@/lib/project-currency";
+import {
   buildBomCostLines,
   computeBomTotal,
   computeEngineeringRollup,
-  formatCurrency,
   parseUnitPrice,
 } from "@/lib/project-rollup";
 import type { WattQuickProject } from "@/lib/project-store";
@@ -24,10 +27,12 @@ export async function exportProjectPDFReport(
   const rollup = computeEngineeringRollup(project);
   const bomLines = buildBomCostLines(rollup);
   const costPrices = project.costPrices ?? {};
+  const currency = getProjectCurrency(project);
   const grandTotal = computeBomTotal(bomLines, costPrices);
 
   const inputs: Record<string, PdfPrimitive> = sanitizePdfRecord({
     Project: project.name,
+    "Quote currency": currency,
     "Calculations saved": project.snapshots.length,
     Created: new Date(project.createdAt).toLocaleString(),
     "Last updated": new Date(project.updatedAt).toLocaleString(),
@@ -75,11 +80,14 @@ export async function exportProjectPDFReport(
     const lineTotal = line.quantity * unitPrice;
     const priceLabel =
       unitPrice > 0
-        ? `${line.quantity} ${line.unit} × ${formatCurrency(unitPrice)} = ${formatCurrency(lineTotal)}`
+        ? `${line.quantity} ${line.unit} × ${formatProjectCurrency(unitPrice, currency)} = ${formatProjectCurrency(lineTotal, currency)}`
         : `${line.quantity} ${line.unit} (no unit price entered)`;
     results[line.label] = priceLabel;
   }
-  results["PROJECT TOTAL ESTIMATE"] = formatCurrency(grandTotal);
+  results["PROJECT TOTAL ESTIMATE"] = formatProjectCurrency(
+    grandTotal,
+    currency
+  );
 
   results["── Saved Calculations ──"] = " ";
   project.snapshots.forEach((snapshot, index) => {

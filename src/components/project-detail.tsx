@@ -10,13 +10,17 @@ import {
   Trash2,
 } from "lucide-react";
 import { ProjectCostWorksheet } from "@/components/project-cost-worksheet";
+import { ProjectCurrencySelector } from "@/components/project-currency-selector";
 import { ProjectEngineeringRollup } from "@/components/project-engineering-rollup";
+import { getProjectCurrency } from "@/lib/project-currency";
 import { exportProjectPDFReport } from "@/lib/project-pdf";
 import { computeEngineeringRollup } from "@/lib/project-rollup";
 import {
   getProject,
   removeSnapshotFromProject,
   updateProjectCostPrice,
+  updateProjectCurrency,
+  type ProjectCurrency,
   type WattQuickProject,
 } from "@/lib/project-store";
 import { calculatorCommandBtn } from "@/lib/glass-ui";
@@ -61,6 +65,11 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
 
   const handleUnitPriceChange = (lineId: string, value: string) => {
     const updated = updateProjectCostPrice(projectId, lineId, value);
+    if (updated) setProject(updated);
+  };
+
+  const handleCurrencyChange = (currency: ProjectCurrency) => {
+    const updated = updateProjectCurrency(projectId, currency);
     if (updated) setProject(updated);
   };
 
@@ -110,23 +119,29 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
             {new Date(project.updatedAt).toLocaleString()}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => void handleExport()}
-          disabled={exporting || project.snapshots.length === 0}
-          className={cn(
-            calculatorCommandBtn,
-            "inline-flex h-11 items-center gap-2 px-5 text-sm font-semibold text-foreground",
-            exporting && "cursor-wait opacity-80"
-          )}
-        >
-          {exporting ? (
-            <Loader2 className="size-4 animate-spin" aria-hidden />
-          ) : (
-            <FileDown className="size-4 text-primary" aria-hidden />
-          )}
-          {exporting ? "Exporting…" : "Export project report"}
-        </button>
+        <div className="flex flex-wrap items-end gap-3">
+          <ProjectCurrencySelector
+            value={getProjectCurrency(project)}
+            onChange={handleCurrencyChange}
+          />
+          <button
+            type="button"
+            onClick={() => void handleExport()}
+            disabled={exporting || project.snapshots.length === 0}
+            className={cn(
+              calculatorCommandBtn,
+              "inline-flex h-11 items-center gap-2 px-5 text-sm font-semibold text-foreground",
+              exporting && "cursor-wait opacity-80"
+            )}
+          >
+            {exporting ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden />
+            ) : (
+              <FileDown className="size-4 text-primary" aria-hidden />
+            )}
+            {exporting ? "Exporting…" : "Export project report"}
+          </button>
+        </div>
       </div>
 
       {exportError ? (
@@ -141,6 +156,7 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
           <ProjectCostWorksheet
             rollup={rollup}
             costPrices={project.costPrices ?? {}}
+            currency={getProjectCurrency(project)}
             onUnitPriceChange={handleUnitPriceChange}
           />
         </>

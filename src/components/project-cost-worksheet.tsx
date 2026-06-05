@@ -2,9 +2,12 @@
 
 import { Input } from "@/components/ui/input";
 import {
+  formatProjectCurrency,
+  type ProjectCurrency,
+} from "@/lib/project-currency";
+import {
   buildBomCostLines,
   computeBomTotal,
-  formatCurrency,
   parseUnitPrice,
   type BomCostLine,
   type EngineeringRollup,
@@ -15,6 +18,7 @@ import { cn } from "@/lib/utils";
 interface ProjectCostWorksheetProps {
   rollup: EngineeringRollup;
   costPrices: Record<string, string>;
+  currency: ProjectCurrency;
   onUnitPriceChange: (lineId: string, value: string) => void;
   className?: string;
 }
@@ -26,6 +30,7 @@ function lineTotal(line: BomCostLine, unitPrices: Record<string, string>): numbe
 export function ProjectCostWorksheet({
   rollup,
   costPrices,
+  currency,
   onUnitPriceChange,
   className,
 }: ProjectCostWorksheetProps) {
@@ -63,7 +68,7 @@ export function ProjectCostWorksheet({
                 scope="col"
                 className="calculator-results-table__value px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground"
               >
-                Unit price
+                Unit price ({currency})
               </th>
               <th
                 scope="col"
@@ -104,7 +109,7 @@ export function ProjectCostWorksheet({
                     />
                   </td>
                   <td className="calculator-results-table__value px-3 py-2.5 font-semibold tabular-nums text-foreground">
-                    {formatCurrency(total)}
+                    {formatProjectCurrency(total, currency)}
                   </td>
                 </tr>
               );
@@ -120,7 +125,7 @@ export function ProjectCostWorksheet({
                 Project estimate
               </th>
               <td className="calculator-results-table__value px-3 py-3 text-right text-base font-bold tabular-nums text-primary">
-                {formatCurrency(grandTotal)}
+                {formatProjectCurrency(grandTotal, currency)}
               </td>
             </tr>
           </tfoot>

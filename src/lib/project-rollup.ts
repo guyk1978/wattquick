@@ -363,14 +363,6 @@ export function parseUnitPrice(value: string): number {
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
-export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(amount);
-}
-
 export function computeBomTotal(
   lines: BomCostLine[],
   unitPrices: Record<string, string>
