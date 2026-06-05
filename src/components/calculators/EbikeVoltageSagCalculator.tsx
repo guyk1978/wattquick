@@ -9,19 +9,67 @@ import { formatNumber } from "@/lib/format";
 import { CalculatorAssumptionNote } from "@/components/calculator/calculator-assumption-note";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorPrimaryMetric } from "@/components/calculator/calculator-primary-metric";
-import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { CalculatorSecondaryResults } from "@/components/calculator/calculator-secondary-results";
+import {
+  CalculatorResultsTable,
+  type CalculatorResultRow,
+} from "@/components/calculator/calculator-results-table";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
 } from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "ebike-voltage-sag" satisfies CalculatorId;
 
 interface EbikeVoltageSagCalculatorProps {
   className?: string;
+}
+
+function buildVoltageSagResultRows(
+  parsed: NonNullable<ReturnType<typeof calculateEbikeVoltageSag>>,
+  nominalVoltage: string
+): CalculatorResultRow[] {
+  return [
+    {
+      label: "Voltage under load",
+      value: formatNumber(parsed.loadedVoltage, { maxDecimals: 1 }),
+      unit: "V",
+    },
+    {
+      label: "Voltage sag",
+      value: formatNumber(parsed.sagVolts, { maxDecimals: 2 }),
+      unit: "V",
+    },
+    {
+      label: "Sag percentage",
+      value: formatNumber(parsed.sagPercent, { maxDecimals: 1 }),
+      unit: "%",
+    },
+    {
+      label: "Pack resistance",
+      value: formatNumber(parsed.rTotal * 1000, { maxDecimals: 1 }),
+      unit: "mΩ",
+    },
+    {
+      label: "Nominal voltage",
+      value: nominalVoltage || "—",
+      unit: "V",
+    },
+    {
+      label: "Max controller draw",
+      value: formatNumber(parsed.maxDrawAmps, { maxDecimals: 0 }),
+      unit: "A",
+    },
+    {
+      label: "Cell resistance",
+      value: formatNumber(parsed.cellResistanceOhm, { maxDecimals: 3 }),
+      unit: "Ω",
+    },
+    {
+      label: "Pack layout",
+      value: `${parsed.seriesCells}S${parsed.parallelGroups}P`,
+    },
+  ];
 }
 
 export function EbikeVoltageSagCalculator({
@@ -30,14 +78,22 @@ export function EbikeVoltageSagCalculator({
   const definition = getCalculatorDefinition(CALCULATOR_ID);
   const { values, setValue } = useCalculatorForm(definition.fields);
 
-  const parsed = useMemo(() => calculateEbikeVoltageSag(values), [values]);
+  const output = useMemo(() => {
+    const parsed = calculateEbikeVoltageSag(values);
+    if (!parsed) {
+      return { results: [] as CalculatorResultRow[] };
+    }
+    return {
+      results: buildVoltageSagResultRows(parsed, values.nominalVoltage ?? ""),
+    };
+  }, [values]);
 
-  const sagDetail = parsed
-    ? `Under load ${formatNumber(parsed.loadedVoltage, { maxDecimals: 1 })} V · ${formatNumber(parsed.sagPercent, { maxDecimals: 1 })}% sag`
-    : null;
+  const primary = output.results[0];
+  const secondaryRows = output.results.slice(1);
+  const hasResults = output.results.length > 0;
 
   return (
-    <CalculatorCommandShell className={cn(className)}>
+    <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
         inputs={
           <CalculatorInputs
@@ -47,54 +103,30 @@ export function EbikeVoltageSagCalculator({
           />
         }
         results={
-          <GamifiedDashboardFrame accent="primary" label="Voltage sag">
-            <CalculatorPrimaryMetric
-              value={parsed?.sagVolts ?? null}
-              unit="V"
-              detail={sagDetail}
-              emptyMessage={definition.result.emptyMessage}
-              animateNumeric
-              decimals={2}
-            />
-          </GamifiedDashboardFrame>
+          <div className="flex w-full min-w-0 flex-col gap-3">
+            <GamifiedDashboardFrame accent="primary" label="Primary result">
+              <CalculatorPrimaryMetric
+                value={primary?.value ?? null}
+                unit={primary?.unit}
+                detail={
+                  hasResults
+                    ? `${secondaryRows[0]?.value ?? "—"} V sag · ${secondaryRows[1]?.value ?? "—"}% of nominal`
+                    : null
+                }
+                emptyMessage={definition.result.emptyMessage}
+                animateNumeric={false}
+              />
+            </GamifiedDashboardFrame>
+            <CalculatorResultsTable rows={secondaryRows} />
+          </div>
         }
       />
 
-      <CalculatorSecondaryResults>
-        <CalculatorResult
-          label="Voltage under load"
-          value={
-            parsed ? formatNumber(parsed.loadedVoltage, { maxDecimals: 1 }) : null
-          }
-          unit="V"
-          detail={
-            parsed
-              ? `${values.nominalVoltage ?? "—"} V nominal − ${formatNumber(parsed.sagVolts, { maxDecimals: 2 })} V sag`
-              : null
-          }
-          emptyMessage="Enter values above"
-        />
-        <CalculatorResult
-          label="Pack resistance"
-          value={
-            parsed ? formatNumber(parsed.rTotal * 1000, { maxDecimals: 1 }) : null
-          }
-          unit="mΩ"
-          detail={
-            parsed
-              ? `R = ${parsed.cellResistanceOhm} Ω × ${parsed.seriesCells}S ÷ ${parsed.parallelGroups}P @ ${parsed.maxDrawAmps} A`
-              : null
-          }
-          emptyMessage="Enter values above"
-        />
-      </CalculatorSecondaryResults>
-
-      {parsed ? (
+      {hasResults ? (
         <CalculatorAssumptionNote>
-          Calculation uses average cell internal resistance of{" "}
-          {parsed.cellResistanceOhm} Ω (quality 18650 ≈ 0.03 Ω). Pack resistance
-          R_total = R_cell × S ÷ P; sag = I × R_total. Actual sag varies with
-          temperature, SOC, and cell age.
+          R_total = R_cell × S ÷ P; V_sag = I × R_total. Default cell resistance
+          is 0.03 Ω (quality 18650). Actual sag varies with temperature, SOC, and
+          cell age.
         </CalculatorAssumptionNote>
       ) : null}
     </CalculatorCommandShell>
