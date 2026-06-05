@@ -199,6 +199,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "series-vs-parallel-battery-configurations",
     "articleTitle": "Series vs. Parallel Battery Configurations Explained"
   },
+  "solar-shading-analysis": {
+    "articleSlug": "shading-and-strings-guide",
+    "articleTitle": "Shading & Strings: Why Your Central Inverter is Limiting Your Yield"
+  },
   "home-backup-sizing": {
     "articleSlug": "size-home-emergency-backup-battery",
     "articleTitle": "How to Size a Home Emergency Backup Battery Bank"

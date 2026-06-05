@@ -1099,6 +1099,7 @@ export const calculatorsSolar = [
   {
     slug: "solar-shading-analysis",
     href: "/solar-shading-analysis",
+    relatedArticleId: "shading-and-strings-guide",
     title: "Solar Shading Analysis",
     description:
       "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",

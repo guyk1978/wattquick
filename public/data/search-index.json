@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T15:50:04.519Z",
+  "generatedAt": "2026-06-05T15:53:43.960Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -3234,6 +3234,21 @@
       "tag": "Battery",
       "keywords": [
         "Battery",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "shading-and-strings-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "Shading & Strings: Why Your Central Inverter is Limiting Your Yield",
+      "description": "Why does one shaded panel drag down a whole string? Bypass diodes, MPPT mismatch, and when optimizers pay for themselves—plus a tool to quantify kWh and dollar loss.",
+      "href": "/blog/shading-and-strings-guide/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
         "blog",
         "article"
       ]
