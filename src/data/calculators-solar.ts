@@ -26,7 +26,11 @@ import {
   calculatePaybackRoi,
   calculateSolarDegradation20YearRoi,
   calculateRoofSpace,
+  calculateSolarShadingAnalysis,
+  SOLAR_SHADING_DEFAULT_KWH_PER_KWP,
+  SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL,
   type SeasonMode,
+  type SolarInverterTopology,
 } from "@/lib/calculators/solar";
 import { calculateDcCableVoltageDrop } from "@/lib/calculators/electrical";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
@@ -1089,6 +1093,165 @@ export const calculatorsSolar = [
         value: formatCurrency(result.total20YearSavings),
         unit: "",
         detail: `Break-even ${breakEven} · ${formatNumber(result.total20YearKwh, { maxDecimals: 0 })} kWh over 20 yr`,
+      };
+    },
+  },
+  {
+    slug: "solar-shading-analysis",
+    href: "/solar-shading-analysis",
+    title: "Solar Shading Analysis",
+    description:
+      "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",
+    keywords: [
+      "solar shading calculator",
+      "pv string shading loss",
+      "bypass diode production loss",
+      "optimizer payback shading",
+    ],
+    icon: Gauge,
+    tag: "Solar",
+    category: "solar",
+    suggestions: [
+      "solar-array-current",
+      "solar-daily-yield",
+      "solar-panel-size",
+      "solar-degradation",
+    ],
+    fields: [
+      {
+        id: "panelCount",
+        label: "Panels in string",
+        unit: "#",
+        placeholder: "12",
+        defaultValue: "12",
+      },
+      {
+        id: "panelWatts",
+        label: "Panel rating",
+        unit: "W",
+        placeholder: "400",
+        defaultValue: "400",
+      },
+      {
+        id: "shadedPanelPercent",
+        label: "Panels with shading",
+        unit: "%",
+        placeholder: "10",
+        defaultValue: "10",
+        hint: "Share of modules receiving any shade",
+      },
+      {
+        id: "shadeCoveragePercent",
+        label: "Shade on affected panels",
+        unit: "%",
+        placeholder: "25",
+        defaultValue: "25",
+        hint: "Portion of each shaded module under shadow",
+      },
+      {
+        id: "inverterType",
+        label: "Inverter topology",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "string",
+        options: [
+          { value: "string", label: "String inverter (central)" },
+          { value: "optimizer", label: "Microinverters / optimizers" },
+        ],
+      },
+      {
+        id: "annualProductionKwh",
+        label: "Baseline annual production",
+        unit: "kWh/yr",
+        placeholder: "6720",
+        hint: `Leave blank to estimate at ${SOLAR_SHADING_DEFAULT_KWH_PER_KWP} kWh/kWp/yr`,
+      },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+      {
+        id: "optimizerCostPerPanel",
+        label: "Optimizer cost per panel",
+        unit: "$",
+        placeholder: String(SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL),
+        defaultValue: String(SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL),
+        hint: "For payback estimate when optimizers are recommended",
+      },
+    ],
+    result: {
+      label: "Annual production loss",
+      emptyMessage: "Enter string layout, shading, and production baseline",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Bypass diodes and string loss",
+          body: "On string inverters, partial shade on one module can activate bypass diodes, removing a substring (~⅓ of the panel) and lowering string Vmpp. Current mismatch then drags output from unshaded modules—losses often exceed the shaded area percentage.",
+        },
+        {
+          heading: "Optimizers vs string",
+          body: "Module-level power electronics limit mismatch to per-panel irradiance. Use this tool to quantify kWh/yr and $/yr loss, then compare optimizer payback against the financial loss.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: One tree branch? A: Even one partially shaded module can cost double-digit percent on a string. Q: Verify after fix? A: Pair with Solar Array Current for post-mitigation checks. Q: Azimuth? A: Use Solar Panel Tilt / site yield tools for orientation losses—this calculator isolates shading on an existing string.",
+        },
+      ],
+    },
+    compute(values) {
+      const panelCount = parsePositive(values.panelCount ?? "");
+      const panelWatts = parsePositive(values.panelWatts ?? "");
+      const shadedPanelPercent = parsePositive(values.shadedPanelPercent ?? "");
+      const shadeCoveragePercent = parsePositive(values.shadeCoveragePercent ?? "");
+      const inverterType = values.inverterType as SolarInverterTopology;
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      const optimizerCostPerPanel = parsePositive(
+        values.optimizerCostPerPanel ?? ""
+      );
+
+      let annualProductionKwh = parsePositive(values.annualProductionKwh ?? "");
+      if (
+        annualProductionKwh === null &&
+        panelCount !== null &&
+        panelWatts !== null
+      ) {
+        annualProductionKwh =
+          (panelCount * panelWatts * SOLAR_SHADING_DEFAULT_KWH_PER_KWP) / 1000;
+      }
+
+      if (
+        panelCount === null ||
+        panelWatts === null ||
+        shadedPanelPercent === null ||
+        shadeCoveragePercent === null ||
+        (inverterType !== "string" && inverterType !== "optimizer") ||
+        annualProductionKwh === null ||
+        ratePerKwh === null
+      ) {
+        return { value: null };
+      }
+
+      const result = calculateSolarShadingAnalysis({
+        panelCount,
+        panelWatts,
+        shadedPanelPercent,
+        shadeCoveragePercent,
+        inverterType,
+        annualProductionKwh,
+        ratePerKwh,
+        optimizerCostPerPanel: optimizerCostPerPanel ?? undefined,
+      });
+
+      if (!result) return { value: null };
+
+      return {
+        value: formatNumber(result.annualProductionLossKwh, { maxDecimals: 0 }),
+        unit: "kWh/yr",
+        detail: `${formatNumber(result.productionLossPercent, { maxDecimals: 1 })}% loss · ${formatCurrency(result.annualFinancialLoss)}/yr · ${result.recommendationLabel}`,
       };
     },
   },

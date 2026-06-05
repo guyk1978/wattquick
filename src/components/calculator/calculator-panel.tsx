@@ -47,6 +47,7 @@ import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/Invert
 import { CriticalLoadAnalysisCalculator } from "@/components/calculators/CriticalLoadAnalysisCalculator";
 import { StandbyPowerAggregatorCalculator } from "@/components/calculators/StandbyPowerAggregatorCalculator";
 import { MobilityTcoCalculator } from "@/components/calculators/MobilityTcoCalculator";
+import { SolarShadingAnalysisCalculator } from "@/components/calculators/SolarShadingAnalysisCalculator";
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
@@ -119,6 +120,9 @@ export function CalculatorPanel({
   }
   if (id === "mobility-tco-calculator") {
     return <MobilityTcoCalculator className={className} />;
+  }
+  if (id === "solar-shading-analysis") {
+    return <SolarShadingAnalysisCalculator className={className} />;
   }
   if (id === "dc-cable-voltage-drop") {
     return <DcCableVoltageDropCalculator className={className} />;

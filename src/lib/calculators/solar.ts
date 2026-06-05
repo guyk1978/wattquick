@@ -469,3 +469,156 @@ export function calculateWaterPumpSolarSizing({
     gaugeFillPercent: Math.min(100, Math.max(8, kWp * 12)),
   };
 }
+
+export type SolarInverterTopology = "string" | "optimizer";
+
+export const SOLAR_SHADING_BYPASS_THRESHOLD_PERCENT = 10;
+/** Typical 60-cell module: three bypass-diode substrings (~⅓ each). */
+export const SOLAR_SHADING_BYPASS_SUBSTRING_FRACTION = 1 / 3;
+export const SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL = 50;
+export const SOLAR_SHADING_DEFAULT_KWH_PER_KWP = 1400;
+
+export type SolarShadingRecommendation = "add_optimizers" | "keep_as_is";
+
+export interface SolarShadingAnalysisInput {
+  panelCount: number;
+  panelWatts: number;
+  shadedPanelPercent: number;
+  shadeCoveragePercent: number;
+  inverterType: SolarInverterTopology;
+  annualProductionKwh: number;
+  ratePerKwh: number;
+  optimizerCostPerPanel?: number;
+}
+
+export interface SolarShadingAnalysisResult {
+  panelCount: number;
+  systemKw: number;
+  shadedPanelCount: number;
+  productionLossPercent: number;
+  annualProductionLossKwh: number;
+  annualFinancialLoss: number;
+  mismatchLossPercent: number;
+  bypassLossPercent: number;
+  directShadingLossPercent: number;
+  recommendation: SolarShadingRecommendation;
+  recommendationLabel: string;
+  optimizerPaybackYears: number | null;
+  optimizerTotalCost: number | null;
+  inverterType: SolarInverterTopology;
+}
+
+function roundPct(value: number): number {
+  return parseFloat((value * 100).toFixed(1));
+}
+
+export function calculateSolarShadingAnalysis({
+  panelCount,
+  panelWatts,
+  shadedPanelPercent,
+  shadeCoveragePercent,
+  inverterType,
+  annualProductionKwh,
+  ratePerKwh,
+  optimizerCostPerPanel = SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL,
+}: SolarShadingAnalysisInput): SolarShadingAnalysisResult | null {
+  if (
+    panelCount <= 0 ||
+    panelWatts <= 0 ||
+    shadedPanelPercent < 0 ||
+    shadedPanelPercent > 100 ||
+    shadeCoveragePercent < 0 ||
+    shadeCoveragePercent > 100 ||
+    annualProductionKwh <= 0 ||
+    ratePerKwh <= 0
+  ) {
+    return null;
+  }
+
+  const shadedFraction = shadedPanelPercent / 100;
+  const shadeSeverity = shadeCoveragePercent / 100;
+  const shadedPanelCount = Math.ceil(panelCount * shadedFraction);
+  const systemKw = parseFloat(
+    ((panelCount * panelWatts) / 1000).toFixed(2)
+  );
+
+  let productionLossFraction = 0;
+  let directShadingLossPercent = 0;
+  let bypassLossPercent = 0;
+  let mismatchLossPercent = 0;
+
+  if (shadedFraction <= 0 || shadeSeverity <= 0) {
+    productionLossFraction = 0;
+  } else if (inverterType === "optimizer") {
+    directShadingLossPercent = roundPct(shadedFraction * shadeSeverity * 0.92);
+    productionLossFraction = directShadingLossPercent / 100;
+  } else {
+    directShadingLossPercent = roundPct(shadedFraction * shadeSeverity * 0.65);
+
+    if (shadeCoveragePercent >= SOLAR_SHADING_BYPASS_THRESHOLD_PERCENT) {
+      bypassLossPercent = roundPct(
+        shadedFraction *
+          SOLAR_SHADING_BYPASS_SUBSTRING_FRACTION *
+          Math.min(1, shadeSeverity * 2.5)
+      );
+    }
+
+    mismatchLossPercent = roundPct(
+      shadedFraction * shadeSeverity * (1.2 + shadedFraction * 1.5)
+    );
+
+    productionLossFraction = Math.min(
+      0.95,
+      (directShadingLossPercent + bypassLossPercent + mismatchLossPercent) / 100
+    );
+  }
+
+  const annualProductionLossKwh = Math.round(
+    annualProductionKwh * productionLossFraction
+  );
+  const annualFinancialLoss = parseFloat(
+    (annualProductionLossKwh * ratePerKwh).toFixed(2)
+  );
+
+  const productionLossPercent = roundPct(productionLossFraction);
+
+  let recommendation: SolarShadingRecommendation = "keep_as_is";
+  let recommendationLabel = "Keep as is — shading impact is minor";
+  let optimizerPaybackYears: number | null = null;
+  let optimizerTotalCost: number | null = null;
+
+  if (
+    inverterType === "string" &&
+    (productionLossPercent >= 5 || shadedPanelCount >= 1)
+  ) {
+    if (productionLossPercent >= 8 || mismatchLossPercent >= 5) {
+      recommendation = "add_optimizers";
+      recommendationLabel = "Add optimizers — string mismatch and bypass losses are significant";
+      optimizerTotalCost = panelCount * optimizerCostPerPanel;
+      if (annualFinancialLoss > 0) {
+        optimizerPaybackYears = parseFloat(
+          (optimizerTotalCost / annualFinancialLoss).toFixed(1)
+        );
+      }
+    }
+  } else if (inverterType === "optimizer") {
+    recommendationLabel = "Keep as is — module-level electronics limit mismatch drag";
+  }
+
+  return {
+    panelCount,
+    systemKw,
+    shadedPanelCount,
+    productionLossPercent,
+    annualProductionLossKwh,
+    annualFinancialLoss,
+    mismatchLossPercent,
+    bypassLossPercent,
+    directShadingLossPercent,
+    recommendation,
+    recommendationLabel,
+    optimizerPaybackYears,
+    optimizerTotalCost,
+    inverterType,
+  };
+}

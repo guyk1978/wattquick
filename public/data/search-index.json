@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T15:38:49.238Z",
+  "generatedAt": "2026-06-05T15:50:04.519Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1123,6 +1123,22 @@
         "pv degradation payback",
         "solar panel output loss",
         "solar break even degradation"
+      ]
+    },
+    {
+      "id": "solar-shading-analysis",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar Shading Analysis",
+      "description": "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",
+      "href": "/solar-shading-analysis/",
+      "tag": "Solar",
+      "keywords": [
+        "solar shading calculator",
+        "pv string shading loss",
+        "bypass diode production loss",
+        "optimizer payback shading"
       ]
     },
     {
