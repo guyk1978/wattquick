@@ -112,6 +112,16 @@ export const BLOG_CATEGORY_THEME: Record<BlogCategory, BlogCategoryTheme> = {
     accentFrom: "#84cc16",
     accentTo: "#22c55e",
   },
+  "E-Bike": {
+    label: "E-Bike",
+    bg: "bg-cyan-500/12 dark:bg-cyan-500/18",
+    text: "text-cyan-900 dark:text-cyan-300",
+    border: "border-cyan-500/25 dark:border-cyan-400/35",
+    gradient: "from-cyan-500/25 via-sky-400/15 to-teal-500/20",
+    glow: "rgba(34, 211, 238, 0.32)",
+    accentFrom: "#22d3ee",
+    accentTo: "#06b6d4",
+  },
 };
 
 export function getBlogCategoryTheme(category: BlogCategory): BlogCategoryTheme {

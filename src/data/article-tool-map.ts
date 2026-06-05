@@ -39,6 +39,26 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "daily-watt-hour-budget-sustainable-home",
     "articleTitle": "Building a Daily Watt-Hour Budget for a Sustainable Home"
   },
+  "ebike-battery-cycle-life": {
+    "articleSlug": "ebike-battery-cycle-life-guide",
+    "articleTitle": "How to Prevent Premature E-Bike Battery Wear: DOD, Cycles, and SOH"
+  },
+  "ebike-max-speed": {
+    "articleSlug": "ebike-battery-voltage-comparison",
+    "articleTitle": "36V vs 48V vs 52V E-Bike Batteries: A Performance Comparison"
+  },
+  "ebike-controller-watts": {
+    "articleSlug": "ebike-controller-selection-guide",
+    "articleTitle": "How to Choose an E-Bike Controller: Current, Watts, and C-Rating"
+  },
+  "ebike-range-estimator": {
+    "articleSlug": "ebike-range-guide",
+    "articleTitle": "The Complete Guide to E-Bike Battery Range: Wh, Assist, and Weight"
+  },
+  "ebike-voltage-sag": {
+    "articleSlug": "ebike-voltage-sag-guide",
+    "articleTitle": "E-Bike Voltage Sag: An Engineering Guide to Voltage Drop Under Load"
+  },
   "ev-fleet-tco": {
     "articleSlug": "electric-vs-gas-fleet-tco-guide",
     "articleTitle": "Electric vs. Gas Fleet TCO: A Logistics Owner's Workbook"

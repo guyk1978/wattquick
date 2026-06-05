@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T09:50:54.794Z",
+  "generatedAt": "2026-06-05T10:01:08.465Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2164,6 +2164,81 @@
       "tag": "Appliances",
       "keywords": [
         "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ebike-battery-cycle-life-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "How to Prevent Premature E-Bike Battery Wear: DOD, Cycles, and SOH",
+      "description": "Cycle life vs calendar aging, depth of discharge (DOD), state of health (SOH), and data-backed habits that extend lithium e-bike pack life.",
+      "href": "/blog/ebike-battery-cycle-life-guide/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ebike-battery-voltage-comparison",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "36V vs 48V vs 52V E-Bike Batteries: A Performance Comparison",
+      "description": "Nominal voltage tiers (10S, 13S, 14S), current for the same watts, sag, range, and regulatory context — with max-speed and sag calculators.",
+      "href": "/blog/ebike-battery-voltage-comparison/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ebike-controller-selection-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "How to Choose an E-Bike Controller: Current, Watts, and C-Rating",
+      "description": "Controller role in the drive system, mapping amps to motor watts, continuous vs peak current, and matching the BMS and pack C-rating.",
+      "href": "/blog/ebike-controller-selection-guide/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ebike-range-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "The Complete Guide to E-Bike Battery Range: Wh, Assist, and Weight",
+      "description": "What actually determines how far an e-bike rides on one charge? Wh/km model, assist levels, mass, wind, BMS limits, and a free range calculator.",
+      "href": "/blog/ebike-range-guide/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "ebike-voltage-sag-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "E-Bike Voltage Sag: An Engineering Guide to Voltage Drop Under Load",
+      "description": "Why terminal voltage falls when the motor draws current, how S×P pack layout sets internal resistance, and how to calculate sag before the BMS limits assist.",
+      "href": "/blog/ebike-voltage-sag-guide/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
         "blog",
         "article"
       ]
