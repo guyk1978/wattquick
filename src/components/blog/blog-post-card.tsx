@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { Calendar, Clock } from "lucide-react";
 import { useBlogIndexToolLaunch } from "@/components/blog/blog-index-tool-launch";
@@ -28,7 +29,7 @@ interface BlogPostCardProps {
   className?: string;
 }
 
-/** Compact light-glass card for the blog index grid */
+/** Flat, sharp blog index card */
 export function BlogPostCard({
   post,
   featured = false,
@@ -49,57 +50,40 @@ export function BlogPostCard({
   return (
     <article
       className={cn(
-        "blog-post-card group relative flex h-full flex-col overflow-hidden rounded-2xl",
-        "border border-white/10 bg-white/40 shadow-sm backdrop-blur-[10px]",
-        "transition-[transform,box-shadow,border-color] duration-300",
-        "hover:-translate-y-0.5 hover:border-white/20 hover:shadow-md",
-        "dark:bg-white/[0.04] dark:shadow-none",
-        featured ? "min-h-[240px] sm:min-h-[200px]" : "min-h-[220px]",
+        "blog-post-card group relative flex h-full flex-col overflow-hidden rounded-none",
+        "bg-card transition-colors duration-150 hover:bg-muted/30",
+        "dark:bg-[rgb(6_10_22/0.72)] dark:hover:bg-[rgb(8_14_28/0.85)]",
+        featured ? "min-h-[200px] sm:min-h-[180px]" : "min-h-[180px]",
         className
       )}
+      style={
+        {
+          "--blog-accent": theme.accentFrom,
+        } as CSSProperties
+      }
     >
       <Link
         href={href}
-        className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        className="absolute inset-0 z-10 rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         aria-label={`Read ${post.title}`}
       />
 
-      <div
-        className={cn(
-          "relative shrink-0 overflow-hidden",
-          featured ? "h-[5.5rem] sm:h-[5rem]" : "h-[4.5rem]"
-        )}
-      >
-        <div
-          className={cn(
-            "absolute inset-0 bg-gradient-to-br opacity-90",
-            theme.gradient
-          )}
-        />
-        <div className="relative flex h-full items-start justify-between gap-2 p-3">
-          <span
-            className={cn(
-              "rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide",
-              theme.bg,
-              theme.text,
-              theme.border
-            )}
-          >
-            {theme.label}
+      <div className="relative flex shrink-0 items-center justify-between gap-2 border-b border-border/40 px-2.5 py-2">
+        <span className="blog-post-card__label text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
+          {theme.label}
+        </span>
+        {featured ? (
+          <span className="text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground/80">
+            Featured guide
           </span>
-          {featured ? (
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-white/90 drop-shadow-sm">
-              Featured guide
-            </span>
-          ) : null}
-        </div>
+        ) : null}
       </div>
 
-      <div className="relative flex flex-1 flex-col p-3">
+      <div className="relative flex flex-1 flex-col px-2.5 py-2.5">
         <h2
           className={cn(
             "blog-post-card__title font-semibold leading-snug tracking-tight text-foreground transition-colors group-hover:text-primary",
-            featured ? "text-base sm:text-lg" : "text-sm"
+            featured ? "text-base" : "text-sm"
           )}
         >
           {post.title}
@@ -107,7 +91,7 @@ export function BlogPostCard({
 
         <p
           className={cn(
-            "mt-1.5 line-clamp-2 leading-relaxed text-muted-foreground",
+            "mt-1 line-clamp-2 leading-relaxed text-muted-foreground",
             featured ? "text-sm" : "text-xs"
           )}
         >
@@ -131,11 +115,10 @@ export function BlogPostCard({
             type="button"
             onClick={handleOpenTool}
             className={cn(
-              "blog-tool-tag inline-flex max-w-full items-center rounded-md border border-white/10",
-              "bg-white/30 px-1.5 py-0.5 text-[10px] font-medium text-foreground/90 backdrop-blur-[10px]",
-              "transition-colors hover:border-cyan-500/35 hover:bg-cyan-500/15 hover:text-primary",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
-              "dark:bg-white/[0.08] dark:hover:bg-cyan-500/10"
+              "blog-tool-tag inline-flex max-w-full items-center rounded-none border border-border/50",
+              "bg-transparent px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground",
+              "transition-colors hover:border-border hover:bg-muted/40 hover:text-foreground",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
             )}
             title={`Open ${toolName} calculator`}
           >
