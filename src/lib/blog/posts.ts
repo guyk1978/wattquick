@@ -19,7 +19,8 @@ export type BlogCategory =
   | "RV & Marine"
   | "Utility Tariffs"
   | "Green Home"
-  | "E-Bike";
+  | "E-Bike"
+  | "E-Scooter";
 
 export interface BlogPost {
   slug: string;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T10:19:26.099Z",
+  "generatedAt": "2026-06-05T10:41:05.147Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1989,6 +1989,186 @@
       ]
     },
     {
+      "id": "escooter-range",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Range Calculator",
+      "description": "Estimate range with standing-rider drag, tyre pressure, and light-pack efficiency (typical 36–48 V).",
+      "href": "/escooter-range/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter range",
+        "electric scooter range",
+        "wh per km scooter"
+      ]
+    },
+    {
+      "id": "escooter-tire-pressure",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Tyre Pressure & Rolling Resistance",
+      "description": "See how under-inflation on 8–10″ wheels raises Wh/km and cuts range.",
+      "href": "/escooter-tire-pressure/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter tire pressure",
+        "rolling resistance scooter",
+        "10 inch tyre"
+      ]
+    },
+    {
+      "id": "escooter-max-speed",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Max Speed Calculator",
+      "description": "Theoretical top speed from voltage, motor KV, and wheel diameter.",
+      "href": "/escooter-max-speed/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter max speed",
+        "motor kv scooter",
+        "wheel rpm"
+      ]
+    },
+    {
+      "id": "escooter-hill-climb",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Hill Climb Grade Calculator",
+      "description": "Maximum climb grade from motor watts, total mass, and crawl speed.",
+      "href": "/escooter-hill-climb/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter hill climb",
+        "motor torque grade",
+        "scooter slope"
+      ]
+    },
+    {
+      "id": "escooter-tire-wear",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Tyre Wear Life Calculator",
+      "description": "Estimate tread life in km and weeks from weekly distance and surface type.",
+      "href": "/escooter-tire-wear/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter tire wear",
+        "solid tyre life",
+        "scooter maintenance"
+      ]
+    },
+    {
+      "id": "escooter-charge-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Charge Time Calculator",
+      "description": "Compare 2 A / 3 A / 4 A charger times for typical 36 V and 48 V packs.",
+      "href": "/escooter-charge-time/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter charge time",
+        "2a charger scooter",
+        "fast charge scooter"
+      ]
+    },
+    {
+      "id": "escooter-cost-per-km",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Cost per km Calculator",
+      "description": "Electricity cost per km versus public transit for commute planning.",
+      "href": "/escooter-cost-per-km/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter cost per km",
+        "scooter vs transit",
+        "commute economics"
+      ]
+    },
+    {
+      "id": "escooter-weight-limit",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Rider Weight Limit Calculator",
+      "description": "Stress factor on motor and deck when exceeding rated rider mass.",
+      "href": "/escooter-weight-limit/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter weight limit",
+        "max rider weight",
+        "motor overload"
+      ]
+    },
+    {
+      "id": "escooter-peak-amps",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Peak Discharge Amps Calculator",
+      "description": "Check acceleration peaks against controller and pack C-rating.",
+      "href": "/escooter-peak-amps/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter peak amps",
+        "controller limit",
+        "battery c rate scooter"
+      ]
+    },
+    {
+      "id": "escooter-brake-pad-wear",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Brake Pad Wear Calculator",
+      "description": "Pad life in km from regen share, hill riding, and weekly distance.",
+      "href": "/escooter-brake-pad-wear/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter brake pads",
+        "regen braking scooter",
+        "brake wear"
+      ]
+    },
+    {
+      "id": "escooter-connector-loss",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Connector Power Loss Calculator",
+      "description": "I²R heat at XT30/XT60/XT90 pairs under ride and charge current.",
+      "href": "/escooter-connector-loss/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "xt60 loss",
+        "connector resistance scooter",
+        "escooter wiring"
+      ]
+    },
+    {
+      "id": "escooter-maintenance-schedule",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Maintenance Schedule Calculator",
+      "description": "Km and weeks until tyre, brake, and bolt-torque service intervals.",
+      "href": "/escooter-maintenance-schedule/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter maintenance",
+        "service interval scooter",
+        "scooter checklist"
+      ]
+    },
+    {
       "id": "ac-inrush-current-guide",
       "type": "blog",
       "category": "Blog Articles",
@@ -2254,6 +2434,81 @@
       "tag": "Commercial EV",
       "keywords": [
         "Commercial EV",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-battery-care",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "Small-Pack Battery Care on E-Scooters: Charging Heat, C-Rates, and Longevity",
+      "description": "Light 36–48 V scooter packs heat faster than e-bike batteries. Charge rates, taper curves, storage SOC, and when 2 A beats 4 A for cell life.",
+      "href": "/blog/escooter-battery-care/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-brakes-safety",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "E-Scooter Braking Safety: Why Regen Alone Fails on Steep Downhills",
+      "description": "Friction pads, regen limits, heat fade, and pad life on standing micro-EVs. Engineering reasons to keep mechanical brakes maintained on scooter commutes.",
+      "href": "/blog/escooter-brakes-safety/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-commute-optimization",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "E-Scooter Commute Optimization: More Range and Lower Cost per Kilometre",
+      "description": "Wh/km tuning, transit fare comparison, tyre pressure, route choice, and charging strategy for daily e-scooter commuters.",
+      "href": "/blog/escooter-commute-optimization/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-motor-power-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "E-Scooter Motor Power Truth: 500W vs 1000W — Is More Always Better?",
+      "description": "Continuous watts, burst current, hill grade physics, and controller limits on light EV scooters. When a bigger motor helps — and when it only drains faster.",
+      "href": "/blog/escooter-motor-power-guide/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-range-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "E-Scooter Tyre Engineering: Why Air Pressure Is the #1 Range and Comfort Factor",
+      "description": "Small 8–10″ wheels amplify rolling resistance. Learn how bar pressure, rider stance, and pack voltage set Wh/km and real commute range on electric scooters.",
+      "href": "/blog/escooter-range-guide/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
         "blog",
         "article"
       ]

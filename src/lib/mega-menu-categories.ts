@@ -3,6 +3,7 @@ import {
   ArrowLeftRight,
   Battery,
   Bike,
+  Footprints,
   Car,
   DollarSign,
   Gauge,
@@ -55,6 +56,14 @@ export const MEGA_MENU_CATEGORIES: MegaMenuCategory[] = [
     href: "/category/ebike",
     icon: Bike,
     color: "#22D3EE",
+  },
+  {
+    category: "escooter",
+    label: CALCULATOR_CATEGORY_LABELS.escooter,
+    description: CALCULATOR_CATEGORY_DESCRIPTIONS.escooter,
+    href: "/category/escooter",
+    icon: Footprints,
+    color: "#F472B6",
   },
   {
     category: "battery",

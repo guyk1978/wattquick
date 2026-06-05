@@ -15,7 +15,8 @@ export type CalculatorCategory =
   | "tou"
   | "green-home"
   | "pool"
-  | "ebike";
+  | "ebike"
+  | "escooter";
 
 export type CalculatorFieldInputType = "text" | "select" | "range";
 
@@ -99,6 +100,7 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   "green-home": "Green Home",
   pool: "Pool",
   ebike: "E-Bike",
+  escooter: "E-Scooter",
 };
 
 export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string> = {
@@ -117,4 +119,6 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
   pool: "Pool pumps, heating, covers, and seasonal operating cost",
   ebike: "Range, charging, motor power, and e-bike battery health",
+  escooter:
+    "Tyre pressure, hill climb, charge time, and commuter economics for light EVs",
 };

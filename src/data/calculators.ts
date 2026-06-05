@@ -21,6 +21,7 @@ import { calculatorsGreenHome } from "@/data/calculators-green-home";
 import { calculatorsRvMarine } from "@/data/calculators-rv-marine";
 import { calculatorsSolar } from "@/data/calculators-solar";
 import { calculatorsEbike } from "@/data/calculators-ebike";
+import { calculatorsEscooter } from "@/data/calculators-escooter";
 import { calculatorsTariffs } from "@/data/calculators-tariffs";
 
 /**
@@ -1158,6 +1159,7 @@ export const calculators = [
   ...calculatorsTariffs,
   ...calculatorsGreenHome,
   ...calculatorsEbike,
+  ...calculatorsEscooter,
 ] as const satisfies readonly CalculatorDataEntry[];
 
 export type CalculatorSlug = (typeof calculators)[number]["slug"];

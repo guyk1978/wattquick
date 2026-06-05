@@ -36,6 +36,7 @@ export const CALCULATOR_CATEGORY_THEME: Record<CalculatorCategory, CategoryTheme
     },
     pool: { color: "#06B6D4", colorDark: "#0891B2", ctaText: "#FFFFFF" },
     ebike: { color: "#22D3EE", colorDark: "#06B6D4", ctaText: "#000000" },
+    escooter: { color: "#F472B6", colorDark: "#EC4899", ctaText: "#000000" },
   };
 
 export function getCategoryTheme(category: CalculatorCategory): CategoryTheme {

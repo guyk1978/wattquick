@@ -36,6 +36,8 @@ import { PoolEnergyThermalCoverCalculator } from "@/components/calculators/PoolE
 import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverterSavingsCalculator";
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
 import { EbikeRangeEstimatorCalculator } from "@/components/calculators/EbikeRangeEstimatorCalculator";
+import { EscooterCalculatorShell } from "@/components/calculators/EscooterCalculatorShell";
+import { ESCOOTER_CALCULATOR_IDS } from "@/lib/calculators/escooter";
 import { EbikeVoltageSagCalculator } from "@/components/calculators/EbikeVoltageSagCalculator";
 import { EbikeBatteryCycleLifeCalculator } from "@/components/calculators/EbikeBatteryCycleLifeCalculator";
 import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/EvChargingTemperatureImpactCalculator";
@@ -165,6 +167,9 @@ export function CalculatorPanel({
   }
   if (id === "ebike-battery-cycle-life") {
     return <EbikeBatteryCycleLifeCalculator className={className} />;
+  }
+  if ((ESCOOTER_CALCULATOR_IDS as readonly string[]).includes(id)) {
+    return <EscooterCalculatorShell id={id} className={className} />;
   }
 
   const definition = getCalculatorDefinition(id);

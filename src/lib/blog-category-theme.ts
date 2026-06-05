@@ -122,6 +122,16 @@ export const BLOG_CATEGORY_THEME: Record<BlogCategory, BlogCategoryTheme> = {
     accentFrom: "#22d3ee",
     accentTo: "#06b6d4",
   },
+  "E-Scooter": {
+    label: "E-Scooter",
+    bg: "bg-pink-500/12 dark:bg-pink-500/18",
+    text: "text-pink-900 dark:text-pink-300",
+    border: "border-pink-500/25 dark:border-pink-400/35",
+    gradient: "from-pink-500/25 via-rose-400/15 to-fuchsia-500/20",
+    glow: "rgba(244, 114, 182, 0.32)",
+    accentFrom: "#f472b6",
+    accentTo: "#ec4899",
+  },
 };
 
 export function getBlogCategoryTheme(category: BlogCategory): BlogCategoryTheme {

@@ -63,6 +63,26 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "electric-vs-gas-fleet-tco-guide",
     "articleTitle": "Electric vs. Gas Fleet TCO: A Logistics Owner's Workbook"
   },
+  "escooter-charge-time": {
+    "articleSlug": "escooter-battery-care",
+    "articleTitle": "Small-Pack Battery Care on E-Scooters: Charging Heat, C-Rates, and Longevity"
+  },
+  "escooter-brake-pad-wear": {
+    "articleSlug": "escooter-brakes-safety",
+    "articleTitle": "E-Scooter Braking Safety: Why Regen Alone Fails on Steep Downhills"
+  },
+  "escooter-cost-per-km": {
+    "articleSlug": "escooter-commute-optimization",
+    "articleTitle": "E-Scooter Commute Optimization: More Range and Lower Cost per Kilometre"
+  },
+  "escooter-hill-climb": {
+    "articleSlug": "escooter-motor-power-guide",
+    "articleTitle": "E-Scooter Motor Power Truth: 500W vs 1000W — Is More Always Better?"
+  },
+  "escooter-range": {
+    "articleSlug": "escooter-range-guide",
+    "articleTitle": "E-Scooter Tyre Engineering: Why Air Pressure Is the #1 Range and Comfort Factor"
+  },
   "ev-preconditioning-cost": {
     "articleSlug": "ev-battery-preconditioning-thermal-guide",
     "articleTitle": "Why Your EV Battery Needs Preconditioning: A Guide to Thermal Management"
