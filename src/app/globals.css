@@ -1441,6 +1441,32 @@
   }
 }
 
+/* Blog / tool launch modal — flat command-center calculator */
+.calculator-launch-modal__panel {
+  border: none;
+  border-radius: 0;
+}
+
+.calculator-launch-modal__body .calculator-command-panel {
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.dark .calculator-launch-modal__body .calculator-command-panel {
+  background: transparent;
+  box-shadow: none;
+}
+
+.calculator-launch-modal__guide-link {
+  border: none;
+  border-left: 2px solid color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.dark .calculator-launch-modal__guide-link {
+  border-left-color: color-mix(in srgb, var(--primary) 55%, transparent);
+}
+
 .command-center-modal .glass-neon {
   --neon-from: #22d3ee;
   --neon-to: #3b82f6;
