@@ -6,8 +6,10 @@ import { AlertTriangle, ArrowRight, Sun } from "lucide-react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
+import { SolarRoiIncentivesField } from "@/components/calculator/solar-roi-incentives-field";
 import {
   calculateSolarRoiAnalysis,
+  type SolarIncentivesMode,
   type SolarRoiMilestoneYear,
 } from "@/lib/calculators/solar";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
@@ -37,6 +39,31 @@ const SHADING_CALCULATOR = {
 } as const;
 
 const MILESTONE_YEARS: SolarRoiMilestoneYear[] = [1, 5, 10, 20];
+
+const INCENTIVE_FIELD_IDS = new Set([
+  "incentivesMode",
+  "incentivesAmount",
+  "incentivesPercent",
+]);
+
+function parseIncentivesMode(value: string | undefined): SolarIncentivesMode {
+  return value === "percent" ? "percent" : "fixed";
+}
+
+function formatIncentivesDetail(
+  parsed: NonNullable<ReturnType<typeof calculateSolarRoiAnalysis>>
+): string {
+  if (parsed.incentivesAmount <= 0) {
+    return `Net install ${formatCurrency(parsed.netInstallCost)}`;
+  }
+  if (
+    parsed.incentivesMode === "percent" &&
+    parsed.incentivesPercent !== null
+  ) {
+    return `After ${formatNumber(parsed.incentivesPercent, { maxDecimals: 0 })}% credit (${formatCurrency(parsed.incentivesAmount)}) · net cost ${formatCurrency(parsed.netInstallCost)}`;
+  }
+  return `After ${formatCurrency(parsed.incentivesAmount)} incentives · net cost ${formatCurrency(parsed.netInstallCost)}`;
+}
 
 interface SolarRoiAnalysisCalculatorProps {
   className?: string;
@@ -74,10 +101,25 @@ export function SolarRoiAnalysisCalculator({
   const definition = getCalculatorDefinition(CALCULATOR_ID);
   const { values, setValue } = useCalculatorForm(definition.fields);
 
+  const inputFields = useMemo(() => {
+    const standard = definition.fields.filter(
+      (field) => !INCENTIVE_FIELD_IDS.has(field.id)
+    );
+    const installIndex = standard.findIndex((field) => field.id === "installCost");
+    return {
+      beforeIncentives: standard.slice(0, installIndex + 1),
+      afterIncentives: standard.slice(installIndex + 1),
+    };
+  }, [definition.fields]);
+
+  const incentivesMode = parseIncentivesMode(values.incentivesMode);
+
   const parsed = useMemo(() => {
     const annualYieldKwh = parsePositive(values.annualYieldKwh ?? "");
     const installCost = parsePositive(values.installCost ?? "");
     const incentivesAmount = parseNonNegative(values.incentivesAmount ?? "") ?? 0;
+    const incentivesPercent = parseNonNegative(values.incentivesPercent ?? "");
+    const mode = parseIncentivesMode(values.incentivesMode);
     const annualDegradationPercent = parsePositive(
       values.annualDegradationPercent ?? ""
     );
@@ -100,6 +142,8 @@ export function SolarRoiAnalysisCalculator({
       annualDegradationPercent === null ||
       electricityRatePerKwh === null ||
       exportRatePerKwh === null ||
+      (mode === "percent" &&
+        (incentivesPercent === null || incentivesPercent > 100)) ||
       !Number.isFinite(selfConsumptionPercent) ||
       selfConsumptionPercent < 0 ||
       selfConsumptionPercent > 100 ||
@@ -112,7 +156,9 @@ export function SolarRoiAnalysisCalculator({
     return calculateSolarRoiAnalysis({
       annualYieldKwh,
       installCost,
+      incentivesMode: mode,
       incentivesAmount,
+      incentivesPercent: incentivesPercent ?? 0,
       annualDegradationPercent,
       electricityRatePerKwh,
       exportRatePerKwh,
@@ -186,11 +232,26 @@ export function SolarRoiAnalysisCalculator({
 
       <CalculatorCommandSplit
         inputs={
-          <CalculatorInputs
-            fields={definition.fields}
-            values={values}
-            onChange={setValue}
-          />
+          <div className="calculator-command__inputs-stack flex flex-col gap-5">
+            <CalculatorInputs
+              fields={inputFields.beforeIncentives}
+              values={values}
+              onChange={setValue}
+            />
+            <SolarRoiIncentivesField
+              mode={incentivesMode}
+              fixedValue={values.incentivesAmount ?? "0"}
+              percentValue={values.incentivesPercent ?? "30"}
+              onModeChange={(mode) => setValue("incentivesMode", mode)}
+              onFixedChange={(value) => setValue("incentivesAmount", value)}
+              onPercentChange={(value) => setValue("incentivesPercent", value)}
+            />
+            <CalculatorInputs
+              fields={inputFields.afterIncentives}
+              values={values}
+              onChange={setValue}
+            />
+          </div>
         }
         results={
           parsed ? (
@@ -216,11 +277,7 @@ export function SolarRoiAnalysisCalculator({
                 <CalculatorResult
                   label="Net benefit vs. no solar"
                   value={formatCurrency(parsed.netBenefitVsStatusQuo)}
-                  detail={
-                    parsed.incentivesAmount > 0
-                      ? `After ${formatCurrency(parsed.incentivesAmount)} incentives · net cost ${formatCurrency(parsed.netInstallCost)}`
-                      : `Net install ${formatCurrency(parsed.netInstallCost)}`
-                  }
+                  detail={formatIncentivesDetail(parsed)}
                   emptyMessage="—"
                 />
               </div>

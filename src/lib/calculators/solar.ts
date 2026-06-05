@@ -244,10 +244,50 @@ export const SOLAR_ROI_ANALYSIS_YEARS = 20;
 /** Default annual panel loss — matches solar-degradation calculator default. */
 export const DEFAULT_SOLAR_DEGRADATION_PERCENT = 0.5;
 
+export type SolarIncentivesMode = "fixed" | "percent";
+
+export const DEFAULT_FEDERAL_TAX_CREDIT_PERCENT = 30;
+
+export interface SolarIncentivesResolved {
+  incentivesAmount: number;
+  netInstallCost: number;
+  incentivesMode: SolarIncentivesMode;
+  incentivesPercent: number | null;
+}
+
+/** Net install after fixed $ rebates or a percentage credit (e.g. 30% ITC). */
+export function resolveSolarIncentives(
+  installCost: number,
+  mode: SolarIncentivesMode,
+  fixedAmount: number,
+  percent: number
+): SolarIncentivesResolved {
+  if (mode === "percent") {
+    const incentivesPercent = Math.min(100, Math.max(0, percent));
+    const incentivesAmount = installCost * (incentivesPercent / 100);
+    return {
+      incentivesMode: "percent",
+      incentivesPercent,
+      incentivesAmount: Math.round(incentivesAmount),
+      netInstallCost: Math.max(0, installCost * (1 - incentivesPercent / 100)),
+    };
+  }
+
+  const incentivesAmount = Math.min(installCost, Math.max(0, fixedAmount));
+  return {
+    incentivesMode: "fixed",
+    incentivesPercent: null,
+    incentivesAmount: Math.round(incentivesAmount),
+    netInstallCost: Math.max(0, installCost - incentivesAmount),
+  };
+}
+
 export interface SolarRoiAnalysisInput {
   annualYieldKwh: number;
   installCost: number;
+  incentivesMode?: SolarIncentivesMode;
   incentivesAmount?: number;
+  incentivesPercent?: number;
   annualDegradationPercent: number;
   electricityRatePerKwh: number;
   exportRatePerKwh: number;
@@ -272,6 +312,8 @@ export type SolarRoiMilestoneYear = 1 | 5 | 10 | 20;
 export interface SolarRoiAnalysisResult {
   grossInstallCost: number;
   incentivesAmount: number;
+  incentivesMode: SolarIncentivesMode;
+  incentivesPercent: number | null;
   netInstallCost: number;
   breakEvenYears: number | null;
   breakEvenLabel: string;
@@ -287,14 +329,22 @@ export interface SolarRoiAnalysisResult {
 export function calculateSolarRoiAnalysis({
   annualYieldKwh,
   installCost,
+  incentivesMode = "fixed",
   incentivesAmount = 0,
+  incentivesPercent = 0,
   annualDegradationPercent,
   electricityRatePerKwh,
   exportRatePerKwh,
   selfConsumptionPercent,
   energyInflationPercent,
 }: SolarRoiAnalysisInput): SolarRoiAnalysisResult {
-  const netInstallCost = Math.max(0, installCost - incentivesAmount);
+  const incentives = resolveSolarIncentives(
+    installCost,
+    incentivesMode,
+    incentivesAmount,
+    incentivesPercent
+  );
+  const { netInstallCost, incentivesAmount: resolvedIncentives } = incentives;
   const degFactor = 1 - annualDegradationPercent / 100;
   const inflationFactor = 1 + energyInflationPercent / 100;
   const selfFactor =
@@ -361,7 +411,9 @@ export function calculateSolarRoiAnalysis({
 
   return {
     grossInstallCost: installCost,
-    incentivesAmount,
+    incentivesAmount: resolvedIncentives,
+    incentivesMode: incentives.incentivesMode,
+    incentivesPercent: incentives.incentivesPercent,
     netInstallCost,
     breakEvenYears,
     breakEvenLabel,

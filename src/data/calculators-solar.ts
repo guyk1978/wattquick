@@ -28,7 +28,9 @@ import {
   calculateSolarRoiAnalysis,
   calculateRoofSpace,
   calculateSolarShadingAnalysis,
+  DEFAULT_FEDERAL_TAX_CREDIT_PERCENT,
   DEFAULT_SOLAR_DEGRADATION_PERCENT,
+  type SolarIncentivesMode,
   SOLAR_SHADING_DEFAULT_KWH_PER_KWP,
   SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL,
   type SeasonMode,
@@ -1289,12 +1291,25 @@ export const calculatorsSolar = [
         defaultValue: "18000",
       },
       {
+        id: "incentivesMode",
+        label: "Incentive entry mode",
+        defaultValue: "fixed",
+      },
+      {
         id: "incentivesAmount",
         label: "Tax credits & incentives",
         unit: "$",
         placeholder: "0",
         defaultValue: "0",
-        hint: "Federal/state rebates—reduces net upfront cost",
+        hint: "Fixed dollar rebates",
+      },
+      {
+        id: "incentivesPercent",
+        label: "Tax credit percentage",
+        unit: "%",
+        placeholder: "30",
+        defaultValue: String(DEFAULT_FEDERAL_TAX_CREDIT_PERCENT),
+        hint: "e.g. 30% Federal ITC",
       },
       {
         id: "annualYieldKwh",
@@ -1372,15 +1387,20 @@ export const calculatorsSolar = [
         },
         {
           heading: "Frequently asked questions",
-          body: "Q: Include tax credits? A: Use the incentives field—or enter net cost manually. Q: Shading? A: Run Solar Shading Analysis first. Q: vs. Degradation ROI? A: That tool sizes from kWp; this one accepts direct annual kWh and export rates.",
+          body: "Q: Include tax credits? A: Toggle $ fixed or % percentage (e.g. 30% ITC). Q: Shading? A: Run Solar Shading Analysis first. Q: vs. Degradation ROI? A: That tool sizes from kWp; this one accepts direct annual kWh and export rates.",
         },
       ],
     },
     compute(values) {
       const annualYieldKwh = parsePositive(values.annualYieldKwh ?? "");
       const installCost = parsePositive(values.installCost ?? "");
+      const incentivesMode: SolarIncentivesMode =
+        values.incentivesMode === "percent" ? "percent" : "fixed";
       const incentivesAmount =
         parseNonNegative(values.incentivesAmount ?? "") ?? 0;
+      const incentivesPercent = parseNonNegative(
+        values.incentivesPercent ?? ""
+      );
       const annualDegradationPercent = parsePositive(
         values.annualDegradationPercent ?? ""
       );
@@ -1412,10 +1432,19 @@ export const calculatorsSolar = [
         return { value: null };
       }
 
+      if (
+        incentivesMode === "percent" &&
+        (incentivesPercent === null || incentivesPercent > 100)
+      ) {
+        return { value: null };
+      }
+
       const result = calculateSolarRoiAnalysis({
         annualYieldKwh,
         installCost,
+        incentivesMode,
         incentivesAmount,
+        incentivesPercent: incentivesPercent ?? 0,
         annualDegradationPercent,
         electricityRatePerKwh,
         exportRatePerKwh,
