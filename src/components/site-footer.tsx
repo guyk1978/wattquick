@@ -11,7 +11,7 @@ export function SiteFooter() {
   const count = getAllCalculatorMeta().length;
 
   return (
-    <footer className="site-footer relative z-[1] mt-auto border-t border-border/50 bg-card/30">
+    <footer className="site-footer relative z-[1] mt-auto border-t border-border/50">
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">

@@ -60,10 +60,9 @@ export function CalculatorsMegaMenu() {
       <Link
         href="/calculators/"
         className={cn(
-          "inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium",
-          "text-muted-foreground transition-colors duration-150",
-          "hover:bg-white/50 hover:text-foreground dark:hover:bg-white/5",
-          open && "bg-white/60 text-foreground dark:bg-white/10"
+          "header-nav-link inline-flex items-center gap-1 px-3.5 py-2 text-sm font-medium",
+          "text-muted-foreground",
+          open && "text-foreground"
         )}
         aria-expanded={open}
         aria-haspopup="true"
@@ -87,7 +86,7 @@ export function CalculatorsMegaMenu() {
             : "invisible opacity-0 pointer-events-none"
         )}
       >
-        <div className="calculators-mega-menu__panel overflow-hidden rounded-none bg-card dark:bg-[rgb(6_10_22/0.96)]">
+        <div className="calculators-mega-menu__panel overflow-hidden rounded-none">
           <div className="border-b border-border/40 px-2.5 py-2 sm:px-3">
             <div className="relative">
               <Search

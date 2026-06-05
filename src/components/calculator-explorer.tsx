@@ -120,7 +120,7 @@ export function CalculatorExplorer({
         </p>
       ) : (
         <ul
-          className="calculators-directory__list list-none divide-y divide-border/40 rounded-none bg-card dark:bg-[rgb(6_10_22/0.72)]"
+          className="calculators-directory__list list-none divide-y divide-border/40 rounded-none"
           role="list"
         >
           {filtered.map((calc) => (
@@ -148,11 +148,9 @@ function CategoryChip({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "calculators-directory__chip shrink-0 rounded-none px-2.5 py-1 text-xs font-medium transition-colors duration-150",
+        "calculators-directory__chip filter-chip shrink-0 px-2.5 py-1 text-xs font-medium",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        active
-          ? "border border-foreground/20 bg-muted/60 text-foreground dark:bg-[rgb(8_14_28/0.85)]"
-          : "border border-border/50 bg-transparent text-muted-foreground hover:border-border hover:bg-muted/30 hover:text-foreground"
+        !active && "border-transparent bg-transparent"
       )}
     >
       {children}

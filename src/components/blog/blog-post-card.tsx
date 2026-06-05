@@ -51,8 +51,8 @@ export function BlogPostCard({
     <article
       className={cn(
         "blog-post-card group relative flex h-full flex-col overflow-hidden rounded-none",
-        "bg-card transition-colors duration-150 hover:bg-muted/30",
-        "dark:bg-[rgb(6_10_22/0.72)] dark:hover:bg-[rgb(8_14_28/0.85)]",
+        "transition-colors duration-150 hover:bg-muted/20",
+        "dark:hover:bg-[rgb(8_14_28/0.85)]",
         featured ? "min-h-[200px] sm:min-h-[180px]" : "min-h-[180px]",
         className
       )}

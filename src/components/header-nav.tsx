@@ -19,10 +19,8 @@ export function HeaderNav() {
             key={item.href}
             href={item.href}
             className={cn(
-              "rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground",
-              "transition-[color,transform,box-shadow] duration-200",
-              "hover:scale-[1.02] hover:bg-white/50 hover:text-foreground",
-              "dark:hover:bg-white/5"
+              "header-nav-link px-3.5 py-2 text-sm font-medium text-muted-foreground",
+              "hover:text-foreground"
             )}
           >
             {item.label}

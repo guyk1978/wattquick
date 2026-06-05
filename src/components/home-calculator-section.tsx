@@ -11,6 +11,7 @@ import {
   type CalculatorId,
 } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
+import { calculatorCommandInput } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const ALL_CATEGORY = "all" as const;
@@ -93,12 +94,9 @@ export function HomeCalculatorSection({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className={cn(
-              "h-14 w-full rounded-2xl border-2 border-border/80 bg-card pl-14 pr-5 text-base text-foreground shadow-sm",
-              "placeholder:text-muted-foreground/80",
-              "transition-[border-color,box-shadow] duration-200",
-              "hover:border-primary/25",
-              "focus:border-primary/50 focus:outline-none focus:ring-4 focus:ring-primary/15",
-              "dark:border-border dark:bg-card/90 dark:shadow-none dark:focus:ring-primary/20"
+              calculatorCommandInput,
+              "h-12 w-full rounded-none border pl-12 pr-4 text-base shadow-none focus-visible:ring-0",
+              "dark:border-border dark:bg-card/90"
             )}
           />
         </div>
@@ -153,7 +151,7 @@ export function HomeCalculatorSection({
         </div>
 
         {displayItems.length === 0 ? (
-          <p className="rounded-xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground">
+          <p className="rounded-none border border-dashed border-border py-12 text-center text-sm text-muted-foreground">
             No calculators match your search. Try another keyword or category.
           </p>
         ) : (
@@ -182,12 +180,11 @@ export function HomeCalculatorSection({
         <Link
           href={viewAllHref}
           className={cn(
-            "inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground shadow-sm",
-            "transition-[border-color,background-color,transform] duration-200",
-            "hover:border-primary/30 hover:bg-muted/50",
+            "inline-flex items-center gap-2 rounded-none border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground",
+            "transition-[border-color,background-color] duration-150",
+            "hover:border-primary/30 hover:bg-white",
             "dark:hover:bg-muted/30",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-            "active:scale-[0.99]"
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           )}
         >
           View all {totalCount} calculators
@@ -214,11 +211,9 @@ function FilterPill({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors duration-150 sm:text-sm",
+        "filter-chip shrink-0 px-3 py-1.5 text-xs font-medium sm:text-sm",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-        active
-          ? "border border-primary/35 bg-primary/10 text-primary dark:bg-primary/15"
-          : "border border-transparent bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground dark:bg-muted/50"
+        active && "border-primary/30 bg-primary/10 text-primary dark:bg-primary/15"
       )}
     >
       {children}
