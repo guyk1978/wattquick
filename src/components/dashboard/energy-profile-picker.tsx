@@ -35,9 +35,9 @@ export function EnergyProfilePicker({
               aria-checked={active}
               onClick={() => onChange(profile.id)}
               className={cn(
-                "filter-chip shrink-0 px-3 py-1.5 text-left text-xs font-semibold",
+                "command-center-scenario-chip shrink-0 px-3 py-1.5 text-left text-xs font-medium",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
-                active && "border-primary/30 bg-primary/10 text-primary"
+                active && "command-center-scenario-chip--active"
               )}
             >
               {profile.label}
@@ -46,7 +46,7 @@ export function EnergyProfilePicker({
         })}
       </div>
       <p className="text-xs text-muted-foreground" role="status">
-        <span className="font-medium text-foreground">
+        <span className="font-semibold text-foreground">
           {activeConfig.nodes.length} nodes
         </span>{" "}
         active in this scenario

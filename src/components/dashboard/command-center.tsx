@@ -105,7 +105,7 @@ export function CommandCenter() {
   }, [refreshRecent]);
 
   return (
-    <div className="command-center dark text-foreground">
+    <div className="command-center text-foreground">
       <header className="mb-8 space-y-4 sm:mb-10">
         <div className="flex items-center gap-3">
           <span className="flex size-10 items-center justify-center rounded-none border border-border/60 bg-primary/10 text-primary">
@@ -122,7 +122,8 @@ export function CommandCenter() {
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           {hydrated ? profileConfig.description : "Loading your energy profile…"}{" "}
-          Pick a scenario—nodes and flows update live.
+          Pick a scenario—nodes and flows update live. Pulsing nodes are new or not
+          yet opened.
         </p>
         {hydrated ? (
           <EnergyProfilePicker value={profile} onChange={handleProfileChange} />

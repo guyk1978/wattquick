@@ -1398,7 +1398,94 @@
 
 /* —— WattQuick Command Center —— */
 .command-center-page {
+  color-scheme: light;
+}
+
+.dark .command-center-page {
   color-scheme: dark;
+}
+
+.command-center-diagram {
+  background: rgb(255 255 255 / 0.98);
+  border: 1px solid rgb(15 23 42 / 0.1);
+  box-shadow: none;
+}
+
+.dark .command-center-diagram {
+  background: rgb(6 10 22 / 0.72);
+  border-color: rgb(255 255 255 / 0.08);
+}
+
+.command-center-scenario-chip {
+  border-radius: 0;
+  border: 1px solid rgb(15 23 42 / 0.12);
+  background: rgb(255 255 255 / 0.85);
+  color: var(--muted-foreground);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.command-center-scenario-chip:hover {
+  border-color: rgb(15 23 42 / 0.2);
+  background: rgb(255 255 255 / 1);
+  color: var(--foreground);
+}
+
+.command-center-scenario-chip--active {
+  border-color: rgb(15 23 42 / 0.28);
+  border-left: 2px solid var(--primary);
+  background: rgb(241 245 249);
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.dark .command-center-scenario-chip {
+  border-color: rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.dark .command-center-scenario-chip:hover {
+  border-color: rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.06);
+}
+
+.dark .command-center-scenario-chip--active {
+  border-color: rgb(255 255 255 / 0.22);
+  border-left-color: var(--primary);
+  background: rgb(8 14 28 / 0.85);
+  color: var(--foreground);
+}
+
+.command-center-recent-card {
+  border-radius: 0;
+  border: 1px solid rgb(15 23 42 / 0.1);
+  background: rgb(255 255 255 / 0.98);
+  box-shadow: none;
+  transition: background-color 0.15s ease;
+}
+
+.command-center-recent-card:hover {
+  background: rgb(248 250 252);
+}
+
+.command-center-recent-card--empty {
+  border-style: dashed;
+  background: rgb(255 255 255 / 0.72);
+}
+
+.dark .command-center-recent-card {
+  border-color: rgb(255 255 255 / 0.1);
+  background: rgb(6 10 22 / 0.72);
+}
+
+.dark .command-center-recent-card:hover {
+  background: rgb(8 14 28 / 0.85);
+}
+
+.dark .command-center-recent-card--empty {
+  background: rgb(6 10 22 / 0.5);
 }
 
 .command-center .glass-neon--primary {
@@ -1651,53 +1738,6 @@
   line-height: 1.2;
 }
 
-.command-center-node--pulse {
-  animation: command-center-node-pulse 2.2s ease-in-out infinite;
-}
-
-.command-center-node--pulse-new {
-  animation: command-center-node-pulse-strong 1.6s ease-in-out infinite;
-}
-
-.command-center-node__ring {
-  animation: command-center-ring-pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 0 0 rgb(34 211 238 / 0.45);
-}
-
-@keyframes command-center-node-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgb(34 211 238 / 0.15);
-  }
-  50% {
-    box-shadow: 0 0 20px 2px rgb(34 211 238 / 0.35);
-  }
-}
-
-@keyframes command-center-node-pulse-strong {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgb(52 211 153 / 0.2);
-    border-color: rgb(52 211 153 / 0.35);
-  }
-  50% {
-    box-shadow: 0 0 28px 4px rgb(52 211 153 / 0.45);
-    border-color: rgb(52 211 153 / 0.55);
-  }
-}
-
-@keyframes command-center-ring-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgb(34 211 238 / 0.35);
-    opacity: 0.6;
-  }
-  50% {
-    box-shadow: 0 0 12px 4px rgb(34 211 238 / 0.55);
-    opacity: 1;
-  }
-}
-
 /* ═══════════════════════════════════════════════════════════════
    Flat & Sharp — shared panel utilities
    ═══════════════════════════════════════════════════════════════ */
@@ -1790,10 +1830,90 @@
   box-shadow: 0 16px 40px rgb(0 0 0 / 0.4);
 }
 
-/* Flat dashboard — no glow pulse rings */
-.command-center-node--pulse,
-.command-center-node--pulse-new,
-.command-center-node__ring {
-  animation: none !important;
-  box-shadow: none !important;
+.command-center-node--pulse {
+  animation: command-center-node-pulse-light 2.2s ease-in-out infinite;
+}
+
+.command-center-node--pulse-new {
+  animation: command-center-node-pulse-new-light 1.6s ease-in-out infinite;
+}
+
+.command-center-node__icon-pulse {
+  animation: command-center-icon-pulse-light 2.2s ease-in-out infinite;
+}
+
+@keyframes command-center-node-pulse-light {
+  0%,
+  100% {
+    border-color: rgb(15 23 42 / 0.14);
+  }
+  50% {
+    border-color: rgb(37 99 235 / 0.5);
+  }
+}
+
+@keyframes command-center-node-pulse-new-light {
+  0%,
+  100% {
+    border-color: rgb(15 23 42 / 0.14);
+    border-left-color: rgb(37 99 235 / 0.35);
+  }
+  50% {
+    border-color: rgb(37 99 235 / 0.45);
+    border-left-color: rgb(29 78 216 / 0.85);
+  }
+}
+
+@keyframes command-center-icon-pulse-light {
+  0%,
+  100% {
+    border-color: rgb(15 23 42 / 0.12);
+  }
+  50% {
+    border-color: rgb(37 99 235 / 0.4);
+  }
+}
+
+.dark .command-center-node--pulse {
+  animation: command-center-node-pulse-dark 2.2s ease-in-out infinite;
+}
+
+.dark .command-center-node--pulse-new {
+  animation: command-center-node-pulse-new-dark 1.6s ease-in-out infinite;
+}
+
+.dark .command-center-node__icon-pulse {
+  animation: command-center-icon-pulse-dark 2.2s ease-in-out infinite;
+}
+
+@keyframes command-center-node-pulse-dark {
+  0%,
+  100% {
+    border-color: rgb(255 255 255 / 0.12);
+  }
+  50% {
+    border-color: rgb(34 211 238 / 0.45);
+  }
+}
+
+@keyframes command-center-node-pulse-new-dark {
+  0%,
+  100% {
+    border-color: rgb(255 255 255 / 0.12);
+    border-left-color: rgb(34 211 238 / 0.35);
+  }
+  50% {
+    border-color: rgb(34 211 238 / 0.5);
+    border-left-color: rgb(34 211 238 / 0.85);
+  }
+}
+
+@keyframes command-center-icon-pulse-dark {
+  0%,
+  100% {
+    border-color: rgb(255 255 255 / 0.1);
+  }
+  50% {
+    border-color: rgb(34 211 238 / 0.4);
+  }
 }

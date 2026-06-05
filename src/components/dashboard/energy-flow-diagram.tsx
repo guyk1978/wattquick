@@ -30,18 +30,26 @@ const ICONS: Record<FlowNodeId, LucideIcon> = {
   generator: Fuel,
 };
 
-const ACCENT_RING: Record<FlowNodeConfig["accent"], string> = {
-  emerald: "border-emerald-500/35",
-  cyan: "border-cyan-500/35",
-  blue: "border-blue-500/35",
-  amber: "border-amber-500/35",
-  violet: "border-violet-500/35",
+const ACCENT_BORDER: Record<FlowNodeConfig["accent"], string> = {
+  emerald: "border-emerald-700/40 dark:border-emerald-500/35",
+  cyan: "border-cyan-800/40 dark:border-cyan-500/35",
+  blue: "border-blue-700/40 dark:border-blue-500/35",
+  amber: "border-amber-700/40 dark:border-amber-500/35",
+  violet: "border-violet-700/40 dark:border-violet-500/35",
+};
+
+const ACCENT_ICON: Record<FlowNodeConfig["accent"], string> = {
+  emerald: "text-emerald-800 dark:text-emerald-400",
+  cyan: "text-cyan-900 dark:text-cyan-400",
+  blue: "text-blue-800 dark:text-blue-400",
+  amber: "text-amber-900 dark:text-amber-400",
+  violet: "text-violet-800 dark:text-violet-400",
 };
 
 const STROKE_TONE: Record<EnergyFlowEdge["tone"], string> = {
-  green: "stroke-emerald-400/55",
-  blue: "stroke-cyan-400/55",
-  mixed: "stroke-blue-400/45",
+  green: "stroke-emerald-800/55 dark:stroke-emerald-400/55",
+  blue: "stroke-sky-800/55 dark:stroke-cyan-400/55",
+  mixed: "stroke-blue-800/50 dark:stroke-blue-400/45",
 };
 
 interface EnergyFlowDiagramProps {
@@ -64,8 +72,8 @@ export function EnergyFlowDiagram({
   profile,
   scenarioKey,
   onOpenCalculator,
-  newNodeIds: _newNodeIds,
-  unvisitedNodeIds: _unvisitedNodeIds,
+  newNodeIds,
+  unvisitedNodeIds,
   className,
 }: EnergyFlowDiagramProps) {
   const activeNodes = useMemo(
@@ -96,9 +104,6 @@ export function EnergyFlowDiagram({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35 }}
         >
-          <defs>
-          </defs>
-
           <AnimatePresence>
             {edges.map((edge, i) => {
               const a = toSvgCoords(edge.from);
@@ -118,7 +123,7 @@ export function EnergyFlowDiagram({
                     y1={a.y}
                     x2={b.x}
                     y2={b.y}
-                    strokeWidth={0.35}
+                    strokeWidth={0.4}
                     className={strokeClass}
                     fill="none"
                     initial={{ pathLength: 0 }}
@@ -136,6 +141,9 @@ export function EnergyFlowDiagram({
         {profile.nodes.map((node) => {
           const pos = NODE_LAYOUT[node.id];
           const Icon = ICONS[node.id];
+          const isNew = newNodeIds.has(node.id);
+          const isUnvisited = unvisitedNodeIds.has(node.id);
+          const shouldPulse = isNew || isUnvisited;
 
           return (
             <motion.button
@@ -152,9 +160,10 @@ export function EnergyFlowDiagram({
               onClick={() => onOpenCalculator(node.calculatorId, node.id)}
               className={cn(
                 "command-center-node absolute flex flex-col items-center gap-1 rounded-none border bg-card px-2 py-1.5",
-                "text-foreground dark:bg-[rgb(6_10_22/0.92)]",
-                ACCENT_RING[node.accent],
-                "transition-colors hover:bg-muted/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                ACCENT_BORDER[node.accent],
+                "transition-colors hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+                shouldPulse && "command-center-node--pulse",
+                isNew && "command-center-node--pulse-new"
               )}
               style={{
                 left: `${pos.x * 100}%`,
@@ -163,10 +172,22 @@ export function EnergyFlowDiagram({
               }}
               aria-label={`Open ${node.label} calculator`}
             >
-              <span className="relative flex size-8 items-center justify-center rounded-none border border-border/50 bg-muted/30 sm:size-9">
-                <Icon className="relative size-4 text-foreground sm:size-5" strokeWidth={2} aria-hidden />
+              <span
+                className={cn(
+                  "relative flex size-8 items-center justify-center rounded-none border border-border/50 bg-muted/25 sm:size-9",
+                  shouldPulse && "command-center-node__icon-pulse"
+                )}
+              >
+                <Icon
+                  className={cn(
+                    "relative size-4 sm:size-5",
+                    ACCENT_ICON[node.accent]
+                  )}
+                  strokeWidth={2}
+                  aria-hidden
+                />
               </span>
-              <span className="dashboard-flow-label max-w-[5rem] text-center text-[10px] font-semibold leading-tight text-muted-foreground sm:max-w-[5.5rem] sm:text-[11px]">
+              <span className="dashboard-flow-label max-w-[5rem] text-center text-[10px] font-semibold leading-tight text-foreground sm:max-w-[5.5rem] sm:text-[11px]">
                 {node.label}
               </span>
             </motion.button>

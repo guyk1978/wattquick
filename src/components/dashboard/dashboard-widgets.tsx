@@ -39,7 +39,7 @@ export function DashboardWidgets({
           if (!entry) {
             return (
               <li key={`empty-${i}`}>
-                <div className="flat-subpanel border-dashed px-2 py-1.5">
+                <div className="command-center-recent-card command-center-recent-card--empty px-2 py-1.5">
                   <p className="text-[10px] leading-snug text-muted-foreground">
                     Tap a flow node to log a run here.
                   </p>
@@ -59,7 +59,7 @@ export function DashboardWidgets({
                 type="button"
                 onClick={() => onOpenCalculator(entry.id)}
                 className={cn(
-                  "flat-panel flex w-full items-center gap-2 px-2 py-1.5 text-left",
+                  "command-center-recent-card flex w-full items-center gap-2 px-2 py-1.5 text-left",
                   "transition-colors hover:bg-muted/30",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 )}
