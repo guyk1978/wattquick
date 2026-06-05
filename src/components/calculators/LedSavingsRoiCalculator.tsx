@@ -312,7 +312,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
       ) : null}
 
       {parsed && hasSavings ? (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="calculator-secondary-results">
             <div className="rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Annual financial savings
@@ -375,7 +375,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
         ) : null}
 
         {parsed && hasSavings ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="calculator-secondary-results">
             <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Power saved

@@ -147,7 +147,7 @@ export function GeneratorVsSolarHybridCalculator({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="calculator-secondary-results">
           <CalculatorResult
             label="5-year cumulative — generator"
             value={parsed ? formatCurrency(parsed.generator5Year) : null}

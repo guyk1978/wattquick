@@ -42,10 +42,10 @@ export function CalculatorField({
   const inputType = field.inputType ?? "text";
 
   return (
-    <div className={cn("calculator-command__field group/field flex flex-col gap-2", className)}>
+    <div className={cn("calculator-command__field group/field flex flex-col gap-1.5", className)}>
       <Label
         htmlFor={field.id}
-        className="block w-full text-[0.8125rem] font-medium leading-snug tracking-tight text-foreground/90"
+        className="block w-full text-sm font-medium leading-snug text-foreground"
       >
         {field.label}
         {inputType === "range" && field.unit ? (

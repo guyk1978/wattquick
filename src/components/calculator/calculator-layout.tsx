@@ -23,7 +23,7 @@ export function CalculatorLayout({
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-lg px-4 pb-20 pt-6 sm:max-w-2xl sm:px-6 sm:pb-24 sm:pt-10",
+        "mx-auto w-full max-w-4xl px-4 pb-20 pt-6 sm:px-6 sm:pb-24 sm:pt-10",
         className
       )}
     >

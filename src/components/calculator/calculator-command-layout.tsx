@@ -15,7 +15,7 @@ export function CalculatorCommandShell({
 }: CalculatorCommandShellProps) {
   return (
     <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="calculator-command__inner flex flex-col gap-6 sm:gap-8">
+      <div className="calculator-command__inner flex flex-col gap-5 sm:gap-6">
         <CalculatorPanelBrand />
         {children}
       </div>

@@ -186,7 +186,7 @@ export function LightingCircuitLoadCalculator({
         />
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="calculator-secondary-results">
           <CalculatorResult
             label="Total lighting load"
             value={parsed ? formatNumber(parsed.totalWatts, { maxDecimals: 0 }) : null}

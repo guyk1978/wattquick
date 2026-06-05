@@ -330,7 +330,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
             <p className="mt-1 text-sm text-muted-foreground">
               ICE-only services you no longer pay for (annual estimates for your mileage).
             </p>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            <ul className="calculator-secondary-results mt-4">
               {iceOnlyItems.map((row) => {
                 const Icon = MAINTENANCE_ICONS[row.icon];
                 return (

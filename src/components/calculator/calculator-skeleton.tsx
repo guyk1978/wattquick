@@ -4,7 +4,7 @@ export function CalculatorSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "mx-auto w-full max-w-lg animate-pulse px-4 pb-16 pt-6 sm:max-w-2xl sm:px-6 sm:pb-20 sm:pt-10",
+        "mx-auto w-full max-w-4xl animate-pulse px-4 pb-16 pt-6 sm:px-6 sm:pb-20 sm:pt-10",
         className
       )}
     >

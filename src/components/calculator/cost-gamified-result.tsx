@@ -28,9 +28,9 @@ export function CostGamifiedResult({
 
   return (
     <GamifiedDashboardFrame accent="cost" label={label} className={className}>
-      <div className={cn("mt-5", !hasResult && "opacity-70")}>
+      <div className={cn("mt-3", !hasResult && "opacity-70")}>
         {!hasResult ? (
-          <p className="text-xl font-medium leading-snug text-muted-foreground sm:text-2xl">
+          <p className="text-lg font-medium leading-snug text-muted-foreground">
             {emptyMessage}
           </p>
         ) : (
@@ -38,13 +38,13 @@ export function CostGamifiedResult({
             <div className={calculatorResultValueRow}>
               <span className={calculatorResultValue}>{displayValue}</span>
               {unit ? (
-                <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
+                <span className="calculator-result-unit font-medium text-muted-foreground">
                   {unit}
                 </span>
               ) : null}
             </div>
             {detail ? (
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 {detail}
               </p>
             ) : null}

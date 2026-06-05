@@ -25,10 +25,10 @@ export function GamifiedDashboardFrame({
       data-accent={accent}
     >
       <div className="relative min-w-0">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           {label}
         </p>
-        {children}
+        <div className="mt-3">{children}</div>
       </div>
     </section>
   );

@@ -125,7 +125,7 @@ export function MicrogridRoiCalculator({ className }: MicrogridRoiCalculatorProp
               emptyMessage={definition.result.emptyMessage}
             />
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="calculator-secondary-results">
               <CalculatorResult
                 label="10-year cumulative ROI"
                 value={parsed ? `${parsed.roi10Years}` : null}

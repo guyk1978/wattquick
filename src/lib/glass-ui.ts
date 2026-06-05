@@ -47,7 +47,7 @@ export function calculatorCommandPanel() {
 
 /** Result block — flat dark surface, sans-serif values */
 export function calculatorCommandResult() {
-  return cn("calculator-command-result", calculatorResultCard, "p-6 sm:p-8");
+  return cn("calculator-command-result", calculatorResultCard, "p-4 sm:p-5");
 }
 
 /** Primary result value — clean sans-serif (no mono glow) */
@@ -78,10 +78,10 @@ export const neonHeroNumber =
 
 /** Grid wrappers for pairs/triplets of CalculatorResult cards */
 export const calculatorResultsGrid =
-  "calculator-results-grid grid grid-cols-1 gap-4 sm:grid-cols-2";
+  "calculator-results-grid calculator-secondary-results";
 
 export const calculatorResultsGrid3 =
-  "calculator-results-grid grid grid-cols-1 gap-4 sm:grid-cols-3";
+  "calculator-results-grid calculator-secondary-results";
 
 export const calculatorResultCard = "calculator-result-card min-w-0";
 

@@ -34,32 +34,32 @@ export function CalculatorResult({
       className={cn(calculatorCommandResult(), className)}
     >
       <div className="relative min-w-0">
-        <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           {label}
         </p>
 
         <div
           key={resultKey}
-          className={cn("mt-4 min-h-[4.5rem] min-w-0", !hasResult && "opacity-70")}
+          className={cn("mt-3 min-h-[3.5rem] min-w-0", !hasResult && "opacity-70")}
         >
           {hasResult ? (
             <>
               <div className={calculatorResultValueRow}>
                 <span className={calculatorResultValue}>{value}</span>
                 {unit ? (
-                  <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
+                  <span className="calculator-result-unit font-medium text-muted-foreground">
                     {unit}
                   </span>
                 ) : null}
               </div>
               {detail ? (
-                <p className="mt-3 text-center text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {detail}
                 </p>
               ) : null}
             </>
           ) : (
-            <p className="text-center text-xl font-medium leading-snug text-muted-foreground sm:text-2xl">
+            <p className="text-lg font-medium leading-snug text-muted-foreground">
               {emptyMessage}
             </p>
           )}

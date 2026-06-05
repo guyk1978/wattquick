@@ -307,7 +307,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-4">
+                <div className="calculator-secondary-results">
                   <div className="space-y-2 sm:col-span-2">
                     <Label
                       htmlFor={`${line.id}-type`}
@@ -454,7 +454,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
         ) : null}
 
         {parsed ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="calculator-secondary-results">
             <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Annual energy
