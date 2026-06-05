@@ -1539,6 +1539,25 @@
   box-shadow: none;
 }
 
+/* —— Header calculators mega menu —— */
+.calculators-mega-menu__panel {
+  border: none;
+  box-shadow: 0 16px 40px rgb(15 23 42 / 0.1);
+}
+
+.dark .calculators-mega-menu__panel {
+  box-shadow: 0 24px 48px rgb(0 0 0 / 0.45);
+}
+
+.calculators-mega-menu__card {
+  border: none;
+  border-left: 2px solid color-mix(in srgb, var(--mega-cat) 50%, transparent);
+}
+
+.dark .calculators-mega-menu__card {
+  border-left-color: color-mix(in srgb, var(--mega-cat) 60%, transparent);
+}
+
 .calculator-list-item a:hover,
 .calculator-list-item a:focus-visible {
   border-left-color: color-mix(in srgb, var(--cat) 55%, transparent);

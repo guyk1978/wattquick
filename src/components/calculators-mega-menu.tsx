@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { useMemo, useRef, useState } from "react";
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   CALCULATOR_CATEGORY_LABELS,
   getAllCalculatorMeta,
 } from "@/lib/calculators";
+import { calculatorCommandInput } from "@/lib/glass-ui";
 import { MEGA_MENU_CATEGORIES, megaMenuIconProps } from "@/lib/mega-menu-categories";
 import { cn } from "@/lib/utils";
 
@@ -59,9 +61,8 @@ export function CalculatorsMegaMenu() {
         href="/calculators/"
         className={cn(
           "inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium",
-          "text-muted-foreground transition-[color,transform,box-shadow,background] duration-200",
-          "hover:scale-[1.02] hover:bg-white/50 hover:text-foreground",
-          "dark:hover:bg-white/5",
+          "text-muted-foreground transition-colors duration-150",
+          "hover:bg-white/50 hover:text-foreground dark:hover:bg-white/5",
           open && "bg-white/60 text-foreground dark:bg-white/10"
         )}
         aria-expanded={open}
@@ -70,7 +71,7 @@ export function CalculatorsMegaMenu() {
         Calculators
         <ChevronDown
           className={cn(
-            "size-3.5 opacity-60 transition-transform duration-200",
+            "size-3.5 opacity-60 transition-transform duration-150",
             open && "rotate-180"
           )}
           aria-hidden
@@ -79,24 +80,18 @@ export function CalculatorsMegaMenu() {
 
       <div
         className={cn(
-          "absolute left-1/2 top-full z-[60] w-[min(800px,calc(100vw-2rem))] -translate-x-1/2 pt-2",
-          "transition-[opacity,visibility,transform] duration-200 ease-out",
+          "absolute left-1/2 top-full z-[60] w-[min(760px,calc(100vw-2rem))] -translate-x-1/2 pt-1.5",
+          "transition-[opacity,visibility] duration-150",
           open
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-1 opacity-0 pointer-events-none"
+            ? "visible opacity-100"
+            : "invisible opacity-0 pointer-events-none"
         )}
       >
-        <div
-          className={cn(
-            "overflow-hidden rounded-2xl border border-slate-200/80",
-            "bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-xl",
-            "dark:border-slate-700/60 dark:bg-slate-900/95 dark:shadow-black/40"
-          )}
-        >
-          <div className="border-b border-slate-200/70 p-4 dark:border-slate-700/50">
+        <div className="calculators-mega-menu__panel overflow-hidden rounded-none bg-card dark:bg-[rgb(6_10_22/0.96)]">
+          <div className="border-b border-border/40 px-2.5 py-2 sm:px-3">
             <div className="relative">
               <Search
-                className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400"
+                className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground"
                 aria-hidden
               />
               <Input
@@ -105,20 +100,23 @@ export function CalculatorsMegaMenu() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Quick find a calculator…"
                 className={cn(
-                  "h-10 rounded-xl border-slate-200 bg-slate-100/80 pl-9 text-slate-900",
-                  "placeholder:text-slate-500 focus-visible:ring-slate-400/30",
-                  "dark:border-slate-600 dark:bg-slate-800/80 dark:text-white dark:placeholder:text-slate-400"
+                  calculatorCommandInput,
+                  "h-9 rounded-none border-0 pl-8 text-sm shadow-none focus-visible:ring-0"
                 )}
                 aria-label="Quick find a calculator"
               />
             </div>
           </div>
 
-          <div className="max-h-[min(60vh,420px)] overflow-y-auto p-4">
+          <div className="max-h-[min(58vh,380px)] overflow-y-auto px-2.5 py-2 sm:px-3">
             {showResults ? (
-              <ul className="space-y-1" role="listbox" aria-label="Calculator search results">
+              <ul
+                className="divide-y divide-border/40"
+                role="listbox"
+                aria-label="Calculator search results"
+              >
                 {searchResults.length === 0 ? (
-                  <li className="px-2 py-6 text-center text-sm text-muted-foreground">
+                  <li className="px-1 py-4 text-center text-xs text-muted-foreground">
                     No calculators match &ldquo;{query.trim()}&rdquo;
                   </li>
                 ) : (
@@ -127,18 +125,24 @@ export function CalculatorsMegaMenu() {
                       <Link
                         href={calc.href}
                         className={cn(
-                          "flex flex-col gap-0.5 rounded-xl px-3 py-2.5",
-                          "transition-colors hover:bg-slate-100 dark:hover:bg-slate-800/80"
+                          "group flex items-center justify-between gap-2 rounded-none px-1.5 py-2",
+                          "transition-colors hover:bg-muted/40 dark:hover:bg-[rgb(8_14_28/0.55)]"
                         )}
                         onClick={() => setOpen(false)}
                         role="option"
                       >
-                        <span className="text-sm font-semibold text-slate-900 dark:text-white">
-                          {calc.title}
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-medium text-foreground">
+                            {calc.title}
+                          </span>
+                          <span className="block truncate text-[0.6875rem] text-muted-foreground">
+                            {CALCULATOR_CATEGORY_LABELS[calc.category]} · {calc.tag}
+                          </span>
                         </span>
-                        <span className="text-xs text-slate-500 dark:text-slate-400">
-                          {CALCULATOR_CATEGORY_LABELS[calc.category]} · {calc.tag}
-                        </span>
+                        <ArrowUpRight
+                          className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                          aria-hidden
+                        />
                       </Link>
                     </li>
                   ))
@@ -146,7 +150,7 @@ export function CalculatorsMegaMenu() {
               </ul>
             ) : (
               <div
-                className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+                className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
                 role="navigation"
                 aria-label="Calculator categories"
               >
@@ -156,34 +160,24 @@ export function CalculatorsMegaMenu() {
                     <Link
                       key={item.category}
                       href={item.href}
-                      className={cn(
-                        "group/card flex gap-3 rounded-xl border border-slate-200/80 p-3",
-                        "bg-white/60 transition-[transform,box-shadow,border-color] duration-200",
-                        "hover:-translate-y-0.5 hover:border-slate-300",
-                        "dark:border-slate-700/60 dark:bg-slate-800/40 dark:hover:border-slate-600"
-                      )}
-                      style={
-                        {
-                          "--mega-cat": item.color,
-                        } as React.CSSProperties
-                      }
+                      className="calculators-mega-menu__card group/card flex gap-2 rounded-none px-2 py-1.5 transition-colors hover:bg-muted/40 dark:hover:bg-[rgb(8_14_28/0.55)]"
+                      style={{ "--mega-cat": item.color } as CSSProperties}
                       onClick={() => setOpen(false)}
                     >
                       <span
                         className={cn(
-                          "flex size-10 shrink-0 items-center justify-center rounded-lg",
-                          "bg-[color-mix(in_srgb,var(--mega-cat)_18%,transparent)]",
-                          "transition-shadow duration-200",
-                          "group-hover/card:shadow-[0_0_20px_-4px_var(--mega-cat)]"
+                          "flex size-7 shrink-0 items-center justify-center rounded-none",
+                          "bg-[color-mix(in_srgb,var(--mega-cat)_12%,transparent)]",
+                          "dark:bg-[color-mix(in_srgb,var(--mega-cat)_18%,transparent)]"
                         )}
                       >
                         <Icon {...megaMenuIconProps(item.color)} aria-hidden />
                       </span>
-                      <span className="min-w-0">
-                        <span className="block text-sm font-bold text-slate-900 transition-colors group-hover/card:text-[var(--mega-cat)] dark:text-white">
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-xs font-semibold text-foreground">
                           {item.label}
                         </span>
-                        <span className="mt-0.5 line-clamp-2 text-xs leading-snug text-slate-500 dark:text-slate-400">
+                        <span className="mt-0.5 line-clamp-1 text-[0.6875rem] leading-snug text-muted-foreground">
                           {item.description}
                         </span>
                       </span>
@@ -194,17 +188,20 @@ export function CalculatorsMegaMenu() {
             )}
           </div>
 
-          <div className="border-t border-slate-200/70 px-4 py-3 dark:border-slate-700/50">
+          <div className="border-t border-border/40 px-2.5 py-2 sm:px-3">
             <Link
               href="/calculators/"
               className={cn(
-                "inline-flex items-center gap-1.5 text-sm font-semibold text-primary",
-                "transition-colors hover:text-primary/80"
+                "group inline-flex items-center gap-1 text-xs font-medium text-foreground sm:text-sm",
+                "transition-colors hover:text-primary"
               )}
               onClick={() => setOpen(false)}
             >
               View all calculators
-              <ArrowRight className="size-4" aria-hidden />
+              <ArrowUpRight
+                className="size-3.5 opacity-60 transition-opacity group-hover:opacity-100"
+                aria-hidden
+              />
             </Link>
           </div>
         </div>
