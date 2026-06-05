@@ -4,6 +4,11 @@ import type { ProjectSnapshot, WattQuickProject } from "@/lib/project-store";
 const SHARE_VERSION = 1;
 const HASH_PREFIX = "d=";
 
+export interface ProjectShareApproval {
+  clientName: string;
+  approvedAt: string;
+}
+
 export interface ProjectSharePayload {
   v: typeof SHARE_VERSION;
   id: string;
@@ -13,6 +18,14 @@ export interface ProjectSharePayload {
   updatedAt: string;
   createdAt: string;
   snapshots: ProjectSnapshot[];
+  technicianContact?: string;
+  approval?: ProjectShareApproval;
+}
+
+export interface ResolvedSharedProject {
+  project: WattQuickProject;
+  approval: ProjectShareApproval | null;
+  technicianContact: string | null;
 }
 
 function toBase64Url(bytes: Uint8Array): string {
@@ -45,6 +58,9 @@ export function projectToSharePayload(project: WattQuickProject): ProjectSharePa
     updatedAt: project.updatedAt,
     createdAt: project.createdAt,
     snapshots: project.snapshots.map((snapshot) => ({ ...snapshot })),
+    ...(project.technicianContact
+      ? { technicianContact: project.technicianContact }
+      : {}),
   };
 }
 
@@ -57,6 +73,9 @@ export function sharePayloadToProject(payload: ProjectSharePayload): WattQuickPr
     currency: resolveProjectCurrency(payload.currency),
     costPrices: { ...payload.costPrices },
     snapshots: payload.snapshots.map((snapshot) => ({ ...snapshot })),
+    ...(payload.technicianContact
+      ? { technicianContact: payload.technicianContact }
+      : {}),
   };
 }
 
@@ -86,9 +105,14 @@ export function decodeSharePayload(encoded: string): ProjectSharePayload | null 
 
 export function buildProjectShareUrl(
   project: WattQuickProject,
-  origin = typeof window !== "undefined" ? window.location.origin : "https://wattquick.com"
+  origin = typeof window !== "undefined" ? window.location.origin : "https://wattquick.com",
+  approval?: ProjectShareApproval | null
 ): string {
-  const encoded = encodeSharePayload(project);
+  let payload = projectToSharePayload(project);
+  if (approval) {
+    payload = { ...payload, approval };
+  }
+  const encoded = toBase64Url(new TextEncoder().encode(JSON.stringify(payload)));
   const base = origin.replace(/\/$/, "");
   return `${base}/projects/share/${project.id}/#${HASH_PREFIX}${encoded}`;
 }
@@ -120,6 +144,13 @@ export function resolveSharedProject(
   projectId: string,
   hashEncoded?: string | null
 ): WattQuickProject | null {
+  return resolveSharedProjectData(projectId, hashEncoded)?.project ?? null;
+}
+
+export function resolveSharedProjectData(
+  projectId: string,
+  hashEncoded?: string | null
+): ResolvedSharedProject | null {
   const encoded =
     hashEncoded ??
     readShareHashPayload() ??
@@ -134,5 +165,40 @@ export function resolveSharedProject(
     return null;
   }
 
-  return sharePayloadToProject(payload);
+  return {
+    project: sharePayloadToProject(payload),
+    approval: payload.approval ?? null,
+    technicianContact: payload.technicianContact ?? null,
+  };
+}
+
+export function appendApprovalToSharePayload(
+  clientName: string,
+  hashEncoded?: string | null
+): string | null {
+  const encoded = hashEncoded ?? readShareHashPayload();
+  if (!encoded) return null;
+
+  const payload = decodeSharePayload(encoded);
+  if (!payload) return null;
+
+  const trimmedName = clientName.trim();
+  if (!trimmedName) return null;
+
+  const updated: ProjectSharePayload = {
+    ...payload,
+    approval: {
+      clientName: trimmedName,
+      approvedAt: new Date().toISOString(),
+    },
+  };
+
+  return toBase64Url(new TextEncoder().encode(JSON.stringify(updated)));
+}
+
+export function updateShareUrlHash(encoded: string): void {
+  if (typeof window === "undefined") return;
+  const nextHash = `${HASH_PREFIX}${encoded}`;
+  if (window.location.hash === `#${nextHash}`) return;
+  window.history.replaceState(null, "", `#${nextHash}`);
 }

@@ -29,6 +29,8 @@ export interface WattQuickProject {
   costPrices?: Record<string, string>;
   /** Quote currency for BOM worksheet and PDF export */
   currency?: ProjectCurrency;
+  /** Email or phone (WhatsApp) for client approval notifications */
+  technicianContact?: string;
 }
 
 export type ProjectSavePayload = {
@@ -151,6 +153,24 @@ export function addSnapshotToProject(
     ...projects[index]!,
     updatedAt: snapshot.timestamp,
     snapshots: [snapshot, ...projects[index]!.snapshots],
+  };
+  writeProjects(projects);
+  return projects[index]!;
+}
+
+export function updateProjectTechnicianContact(
+  projectId: string,
+  contact: string
+): WattQuickProject | null {
+  const projects = listProjects();
+  const index = projects.findIndex((project) => project.id === projectId);
+  if (index < 0) return null;
+
+  const trimmed = contact.trim();
+  projects[index] = {
+    ...projects[index]!,
+    technicianContact: trimmed || undefined,
+    updatedAt: new Date().toISOString(),
   };
   writeProjects(projects);
   return projects[index]!;

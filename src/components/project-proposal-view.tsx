@@ -5,9 +5,14 @@ import { useEffect, useMemo, useState } from "react";
 import { Calculator, Zap } from "lucide-react";
 import { ProjectCostWorksheet } from "@/components/project-cost-worksheet";
 import { ProjectEngineeringRollup } from "@/components/project-engineering-rollup";
+import { ProjectProposalApproval } from "@/components/project-proposal-approval";
 import { getProjectCurrency } from "@/lib/project-currency";
 import { computeEngineeringRollup } from "@/lib/project-rollup";
-import { readShareHashPayload, resolveSharedProject } from "@/lib/project-share";
+import {
+  readShareHashPayload,
+  resolveSharedProjectData,
+  type ProjectShareApproval,
+} from "@/lib/project-share";
 import type { WattQuickProject } from "@/lib/project-store";
 
 interface ProjectProposalViewProps {
@@ -16,6 +21,8 @@ interface ProjectProposalViewProps {
 
 export function ProjectProposalView({ projectId }: ProjectProposalViewProps) {
   const [project, setProject] = useState<WattQuickProject | null>(null);
+  const [approval, setApproval] = useState<ProjectShareApproval | null>(null);
+  const [technicianContact, setTechnicianContact] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
@@ -25,9 +32,11 @@ export function ProjectProposalView({ projectId }: ProjectProposalViewProps) {
     );
     const resolvedId = pathMatch?.[1] ?? projectId;
     const hashPayload = readShareHashPayload();
-    const resolved = resolveSharedProject(resolvedId, hashPayload);
+    const resolved = resolveSharedProjectData(resolvedId, hashPayload);
     if (resolved) {
-      setProject(resolved);
+      setProject(resolved.project);
+      setApproval(resolved.approval);
+      setTechnicianContact(resolved.technicianContact);
       setError(null);
     } else {
       setError(
@@ -82,6 +91,12 @@ export function ProjectProposalView({ projectId }: ProjectProposalViewProps) {
           {new Date(project.updatedAt).toLocaleDateString()}
         </p>
       </header>
+
+      <ProjectProposalApproval
+        project={project}
+        initialApproval={approval}
+        technicianContact={technicianContact}
+      />
 
       {rollup ? (
         <>
