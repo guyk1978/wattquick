@@ -18,9 +18,9 @@ import { CalculatorAssumptionNote } from "@/components/calculator/calculator-ass
 import { CalculatorField } from "@/components/calculator/calculator-field";
 import { CalculatorPrimaryMetric } from "@/components/calculator/calculator-primary-metric";
 import {
-  CalculatorResultsTable,
-  type CalculatorResultRow,
-} from "@/components/calculator/calculator-results-table";
+  StandbyPowerResultsGrid,
+  type StandbyPowerResultRow,
+} from "@/components/calculator/standby-power-results-grid";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -58,39 +58,51 @@ function createDeviceRow(
   };
 }
 
+function formatCompactAnnualCost(amount: number): string {
+  return `${formatCurrency(amount)}/yr`;
+}
+
 function buildResultRows(
   parsed: NonNullable<ReturnType<typeof calculateStandbyPowerAggregator>>
-): CalculatorResultRow[] {
-  const summaryRows: CalculatorResultRow[] = [
+): StandbyPowerResultRow[] {
+  const summaryRows: StandbyPowerResultRow[] = [
     {
+      id: "total-standby-watts",
       label: "Total standby watts",
-      value: formatNumber(parsed.totalStandbyWatts, { maxDecimals: 0 }),
-      unit: "W",
+      display: `${formatNumber(parsed.totalStandbyWatts, { maxDecimals: 0 })} W`,
+      accent: true,
     },
     {
+      id: "total-annual-energy",
       label: "Total annual energy",
-      value: formatNumber(parsed.annualKwh, { maxDecimals: 0 }),
-      unit: "kWh",
+      display: `${formatNumber(parsed.annualKwh, { maxDecimals: 0 })} kWh/yr`,
+      accent: true,
     },
     {
+      id: "est-annual-cost",
       label: "Est. annual cost",
-      value: formatCurrency(parsed.annualCost),
+      display: formatCompactAnnualCost(parsed.annualCost),
+      accent: true,
     },
     {
+      id: "what-you-could-buy",
       label: "What you could buy",
-      value: parsed.comparisonLabel,
+      display: parsed.comparisonLabel,
+      multiline: true,
     },
     {
+      id: "potential-savings",
       label: "Potential savings",
-      value: formatCurrency(parsed.potentialAnnualSavings),
-      unit: "/yr",
+      display: formatCompactAnnualCost(parsed.potentialAnnualSavings),
+      accent: true,
     },
   ];
 
-  const deviceRows: CalculatorResultRow[] = parsed.devices.map((device) => ({
+  const deviceRows: StandbyPowerResultRow[] = parsed.devices.map((device) => ({
+    id: `device-${device.name}`,
     label: device.name,
-    value: formatCurrency(device.annualCost),
-    unit: "/yr",
+    display: formatCompactAnnualCost(device.annualCost),
+    accent: true,
   }));
 
   return [...summaryRows, ...deviceRows];
@@ -194,7 +206,7 @@ export function StandbyPowerAggregatorCalculator({
   const hasResults = resultRows.length > 0;
 
   const primaryDetail = parsed
-    ? `${formatNumber(parsed.annualKwh, { maxDecimals: 0 })} kWh/yr · ${formatNumber(parsed.totalStandbyWatts, { maxDecimals: 0 })} W · ${formatCurrency(parsed.monthlyCost)}/mo`
+    ? `${formatNumber(parsed.annualKwh, { maxDecimals: 0 })} kWh/yr · ${formatNumber(parsed.totalStandbyWatts, { maxDecimals: 0 })} W`
     : null;
 
   const rateField = definition.fields.find((field) => field.id === "ratePerKwh");
@@ -342,8 +354,12 @@ export function StandbyPowerAggregatorCalculator({
           </div>
         }
         results={
-          <div className="flex w-full min-w-0 flex-col gap-3">
-            <GamifiedDashboardFrame accent="primary" label="Annual vampire cost">
+          <div className="flex w-full min-w-0 flex-col gap-2">
+            <GamifiedDashboardFrame
+              accent="primary"
+              label="Annual vampire cost"
+              className="!p-3 sm:!p-4"
+            >
               <CalculatorPrimaryMetric
                 value={parsed ? formatCurrency(parsed.annualCost) : null}
                 unit="/yr"
@@ -352,12 +368,12 @@ export function StandbyPowerAggregatorCalculator({
                 animateNumeric={false}
               />
             </GamifiedDashboardFrame>
-            <CalculatorResultsTable rows={resultRows} />
+            <StandbyPowerResultsGrid rows={resultRows} />
             {hasResults ? (
               <div
                 className={cn(
                   flatAlert,
-                  "flex gap-2.5 px-3 py-2.5 text-sm leading-relaxed text-muted-foreground"
+                  "flex gap-2 px-2.5 py-2 text-xs leading-relaxed text-muted-foreground"
                 )}
                 role="status"
               >
