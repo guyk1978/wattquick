@@ -1,10 +1,22 @@
 import { cn } from "@/lib/utils";
 
-/** Deep glass panel — blur, inset lip, theme-aware */
-export const glassSurface = "glass-surface";
+/** Flat panel — white card, 1px border, sharp corners (replaces glass-surface) */
+export const flatPanel = "flat-panel";
 
-/** Gradient neon border + ambient glow (set --neon-from / --neon-to or use modifiers) */
-export const glassNeon = "glass-neon";
+/** Chart / gauge wrapper inside calculators */
+export const flatVisualPanel = "flat-visual-panel";
+
+/** Tip, warning, or info callout row */
+export const flatAlert = "flat-alert";
+
+/** SEO aside / nested comparison block */
+export const flatSubPanel = "flat-subpanel";
+
+/** @deprecated Use flatPanel */
+export const glassSurface = flatPanel;
+
+/** @deprecated Neon borders removed — use flatPanel */
+export const glassNeon = "";
 
 export type GlassNeonAccent =
   | "battery"
@@ -13,33 +25,19 @@ export type GlassNeonAccent =
   | "primary"
   | "cat";
 
-export function glassNeonAccent(accent: GlassNeonAccent) {
-  const map: Record<GlassNeonAccent, string> = {
-    battery: "glass-neon--battery",
-    ev: "glass-neon--ev",
-    cost: "glass-neon--cost",
-    primary: "glass-neon--primary",
-    cat: "glass-neon-cat",
-  };
-  return map[accent];
+/** @deprecated No-op — accent rings removed */
+export function glassNeonAccent(_accent: GlassNeonAccent) {
+  return "";
 }
 
-export function glassDashboard(accent: GlassNeonAccent = "primary") {
-  return cn(
-    glassSurface,
-    glassNeon,
-    glassNeonAccent(accent),
-    "relative overflow-hidden rounded-2xl sm:rounded-3xl"
-  );
+/** Dashboard / diagram shell — flat, no neon */
+export function glassDashboard(_accent: GlassNeonAccent = "primary") {
+  return cn(flatPanel, "relative overflow-hidden");
 }
 
+/** Generic flat panel */
 export function glassPanel() {
-  return cn(
-    glassSurface,
-    glassNeon,
-    glassNeonAccent("primary"),
-    "relative overflow-hidden rounded-2xl sm:rounded-3xl"
-  );
+  return cn(flatPanel, "relative overflow-hidden");
 }
 
 /** Command-center calculator shell — square corners, deep shadow, no neon ring */

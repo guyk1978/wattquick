@@ -1,6 +1,6 @@
 "use client";
 
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Leaf } from "lucide-react";
 
@@ -29,25 +29,25 @@ export function CarbonSavingsVisual({
       role="img"
       aria-label={`${savingsPercent.toFixed(0)} percent carbon savings with renewable charging`}
     >
-      <div className={cn(glassSurface, "space-y-4 rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "space-y-4 rounded-none p-4")}>
         <div className="space-y-2">
           <div className="flex justify-between text-xs font-medium text-muted-foreground">
             <span>Grid-charged losses</span>
             <span className="tabular-nums">{gridCarbonKg.toFixed(1)} kg/yr</span>
           </div>
-          <div className="relative h-3 overflow-hidden rounded-full bg-muted/80">
+          <div className="relative h-3 overflow-hidden rounded-none bg-muted/80">
             <div
-              className="absolute inset-y-0 left-0 rounded-full bg-zinc-500/70 dark:bg-zinc-400/50"
+              className="absolute inset-y-0 left-0 rounded-none bg-zinc-500/70 dark:bg-zinc-400/50"
               style={{ width: `${remainingPct}%` }}
             />
             <div
-              className="absolute inset-y-0 right-0 rounded-full bg-gradient-to-l from-emerald-500 to-green-400 transition-[width] duration-700 ease-out"
+              className="absolute inset-y-0 right-0 rounded-none bg-gradient-to-l from-emerald-500 to-green-400 transition-[width] duration-700 ease-out"
               style={{ width: `${savedPct}%` }}
             />
           </div>
         </div>
 
-        <div className="flex items-center gap-2 rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-2">
+        <div className="flex items-center gap-2 rounded-none border border-emerald-500/25 bg-emerald-500/10 px-3 py-2">
           <Leaf
             className="size-4 shrink-0 text-emerald-600 dark:text-emerald-400"
             aria-hidden

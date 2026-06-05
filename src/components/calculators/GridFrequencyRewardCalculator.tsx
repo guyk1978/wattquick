@@ -176,7 +176,7 @@ export function GridFrequencyRewardCalculator({
 
       {parsed ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-violet-500/30 bg-violet-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-violet-500/30 bg-violet-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Activity
@@ -219,7 +219,7 @@ export function GridFrequencyRewardCalculator({
                 Availability scenarios
               </h3>
             </div>
-            <div className="overflow-x-auto rounded-xl border border-border/60">
+            <div className="overflow-x-auto rounded-none border border-border/60">
               <table className="w-full min-w-[280px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-border/60 bg-muted/40 text-xs font-semibold uppercase tracking-wide text-muted-foreground">

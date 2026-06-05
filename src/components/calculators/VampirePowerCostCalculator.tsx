@@ -288,7 +288,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
             {lines.map((line, index) => (
               <li
                 key={line.id}
-                className="rounded-2xl border border-border/50 bg-muted/15 p-4 sm:p-5"
+                className="rounded-none border border-border/50 bg-muted/15 p-4 sm:p-5"
               >
                 <div className="mb-3 flex items-center justify-between gap-2">
                   <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -388,7 +388,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
             >
               Electricity rate
             </Label>
-            <span className="shrink-0 rounded-md bg-muted/80 px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+            <span className="shrink-0 rounded-none bg-muted/80 px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
               $/kWh
             </span>
           </div>
@@ -418,7 +418,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
       />
 
       {parsed && lineBreakdown.length > 0 ? (
-          <div className="overflow-hidden rounded-xl border border-border/50">
+          <div className="overflow-hidden rounded-none border border-border/50">
             <table className="w-full text-left text-sm">
               <caption className="sr-only">Cost breakdown by device row</caption>
               <thead>
@@ -455,7 +455,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
 
         {parsed ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-border/50 bg-muted/25 px-4 py-3">
+            <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Annual energy
               </p>
@@ -464,7 +464,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
                 <span className="text-sm font-medium text-muted-foreground">kWh/yr</span>
               </p>
             </div>
-            <div className="rounded-xl border border-border/50 bg-muted/25 px-4 py-3">
+            <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Monthly cost
               </p>
@@ -492,7 +492,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
         <ShareButtons title={definition.title} className="pt-1" />
 
         <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="vampire-learn-more-heading"
         >
           <h2
@@ -509,7 +509,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    "group flex items-start justify-between gap-3 rounded-xl border border-border/40",
+                    "group flex items-start justify-between gap-3 rounded-none border border-border/40",
                     "bg-background/40 px-4 py-3 text-sm transition-colors",
                     "hover:border-primary/30 hover:bg-primary/5"
                   )}
@@ -538,7 +538,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
         </section>
 
         <section
-          className="rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:p-6"
+          className="rounded-none border border-primary/20 bg-primary/5 p-5 sm:p-6"
           aria-labelledby="vampire-cta-heading"
         >
           <h2

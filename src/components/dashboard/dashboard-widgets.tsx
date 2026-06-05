@@ -1,12 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { History } from "lucide-react";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { getDefaultResultSnapshot } from "@/lib/dashboard-snapshot";
 import type { RecentCalculatorEntry } from "@/lib/dashboard-storage";
-import { neonHeroNumber } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface DashboardWidgetsProps {
@@ -24,27 +21,26 @@ export function DashboardWidgets({
 
   return (
     <aside
-      className={cn("space-y-3", className)}
+      className={cn("space-y-2", className)}
       aria-labelledby="dashboard-recent-heading"
     >
       <div className="flex items-center gap-2">
-        <History className="size-3.5 text-cyan-400" aria-hidden />
         <h2
           id="dashboard-recent-heading"
-          className="text-[11px] font-semibold uppercase tracking-widest text-slate-400"
+          className="text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground"
         >
           Recent runs
         </h2>
       </div>
 
-      <ul className="grid list-none gap-2 p-0 sm:grid-cols-3 lg:grid-cols-1">
+      <ul className="grid list-none gap-1.5 p-0 sm:grid-cols-3 lg:grid-cols-1">
         {slots.map((i) => {
           const entry = recent[i];
           if (!entry) {
             return (
               <li key={`empty-${i}`}>
-                <div className="command-center-widget--empty rounded-lg border border-dashed border-white/10 px-2.5 py-2">
-                  <p className="text-[10px] leading-snug text-slate-500">
+                <div className="flat-subpanel border-dashed px-2 py-1.5">
+                  <p className="text-[10px] leading-snug text-muted-foreground">
                     Tap a flow node to log a run here.
                   </p>
                 </div>
@@ -59,41 +55,33 @@ export function DashboardWidgets({
 
           return (
             <li key={`${entry.id}-${entry.usedAt}`}>
-              <motion.button
+              <button
                 type="button"
-                layout
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
                 onClick={() => onOpenCalculator(entry.id)}
                 className={cn(
-                  "command-center-widget-compact flex w-full items-center gap-2 rounded-lg border border-white/10 bg-slate-900/70 px-2 py-1.5 text-left backdrop-blur-sm",
-                  "transition-[border-color,box-shadow] hover:border-cyan-500/30 hover:shadow-[0_0_16px_rgba(34,211,238,0.1)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50"
+                  "flat-panel flex w-full items-center gap-2 px-2 py-1.5 text-left",
+                  "transition-colors hover:bg-muted/30",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 )}
               >
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-cyan-500/10 text-cyan-400">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-none border border-border/50 bg-muted/30 text-primary">
                   <Icon className="size-3.5" strokeWidth={2} aria-hidden />
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[11px] font-medium text-slate-200">
+                  <span className="block truncate text-[11px] font-medium text-foreground">
                     {meta.title}
                   </span>
                   {snapshot ? (
-                    <span
-                      className={cn(
-                        neonHeroNumber,
-                        "dashboard-widget-stat mt-0.5 block text-cyan-300/95"
-                      )}
-                    >
+                    <span className="dashboard-widget-stat mt-0.5 block text-xs font-semibold text-foreground">
                       {snapshot}
                     </span>
                   ) : (
-                    <span className="mt-0.5 block text-[10px] text-slate-500">
+                    <span className="mt-0.5 block text-[10px] text-muted-foreground">
                       Open to calculate
                     </span>
                   )}
                 </span>
-              </motion.button>
+              </button>
             </li>
           );
         })}

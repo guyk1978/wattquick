@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NeonLiquidVessel } from "@/components/neon-liquid-vessel";
+import { Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface HomeHeroProps {
@@ -11,75 +11,36 @@ export function HomeHero({ calculatorCount, className }: HomeHeroProps) {
   return (
     <section
       className={cn(
-        "home-hero relative z-[1] overflow-hidden px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:pb-20 lg:pt-16",
+        "home-hero relative z-[1] px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-10 lg:pb-14 lg:pt-12",
         className
       )}
     >
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -left-24 -top-28 size-[28rem] rounded-full bg-emerald-400/10 blur-[120px] dark:hidden" />
-        <div className="absolute -right-20 top-0 size-[24rem] rounded-full bg-blue-500/10 blur-[120px] dark:hidden" />
-        <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-indigo-500/8 blur-[100px] dark:hidden" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      </div>
-
       <div className="relative mx-auto max-w-4xl text-center">
-        <NeonLiquidVessel />
+        <div className="mx-auto mb-6 flex size-14 items-center justify-center rounded-none border border-border/60 bg-card text-primary">
+          <Zap className="size-7" strokeWidth={2} aria-hidden />
+        </div>
 
-        <h1
-          className={cn(
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-3 motion-safe:fill-mode-both motion-safe:duration-500",
-            "text-4xl font-black leading-none tracking-tight",
-            "bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 bg-clip-text text-transparent",
-            "dark:from-cyan-300 dark:via-sky-400 dark:to-lime-400",
-            "md:text-6xl"
-          )}
-        >
+        <h1 className="text-4xl font-black leading-none tracking-tight text-foreground md:text-6xl">
           Instant answers for batteries, solar &amp; EV
         </h1>
 
-        <p
-          className={cn(
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:fill-mode-both motion-safe:duration-500 motion-safe:delay-150",
-            "mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
-          )}
-        >
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-muted-foreground md:text-xl">
           <span className="font-semibold text-foreground">
             {calculatorCount} free calculators.
           </span>{" "}
           No sign-up, no submit buttons—type and get results in milliseconds.
         </p>
 
-        <div
-          className={cn(
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:duration-500 motion-safe:delay-200",
-            "mt-10 flex flex-wrap items-center justify-center gap-3"
-          )}
-        >
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
           <Link
             href="#calculators"
-            className={cn(
-              "inline-flex h-12 items-center rounded-xl px-6 text-sm font-bold text-primary-foreground",
-              "bg-gradient-to-r from-primary via-blue-600 to-indigo-600",
-              "shadow-lg shadow-primary/25",
-              "dark:shadow-[0_0_36px_-4px_rgb(59_130_246/0.7),0_0_72px_-16px_rgb(34_211_238/0.45)]",
-              "transition-[transform,box-shadow,filter] duration-300",
-              "hover:scale-[1.03] hover:shadow-xl hover:brightness-110",
-              "dark:hover:shadow-[0_0_44px_-2px_rgb(59_130_246/0.8),0_0_88px_-12px_rgb(34_211_238/0.55)]",
-              "active:scale-[0.99]"
-            )}
+            className="flat-inline-action inline-flex h-11 items-center px-5 text-sm font-semibold"
           >
             Search calculators ↓
           </Link>
           <Link
             href="/calculators/"
-            className={cn(
-              "inline-flex h-12 items-center rounded-xl border border-border bg-card px-6 text-sm font-semibold text-foreground",
-              "shadow-sm transition-all duration-300",
-              "hover:border-primary/30 hover:bg-muted/50",
-              "dark:border-white/12 dark:bg-slate-950/55 dark:backdrop-blur-md",
-              "dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.1)]",
-              "dark:hover:border-white/20 dark:hover:bg-slate-900/65"
-            )}
+            className="inline-flex h-11 items-center rounded-none border border-border bg-card px-5 text-sm font-semibold text-foreground transition-colors hover:bg-white dark:border-white/12 dark:bg-[rgb(6_10_22/0.72)] dark:hover:bg-[rgb(8_14_28/0.85)]"
           >
             View all {calculatorCount}
           </Link>

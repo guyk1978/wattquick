@@ -1,6 +1,6 @@
 "use client";
 
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface VoltageDropVisualProps {
@@ -29,7 +29,7 @@ export function VoltageDropVisual({
       role="img"
       aria-label={`Voltage drop ${dropPercent.toFixed(1)} percent, ${voltageAtLoad} volts at load`}
     >
-      <div className={cn(glassSurface, "space-y-4 rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "space-y-4 rounded-none p-4")}>
         <div className="space-y-1.5">
           <div className="flex justify-between text-xs font-medium text-muted-foreground">
             <span>At load</span>
@@ -37,9 +37,9 @@ export function VoltageDropVisual({
               {voltageAtLoad.toFixed(1)} V
             </span>
           </div>
-          <div className="relative h-4 overflow-hidden rounded-full bg-muted/80">
+          <div className="relative h-4 overflow-hidden rounded-none bg-muted/80">
             <div
-              className="absolute inset-y-0 left-0 rounded-full bg-emerald-500/90 transition-[width] duration-700 ease-out"
+              className="absolute inset-y-0 left-0 rounded-none bg-emerald-500/90 transition-[width] duration-700 ease-out"
               style={{ width: `${deliveredPct}%` }}
             />
             <div

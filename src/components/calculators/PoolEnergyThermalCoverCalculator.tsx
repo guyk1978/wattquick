@@ -213,7 +213,7 @@ export function PoolEnergyThermalCoverCalculator({
       ) : null}
 
       <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="pool-cover-learn-heading"
         >
           <h2

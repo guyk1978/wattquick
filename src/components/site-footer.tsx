@@ -16,7 +16,7 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <span className="flex size-8 items-center justify-center rounded-none bg-primary text-primary-foreground">
                 <Zap className="size-4" strokeWidth={2.5} />
               </span>
               <span className="font-semibold tracking-tight">WattQuick</span>

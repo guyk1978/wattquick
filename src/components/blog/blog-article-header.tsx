@@ -32,7 +32,7 @@ export function BlogArticleHeader({ post, className }: BlogArticleHeaderProps) {
       <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
         <span
           className={cn(
-            "rounded-full border px-3 py-1 text-xs font-bold uppercase tracking-wide",
+            "rounded-none border px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide",
             theme.bg,
             theme.text,
             theme.border

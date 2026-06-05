@@ -137,7 +137,7 @@ export function GeneratorVsSolarHybridCalculator({
 
       {parsed && parsed.paybackYears !== null && parsed.annualSavings > 0 ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Sun className="size-5 shrink-0 text-amber-500 dark:text-amber-400" aria-hidden />
@@ -195,7 +195,7 @@ export function GeneratorVsSolarHybridCalculator({
         </div>
 
         {parsed ? (
-          <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
+          <div className="flex items-start gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
             <Fuel className="mt-0.5 size-4 shrink-0" aria-hidden />
             <p>
               Generator-only model: ~{parsed.dailyFuelLiters} L/day at your load

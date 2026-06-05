@@ -32,7 +32,7 @@ export function CalculatorLayout({
         className={cn(
           "mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground",
           "transition-colors duration-200 hover:text-foreground",
-          "rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          "rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         )}
       >
         <ArrowLeft className="size-4 shrink-0" aria-hidden />
@@ -41,10 +41,10 @@ export function CalculatorLayout({
 
       <header className="mb-8 space-y-4 sm:mb-10">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-primary/15 text-primary ring-1 ring-primary/20">
+          <span className="flex size-11 items-center justify-center rounded-none border border-border/60 bg-primary/10 text-primary">
             <Icon className="size-5" strokeWidth={2} aria-hidden />
           </span>
-          <span className="rounded-full border border-border/60 bg-muted/30 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="rounded-none border border-border/60 bg-muted/30 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             {calculator.tag}
           </span>
         </div>
@@ -63,7 +63,7 @@ export function CalculatorLayout({
 
         {seoContent ? (
           <aside
-            className="rounded-2xl border border-border/50 bg-muted/20 p-6 sm:p-8"
+            className="flat-subpanel p-4 sm:p-6"
             aria-label="Calculator guide"
           >
             {seoContent}

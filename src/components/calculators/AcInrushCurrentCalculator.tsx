@@ -161,7 +161,7 @@ export function AcInrushCurrentCalculator({
 
       {parsed && parsed.inrushRatio >= 7 ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Bolt
@@ -205,7 +205,7 @@ export function AcInrushCurrentCalculator({
         </div>
 
         {parsed ? (
-          <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
+          <div className="flex items-start gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
             <Zap className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
             <p>
               Inrush lasts milliseconds—breakers tolerate brief magnetic overload.

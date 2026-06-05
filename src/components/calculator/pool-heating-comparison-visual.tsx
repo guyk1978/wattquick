@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency, formatNumber } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Flame, Snowflake } from "lucide-react";
 
@@ -31,7 +31,7 @@ export function PoolHeatingComparisonVisual({
       role="img"
       aria-label={`Monthly pool heating: electric ${formatCurrency(monthlyHeatingCostElectric)}, heat pump COP ${heatPumpCop} ${formatCurrency(monthlyHeatingCostHeatPump)}, saving ${formatCurrency(monthlyHeatingSavingsHpVsElectric)}`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4 sm:p-6")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4 sm:p-6")}>
         <p className="mb-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Heating technology comparison
         </p>
@@ -78,7 +78,7 @@ export function PoolHeatingComparisonVisual({
         </div>
 
         {monthlyHeatingSavingsHpVsElectric > 0 ? (
-          <div className="mx-auto mt-5 max-w-sm rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-center">
+          <div className="mx-auto mt-5 max-w-sm rounded-none border border-cyan-500/30 bg-cyan-500/10 px-4 py-3 text-center">
             <p className="text-xs font-medium text-muted-foreground">
               Savings vs. resistance heater
             </p>
@@ -89,7 +89,7 @@ export function PoolHeatingComparisonVisual({
           </div>
         ) : null}
 
-        <div className="mt-5 overflow-x-auto rounded-xl border border-border/40 bg-muted/15">
+        <div className="mt-5 overflow-x-auto rounded-none border border-border/40 bg-muted/15">
           <table className="w-full min-w-[18rem] text-center text-sm">
             <thead>
               <tr className="border-b border-border/50 text-xs uppercase tracking-wide text-muted-foreground">

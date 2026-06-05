@@ -233,7 +233,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
             ) : (
               <div className="flex flex-col gap-5">
                 <div
-                  className="flex rounded-xl border border-border/50 bg-muted/30 p-1"
+                  className="flex rounded-none border border-border/50 bg-muted/30 p-1"
                   role="tablist"
                   aria-label="Comparison chart view"
                 >
@@ -250,7 +250,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                       aria-selected={chartView === tab.id}
                       onClick={() => setChartView(tab.id)}
                       className={cn(
-                        "flex-1 rounded-lg px-3 py-2 text-xs font-semibold transition-colors sm:text-sm",
+                        "flex-1 rounded-none px-3 py-2 text-xs font-semibold transition-colors sm:text-sm",
                         chartView === tab.id
                           ? "bg-background text-foreground shadow-sm ring-1 ring-border/60"
                           : "text-muted-foreground hover:text-foreground"
@@ -282,7 +282,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                         {breakEvenDetail}
                       </p>
                     ) : null}
-                    <div className="flex items-center gap-2 rounded-xl border border-primary/25 bg-primary/10 px-3 py-2 text-sm font-medium text-foreground">
+                    <div className="flex items-center gap-2 rounded-none border border-primary/25 bg-primary/10 px-3 py-2 text-sm font-medium text-foreground">
                       <Timer className="size-4 shrink-0 text-primary" aria-hidden />
                       <span>
                         {formatCurrency(parsePositive(values.ledBulbPrice ?? "") ?? 0)} bulb ÷{" "}
@@ -300,7 +300,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
 
       {parsed && !hasSavings ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-foreground/90"
           role="status"
         >
           <Clock className="size-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
@@ -313,7 +313,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
 
       {parsed && hasSavings ? (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
+            <div className="rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Annual financial savings
               </p>
@@ -326,7 +326,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                 /day
               </p>
             </div>
-            <div className="rounded-xl border border-emerald-500/35 bg-emerald-500/[0.12] px-4 py-4 dark:bg-emerald-500/10">
+            <div className="rounded-none border border-emerald-500/35 bg-emerald-500/[0.12] px-4 py-4 dark:bg-emerald-500/10">
               <div className="flex items-center gap-2">
                 <TreeDeciduous
                   className="size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
@@ -376,7 +376,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
 
         {parsed && hasSavings ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-border/50 bg-muted/25 px-4 py-3">
+            <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Power saved
               </p>
@@ -385,7 +385,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                 <span className="text-sm font-medium text-muted-foreground">W per bulb</span>
               </p>
             </div>
-            <div className="rounded-xl border border-border/50 bg-muted/25 px-4 py-3">
+            <div className="rounded-none border border-border/50 bg-muted/25 px-4 py-3">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                 Payback in days
               </p>
@@ -398,7 +398,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
         ) : null}
 
         <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="led-benefits-heading"
         >
           <h2
@@ -450,7 +450,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
         </section>
 
         <section
-          className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 sm:p-6"
+          className="rounded-none border border-emerald-500/20 bg-emerald-500/5 p-5 sm:p-6"
           aria-labelledby="led-carbon-learn-heading"
         >
           <h2
@@ -472,7 +472,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "mt-4 flex items-start justify-between gap-3 rounded-xl border border-border/40",
+              "mt-4 flex items-start justify-between gap-3 rounded-none border border-border/40",
               "bg-background/40 px-4 py-3 text-sm transition-colors",
               "hover:border-emerald-500/30 hover:bg-emerald-500/5"
             )}

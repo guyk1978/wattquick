@@ -1,6 +1,6 @@
 "use client";
 
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface WindTurbineVisualProps {
@@ -25,7 +25,7 @@ export function WindTurbineVisual({
       role="img"
       aria-label={`Wind speed ${windSpeedMs.toFixed(1)} meters per second`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4")}>
         <div className="relative mx-auto flex size-24 items-center justify-center">
           <div
             className="motion-safe:animate-spin motion-reduce:animate-none"
@@ -55,9 +55,9 @@ export function WindTurbineVisual({
             <span>Wind</span>
             <span className="tabular-nums">{windSpeedMs.toFixed(1)} m/s</span>
           </div>
-          <div className="relative h-2.5 overflow-hidden rounded-full bg-sky-950/20 dark:bg-sky-950/60">
+          <div className="relative h-2.5 overflow-hidden rounded-none bg-sky-950/20 dark:bg-sky-950/60">
             <div
-              className="absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-sky-400 via-cyan-400 to-sky-500 transition-[width] duration-700 ease-out"
+              className="absolute inset-y-0 left-0 rounded-none bg-gradient-to-r from-sky-400 via-cyan-400 to-sky-500 transition-[width] duration-700 ease-out"
               style={{ width: `${fill}%` }}
             />
           </div>

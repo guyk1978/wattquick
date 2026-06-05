@@ -72,10 +72,10 @@ function EfficiencyScoreBadge({
       <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
         {label}
       </p>
-      <div className="relative h-3 w-full max-w-[10rem] overflow-hidden rounded-full bg-muted/60">
+      <div className="relative h-3 w-full max-w-[10rem] overflow-hidden rounded-none bg-muted/60">
         <div
           className={cn(
-            "h-full rounded-full transition-[width] duration-700 ease-out",
+            "h-full rounded-none transition-[width] duration-700 ease-out",
             variant === "before"
               ? "bg-gradient-to-r from-orange-500 to-amber-400"
               : "bg-gradient-to-r from-emerald-600 to-emerald-400"
@@ -268,7 +268,7 @@ export function HomeInsulationSavingsCalculator({
       ) : null}
 
       <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="insulation-learn-heading"
         >
           <h2

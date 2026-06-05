@@ -159,7 +159,7 @@ export function SolarDegradation20YearRoiCalculator({
       {parsed ? <SolarDegradationRoiChart yearly={parsed.yearly} /> : null}
 
       <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="solar-deg-warranty-heading"
         >
           <h2

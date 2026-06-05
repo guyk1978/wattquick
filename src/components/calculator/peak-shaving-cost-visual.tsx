@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface PeakShavingCostVisualProps {
@@ -28,7 +28,7 @@ export function PeakShavingCostVisual({
       role="img"
       aria-label={`Monthly bill before ${formatCurrency(beforeCost)}, after ${formatCurrency(afterCost)}, saving ${formatCurrency(monthlySavings)}`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4 sm:p-5")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4 sm:p-5")}>
         <div className="mb-4 flex items-end justify-center gap-6 sm:gap-10">
           <div className="flex flex-col items-center gap-2">
             <div className="relative flex h-36 w-14 items-end justify-center sm:h-40 sm:w-16">
@@ -53,7 +53,7 @@ export function PeakShavingCostVisual({
               />
               {monthlySavings > 0 ? (
                 <div
-                  className="pointer-events-none absolute -right-1 top-1/4 flex h-[calc(100%-25%)] w-1.5 items-center justify-center rounded-full bg-emerald-400/40 motion-safe:animate-pulse"
+                  className="pointer-events-none absolute -right-1 top-1/4 flex h-[calc(100%-25%)] w-1.5 items-center justify-center rounded-none bg-emerald-400/40 motion-safe:animate-pulse"
                   aria-hidden
                 />
               ) : null}
@@ -68,7 +68,7 @@ export function PeakShavingCostVisual({
         </div>
 
         {monthlySavings > 0 ? (
-          <div className="relative overflow-hidden rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
+          <div className="relative overflow-hidden rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
             <div
               className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-emerald-400/25 to-transparent motion-safe:animate-pulse"
               aria-hidden

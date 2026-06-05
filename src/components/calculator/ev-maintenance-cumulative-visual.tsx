@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface EvMaintenanceCumulativeVisualProps {
@@ -37,7 +37,7 @@ export function EvMaintenanceCumulativeVisual({
       role="img"
       aria-label={`Cumulative maintenance over ${years} years: ICE ${formatCurrency(iceCumulativeByYear[years - 1] ?? 0)}, EV ${formatCurrency(evCumulativeByYear[years - 1] ?? 0)}${showBatteryRisk ? `, EV with battery replacement ${formatCurrency(evCumulativeWithBatteryByYear[years - 1] ?? 0)}` : ""}`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4 sm:p-5")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4 sm:p-5")}>
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Cumulative maintenance cost
         </p>
@@ -114,13 +114,13 @@ export function EvMaintenanceCumulativeVisual({
         </div>
 
         <div className="mt-4 grid grid-cols-2 gap-3 text-center text-sm">
-          <div className="rounded-lg border border-red-500/25 bg-red-500/10 px-2 py-2">
+          <div className="rounded-none border border-red-500/25 bg-red-500/10 px-2 py-2">
             <p className="text-xs text-muted-foreground">ICE @ {years} yr</p>
             <p className="font-semibold tabular-nums text-foreground">
               {formatCurrency(iceCumulativeByYear[years - 1] ?? 0)}
             </p>
           </div>
-          <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-2 py-2">
+          <div className="rounded-none border border-emerald-500/25 bg-emerald-500/10 px-2 py-2">
             <p className="text-xs text-muted-foreground">EV @ {years} yr</p>
             <p className="font-semibold tabular-nums text-foreground">
               {formatCurrency(evCumulativeByYear[years - 1] ?? 0)}
@@ -134,7 +134,7 @@ export function EvMaintenanceCumulativeVisual({
         </div>
 
         {maintenanceSavings > 0 ? (
-          <div className="mt-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-center">
+          <div className="mt-3 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-center">
             <p className="text-xs font-medium text-muted-foreground">
               Maintenance gap @ year {years}
             </p>

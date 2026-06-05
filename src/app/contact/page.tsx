@@ -18,9 +18,9 @@ export default function ContactPage() {
         title="Contact"
         description="Questions, feedback, or ideas—we'd love to hear from you."
       />
-      <div className="rounded-2xl border border-border/60 bg-card/50 p-6 sm:p-8">
-        <div className="flex items-start gap-4">
-          <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
+      <div className="flat-panel p-4 sm:p-6">
+        <div className="flex items-start gap-3">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-none border border-border/60 bg-primary/10 text-primary">
             <Mail className="size-5" aria-hidden />
           </span>
           <div className="space-y-3">

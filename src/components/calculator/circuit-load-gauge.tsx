@@ -1,7 +1,7 @@
 "use client";
 
 import { LIGHTING_CONTINUOUS_LOAD_FACTOR } from "@/lib/calculators/appliances";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface CircuitLoadGaugeProps {
@@ -32,7 +32,7 @@ export function CircuitLoadGauge({
       role="img"
       aria-label={`Breaker utilization ${utilizationPercent.toFixed(1)} percent`}
     >
-      <div className={cn(glassSurface, "space-y-3 rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "space-y-3 rounded-none p-4")}>
         <div className="flex justify-between text-xs font-medium text-muted-foreground">
           <span>Breaker use</span>
           <span className="tabular-nums text-foreground">
@@ -40,10 +40,10 @@ export function CircuitLoadGauge({
           </span>
         </div>
 
-        <div className="relative h-4 overflow-hidden rounded-full bg-muted/80">
+        <div className="relative h-4 overflow-hidden rounded-none bg-muted/80">
           <div
             className={cn(
-              "absolute inset-y-0 left-0 rounded-full transition-[width] duration-700 ease-out",
+              "absolute inset-y-0 left-0 rounded-none transition-[width] duration-700 ease-out",
               FILL_CLASS[status]
             )}
             style={{ width: `${fill}%` }}

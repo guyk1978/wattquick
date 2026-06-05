@@ -140,7 +140,7 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
 
       {parsed ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Leaf
@@ -200,7 +200,7 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
         </div>
 
         {parsed ? (
-          <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
+          <div className="flex items-start gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
             <Battery className="mt-0.5 size-4 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden />
             <p>
               Operational loss carbon only—battery manufacturing and inverter embodied

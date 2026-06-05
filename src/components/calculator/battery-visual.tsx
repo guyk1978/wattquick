@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { BATTERY_GLOW_COLORS, type BatteryGlow } from "@/lib/battery-dashboard";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface BatteryVisualProps {
@@ -28,7 +28,7 @@ export function BatteryVisual({
     >
       <div
         className={cn(
-          glassSurface,
+          flatVisualPanel,
           "relative rounded-[20px] p-2 transition-[box-shadow] duration-500"
         )}
         style={
@@ -39,13 +39,13 @@ export function BatteryVisual({
         }
       >
         <div
-          className="pointer-events-none absolute inset-0 rounded-[18px] opacity-0 dark:opacity-100"
+          className="pointer-events-none absolute inset-0 rounded-none opacity-0 dark:opacity-100"
           style={{
             boxShadow: `0 0 48px 4px ${colors.glowDark}, inset 0 0 24px -8px ${colors.glowDark}`,
           }}
         />
 
-        <div className="relative h-36 overflow-hidden rounded-xl bg-zinc-200/60 dark:bg-zinc-950/90 sm:h-40">
+        <div className="relative h-36 overflow-hidden rounded-none bg-zinc-200/60 dark:bg-zinc-950/90 sm:h-40">
           <svg
             className="pointer-events-none absolute inset-0 size-full"
             viewBox="0 0 120 160"

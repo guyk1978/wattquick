@@ -160,7 +160,7 @@ export function WaterPumpSolarSizingCalculator({
 
       {parsed ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Droplets
@@ -201,7 +201,7 @@ export function WaterPumpSolarSizingCalculator({
         </div>
 
         {parsed && parsed.mppt !== "optional" ? (
-          <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
+          <div className="flex items-start gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
             <Cpu className="mt-0.5 size-4 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden />
             <p>
               {parsed.mppt === "strongly-recommended"

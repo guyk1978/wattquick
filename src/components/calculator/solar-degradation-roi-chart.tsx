@@ -53,7 +53,7 @@ export function SolarDegradationRoiChart({
   return (
     <figure
       className={cn(
-        "rounded-2xl border border-border/50 bg-muted/15 p-4 sm:p-5",
+        "rounded-none border border-border/50 bg-muted/15 p-4 sm:p-5",
         className
       )}
       aria-labelledby="solar-deg-chart-title"
@@ -165,14 +165,14 @@ export function SolarDegradationRoiChart({
       <ul className="mt-3 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground">
         <li className="flex items-center gap-2">
           <span
-            className="inline-block h-0.5 w-6 rounded-full bg-amber-500"
+            className="inline-block h-0.5 w-6 rounded-none bg-amber-500"
             aria-hidden
           />
           Energy production (annual kWh)
         </li>
         <li className="flex items-center gap-2">
           <span
-            className="inline-block h-0.5 w-6 rounded-full bg-emerald-500"
+            className="inline-block h-0.5 w-6 rounded-none bg-emerald-500"
             aria-hidden
           />
           Total savings (cumulative)

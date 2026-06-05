@@ -123,7 +123,7 @@ export function EvTireWearCostCalculator({
 
       {parsed ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <LifeBuoy

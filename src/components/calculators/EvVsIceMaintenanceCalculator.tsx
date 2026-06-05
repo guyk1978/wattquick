@@ -191,7 +191,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         results={
           parsed ? (
             <div className={cn(calculatorResultsGrid3, "gap-3")}>
-            <div className="min-w-0 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4 text-center">
+            <div className="min-w-0 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-4 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Maintenance savings ({years} yr)
               </p>
@@ -204,7 +204,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
                 {maintenanceSavingsValue}
               </p>
             </div>
-            <div className="min-w-0 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-4 text-center">
+            <div className="min-w-0 rounded-none border border-amber-500/30 bg-amber-500/10 px-4 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Potential battery cost
               </p>
@@ -236,7 +236,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
             </div>
             <div
               className={cn(
-                "min-w-0 rounded-xl border px-4 py-4 text-center",
+                "min-w-0 rounded-none border px-4 py-4 text-center",
                 parsed.netSavingsPositive
                   ? "border-primary/30 bg-primary/10"
                   : "border-red-500/30 bg-red-500/10"
@@ -285,7 +285,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         ) : null}
 
         <div
-          className="flex items-start gap-3 rounded-xl border border-sky-500/25 bg-sky-500/10 px-4 py-4 text-sm text-foreground/90"
+          className="flex items-start gap-3 rounded-none border border-sky-500/25 bg-sky-500/10 px-4 py-4 text-sm text-foreground/90"
           role="note"
         >
           <Info className="mt-0.5 size-5 shrink-0 text-sky-600 dark:text-sky-400" aria-hidden />
@@ -336,9 +336,9 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
                 return (
                   <li
                     key={row.id}
-                    className="flex gap-3 rounded-xl border border-border/50 bg-muted/20 px-4 py-3"
+                    className="flex gap-3 rounded-none border border-border/50 bg-muted/20 px-4 py-3"
                   >
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-400">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-none bg-amber-500/15 text-amber-700 dark:text-amber-400">
                       <Icon className="size-5" aria-hidden />
                     </span>
                     <div className="min-w-0">
@@ -359,7 +359,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
         ) : null}
 
         <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="ev-maintenance-learn-heading"
         >
           <h2

@@ -1,7 +1,7 @@
 "use client";
 
 import { formatNumber } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface InrushSpikeVisualProps {
@@ -27,10 +27,10 @@ export function InrushSpikeVisual({
       role="img"
       aria-label={`Running ${nominalAmps.toFixed(1)} amps, peak inrush ${peakInrushAmps.toFixed(1)} amps`}
     >
-      <div className={cn(glassSurface, "space-y-4 rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "space-y-4 rounded-none p-4")}>
         <div className="flex items-end justify-center gap-3">
           <div className="flex flex-col items-center gap-1.5">
-            <div className="relative flex h-32 w-12 items-end justify-center rounded-lg bg-muted/50">
+            <div className="relative flex h-32 w-12 items-end justify-center rounded-none bg-muted/50">
               <div
                 className="w-full rounded-t-md bg-gradient-to-t from-sky-600 to-sky-400 transition-[height] duration-700 ease-out"
                 style={{ height: `${runPct}%` }}
@@ -45,7 +45,7 @@ export function InrushSpikeVisual({
           </div>
 
           <div className="flex flex-col items-center gap-1.5">
-            <div className="relative flex h-32 w-14 items-end justify-center rounded-lg bg-muted/50">
+            <div className="relative flex h-32 w-14 items-end justify-center rounded-none bg-muted/50">
               <div
                 className="w-full rounded-t-md bg-gradient-to-t from-sky-500 to-sky-400 transition-[height] duration-500 ease-out"
                 style={{ height: `${runPct}%` }}

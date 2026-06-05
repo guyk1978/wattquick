@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { COST_TIER_COLORS, type CostTier } from "@/lib/cost-dashboard";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface CostVisualProps {
@@ -24,7 +24,7 @@ export function CostVisual({ needlePercent, tier, className }: CostVisualProps) 
       aria-label={`Energy cost meter at ${Math.round(pct)} percent intensity`}
     >
       <div
-        className={cn(glassSurface, "relative rounded-2xl p-4")}
+        className={cn(flatVisualPanel, "relative rounded-none p-4")}
         style={
           {
             "--cost-glow": colors.glowDark,
@@ -155,7 +155,7 @@ export function CostVisual({ needlePercent, tier, className }: CostVisualProps) 
 
         <div
           aria-hidden
-          className="mx-auto mt-1 flex h-1.5 w-3/4 overflow-hidden rounded-full bg-zinc-200/70 dark:bg-zinc-800/80"
+          className="mx-auto mt-1 flex h-1.5 w-3/4 overflow-hidden rounded-none bg-zinc-200/70 dark:bg-zinc-800/80"
         >
           <div className="h-full w-1/3 bg-emerald-500/90 shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
           <div className="h-full w-1/3 bg-amber-500/90 shadow-[0_0_8px_rgba(245,158,11,0.4)]" />

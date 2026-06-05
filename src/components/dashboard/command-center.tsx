@@ -108,27 +108,26 @@ export function CommandCenter() {
     <div className="command-center dark text-foreground">
       <header className="mb-8 space-y-4 sm:mb-10">
         <div className="flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-400">
+          <span className="flex size-10 items-center justify-center rounded-none border border-border/60 bg-primary/10 text-primary">
             <LayoutDashboard className="size-5" aria-hidden />
           </span>
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-400/90">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
               WattQuick Command Center
             </p>
-            <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
               Energy flow control
             </h1>
           </div>
         </div>
-        <p className="max-w-2xl text-sm leading-relaxed text-slate-400 sm:text-base">
+        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           {hydrated ? profileConfig.description : "Loading your energy profile…"}{" "}
-          Pick a scenario—nodes and flows update live. Pulsing nodes are new or not
-          yet opened.
+          Pick a scenario—nodes and flows update live.
         </p>
         {hydrated ? (
           <EnergyProfilePicker value={profile} onChange={handleProfileChange} />
         ) : (
-          <div className="h-10 animate-pulse rounded-xl bg-white/5" aria-hidden />
+          <div className="h-9 animate-pulse rounded-none bg-muted/40" aria-hidden />
         )}
       </header>
 
@@ -140,15 +139,11 @@ export function CommandCenter() {
         <section
           className={cn(
             glassDashboard("primary"),
-            "command-center-diagram relative overflow-hidden rounded-3xl p-4 sm:p-6"
+            "command-center-diagram relative overflow-hidden p-3 sm:p-4"
           )}
           aria-label="Interactive energy flow diagram"
         >
-          <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(34,211,238,0.08),transparent)]"
-            aria-hidden
-          />
-          <div className="glass-neon__inner relative">
+          <div className="relative">
             {hydrated ? (
               <EnergyFlowDiagram
                 profile={profileConfig}
@@ -159,7 +154,7 @@ export function CommandCenter() {
               />
             ) : (
               <div
-                className="flex aspect-[4/3] min-h-[280px] items-center justify-center text-sm text-slate-500"
+                className="flex aspect-[4/3] min-h-[280px] items-center justify-center text-sm text-muted-foreground"
                 aria-hidden
               >
                 Loading scenario…

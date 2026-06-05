@@ -8,28 +8,28 @@ export function CalculatorSkeleton({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="mb-8 h-5 w-32 rounded-lg bg-muted" />
+      <div className="mb-8 h-5 w-32 rounded-none bg-muted" />
       <div className="mb-10 space-y-4">
         <div className="flex gap-3">
-          <div className="size-12 rounded-2xl bg-muted" />
-          <div className="h-6 w-20 rounded-full bg-muted" />
+          <div className="size-11 rounded-none bg-muted" />
+          <div className="h-6 w-20 rounded-none bg-muted" />
         </div>
-        <div className="h-8 w-3/4 max-w-sm rounded-lg bg-muted" />
-        <div className="h-5 w-full max-w-md rounded-lg bg-muted/80" />
+        <div className="h-8 w-3/4 max-w-sm rounded-none bg-muted" />
+        <div className="h-5 w-full max-w-md rounded-none bg-muted/80" />
       </div>
-      <div className="space-y-6 rounded-3xl border border-border/40 bg-card/50 p-6">
-        <div className="flex flex-col gap-6">
+      <div className="flat-panel space-y-5 p-4 sm:p-5">
+        <div className="flex flex-col gap-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className={cn("space-y-2", i === 3 && "sm:col-span-2")}>
-              <div className="h-4 w-24 rounded bg-muted" />
-              <div className="h-12 rounded-xl bg-muted/80" />
+              <div className="h-4 w-24 rounded-none bg-muted" />
+              <div className="h-10 rounded-none bg-muted/80" />
             </div>
           ))}
         </div>
         <div className="h-px bg-border/60" />
-        <div className="space-y-3 rounded-2xl bg-muted/30 p-8">
-          <div className="h-3 w-28 rounded bg-muted" />
-          <div className="h-14 w-40 rounded-lg bg-muted" />
+        <div className="flat-subpanel space-y-2 p-5">
+          <div className="h-3 w-28 rounded-none bg-muted" />
+          <div className="h-12 w-40 rounded-none bg-muted" />
         </div>
       </div>
     </div>

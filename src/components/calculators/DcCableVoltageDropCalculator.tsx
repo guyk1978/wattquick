@@ -168,7 +168,7 @@ export function DcCableVoltageDropCalculator({
       {parsed && complianceStyle ? (
         <div
           className={cn(
-            "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
+            "flex items-center gap-3 rounded-none border px-4 py-3 text-sm font-medium",
             complianceStyle.badge
           )}
           role="status"
@@ -179,7 +179,7 @@ export function DcCableVoltageDropCalculator({
       ) : null}
 
       <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="dc-drop-learn-heading"
         >
           <h2

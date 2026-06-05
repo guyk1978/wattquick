@@ -11,11 +11,10 @@ export function BlogBackLink({ className }: BlogBackLinkProps) {
     <Link
       href="/blog/"
       className={cn(
-        "group mb-8 inline-flex items-center gap-2 rounded-full px-3 py-2",
-        "text-sm font-medium text-slate-600 dark:text-slate-400",
-        "transition-[color,transform,background] duration-200",
-        "hover:-translate-x-1 hover:bg-slate-100 hover:text-slate-900",
-        "dark:hover:bg-slate-800/60 dark:hover:text-slate-100",
+        "group mb-8 inline-flex items-center gap-2 rounded-none border border-border/50 px-2.5 py-1.5",
+        "text-sm font-medium text-muted-foreground",
+        "transition-colors duration-150",
+        "hover:border-border hover:bg-muted/40 hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         className
       )}

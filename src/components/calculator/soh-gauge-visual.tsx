@@ -2,7 +2,7 @@
 
 import type { BatteryGlow } from "@/lib/battery-dashboard";
 import { BatteryVisual } from "@/components/calculator/battery-visual";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { HeartPulse } from "lucide-react";
 
@@ -24,7 +24,7 @@ export function SohGaugeVisual({
       role="img"
       aria-label={`State of health ${Math.round(sohPercent)} percent`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-3")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-3")}>
         <BatteryVisual fillPercent={sohPercent} glow={glow} />
         <div className="mt-3 flex items-center justify-center gap-2">
           <HeartPulse

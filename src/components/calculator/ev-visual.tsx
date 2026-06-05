@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { EV_GLOW_COLORS, type EvGlow } from "@/lib/ev-dashboard";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface EvVisualProps {
@@ -26,7 +26,7 @@ export function EvVisual({ fillPercent, glow, className }: EvVisualProps) {
       aria-label={`EV charge gauge ${Math.round(fill)} percent`}
     >
       <div
-        className={cn(glassSurface, "relative rounded-full p-3")}
+        className={cn(flatVisualPanel, "relative rounded-none p-3")}
         style={
           {
             "--ev-glow": colors.glowDark,

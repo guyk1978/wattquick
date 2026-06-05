@@ -179,7 +179,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
         }
         results={
           parsed && paybackLabel ? (
-            <div className="calculator-result-card min-w-0 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
+            <div className="calculator-result-card min-w-0 rounded-none border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
               <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 Payback period
               </p>
@@ -213,8 +213,8 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
             />
 
             <div className={cn(calculatorResultsGrid, "gap-3")}>
-              <div className="flex gap-3 rounded-xl border border-sky-500/25 bg-sky-500/10 px-4 py-4">
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-sky-500/20 text-sky-700 dark:text-sky-300">
+              <div className="flex gap-3 rounded-none border border-sky-500/25 bg-sky-500/10 px-4 py-4">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-none bg-sky-500/20 text-sky-700 dark:text-sky-300">
                   <RotateCw className="size-5" aria-hidden />
                 </span>
                 <div>
@@ -227,8 +227,8 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
                   </p>
                 </div>
               </div>
-              <div className="flex gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-4">
-                <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-700 dark:text-emerald-300">
+              <div className="flex gap-3 rounded-none border border-emerald-500/25 bg-emerald-500/10 px-4 py-4">
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-none bg-emerald-500/20 text-emerald-700 dark:text-emerald-300">
                   <Activity className="size-5" aria-hidden />
                 </span>
                 <div>
@@ -270,7 +270,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
       ) : null}
 
       <section
-          className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
+          className="rounded-none border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="ac-inverter-learn-heading"
         >
           <h2

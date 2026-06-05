@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface HeatGaugeVisualProps {
@@ -25,8 +25,8 @@ export function HeatGaugeVisual({ fillPercent, className }: HeatGaugeVisualProps
     >
       <div
         className={cn(
-          glassSurface,
-          "relative rounded-[18px] p-2 transition-[box-shadow] duration-500"
+          flatVisualPanel,
+          "relative rounded-none p-2 transition-[box-shadow] duration-500"
         )}
         style={
           {
@@ -35,7 +35,7 @@ export function HeatGaugeVisual({ fillPercent, className }: HeatGaugeVisualProps
           } as CSSProperties
         }
       >
-        <div className="relative h-36 overflow-hidden rounded-xl bg-orange-950/25 dark:bg-orange-950/70 sm:h-40">
+        <div className="relative h-36 overflow-hidden rounded-none bg-orange-950/25 dark:bg-orange-950/70 sm:h-40">
           <div
             className="absolute inset-x-0 bottom-0 transition-[height] duration-700 ease-out motion-safe:animate-in motion-safe:fade-in"
             style={{
@@ -53,13 +53,13 @@ export function HeatGaugeVisual({ fillPercent, className }: HeatGaugeVisualProps
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute inset-x-3 top-2 h-2 rounded-full bg-white/35 motion-safe:animate-pulse"
+              className="pointer-events-none absolute inset-x-3 top-2 h-2 rounded-none bg-white/35 motion-safe:animate-pulse"
               aria-hidden
             />
           </div>
 
           <div
-            className="pointer-events-none absolute inset-0 rounded-xl border border-orange-400/30"
+            className="pointer-events-none absolute inset-0 rounded-none border border-orange-400/30"
             aria-hidden
           />
 

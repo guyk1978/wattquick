@@ -14,7 +14,7 @@ export function MobileNav() {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex size-9 items-center justify-center rounded-lg border border-border/60 text-foreground transition-colors hover:bg-muted/50"
+        className="flex size-9 items-center justify-center rounded-none border border-border/60 text-foreground transition-colors hover:bg-muted/50"
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
       >
@@ -22,7 +22,7 @@ export function MobileNav() {
       </button>
       {open ? (
         <nav
-          className="absolute right-0 top-full z-50 mt-2 min-w-[200px] rounded-xl border border-border/60 bg-card p-2 shadow-xl"
+          className="mobile-nav-panel absolute right-0 top-full z-50 mt-1.5 min-w-[200px] p-1.5"
           aria-label="Mobile navigation"
         >
           <ul className="flex flex-col gap-0.5">
@@ -32,7 +32,7 @@ export function MobileNav() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "block rounded-lg px-3 py-2.5 text-sm font-medium text-muted-foreground",
+                    "block rounded-none px-3 py-2 text-sm font-medium text-muted-foreground",
                     "transition-colors hover:bg-muted/50 hover:text-foreground"
                   )}
                 >

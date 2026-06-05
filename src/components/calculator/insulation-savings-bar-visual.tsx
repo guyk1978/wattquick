@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency, formatNumber } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface InsulationSavingsBarVisualProps {
@@ -34,7 +34,7 @@ export function InsulationSavingsBarVisual({
       role="img"
       aria-label={`Annual HVAC energy before upgrade ${formatNumber(annualKwhBefore, { maxDecimals: 0 })} kWh (${formatCurrency(annualCostBefore)}), after ${formatNumber(annualKwhAfter, { maxDecimals: 0 })} kWh (${formatCurrency(annualCostAfter)}), saving ${formatCurrency(annualSavings)} per year`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4 sm:p-5")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4 sm:p-5")}>
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Annual heating &amp; cooling energy
         </p>
@@ -80,7 +80,7 @@ export function InsulationSavingsBarVisual({
         </div>
 
         {annualSavings > 0 ? (
-          <div className="mt-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
+          <div className="mt-4 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
             <p className="text-xs font-medium text-muted-foreground">Estimated annual savings</p>
             <p className="text-base font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
               {formatCurrency(annualSavings)}

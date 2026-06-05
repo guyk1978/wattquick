@@ -146,7 +146,7 @@ export function EvPreconditioningCostCalculator({
       {parsed && modeStyle ? (
         <div
           className={cn(
-            "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
+            "flex items-center gap-3 rounded-none border px-4 py-3 text-sm font-medium",
             modeStyle.badge
           )}
           role="status"

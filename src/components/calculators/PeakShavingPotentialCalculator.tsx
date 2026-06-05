@@ -187,7 +187,7 @@ export function PeakShavingPotentialCalculator({
 
       {parsed && parsed.monthlySavings <= 0 ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
+          className="flex items-center gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
           role="status"
         >
           <Clock className="size-5 shrink-0" aria-hidden />
@@ -228,7 +228,7 @@ export function PeakShavingPotentialCalculator({
         </div>
 
         {parsed && parsed.monthlySavings > 0 ? (
-          <div className="flex items-start gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-sm text-foreground/90">
+          <div className="flex items-start gap-3 rounded-none border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-sm text-foreground/90">
             <TrendingDown
               className="mt-0.5 size-4 shrink-0 text-emerald-600 dark:text-emerald-400"
               aria-hidden

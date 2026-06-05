@@ -10,16 +10,15 @@ export function CalnexAppCallout({ className }: CalnexAppCalloutProps) {
   return (
     <aside
       className={cn(
-        "rounded-2xl border border-primary/25 bg-card/60 p-4 shadow-[0_0_24px_-8px_rgba(59,130,246,0.35)]",
-        "sm:flex sm:items-center sm:gap-4 sm:p-5",
+        "flat-panel border-l-2 border-l-primary/40 p-3 sm:flex sm:items-center sm:gap-3 sm:p-4",
         className
       )}
       aria-label="Solar and EV financing partner"
     >
-      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary ring-1 ring-primary/25">
-        <LineChart className="size-5" strokeWidth={2} aria-hidden />
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-none border border-border/60 bg-muted/40 text-primary">
+        <LineChart className="size-4" strokeWidth={2} aria-hidden />
       </span>
-      <div className="mt-3 min-w-0 flex-1 sm:mt-0">
+      <div className="mt-2 min-w-0 flex-1 sm:mt-0">
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">
             Calculate ROI &amp; Financing:
@@ -32,8 +31,8 @@ export function CalnexAppCallout({ className }: CalnexAppCalloutProps) {
           target="_blank"
           rel="noopener noreferrer sponsored"
           className={cn(
-            "mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#3b82f6]",
-            "underline-offset-4 transition-colors hover:text-primary hover:underline",
+            "mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-primary",
+            "underline-offset-4 transition-colors hover:underline",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           )}
         >

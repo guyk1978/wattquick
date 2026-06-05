@@ -168,7 +168,7 @@ export function SmallWindTurbineYieldCalculator({
 
       {parsed?.exceedsBetzLimit ? (
           <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+            className="flex items-center gap-3 rounded-none border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
             role="status"
           >
             <Wind
@@ -184,7 +184,7 @@ export function SmallWindTurbineYieldCalculator({
 
         {parsed && windSpeed < 2.5 ? (
           <div
-            className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
+            className="flex items-center gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
             role="status"
           >
             <Wind className="size-5 shrink-0" aria-hidden />
@@ -229,7 +229,7 @@ export function SmallWindTurbineYieldCalculator({
         </div>
 
         {parsed ? (
-          <div className="flex items-start gap-3 rounded-xl border border-sky-500/25 bg-sky-500/10 px-4 py-3 text-sm text-foreground/90">
+          <div className="flex items-start gap-3 rounded-none border border-sky-500/25 bg-sky-500/10 px-4 py-3 text-sm text-foreground/90">
             <Wind
               className="mt-0.5 size-4 shrink-0 text-sky-600 dark:text-sky-400"
               aria-hidden

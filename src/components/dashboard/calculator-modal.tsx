@@ -109,14 +109,13 @@ export function CalculatorModal({
           onClick={handleBackdrop}
         >
           <div
-            className="absolute inset-0 bg-slate-950/75 backdrop-blur-md"
+            className="absolute inset-0 bg-background/80"
             aria-hidden
           />
           <motion.div
             className={cn(
-              "command-center-modal relative z-10 flex max-h-[92vh] w-full flex-col",
-              "rounded-t-3xl border border-cyan-500/20 bg-slate-950/90 shadow-[0_0_60px_rgba(34,211,238,0.12)]",
-              "sm:max-h-[88vh] sm:max-w-2xl sm:rounded-3xl"
+              "command-center-modal flat-panel relative z-10 flex max-h-[92vh] w-full flex-col",
+              "sm:max-h-[88vh] sm:max-w-2xl"
             )}
             initial={{ y: 48, scale: 0.96, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}
@@ -124,12 +123,12 @@ export function CalculatorModal({
             transition={{ type: "spring", stiffness: 380, damping: 32 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex shrink-0 flex-col gap-3 border-b border-white/10 px-4 py-4 sm:px-6">
+            <div className="flex shrink-0 flex-col gap-3 border-b border-border/40 px-4 py-3 sm:px-5">
               {showBack && launchCtx ? (
                 <Link
                   href={getArticleUrl(launchCtx.articleSlug)}
                   onClick={onClose}
-                  className="inline-flex w-fit items-center gap-1.5 text-xs font-medium text-cyan-400/90 transition-colors hover:text-cyan-300"
+                  className="inline-flex w-fit items-center gap-1.5 text-xs font-medium text-primary transition-colors hover:text-primary/80"
                 >
                   <ArrowLeft className="size-3.5" aria-hidden />
                   <span className="tool-preview-nowrap max-w-[16rem] truncate sm:max-w-none">
@@ -139,19 +138,19 @@ export function CalculatorModal({
               ) : null}
               <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
-                <p className="text-xs font-semibold uppercase tracking-widest text-cyan-400/90">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                   Quick launch
                 </p>
                 <h2
                   id="dashboard-calc-modal-title"
-                  className="truncate text-lg font-semibold text-white sm:text-xl"
+                  className="truncate text-lg font-semibold text-foreground sm:text-xl"
                 >
                   {meta.title}
                 </h2>
                 {liveSnapshot ? (
                   <p
                     className={cn(
-                      "neon-hero-number dashboard-modal-stat mt-1 text-cyan-300/90"
+                      "dashboard-modal-stat mt-1 text-sm font-semibold text-foreground"
                     )}
                   >
                     {liveSnapshot}
@@ -161,7 +160,7 @@ export function CalculatorModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/10 text-slate-300 transition-colors hover:border-cyan-500/40 hover:bg-white/5 hover:text-white"
+                className="flex size-9 shrink-0 items-center justify-center rounded-none border border-border/60 text-muted-foreground transition-colors hover:bg-muted/40 hover:text-foreground"
                 aria-label="Close calculator"
               >
                 <X className="size-5" />
@@ -176,29 +175,29 @@ export function CalculatorModal({
             </div>
 
             {nextStep ? (
-              <div className="shrink-0 border-t border-white/10 bg-slate-900/50 px-4 py-4 sm:px-6">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400/90">
+              <div className="shrink-0 border-t border-border/40 bg-muted/20 px-4 py-3 sm:px-5">
+                <p className="text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
                   Next steps
                 </p>
                 <button
                   type="button"
                   onClick={handleNextStep}
                   className={cn(
-                    "mt-2 flex w-full items-center justify-between gap-3 rounded-xl border border-emerald-500/25 bg-emerald-500/10 px-4 py-3 text-left",
-                    "transition-colors hover:border-emerald-400/40 hover:bg-emerald-500/15",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
+                    "flat-subpanel mt-2 flex w-full items-center justify-between gap-3 px-3 py-2.5 text-left",
+                    "transition-colors hover:bg-muted/40",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   )}
                 >
                   <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold text-white">
+                    <span className="block truncate text-sm font-semibold text-foreground">
                       {nextStep.title}
                     </span>
-                    <span className="mt-0.5 block text-xs text-slate-400">
+                    <span className="mt-0.5 block text-xs text-muted-foreground">
                       {nextStep.reason}
                     </span>
                   </span>
                   <ArrowRight
-                    className="size-4 shrink-0 text-emerald-400"
+                    className="size-4 shrink-0 text-primary"
                     aria-hidden
                   />
                 </button>

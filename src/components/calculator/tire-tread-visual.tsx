@@ -1,6 +1,6 @@
 "use client";
 
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface TireTreadVisualProps {
@@ -26,10 +26,10 @@ function TreadBar({
         <span>{label}</span>
         <span className="tabular-nums">{Math.round(remainingPercent)}% tread left</span>
       </div>
-      <div className="relative h-3 overflow-hidden rounded-full bg-muted/80">
+      <div className="relative h-3 overflow-hidden rounded-none bg-muted/80">
         <div
           className={cn(
-            "absolute inset-y-0 left-0 rounded-full transition-[width] duration-700 ease-out",
+            "absolute inset-y-0 left-0 rounded-none transition-[width] duration-700 ease-out",
             accentClass
           )}
           style={{ width: `${remainingPercent}%` }}
@@ -56,7 +56,7 @@ export function TireTreadVisual({
       role="img"
       aria-label="Tread depth comparison ICE versus EV"
     >
-      <div className={cn(glassSurface, "space-y-4 rounded-2xl p-4")}>
+      <div className={cn(flatVisualPanel, "space-y-4 rounded-none p-4")}>
         <TreadBar
           label="ICE (reference)"
           remainingPercent={iceRemainingPercent}

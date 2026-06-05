@@ -1,7 +1,7 @@
 "use client";
 
 import { formatCurrency, formatNumber } from "@/lib/format";
-import { glassSurface } from "@/lib/glass-ui";
+import { flatVisualPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Activity, RotateCw } from "lucide-react";
 
@@ -35,7 +35,7 @@ export function AcInverterSavingsBarVisual({
       role="img"
       aria-label={`Monthly electricity cost: on/off ${formatCurrency(monthlyCostRegular)}, inverter ${formatCurrency(monthlyCostInverter)}, saving ${formatCurrency(monthlySavings)}`}
     >
-      <div className={cn(glassSurface, "rounded-2xl p-4 sm:p-5")}>
+      <div className={cn(flatVisualPanel, "rounded-none p-4 sm:p-5")}>
         <p className="mb-4 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
           Monthly electricity cost
         </p>
@@ -83,7 +83,7 @@ export function AcInverterSavingsBarVisual({
         </div>
 
         {monthlySavings > 0 ? (
-          <div className="mt-4 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
+          <div className="mt-4 rounded-none border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-center">
             <p className="text-xs font-medium text-muted-foreground">Monthly savings (inverter)</p>
             <p className="text-base font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
               {formatCurrency(monthlySavings)}

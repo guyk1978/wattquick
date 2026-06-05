@@ -163,7 +163,7 @@ export function BatteryCalendarAgingCalculator({
       (parseFloat(values.avgStorageTempC ?? "25") >= 35 ||
         parseFloat(values.avgSocPercent ?? "50") >= 90) ? (
         <div
-          className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          className="flex items-center gap-3 rounded-none border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
           role="status"
         >
           <Thermometer
@@ -211,7 +211,7 @@ export function BatteryCalendarAgingCalculator({
         </div>
 
         {parsed ? (
-          <div className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
+          <div className="flex items-start gap-3 rounded-none border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground dark:bg-muted/20">
             <Calendar className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
             <p>
               Calendar aging happens on the shelf—backup packs, seasonal EVs, and
