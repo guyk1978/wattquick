@@ -14,7 +14,7 @@ import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { InrushSpikeVisual } from "@/components/calculator/inrush-spike-visual";
-import { glassPanel, neonHeroNumber } from "@/lib/glass-ui";
+import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Bolt, Zap } from "lucide-react";
 
@@ -96,7 +96,7 @@ export function AcInrushCurrentCalculator({
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}
@@ -148,7 +148,7 @@ export function AcInrushCurrentCalculator({
                 />
                 <div className="flex min-w-0 flex-col gap-4">
                   <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-                    <span className={neonHeroNumber}>
+                    <span className={calculatorResultValue}>
                       <AnimatedCounter
                         target={parsed.peakInrushAmps}
                         decimals={1}

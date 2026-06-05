@@ -30,8 +30,8 @@ import { CalculatorResult } from "@/components/calculator/calculator-result";
 import {
   calculatorResultsGrid,
   calculatorResultsGrid3,
-  glassPanel,
-  neonHeroNumber,
+  calculatorCommandPanel,
+  calculatorResultValue,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -165,7 +165,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
   }, [definition.result.label, definition.title, fieldLabels, parsed, paybackLabel, values]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}
@@ -180,7 +180,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Payback period
             </p>
-            <p className={cn("mt-2", neonHeroNumber)}>{paybackLabel}</p>
+            <p className={cn("mt-2", calculatorResultValue)}>{paybackLabel}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               {parsed.pricePremium > 0 ? (
                 <>

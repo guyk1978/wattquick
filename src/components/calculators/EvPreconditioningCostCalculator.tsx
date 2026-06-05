@@ -12,7 +12,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { glassPanel } from "@/lib/glass-ui";
+import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Flame, Snowflake, Thermometer } from "lucide-react";
 
@@ -120,7 +120,7 @@ export function EvPreconditioningCostCalculator({
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}

@@ -3,7 +3,7 @@
 import { FileDown, Loader2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
-import { glassNeon, glassNeonAccent, glassSurface, neonPillBtn } from "@/lib/glass-ui";
+import { calculatorCommandBtn, calculatorCommandPdfSection } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface JoinMyPdfSaveReportProps {
@@ -72,10 +72,10 @@ export function JoinMyPdfSaveReport({
 
   return (
     <section
-      className={cn(glassSurface, glassNeon, glassNeonAccent("primary"), "rounded-2xl px-4 py-4", className)}
+      className={cn(calculatorCommandPdfSection, className)}
       aria-label="Save calculation report"
     >
-      <div className="glass-neon__inner flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">Save Report:</span>{" "}
           Download your battery and solar calculation specs as a private PDF via{" "}
@@ -90,19 +90,16 @@ export function JoinMyPdfSaveReport({
           disabled={isSaving}
           aria-busy={isSaving}
           className={cn(
-            glassSurface,
-            glassNeon,
-            glassNeonAccent("ev"),
-            neonPillBtn,
-            "inline-flex h-11 shrink-0 items-center justify-center gap-2 px-5 text-sm font-bold text-foreground",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            calculatorCommandBtn,
+            "inline-flex h-11 shrink-0 items-center justify-center gap-2 px-5 text-sm font-semibold text-foreground",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
             isSaving && "cursor-wait opacity-80"
           )}
         >
           {isSaving ? (
-            <Loader2 className="size-4 animate-spin text-[#3b82f6]" aria-hidden />
+            <Loader2 className="size-4 animate-spin text-primary" aria-hidden />
           ) : (
-            <FileDown className="size-4 text-[#3b82f6]" aria-hidden />
+            <FileDown className="size-4 text-primary" aria-hidden />
           )}
           {isSaving ? "Generating PDF…" : "Save via JoinMyPDF"}
         </button>

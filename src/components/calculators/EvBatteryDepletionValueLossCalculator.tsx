@@ -18,7 +18,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { EvGamifiedResult } from "@/components/calculator/ev-gamified-result";
-import { calculatorResultsGrid3, glassPanel } from "@/lib/glass-ui";
+import { calculatorResultsGrid3, calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "ev-battery-depletion-value-loss" satisfies CalculatorId;
@@ -102,7 +102,7 @@ export function EvBatteryDepletionValueLossCalculator({
   }, [definition.title, fieldLabels, parsed, resaleValue, values]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}

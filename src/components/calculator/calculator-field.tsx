@@ -42,12 +42,7 @@ export function CalculatorField({
 
   return (
     <div
-      className={cn(
-        "group/field space-y-2",
-        "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-1 motion-safe:fill-mode-both motion-safe:duration-300",
-        className
-      )}
-      style={{ animationDelay: `${index * 40}ms` }}
+      className={cn("group/field space-y-2", className)}
     >
       <div className="flex items-baseline justify-between gap-3">
         <Label

@@ -14,7 +14,7 @@ import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { WindTurbineVisual } from "@/components/calculator/wind-turbine-visual";
-import { glassPanel, neonHeroNumber } from "@/lib/glass-ui";
+import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Wind } from "lucide-react";
 
@@ -102,7 +102,7 @@ export function SmallWindTurbineYieldCalculator({
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}
@@ -168,7 +168,7 @@ export function SmallWindTurbineYieldCalculator({
                 />
                 <div className="flex min-w-0 flex-col gap-4">
                   <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
-                    <span className={neonHeroNumber}>
+                    <span className={calculatorResultValue}>
                       <AnimatedCounter
                         target={parsed.powerAtMeanWindW}
                         decimals={0}

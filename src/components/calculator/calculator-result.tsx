@@ -40,11 +40,7 @@ export function CalculatorResult({
 
         <div
           key={resultKey}
-          className={cn(
-            "mt-4 min-h-[4.5rem] min-w-0 transition-opacity duration-200",
-            "motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-300 motion-safe:fill-mode-both",
-            !hasResult && "opacity-70"
-          )}
+          className={cn("mt-4 min-h-[4.5rem] min-w-0", !hasResult && "opacity-70")}
         >
           {hasResult ? (
             <>

@@ -62,6 +62,15 @@ export const calculatorCommandInput = "calculator-command-input";
 /** Share icon — integrated on panel, no neon pill */
 export const calculatorCommandShareBtn = "calculator-command-share-btn";
 
+/** Flat PDF save row — no neon ring */
+export const calculatorCommandPdfSection = "calculator-command-pdf";
+
+/** Flat action button inside calculator panels */
+export const calculatorCommandBtn = "calculator-command-btn";
+
+/** Nested sub-panel (e.g. comparison cards) */
+export const calculatorCommandSubPanel = "calculator-command-subpanel";
+
 /** Recessed tactile input slot */
 export const glassInsetInput = "glass-inset-input";
 

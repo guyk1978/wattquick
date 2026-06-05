@@ -513,6 +513,96 @@
   text-align: left;
 }
 
+/* Nested panels & charts — flat, square, no neon */
+.calculator-command .glass-neon.glass-surface {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.calculator-command .glass-neon::before,
+.calculator-command .glass-neon::after {
+  display: none !important;
+}
+
+.calculator-command .glass-neon.glass-surface:not(.calculator-command-panel) {
+  background: rgb(4 8 18 / 0.65);
+  box-shadow: none;
+}
+
+.calculator-command-pdf {
+  border-radius: 0;
+  border: none;
+  background: rgb(4 8 18 / 0.55);
+  box-shadow: none;
+  padding: 1rem;
+}
+
+.dark .calculator-command-pdf {
+  background: rgb(4 8 18 / 0.55);
+}
+
+.calculator-command-btn {
+  border-radius: 0;
+  border: none;
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: none;
+  transition: background-color 0.2s ease;
+}
+
+.calculator-command-btn:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.12);
+}
+
+.calculator-command-subpanel {
+  border-radius: 0;
+  border: none;
+  background: rgb(4 8 18 / 0.65);
+  box-shadow: none;
+}
+
+.calculator-command .rounded-2xl,
+.calculator-command .rounded-3xl,
+.calculator-command .rounded-xl,
+.calculator-command .rounded-lg,
+.calculator-command .rounded-\[20px\],
+.calculator-command .rounded-\[18px\] {
+  border-radius: 0 !important;
+}
+
+.calculator-command .neon-pill-btn {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* Static interface — no decorative motion */
+.calculator-command .motion-safe\:animate-in,
+.calculator-command .motion-safe\:animate-pulse,
+.calculator-command .battery-visual__pulse,
+.calculator-command .ev-visual__arc,
+.calculator-command .animate-pulse {
+  animation: none !important;
+}
+
+.calculator-command .battery-visual,
+.calculator-command .cost-visual,
+.calculator-command .ev-visual {
+  display: none !important;
+}
+
+.calculator-command .battery-visual__fill,
+.calculator-command .cost-visual__needle,
+.calculator-command [class*="transition-\[height\]"],
+.calculator-command [class*="duration-700"] {
+  transition: none !important;
+}
+
+.calculator-command .glass-surface[style*="box-shadow"],
+.calculator-command .battery-visual [style*="box-shadow"],
+.calculator-command .cost-visual [style*="box-shadow"] {
+  box-shadow: none !important;
+}
+
 /* Calculator result card shell */
 .calculator-result-card {
   min-width: 0;

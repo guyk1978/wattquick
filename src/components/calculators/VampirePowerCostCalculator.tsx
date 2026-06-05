@@ -18,7 +18,7 @@ import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { glassInsetInput, glassPanel } from "@/lib/glass-ui";
+import { calculatorCommandInput, calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "vampire-power-cost" satisfies CalculatorId;
@@ -69,8 +69,8 @@ const DEVICE_OPTIONS = Object.entries(VAMPIRE_DEVICE_PRESETS).map(([value, prese
 }));
 
 const controlClassName = cn(
-  glassInsetInput,
-  "h-12 w-full rounded-xl px-3.5 text-base focus-visible:outline-none"
+  calculatorCommandInput,
+  "h-12 w-full px-3.5 text-base focus-visible:outline-none"
 );
 
 export interface VampireDeviceLine {
@@ -252,7 +252,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <div className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-3">

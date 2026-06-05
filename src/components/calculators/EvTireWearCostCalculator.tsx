@@ -13,7 +13,7 @@ import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { TireTreadVisual } from "@/components/calculator/tire-tread-visual";
-import { glassPanel } from "@/lib/glass-ui";
+import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { LifeBuoy } from "lucide-react";
 
@@ -97,7 +97,7 @@ export function EvTireWearCostCalculator({
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}

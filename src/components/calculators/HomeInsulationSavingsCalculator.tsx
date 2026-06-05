@@ -23,7 +23,12 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { InsulationSavingsBarVisual } from "@/components/calculator/insulation-savings-bar-visual";
-import { calculatorResultsGrid, calculatorResultsGrid3, glassPanel } from "@/lib/glass-ui";
+import {
+  calculatorCommandPanel,
+  calculatorCommandSubPanel,
+  calculatorResultsGrid,
+  calculatorResultsGrid3,
+} from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "home-insulation-savings" satisfies CalculatorId;
@@ -180,7 +185,7 @@ export function HomeInsulationSavingsCalculator({
   }, [definition.result.label, definition.title, fieldLabels, parsed, savingsValue, values]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}
@@ -203,7 +208,7 @@ export function HomeInsulationSavingsCalculator({
               savingsPercent={parsed.savingsPercent}
             />
 
-            <div className={cn(glassPanel(), "rounded-xl border border-border/40 p-4 sm:p-5")}>
+            <div className={cn(calculatorCommandSubPanel, "p-4 sm:p-5")}>
               <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 Energy efficiency score
               </p>

@@ -36,7 +36,7 @@ import {
   calculatorResultsGrid,
   calculatorResultsGrid3,
   calculatorStatValue,
-  glassPanel,
+  calculatorCommandPanel,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -176,7 +176,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}

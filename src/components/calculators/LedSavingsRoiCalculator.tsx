@@ -36,8 +36,8 @@ import {
   calculatorResultValueRow,
   calculatorResultsGrid,
   calculatorResultsGrid3,
-  glassPanel,
-  neonHeroNumber,
+  calculatorCommandPanel,
+  calculatorResultValue,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -200,7 +200,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
   ]);
 
   return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
+    <div className={cn(calculatorCommandPanel(), className)}>
       <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
         <CalculatorInputs
           fields={definition.fields}
@@ -322,7 +322,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                       Time to Break Even
                     </p>
                     <div className={calculatorResultValueRow}>
-                      <span className={neonHeroNumber}>{breakEvenValue}</span>
+                      <span className={calculatorResultValue}>{breakEvenValue}</span>
                     </div>
                     {breakEvenDetail ? (
                       <p className="text-sm leading-relaxed text-muted-foreground">
