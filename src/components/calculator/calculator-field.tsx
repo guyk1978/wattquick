@@ -16,8 +16,8 @@ interface CalculatorFieldProps {
 
 const controlClassName = cn(
   calculatorCommandInput,
-  "h-12 w-full px-3.5 text-base",
-  "focus-visible:outline-none"
+  "h-12 w-full rounded-none border-0 px-3.5 text-base text-foreground shadow-none",
+  "focus-visible:border-0 focus-visible:outline-none focus-visible:ring-0"
 );
 
 const rangeClassName = cn(

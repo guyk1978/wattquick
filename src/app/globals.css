@@ -377,10 +377,13 @@
 .calculator-command > .glass-neon.glass-surface {
   border-radius: 0 !important;
   border: none !important;
-  background: rgb(6 10 22 / 0.94);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 28px 56px rgb(0 0 0 / 0.55);
+  background: rgb(255 255 255 / 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 24px 48px rgb(15 23 42 / 0.08),
+    0 4px 12px rgb(15 23 42 / 0.04);
+  color: var(--foreground);
 }
 
 .dark .calculator-command-panel,
@@ -404,8 +407,9 @@
 .calculator-command .calculator-result-card {
   border-radius: 0 !important;
   border: none !important;
-  background: rgb(4 8 18 / 0.72);
+  background: rgb(248 250 252);
   box-shadow: none;
+  color: var(--foreground);
 }
 
 .dark .calculator-command-result,
@@ -414,21 +418,32 @@
 }
 
 .calculator-command-input {
-  border-radius: 0;
-  background: rgb(4 8 18 / 0.65);
-  border: none;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  border-radius: 0 !important;
+  background: rgb(241 245 249);
+  border: none !important;
+  color: var(--foreground);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9);
   transition: background-color 0.2s ease;
+}
+
+.calculator-command-input::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.75;
 }
 
 .dark .calculator-command-input {
   background: rgb(4 8 18 / 0.65);
-  border: none;
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
 }
 
 .calculator-command-input:focus-visible {
   outline: none;
+  background: rgb(255 255 255);
+  border: none !important;
+  box-shadow: inset 0 0 0 1px rgb(59 130 246 / 0.22);
+}
+
+.dark .calculator-command-input:focus-visible {
   background: rgb(8 14 28 / 0.85);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
 }
@@ -447,6 +462,7 @@
   text-align: center;
   min-width: 0;
   text-shadow: none;
+  color: var(--foreground);
 }
 
 .calculator-command .neon-hero-number {
@@ -458,7 +474,8 @@
 .calculator-command-share-btn {
   border-radius: 0;
   border: none;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(241 245 249);
+  color: var(--muted-foreground);
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -473,6 +490,11 @@
 }
 
 .calculator-command-share-btn:hover {
+  background: rgb(226 232 240);
+  color: var(--foreground);
+}
+
+.dark .calculator-command-share-btn:hover {
   background: rgb(255 255 255 / 0.1);
 }
 
@@ -489,6 +511,10 @@
 }
 
 .calculator-command__divider {
+  background: rgb(15 23 42 / 0.08);
+}
+
+.dark .calculator-command__divider {
   background: rgb(255 255 255 / 0.08);
 }
 
@@ -496,6 +522,11 @@
   border-radius: 0;
   border: none;
   box-shadow: none;
+  background: rgb(241 245 249);
+  color: var(--foreground);
+}
+
+.dark .calculator-command .neon-badge {
   background: rgb(255 255 255 / 0.05);
 }
 
@@ -560,16 +591,21 @@
 }
 
 .calculator-command .glass-neon.glass-surface:not(.calculator-command-panel) {
-  background: rgb(4 8 18 / 0.65);
+  background: rgb(248 250 252);
   box-shadow: none;
+}
+
+.dark .calculator-command .glass-neon.glass-surface:not(.calculator-command-panel) {
+  background: rgb(4 8 18 / 0.65);
 }
 
 .calculator-command-pdf {
   border-radius: 0;
   border: none;
-  background: rgb(4 8 18 / 0.55);
+  background: rgb(248 250 252);
   box-shadow: none;
   padding: 1rem;
+  color: var(--foreground);
 }
 
 .dark .calculator-command-pdf {
@@ -579,20 +615,44 @@
 .calculator-command-btn {
   border-radius: 0;
   border: none;
-  background: rgb(255 255 255 / 0.08);
+  background: rgb(241 245 249);
+  color: var(--foreground);
   box-shadow: none;
   transition: background-color 0.2s ease;
 }
 
 .calculator-command-btn:hover:not(:disabled) {
+  background: rgb(226 232 240);
+}
+
+.dark .calculator-command-btn {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.dark .calculator-command-btn:hover:not(:disabled) {
   background: rgb(255 255 255 / 0.12);
 }
 
 .calculator-command-subpanel {
   border-radius: 0;
   border: none;
-  background: rgb(4 8 18 / 0.65);
+  background: rgb(248 250 252);
   box-shadow: none;
+  color: var(--foreground);
+}
+
+.dark .calculator-command-subpanel {
+  background: rgb(4 8 18 / 0.65);
+}
+
+/* Flat panels — strip default Input borders inside calculators */
+.calculator-command .calculator-command-input {
+  --tw-ring-shadow: 0 0 #0000;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+
+.calculator-command .calculator-command-input:focus-visible {
+  --tw-ring-shadow: 0 0 #0000;
 }
 
 .calculator-command .rounded-2xl,
