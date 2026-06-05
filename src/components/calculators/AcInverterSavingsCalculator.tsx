@@ -25,12 +25,15 @@ import { formatCurrency, formatNumber, parseNonNegative, parsePositive } from "@
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { AcInverterSavingsBarVisual } from "@/components/calculator/ac-inverter-savings-bar-visual";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import {
   calculatorResultsGrid,
   calculatorResultsGrid3,
-  calculatorCommandPanel,
   calculatorResultValue,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
@@ -165,38 +168,40 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
   }, [definition.result.label, definition.title, fieldLabels, parsed, paybackLabel, values]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={handleFieldChange}
+          />
+        }
+        results={
+          parsed && paybackLabel ? (
+            <div className="calculator-result-card min-w-0 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Payback period
+              </p>
+              <p className={cn("mt-2", calculatorResultValue)}>{paybackLabel}</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {parsed.pricePremium > 0 ? (
+                  <>
+                    Recover {formatCurrency(parsed.pricePremium)} purchase premium via{" "}
+                    {formatCurrency(parsed.monthlySavings)}/mo electricity savings
+                  </>
+                ) : (
+                  <>Inverter costs the same or less upfront—energy savings start day one</>
+                )}
+              </p>
+            </div>
+          ) : null
+        }
+      />
 
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed && paybackLabel ? (
-          <div className="calculator-result-card min-w-0 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-5 text-center sm:px-6 sm:py-6">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              Payback period
-            </p>
-            <p className={cn("mt-2", calculatorResultValue)}>{paybackLabel}</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {parsed.pricePremium > 0 ? (
-                <>
-                  Recover {formatCurrency(parsed.pricePremium)} purchase premium via{" "}
-                  {formatCurrency(parsed.monthlySavings)}/mo electricity savings
-                </>
-              ) : (
-                <>Inverter costs the same or less upfront—energy savings start day one</>
-              )}
-            </p>
-          </div>
-        ) : null}
-
-        {parsed ? (
-          <>
-            <AcInverterSavingsBarVisual
+      {parsed ? (
+        <>
+          <AcInverterSavingsBarVisual
               monthlyCostRegular={parsed.monthlyCostRegular}
               monthlyCostInverter={parsed.monthlyCostInverter}
               monthlyKwhRegular={parsed.monthlyKwhRegular}
@@ -261,10 +266,10 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
                 emptyMessage="—"
               />
             </div>
-          </>
-        ) : null}
+        </>
+      ) : null}
 
-        <section
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="ac-inverter-learn-heading"
         >
@@ -320,8 +325,7 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

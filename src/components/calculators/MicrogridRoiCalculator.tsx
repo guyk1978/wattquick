@@ -9,10 +9,12 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { calculatorCommandPanel } from "@/lib/glass-ui";
-import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "microgrid-roi" satisfies CalculatorId;
 
@@ -104,54 +106,56 @@ export function MicrogridRoiCalculator({ className }: MicrogridRoiCalculatorProp
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <div className="flex flex-col gap-4">
-          <CalculatorResult
-            label="Break-even point"
-            value={breakEvenValue}
-            unit="years"
-            detail={breakEvenDetail}
-            emptyMessage={definition.result.emptyMessage}
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
           />
+        }
+        results={
+          <div className="flex flex-col gap-4">
+            <CalculatorResult
+              label="Break-even point"
+              value={breakEvenValue}
+              unit="years"
+              detail={breakEvenDetail}
+              emptyMessage={definition.result.emptyMessage}
+            />
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <CalculatorResult
-              label="10-year cumulative ROI"
-              value={parsed ? `${parsed.roi10Years}` : null}
-              unit="%"
-              detail={
-                parsed
-                  ? `${formatCurrency(parsed.cumulative10)} total cash in (10 yr)`
-                  : null
-              }
-              emptyMessage="Enter values above"
-              className="sm:col-span-1"
-            />
-            <CalculatorResult
-              label="20-year cumulative ROI"
-              value={parsed ? `${parsed.roi20Years}` : null}
-              unit="%"
-              detail={
-                parsed
-                  ? `${formatCurrency(parsed.cumulative20)} total cash in (20 yr)`
-                  : null
-              }
-              emptyMessage="Enter values above"
-              className="sm:col-span-1"
-            />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <CalculatorResult
+                label="10-year cumulative ROI"
+                value={parsed ? `${parsed.roi10Years}` : null}
+                unit="%"
+                detail={
+                  parsed
+                    ? `${formatCurrency(parsed.cumulative10)} total cash in (10 yr)`
+                    : null
+                }
+                emptyMessage="Enter values above"
+                className="sm:col-span-1"
+              />
+              <CalculatorResult
+                label="20-year cumulative ROI"
+                value={parsed ? `${parsed.roi20Years}` : null}
+                unit="%"
+                detail={
+                  parsed
+                    ? `${formatCurrency(parsed.cumulative20)} total cash in (20 yr)`
+                    : null
+                }
+                emptyMessage="Enter values above"
+                className="sm:col-span-1"
+              />
+            </div>
           </div>
-        </div>
+        }
+      />
 
-        <JoinMyPdfSaveReport
+      <JoinMyPdfSaveReport
           calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={primaryForPdf.value}
@@ -164,8 +168,7 @@ export function MicrogridRoiCalculator({ className }: MicrogridRoiCalculatorProp
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

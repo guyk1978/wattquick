@@ -16,8 +16,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { VoltageDropVisual } from "@/components/calculator/voltage-drop-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { AlertTriangle, Cable, CheckCircle2 } from "lucide-react";
 
@@ -125,33 +129,16 @@ export function ResidentialVoltageDropCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed && complianceStyle ? (
-          <div
-            className={cn(
-              "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
-              complianceStyle.badge
-            )}
-            role="status"
-          >
-            <ComplianceIcon className="size-5 shrink-0" aria-hidden />
-            <span>{parsed.recommendation}</span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <div
-          key={resultKey}
-          className="grid gap-6 sm:grid-cols-[minmax(200px,1fr)_minmax(140px,240px)] sm:items-center"
-        >
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
           <GamifiedDashboardFrame
             accent="primary"
             label="Voltage drop"
@@ -176,18 +163,33 @@ export function ResidentialVoltageDropCalculator({
               </div>
             )}
           </GamifiedDashboardFrame>
+        }
+      />
 
-          {parsed ? (
-            <VoltageDropVisual
-              supplyVoltage={supplyVoltage}
-              voltageAtLoad={parsed.voltageAtLoad}
-              dropPercent={parsed.dropPercent}
-              className="sm:justify-self-center"
-            />
-          ) : null}
+      {parsed && complianceStyle ? (
+        <div
+          className={cn(
+            "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
+            complianceStyle.badge
+          )}
+          role="status"
+        >
+          <ComplianceIcon className="size-5 shrink-0" aria-hidden />
+          <span>{parsed.recommendation}</span>
         </div>
+      ) : null}
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed ? (
+        <VoltageDropVisual
+          key={resultKey}
+          supplyVoltage={supplyVoltage}
+          voltageAtLoad={parsed.voltageAtLoad}
+          dropPercent={parsed.dropPercent}
+          className="sm:justify-self-center"
+        />
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Voltage at load"
             value={
@@ -237,8 +239,7 @@ export function ResidentialVoltageDropCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

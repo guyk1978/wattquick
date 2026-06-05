@@ -29,6 +29,10 @@ import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { EvMaintenanceCumulativeVisual } from "@/components/calculator/ev-maintenance-cumulative-visual";
@@ -36,7 +40,6 @@ import {
   calculatorResultsGrid,
   calculatorResultsGrid3,
   calculatorStatValue,
-  calculatorCommandPanel,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -176,18 +179,18 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <div className={cn(calculatorResultsGrid3, "gap-3")}>
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={handleFieldChange}
+          />
+        }
+        results={
+          parsed ? (
+            <div className={cn(calculatorResultsGrid3, "gap-3")}>
             <div className="min-w-0 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Maintenance savings ({years} yr)
@@ -265,11 +268,13 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
                   : "Battery scenario exceeds service savings"}
               </p>
             </div>
-          </div>
-        ) : null}
+            </div>
+          ) : null
+        }
+      />
 
-        {parsed ? (
-          <EvMaintenanceCumulativeVisual
+      {parsed ? (
+        <EvMaintenanceCumulativeVisual
             iceCumulativeByYear={parsed.iceCumulativeByYear}
             evCumulativeByYear={parsed.evCumulativeByYear}
             evCumulativeWithBatteryByYear={parsed.evCumulativeWithBatteryByYear}
@@ -402,8 +407,7 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

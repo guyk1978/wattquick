@@ -11,10 +11,13 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { calculatorResultsGrid3, calculatorCommandPanel } from "@/lib/glass-ui";
-import { cn } from "@/lib/utils";
+import { calculatorResultsGrid3 } from "@/lib/glass-ui";
 
 const CALCULATOR_ID = "bess-roi" satisfies CalculatorId;
 
@@ -124,18 +127,18 @@ export function BessRoiCalculator({ className }: BessRoiCalculatorProps) {
   }, [definition.title, fieldLabels, parsed, paybackDisplay, values]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <div className={calculatorResultsGrid3}>
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          parsed ? (
+            <div className={calculatorResultsGrid3}>
             <CalculatorResult
               label="Daily savings"
               value={formatCurrency(parsed.dailySavings)}
@@ -161,10 +164,12 @@ export function BessRoiCalculator({ className }: BessRoiCalculatorProps) {
               detail={`${formatNumber(parsed.lifetimeDischargedKwh, { maxDecimals: 0 })} kWh over ${lifeYearsDisplay ?? "—"} yr · spread $${formatNumber(parsed.priceSpreadPerKwh, { maxDecimals: 3 })}/kWh`}
               emptyMessage="—"
             />
-          </div>
-        ) : null}
+            </div>
+          ) : null
+        }
+      />
 
-        <section
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="bess-dod-heading"
         >
@@ -215,8 +220,7 @@ export function BessRoiCalculator({ className }: BessRoiCalculatorProps) {
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

@@ -21,10 +21,7 @@ export function CalculatorInputs({
     <div
       role="group"
       aria-label="Calculator inputs"
-      className={cn(
-        "grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-x-5 sm:gap-y-5",
-        className
-      )}
+      className={cn("calculator-command__inputs-stack flex flex-col gap-6", className)}
     >
       {fields.map((field, index) => (
         <CalculatorField
@@ -33,7 +30,6 @@ export function CalculatorInputs({
           value={values[field.id] ?? ""}
           onChange={(v) => onChange(field.id, v)}
           index={index}
-          className={field.colSpan === 2 ? "sm:col-span-2" : undefined}
         />
       ))}
     </div>

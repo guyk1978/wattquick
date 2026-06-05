@@ -16,8 +16,12 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Activity, TrendingUp } from "lucide-react";
 
@@ -124,37 +128,17 @@ export function GridFrequencyRewardCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-violet-500/30 bg-violet-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Activity
-              className="size-5 shrink-0 text-violet-500 dark:text-violet-400"
-              aria-hidden
-            />
-            <span>
-              {rateUnitLabel} · {parsed.result.hoursFactor < 1
-                ? `${formatNumber(parsed.result.hoursFactor * 24, { maxDecimals: 1 })} h enrollment factor`
-                : "Full-day enrollment"}
-              {parsed.result.monthlyKwh !== null
-                ? ` · ~${formatNumber(parsed.result.monthlyKwh, { maxDecimals: 0 })} kWh/mo dispatched`
-                : null}
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="cost"
           label="Estimated monthly revenue"
           ambientClassName="bg-violet-500/[0.12] dark:bg-violet-500/[0.2]"
@@ -186,10 +170,32 @@ export function GridFrequencyRewardCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <CalculatorResult
-          label="Cumulative annual revenue"
+      {parsed ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-violet-500/30 bg-violet-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Activity
+            className="size-5 shrink-0 text-violet-500 dark:text-violet-400"
+            aria-hidden
+          />
+          <span>
+            {rateUnitLabel} · {parsed.result.hoursFactor < 1
+              ? `${formatNumber(parsed.result.hoursFactor * 24, { maxDecimals: 1 })} h enrollment factor`
+              : "Full-day enrollment"}
+            {parsed.result.monthlyKwh !== null
+              ? ` · ~${formatNumber(parsed.result.monthlyKwh, { maxDecimals: 0 })} kWh/mo dispatched`
+              : null}
+          </span>
+        </div>
+      ) : null}
+
+      <CalculatorResult
+        label="Cumulative annual revenue"
           value={
             parsed ? formatCurrency(parsed.result.annualRevenue) : null
           }
@@ -277,8 +283,7 @@ export function GridFrequencyRewardCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

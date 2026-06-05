@@ -12,8 +12,11 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { TireTreadVisual } from "@/components/calculator/tire-tread-visual";
-import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { LifeBuoy } from "lucide-react";
 
@@ -97,34 +100,16 @@ export function EvTireWearCostCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <LifeBuoy
-              className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
-              aria-hidden
-            />
-            <span>
-              EV tires last ~{formatNumber(parsed.evTireLifeKm, { maxDecimals: 0 })} km vs{" "}
-              {formatNumber(parsed.iceTireLifeKm, { maxDecimals: 0 })} km ICE (
-              {formatNumber((parsed.wearFactor - 1) * 100, { maxDecimals: 0 })}% faster wear)
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <div key={resultKey} className="grid gap-6 sm:grid-cols-[minmax(200px,1fr)_minmax(140px,200px)] sm:items-center">
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
           <CostGamifiedResult
             calculatorId={CALCULATOR_ID}
             label="Annual EV tire depreciation"
@@ -133,16 +118,36 @@ export function EvTireWearCostCalculator({
             detail={evAnnualDetail}
             emptyMessage={definition.result.emptyMessage}
           />
-          {parsed ? (
-            <TireTreadVisual
-              iceRemainingPercent={parsed.iceTreadRemainingPercent}
-              evRemainingPercent={parsed.evTreadRemainingPercent}
-              className="sm:justify-self-center"
-            />
-          ) : null}
-        </div>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <LifeBuoy
+            className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
+            aria-hidden
+          />
+          <span>
+            EV tires last ~{formatNumber(parsed.evTireLifeKm, { maxDecimals: 0 })} km vs{" "}
+            {formatNumber(parsed.iceTireLifeKm, { maxDecimals: 0 })} km ICE (
+            {formatNumber((parsed.wearFactor - 1) * 100, { maxDecimals: 0 })}% faster wear)
+          </span>
+        </div>
+      ) : null}
+
+      {parsed ? (
+        <TireTreadVisual
+          key={resultKey}
+          iceRemainingPercent={parsed.iceTreadRemainingPercent}
+          evRemainingPercent={parsed.evTreadRemainingPercent}
+          className="sm:justify-self-center"
+        />
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="ICE reference (annual)"
             value={parsed ? formatCurrency(parsed.iceAnnualCost) : null}
@@ -182,8 +187,7 @@ export function EvTireWearCostCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

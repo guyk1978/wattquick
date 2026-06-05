@@ -13,8 +13,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CarbonSavingsVisual } from "@/components/calculator/carbon-savings-visual";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Battery, Leaf } from "lucide-react";
 
@@ -98,37 +102,16 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Leaf
-              className="size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
-              aria-hidden
-            />
-            <span>
-              Renewable charging avoids ~
-              {formatNumber(parsed.carbonSavedWithRenewablesKg, { maxDecimals: 1 })}{" "}
-              kg CO₂/yr from loss energy vs. grid mix
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <div
-          key={resultKey}
-          className="grid gap-6 sm:grid-cols-[minmax(200px,1fr)_minmax(140px,240px)] sm:items-center"
-        >
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
           <GamifiedDashboardFrame
             accent="battery"
             label="Conversion-loss emissions (grid-charged)"
@@ -152,18 +135,36 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
               </div>
             )}
           </GamifiedDashboardFrame>
+        }
+      />
 
-          {parsed ? (
-            <CarbonSavingsVisual
-              gridCarbonKg={parsed.lossCarbonGridKg}
-              savedKg={parsed.carbonSavedWithRenewablesKg}
-              savingsPercent={parsed.renewableSavingsPercent}
-              className="sm:justify-self-center"
-            />
-          ) : null}
+      {parsed ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Leaf
+            className="size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
+            aria-hidden
+          />
+          <span>
+            Renewable charging avoids ~
+            {formatNumber(parsed.carbonSavedWithRenewablesKg, { maxDecimals: 1 })}{" "}
+            kg CO₂/yr from loss energy vs. grid mix
+          </span>
         </div>
+      ) : null}
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed ? (
+        <CarbonSavingsVisual
+          gridCarbonKg={parsed.lossCarbonGridKg}
+          savedKg={parsed.carbonSavedWithRenewablesKg}
+          savingsPercent={parsed.renewableSavingsPercent}
+          className="sm:justify-self-center"
+        />
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="CO₂ saved with renewables"
             value={
@@ -222,8 +223,7 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

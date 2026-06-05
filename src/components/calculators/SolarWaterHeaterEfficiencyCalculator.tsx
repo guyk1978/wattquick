@@ -13,8 +13,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { HeatGaugeVisual } from "@/components/calculator/heat-gauge-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Flame, Sun } from "lucide-react";
 
@@ -101,34 +105,17 @@ export function SolarWaterHeaterEfficiencyCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed?.exceedsTypicalCollector ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Sun
-              className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
-              aria-hidden
-            />
-            <span>
-              Solar input exceeds typical flat-plate delivery—verify sun-hour
-              estimates or you may have surplus aperture area for this tank
-              load.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="primary"
           label="Thermal efficiency"
           ambientClassName="bg-orange-500/[0.12] dark:bg-orange-500/[0.2]"
@@ -172,9 +159,28 @@ export function SolarWaterHeaterEfficiencyCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed?.exceedsTypicalCollector ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Sun
+            className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
+            aria-hidden
+          />
+          <span>
+            Solar input exceeds typical flat-plate delivery—verify sun-hour
+            estimates or you may have surplus aperture area for this tank
+            load.
+          </span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Energy absorbed (water)"
             value={
@@ -231,8 +237,7 @@ export function SolarWaterHeaterEfficiencyCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

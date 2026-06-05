@@ -12,9 +12,13 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { EvCableLossVisual } from "@/components/calculator/ev-cable-loss-visual";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Cable, Flame, Zap } from "lucide-react";
 
@@ -100,33 +104,17 @@ export function EvChargingCableLossCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed && parsed.powerLossW > 80 ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-orange-500/35 bg-orange-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Flame
-              className="size-5 shrink-0 text-orange-600 dark:text-orange-400"
-              aria-hidden
-            />
-            <span>
-              High I²R loss—upsizing conductor or shortening the run reduces heat
-              and may improve charge speed if voltage sag was limiting current.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="primary"
           label="Cable power loss"
           ambientClassName="bg-orange-500/[0.12] dark:bg-orange-500/[0.2]"
@@ -169,9 +157,27 @@ export function EvChargingCableLossCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed && parsed.powerLossW > 80 ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-orange-500/35 bg-orange-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Flame
+            className="size-5 shrink-0 text-orange-600 dark:text-orange-400"
+            aria-hidden
+          />
+          <span>
+            High I²R loss—upsizing conductor or shortening the run reduces heat
+            and may improve charge speed if voltage sag was limiting current.
+          </span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Wasted energy"
             value={
@@ -224,8 +230,7 @@ export function EvChargingCableLossCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

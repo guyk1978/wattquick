@@ -9,10 +9,12 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parseNonNegative, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { calculatorCommandPanel } from "@/lib/glass-ui";
-import { cn } from "@/lib/utils";
 import { Fuel, Sun } from "lucide-react";
 
 const CALCULATOR_ID = "generator-vs-solar-hybrid" satisfies CalculatorId;
@@ -113,37 +115,39 @@ export function GeneratorVsSolarHybridCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <CalculatorResult
+            label="Estimated annual savings (hybrid)"
+            value={savingsValue}
+            unit="/yr"
+            detail={savingsDetail}
+            emptyMessage={definition.result.emptyMessage}
+          />
+        }
+      />
 
-        {parsed && parsed.paybackYears !== null && parsed.annualSavings > 0 ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Sun className="size-5 shrink-0 text-amber-500 dark:text-amber-400" aria-hidden />
-            <span>
-              Hybrid payback ~{formatNumber(parsed.paybackYears, { maxDecimals: 1 })} years at current fuel and maintenance rates
-            </span>
-          </div>
-        ) : null}
+      {parsed && parsed.paybackYears !== null && parsed.annualSavings > 0 ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Sun className="size-5 shrink-0 text-amber-500 dark:text-amber-400" aria-hidden />
+          <span>
+            Hybrid payback ~{formatNumber(parsed.paybackYears, { maxDecimals: 1 })} years at current fuel and maintenance rates
+          </span>
+        </div>
+      ) : null}
 
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <CalculatorResult
-          label="Estimated annual savings (hybrid)"
-          value={savingsValue}
-          unit="/yr"
-          detail={savingsDetail}
-          emptyMessage={definition.result.emptyMessage}
-        />
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="5-year cumulative — generator"
             value={parsed ? formatCurrency(parsed.generator5Year) : null}
@@ -213,8 +217,7 @@ export function GeneratorVsSolarHybridCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

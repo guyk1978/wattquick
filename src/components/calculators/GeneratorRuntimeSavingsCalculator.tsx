@@ -21,8 +21,12 @@ import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
-import { calculatorResultsGrid3, calculatorCommandPanel } from "@/lib/glass-ui";
+import { calculatorResultsGrid3 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "generator-runtime-savings" satisfies CalculatorId;
@@ -108,18 +112,17 @@ export function GeneratorRuntimeSavingsCalculator({
   }, [annualSavingsValue, definition.title, fieldLabels, parsed, values]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <>
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          parsed ? (
             <CostGamifiedResult
               calculatorId={CALCULATOR_ID}
               label={definition.result.label}
@@ -127,8 +130,20 @@ export function GeneratorRuntimeSavingsCalculator({
               detail={annualDetail}
               emptyMessage={definition.result.emptyMessage}
             />
+          ) : (
+            <CostGamifiedResult
+              calculatorId={CALCULATOR_ID}
+              label={definition.result.label}
+              value={null}
+              detail={null}
+              emptyMessage={definition.result.emptyMessage}
+            />
+          )
+        }
+      />
 
-            <div className={calculatorResultsGrid3}>
+      {parsed ? (
+        <div className={calculatorResultsGrid3}>
               <CalculatorResult
                 label="Daily engine hours saved"
                 value={formatNumber(parsed.dailyHoursSaved, { maxDecimals: 2 })}
@@ -152,19 +167,10 @@ export function GeneratorRuntimeSavingsCalculator({
                 detail={`~${formatNumber(parsed.lifeYearsBefore, { maxDecimals: 1 })} → ${formatNumber(parsed.lifeYearsAfter, { maxDecimals: 1 })} yr at ${formatNumber(parsed.dailyHoursAfter, { maxDecimals: 1 })} h/day`}
                 emptyMessage="—"
               />
-            </div>
-          </>
-        ) : (
-          <CostGamifiedResult
-            calculatorId={CALCULATOR_ID}
-            label={definition.result.label}
-            value={null}
-            detail={null}
-            emptyMessage={definition.result.emptyMessage}
-          />
-        )}
+        </div>
+      ) : null}
 
-        <section
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="gen-hybrid-learn-heading"
         >
@@ -220,8 +226,7 @@ export function GeneratorRuntimeSavingsCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

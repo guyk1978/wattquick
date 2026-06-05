@@ -21,49 +21,67 @@ const controlClassName = cn(
 );
 
 const rangeClassName = cn(
-  "h-2 w-full cursor-pointer appearance-none rounded-full bg-muted/80",
+  "h-2 w-full cursor-pointer appearance-none bg-muted/80",
   "accent-primary",
-  "[&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full",
+  "[&::-webkit-slider-thumb]:size-4 [&::-webkit-slider-thumb]:appearance-none",
   "[&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary/30 [&::-webkit-slider-thumb]:bg-primary",
-  "[&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:transition-transform",
-  "[&::-webkit-slider-thumb]:hover:scale-110",
-  "[&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-2",
+  "[&::-moz-range-thumb]:size-4 [&::-moz-range-thumb]:border-2",
   "[&::-moz-range-thumb]:border-primary/30 [&::-moz-range-thumb]:bg-primary"
 );
+
+function formatUnit(unit: string) {
+  return unit.toUpperCase();
+}
 
 export function CalculatorField({
   field,
   value,
   onChange,
   className,
-  index = 0,
 }: CalculatorFieldProps) {
   const inputType = field.inputType ?? "text";
 
   return (
-    <div
-      className={cn("group/field space-y-2", className)}
-    >
-      <div className="flex items-baseline justify-between gap-3">
-        <Label
-          htmlFor={field.id}
-          className="text-[0.8125rem] font-medium tracking-tight text-foreground/90"
-        >
-          {field.label}
-        </Label>
-        {inputType === "range" ? (
-          <span className="shrink-0 rounded-md bg-primary/15 px-2 py-0.5 font-mono text-[0.8125rem] font-semibold tabular-nums text-primary">
+    <div className={cn("calculator-command__field group/field flex flex-col gap-2", className)}>
+      <Label
+        htmlFor={field.id}
+        className="block w-full text-[0.8125rem] font-medium leading-snug tracking-tight text-foreground/90"
+      >
+        {field.label}
+        {inputType === "range" && field.unit ? (
+          <span className="font-normal text-muted-foreground">
+            {" "}
+            ({formatUnit(field.unit)})
+          </span>
+        ) : field.unit ? (
+          <span className="font-normal text-muted-foreground">
+            {" "}
+            ({formatUnit(field.unit)})
+          </span>
+        ) : null}
+      </Label>
+
+      {inputType === "range" ? (
+        <div className="flex flex-col gap-2">
+          <span className="font-mono text-[0.8125rem] font-semibold tabular-nums text-primary">
             {value}
             {field.unit ? ` ${field.unit}` : ""}
           </span>
-        ) : field.unit ? (
-          <span className="shrink-0 rounded-md bg-muted/80 px-1.5 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
-            {field.unit}
-          </span>
-        ) : null}
-      </div>
-
-      {inputType === "select" && field.options ? (
+          <input
+            id={field.id}
+            type="range"
+            min={field.min ?? 0}
+            max={field.max ?? 100}
+            step={field.step ?? 1}
+            value={value || field.defaultValue || String(field.min ?? 0)}
+            onChange={(e) => onChange(e.target.value)}
+            className={rangeClassName}
+            aria-valuemin={field.min}
+            aria-valuemax={field.max}
+            aria-valuenow={Number(value)}
+          />
+        </div>
+      ) : inputType === "select" && field.options ? (
         <select
           id={field.id}
           value={value}
@@ -76,20 +94,6 @@ export function CalculatorField({
             </option>
           ))}
         </select>
-      ) : inputType === "range" ? (
-        <input
-          id={field.id}
-          type="range"
-          min={field.min ?? 0}
-          max={field.max ?? 100}
-          step={field.step ?? 1}
-          value={value || field.defaultValue || String(field.min ?? 0)}
-          onChange={(e) => onChange(e.target.value)}
-          className={rangeClassName}
-          aria-valuemin={field.min}
-          aria-valuemax={field.max}
-          aria-valuenow={Number(value)}
-        />
       ) : (
         <Input
           id={field.id}
@@ -98,20 +102,15 @@ export function CalculatorField({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={field.placeholder}
-          className={cn(
-            controlClassName,
-            "placeholder:text-muted-foreground/50"
-          )}
+          className={cn(controlClassName, "placeholder:text-muted-foreground/50")}
           autoComplete="off"
           enterKeyHint="done"
         />
       )}
 
-      {field.hint && (
-        <p className="text-xs leading-relaxed text-muted-foreground/90">
-          {field.hint}
-        </p>
-      )}
+      {field.hint ? (
+        <p className="text-xs leading-relaxed text-muted-foreground/90">{field.hint}</p>
+      ) : null}
     </div>
   );
 }

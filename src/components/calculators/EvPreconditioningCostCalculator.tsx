@@ -9,10 +9,13 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Flame, Snowflake, Thermometer } from "lucide-react";
 
@@ -120,41 +123,43 @@ export function EvPreconditioningCostCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <CostGamifiedResult
+            calculatorId={CALCULATOR_ID}
+            label={definition.result.label}
+            value={costValue}
+            detail={costDetail}
+            emptyMessage={definition.result.emptyMessage}
+          />
+        }
+      />
 
-        {parsed && modeStyle ? (
-          <div
-            className={cn(
-              "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
-              modeStyle.badge
-            )}
-            role="status"
-          >
-            <ModeIcon className="size-5 shrink-0" aria-hidden />
-            <span>
-              {modeStyle.label} — typical before DC fast charge when ambient is{" "}
-              {parsed.externalTempC}°C
-            </span>
-          </div>
-        ) : null}
+      {parsed && modeStyle ? (
+        <div
+          className={cn(
+            "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
+            modeStyle.badge
+          )}
+          role="status"
+        >
+          <ModeIcon className="size-5 shrink-0" aria-hidden />
+          <span>
+            {modeStyle.label} — typical before DC fast charge when ambient is{" "}
+            {parsed.externalTempC}°C
+          </span>
+        </div>
+      ) : null}
 
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <CostGamifiedResult
-          calculatorId={CALCULATOR_ID}
-          label={definition.result.label}
-          value={costValue}
-          detail={costDetail}
-          emptyMessage={definition.result.emptyMessage}
-        />
-
-        <CalculatorResult
+      <CalculatorResult
           label="Energy used for thermal management"
           value={
             parsed
@@ -182,8 +187,7 @@ export function EvPreconditioningCostCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

@@ -10,11 +10,15 @@ import { formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { InrushSpikeVisual } from "@/components/calculator/inrush-spike-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Bolt, Zap } from "lucide-react";
 
@@ -96,33 +100,17 @@ export function AcInrushCurrentCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed && parsed.inrushRatio >= 7 ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Bolt
-              className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
-              aria-hidden
-            />
-            <span>
-              High inrush ({parsed.inrushRatio}×)—use {parsed.recommendedCurveType}{" "}
-              breakers or motor soft-start; Type B may nuisance-trip on startup.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="primary"
           label="Peak inrush current"
           ambientClassName="bg-amber-500/[0.12] dark:bg-amber-500/[0.18]"
@@ -167,9 +155,27 @@ export function AcInrushCurrentCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed && parsed.inrushRatio >= 7 ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Bolt
+            className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
+            aria-hidden
+          />
+          <span>
+            High inrush ({parsed.inrushRatio}×)—use {parsed.recommendedCurveType}{" "}
+            breakers or motor soft-start; Type B may nuisance-trip on startup.
+          </span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Nominal running current"
             value={
@@ -222,8 +228,7 @@ export function AcInrushCurrentCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

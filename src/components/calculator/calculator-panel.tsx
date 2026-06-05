@@ -42,10 +42,12 @@ import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/Invert
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "./calculator-command-layout";
 import { CalculatorInputs } from "./calculator-inputs";
-import { CalculatorPanelBrand } from "./calculator-panel-brand";
 import { CalculatorResult } from "./calculator-result";
-import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_FOOTER_NOTES: Partial<Record<CalculatorId, string>> = {
@@ -243,19 +245,17 @@ export function CalculatorPanel({
       );
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="calculator-command__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorPanelBrand />
-
-        <div className="calculator-command__main grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(200px,280px)] lg:items-start lg:gap-8">
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
           <CalculatorInputs
             fields={definition.fields}
             values={values}
             onChange={setValue}
           />
-
-          <div className="min-w-0 lg:pt-1">{resultBlock}</div>
-        </div>
+        }
+        results={resultBlock}
+      />
 
       <JoinMyPdfSaveReport
         calculatorTitle={definition.title}
@@ -278,7 +278,6 @@ export function CalculatorPanel({
         )}
         <ShareButtons title={definition.title} className="sm:ml-auto" />
       </div>
-      </div>
-    </div>
+    </CalculatorCommandShell>
   );
 }

@@ -21,8 +21,12 @@ import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { PoolHeatingComparisonVisual } from "@/components/calculator/pool-heating-comparison-visual";
-import { calculatorResultsGrid3, calculatorCommandPanel } from "@/lib/glass-ui";
+import { calculatorResultsGrid3 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "pool-energy-thermal-cover" satisfies CalculatorId;
@@ -155,18 +159,17 @@ export function PoolEnergyThermalCoverCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <>
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={handleFieldChange}
+          />
+        }
+        results={
+          parsed ? (
             <div className={calculatorResultsGrid3}>
               <CalculatorResult
                 label="Daily cost"
@@ -194,19 +197,22 @@ export function PoolEnergyThermalCoverCalculator({
                 emptyMessage="—"
               />
             </div>
+          ) : null
+        }
+      />
 
-            <PoolHeatingComparisonVisual
-              monthlyHeatingCostElectric={parsed.monthlyHeatingCostElectric}
-              monthlyHeatingCostHeatPump={parsed.monthlyHeatingCostHeatPump}
-              monthlyHeatingSavingsHpVsElectric={parsed.monthlyHeatingSavingsHpVsElectric}
-              heatPumpCop={parsed.heatPumpCop}
-              electricBarPercent={parsed.electricBarPercent}
-              heatPumpBarPercent={parsed.heatPumpBarPercent}
-            />
-          </>
-        ) : null}
+      {parsed ? (
+        <PoolHeatingComparisonVisual
+          monthlyHeatingCostElectric={parsed.monthlyHeatingCostElectric}
+          monthlyHeatingCostHeatPump={parsed.monthlyHeatingCostHeatPump}
+          monthlyHeatingSavingsHpVsElectric={parsed.monthlyHeatingSavingsHpVsElectric}
+          heatPumpCop={parsed.heatPumpCop}
+          electricBarPercent={parsed.electricBarPercent}
+          heatPumpBarPercent={parsed.heatPumpBarPercent}
+        />
+      ) : null}
 
-        <section
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="pool-cover-learn-heading"
         >
@@ -267,8 +273,7 @@ export function PoolEnergyThermalCoverCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

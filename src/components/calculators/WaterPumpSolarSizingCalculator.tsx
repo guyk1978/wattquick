@@ -13,8 +13,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { WaterGaugeVisual } from "@/components/calculator/water-gauge-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Cpu, Droplets } from "lucide-react";
 
@@ -99,30 +103,17 @@ export function WaterPumpSolarSizingCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Droplets
-              className="size-5 shrink-0 text-sky-500 dark:text-sky-400"
-              aria-hidden
-            />
-            <span>{parsed.mpptLabel}</span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="primary"
           label="Required solar array"
           ambientClassName="bg-sky-500/[0.12] dark:bg-sky-500/[0.2]"
@@ -163,9 +154,24 @@ export function WaterPumpSolarSizingCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-sky-500/30 bg-sky-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Droplets
+            className="size-5 shrink-0 text-sky-500 dark:text-sky-400"
+            aria-hidden
+          />
+          <span>{parsed.mpptLabel}</span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Estimated panels"
             value={parsed ? `${parsed.panelCount}` : null}
@@ -218,8 +224,7 @@ export function WaterPumpSolarSizingCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

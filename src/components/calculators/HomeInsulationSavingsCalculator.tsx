@@ -20,11 +20,14 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { InsulationSavingsBarVisual } from "@/components/calculator/insulation-savings-bar-visual";
 import {
-  calculatorCommandPanel,
   calculatorCommandSubPanel,
   calculatorResultsGrid,
   calculatorResultsGrid3,
@@ -185,19 +188,47 @@ export function HomeInsulationSavingsCalculator({
   }, [definition.result.label, definition.title, fieldLabels, parsed, savingsValue, values]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={handleFieldChange}
+          />
+        }
+        results={
+          parsed ? (
+            <div className={calculatorResultsGrid3}>
+              <CalculatorResult
+                label="Composite U-value (before)"
+                value={formatNumber(parsed.compositeUBefore, { maxDecimals: 2 })}
+                unit="W/m²·K"
+                detail="Lower is better — measures heat flow"
+                emptyMessage="—"
+              />
+              <CalculatorResult
+                label="Design heat loss (before)"
+                value={formatNumber(parsed.heatLossKwBefore, { maxDecimals: 2 })}
+                unit="kW"
+                detail="At climate design ΔT"
+                emptyMessage="—"
+              />
+              <CalculatorResult
+                label="Annual HVAC savings"
+                value={formatCurrency(parsed.annualSavings)}
+                unit="/yr"
+                detail={`${formatNumber(parsed.savingsPercent, { maxDecimals: 1 })}% vs. current envelope`}
+                emptyMessage="—"
+              />
+            </div>
+          ) : null
+        }
+      />
 
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <>
-            <InsulationSavingsBarVisual
+      {parsed ? (
+        <>
+          <InsulationSavingsBarVisual
               annualKwhBefore={parsed.annualKwhBefore}
               annualKwhAfter={parsed.annualKwhAfter}
               annualCostBefore={parsed.annualCostBefore}
@@ -233,34 +264,10 @@ export function HomeInsulationSavingsCalculator({
                 {parsed.upgradeWindowLabel}
               </p>
             </div>
+        </>
+      ) : null}
 
-            <div className={calculatorResultsGrid3}>
-              <CalculatorResult
-                label="Composite U-value (before)"
-                value={formatNumber(parsed.compositeUBefore, { maxDecimals: 2 })}
-                unit="W/m²·K"
-                detail="Lower is better — measures heat flow"
-                emptyMessage="—"
-              />
-              <CalculatorResult
-                label="Design heat loss (before)"
-                value={formatNumber(parsed.heatLossKwBefore, { maxDecimals: 2 })}
-                unit="kW"
-                detail="At climate design ΔT"
-                emptyMessage="—"
-              />
-              <CalculatorResult
-                label="Annual HVAC savings"
-                value={formatCurrency(parsed.annualSavings)}
-                unit="/yr"
-                detail={`${formatNumber(parsed.savingsPercent, { maxDecimals: 1 })}% vs. current envelope`}
-                emptyMessage="—"
-              />
-            </div>
-          </>
-        ) : null}
-
-        <section
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="insulation-learn-heading"
         >
@@ -310,8 +317,7 @@ export function HomeInsulationSavingsCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

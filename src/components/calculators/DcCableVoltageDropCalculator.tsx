@@ -19,9 +19,13 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
-import { calculatorResultsGrid3, calculatorCommandPanel } from "@/lib/glass-ui";
+import { calculatorResultsGrid3 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "dc-cable-voltage-drop" satisfies CalculatorId;
@@ -124,31 +128,18 @@ export function DcCableVoltageDropCalculator({
   }, [definition.title, fieldLabels, parsed, values]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed && complianceStyle ? (
-          <div
-            className={cn(
-              "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
-              complianceStyle.badge
-            )}
-            role="status"
-          >
-            <ComplianceIcon className="size-5 shrink-0" aria-hidden />
-            <span>{parsed.recommendation}</span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed ? (
-          <div className={calculatorResultsGrid3}>
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          parsed ? (
+            <div className={calculatorResultsGrid3}>
             <CalculatorResult
               label="Recommended cable size"
               value={parsed.recommendedCableLabel}
@@ -169,10 +160,25 @@ export function DcCableVoltageDropCalculator({
               detail={`I²R · ${formatNumber(parsed.loadAmps, { maxDecimals: 1 })} A · ${formatNumber(parsed.oneWayLengthM, { maxDecimals: 0 })} m one-way`}
               emptyMessage="—"
             />
-          </div>
-        ) : null}
+            </div>
+          ) : null
+        }
+      />
 
-        <section
+      {parsed && complianceStyle ? (
+        <div
+          className={cn(
+            "flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium",
+            complianceStyle.badge
+          )}
+          role="status"
+        >
+          <ComplianceIcon className="size-5 shrink-0" aria-hidden />
+          <span>{parsed.recommendation}</span>
+        </div>
+      ) : null}
+
+      <section
           className="rounded-2xl border border-border/50 bg-muted/20 p-5 sm:p-6"
           aria-labelledby="dc-drop-learn-heading"
         >
@@ -228,8 +234,7 @@ export function DcCableVoltageDropCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

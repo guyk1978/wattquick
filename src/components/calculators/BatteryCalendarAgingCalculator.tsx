@@ -12,9 +12,13 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { SohGaugeVisual } from "@/components/calculator/soh-gauge-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Calendar, Thermometer } from "lucide-react";
 
@@ -99,35 +103,17 @@ export function BatteryCalendarAgingCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed &&
-        (parseFloat(values.avgStorageTempC ?? "25") >= 35 ||
-          parseFloat(values.avgSocPercent ?? "50") >= 90) ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Thermometer
-              className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
-              aria-hidden
-            />
-            <span>
-              High temperature and/or very high average SOC accelerate calendar
-              fade—store near 50% charge and cool, dry conditions when possible.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="battery"
           label="Remaining capacity (SoH)"
           ambientClassName="bg-[#22C55E]/[0.12] dark:bg-[#22C55E]/[0.2]"
@@ -169,9 +155,29 @@ export function BatteryCalendarAgingCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed &&
+      (parseFloat(values.avgStorageTempC ?? "25") >= 35 ||
+        parseFloat(values.avgSocPercent ?? "50") >= 90) ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+          role="status"
+        >
+          <Thermometer
+            className="size-5 shrink-0 text-amber-600 dark:text-amber-400"
+            aria-hidden
+          />
+          <span>
+            High temperature and/or very high average SOC accelerate calendar
+            fade—store near 50% charge and cool, dry conditions when possible.
+          </span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Calendar capacity loss"
             value={
@@ -228,8 +234,7 @@ export function BatteryCalendarAgingCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

@@ -14,11 +14,15 @@ import {
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { calculatorCommandInput, calculatorCommandPanel } from "@/lib/glass-ui";
+import { calculatorCommandInput } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "vampire-power-cost" satisfies CalculatorId;
@@ -252,9 +256,11 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <div className="space-y-4">
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <div className="flex flex-col gap-6">
+          <div className="space-y-4">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="text-sm font-semibold tracking-tight text-foreground">
@@ -397,19 +403,21 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
             autoComplete="off"
           />
         </div>
+          </div>
+        }
+        results={
+          <CostGamifiedResult
+            calculatorId={CALCULATOR_ID}
+            label={definition.result.label}
+            value={annualValue}
+            unit="/yr"
+            detail={annualDetail}
+            emptyMessage={definition.result.emptyMessage}
+          />
+        }
+      />
 
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <CostGamifiedResult
-          calculatorId={CALCULATOR_ID}
-          label={definition.result.label}
-          value={annualValue}
-          unit="/yr"
-          detail={annualDetail}
-          emptyMessage={definition.result.emptyMessage}
-        />
-
-        {parsed && lineBreakdown.length > 0 ? (
+      {parsed && lineBreakdown.length > 0 ? (
           <div className="overflow-hidden rounded-xl border border-border/50">
             <table className="w-full text-left text-sm">
               <caption className="sr-only">Cost breakdown by device row</caption>
@@ -560,7 +568,6 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
             ))}
           </ul>
         </section>
-      </div>
-    </div>
+    </CalculatorCommandShell>
   );
 }

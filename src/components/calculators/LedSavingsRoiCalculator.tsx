@@ -25,6 +25,10 @@ import { useCalculatorForm } from "@/hooks/use-calculator-form";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import {
@@ -36,7 +40,6 @@ import {
   calculatorResultValueRow,
   calculatorResultsGrid,
   calculatorResultsGrid3,
-  calculatorCommandPanel,
   calculatorResultValue,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
@@ -200,67 +203,17 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={handleFieldChange}
-        />
-
-        {parsed && !hasSavings ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-foreground/90"
-            role="status"
-          >
-            <Clock className="size-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-            <span>
-              The LED must draw fewer watts than the existing bulb to save on electricity
-              and carbon.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        {parsed && hasSavings ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                Annual financial savings
-              </p>
-              <p className="mt-2 font-mono text-2xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
-                {formatCurrency(parsed.annualSavings)}
-                <span className="text-sm font-semibold text-muted-foreground">/yr</span>
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {formatCurrency(parsed.monthlySavings)}/mo · {formatCurrency(parsed.dailySavings)}
-                /day
-              </p>
-            </div>
-            <div className="rounded-xl border border-emerald-500/35 bg-emerald-500/[0.12] px-4 py-4 dark:bg-emerald-500/10">
-              <div className="flex items-center gap-2">
-                <TreeDeciduous
-                  className="size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
-                  aria-hidden
-                />
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Carbon footprint reduction
-                </p>
-              </div>
-              <p className="mt-2 font-mono text-2xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
-                {formatNumber(parsed.annualCo2SavedKg, { maxDecimals: 1 })}
-                <span className="text-sm font-semibold text-muted-foreground"> kg CO₂/yr</span>
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {formatNumber(parsed.annualKwhSaved, { maxDecimals: 1 })} kWh saved ×{" "}
-                {values.co2KgPerKwh ?? "0.5"} kg/kWh
-              </p>
-            </div>
-          </div>
-        ) : null}
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={handleFieldChange}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="cost"
           label="Time to break even"
           ambientClassName="bg-emerald-500/[0.1] dark:bg-emerald-500/[0.18]"
@@ -342,9 +295,61 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
             )}
           </div>
         </GamifiedDashboardFrame>
+        }
+      />
 
-        {parsed && hasSavings ? (
-          <div className={calculatorResultsGrid3}>
+      {parsed && !hasSavings ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-foreground/90"
+          role="status"
+        >
+          <Clock className="size-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+          <span>
+            The LED must draw fewer watts than the existing bulb to save on electricity
+            and carbon.
+          </span>
+        </div>
+      ) : null}
+
+      {parsed && hasSavings ? (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                Annual financial savings
+              </p>
+              <p className="mt-2 font-mono text-2xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
+                {formatCurrency(parsed.annualSavings)}
+                <span className="text-sm font-semibold text-muted-foreground">/yr</span>
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {formatCurrency(parsed.monthlySavings)}/mo · {formatCurrency(parsed.dailySavings)}
+                /day
+              </p>
+            </div>
+            <div className="rounded-xl border border-emerald-500/35 bg-emerald-500/[0.12] px-4 py-4 dark:bg-emerald-500/10">
+              <div className="flex items-center gap-2">
+                <TreeDeciduous
+                  className="size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
+                  aria-hidden
+                />
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Carbon footprint reduction
+                </p>
+              </div>
+              <p className="mt-2 font-mono text-2xl font-bold tabular-nums text-emerald-800 dark:text-emerald-200">
+                {formatNumber(parsed.annualCo2SavedKg, { maxDecimals: 1 })}
+                <span className="text-sm font-semibold text-muted-foreground"> kg CO₂/yr</span>
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {formatNumber(parsed.annualKwhSaved, { maxDecimals: 1 })} kWh saved ×{" "}
+                {values.co2KgPerKwh ?? "0.5"} kg/kWh
+              </p>
+            </div>
+          </div>
+        ) : null}
+
+      {parsed && hasSavings ? (
+        <div className={calculatorResultsGrid3}>
             <CalculatorResult
               label="Daily operating cost"
               value={formatCurrency(parsed.dailyCostLegacy)}
@@ -499,8 +504,7 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

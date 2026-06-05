@@ -13,8 +13,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { PeakShavingCostVisual } from "@/components/calculator/peak-shaving-cost-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Clock, TrendingDown } from "lucide-react";
 
@@ -105,30 +109,17 @@ export function PeakShavingPotentialCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed && parsed.monthlySavings <= 0 ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
-            role="status"
-          >
-            <Clock className="size-5 shrink-0" aria-hidden />
-            <span>
-              Peak rate must exceed off-peak rate for savings—check your tariff
-              schedule labels.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="cost"
           label="Estimated monthly savings"
           ambientClassName="bg-emerald-500/[0.1] dark:bg-emerald-500/[0.18]"
@@ -190,9 +181,24 @@ export function PeakShavingPotentialCalculator({
               </div>
             )}
           </div>
-        </GamifiedDashboardFrame>
+          </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed && parsed.monthlySavings <= 0 ? (
+        <div
+          className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
+          role="status"
+        >
+          <Clock className="size-5 shrink-0" aria-hidden />
+          <span>
+            Peak rate must exceed off-peak rate for savings—check your tariff
+            schedule labels.
+          </span>
+        </div>
+      ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Annual savings"
             value={parsed ? formatCurrency(parsed.annualSavings) : null}
@@ -248,8 +254,7 @@ export function PeakShavingPotentialCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

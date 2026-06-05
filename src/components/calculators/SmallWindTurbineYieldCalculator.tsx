@@ -13,8 +13,12 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import {
+  CalculatorCommandShell,
+  CalculatorCommandSplit,
+} from "@/components/calculator/calculator-command-layout";
 import { WindTurbineVisual } from "@/components/calculator/wind-turbine-visual";
-import { calculatorCommandPanel, calculatorResultValue } from "@/lib/glass-ui";
+import { calculatorResultValue } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 import { Wind } from "lucide-react";
 
@@ -102,46 +106,17 @@ export function SmallWindTurbineYieldCalculator({
   ]);
 
   return (
-    <div className={cn(calculatorCommandPanel(), className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-        <CalculatorInputs
-          fields={definition.fields}
-          values={values}
-          onChange={setValue}
-        />
-
-        {parsed?.exceedsBetzLimit ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
-            role="status"
-          >
-            <Wind
-              className="size-5 shrink-0 text-sky-600 dark:text-sky-400"
-              aria-hidden
-            />
-            <span>
-              Aerodynamic efficiency above ~59% (Betz limit) is not physical—use
-              manufacturer overall system efficiency (often 25–40%).
-            </span>
-          </div>
-        ) : null}
-
-        {parsed && windSpeed < 2.5 ? (
-          <div
-            className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
-            role="status"
-          >
-            <Wind className="size-5 shrink-0" aria-hidden />
-            <span>
-              Below ~2.5 m/s cut-in—most small turbines produce little or no
-              usable power at this average wind speed.
-            </span>
-          </div>
-        ) : null}
-
-        <div className="h-px bg-border/60" aria-hidden />
-
-        <GamifiedDashboardFrame
+    <CalculatorCommandShell className={className}>
+      <CalculatorCommandSplit
+        inputs={
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+        }
+        results={
+          <GamifiedDashboardFrame
           accent="primary"
           label="Power at average wind"
           ambientClassName="bg-sky-500/[0.12] dark:bg-sky-500/[0.2]"
@@ -188,8 +163,39 @@ export function SmallWindTurbineYieldCalculator({
             )}
           </div>
         </GamifiedDashboardFrame>
+        }
+      />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {parsed?.exceedsBetzLimit ? (
+          <div
+            className="flex items-center gap-3 rounded-xl border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm font-medium text-foreground/90"
+            role="status"
+          >
+            <Wind
+              className="size-5 shrink-0 text-sky-600 dark:text-sky-400"
+              aria-hidden
+            />
+            <span>
+              Aerodynamic efficiency above ~59% (Betz limit) is not physical—use
+              manufacturer overall system efficiency (often 25–40%).
+            </span>
+          </div>
+        ) : null}
+
+        {parsed && windSpeed < 2.5 ? (
+          <div
+            className="flex items-center gap-3 rounded-xl border border-border/60 bg-muted/30 px-4 py-3 text-sm text-muted-foreground"
+            role="status"
+          >
+            <Wind className="size-5 shrink-0" aria-hidden />
+            <span>
+              Below ~2.5 m/s cut-in—most small turbines produce little or no
+              usable power at this average wind speed.
+            </span>
+          </div>
+        ) : null}
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <CalculatorResult
             label="Estimated daily yield"
             value={
@@ -249,8 +255,7 @@ export function SmallWindTurbineYieldCalculator({
           saveError={pdfError}
         />
 
-        <ShareButtons title={definition.title} className="pt-1" />
-      </div>
-    </div>
+      <ShareButtons title={definition.title} className="pt-1" />
+    </CalculatorCommandShell>
   );
 }

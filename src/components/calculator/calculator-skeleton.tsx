@@ -18,7 +18,7 @@ export function CalculatorSkeleton({ className }: { className?: string }) {
         <div className="h-5 w-full max-w-md rounded-lg bg-muted/80" />
       </div>
       <div className="space-y-6 rounded-3xl border border-border/40 bg-card/50 p-6">
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-6">
           {[1, 2, 3].map((i) => (
             <div key={i} className={cn("space-y-2", i === 3 && "sm:col-span-2")}>
               <div className="h-4 w-24 rounded bg-muted" />
