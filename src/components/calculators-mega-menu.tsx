@@ -9,10 +9,16 @@ import { Input } from "@/components/ui/input";
 import {
   CALCULATOR_CATEGORY_LABELS,
   getAllCalculatorMeta,
+  getCalculatorMeta,
 } from "@/lib/calculators";
+import {
+  CALCULATOR_USE_CASES,
+  getSortedUseCaseCalculatorIds,
+  type CalculatorUseCaseId,
+  useCaseIconProps,
+} from "@/lib/calculator-use-cases";
 import { calculatorCommandInput } from "@/lib/glass-ui";
 import { isMainNavActive } from "@/lib/nav-active";
-import { MEGA_MENU_CATEGORIES, megaMenuIconProps } from "@/lib/mega-menu-categories";
 import { cn } from "@/lib/utils";
 
 export function CalculatorsMegaMenu() {
@@ -20,6 +26,7 @@ export function CalculatorsMegaMenu() {
   const isActive = isMainNavActive("/calculators", pathname);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState<CalculatorUseCaseId>("homeowners");
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const allCalculators = useMemo(() => getAllCalculatorMeta(), []);
@@ -37,6 +44,24 @@ export function CalculatorsMegaMenu() {
       )
       .slice(0, 8);
   }, [allCalculators, query]);
+
+  const activeUseCase = useMemo(
+    () => CALCULATOR_USE_CASES.find((item) => item.id === activeTab)!,
+    [activeTab]
+  );
+
+  const tabCalculators = useMemo(
+    () =>
+      getSortedUseCaseCalculatorIds(activeTab).map((id) =>
+        getCalculatorMeta(id)
+      ),
+    [activeTab]
+  );
+
+  const featuredSet = useMemo(
+    () => new Set(activeUseCase.featuredIds),
+    [activeUseCase]
+  );
 
   const showResults = query.trim().length > 0;
 
@@ -111,6 +136,43 @@ export function CalculatorsMegaMenu() {
             </div>
           </div>
 
+          {!showResults ? (
+            <div
+              className="calculators-mega-menu__tabs border-b border-border/40 px-2.5 py-1.5 sm:px-3"
+              role="tablist"
+              aria-label="Calculator use cases"
+            >
+              {CALCULATOR_USE_CASES.map((useCase) => {
+                const Icon = useCase.icon;
+                const selected = activeTab === useCase.id;
+                return (
+                  <button
+                    key={useCase.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    aria-controls={`mega-menu-panel-${useCase.id}`}
+                    id={`mega-menu-tab-${useCase.id}`}
+                    className={cn(
+                      "calculators-mega-menu__tab inline-flex items-center gap-1.5 rounded-none px-2 py-1.5 text-[0.6875rem] font-semibold sm:text-xs",
+                      selected && "calculators-mega-menu__tab--active"
+                    )}
+                    style={
+                      {
+                        "--mega-use-case": useCase.color,
+                      } as CSSProperties
+                    }
+                    onClick={() => setActiveTab(useCase.id)}
+                  >
+                    <Icon {...useCaseIconProps(useCase.color)} aria-hidden />
+                    <span className="hidden sm:inline">{useCase.label}</span>
+                    <span className="sm:hidden">{useCase.shortLabel}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ) : null}
+
           <div className="max-h-[min(58vh,380px)] overflow-y-auto px-2.5 py-2 sm:px-3">
             {showResults ? (
               <ul
@@ -153,50 +215,84 @@ export function CalculatorsMegaMenu() {
               </ul>
             ) : (
               <div
-                className="grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3"
-                role="navigation"
-                aria-label="Calculator categories"
+                id={`mega-menu-panel-${activeTab}`}
+                role="tabpanel"
+                aria-labelledby={`mega-menu-tab-${activeTab}`}
               >
-                {MEGA_MENU_CATEGORIES.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.category}
-                      href={item.href}
-                      className="calculators-mega-menu__card group/card flex gap-2 rounded-none px-2 py-1.5 transition-colors hover:bg-muted/40 dark:hover:bg-[rgb(8_14_28/0.55)]"
-                      style={{ "--mega-cat": item.color } as CSSProperties}
-                      onClick={() => setOpen(false)}
-                    >
-                      <span
-                        className={cn(
-                          "flex size-7 shrink-0 items-center justify-center rounded-none",
-                          "bg-[color-mix(in_srgb,var(--mega-cat)_12%,transparent)]",
-                          "dark:bg-[color-mix(in_srgb,var(--mega-cat)_18%,transparent)]"
-                        )}
-                      >
-                        <Icon {...megaMenuIconProps(item.color)} aria-hidden />
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-semibold text-foreground">
-                          {item.label}
-                        </span>
-                        <span className="mt-0.5 line-clamp-1 text-[0.6875rem] leading-snug text-muted-foreground">
-                          {item.description}
-                        </span>
-                      </span>
-                    </Link>
-                  );
-                })}
+                <p className="mb-2 px-0.5 text-[0.6875rem] leading-snug text-muted-foreground sm:text-xs">
+                  {activeUseCase.description}
+                </p>
+                <ul
+                  className="divide-y divide-border/40"
+                  role="list"
+                  aria-label={`${activeUseCase.label} calculators`}
+                >
+                  {tabCalculators.map((calc) => {
+                    const isFeatured = featuredSet.has(calc.id);
+                    return (
+                      <li key={calc.id}>
+                        <Link
+                          href={calc.href}
+                          className={cn(
+                            "group flex items-center justify-between gap-2 rounded-none px-1.5 py-2 transition-colors",
+                            "hover:bg-muted/40 dark:hover:bg-[rgb(8_14_28/0.55)]",
+                            isFeatured && "calculators-mega-menu__featured"
+                          )}
+                          style={
+                            isFeatured
+                              ? ({
+                                  "--mega-use-case": activeUseCase.color,
+                                } as CSSProperties)
+                              : undefined
+                          }
+                          onClick={() => setOpen(false)}
+                        >
+                          <span className="min-w-0">
+                            <span className="block truncate text-sm font-medium text-foreground">
+                              {calc.title}
+                            </span>
+                            <span className="block truncate text-[0.6875rem] text-muted-foreground">
+                              {CALCULATOR_CATEGORY_LABELS[calc.category]} ·{" "}
+                              {calc.tag}
+                            </span>
+                          </span>
+                          <ArrowUpRight
+                            className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                            aria-hidden
+                          />
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             )}
           </div>
 
-          <div className="border-t border-border/40 px-2.5 py-2 sm:px-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/40 px-2.5 py-2 sm:px-3">
+            {!showResults ? (
+              <Link
+                href={activeUseCase.browseHref}
+                className={cn(
+                  "group inline-flex items-center gap-1 text-xs font-medium text-foreground",
+                  "transition-colors hover:text-primary"
+                )}
+                onClick={() => setOpen(false)}
+              >
+                Browse all {activeUseCase.label.toLowerCase()} tools
+                <ArrowUpRight
+                  className="size-3.5 opacity-60 transition-opacity group-hover:opacity-100"
+                  aria-hidden
+                />
+              </Link>
+            ) : (
+              <span />
+            )}
             <Link
               href="/calculators/"
               className={cn(
-                "group inline-flex items-center gap-1 text-xs font-medium text-foreground sm:text-sm",
-                "transition-colors hover:text-primary"
+                "group inline-flex items-center gap-1 text-xs font-medium text-muted-foreground",
+                "transition-colors hover:text-foreground"
               )}
               onClick={() => setOpen(false)}
             >

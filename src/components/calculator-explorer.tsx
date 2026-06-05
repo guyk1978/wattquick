@@ -22,12 +22,15 @@ interface CalculatorExplorerProps {
   initialQuery?: string;
   /** Initial category filter from URL. */
   initialCategory?: CalculatorCategory;
+  /** When set, the list is pre-filtered to a use-case group from the mega menu. */
+  useCaseLabel?: string;
 }
 
 export function CalculatorExplorer({
   ids,
   initialQuery = "",
   initialCategory,
+  useCaseLabel,
 }: CalculatorExplorerProps) {
   const calculators = useMemo(
     () => ids.map((id) => getCalculatorMeta(id)),
@@ -69,6 +72,19 @@ export function CalculatorExplorer({
 
   return (
     <div className="calculators-directory space-y-4">
+      {useCaseLabel ? (
+        <p className="text-sm text-muted-foreground">
+          Showing{" "}
+          <span className="font-medium text-foreground">{useCaseLabel}</span>{" "}
+          calculators.{" "}
+          <a
+            href="/calculators/"
+            className="font-medium text-foreground underline-offset-2 hover:underline"
+          >
+            View all
+          </a>
+        </p>
+      ) : null}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search

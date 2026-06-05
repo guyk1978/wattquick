@@ -1762,6 +1762,50 @@
   border-left-color: color-mix(in srgb, var(--mega-cat) 60%, transparent);
 }
 
+.calculators-mega-menu__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.calculators-mega-menu__tab {
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: rgb(100 116 139);
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.calculators-mega-menu__tab:hover {
+  color: rgb(15 23 42);
+  background: rgb(15 23 42 / 0.04);
+}
+
+.calculators-mega-menu__tab--active {
+  border-bottom-color: var(--mega-use-case);
+  color: rgb(15 23 42);
+  background: color-mix(in srgb, var(--mega-use-case) 8%, transparent);
+}
+
+.dark .calculators-mega-menu__tab {
+  color: rgb(148 163 184);
+}
+
+.dark .calculators-mega-menu__tab:hover {
+  color: rgb(248 250 252);
+  background: rgb(255 255 255 / 0.04);
+}
+
+.dark .calculators-mega-menu__tab--active {
+  color: rgb(248 250 252);
+  background: color-mix(in srgb, var(--mega-use-case) 14%, transparent);
+}
+
+.calculators-mega-menu__featured {
+  border-left: 2px solid color-mix(in srgb, var(--mega-use-case) 50%, transparent);
+}
+
 .calculator-list-item a:hover,
 .calculator-list-item a:focus-visible {
   border-left-color: color-mix(in srgb, var(--cat) 55%, transparent);

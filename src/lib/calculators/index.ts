@@ -34,6 +34,16 @@ export {
 export { getRelatedCalculators } from "./related";
 export { isCalculatorId } from "./utils";
 export { isCalculatorCategory } from "./categories";
+export {
+  CALCULATOR_USE_CASES,
+  getCalculatorUseCase,
+  getCalculatorsForUseCase,
+  getSortedUseCaseCalculatorIds,
+  getUseCaseById,
+  isCalculatorUseCase,
+  type CalculatorUseCase,
+  type CalculatorUseCaseId,
+} from "../calculator-use-cases";
 
 import { getAllCalculatorMeta as _getAllCalculatorMeta } from "./registry";
 
