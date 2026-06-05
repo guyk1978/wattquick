@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BlogPostGrid } from "@/components/blog/blog-post-grid";
+import { BlogIndex } from "@/components/blog/blog-index";
 import { PageHeader, PageShell } from "@/components/page-shell";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
@@ -24,7 +24,7 @@ export default function BlogPage() {
       {posts.length === 0 ? (
         <p className="text-center text-muted-foreground">No articles yet.</p>
       ) : (
-        <BlogPostGrid posts={posts} />
+        <BlogIndex posts={posts} />
       )}
     </PageShell>
   );
