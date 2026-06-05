@@ -1529,6 +1529,26 @@
   white-space: nowrap;
 }
 
+/* —— Calculators directory — flat list —— */
+.calculators-directory__list {
+  border: none;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 0.06);
+}
+
+.dark .calculators-directory__list {
+  box-shadow: none;
+}
+
+.calculator-list-item a:hover,
+.calculator-list-item a:focus-visible {
+  border-left-color: color-mix(in srgb, var(--cat) 55%, transparent);
+}
+
+.dark .calculator-list-item a:hover,
+.dark .calculator-list-item a:focus-visible {
+  border-left-color: color-mix(in srgb, var(--cat) 65%, transparent);
+}
+
 .dashboard-flow-label,
 .dashboard-widget-stat,
 .dashboard-modal-stat {

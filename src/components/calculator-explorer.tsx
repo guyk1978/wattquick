@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import { CalculatorListItem } from "@/components/calculator-list-item";
 import { Input } from "@/components/ui/input";
+import { calculatorCommandInput } from "@/lib/glass-ui";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
@@ -67,11 +68,11 @@ export function CalculatorExplorer({
   }, [calculators, query, category]);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+    <div className="calculators-directory space-y-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="relative flex-1">
           <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden
           />
           <Input
@@ -79,17 +80,20 @@ export function CalculatorExplorer({
             placeholder="Search calculators…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="h-11 rounded-xl border-border bg-card pl-10 shadow-sm dark:bg-card/90"
+            className={cn(
+              calculatorCommandInput,
+              "h-10 rounded-none border-0 pl-9 shadow-none focus-visible:ring-0"
+            )}
             aria-label="Search calculators"
           />
         </div>
-        <p className="shrink-0 text-sm text-muted-foreground sm:text-right">
+        <p className="shrink-0 text-xs text-muted-foreground sm:text-right sm:text-sm">
           {filtered.length} of {calculators.length}
         </p>
       </div>
 
       <div
-        className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible"
+        className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible"
         role="tablist"
         aria-label="Filter by category"
       >
@@ -111,12 +115,12 @@ export function CalculatorExplorer({
       </div>
 
       {filtered.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-border py-12 text-center text-sm text-muted-foreground">
+        <p className="rounded-none border border-dashed border-border/60 py-10 text-center text-sm text-muted-foreground">
           No calculators match your search.
         </p>
       ) : (
         <ul
-          className="divide-y divide-border/70 rounded-xl border border-border/80 bg-card/50 p-1 dark:bg-card/30"
+          className="calculators-directory__list list-none divide-y divide-border/40 rounded-none bg-card dark:bg-[rgb(6_10_22/0.72)]"
           role="list"
         >
           {filtered.map((calc) => (
@@ -144,11 +148,11 @@ function CategoryChip({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors duration-150 sm:text-sm",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+        "calculators-directory__chip shrink-0 rounded-none px-2.5 py-1 text-xs font-medium transition-colors duration-150",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         active
-          ? "border border-primary/35 bg-primary/10 text-primary dark:bg-primary/15"
-          : "border border-transparent bg-muted/70 text-muted-foreground hover:bg-muted hover:text-foreground dark:bg-muted/50"
+          ? "border border-foreground/20 bg-muted/60 text-foreground dark:bg-[rgb(8_14_28/0.85)]"
+          : "border border-border/50 bg-transparent text-muted-foreground hover:border-border hover:bg-muted/30 hover:text-foreground"
       )}
     >
       {children}

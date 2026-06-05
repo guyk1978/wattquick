@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
@@ -15,7 +15,7 @@ interface CalculatorListItemProps {
   className?: string;
 }
 
-/** Compact row for full calculator directory (progressive disclosure). */
+/** Compact flat row for the calculators directory */
 export function CalculatorListItem({
   calculator,
   className,
@@ -24,46 +24,43 @@ export function CalculatorListItem({
   const theme = getCategoryTheme(calculator.category);
 
   return (
-    <li className={className}>
+    <li className={cn("calculator-list-item", className)}>
       <Link
         href={calculator.href}
         style={categoryThemeVars(theme)}
         className={cn(
-          "group flex items-center gap-3 rounded-lg px-3 py-2.5 sm:gap-4 sm:px-4 sm:py-3",
-          "border border-transparent transition-colors duration-150",
-          "hover:border-[color-mix(in_srgb,var(--cat)_28%,transparent)]",
-          "hover:bg-muted/60 dark:hover:bg-muted/40",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          "group flex items-center gap-2.5 rounded-none border-l-2 border-l-transparent px-2.5 py-2 sm:gap-3 sm:px-3",
+          "transition-colors duration-150 hover:bg-muted/40",
+          "dark:hover:bg-[rgb(8_14_28/0.55)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         )}
       >
         <span
           className={cn(
-            "flex size-9 shrink-0 items-center justify-center rounded-lg border sm:size-10",
-            "border-[color-mix(in_srgb,var(--cat)_22%,transparent)]",
-            "bg-card text-[var(--cat)]",
-            "dark:border-[color-mix(in_srgb,var(--cat)_35%,transparent)]",
-            "dark:bg-[color-mix(in_srgb,var(--cat)_12%,var(--card))]"
+            "flex size-7 shrink-0 items-center justify-center rounded-none sm:size-8",
+            "bg-[color-mix(in_srgb,var(--cat)_10%,transparent)] text-[var(--cat)]",
+            "dark:bg-[color-mix(in_srgb,var(--cat)_16%,transparent)]"
           )}
         >
-          <Icon className="size-4 sm:size-[1.125rem]" strokeWidth={2} aria-hidden />
+          <Icon className="size-3.5 sm:size-4" strokeWidth={2} aria-hidden />
         </span>
 
         <span className="min-w-0 flex-1">
-          <span className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-            <span className="text-sm font-semibold text-foreground sm:text-base">
+          <span className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <span className="truncate text-sm font-medium text-foreground">
               {calculator.title}
             </span>
-            <span className="text-[0.6875rem] font-medium uppercase tracking-wide text-muted-foreground">
+            <span className="shrink-0 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
               {CALCULATOR_CATEGORY_LABELS[calculator.category]}
             </span>
           </span>
-          <span className="mt-0.5 block line-clamp-1 text-xs text-muted-foreground sm:text-sm">
+          <span className="mt-0.5 block line-clamp-1 text-xs text-muted-foreground">
             {calculator.description}
           </span>
         </span>
 
-        <ChevronRight
-          className="size-4 shrink-0 text-muted-foreground opacity-60 transition-transform duration-150 group-hover:translate-x-0.5 group-hover:opacity-100"
+        <ArrowUpRight
+          className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100"
           aria-hidden
         />
       </Link>
