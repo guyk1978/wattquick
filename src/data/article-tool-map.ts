@@ -251,6 +251,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "vampire-energy-standby-power-waste",
     "articleTitle": "Vampire Energy and Standby Power Waste in the Home"
   },
+  "standby-power-aggregator": {
+    "articleSlug": "vampire-power-guide",
+    "articleTitle": "10 Devices Stealing Your Power at Night: How to Kill Vampire Power"
+  },
   "battery-c-rate": {
     "articleSlug": "what-is-battery-c-rate",
     "articleTitle": "What Is Battery C-Rate? Discharge Speed in Plain Language"

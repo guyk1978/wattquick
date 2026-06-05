@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T15:17:40.861Z",
+  "generatedAt": "2026-06-05T15:24:47.482Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -3486,6 +3486,21 @@
       "tag": "Appliances",
       "keywords": [
         "Appliances",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "vampire-power-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Green Home",
+      "title": "10 Devices Stealing Your Power at Night: How to Kill Vampire Power",
+      "description": "What is phantom load? The standby devices that drain electricity while you sleep—and how our Standby Power Aggregator shows what that waste costs per year.",
+      "href": "/blog/vampire-power-guide/",
+      "tag": "Green Home",
+      "keywords": [
+        "Green Home",
         "blog",
         "article"
       ]

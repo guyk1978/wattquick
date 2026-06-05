@@ -895,6 +895,7 @@ export const calculatorsGreenHome = [
   {
     slug: "standby-power-aggregator",
     href: "/standby-power-aggregator",
+    relatedArticleId: "vampire-power-guide",
     title: "Standby Power Aggregator",
     description:
       "Add TVs, chargers, consoles, and adapters to see total vampire power cost and what you could buy instead.",
