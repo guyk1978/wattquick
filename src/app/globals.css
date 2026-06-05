@@ -1354,6 +1354,17 @@
   }
 }
 
+/* Related calculator links — flat, accent line, no glow */
+.calc-card-related {
+  border: none;
+  border-left: 2px solid color-mix(in srgb, var(--cat) 55%, transparent);
+  box-shadow: none;
+}
+
+.dark .calc-card-related {
+  border-left-color: color-mix(in srgb, var(--cat) 65%, transparent);
+}
+
 /* Calculator cards — subtle hover pop */
 @media (prefers-reduced-motion: no-preference) {
   .calc-card {

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 
 interface CalculatorCardProps {
   calculator: CalculatorMeta;
-  variant?: "default" | "compact" | "minimal";
+  variant?: "default" | "compact" | "minimal" | "related";
   className?: string;
 }
 
@@ -25,7 +25,52 @@ export function CalculatorCard({
   const Icon = calculator.icon;
   const isCompact = variant === "compact";
   const isMinimal = variant === "minimal";
+  const isRelated = variant === "related";
   const theme = getCategoryTheme(calculator.category);
+
+  if (isRelated) {
+    return (
+      <Link
+        href={calculator.href}
+        style={categoryThemeVars(theme)}
+        className={cn(
+          "calc-card-related group flex items-center gap-2.5 rounded-none px-3 py-2.5",
+          "bg-card transition-colors duration-150",
+          "hover:bg-muted/50 dark:bg-[rgb(6_10_22/0.72)] dark:hover:bg-[rgb(8_14_28/0.85)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          className
+        )}
+      >
+        <span
+          className={cn(
+            "flex size-7 shrink-0 items-center justify-center rounded-none",
+            "bg-[color-mix(in_srgb,var(--cat)_12%,transparent)] text-[var(--cat)]",
+            "dark:bg-[color-mix(in_srgb,var(--cat)_18%,transparent)]"
+          )}
+        >
+          <Icon className="size-3.5" strokeWidth={2} aria-hidden />
+        </span>
+
+        <span className="min-w-0 flex-1">
+          <span className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <span className="truncate text-sm font-medium leading-snug text-foreground">
+              {calculator.title}
+            </span>
+            <span className="shrink-0 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
+              {calculator.tag}
+            </span>
+          </span>
+        </span>
+
+        <ArrowUpRight
+          className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+          strokeWidth={2}
+          aria-hidden
+        />
+        <span className="sr-only">Open {calculator.title}</span>
+      </Link>
+    );
+  }
 
   if (isMinimal) {
     return (
