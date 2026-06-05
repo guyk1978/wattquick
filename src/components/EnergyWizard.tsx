@@ -331,6 +331,9 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                   <article
                     className={cn(
                       "energy-wizard__step rounded-none border border-border/60 p-4 sm:p-5",
+                      step.kind === "calculator" &&
+                        "energy-wizard__step--calculator",
+                      step.kind === "article" && "energy-wizard__step--article",
                       done && "energy-wizard__step--complete"
                     )}
                   >
@@ -340,9 +343,16 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                           <span className="inline-flex size-6 items-center justify-center rounded-none border border-border/60 text-[0.6875rem] font-bold text-muted-foreground">
                             {step.stepNumber}
                           </span>
-                          <span className="inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                          <span
+                            className={cn(
+                              "inline-flex items-center gap-1 rounded-none border px-2 py-0.5 text-[0.6875rem] font-semibold uppercase tracking-wider",
+                              step.kind === "calculator"
+                                ? "energy-wizard__badge--tool border-amber-500/30 bg-amber-500/10 text-amber-950 dark:text-amber-100"
+                                : "energy-wizard__badge--guide border-violet-500/30 bg-violet-500/10 text-violet-950 dark:text-violet-100"
+                            )}
+                          >
                             <Icon className="size-3.5" aria-hidden />
-                            {step.kind === "calculator" ? "Calculator" : "Guide"}
+                            {step.kind === "calculator" ? "Tool" : "Guide"}
                           </span>
                         </div>
                         <h3 className="mt-2 text-base font-semibold text-foreground">

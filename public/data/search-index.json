@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T16:28:08.725Z",
+  "generatedAt": "2026-06-05T16:35:04.228Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -3428,6 +3428,21 @@
       "title": "Solar Energy for Agriculture: How to Choose a Water Pump System",
       "description": "Compare DC solar pumps and AC infrastructure for farm irrigation—how pumping depth changes energy demand and what to spec before you buy panels.",
       "href": "/blog/solar-water-pumping-agriculture/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "the-20-year-solar-ledger",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "The 20-Year Solar Ledger: Understanding Your Solar ROI",
+      "description": "Solar isn't just an expense; it's a 20-year financial asset. We break down degradation, inflation, and net metering to show how your system truly pays off.",
+      "href": "/blog/the-20-year-solar-ledger/",
       "tag": "Solar",
       "keywords": [
         "Solar",

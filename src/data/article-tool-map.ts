@@ -231,6 +231,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "solar-water-pumping-agriculture",
     "articleTitle": "Solar Energy for Agriculture: How to Choose a Water Pump System"
   },
+  "solar-roi-analysis": {
+    "articleSlug": "the-20-year-solar-ledger",
+    "articleTitle": "The 20-Year Solar Ledger: Understanding Your Solar ROI"
+  },
   "home-insulation-savings": {
     "articleSlug": "thermal-insulation-home-energy-bills",
     "articleTitle": "The impact of thermal insulation on home energy bills"

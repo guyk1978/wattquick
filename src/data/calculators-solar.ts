@@ -1263,6 +1263,7 @@ export const calculatorsSolar = [
   {
     slug: "solar-roi-analysis",
     href: "/solar-roi-analysis",
+    relatedArticleId: "the-20-year-solar-ledger",
     title: "Solar ROI Analysis",
     description:
       "Advanced 20-year solar payback with degradation, rate inflation, export credits, incentives, and cumulative savings vs. status quo.",

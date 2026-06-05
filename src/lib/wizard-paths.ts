@@ -134,7 +134,7 @@ export const WIZARD_PATH_MAP: Record<
     owner: [
       { kind: "calculator", slug: "solar-shading-analysis" },
       { kind: "calculator", slug: "solar-roi-analysis" },
-      { kind: "article", slug: "solar-roi-payback-period-guide" },
+      { kind: "article", slug: "the-20-year-solar-ledger" },
     ],
     pro: [
       { kind: "calculator", slug: "solar-shading-analysis" },

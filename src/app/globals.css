@@ -1851,6 +1851,14 @@
 }
 
 /* —— WattQuick Wizard —— */
+.energy-wizard__step--calculator {
+  border-left: 2px solid color-mix(in srgb, rgb(245 158 11) 40%, transparent);
+}
+
+.energy-wizard__step--article {
+  border-left: 2px solid color-mix(in srgb, rgb(139 92 246) 40%, transparent);
+}
+
 .energy-wizard__step--complete {
   border-left: 2px solid color-mix(in srgb, var(--primary) 45%, transparent);
 }
