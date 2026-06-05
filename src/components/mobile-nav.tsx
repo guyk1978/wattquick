@@ -1,20 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { isMainNavActive } from "@/lib/nav-active";
 import { MAIN_NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div className="relative sm:hidden">
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex size-9 items-center justify-center rounded-none border border-border/60 text-foreground transition-colors hover:bg-muted/50"
+        className="header-nav-link flex size-9 items-center justify-center text-white"
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
       >
@@ -31,9 +34,12 @@ export function MobileNav() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
+                  aria-current={
+                    isMainNavActive(item.href, pathname) ? "page" : undefined
+                  }
                   className={cn(
-                    "block rounded-none px-3 py-2 text-sm font-medium text-muted-foreground",
-                    "transition-colors hover:bg-muted/50 hover:text-foreground"
+                    "header-nav-link block px-3 py-2 text-sm font-medium",
+                    isMainNavActive(item.href, pathname) && "header-nav-link--active"
                   )}
                 >
                   {item.label}

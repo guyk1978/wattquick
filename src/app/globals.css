@@ -833,20 +833,18 @@
 }
 
 .glass-header {
-  background: rgb(255 255 255 / 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgb(15 23 42 / 0.08);
-  box-shadow: 0 4px 20px rgb(15 23 42 / 0.05);
+  background: #000000;
+  opacity: 1;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid #1a1a1a;
+  box-shadow: none;
 }
 
 .dark .glass-header {
-  background: rgb(15 23 42 / 0.72);
-  border-bottom-color: rgb(59 130 246 / 0.12);
-  box-shadow:
-    0 0 48px -16px rgb(59 130 246 / 0.25),
-    inset 0 -1px 0 rgb(0 0 0 / 0.35),
-    inset 0 1px 0 rgb(255 255 255 / 0.05);
+  background: #000000;
+  border-bottom-color: #1a1a1a;
+  box-shadow: none;
 }
 
 .gauge-specular {
@@ -1680,21 +1678,41 @@
   border-left-color: color-mix(in srgb, var(--cat) 65%, transparent);
 }
 
-/* —— Light mode: nav links, filter chips, tags —— */
+/* —— Matte black header: nav links —— */
 .header-nav-link {
   border-radius: 0;
+  color: #ffffff;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .header-nav-link:hover,
-.header-nav-link[aria-expanded="true"] {
-  background: rgb(255 255 255 / 0.72);
-  color: var(--foreground);
+.header-nav-link[aria-expanded="true"]:not(.header-nav-link--active) {
+  background: #ff3b30;
+  color: #000000;
 }
 
-.dark .header-nav-link:hover,
-.dark .header-nav-link[aria-expanded="true"] {
-  background: rgb(255 255 255 / 0.05);
+.header-nav-link--active,
+.header-nav-link.active {
+  background: #ffcc00;
+  color: #000000;
+}
+
+.header-nav-link--active:hover,
+.header-nav-link.active:hover {
+  background: #ffcc00;
+  color: #000000;
+}
+
+.glass-header .theme-toggle {
+  border-color: #333333;
+  background: #111111;
+  box-shadow: none;
+}
+
+.glass-header .theme-toggle__thumb {
+  border-color: #444444;
+  background: #222222;
+  color: #ffcc00;
 }
 
 .filter-chip {
@@ -1845,15 +1863,15 @@
 
 .mobile-nav-panel {
   border-radius: 0;
-  border: 1px solid rgb(15 23 42 / 0.1);
-  background: rgb(255 255 255 / 0.98);
-  box-shadow: 0 8px 24px rgb(15 23 42 / 0.08);
+  border: 1px solid #1a1a1a;
+  background: #000000;
+  box-shadow: none;
 }
 
 .dark .mobile-nav-panel {
-  border-color: rgb(255 255 255 / 0.1);
-  background: rgb(6 10 22 / 0.96);
-  box-shadow: 0 16px 40px rgb(0 0 0 / 0.4);
+  border-color: #1a1a1a;
+  background: #000000;
+  box-shadow: none;
 }
 
 .command-center-node--pulse {

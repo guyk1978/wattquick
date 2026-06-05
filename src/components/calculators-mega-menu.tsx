@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import { useMemo, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Search } from "lucide-react";
@@ -10,10 +11,13 @@ import {
   getAllCalculatorMeta,
 } from "@/lib/calculators";
 import { calculatorCommandInput } from "@/lib/glass-ui";
+import { isMainNavActive } from "@/lib/nav-active";
 import { MEGA_MENU_CATEGORIES, megaMenuIconProps } from "@/lib/mega-menu-categories";
 import { cn } from "@/lib/utils";
 
 export function CalculatorsMegaMenu() {
+  const pathname = usePathname();
+  const isActive = isMainNavActive("/calculators", pathname);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -59,10 +63,10 @@ export function CalculatorsMegaMenu() {
     >
       <Link
         href="/calculators/"
+        aria-current={isActive ? "page" : undefined}
         className={cn(
           "header-nav-link inline-flex items-center gap-1 px-3.5 py-2 text-sm font-medium",
-          "text-muted-foreground",
-          open && "text-foreground"
+          isActive && "header-nav-link--active"
         )}
         aria-expanded={open}
         aria-haspopup="true"
