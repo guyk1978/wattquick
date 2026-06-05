@@ -1,11 +1,36 @@
 import { formatCurrency, formatDuration, formatNumber, parseNonNegative, parsePositive } from "@/lib/format";
 
-const ASSIST_PRESETS = {
-  eco: { label: "Eco (25%)", factor: 0.25 },
-  tour: { label: "Tour (50%)", factor: 0.5 },
-  sport: { label: "Sport (75%)", factor: 0.75 },
-  turbo: { label: "Turbo (100%)", factor: 1 },
-} as const;
+/** Assist level 1–5 maps to consumption multiplier 1.0 → 2.5 */
+export const EBIKE_ASSIST_LEVELS = [
+  { value: "1", label: "Level 1 — minimal assist (×1.0)" },
+  { value: "2", label: "Level 2 (×1.375)" },
+  { value: "3", label: "Level 3 — medium (×1.75)" },
+  { value: "4", label: "Level 4 (×2.125)" },
+  { value: "5", label: "Level 5 — max assist (×2.5)" },
+] as const;
+
+export const EBIKE_WIND_TERRAIN_FACTORS = [
+  { value: "0.8", label: "Tailwind / flat (×0.8)" },
+  { value: "1.0", label: "Calm / neutral (×1.0)" },
+  { value: "1.2", label: "Light headwind / rolling (×1.2)" },
+  { value: "1.35", label: "Moderate climb / headwind (×1.35)" },
+  { value: "1.5", label: "Steep climb / strong headwind (×1.5)" },
+] as const;
+
+const DEFAULT_BASE_WH_PER_KM = 9;
+const DEFAULT_PACK_EFFICIENCY = 0.92;
+const DEFAULT_CELL_RESISTANCE_OHM = 0.03;
+const DEFAULT_CYCLE_LIFE_K = 1750;
+const DEFAULT_SOH_TARGET_PERCENT = 80;
+
+function assistMultiplier(level: number): number {
+  const clamped = Math.min(5, Math.max(1, level));
+  return 1 + (clamped - 1) * 0.375;
+}
+
+function weightWhPerKmPenalty(totalMassKg: number): number {
+  return Math.max(0, (totalMassKg - 80) / 10) * 0.1;
+}
 
 const TERRAIN_PRESETS = {
   flat: { label: "Flat", multiplier: 1 },
@@ -13,26 +38,63 @@ const TERRAIN_PRESETS = {
   hilly: { label: "Hilly", multiplier: 1.55 },
 } as const;
 
-export type EbikeAssistLevel = keyof typeof ASSIST_PRESETS;
 export type EbikeTerrain = keyof typeof TERRAIN_PRESETS;
 
-export function calculateEbikeRange(values: Record<string, string>) {
-  const batteryWh = parsePositive(values.batteryWh ?? "");
-  const avgSpeedKmh = parsePositive(values.avgSpeedKmh ?? "");
-  const assist = (values.assistLevel ?? "tour") as EbikeAssistLevel;
-  if (batteryWh === null || avgSpeedKmh === null) return null;
+export interface EbikeRangeInput {
+  batteryWh: number;
+  packEfficiency: number;
+  baseWhPerKm: number;
+  assistLevel: number;
+  totalMassKg: number;
+  windTerrainFactor: number;
+}
 
-  const assistFactor = ASSIST_PRESETS[assist]?.factor ?? 0.5;
-  const baseWhPerKm = 12 - assistFactor * 4;
-  const speedFactor = 1 + Math.max(0, avgSpeedKmh - 20) * 0.02;
-  const consumptionWhPerKm = baseWhPerKm * speedFactor;
-  const rangeKm = batteryWh / consumptionWhPerKm;
+export function calculateEbikeRangeFromInput(input: EbikeRangeInput) {
+  const assistMult = assistMultiplier(input.assistLevel);
+  const weightPenalty = weightWhPerKmPenalty(input.totalMassKg);
+  const consumptionWhPerKm =
+    input.baseWhPerKm * assistMult * input.windTerrainFactor + weightPenalty;
+  const usableWh = input.batteryWh * input.packEfficiency;
+  const rangeKm = usableWh / consumptionWhPerKm;
 
   return {
     rangeKm,
     consumptionWhPerKm,
-    assistLabel: ASSIST_PRESETS[assist]?.label ?? "Tour",
+    usableWh,
+    assistMult,
+    weightPenalty,
+    assistLevel: input.assistLevel,
+    windTerrainFactor: input.windTerrainFactor,
   };
+}
+
+export function calculateEbikeRange(values: Record<string, string>) {
+  const batteryWh = parsePositive(values.batteryWh ?? "");
+  const totalMassKg = parsePositive(values.totalMassKg ?? "");
+  const assistLevel = parsePositive(values.assistLevel ?? "");
+  const windTerrainFactor = parsePositive(values.windTerrainFactor ?? "");
+  const baseWhPerKm = parsePositive(values.baseWhPerKm ?? "") ?? DEFAULT_BASE_WH_PER_KM;
+  const packEfficiencyPct = parsePositive(values.packEfficiency ?? "");
+  if (
+    batteryWh === null ||
+    totalMassKg === null ||
+    assistLevel === null ||
+    windTerrainFactor === null
+  ) {
+    return null;
+  }
+
+  const packEfficiency =
+    packEfficiencyPct !== null ? packEfficiencyPct / 100 : DEFAULT_PACK_EFFICIENCY;
+
+  return calculateEbikeRangeFromInput({
+    batteryWh,
+    packEfficiency,
+    baseWhPerKm,
+    assistLevel,
+    totalMassKg,
+    windTerrainFactor,
+  });
 }
 
 export function calculateEbikeChargingCost(values: Record<string, string>) {
@@ -83,17 +145,56 @@ export function calculateEbikeBatteryCRate(values: Record<string, string>) {
   return { maxContinuousAmps, headroomPercent, isWithinRating };
 }
 
+export interface EbikeVoltageSagInput {
+  nominalVoltage: number;
+  cellResistanceOhm: number;
+  seriesCells: number;
+  parallelGroups: number;
+  maxDrawAmps: number;
+}
+
+export function calculateEbikeVoltageSagFromInput(input: EbikeVoltageSagInput) {
+  const rTotal =
+    (input.cellResistanceOhm * input.seriesCells) / Math.max(1, input.parallelGroups);
+  const sagVolts = input.maxDrawAmps * rTotal;
+  const loadedVoltage = Math.max(0, input.nominalVoltage - sagVolts);
+  const sagPercent = (sagVolts / input.nominalVoltage) * 100;
+
+  return {
+    sagVolts,
+    loadedVoltage,
+    sagPercent,
+    rTotal,
+    cellResistanceOhm: input.cellResistanceOhm,
+    seriesCells: input.seriesCells,
+    parallelGroups: input.parallelGroups,
+    maxDrawAmps: input.maxDrawAmps,
+  };
+}
+
 export function calculateEbikeVoltageSag(values: Record<string, string>) {
   const nominalVoltage = parsePositive(values.nominalVoltage ?? "");
-  const internalResistanceMohm = parsePositive(values.internalResistanceMohm ?? "");
-  const loadAmps = parsePositive(values.loadAmps ?? "");
-  if (nominalVoltage === null || internalResistanceMohm === null || loadAmps === null) return null;
+  const cellResistanceOhm =
+    parsePositive(values.cellResistanceOhm ?? "") ?? DEFAULT_CELL_RESISTANCE_OHM;
+  const seriesCells = parsePositive(values.seriesCells ?? "");
+  const parallelGroups = parsePositive(values.parallelGroups ?? "");
+  const maxDrawAmps = parsePositive(values.maxDrawAmps ?? "");
+  if (
+    nominalVoltage === null ||
+    seriesCells === null ||
+    parallelGroups === null ||
+    maxDrawAmps === null
+  ) {
+    return null;
+  }
 
-  const sagVolts = loadAmps * (internalResistanceMohm / 1000);
-  const loadedVoltage = Math.max(0, nominalVoltage - sagVolts);
-  const sagPercent = (sagVolts / nominalVoltage) * 100;
-
-  return { sagVolts, loadedVoltage, sagPercent };
+  return calculateEbikeVoltageSagFromInput({
+    nominalVoltage,
+    cellResistanceOhm,
+    seriesCells,
+    parallelGroups,
+    maxDrawAmps,
+  });
 }
 
 export function calculateEbikeWeightPerformance(values: Record<string, string>) {
@@ -165,21 +266,58 @@ export function calculateEbikeControllerWatts(values: Record<string, string>) {
   return { inputWatts, shaftWatts, motorEfficiency };
 }
 
+export interface EbikeCycleLifeInput {
+  cyclesCompleted: number;
+  avgDepthOfDischargePercent: number;
+  chemistryK: number;
+  manufacturerRatedCycles: number;
+  sohTargetPercent: number;
+}
+
+export function calculateEbikeBatteryCycleLifeFromInput(input: EbikeCycleLifeInput) {
+  const dod = Math.min(0.99, Math.max(0.05, input.avgDepthOfDischargePercent / 100));
+  const expectedTotalCycles = input.chemistryK * Math.pow(dod, -1.5);
+  const remainingModelCycles = Math.max(0, expectedTotalCycles - input.cyclesCompleted);
+  const lifeUsedPercent = (input.cyclesCompleted / expectedTotalCycles) * 100;
+  const remainingManufacturerCycles = Math.max(
+    0,
+    input.manufacturerRatedCycles - input.cyclesCompleted
+  );
+  const atSohEndOfLife = input.cyclesCompleted >= input.manufacturerRatedCycles;
+
+  return {
+    dod,
+    expectedTotalCycles,
+    remainingModelCycles,
+    remainingManufacturerCycles,
+    lifeUsedPercent,
+    atSohEndOfLife,
+    chemistryK: input.chemistryK,
+    manufacturerRatedCycles: input.manufacturerRatedCycles,
+    sohTargetPercent: input.sohTargetPercent,
+  };
+}
+
 export function calculateEbikeBatteryCycleLife(values: Record<string, string>) {
   const cyclesCompleted = parseNonNegative(values.cyclesCompleted ?? "");
   const avgDepthOfDischarge = parsePositive(values.avgDepthOfDischarge ?? "");
-  const ratedCycles = parsePositive(values.ratedCycles ?? "") ?? 800;
+  const chemistryK = parsePositive(values.chemistryK ?? "") ?? DEFAULT_CYCLE_LIFE_K;
+  const manufacturerRatedCycles =
+    parsePositive(values.manufacturerRatedCycles ?? "") ?? 700;
+  const sohTargetPercent =
+    parsePositive(values.sohTargetPercent ?? "") ?? DEFAULT_SOH_TARGET_PERCENT;
   if (cyclesCompleted === null || avgDepthOfDischarge === null) return null;
 
-  const dodFactor = Math.max(0.35, avgDepthOfDischarge / 80);
-  const adjustedRatedCycles = ratedCycles / dodFactor;
-  const remainingCycles = Math.max(0, adjustedRatedCycles - cyclesCompleted);
-  const lifeUsedPercent = (cyclesCompleted / adjustedRatedCycles) * 100;
-
-  return { remainingCycles, lifeUsedPercent, adjustedRatedCycles };
+  return calculateEbikeBatteryCycleLifeFromInput({
+    cyclesCompleted,
+    avgDepthOfDischargePercent: avgDepthOfDischarge,
+    chemistryK,
+    manufacturerRatedCycles,
+    sohTargetPercent,
+  });
 }
 
-export { ASSIST_PRESETS, TERRAIN_PRESETS };
+export { TERRAIN_PRESETS };
 
 export function formatEbikeRangeResult(values: Record<string, string>) {
   const result = calculateEbikeRange(values);
@@ -187,7 +325,7 @@ export function formatEbikeRangeResult(values: Record<string, string>) {
   return {
     value: formatNumber(result.rangeKm, { maxDecimals: 1 }),
     unit: "km",
-    detail: `${formatNumber(result.consumptionWhPerKm, { maxDecimals: 1 })} Wh/km · ${result.assistLabel}`,
+    detail: `${formatNumber(result.consumptionWhPerKm, { maxDecimals: 1 })} Wh/km · assist L${result.assistLevel} ×${formatNumber(result.assistMult, { maxDecimals: 2 })}`,
   };
 }
 
@@ -239,7 +377,7 @@ export function formatEbikeVoltageSagResult(values: Record<string, string>) {
   return {
     value: formatNumber(result.sagVolts, { maxDecimals: 2 }),
     unit: "V",
-    detail: `Loaded ${formatNumber(result.loadedVoltage, { maxDecimals: 1 })} V · ${formatNumber(result.sagPercent, { maxDecimals: 1 })}% sag`,
+    detail: `Under load ${formatNumber(result.loadedVoltage, { maxDecimals: 1 })} V · R_pack ${formatNumber(result.rTotal * 1000, { maxDecimals: 1 })} mΩ`,
   };
 }
 
@@ -276,8 +414,10 @@ export function formatEbikeBatteryCycleLifeResult(values: Record<string, string>
   const result = calculateEbikeBatteryCycleLife(values);
   if (!result) return { value: null, unit: "cycles", detail: null };
   return {
-    value: formatNumber(result.remainingCycles, { maxDecimals: 0 }),
+    value: formatNumber(result.remainingModelCycles, { maxDecimals: 0 }),
     unit: "cycles",
-    detail: `${formatNumber(result.lifeUsedPercent, { maxDecimals: 0 })}% of adjusted life used · rated ${formatNumber(result.adjustedRatedCycles, { maxDecimals: 0 })} cycles`,
+    detail: result.atSohEndOfLife
+      ? `Past ${result.sohTargetPercent}% SOH manufacturer rating`
+      : `${formatNumber(result.remainingManufacturerCycles, { maxDecimals: 0 })} cycles to ${result.sohTargetPercent}% SOH spec · ${formatNumber(result.lifeUsedPercent, { maxDecimals: 0 })}% of k×DOD⁻¹·⁵ model used`,
   };
 }

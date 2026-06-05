@@ -35,6 +35,9 @@ import { HomeInsulationSavingsCalculator } from "@/components/calculators/HomeIn
 import { PoolEnergyThermalCoverCalculator } from "@/components/calculators/PoolEnergyThermalCoverCalculator";
 import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverterSavingsCalculator";
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
+import { EbikeRangeEstimatorCalculator } from "@/components/calculators/EbikeRangeEstimatorCalculator";
+import { EbikeVoltageSagCalculator } from "@/components/calculators/EbikeVoltageSagCalculator";
+import { EbikeBatteryCycleLifeCalculator } from "@/components/calculators/EbikeBatteryCycleLifeCalculator";
 import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/EvChargingTemperatureImpactCalculator";
 import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/EvBatteryDepletionValueLossCalculator";
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
@@ -153,6 +156,15 @@ export function CalculatorPanel({
   }
   if (id === "ev-vs-ice-maintenance") {
     return <EvVsIceMaintenanceCalculator className={className} />;
+  }
+  if (id === "ebike-range-estimator") {
+    return <EbikeRangeEstimatorCalculator className={className} />;
+  }
+  if (id === "ebike-voltage-sag") {
+    return <EbikeVoltageSagCalculator className={className} />;
+  }
+  if (id === "ebike-battery-cycle-life") {
+    return <EbikeBatteryCycleLifeCalculator className={className} />;
   }
 
   const definition = getCalculatorDefinition(id);

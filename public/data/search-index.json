@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T09:33:31.093Z",
+  "generatedAt": "2026-06-05T09:39:13.027Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1837,7 +1837,7 @@
       "category": "Calculators",
       "group": "E-Bike",
       "title": "E-Bike Range Estimator",
-      "description": "Estimate riding range from battery capacity (Wh), average speed, and pedal-assist level.",
+      "description": "Physics-based range estimate from battery Wh, assist level, rider weight, and wind/terrain factors.",
       "href": "/ebike-range-estimator/",
       "tag": "E-Bike",
       "keywords": [
@@ -1915,7 +1915,7 @@
       "category": "Calculators",
       "group": "E-Bike",
       "title": "E-Bike Voltage Sag Calculator",
-      "description": "Calculate voltage drop under load from internal pack resistance and motor current.",
+      "description": "Calculate dynamic voltage sag from cell resistance, S×P pack layout, and max controller current.",
       "href": "/ebike-voltage-sag/",
       "tag": "E-Bike",
       "keywords": [
@@ -1978,7 +1978,7 @@
       "category": "Calculators",
       "group": "E-Bike",
       "title": "E-Bike Battery Cycle Life Calculator",
-      "description": "Estimate remaining battery life from completed cycles, average depth of discharge, and rated cycle count.",
+      "description": "Estimate remaining cycle life using k × DOD⁻¹·⁵ decay and manufacturer 80% SOH ratings.",
       "href": "/ebike-battery-cycle-life/",
       "tag": "E-Bike",
       "keywords": [
