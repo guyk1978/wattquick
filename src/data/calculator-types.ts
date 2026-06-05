@@ -45,6 +45,8 @@ export interface CalculatorResultDisplay {
   value: string | null;
   unit?: string;
   detail?: string | null;
+  /** Extra labeled results saved to project snapshots for BOM rollup */
+  snapshotResults?: Record<string, string>;
 }
 
 export interface CalculatorResultConfig {

@@ -13,6 +13,8 @@ export interface EngineeringRollupMetrics {
   totalCableLengthM: number | null;
   requiredWh: number | null;
   nominalInverterW: number | null;
+  totalReactiveKvar: number | null;
+  usableBatteryKwh: number | null;
 }
 
 export interface EngineeringRollup {
@@ -46,13 +48,23 @@ function parseWh(text: string): number | null {
   return match ? parseNumber(match[1]!) : null;
 }
 
-function parseKwh(text: string): number | null {
+function parseKwhToWh(text: string): number | null {
   const match = text.match(/([\d,]+(?:\.\d+)?)\s*kWh\b/i);
   return match ? parseNumber(match[1]!)! * 1000 : null;
 }
 
 function parseAh(text: string): number | null {
   const match = text.match(/([\d,]+(?:\.\d+)?)\s*Ah\b/i);
+  return match ? parseNumber(match[1]!) : null;
+}
+
+function parseKvar(text: string): number | null {
+  const match = text.match(/([\d,]+(?:\.\d+)?)\s*kVAR\b/i);
+  return match ? parseNumber(match[1]!) : null;
+}
+
+function parseKwhValue(text: string): number | null {
+  const match = text.match(/([\d,]+(?:\.\d+)?)\s*kWh\b/i);
   return match ? parseNumber(match[1]!) : null;
 }
 
@@ -94,7 +106,7 @@ function extractBatteryWh(snapshot: ProjectSnapshot): number | null {
   if (packEnergy) {
     return (
       parseWh(packEnergy) ??
-      parseKwh(packEnergy) ??
+      parseKwhToWh(packEnergy) ??
       (() => {
         const ah = parseAh(packEnergy);
         const voltage =
@@ -109,7 +121,7 @@ function extractBatteryWh(snapshot: ProjectSnapshot): number | null {
   return (
     parseWh(snapshot.summary) ??
     parseWh(snapshot.results.Notes ?? "") ??
-    parseKwh(snapshotText(snapshot))
+    parseKwhToWh(snapshotText(snapshot))
   );
 }
 
@@ -161,6 +173,8 @@ export function computeEngineeringRollup(
   const surgeValues: number[] = [];
   const continuousValues: number[] = [];
   const cableLengths: number[] = [];
+  const reactiveKvarValues: number[] = [];
+  const usableBatteryKwhValues: number[] = [];
   let requiredWh: number | null = null;
   let nominalInverterW: number | null = null;
 
@@ -221,6 +235,43 @@ export function computeEngineeringRollup(
         `${snapshot.calculatorTitle}: ${cableM.toFixed(1)} m one-way`
       );
     }
+
+    if (slug === "reactive-power-calculator") {
+      const kvar =
+        parseKvar(findResult(snapshot, "reactive power") ?? "") ??
+        parseKvar(snapshot.summary);
+      if (kvar !== null) {
+        reactiveKvarValues.push(kvar);
+        sources.push(`Reactive load: ${kvar.toFixed(2)} kVAR`);
+      }
+    }
+
+    if (slug === "battery-dod-energy-yield") {
+      const usableKwh =
+        parseKwhValue(findResult(snapshot, "usable energy") ?? "") ??
+        parseKwhValue(snapshot.summary);
+      const usableWh =
+        parseWh(findResult(snapshot, "usable energy (wh)") ?? "") ??
+        (usableKwh !== null ? usableKwh * 1000 : null);
+      if (usableKwh !== null) {
+        usableBatteryKwhValues.push(usableKwh);
+        sources.push(`Usable battery: ${usableKwh.toFixed(2)} kWh`);
+      }
+      if (usableWh !== null) {
+        batteryWhValues.push(usableWh);
+      }
+    }
+
+    if (slug === "conductor-resistance-temperature") {
+      const resistance =
+        parseNumber(findResult(snapshot, "resistance at temperature") ?? "") ??
+        parseNumber(snapshot.summary);
+      if (resistance !== null) {
+        sources.push(
+          `${snapshot.calculatorTitle}: ${resistance.toFixed(4)} Ω @ ${snapshot.inputs.temperatureC ?? "—"}°C`
+        );
+      }
+    }
   }
 
   return {
@@ -231,6 +282,8 @@ export function computeEngineeringRollup(
       totalCableLengthM: sumNullable(cableLengths),
       requiredWh,
       nominalInverterW,
+      totalReactiveKvar: sumNullable(reactiveKvarValues),
+      usableBatteryKwh: maxNullable(usableBatteryKwhValues),
     },
     sources: [...new Set(sources)],
   };
@@ -244,6 +297,7 @@ export function buildBomCostLines(rollup: EngineeringRollup): BomCostLine[] {
   const batteryWh = maxNullable([
     metrics.totalBatteryWh,
     metrics.requiredWh,
+    metrics.usableBatteryKwh !== null ? metrics.usableBatteryKwh * 1000 : null,
   ]);
 
   if (batteryWh !== null && batteryWh > 0) {

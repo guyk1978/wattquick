@@ -307,6 +307,7 @@ export function CalculatorPanel({
         detail={result.detail}
         values={values}
         fieldLabels={fieldLabels}
+        projectResults={result.snapshotResults}
         onSaveToPdf={handleSaveToPDF}
         isSaving={pdfLoading}
         saveError={pdfError}

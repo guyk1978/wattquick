@@ -1,6 +1,26 @@
 import {
-  ArrowRightLeft, Battery, BatteryCharging, Cable, Car, Cpu, DollarSign, Percent, Refrigerator, Shield, Sun, Zap,
+  Activity,
+  ArrowRightLeft,
+  Battery,
+  BatteryCharging,
+  Cable,
+  Car,
+  Cpu,
+  DollarSign,
+  Percent,
+  Refrigerator,
+  Shield,
+  Sun,
+  Thermometer,
+  Zap,
 } from "lucide-react";
+import {
+  calculateBatteryDodEnergyYield,
+  calculateConductorResistance,
+  calculateReactivePower,
+  formatConductorResistanceDetail,
+  isConductorMaterial,
+} from "@/lib/calculators/converters";
 import {
   calculateResidentialVoltageDrop,
   isAcWireSizeKey,
@@ -167,6 +187,276 @@ export const calculators = [
     };
   },
 },
+  {
+    slug: "conductor-resistance-temperature",
+    href: "/conductor-resistance-temperature",
+    title: "Conductor Resistance & Temperature Calculator",
+    description:
+      "Calculate copper or aluminum conductor resistance from cross-section, length, and operating temperature.",
+    keywords: [
+      "conductor resistance calculator",
+      "wire temperature derating",
+      "copper resistance mm2",
+      "aluminum cable resistance",
+      "temperature coefficient wire",
+    ],
+    icon: Thermometer,
+    tag: "Convert",
+    category: "convert",
+    suggestions: ["dc-cable-size", "dc-cable-voltage-drop", "ohms-law", "residential-voltage-drop"],
+    fields: [
+      {
+        id: "material",
+        label: "Conductor material",
+        inputType: "select",
+        defaultValue: "copper",
+        options: [
+          { value: "copper", label: "Copper (Cu)" },
+          { value: "aluminum", label: "Aluminum (Al)" },
+        ],
+      },
+      {
+        id: "crossSectionMm2",
+        label: "Cross-section",
+        unit: "mm²",
+        inputType: "select",
+        defaultValue: "6",
+        options: [
+          { value: "1.5", label: "1.5 mm² (≈16 AWG)" },
+          { value: "2.5", label: "2.5 mm² (≈14 AWG)" },
+          { value: "4", label: "4 mm² (≈12 AWG)" },
+          { value: "6", label: "6 mm² (≈10 AWG)" },
+          { value: "10", label: "10 mm² (≈8 AWG)" },
+          { value: "16", label: "16 mm² (≈6 AWG)" },
+          { value: "25", label: "25 mm² (≈4 AWG)" },
+          { value: "35", label: "35 mm² (≈2 AWG)" },
+          { value: "50", label: "50 mm² (≈1/0 AWG)" },
+        ],
+      },
+      {
+        id: "lengthM",
+        label: "One-way length",
+        unit: "m",
+        placeholder: "15",
+        defaultValue: "15",
+      },
+      {
+        id: "temperatureC",
+        label: "Operating temperature",
+        unit: "°C",
+        placeholder: "40",
+        defaultValue: "25",
+        hint: "Resistance rises ~0.4%/°C above 20°C reference",
+      },
+    ],
+    result: {
+      label: "Resistance at temperature",
+      emptyMessage: "Enter material, size, length & temperature",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Temperature-adjusted resistance",
+          body: "R(T) = R₂₀ × [1 + α(T − 20°C)] where R₂₀ = ρL/A. Copper ρ ≈ 0.0175 Ω·mm²/m; aluminum ρ ≈ 0.0282 Ω·mm²/m at 20°C.",
+        },
+        {
+          heading: "Why it matters for DC cable BOM",
+          body: "Hot conductors increase I²R loss and voltage drop. Size cables using field temperature—not datasheet 25°C values—before quoting wire quantities.",
+        },
+      ],
+    },
+    compute(values) {
+      const materialRaw = values.material ?? "copper";
+      const crossSectionMm2 = parsePositive(values.crossSectionMm2 ?? "");
+      const lengthM = parsePositive(values.lengthM ?? "");
+      const temperatureC = Number(values.temperatureC?.trim() ?? "");
+      if (
+        !isConductorMaterial(materialRaw) ||
+        crossSectionMm2 === null ||
+        lengthM === null ||
+        !Number.isFinite(temperatureC)
+      ) {
+        return { value: null };
+      }
+
+      const result = calculateConductorResistance({
+        material: materialRaw,
+        crossSectionMm2,
+        lengthM,
+        temperatureC,
+      });
+
+      return {
+        value: formatNumber(result.resistanceOhm, { maxDecimals: 4 }),
+        unit: "Ω",
+        detail: formatConductorResistanceDetail(result),
+        snapshotResults: {
+          "Resistance at temperature": `${formatNumber(result.resistanceOhm, { maxDecimals: 4 })} Ω`,
+          "Resistance at 20°C": `${formatNumber(result.resistanceAt20, { maxDecimals: 4 })} Ω`,
+          "Resistance per meter": `${formatNumber(result.resistancePerM, { maxDecimals: 6 })} Ω/m`,
+          "Temperature factor": formatNumber(result.tempFactor, { maxDecimals: 4 }),
+        },
+      };
+    },
+  },
+  {
+    slug: "reactive-power-calculator",
+    href: "/reactive-power-calculator",
+    title: "Reactive Power & Power Factor Calculator",
+    description:
+      "Convert kVA to real kW and reactive kVAR for motor and driver loads—plan inverter and conductor sizing.",
+    keywords: [
+      "reactive power calculator",
+      "kvar calculator",
+      "power factor kva kw",
+      "apparent power converter",
+      "motor reactive load",
+    ],
+    icon: Activity,
+    tag: "Convert",
+    category: "convert",
+    suggestions: ["kva-to-kw", "power-factor", "inverter-sizing", "amps-to-watts"],
+    fields: [
+      {
+        id: "kva",
+        label: "Apparent power",
+        unit: "kVA",
+        placeholder: "12",
+        defaultValue: "12",
+      },
+      {
+        id: "pf",
+        label: "Power factor",
+        unit: "0–1",
+        placeholder: "0.85",
+        defaultValue: "0.85",
+        hint: "Motors often 0.7–0.9; resistive loads near 1.0",
+      },
+    ],
+    result: {
+      label: "Reactive power",
+      emptyMessage: "Enter kVA and power factor",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Real, apparent, and reactive power",
+          body: "kW = kVA × PF. Reactive power kVAR = √(kVA² − kW²). Poor power factor increases current without delivering useful work.",
+        },
+        {
+          heading: "Sizing with reactive load",
+          body: "Inverter and breaker ratings must cover apparent power (kVA), not just real watts. Include reactive kVAR in project BOM when quoting AC distribution.",
+        },
+      ],
+    },
+    compute(values) {
+      const kva = parsePositive(values.kva ?? "");
+      const pf = parsePositive(values.pf ?? "");
+      if (kva === null || pf === null || pf > 1) return { value: null };
+
+      const result = calculateReactivePower({
+        apparentKva: kva,
+        powerFactor: pf,
+      });
+
+      return {
+        value: formatNumber(result.reactiveKvar, { maxDecimals: 2 }),
+        unit: "kVAR",
+        detail: `${formatNumber(result.realKw, { maxDecimals: 2 })} kW real · ${formatNumber(result.apparentKva, { maxDecimals: 1 })} kVA · φ ${formatNumber(result.phaseAngleDeg, { maxDecimals: 1 })}°`,
+        snapshotResults: {
+          "Real power": `${formatNumber(result.realKw, { maxDecimals: 2 })} kW`,
+          "Reactive power": `${formatNumber(result.reactiveKvar, { maxDecimals: 2 })} kVAR`,
+          "Apparent power": `${formatNumber(result.apparentKva, { maxDecimals: 1 })} kVA`,
+          "Power factor": formatNumber(result.powerFactor, { maxDecimals: 2 }),
+        },
+      };
+    },
+  },
+  {
+    slug: "battery-dod-energy-yield",
+    href: "/battery-dod-energy-yield",
+    title: "Battery DoD to Energy Yield Calculator",
+    description:
+      "Convert nominal battery capacity and depth of discharge to usable kWh for backup and critical-load planning.",
+    keywords: [
+      "battery dod energy yield",
+      "depth of discharge kwh",
+      "usable battery capacity",
+      "battery energy calculator",
+      "lithium dod planning",
+    ],
+    icon: BatteryCharging,
+    tag: "Convert",
+    category: "convert",
+    suggestions: [
+      "battery-depth-of-discharge",
+      "ah-to-wh",
+      "critical-load-analysis",
+      "home-backup-sizing",
+    ],
+    fields: [
+      {
+        id: "nominalCapacityKwh",
+        label: "Nominal capacity",
+        unit: "kWh",
+        placeholder: "10",
+        defaultValue: "10",
+      },
+      {
+        id: "depthOfDischargePercent",
+        label: "Depth of discharge",
+        unit: "%",
+        inputType: "range",
+        min: 10,
+        max: 100,
+        step: 5,
+        defaultValue: "80",
+        hint: "Lithium often 80–90%; lead-acid typically 50%",
+      },
+    ],
+    result: {
+      label: "Usable energy",
+      emptyMessage: "Enter nominal kWh and DoD %",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Usable energy formula",
+          body: "Usable kWh = nominal capacity × (DoD ÷ 100). A 10 kWh bank at 80% DoD delivers 8 kWh to loads before hitting your reserve floor.",
+        },
+        {
+          heading: "Critical load alignment",
+          body: "Compare usable kWh against Critical Load Analysis Wh requirements. Save both snapshots to the same project for accurate BOM battery sizing.",
+        },
+      ],
+    },
+    compute(values) {
+      const nominalCapacityKwh = parsePositive(values.nominalCapacityKwh ?? "");
+      const depthOfDischargePercent = parsePositive(
+        values.depthOfDischargePercent ?? ""
+      );
+      if (nominalCapacityKwh === null || depthOfDischargePercent === null) {
+        return { value: null };
+      }
+
+      const result = calculateBatteryDodEnergyYield({
+        nominalCapacityKwh,
+        depthOfDischargePercent,
+      });
+
+      return {
+        value: formatNumber(result.usableKwh, { maxDecimals: 2 }),
+        unit: "kWh",
+        detail: `${formatNumber(result.usableWh, { maxDecimals: 0 })} Wh usable · ${formatNumber(result.reservedKwh, { maxDecimals: 2 })} kWh reserve (${formatNumber(result.reservedPercent, { maxDecimals: 0 })}%)`,
+        snapshotResults: {
+          "Usable energy": `${formatNumber(result.usableKwh, { maxDecimals: 2 })} kWh`,
+          "Usable energy (Wh)": `${formatNumber(result.usableWh, { maxDecimals: 0 })} Wh`,
+          "Nominal capacity": `${formatNumber(result.nominalCapacityKwh, { maxDecimals: 2 })} kWh`,
+          "Depth of discharge": `${formatNumber(result.depthOfDischargePercent, { maxDecimals: 0 })} %`,
+        },
+      };
+    },
+  },
   {
     slug: "kw-to-hp",
     href: "/kw-to-hp",

@@ -109,7 +109,14 @@ export const CALCULATOR_USE_CASES: CalculatorUseCase[] = [
     description: "Fast unit conversions and electrical quick tools.",
     icon: ArrowLeftRight,
     color: "#06B6D4",
-    featuredIds: ["ah-to-wh", "kva-to-kw", "watts-to-amps", "ohms-law"],
+    featuredIds: [
+      "conductor-resistance-temperature",
+      "reactive-power-calculator",
+      "battery-dod-energy-yield",
+      "ah-to-wh",
+      "kva-to-kw",
+      "watts-to-amps",
+    ],
     browseHref: "/calculators/?use-case=converters",
   },
 ];

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T17:02:58.091Z",
+  "generatedAt": "2026-06-05T17:11:51.578Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -199,6 +199,57 @@
         "kva to kw",
         "apparent power converter",
         "power factor calculator"
+      ]
+    },
+    {
+      "id": "conductor-resistance-temperature",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Conductor Resistance & Temperature Calculator",
+      "description": "Calculate copper or aluminum conductor resistance from cross-section, length, and operating temperature.",
+      "href": "/conductor-resistance-temperature/",
+      "tag": "Convert",
+      "keywords": [
+        "conductor resistance calculator",
+        "wire temperature derating",
+        "copper resistance mm2",
+        "aluminum cable resistance",
+        "temperature coefficient wire"
+      ]
+    },
+    {
+      "id": "reactive-power-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Reactive Power & Power Factor Calculator",
+      "description": "Convert kVA to real kW and reactive kVAR for motor and driver loads—plan inverter and conductor sizing.",
+      "href": "/reactive-power-calculator/",
+      "tag": "Convert",
+      "keywords": [
+        "reactive power calculator",
+        "kvar calculator",
+        "power factor kva kw",
+        "apparent power converter",
+        "motor reactive load"
+      ]
+    },
+    {
+      "id": "battery-dod-energy-yield",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Convert",
+      "title": "Battery DoD to Energy Yield Calculator",
+      "description": "Convert nominal battery capacity and depth of discharge to usable kWh for backup and critical-load planning.",
+      "href": "/battery-dod-energy-yield/",
+      "tag": "Convert",
+      "keywords": [
+        "battery dod energy yield",
+        "depth of discharge kwh",
+        "usable battery capacity",
+        "battery energy calculator",
+        "lithium dod planning"
       ]
     },
     {

@@ -42,6 +42,14 @@ export function ProjectEngineeringRollup({
       label: "Total DC cable (one-way)",
       value: formatMetric(metrics.totalCableLengthM, "m"),
     },
+    {
+      label: "Total reactive load",
+      value: formatMetric(metrics.totalReactiveKvar, "kVAR"),
+    },
+    {
+      label: "Usable battery energy (DoD)",
+      value: formatMetric(metrics.usableBatteryKwh, "kWh"),
+    },
   ];
 
   const hasData = rows.some((row) => row.value !== "—");

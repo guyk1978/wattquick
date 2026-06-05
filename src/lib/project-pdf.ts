@@ -60,6 +60,14 @@ export async function exportProjectPDFReport(
     rollup.metrics.totalCableLengthM,
     "m"
   );
+  results["Total reactive load"] = formatMetric(
+    rollup.metrics.totalReactiveKvar,
+    "kVAR"
+  );
+  results["Usable battery energy (DoD)"] = formatMetric(
+    rollup.metrics.usableBatteryKwh,
+    "kWh"
+  );
 
   results["── Materials & Cost Estimate ──"] = " ";
   for (const line of bomLines) {
