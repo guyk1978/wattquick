@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T14:58:12.496Z",
+  "generatedAt": "2026-06-05T15:17:40.861Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1845,6 +1845,22 @@
         "home wind power estimate",
         "wind speed cubic power",
         "hybrid solar wind sizing"
+      ]
+    },
+    {
+      "id": "standby-power-aggregator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Green Home",
+      "title": "Standby Power Aggregator",
+      "description": "Add TVs, chargers, consoles, and adapters to see total vampire power cost and what you could buy instead.",
+      "href": "/standby-power-aggregator/",
+      "tag": "Smart Home",
+      "keywords": [
+        "standby power aggregator",
+        "vampire power calculator",
+        "phantom load cost",
+        "smart home standby waste"
       ]
     },
     {

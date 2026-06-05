@@ -96,6 +96,119 @@ export interface VampirePowerMultiResult {
   lineCount: number;
 }
 
+export const STANDBY_POWER_AGGREGATOR_MAX_SLOTS = 12;
+
+export const STANDBY_POWER_DEVICE_PRESETS = [
+  { name: "Television", standbyWatts: 5, deviceCount: 1 },
+  { name: "AV receiver / converter", standbyWatts: 4, deviceCount: 1 },
+  { name: "Gaming console", standbyWatts: 8, deviceCount: 1 },
+  { name: "Phone charger", standbyWatts: 1, deviceCount: 2 },
+  { name: "Computer monitor", standbyWatts: 2, deviceCount: 1 },
+] as const;
+
+/** Smart-strip / switched outlet can eliminate ~90% of always-on standby. */
+export const STANDBY_SMART_PLUG_SAVINGS_FRACTION = 0.9;
+
+export interface StandbyPowerDevice {
+  name: string;
+  standbyWatts: number;
+  deviceCount: number;
+}
+
+export interface StandbyPowerDeviceBreakdown {
+  name: string;
+  standbyWatts: number;
+  deviceCount: number;
+  subtotalWatts: number;
+  dailyKwh: number;
+  annualKwh: number;
+  annualCost: number;
+  potentialSavings: number;
+}
+
+export interface StandbyPowerAggregatorResult {
+  totalStandbyWatts: number;
+  dailyKwh: number;
+  annualKwh: number;
+  annualCost: number;
+  monthlyCost: number;
+  potentialAnnualSavings: number;
+  deviceCount: number;
+  devices: StandbyPowerDeviceBreakdown[];
+  comparisonLabel: string;
+}
+
+function describeVampireCostComparison(annualCost: number): string {
+  if (annualCost < 10) {
+    return "a few months of streaming or takeout lunches";
+  }
+  if (annualCost < 25) {
+    return "a smart power strip for your entertainment center";
+  }
+  if (annualCost < 50) {
+    return "a year of premium coffee or several LED bulb packs";
+  }
+  if (annualCost < 100) {
+    return "a learning smart thermostat over time";
+  }
+  if (annualCost < 200) {
+    return "a weekend getaway or major home efficiency kit";
+  }
+  return "a significant HVAC tune-up, insulation work, or solar accessory";
+}
+
+export function calculateStandbyPowerAggregator(
+  devices: StandbyPowerDevice[],
+  ratePerKwh: number
+): StandbyPowerAggregatorResult | null {
+  if (devices.length === 0 || ratePerKwh <= 0) return null;
+
+  const breakdown: StandbyPowerDeviceBreakdown[] = devices.map((device) => {
+    const subtotalWatts = device.standbyWatts * device.deviceCount;
+    const dailyKwh = (subtotalWatts * 24) / 1000;
+    const annualKwh = dailyKwh * 365;
+    const annualCost = annualKwh * ratePerKwh;
+    const potentialSavings = annualCost * STANDBY_SMART_PLUG_SAVINGS_FRACTION;
+
+    return {
+      name: device.name,
+      standbyWatts: device.standbyWatts,
+      deviceCount: device.deviceCount,
+      subtotalWatts: Math.round(subtotalWatts),
+      dailyKwh: parseFloat(dailyKwh.toFixed(3)),
+      annualKwh: parseFloat(annualKwh.toFixed(1)),
+      annualCost: parseFloat(annualCost.toFixed(2)),
+      potentialSavings: parseFloat(potentialSavings.toFixed(2)),
+    };
+  });
+
+  const totalStandbyWatts = breakdown.reduce(
+    (sum, device) => sum + device.subtotalWatts,
+    0
+  );
+  if (totalStandbyWatts <= 0) return null;
+
+  const dailyKwh = breakdown.reduce((sum, device) => sum + device.dailyKwh, 0);
+  const annualKwh = breakdown.reduce((sum, device) => sum + device.annualKwh, 0);
+  const annualCost = breakdown.reduce((sum, device) => sum + device.annualCost, 0);
+  const potentialAnnualSavings = breakdown.reduce(
+    (sum, device) => sum + device.potentialSavings,
+    0
+  );
+
+  return {
+    totalStandbyWatts: Math.round(totalStandbyWatts),
+    dailyKwh: parseFloat(dailyKwh.toFixed(3)),
+    annualKwh: Math.round(annualKwh),
+    annualCost: parseFloat(annualCost.toFixed(2)),
+    monthlyCost: parseFloat((annualCost / 12).toFixed(2)),
+    potentialAnnualSavings: parseFloat(potentialAnnualSavings.toFixed(2)),
+    deviceCount: devices.length,
+    devices: breakdown,
+    comparisonLabel: describeVampireCostComparison(annualCost),
+  };
+}
+
 /** Sum annual standby cost across multiple device rows. */
 export function calculateVampirePowerMulti(
   lines: VampirePowerLineInput[],

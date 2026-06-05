@@ -1,4 +1,9 @@
-import { Battery, Home, Lamp, LayoutGrid, Network, Sun, Thermometer, Wind } from "lucide-react";
+import { Battery, Home, Lamp, LayoutGrid, Network, PlugZap, Sun, Thermometer, Wind } from "lucide-react";
+import {
+  calculateStandbyPowerAggregator,
+  STANDBY_POWER_AGGREGATOR_MAX_SLOTS,
+  type StandbyPowerDevice,
+} from "@/lib/calculators/appliances";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import {
   calculateBessCarbonCost,
@@ -22,6 +27,24 @@ import type { CalculatorDataEntry } from "@/data/calculator-types";
 const seo = (heading: string, body: string, faq: string) => ({
   sections: [{ heading, body }, { heading: "Frequently asked questions", body: faq }],
 });
+
+function parseStandbyDevicesFromValues(
+  values: Record<string, string | undefined>
+): StandbyPowerDevice[] | null {
+  const devices: StandbyPowerDevice[] = [];
+
+  for (let slot = 1; slot <= STANDBY_POWER_AGGREGATOR_MAX_SLOTS; slot += 1) {
+    const name = values[`device${slot}Name`]?.trim();
+    const standbyWatts = parsePositive(values[`device${slot}Watts`] ?? "");
+    const deviceCount = parsePositive(values[`device${slot}Count`] ?? "");
+    if (!name || standbyWatts === null || deviceCount === null) {
+      continue;
+    }
+    devices.push({ name, standbyWatts, deviceCount });
+  }
+
+  return devices.length > 0 ? devices : null;
+}
 
 export const calculatorsGreenHome = [
   {
@@ -866,6 +889,89 @@ export const calculatorsGreenHome = [
         value: formatNumber(result.powerAtMeanWindW, { maxDecimals: 0 }),
         unit: "W",
         detail: `${result.dailyKwh} kWh/day · ${result.annualKwh} kWh/yr · ${result.sweptAreaSqM} m² rotor`,
+      };
+    },
+  },
+  {
+    slug: "standby-power-aggregator",
+    href: "/standby-power-aggregator",
+    title: "Standby Power Aggregator",
+    description:
+      "Add TVs, chargers, consoles, and adapters to see total vampire power cost and what you could buy instead.",
+    keywords: [
+      "standby power aggregator",
+      "vampire power calculator",
+      "phantom load cost",
+      "smart home standby waste",
+    ],
+    icon: PlugZap,
+    tag: "Smart Home",
+    category: "green-home",
+    suggestions: [
+      "smart-thermostat-savings",
+      "vampire-power-cost",
+      "led-savings-roi",
+      "energy-consumption",
+    ],
+    fields: [
+      ...Array.from({ length: STANDBY_POWER_AGGREGATOR_MAX_SLOTS }, (_, index) => {
+        const slot = index + 1;
+        return [
+          { id: `device${slot}Name`, label: `Device ${slot} name` },
+          {
+            id: `device${slot}Watts`,
+            label: `Device ${slot} standby watts`,
+            unit: "W",
+          },
+          {
+            id: `device${slot}Count`,
+            label: `Device ${slot} quantity`,
+            unit: "#",
+          },
+        ];
+      }).flat(),
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+    ],
+    result: {
+      label: "Total annual vampire cost",
+      emptyMessage: "Add standby devices and your electricity rate",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Standby power formula",
+          body: "Daily kWh = Σ (standby W × quantity × 24 h) ÷ 1,000. Annual cost = daily kWh × 365 × your $/kWh rate. Modern devices draw watts even when screens are off—chargers, converters, and instant-on TVs are common culprits.",
+        },
+        {
+          heading: "Cut phantom load",
+          body: "Smart strips and switched outlets can eliminate most always-on draw. Pair this audit with Smart Thermostat Savings for HVAC waste and LED Savings ROI for lighting upgrades.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Is standby worth fixing? A: One charger is pennies; a dozen devices add up to real money. Q: How accurate are defaults? A: Override watts with a plug meter for best results. Q: vs. Vampire Power Cost? A: Same math—this tool aggregates a whole-home list in one view.",
+        },
+      ],
+    },
+    compute(values) {
+      const devices = parseStandbyDevicesFromValues(values);
+      const ratePerKwh = parsePositive(values.ratePerKwh ?? "");
+      if (!devices || ratePerKwh === null) {
+        return { value: null };
+      }
+
+      const result = calculateStandbyPowerAggregator(devices, ratePerKwh);
+      if (!result) return { value: null };
+
+      return {
+        value: formatCurrency(result.annualCost),
+        unit: "/yr",
+        detail: `${result.annualKwh} kWh/yr · ${result.totalStandbyWatts} W standby · ${result.comparisonLabel}`,
       };
     },
   },

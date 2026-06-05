@@ -45,6 +45,7 @@ import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
 import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
 import { CriticalLoadAnalysisCalculator } from "@/components/calculators/CriticalLoadAnalysisCalculator";
+import { StandbyPowerAggregatorCalculator } from "@/components/calculators/StandbyPowerAggregatorCalculator";
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
@@ -111,6 +112,9 @@ export function CalculatorPanel({
   }
   if (id === "critical-load-analysis") {
     return <CriticalLoadAnalysisCalculator className={className} />;
+  }
+  if (id === "standby-power-aggregator") {
+    return <StandbyPowerAggregatorCalculator className={className} />;
   }
   if (id === "dc-cable-voltage-drop") {
     return <DcCableVoltageDropCalculator className={className} />;

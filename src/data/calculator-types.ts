@@ -116,7 +116,7 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   "commercial-ev": "Fleet trucks, vans, buses, and industrial EV",
   "rv-marine": "RV solar, marine banks, camping and portable power",
   tou: "Time-of-use rates, peak shaving, demand charges, and arbitrage",
-  "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
+  "green-home": "Insulation, lighting, HVAC, standby power, and envelope efficiency",
   pool: "Pool pumps, heating, covers, and seasonal operating cost",
   ebike: "Range, charging, motor power, and e-bike battery health",
   escooter:
