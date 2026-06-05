@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T15:27:34.466Z",
+  "generatedAt": "2026-06-05T15:34:37.938Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2198,6 +2198,23 @@
         "escooter maintenance",
         "service interval scooter",
         "scooter checklist"
+      ]
+    },
+    {
+      "id": "mobility-tco-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "Mobility TCO Calculator",
+      "description": "Compare 3-year total cost of ownership: car vs e-bike vs e-scooter for commuting and urban mobility.",
+      "href": "/mobility-tco-calculator/",
+      "tag": "Decision Tool",
+      "keywords": [
+        "mobility tco calculator",
+        "e-bike vs car cost",
+        "e-scooter vs car",
+        "commute ownership cost",
+        "micro mobility tco"
       ]
     },
     {

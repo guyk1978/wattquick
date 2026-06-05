@@ -118,7 +118,7 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   tou: "Time-of-use rates, peak shaving, demand charges, and arbitrage",
   "green-home": "Insulation, lighting, HVAC, standby power, and envelope efficiency",
   pool: "Pool pumps, heating, covers, and seasonal operating cost",
-  ebike: "Range, charging, motor power, and e-bike battery health",
+  ebike: "Range, charging, TCO decisions, motor power, and e-bike battery health",
   escooter:
     "Tyre pressure, hill climb, charge time, and commuter economics for light EVs",
 };
