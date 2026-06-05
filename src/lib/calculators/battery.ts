@@ -92,12 +92,24 @@ export function calculateHomeBackupSizing({
   };
 }
 
+export const CRITICAL_LOAD_SURGE_FACTOR = 5;
+
 export const CRITICAL_LOAD_DEVICE_PRESETS = [
-  { name: "Refrigerator", runningWatts: 150, hoursPerDay: 8 },
-  { name: "Router / modem", runningWatts: 15, hoursPerDay: 24 },
-  { name: "Lighting", runningWatts: 200, hoursPerDay: 5 },
-  { name: "Television", runningWatts: 100, hoursPerDay: 4 },
-  { name: "Water pump", runningWatts: 750, hoursPerDay: 0.5 },
+  {
+    name: "Refrigerator",
+    runningWatts: 150,
+    hoursPerDay: 8,
+    highSurge: true,
+  },
+  { name: "Router / modem", runningWatts: 15, hoursPerDay: 24, highSurge: false },
+  { name: "Lighting", runningWatts: 200, hoursPerDay: 5, highSurge: false },
+  { name: "Television", runningWatts: 100, hoursPerDay: 4, highSurge: false },
+  {
+    name: "Water pump",
+    runningWatts: 750,
+    hoursPerDay: 0.5,
+    highSurge: true,
+  },
 ] as const;
 
 export const CRITICAL_LOAD_SAFETY_FACTOR = 1.2;
@@ -111,6 +123,7 @@ export interface CriticalLoadDevice {
   name: string;
   runningWatts: number;
   hoursPerDay: number;
+  highSurge?: boolean;
 }
 
 export interface CriticalLoadAnalysisInput {
@@ -139,6 +152,13 @@ export function calculateCriticalLoadAnalysis({
   );
   const requiredWh = avgHourlyWh * backupTargetHours * safetyFactor;
 
+  const surgeDevices = devices.filter((device) => device.highSurge);
+  const estimatedTotalSurge = surgeDevices.reduce(
+    (sum, device) => sum + device.runningWatts * CRITICAL_LOAD_SURGE_FACTOR,
+    0
+  );
+  const hasHighSurgeLoads = surgeDevices.length > 0;
+
   const batteryNominalWh =
     CRITICAL_LOAD_REFERENCE_BATTERY_VOLTAGE * CRITICAL_LOAD_REFERENCE_BATTERY_AH;
   const inverterEfficiency = inverterEfficiencyPercent / 100;
@@ -161,6 +181,9 @@ export function calculateCriticalLoadAnalysis({
     depthOfDischargePercent,
     safetyFactor,
     deviceCount: devices.length,
+    estimatedTotalSurge: Math.round(estimatedTotalSurge),
+    hasHighSurgeLoads,
+    surgeDeviceCount: surgeDevices.length,
   };
 }
 

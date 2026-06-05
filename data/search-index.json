@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T14:48:07.243Z",
+  "generatedAt": "2026-06-05T14:58:12.496Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2765,6 +2765,21 @@
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "home-backup-load-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Backup",
+      "title": "Home Backup Planning: How to Calculate Critical Load Energy for Power Outages",
+      "description": "Engineering guide to home backup systems (UPS and solar storage). Map essential loads, size Wh capacity, and plan outage runtime with a safety margin.",
+      "href": "/blog/home-backup-load-guide/",
+      "tag": "Backup",
+      "keywords": [
+        "Backup",
         "blog",
         "article"
       ]

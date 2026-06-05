@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
-import { ArrowRight, Home, Plus, Trash2, Zap } from "lucide-react";
+import { AlertTriangle, ArrowRight, Home, Plus, Trash2, Zap } from "lucide-react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
@@ -26,7 +26,7 @@ import {
   CalculatorCommandSplit,
 } from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorCommandInput } from "@/lib/glass-ui";
+import { calculatorCommandInput, flatAlert } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_ID = "critical-load-analysis" satisfies CalculatorId;
@@ -36,11 +36,17 @@ const HOME_BACKUP_CALCULATOR = {
   href: "/home-backup-sizing/",
 } as const;
 
+const INVERTER_SURGE_CALCULATOR = {
+  label: "Inverter Peak Load Surge",
+  href: "/inverter-peak-load-surge/",
+} as const;
+
 interface DeviceRow {
   id: string;
   name: string;
   runningWatts: string;
   hoursPerDay: string;
+  highSurge: boolean;
 }
 
 interface CriticalLoadAnalysisCalculatorProps {
@@ -55,6 +61,7 @@ function createDeviceRow(
     name: preset?.name ?? "",
     runningWatts: preset ? String(preset.runningWatts) : "",
     hoursPerDay: preset ? String(preset.hoursPerDay) : "",
+    highSurge: preset?.highSurge ?? false,
   };
 }
 
@@ -67,6 +74,15 @@ function buildResultRows(
       value: formatNumber(parsed.totalRunningWatts, { maxDecimals: 0 }),
       unit: "W",
     },
+    ...(parsed.hasHighSurgeLoads
+      ? [
+          {
+            label: "Estimated total surge",
+            value: formatNumber(parsed.estimatedTotalSurge, { maxDecimals: 0 }),
+            unit: "W",
+          },
+        ]
+      : []),
     {
       label: "Required capacity",
       value: formatNumber(parsed.requiredWh, { maxDecimals: 0 }),
@@ -111,6 +127,7 @@ export function CriticalLoadAnalysisCalculator({
       setValue(`device${slot}Name`, row.name);
       setValue(`device${slot}Watts`, row.runningWatts);
       setValue(`device${slot}Hours`, row.hoursPerDay);
+      setValue(`device${slot}HighSurge`, row.highSurge ? "true" : "false");
     });
   }, []);
 
@@ -120,6 +137,7 @@ export function CriticalLoadAnalysisCalculator({
       setValue(`device${slot}Name`, row.name);
       setValue(`device${slot}Watts`, row.runningWatts);
       setValue(`device${slot}Hours`, row.hoursPerDay);
+      setValue(`device${slot}HighSurge`, row.highSurge ? "true" : "false");
     },
     [setValue]
   );
@@ -157,6 +175,7 @@ export function CriticalLoadAnalysisCalculator({
           setValue(`device${slot}Name`, "");
           setValue(`device${slot}Watts`, "");
           setValue(`device${slot}Hours`, "");
+          setValue(`device${slot}HighSurge`, "false");
         }
         return next;
       });
@@ -179,6 +198,7 @@ export function CriticalLoadAnalysisCalculator({
           name: row.name.trim(),
           runningWatts,
           hoursPerDay,
+          highSurge: row.highSurge,
         };
       })
       .filter((device): device is NonNullable<typeof device> => device !== null);
@@ -224,6 +244,11 @@ export function CriticalLoadAnalysisCalculator({
           "Total load": `${formatNumber(parsed.totalRunningWatts, { maxDecimals: 0 })} W`,
           "Battery bank": parsed.batteryBankLabel,
           "Inverter efficiency": `${parsed.inverterEfficiencyPercent}%`,
+          ...(parsed.hasHighSurgeLoads
+            ? {
+                "Estimated total surge": `${formatNumber(parsed.estimatedTotalSurge, { maxDecimals: 0 })} W`,
+              }
+            : {}),
         })
       );
     } catch {
@@ -253,10 +278,8 @@ export function CriticalLoadAnalysisCalculator({
 
               <ul id={listId} className="divide-y divide-border">
                 {devices.map((device, index) => (
-                  <li
-                    key={device.id}
-                    className="grid gap-3 p-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_auto]"
-                  >
+                  <li key={device.id} className="flex flex-col gap-3 p-3">
+                    <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_auto]">
                     <label className="flex min-w-0 flex-col gap-1.5">
                       <span className="text-xs font-medium text-muted-foreground">
                         Device
@@ -331,6 +354,22 @@ export function CriticalLoadAnalysisCalculator({
                         <Trash2 className="size-4" aria-hidden />
                       </button>
                     </div>
+                    </div>
+
+                    <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
+                      <input
+                        type="checkbox"
+                        checked={device.highSurge}
+                        onChange={(event) =>
+                          updateDevice(device.id, {
+                            highSurge: event.target.checked,
+                          })
+                        }
+                        className="size-4 rounded-none border border-border accent-primary"
+                        aria-label={`Device ${index + 1} high surge`}
+                      />
+                      <span>High surge device</span>
+                    </label>
                   </li>
                 ))}
               </ul>
@@ -358,6 +397,30 @@ export function CriticalLoadAnalysisCalculator({
               />
             </GamifiedDashboardFrame>
             <CalculatorResultsTable rows={resultRows} />
+            {parsed?.hasHighSurgeLoads ? (
+              <div
+                className={cn(
+                  flatAlert,
+                  "flex gap-2.5 border-amber-500/30 bg-amber-500/10 px-3 py-2.5 text-sm leading-relaxed text-amber-950 dark:text-amber-200"
+                )}
+                role="status"
+              >
+                <AlertTriangle
+                  className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400"
+                  aria-hidden
+                />
+                <p>
+                  High surge load detected. Check if your inverter can handle this
+                  peak:{" "}
+                  <Link
+                    href={INVERTER_SURGE_CALCULATOR.href}
+                    className="font-medium text-primary underline-offset-4 hover:underline"
+                  >
+                    {INVERTER_SURGE_CALCULATOR.label}
+                  </Link>
+                </p>
+              </div>
+            ) : null}
           </div>
         }
       />
@@ -365,7 +428,8 @@ export function CriticalLoadAnalysisCalculator({
       {hasResults ? (
         <CalculatorAssumptionNote>
           Required Wh = average hourly consumption × backup target hours × 1.2
-          safety factor. Battery count assumes 12 V 100 Ah cells at 80% depth of
+          safety factor. Estimated surge uses running watts × 5 for high-surge
+          devices. Battery count assumes 12 V 100 Ah cells at 80% depth of
           discharge and {parsed?.inverterEfficiencyPercent ?? 92}% inverter efficiency.
         </CalculatorAssumptionNote>
       ) : null}

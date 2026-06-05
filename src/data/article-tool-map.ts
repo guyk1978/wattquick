@@ -123,6 +123,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "hidden-costs-public-ev-charging",
     "articleTitle": "Hidden Costs of Public EV Charging (Session Fees, Idle Penalties, and More)"
   },
+  "critical-load-analysis": {
+    "articleSlug": "home-backup-load-guide",
+    "articleTitle": "Home Backup Planning: How to Calculate Critical Load Energy for Power Outages"
+  },
   "lighting-circuit-load": {
     "articleSlug": "home-lighting-circuit-safety",
     "articleTitle": "Home Electrical Safety: Are Your Lighting Circuits Up to Code?"

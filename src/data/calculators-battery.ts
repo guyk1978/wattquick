@@ -44,7 +44,8 @@ function parseCriticalLoadDevicesFromValues(
     if (!name || runningWatts === null || hoursPerDay === null) {
       continue;
     }
-    devices.push({ name, runningWatts, hoursPerDay });
+    const highSurge = values[`device${slot}HighSurge`] === "true";
+    devices.push({ name, runningWatts, hoursPerDay, highSurge });
   }
 
   return devices.length > 0 ? devices : null;
@@ -805,6 +806,7 @@ export const calculatorsBattery = [
   {
     slug: "critical-load-analysis",
     href: "/critical-load-analysis",
+    relatedArticleId: "home-backup-load-guide",
     title: "Critical Load Analysis",
     description:
       "Plan home backup power by listing essential devices, daily runtime, and target outage hours.",
@@ -837,6 +839,10 @@ export const calculatorsBattery = [
             id: `device${slot}Hours`,
             label: `Device ${slot} hours per day`,
             unit: "hrs",
+          },
+          {
+            id: `device${slot}HighSurge`,
+            label: `Device ${slot} high surge`,
           },
         ];
       }).flat(),
