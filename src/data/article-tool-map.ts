@@ -167,6 +167,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "microgrid-break-even-calculator-explained",
     "articleTitle": "How to Calculate Break-Even on Your Microgrid: Formulas Behind the ROI Tool"
   },
+  "mobility-tco-calculator": {
+    "articleSlug": "mobility-tco-guide",
+    "articleTitle": "The True Cost of Commuting: Why E-Mobility is Cheaper Than a Car"
+  },
   "solar-angle-optimizer": {
     "articleSlug": "optimize-solar-panel-tilt-angle",
     "articleTitle": "How to Optimize Solar Panel Tilt and Angle for Your Latitude"

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T15:34:37.938Z",
+  "generatedAt": "2026-06-05T15:38:49.238Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -3053,6 +3053,21 @@
       "tag": "Green Home",
       "keywords": [
         "Green Home",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "mobility-tco-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Bike",
+      "title": "The True Cost of Commuting: Why E-Mobility is Cheaper Than a Car",
+      "description": "Is your car costing more than you think? We break down 3-year total cost of ownership (TCO) for cars vs e-bikes and e-scooters—including parking and depreciation.",
+      "href": "/blog/mobility-tco-guide/",
+      "tag": "E-Bike",
+      "keywords": [
+        "E-Bike",
         "blog",
         "article"
       ]

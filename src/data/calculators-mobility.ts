@@ -10,6 +10,7 @@ export const calculatorsMobility = [
   {
     slug: "mobility-tco-calculator",
     href: "/mobility-tco-calculator",
+    relatedArticleId: "mobility-tco-guide",
     title: "Mobility TCO Calculator",
     description:
       "Compare 3-year total cost of ownership: car vs e-bike vs e-scooter for commuting and urban mobility.",
