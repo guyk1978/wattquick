@@ -1,4 +1,4 @@
-import { BatteryCharging, Cable, Calendar, Cpu, Gauge, Home, Layers, Zap } from "lucide-react";
+import { BatteryCharging, Cable, Calendar, Cpu, Gauge, Home, Layers, Shield, Zap } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -10,9 +10,12 @@ import {
   calculateBatteryVoltageDrop,
   calculateBessRoi,
   calculateCrate,
+  calculateCriticalLoadAnalysis,
   calculateHomeBackupSizing,
   calculateInverterLoss,
   calculateSeriesParallel,
+  CRITICAL_LOAD_MAX_DEVICE_SLOTS,
+  type CriticalLoadDevice,
 } from "@/lib/calculators/battery";
 import {
   calculateInverterPeakLoadSurge,
@@ -28,6 +31,24 @@ const INVERTER_LOAD_PRESET_OPTIONS = Object.entries(INVERTER_MOTOR_LOAD_PRESETS)
     label: preset.label,
   })
 );
+
+function parseCriticalLoadDevicesFromValues(
+  values: Record<string, string | undefined>
+): CriticalLoadDevice[] | null {
+  const devices: CriticalLoadDevice[] = [];
+
+  for (let slot = 1; slot <= CRITICAL_LOAD_MAX_DEVICE_SLOTS; slot += 1) {
+    const name = values[`device${slot}Name`]?.trim();
+    const runningWatts = parsePositive(values[`device${slot}Watts`] ?? "");
+    const hoursPerDay = parsePositive(values[`device${slot}Hours`] ?? "");
+    if (!name || runningWatts === null || hoursPerDay === null) {
+      continue;
+    }
+    devices.push({ name, runningWatts, hoursPerDay });
+  }
+
+  return devices.length > 0 ? devices : null;
+}
 
 function parseInverterLoadsFromValues(
   values: Record<string, string | undefined>
@@ -778,6 +799,91 @@ export const calculatorsBattery = [
             : "—",
         unit: result.paybackYears !== null ? "yr" : undefined,
         detail: `${formatCurrency(result.dailySavings)}/day · LCOS $${formatNumber(result.lcosPerKwh, { maxDecimals: 3 })}/kWh`,
+      };
+    },
+  },
+  {
+    slug: "critical-load-analysis",
+    href: "/critical-load-analysis",
+    title: "Critical Load Analysis",
+    description:
+      "Plan home backup power by listing essential devices, daily runtime, and target outage hours.",
+    keywords: [
+      "critical load analysis",
+      "home backup power calculator",
+      "essential load sizing",
+      "backup battery planning",
+    ],
+    icon: Shield,
+    tag: "Backup",
+    category: "backup",
+    suggestions: [
+      "home-backup-sizing",
+      "ups-runtime",
+      "inverter-peak-load-surge",
+      "battery-bank-size",
+    ],
+    fields: [
+      ...Array.from({ length: CRITICAL_LOAD_MAX_DEVICE_SLOTS }, (_, index) => {
+        const slot = index + 1;
+        return [
+          { id: `device${slot}Name`, label: `Device ${slot} name` },
+          {
+            id: `device${slot}Watts`,
+            label: `Device ${slot} running watts`,
+            unit: "W",
+          },
+          {
+            id: `device${slot}Hours`,
+            label: `Device ${slot} hours per day`,
+            unit: "hrs",
+          },
+        ];
+      }).flat(),
+      {
+        id: "backupTargetHours",
+        label: "Backup target time",
+        unit: "hrs",
+        placeholder: "8",
+        defaultValue: "8",
+      },
+    ],
+    result: {
+      label: "Required Wh capacity",
+      emptyMessage: "Add devices and backup target time",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "How critical load analysis works",
+          body: "List each essential appliance with running watts and hours used per day. We average daily consumption into an hourly Wh rate, multiply by your target outage duration, and add a 20% safety buffer for inverter loss and aging.",
+        },
+        {
+          heading: "Battery bank suggestion",
+          body: "The 12 V 100 Ah count is a planning shortcut—nominal 1,200 Wh per battery with 80% depth of discharge and 92% inverter efficiency. Pair with Home Backup Battery Sizing for voltage, DoD, and bank Ah.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Peak vs. average load? A: Total running watts shows simultaneous demand; Wh capacity uses your daily usage pattern. Q: Include surge? A: Use Inverter Peak Load Surge for motor start sizing. Q: Whole house? A: List only circuits you need during an outage.",
+        },
+      ],
+    },
+    compute(values) {
+      const devices = parseCriticalLoadDevicesFromValues(values);
+      const backupTargetHours = parsePositive(values.backupTargetHours ?? "");
+      if (!devices || backupTargetHours === null) {
+        return { value: null };
+      }
+
+      const result = calculateCriticalLoadAnalysis({
+        devices,
+        backupTargetHours,
+      });
+
+      return {
+        value: formatNumber(result.requiredWh, { maxDecimals: 0 }),
+        unit: "Wh",
+        detail: `${formatNumber(result.totalRunningWatts, { maxDecimals: 0 })} W total load · ${result.batteryBankLabel} · ${result.inverterEfficiencyPercent}% inverter`,
       };
     },
   },

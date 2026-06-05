@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T11:01:42.885Z",
+  "generatedAt": "2026-06-05T14:48:07.243Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1250,6 +1250,22 @@
         "tou battery arbitrage",
         "levelized cost of storage lcos",
         "peak off peak battery savings"
+      ]
+    },
+    {
+      "id": "critical-load-analysis",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Backup",
+      "title": "Critical Load Analysis",
+      "description": "Plan home backup power by listing essential devices, daily runtime, and target outage hours.",
+      "href": "/critical-load-analysis/",
+      "tag": "Backup",
+      "keywords": [
+        "critical load analysis",
+        "home backup power calculator",
+        "essential load sizing",
+        "backup battery planning"
       ]
     },
     {

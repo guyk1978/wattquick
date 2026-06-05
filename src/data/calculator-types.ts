@@ -112,7 +112,7 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   appliance: "Daily use and electricity cost",
   sizing: "Banks, inverters, and system sizing",
   cost: "Battery pack pricing estimates",
-  backup: "UPS and backup runtime",
+  backup: "Critical loads, UPS runtime, and outage planning",
   "commercial-ev": "Fleet trucks, vans, buses, and industrial EV",
   "rv-marine": "RV solar, marine banks, camping and portable power",
   tou: "Time-of-use rates, peak shaving, demand charges, and arbitrage",

@@ -92,6 +92,78 @@ export function calculateHomeBackupSizing({
   };
 }
 
+export const CRITICAL_LOAD_DEVICE_PRESETS = [
+  { name: "Refrigerator", runningWatts: 150, hoursPerDay: 8 },
+  { name: "Router / modem", runningWatts: 15, hoursPerDay: 24 },
+  { name: "Lighting", runningWatts: 200, hoursPerDay: 5 },
+  { name: "Television", runningWatts: 100, hoursPerDay: 4 },
+  { name: "Water pump", runningWatts: 750, hoursPerDay: 0.5 },
+] as const;
+
+export const CRITICAL_LOAD_SAFETY_FACTOR = 1.2;
+export const CRITICAL_LOAD_DEFAULT_INVERTER_EFFICIENCY_PERCENT = 92;
+export const CRITICAL_LOAD_DEFAULT_DOD_PERCENT = 80;
+export const CRITICAL_LOAD_REFERENCE_BATTERY_VOLTAGE = 12;
+export const CRITICAL_LOAD_REFERENCE_BATTERY_AH = 100;
+export const CRITICAL_LOAD_MAX_DEVICE_SLOTS = 12;
+
+export interface CriticalLoadDevice {
+  name: string;
+  runningWatts: number;
+  hoursPerDay: number;
+}
+
+export interface CriticalLoadAnalysisInput {
+  devices: CriticalLoadDevice[];
+  backupTargetHours: number;
+  inverterEfficiencyPercent?: number;
+  depthOfDischargePercent?: number;
+  safetyFactor?: number;
+}
+
+export function calculateCriticalLoadAnalysis({
+  devices,
+  backupTargetHours,
+  inverterEfficiencyPercent = CRITICAL_LOAD_DEFAULT_INVERTER_EFFICIENCY_PERCENT,
+  depthOfDischargePercent = CRITICAL_LOAD_DEFAULT_DOD_PERCENT,
+  safetyFactor = CRITICAL_LOAD_SAFETY_FACTOR,
+}: CriticalLoadAnalysisInput) {
+  const totalDailyWh = devices.reduce(
+    (sum, device) => sum + device.runningWatts * device.hoursPerDay,
+    0
+  );
+  const avgHourlyWh = totalDailyWh / 24;
+  const totalRunningWatts = devices.reduce(
+    (sum, device) => sum + device.runningWatts,
+    0
+  );
+  const requiredWh = avgHourlyWh * backupTargetHours * safetyFactor;
+
+  const batteryNominalWh =
+    CRITICAL_LOAD_REFERENCE_BATTERY_VOLTAGE * CRITICAL_LOAD_REFERENCE_BATTERY_AH;
+  const inverterEfficiency = inverterEfficiencyPercent / 100;
+  const depthOfDischarge = depthOfDischargePercent / 100;
+  const batteryWhNeeded = requiredWh / (inverterEfficiency * depthOfDischarge);
+  const batteryCount = Math.max(
+    1,
+    Math.ceil(batteryWhNeeded / batteryNominalWh)
+  );
+
+  return {
+    totalRunningWatts: Math.round(totalRunningWatts),
+    totalDailyWh: Math.round(totalDailyWh),
+    avgHourlyWh: parseFloat(avgHourlyWh.toFixed(1)),
+    requiredWh: Math.round(requiredWh),
+    batteryCount,
+    batteryBankLabel: `${batteryCount}× ${CRITICAL_LOAD_REFERENCE_BATTERY_AH}Ah ${CRITICAL_LOAD_REFERENCE_BATTERY_VOLTAGE}V batteries`,
+    batteryWhNeeded: Math.round(batteryWhNeeded),
+    inverterEfficiencyPercent,
+    depthOfDischargePercent,
+    safetyFactor,
+    deviceCount: devices.length,
+  };
+}
+
 export interface BatteryVoltageDropInput {
   loadAmps: number;
   oneWayLengthFt: number;
