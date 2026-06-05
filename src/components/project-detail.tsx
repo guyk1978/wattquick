@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { ProjectCostWorksheet } from "@/components/project-cost-worksheet";
 import { ProjectCurrencySelector } from "@/components/project-currency-selector";
+import { ProjectShareLinkButton } from "@/components/project-share-link-button";
 import { ProjectEngineeringRollup } from "@/components/project-engineering-rollup";
 import { getProjectCurrency } from "@/lib/project-currency";
 import { exportProjectPDFReport } from "@/lib/project-pdf";
@@ -124,6 +125,7 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
             value={getProjectCurrency(project)}
             onChange={handleCurrencyChange}
           />
+          <ProjectShareLinkButton project={project} />
           <button
             type="button"
             onClick={() => void handleExport()}

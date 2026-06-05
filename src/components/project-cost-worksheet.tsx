@@ -19,7 +19,8 @@ interface ProjectCostWorksheetProps {
   rollup: EngineeringRollup;
   costPrices: Record<string, string>;
   currency: ProjectCurrency;
-  onUnitPriceChange: (lineId: string, value: string) => void;
+  onUnitPriceChange?: (lineId: string, value: string) => void;
+  readOnly?: boolean;
   className?: string;
 }
 
@@ -32,6 +33,7 @@ export function ProjectCostWorksheet({
   costPrices,
   currency,
   onUnitPriceChange,
+  readOnly = false,
   className,
 }: ProjectCostWorksheetProps) {
   const lines = buildBomCostLines(rollup);
@@ -44,7 +46,9 @@ export function ProjectCostWorksheet({
           Materials &amp; cost estimate
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Enter unit prices from your supplier. Totals update live.
+          {readOnly
+            ? "Materials estimate prepared from saved engineering data."
+            : "Enter unit prices from your supplier. Totals update live."}
         </p>
       </div>
 
@@ -92,21 +96,32 @@ export function ProjectCostWorksheet({
                   <td className="calculator-results-table__value px-3 py-2.5 tabular-nums">
                     {line.quantity} {line.unit}
                   </td>
-                  <td className="calculator-results-table__value px-3 py-2.5">
-                    <Input
-                      type="text"
-                      inputMode="decimal"
-                      placeholder="0"
-                      value={costPrices[line.id] ?? ""}
-                      onChange={(event) =>
-                        onUnitPriceChange(line.id, event.target.value)
-                      }
-                      aria-label={`Unit price for ${line.label}`}
-                      className={cn(
-                        calculatorCommandInput,
-                        "ml-auto h-9 w-28 rounded-none border-0 px-2 text-right text-sm shadow-none focus-visible:ring-0"
-                      )}
-                    />
+                  <td className="calculator-results-table__value px-3 py-2.5 tabular-nums">
+                    {readOnly ? (
+                      <span className="font-medium text-foreground">
+                        {costPrices[line.id]
+                          ? formatProjectCurrency(
+                              parseUnitPrice(costPrices[line.id]!),
+                              currency
+                            )
+                          : "—"}
+                      </span>
+                    ) : (
+                      <Input
+                        type="text"
+                        inputMode="decimal"
+                        placeholder="0"
+                        value={costPrices[line.id] ?? ""}
+                        onChange={(event) =>
+                          onUnitPriceChange?.(line.id, event.target.value)
+                        }
+                        aria-label={`Unit price for ${line.label}`}
+                        className={cn(
+                          calculatorCommandInput,
+                          "ml-auto h-9 w-28 rounded-none border-0 px-2 text-right text-sm shadow-none focus-visible:ring-0"
+                        )}
+                      />
+                    )}
                   </td>
                   <td className="calculator-results-table__value px-3 py-2.5 font-semibold tabular-nums text-foreground">
                     {formatProjectCurrency(total, currency)}
