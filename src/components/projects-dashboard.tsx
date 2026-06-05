@@ -100,9 +100,14 @@ export function ProjectsDashboard() {
           <li key={project.id}>
             <article className="projects-card flex h-full flex-col rounded-none border border-border/60 bg-muted/10 p-5">
               <div className="flex items-start justify-between gap-3">
-                <div>
+                <div className="min-w-0">
                   <h2 className="text-lg font-semibold tracking-tight text-foreground">
-                    {project.name}
+                    <Link
+                      href={`/projects/?id=${project.id}`}
+                      className="hover:text-primary hover:underline underline-offset-4"
+                    >
+                      {project.name}
+                    </Link>
                   </h2>
                   <p className="mt-1 text-xs text-muted-foreground">
                     Updated {new Date(project.updatedAt).toLocaleString()} ·{" "}
@@ -162,7 +167,16 @@ export function ProjectsDashboard() {
                 ) : null}
               </ul>
 
-              <div className="mt-4 border-t border-border/40 pt-4">
+              <div className="mt-4 flex flex-col gap-2 border-t border-border/40 pt-4">
+                <Link
+                  href={`/projects/?id=${project.id}`}
+                  className={cn(
+                    calculatorCommandBtn,
+                    "inline-flex h-10 w-full items-center justify-center text-sm font-semibold text-foreground"
+                  )}
+                >
+                  Open project &amp; BOM
+                </Link>
                 <button
                   type="button"
                   onClick={() => void handleExport(project)}

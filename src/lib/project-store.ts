@@ -17,6 +17,8 @@ export interface WattQuickProject {
   createdAt: string;
   updatedAt: string;
   snapshots: ProjectSnapshot[];
+  /** Per BOM line unit prices keyed by BomLineId */
+  costPrices?: Record<string, string>;
 }
 
 export type ProjectSavePayload = {
@@ -133,6 +135,27 @@ export function addSnapshotToProject(
     ...projects[index]!,
     updatedAt: snapshot.timestamp,
     snapshots: [snapshot, ...projects[index]!.snapshots],
+  };
+  writeProjects(projects);
+  return projects[index]!;
+}
+
+export function updateProjectCostPrice(
+  projectId: string,
+  lineId: string,
+  unitPrice: string
+): WattQuickProject | null {
+  const projects = listProjects();
+  const index = projects.findIndex((project) => project.id === projectId);
+  if (index < 0) return null;
+
+  projects[index] = {
+    ...projects[index]!,
+    costPrices: {
+      ...projects[index]!.costPrices,
+      [lineId]: unitPrice,
+    },
+    updatedAt: new Date().toISOString(),
   };
   writeProjects(projects);
   return projects[index]!;
