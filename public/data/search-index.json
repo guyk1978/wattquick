@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T10:54:53.678Z",
+  "generatedAt": "2026-06-05T11:01:42.885Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2491,6 +2491,21 @@
       "title": "E-Scooter Motor Power Truth: 500W vs 1000W — Is More Always Better?",
       "description": "Continuous watts, burst current, hill grade physics, and controller limits on light EV scooters. When a bigger motor helps — and when it only drains faster.",
       "href": "/blog/escooter-motor-power-guide/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "E-Scooter",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "escooter-power-drop-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "E-Scooter",
+      "title": "Why Your E-Scooter Slows Down at Half Battery: Voltage Sag, SOC, and Torque",
+      "description": "Technical guide to power drop below 50 % SOC — internal resistance, voltage sag under load, effective motor watts, and when hill climbing fails on light EVs.",
+      "href": "/blog/escooter-power-drop-guide/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
