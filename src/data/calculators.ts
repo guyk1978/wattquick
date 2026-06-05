@@ -536,19 +536,19 @@ export const calculators = [
   fields: [
     {
       id: "capacity",
-      label: "Battery capacity",
+      label: "Battery Cap.",
       unit: "mAh",
       placeholder: "5000",
     },
     {
       id: "current",
-      label: "Charger current",
+      label: "Charger Cur.",
       unit: "mA",
       placeholder: "2000",
     },
     {
       id: "efficiency",
-      label: "Charge efficiency",
+      label: "Charge Eff.",
       unit: "%",
       placeholder: "100",
       defaultValue: "100",
@@ -557,7 +557,7 @@ export const calculators = [
     },
   ],
   result: {
-    label: "Estimated charge time",
+    label: "Estimated Charge Time",
     emptyMessage: "Enter capacity & charger current",
   },
   seo: {

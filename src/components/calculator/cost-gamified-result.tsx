@@ -5,7 +5,7 @@ import { deriveCostDashboardMetrics } from "@/lib/cost-dashboard";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CostVisual } from "@/components/calculator/cost-visual";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorResultValueRow, neonHeroNumber } from "@/lib/glass-ui";
+import { calculatorResultValue, calculatorResultValueRow } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 export interface CostGamifiedResultProps {
@@ -84,7 +84,7 @@ export function CostGamifiedResult({
 
               <div className={calculatorResultValueRow}>
                 {metrics.isCurrency && metrics.countTarget !== null ? (
-                  <span className={neonHeroNumber}>
+                  <span className={calculatorResultValue}>
                     $
                     <AnimatedCounter
                       target={metrics.countTarget}
@@ -92,14 +92,14 @@ export function CostGamifiedResult({
                     />
                   </span>
                 ) : metrics.countTarget !== null ? (
-                  <span className={neonHeroNumber}>
+                  <span className={calculatorResultValue}>
                     <AnimatedCounter
                       target={metrics.countTarget}
                       decimals={metrics.countDecimals}
                     />
                   </span>
                 ) : (
-                  <span className={neonHeroNumber}>{displayValue}</span>
+                  <span className={calculatorResultValue}>{displayValue}</span>
                 )}
                 {unit ? (
                   <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
@@ -135,7 +135,7 @@ function FallbackResult({
   return (
     <>
       <div className={calculatorResultValueRow}>
-        <span className={neonHeroNumber}>{value}</span>
+        <span className={calculatorResultValue}>{value}</span>
         {unit ? (
           <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
             {unit}

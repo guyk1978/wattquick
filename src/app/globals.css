@@ -369,6 +369,150 @@
   text-overflow: ellipsis;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Calculator command panel — flat, square, no neon borders
+   ═══════════════════════════════════════════════════════════════ */
+
+.calculator-command-panel,
+.calculator-command > .glass-neon.glass-surface {
+  border-radius: 0 !important;
+  border: none !important;
+  background: rgb(6 10 22 / 0.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 28px 56px rgb(0 0 0 / 0.55);
+}
+
+.dark .calculator-command-panel,
+.dark .calculator-command > .glass-neon.glass-surface {
+  background: rgb(6 10 22 / 0.94);
+  box-shadow: 0 32px 64px rgb(0 0 0 / 0.62);
+}
+
+.calculator-command-panel.glass-neon::before,
+.calculator-command-panel.glass-neon::after,
+.calculator-command > .glass-neon.glass-surface::before,
+.calculator-command > .glass-neon.glass-surface::after,
+.calculator-command-result.glass-neon::before,
+.calculator-command-result.glass-neon::after,
+.calculator-command .calculator-command-result::before,
+.calculator-command .calculator-command-result::after {
+  display: none !important;
+}
+
+.calculator-command-result,
+.calculator-command .calculator-result-card {
+  border-radius: 0 !important;
+  border: none !important;
+  background: rgb(4 8 18 / 0.72);
+  box-shadow: none;
+}
+
+.dark .calculator-command-result,
+.dark .calculator-command .calculator-result-card {
+  background: rgb(4 8 18 / 0.72);
+}
+
+.calculator-command-input {
+  border-radius: 0;
+  background: rgb(4 8 18 / 0.65);
+  border: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  transition: background-color 0.2s ease;
+}
+
+.dark .calculator-command-input {
+  background: rgb(4 8 18 / 0.65);
+  border: none;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
+}
+
+.calculator-command-input:focus-visible {
+  outline: none;
+  background: rgb(8 14 28 / 0.85);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.calculator-result-value {
+  display: block;
+  width: 100%;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.25rem, 4vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  min-width: 0;
+  text-shadow: none;
+}
+
+.calculator-command .neon-hero-number {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+.calculator-command-share-btn {
+  border-radius: 0;
+  border: none;
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.dark .calculator-command-share-btn {
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: none;
+}
+
+.calculator-command-share-btn:hover {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.calculator-command .glass-neon.rounded-2xl,
+.calculator-command .glass-neon.rounded-3xl,
+.calculator-command .rounded-2xl.glass-surface,
+.calculator-command .rounded-3xl.glass-surface {
+  border-radius: 0 !important;
+}
+
+.calculator-command .glass-neon__inner > .grid > section::before,
+.calculator-command .pointer-events-none.absolute.rounded-full.blur-3xl {
+  display: none !important;
+}
+
+.calculator-command__divider {
+  background: rgb(255 255 255 / 0.08);
+}
+
+.calculator-command .neon-badge {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  background: rgb(255 255 255 / 0.05);
+}
+
+.calculator-command__main .calculator-command-result {
+  min-height: 100%;
+}
+
+.calculator-command__main .calculator-command-result > div > p,
+.calculator-command__main .calculator-result-value,
+.calculator-command__main .calculator-result-value-row {
+  text-align: left;
+}
+
+.calculator-command__main .calculator-command-result .mt-4 {
+  text-align: left;
+}
+
 /* Calculator result card shell */
 .calculator-result-card {
   min-width: 0;

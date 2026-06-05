@@ -1,10 +1,9 @@
 "use client";
 
 import {
-  calculatorResultCard,
+  calculatorCommandResult,
+  calculatorResultValue,
   calculatorResultValueRow,
-  glassDashboard,
-  neonHeroNumber,
 } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -32,18 +31,9 @@ export function CalculatorResult({
     <section
       aria-live="polite"
       aria-atomic="true"
-      className={cn(
-        glassDashboard("primary"),
-        calculatorResultCard,
-        "p-6 sm:p-8",
-        className
-      )}
+      className={cn(calculatorCommandResult(), className)}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-16 -top-16 size-48 rounded-full bg-primary/[0.08] blur-3xl dark:bg-primary/[0.15]"
-      />
-      <div className="glass-neon__inner relative min-w-0">
+      <div className="relative min-w-0">
         <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
           {label}
         </p>
@@ -59,7 +49,7 @@ export function CalculatorResult({
           {hasResult ? (
             <>
               <div className={calculatorResultValueRow}>
-                <span className={neonHeroNumber}>{value}</span>
+                <span className={calculatorResultValue}>{value}</span>
                 {unit ? (
                   <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
                     {unit}

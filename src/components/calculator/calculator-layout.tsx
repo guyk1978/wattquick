@@ -58,7 +58,7 @@ export function CalculatorLayout({
         </div>
       </header>
 
-      <div className="space-y-10 sm:space-y-12">
+      <div className="calculator-command space-y-10 sm:space-y-12">
         {children}
 
         {seoContent ? (

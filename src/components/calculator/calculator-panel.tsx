@@ -43,9 +43,14 @@ import { ElectricityRatePlanCalculator } from "@/components/calculators/Electric
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
 import { CalculatorInputs } from "./calculator-inputs";
+import { CalculatorPanelBrand } from "./calculator-panel-brand";
 import { CalculatorResult } from "./calculator-result";
-import { glassPanel } from "@/lib/glass-ui";
+import { calculatorCommandPanel } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
+
+const CALCULATOR_FOOTER_NOTES: Partial<Record<CalculatorId, string>> = {
+  "battery-charging-time": "Note: Heat loss & taper accounted.",
+};
 
 interface CalculatorPanelProps {
   id: CalculatorId;
@@ -197,18 +202,10 @@ export function CalculatorPanel({
     values,
   ]);
 
-  return (
-    <div className={cn(glassPanel(), "p-4 sm:p-6", className)}>
-      <div className="glass-neon__inner flex flex-col gap-6 sm:gap-8">
-      <CalculatorInputs
-        fields={definition.fields}
-        values={values}
-        onChange={setValue}
-      />
+  const footerNote = CALCULATOR_FOOTER_NOTES[id];
 
-      <div className="h-px bg-border/60" aria-hidden />
-
-      {usesBatteryDashboard(definition.category, id) ? (
+  const resultBlock =
+    usesBatteryDashboard(definition.category, id) ? (
         <BatteryGamifiedResult
           calculatorId={id}
           label={definition.result.label}
@@ -243,7 +240,22 @@ export function CalculatorPanel({
           detail={result.detail}
           emptyMessage={definition.result.emptyMessage}
         />
-      )}
+      );
+
+  return (
+    <div className={cn(calculatorCommandPanel(), className)}>
+      <div className="calculator-command__inner flex flex-col gap-6 sm:gap-8">
+        <CalculatorPanelBrand />
+
+        <div className="calculator-command__main grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(200px,280px)] lg:items-start lg:gap-8">
+          <CalculatorInputs
+            fields={definition.fields}
+            values={values}
+            onChange={setValue}
+          />
+
+          <div className="min-w-0 lg:pt-1">{resultBlock}</div>
+        </div>
 
       <JoinMyPdfSaveReport
         calculatorTitle={definition.title}
@@ -258,7 +270,14 @@ export function CalculatorPanel({
         saveError={pdfError}
       />
 
-      <ShareButtons title={definition.title} className="pt-1" />
+      <div className="calculator-command__footer flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        {footerNote ? (
+          <p className="text-xs leading-relaxed text-muted-foreground">{footerNote}</p>
+        ) : (
+          <span className="hidden sm:block" aria-hidden />
+        )}
+        <ShareButtons title={definition.title} className="sm:ml-auto" />
+      </div>
       </div>
     </div>
   );

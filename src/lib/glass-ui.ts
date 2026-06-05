@@ -42,6 +42,26 @@ export function glassPanel() {
   );
 }
 
+/** Command-center calculator shell — square corners, deep shadow, no neon ring */
+export function calculatorCommandPanel() {
+  return cn("calculator-command-panel", "relative overflow-hidden", "p-4 sm:p-6");
+}
+
+/** Result block — flat dark surface, sans-serif values */
+export function calculatorCommandResult() {
+  return cn("calculator-command-result", calculatorResultCard, "p-6 sm:p-8");
+}
+
+/** Primary result value — clean sans-serif (no mono glow) */
+export const calculatorResultValue =
+  "calculator-result-value font-sans font-semibold tabular-nums tracking-tight text-foreground";
+
+/** Flat rectilinear input surface */
+export const calculatorCommandInput = "calculator-command-input";
+
+/** Share icon — integrated on panel, no neon pill */
+export const calculatorCommandShareBtn = "calculator-command-share-btn";
+
 /** Recessed tactile input slot */
 export const glassInsetInput = "glass-inset-input";
 

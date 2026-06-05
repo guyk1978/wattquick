@@ -25,6 +25,7 @@ export interface BatteryDashboardMetrics {
 const EXCLUDED_IDS = new Set<CalculatorId>([
   "inverter-loss-calculator",
   "battery-voltage-drop",
+  "battery-charging-time",
 ]);
 
 /** Calculators that show the gamified battery results dashboard */

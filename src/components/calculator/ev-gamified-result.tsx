@@ -5,7 +5,7 @@ import { deriveEvDashboardMetrics } from "@/lib/ev-dashboard";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { EvVisual } from "@/components/calculator/ev-visual";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
-import { calculatorResultValueRow, neonHeroNumber } from "@/lib/glass-ui";
+import { calculatorResultValue, calculatorResultValueRow } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 export interface EvGamifiedResultProps {
@@ -80,16 +80,16 @@ export function EvGamifiedResult({
 
               <div className={calculatorResultValueRow}>
                 {metrics.useRawValue ? (
-                  <span className={neonHeroNumber}>{displayValue}</span>
+                  <span className={calculatorResultValue}>{displayValue}</span>
                 ) : metrics.countTarget !== null ? (
-                  <span className={neonHeroNumber}>
+                  <span className={calculatorResultValue}>
                     <AnimatedCounter
                       target={metrics.countTarget}
                       decimals={metrics.countDecimals}
                     />
                   </span>
                 ) : (
-                  <span className={neonHeroNumber}>{displayValue}</span>
+                  <span className={calculatorResultValue}>{displayValue}</span>
                 )}
                 {unit ? (
                   <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
@@ -125,7 +125,7 @@ function FallbackResult({
   return (
     <>
       <div className={calculatorResultValueRow}>
-        <span className={neonHeroNumber}>{value}</span>
+        <span className={calculatorResultValue}>{value}</span>
         {unit ? (
           <span className="calculator-result-unit pb-1 font-medium text-muted-foreground">
             {unit}

@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
-import { calculatorResultCard, glassDashboard, type GlassNeonAccent } from "@/lib/glass-ui";
+import { calculatorCommandResult, type GlassNeonAccent } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface GamifiedDashboardFrameProps {
   accent: Exclude<GlassNeonAccent, "cat">;
   label: string;
-  ambientClassName?: string;
+  ambientClassName?: string; // legacy — command panels no longer use ambient glow
   className?: string;
   children: ReactNode;
 }
@@ -13,7 +13,7 @@ interface GamifiedDashboardFrameProps {
 export function GamifiedDashboardFrame({
   accent,
   label,
-  ambientClassName,
+  ambientClassName: _ambientClassName,
   className,
   children,
 }: GamifiedDashboardFrameProps) {
@@ -21,16 +21,10 @@ export function GamifiedDashboardFrame({
     <section
       aria-live="polite"
       aria-atomic="true"
-      className={cn(glassDashboard(accent), calculatorResultCard, "p-6 sm:p-8", className)}
+      className={cn(calculatorCommandResult(), className)}
+      data-accent={accent}
     >
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute -right-20 -top-20 size-56 rounded-full blur-3xl",
-          ambientClassName
-        )}
-      />
-      <div className="glass-neon__inner relative min-w-0">
+      <div className="relative min-w-0">
         <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80">
           {label}
         </p>

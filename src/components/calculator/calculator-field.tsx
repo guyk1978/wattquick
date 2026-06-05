@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { CalculatorFieldDef } from "@/lib/calculators";
-import { glassInsetInput } from "@/lib/glass-ui";
+import { calculatorCommandInput } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface CalculatorFieldProps {
@@ -15,8 +15,8 @@ interface CalculatorFieldProps {
 }
 
 const controlClassName = cn(
-  glassInsetInput,
-  "h-12 w-full rounded-xl px-3.5 text-base",
+  calculatorCommandInput,
+  "h-12 w-full px-3.5 text-base",
   "focus-visible:outline-none"
 );
 
