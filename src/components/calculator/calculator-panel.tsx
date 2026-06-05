@@ -50,6 +50,7 @@ import { MobilityTcoCalculator } from "@/components/calculators/MobilityTcoCalcu
 import { SolarShadingAnalysisCalculator } from "@/components/calculators/SolarShadingAnalysisCalculator";
 import { ElectricityRatePlanCalculator } from "@/components/calculators/ElectricityRatePlanCalculator";
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
+import { SolarRoiAnalysisCalculator } from "@/components/calculators/SolarRoiAnalysisCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
 import {
   CalculatorCommandShell,
@@ -123,6 +124,9 @@ export function CalculatorPanel({
   }
   if (id === "solar-shading-analysis") {
     return <SolarShadingAnalysisCalculator className={className} />;
+  }
+  if (id === "solar-roi-analysis") {
+    return <SolarRoiAnalysisCalculator className={className} />;
   }
   if (id === "dc-cable-voltage-drop") {
     return <DcCableVoltageDropCalculator className={className} />;

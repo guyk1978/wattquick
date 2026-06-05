@@ -75,6 +75,7 @@ export const CALCULATOR_USE_CASES: CalculatorUseCase[] = [
     icon: Wrench,
     color: "#10B981",
     featuredIds: [
+      "solar-roi-analysis",
       "solar-shading-analysis",
       "dc-cable-size",
       "inverter-sizing",

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T16:05:38.613Z",
+  "generatedAt": "2026-06-05T16:14:55.376Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1139,6 +1139,23 @@
         "pv string shading loss",
         "bypass diode production loss",
         "optimizer payback shading"
+      ]
+    },
+    {
+      "id": "solar-roi-analysis",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Solar",
+      "title": "Solar ROI Analysis",
+      "description": "Advanced 20-year solar payback with degradation, rate inflation, export credits, incentives, and cumulative savings vs. status quo.",
+      "href": "/solar-roi-analysis/",
+      "tag": "Solar",
+      "keywords": [
+        "solar roi calculator",
+        "solar payback analysis",
+        "pv 20 year savings",
+        "solar net metering roi",
+        "solar break even year"
       ]
     },
     {

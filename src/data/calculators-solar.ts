@@ -25,8 +25,10 @@ import {
   calculatePanelDegradation,
   calculatePaybackRoi,
   calculateSolarDegradation20YearRoi,
+  calculateSolarRoiAnalysis,
   calculateRoofSpace,
   calculateSolarShadingAnalysis,
+  DEFAULT_SOLAR_DEGRADATION_PERCENT,
   SOLAR_SHADING_DEFAULT_KWH_PER_KWP,
   SOLAR_SHADING_DEFAULT_OPTIMIZER_COST_PER_PANEL,
   type SeasonMode,
@@ -1253,6 +1255,177 @@ export const calculatorsSolar = [
         value: formatNumber(result.annualProductionLossKwh, { maxDecimals: 0 }),
         unit: "kWh/yr",
         detail: `${formatNumber(result.productionLossPercent, { maxDecimals: 1 })}% loss · ${formatCurrency(result.annualFinancialLoss)}/yr · ${result.recommendationLabel}`,
+      };
+    },
+  },
+  {
+    slug: "solar-roi-analysis",
+    href: "/solar-roi-analysis",
+    title: "Solar ROI Analysis",
+    description:
+      "Advanced 20-year solar payback with degradation, rate inflation, export credits, incentives, and cumulative savings vs. status quo.",
+    keywords: [
+      "solar roi calculator",
+      "solar payback analysis",
+      "pv 20 year savings",
+      "solar net metering roi",
+      "solar break even year",
+    ],
+    icon: LineChart,
+    tag: "Solar",
+    category: "solar",
+    suggestions: [
+      "solar-shading-analysis",
+      "solar-degradation",
+      "solar-degradation-20-year-roi",
+      "solar-payback-roi",
+    ],
+    fields: [
+      {
+        id: "installCost",
+        label: "Installed system cost",
+        unit: "$",
+        placeholder: "18000",
+        defaultValue: "18000",
+      },
+      {
+        id: "incentivesAmount",
+        label: "Tax credits & incentives",
+        unit: "$",
+        placeholder: "0",
+        defaultValue: "0",
+        hint: "Federal/state rebates—reduces net upfront cost",
+      },
+      {
+        id: "annualYieldKwh",
+        label: "Year-1 annual yield",
+        unit: "kWh/yr",
+        placeholder: "11200",
+        defaultValue: "11200",
+        hint: "Expected first-year production after install",
+      },
+      {
+        id: "annualDegradationPercent",
+        label: "Annual degradation",
+        inputType: "range",
+        min: 0.3,
+        max: 1.5,
+        step: 0.1,
+        defaultValue: String(DEFAULT_SOLAR_DEGRADATION_PERCENT),
+        unit: "%/yr",
+        colSpan: 2,
+        hint: "Same default as Solar Panel Degradation (0.5%/yr)",
+      },
+      {
+        id: "electricityRatePerKwh",
+        label: "Retail electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
+      {
+        id: "exportRatePerKwh",
+        label: "Net metering / export rate",
+        unit: "$/kWh",
+        placeholder: "0.08",
+        defaultValue: "0.08",
+        hint: "Credit for surplus kWh sent to grid",
+      },
+      {
+        id: "selfConsumptionPercent",
+        label: "Self-consumed on site",
+        inputType: "range",
+        min: 0,
+        max: 100,
+        step: 5,
+        defaultValue: "85",
+        unit: "%",
+        colSpan: 2,
+        hint: "Share of generation used at home vs. exported",
+      },
+      {
+        id: "energyInflationPercent",
+        label: "Electricity price inflation",
+        inputType: "range",
+        min: 0,
+        max: 10,
+        step: 0.5,
+        defaultValue: "3",
+        unit: "%/yr",
+        colSpan: 2,
+        hint: "Escalation on retail & export rates each year",
+      },
+    ],
+    result: {
+      label: "Break-even point",
+      emptyMessage: "Enter cost, yield, rates & degradation",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "20-year financial model",
+          body: "Year-1 kWh declines by your degradation % each year. Savings blend self-consumed kWh at retail with exports at your net-metering rate—both escalating with inflation. Break-even is when cumulative savings repay net install cost after incentives.",
+        },
+        {
+          heading: "NPV & status quo",
+          body: "Simple NPV discounts annual savings at your inflation %. The chart compares net solar savings (green) with cumulative grid spend if you never installed (dashed)—crossing zero marks payback.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Include tax credits? A: Use the incentives field—or enter net cost manually. Q: Shading? A: Run Solar Shading Analysis first. Q: vs. Degradation ROI? A: That tool sizes from kWp; this one accepts direct annual kWh and export rates.",
+        },
+      ],
+    },
+    compute(values) {
+      const annualYieldKwh = parsePositive(values.annualYieldKwh ?? "");
+      const installCost = parsePositive(values.installCost ?? "");
+      const incentivesAmount =
+        parseNonNegative(values.incentivesAmount ?? "") ?? 0;
+      const annualDegradationPercent = parsePositive(
+        values.annualDegradationPercent ?? ""
+      );
+      const electricityRatePerKwh = parsePositive(
+        values.electricityRatePerKwh ?? ""
+      );
+      const exportRatePerKwh = parseNonNegative(
+        values.exportRatePerKwh ?? ""
+      );
+      const selfConsumptionPercent = Number(
+        values.selfConsumptionPercent?.trim() ?? "85"
+      );
+      const energyInflationPercent = Number(
+        values.energyInflationPercent?.trim() ?? "3"
+      );
+
+      if (
+        annualYieldKwh === null ||
+        installCost === null ||
+        annualDegradationPercent === null ||
+        electricityRatePerKwh === null ||
+        exportRatePerKwh === null ||
+        !Number.isFinite(selfConsumptionPercent) ||
+        selfConsumptionPercent < 0 ||
+        selfConsumptionPercent > 100 ||
+        !Number.isFinite(energyInflationPercent) ||
+        energyInflationPercent < 0
+      ) {
+        return { value: null };
+      }
+
+      const result = calculateSolarRoiAnalysis({
+        annualYieldKwh,
+        installCost,
+        incentivesAmount,
+        annualDegradationPercent,
+        electricityRatePerKwh,
+        exportRatePerKwh,
+        selfConsumptionPercent,
+        energyInflationPercent,
+      });
+
+      return {
+        value: result.breakEvenLabel,
+        detail: `${formatCurrency(result.total20YearSavings)} saved · NPV ${formatCurrency(result.simpleNpv)} · ${formatNumber(result.capacityYear20Percent, { maxDecimals: 1 })}% output yr 20`,
       };
     },
   },

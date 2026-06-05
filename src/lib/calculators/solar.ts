@@ -239,6 +239,144 @@ export function calculateSolarDegradation20YearRoi({
   };
 }
 
+export const SOLAR_ROI_ANALYSIS_YEARS = 20;
+
+/** Default annual panel loss — matches solar-degradation calculator default. */
+export const DEFAULT_SOLAR_DEGRADATION_PERCENT = 0.5;
+
+export interface SolarRoiAnalysisInput {
+  annualYieldKwh: number;
+  installCost: number;
+  incentivesAmount?: number;
+  annualDegradationPercent: number;
+  electricityRatePerKwh: number;
+  exportRatePerKwh: number;
+  selfConsumptionPercent: number;
+  energyInflationPercent: number;
+}
+
+export interface SolarRoiYearPoint {
+  year: number;
+  annualKwh: number;
+  retailRate: number;
+  exportRate: number;
+  annualSavings: number;
+  cumulativeSavings: number;
+  statusQuoAnnual: number;
+  cumulativeStatusQuo: number;
+  netPosition: number;
+}
+
+export type SolarRoiMilestoneYear = 1 | 5 | 10 | 20;
+
+export interface SolarRoiAnalysisResult {
+  grossInstallCost: number;
+  incentivesAmount: number;
+  netInstallCost: number;
+  breakEvenYears: number | null;
+  breakEvenLabel: string;
+  total20YearSavings: number;
+  simpleNpv: number;
+  statusQuo20YearCost: number;
+  netBenefitVsStatusQuo: number;
+  capacityYear20Percent: number;
+  yearly: SolarRoiYearPoint[];
+  milestones: Record<SolarRoiMilestoneYear, SolarRoiYearPoint>;
+}
+
+export function calculateSolarRoiAnalysis({
+  annualYieldKwh,
+  installCost,
+  incentivesAmount = 0,
+  annualDegradationPercent,
+  electricityRatePerKwh,
+  exportRatePerKwh,
+  selfConsumptionPercent,
+  energyInflationPercent,
+}: SolarRoiAnalysisInput): SolarRoiAnalysisResult {
+  const netInstallCost = Math.max(0, installCost - incentivesAmount);
+  const degFactor = 1 - annualDegradationPercent / 100;
+  const inflationFactor = 1 + energyInflationPercent / 100;
+  const selfFactor =
+    Math.min(100, Math.max(0, selfConsumptionPercent)) / 100;
+
+  const yearly: SolarRoiYearPoint[] = [];
+  let cumulativeSavings = 0;
+  let cumulativeStatusQuo = 0;
+  let breakEvenYears: number | null = null;
+  let prevCumulativeSavings = 0;
+  let simpleNpv = -netInstallCost;
+
+  for (let year = 1; year <= SOLAR_ROI_ANALYSIS_YEARS; year++) {
+    const annualKwh = annualYieldKwh * Math.pow(degFactor, year - 1);
+    const retailRate =
+      electricityRatePerKwh * Math.pow(inflationFactor, year - 1);
+    const exportRate =
+      exportRatePerKwh * Math.pow(inflationFactor, year - 1);
+
+    const selfKwh = annualKwh * selfFactor;
+    const exportKwh = annualKwh * (1 - selfFactor);
+    const annualSavings = selfKwh * retailRate + exportKwh * exportRate;
+    cumulativeSavings += annualSavings;
+
+    const statusQuoAnnual = annualKwh * retailRate;
+    cumulativeStatusQuo += statusQuoAnnual;
+
+    simpleNpv += annualSavings / Math.pow(inflationFactor, year);
+
+    if (
+      breakEvenYears === null &&
+      cumulativeSavings >= netInstallCost &&
+      netInstallCost > 0
+    ) {
+      const yearDelta = cumulativeSavings - prevCumulativeSavings;
+      const fraction =
+        yearDelta > 0
+          ? (netInstallCost - prevCumulativeSavings) / yearDelta
+          : 1;
+      breakEvenYears = parseFloat((year - 1 + fraction).toFixed(1));
+    }
+    prevCumulativeSavings = cumulativeSavings;
+
+    yearly.push({
+      year,
+      annualKwh: Math.round(annualKwh),
+      retailRate: parseFloat(retailRate.toFixed(4)),
+      exportRate: parseFloat(exportRate.toFixed(4)),
+      annualSavings: Math.round(annualSavings),
+      cumulativeSavings: Math.round(cumulativeSavings),
+      statusQuoAnnual: Math.round(statusQuoAnnual),
+      cumulativeStatusQuo: Math.round(cumulativeStatusQuo),
+      netPosition: Math.round(cumulativeSavings - netInstallCost),
+    });
+  }
+
+  const breakEvenLabel =
+    breakEvenYears !== null ? `Year ${breakEvenYears}` : "20+";
+
+  const milestoneYears: SolarRoiMilestoneYear[] = [1, 5, 10, 20];
+  const milestones = Object.fromEntries(
+    milestoneYears.map((y) => [y, yearly[y - 1]!])
+  ) as Record<SolarRoiMilestoneYear, SolarRoiYearPoint>;
+
+  return {
+    grossInstallCost: installCost,
+    incentivesAmount,
+    netInstallCost,
+    breakEvenYears,
+    breakEvenLabel,
+    total20YearSavings: Math.round(cumulativeSavings),
+    simpleNpv: Math.round(simpleNpv),
+    statusQuo20YearCost: Math.round(cumulativeStatusQuo),
+    netBenefitVsStatusQuo: Math.round(cumulativeSavings - netInstallCost),
+    capacityYear20Percent: parseFloat(
+      (Math.pow(degFactor, SOLAR_ROI_ANALYSIS_YEARS - 1) * 100).toFixed(1)
+    ),
+    yearly,
+    milestones,
+  };
+}
+
 export function calculatePanelDegradation({
   ratedAnnualKwh,
   systemAgeYears,
