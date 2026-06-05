@@ -14,6 +14,7 @@ import type { CalculatorDataEntry } from "@/data/calculator-types";
 import {
   ESCOOTER_CONNECTOR_PRESETS,
   ESCOOTER_SURFACE_PRESETS,
+  ESCOOTER_VOLTAGE_PRESETS,
   formatEscooterResult,
 } from "@/lib/calculators/escooter";
 
@@ -42,13 +43,25 @@ export const calculatorsEscooter = [
     href: "/escooter-range",
     title: "E-Scooter Range Calculator",
     description:
-      "Estimate range with standing-rider drag, tyre pressure, and light-pack efficiency (typical 36–48 V).",
+      "Estimate range with standing-rider drag, tyre pressure, and voltage sag impact at 36 / 48 / 52 V.",
     keywords: ["escooter range", "electric scooter range", "wh per km scooter"],
     icon: Navigation,
     tag: "E-Scooter",
     category: "escooter",
     suggestions: ["escooter-tire-pressure", "escooter-cost-per-km", "escooter-charge-time"],
     fields: [
+      {
+        id: "nominalVoltage",
+        label: "Nominal voltage",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "36",
+        options: Object.entries(ESCOOTER_VOLTAGE_PRESETS).map(([value, p]) => ({
+          value,
+          label: p.label,
+        })),
+        hint: "36 V sags harder under load than 48 V or 52 V",
+      },
       { id: "batteryWh", label: "Battery capacity", unit: "Wh", placeholder: "360", defaultValue: "360" },
       { id: "packEfficiency", label: "Pack efficiency", unit: "%", placeholder: "90", defaultValue: "90" },
       { id: "riderMassKg", label: "Rider mass", unit: "kg", placeholder: "75", defaultValue: "75" },
@@ -57,7 +70,13 @@ export const calculatorsEscooter = [
       { id: "recommendedPressureBar", label: "Recommended pressure", unit: "bar", placeholder: "3.5", defaultValue: "3.5" },
     ],
     result: { label: "Estimated range", emptyMessage: "Enter Wh, mass & tyre pressure" },
-    seo: { sections: [{ heading: "Standing drag", body: "E-scooters use higher Wh/km than e-bikes due to stance and small wheels." }, { heading: "Note", body: ESCOOTER_SEO }] },
+    seo: {
+      sections: [
+        { heading: "Standing drag", body: "E-scooters use higher Wh/km than e-bikes due to stance and small wheels." },
+        { heading: "Voltage sag", body: "At ~50 % SOC a 2 V sag costs ~6 % effective power on 36 V but under 4 % on 48 V." },
+        { heading: "Note", body: ESCOOTER_SEO },
+      ],
+    },
     compute: (v) => formatEscooterResult("escooter-range", v),
   },
   {
@@ -103,20 +122,39 @@ export const calculatorsEscooter = [
     slug: "escooter-hill-climb",
     href: "/escooter-hill-climb",
     title: "E-Scooter Hill Climb Grade Calculator",
-    description: "Maximum climb grade from motor watts, total mass, and crawl speed.",
+    description:
+      "Maximum climb grade with voltage sag torque drop at 36 / 48 / 52 V and mid-SOC load.",
     keywords: ["escooter hill climb", "motor torque grade", "scooter slope"],
     icon: TrendingUp,
     tag: "E-Scooter",
     category: "escooter",
     suggestions: ["escooter-peak-amps", "escooter-weight-limit", "escooter-max-speed"],
     fields: [
+      {
+        id: "nominalVoltage",
+        label: "Nominal voltage",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "36",
+        options: Object.entries(ESCOOTER_VOLTAGE_PRESETS).map(([value, p]) => ({
+          value,
+          label: p.label,
+        })),
+        hint: "Lower voltage = steeper torque drop on hills at 50 % SOC",
+      },
       { id: "motorWatts", label: "Motor power", unit: "W", placeholder: "500", defaultValue: "500" },
       { id: "totalMassKg", label: "Total mass", unit: "kg", placeholder: "89", defaultValue: "89", hint: "Rider + scooter + bag" },
       { id: "minClimbSpeedKmh", label: "Min climb speed", unit: "km/h", placeholder: "8", defaultValue: "8" },
       { id: "motorEfficiency", label: "Motor efficiency", unit: "%", placeholder: "75", defaultValue: "75" },
     ],
     result: { label: "Max climb grade", emptyMessage: "Enter motor W, mass & crawl speed" },
-    seo: { sections: [{ heading: "Grade physics", body: "P = m·g·sin(θ)·v at steady crawl. Burst peaks exceed continuous rating." }, { heading: "Note", body: ESCOOTER_SEO }] },
+    seo: {
+      sections: [
+        { heading: "Grade physics", body: "P = m·g·sin(θ)·v at steady crawl. Burst peaks exceed continuous rating." },
+        { heading: "Voltage sag", body: "Climb draw raises sag; 36 V decks lose more torque per volt than 48 V or 52 V systems." },
+        { heading: "Note", body: ESCOOTER_SEO },
+      ],
+    },
     compute: (v) => formatEscooterResult("escooter-hill-climb", v),
   },
   {
