@@ -164,7 +164,7 @@ export const WIZARD_PATH_MAP: Record<
       { kind: "calculator", slug: "inverter-loading-curve" },
       { kind: "calculator", slug: "battery-series-parallel" },
       { kind: "calculator", slug: "dc-cable-size" },
-      { kind: "article", slug: "size-home-emergency-backup-battery" },
+      { kind: "article", slug: "inverter-thermal-management-guide" },
     ],
   },
   mobility: {

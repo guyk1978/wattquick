@@ -403,6 +403,7 @@ export const calculatorsBattery = [
     slug: "inverter-loading-curve",
     href: "/inverter-loading-curve",
     title: "Inverter Loading Curve",
+    relatedArticleId: "inverter-thermal-management-guide",
     description:
       "Estimate overload shutdown time from nominal power, current load, ambient temperature, and manufacturer overload curves.",
     keywords: [

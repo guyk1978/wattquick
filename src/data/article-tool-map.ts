@@ -143,6 +143,10 @@ export const ARTICLE_BY_TOOL: Partial<Record<CalculatorId, ArticleToolLink>> = {
     "articleSlug": "hybrid-solar-wind-home-energy",
     "articleTitle": "Hybrid Solar and Wind: A Winning Home Energy Combo?"
   },
+  "inverter-loading-curve": {
+    "articleSlug": "inverter-thermal-management-guide",
+    "articleTitle": "Thermal Limits: Managing Inverter Overload in Extreme Heat"
+  },
   "ev-vs-gas-savings": {
     "articleSlug": "is-ev-cheaper-than-gas",
     "articleTitle": "Is an EV Cheaper Than Gas? A Straightforward Cost Comparison"

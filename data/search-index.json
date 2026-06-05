@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T16:51:59.459Z",
+  "generatedAt": "2026-06-05T16:56:58.702Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2953,6 +2953,21 @@
       "tag": "Green Home",
       "keywords": [
         "Green Home",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "inverter-thermal-management-guide",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Guides",
+      "title": "Thermal Limits: Managing Inverter Overload in Extreme Heat",
+      "description": "Why do inverters shut down in July? Learn how to calculate derating, manage overload cycles, and document backup plans with the WattQuick Project Dashboard.",
+      "href": "/blog/inverter-thermal-management-guide/",
+      "tag": "Guides",
+      "keywords": [
+        "Guides",
         "blog",
         "article"
       ]
