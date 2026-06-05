@@ -30,5 +30,9 @@ export function isMainNavActive(href: string, pathname: string): boolean {
     return path === "/dashboard" || path.startsWith("/dashboard/");
   }
 
+  if (link === "/projects") {
+    return path === "/projects" || path.startsWith("/projects/");
+  }
+
   return path === link;
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Briefcase, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { isMainNavActive } from "@/lib/nav-active";
 import { MAIN_NAV } from "@/lib/site";
@@ -38,11 +38,18 @@ export function MobileNav() {
                     isMainNavActive(item.href, pathname) ? "page" : undefined
                   }
                   className={cn(
-                    "header-nav-link block px-3 py-2 text-sm font-medium",
+                    "header-nav-link flex items-center gap-1.5 px-3 py-2 text-sm font-medium",
                     isMainNavActive(item.href, pathname) && "header-nav-link--active"
                   )}
                 >
-                  {item.label}
+                  {item.href === "/projects" ? (
+                    <>
+                      <Briefcase className="size-3.5 shrink-0 opacity-80" aria-hidden />
+                      {item.label}
+                    </>
+                  ) : (
+                    item.label
+                  )}
                 </Link>
               </li>
             ))}
