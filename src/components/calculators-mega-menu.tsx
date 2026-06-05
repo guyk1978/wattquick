@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import { useMemo, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Search } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Compass, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -267,6 +267,27 @@ export function CalculatorsMegaMenu() {
                 </ul>
               </div>
             )}
+          </div>
+
+          <div className="border-t border-border/40 px-2.5 py-2 sm:px-3">
+            <Link
+              href="/wizard/"
+              className={cn(
+                "group mb-2 flex items-center gap-2 rounded-none border border-primary/25 bg-primary/5 px-2.5 py-2 text-xs font-semibold text-foreground sm:text-sm",
+                "transition-colors hover:border-primary/40 hover:bg-primary/10"
+              )}
+              onClick={() => setOpen(false)}
+            >
+              <Compass
+                className="size-3.5 shrink-0 text-primary"
+                aria-hidden
+              />
+              Start Planning: WattQuick Wizard
+              <ArrowUpRight
+                className="ml-auto size-3.5 opacity-60 transition-opacity group-hover:opacity-100"
+                aria-hidden
+              />
+            </Link>
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-border/40 px-2.5 py-2 sm:px-3">

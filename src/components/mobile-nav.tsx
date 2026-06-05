@@ -46,6 +46,21 @@ export function MobileNav() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/wizard/"
+                onClick={() => setOpen(false)}
+                aria-current={
+                  isMainNavActive("/wizard", pathname) ? "page" : undefined
+                }
+                className={cn(
+                  "header-nav-link block px-3 py-2 text-sm font-medium",
+                  isMainNavActive("/wizard", pathname) && "header-nav-link--active"
+                )}
+              >
+                WattQuick Wizard
+              </Link>
+            </li>
           </ul>
         </nav>
       ) : null}
