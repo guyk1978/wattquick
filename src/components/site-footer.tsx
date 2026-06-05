@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 import {
   CALCULATOR_CATEGORY_LABELS,
   getAllCalculatorMeta,
@@ -11,33 +10,31 @@ export function SiteFooter() {
   const count = getAllCalculatorMeta().length;
 
   return (
-    <footer className="site-footer relative z-[1] mt-auto border-t border-border/50">
+    <footer className="site-footer relative z-[1] mt-auto">
       <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <span className="flex size-8 items-center justify-center rounded-none bg-primary text-primary-foreground">
-                <Zap className="size-4" strokeWidth={2.5} />
-              </span>
-              <span className="font-semibold tracking-tight">WattQuick</span>
+            <Link
+              href="/"
+              className="site-header-logo inline-block text-xl leading-none tracking-tight"
+            >
+              <span className="font-black text-white">Watt</span>
+              <span className="font-light text-neutral-400">Quick</span>
             </Link>
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+            <p className="footer-muted max-w-xs text-sm leading-relaxed">
               {count} free micro-calculators for batteries, solar, EV charging,
               and home power. Instant answers—no account required.
             </p>
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <h2 className="footer-heading text-xs font-semibold uppercase tracking-widest">
               Categories
             </h2>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_CALCULATOR_CATEGORIES.map(({ category, href }) => (
                 <li key={category}>
-                  <Link
-                    href={href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
+                  <Link href={href} className="footer-nav-link text-sm">
                     {CALCULATOR_CATEGORY_LABELS[category]}
                   </Link>
                 </li>
@@ -46,16 +43,13 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <h2 className="footer-heading text-xs font-semibold uppercase tracking-widest">
               Company
             </h2>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_LINKS.company.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
+                  <Link href={link.href} className="footer-nav-link text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -64,16 +58,13 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            <h2 className="footer-heading text-xs font-semibold uppercase tracking-widest">
               Legal
             </h2>
             <ul className="mt-4 space-y-2.5">
               {FOOTER_LINKS.legal.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
+                  <Link href={link.href} className="footer-nav-link text-sm">
                     {link.label}
                   </Link>
                 </li>
@@ -82,8 +73,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border/40 pt-8">
-          <h2 className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+        <div className="footer-divider mt-10 border-t pt-8">
+          <h2 className="footer-heading text-center text-xs font-semibold uppercase tracking-widest">
             Network partners
           </h2>
           <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-2">
@@ -93,7 +84,7 @@ export function SiteFooter() {
                   href={partner.href}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="footer-nav-link text-sm font-medium"
                 >
                   {partner.label}
                 </a>
@@ -102,7 +93,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <p className="mt-8 text-center text-xs text-muted-foreground">
+        <p className="footer-muted mt-8 text-center text-xs">
           © {new Date().getFullYear()} WattQuick. All calculators are estimates—for
           planning only, not professional engineering advice.
         </p>
