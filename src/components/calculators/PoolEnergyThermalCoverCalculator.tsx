@@ -262,7 +262,8 @@ export function PoolEnergyThermalCoverCalculator({
         </section>
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={annualSavingsValue}
           detail={resultDetail}

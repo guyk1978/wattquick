@@ -318,6 +318,7 @@ export function SolarRoiAnalysisCalculator({
       ) : null}
 
       <JoinMyPdfSaveReport
+        calculatorSlug={CALCULATOR_ID}
         calculatorTitle={definition.title}
         resultLabel={definition.result.label}
         value={parsed?.breakEvenLabel ?? null}

@@ -205,7 +205,8 @@ export function BessRoiCalculator({ className }: BessRoiCalculatorProps) {
         </section>
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={paybackDisplay}
           detail={

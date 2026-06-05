@@ -211,7 +211,8 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
         ) : null}
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={lossCarbonValue}
           unit="kg CO₂/yr"

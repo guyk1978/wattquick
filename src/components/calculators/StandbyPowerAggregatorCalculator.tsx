@@ -406,6 +406,7 @@ export function StandbyPowerAggregatorCalculator({
       ) : null}
 
       <JoinMyPdfSaveReport
+        calculatorSlug={CALCULATOR_ID}
         calculatorTitle={definition.title}
         resultLabel={definition.result.label}
         value={parsed ? formatCurrency(parsed.annualCost) : null}

@@ -300,6 +300,7 @@ export function CalculatorPanel({
 
       <JoinMyPdfSaveReport
         calculatorTitle={definition.title}
+        calculatorSlug={id}
         resultLabel={definition.result.label}
         value={result.value}
         unit={result.unit}

@@ -1,8 +1,10 @@
 "use client";
 
 import { FileDown, Loader2 } from "lucide-react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
+import { SaveToProjectButton } from "@/components/save-to-project-button";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
+import { buildProjectResults } from "@/lib/project-store";
 import { calculatorCommandBtn, calculatorCommandPdfSection } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -14,6 +16,8 @@ interface JoinMyPdfSaveReportProps {
   detail?: string | null;
   values: Record<string, string>;
   fieldLabels: Record<string, string>;
+  calculatorSlug?: string;
+  projectResults?: Record<string, string>;
   onSaveToPdf?: () => Promise<void>;
   isSaving?: boolean;
   saveError?: string | null;
@@ -28,6 +32,8 @@ export function JoinMyPdfSaveReport({
   detail,
   values,
   fieldLabels,
+  calculatorSlug,
+  projectResults,
   onSaveToPdf,
   isSaving: isSavingProp,
   saveError: saveErrorProp,
@@ -68,6 +74,32 @@ export function JoinMyPdfSaveReport({
 
   const handleSave = onSaveToPdf ?? defaultSaveToPdf;
 
+  const projectPayload = useMemo(() => {
+    if (!calculatorSlug || !hasResult || value === null) return null;
+    const summary = `${value}${unit ? ` ${unit}` : ""}`.trim();
+    return {
+      calculatorSlug,
+      calculatorTitle: calculatorTitle,
+      values,
+      fieldLabels,
+      results:
+        projectResults ??
+        buildProjectResults(resultLabel, value, unit, detail ?? null),
+      summary,
+    };
+  }, [
+    calculatorSlug,
+    calculatorTitle,
+    detail,
+    fieldLabels,
+    hasResult,
+    projectResults,
+    resultLabel,
+    unit,
+    value,
+    values,
+  ]);
+
   if (!hasResult) return null;
 
   return (
@@ -75,34 +107,49 @@ export function JoinMyPdfSaveReport({
       className={cn(calculatorCommandPdfSection, className)}
       aria-label="Save calculation report"
     >
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3">
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">Save Report:</span>{" "}
-          Download your battery and solar calculation specs as a private PDF via{" "}
-          <span className="font-medium text-foreground">JoinMyPDF</span>.
+          Download a PDF via{" "}
+          <span className="font-medium text-foreground">JoinMyPDF</span>
+          {projectPayload ? (
+            <>
+              {" "}
+              or add this run to a{" "}
+              <span className="font-medium text-foreground">project</span> for a
+              combined export.
+            </>
+          ) : (
+            "."
+          )}
           {saveError ? (
             <span className="mt-1 block text-xs text-destructive">{saveError}</span>
           ) : null}
         </p>
-        <button
-          type="button"
-          onClick={() => void handleSave()}
-          disabled={isSaving}
-          aria-busy={isSaving}
-          className={cn(
-            calculatorCommandBtn,
-            "inline-flex h-11 shrink-0 items-center justify-center gap-2 px-5 text-sm font-semibold text-foreground",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-            isSaving && "cursor-wait opacity-80"
-          )}
-        >
-          {isSaving ? (
-            <Loader2 className="size-4 animate-spin text-primary" aria-hidden />
-          ) : (
-            <FileDown className="size-4 text-primary" aria-hidden />
-          )}
-          {isSaving ? "Generating PDF…" : "Save via JoinMyPDF"}
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => void handleSave()}
+            disabled={isSaving}
+            aria-busy={isSaving}
+            className={cn(
+              calculatorCommandBtn,
+              "inline-flex h-11 items-center justify-center gap-2 px-5 text-sm font-semibold text-foreground",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              isSaving && "cursor-wait opacity-80"
+            )}
+          >
+            {isSaving ? (
+              <Loader2 className="size-4 animate-spin text-primary" aria-hidden />
+            ) : (
+              <FileDown className="size-4 text-primary" aria-hidden />
+            )}
+            {isSaving ? "Generating PDF…" : "Save via JoinMyPDF"}
+          </button>
+          {projectPayload ? (
+            <SaveToProjectButton payload={projectPayload} />
+          ) : null}
+        </div>
       </div>
     </section>
   );

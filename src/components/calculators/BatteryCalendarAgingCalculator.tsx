@@ -222,7 +222,8 @@ export function BatteryCalendarAgingCalculator({
         ) : null}
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={sohValue}
           unit="% SoH"

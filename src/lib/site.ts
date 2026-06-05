@@ -24,6 +24,7 @@ export const FOOTER_CALCULATOR_CATEGORIES: {
 export const FOOTER_LINKS = {
   product: [
     { href: "/dashboard", label: "Command Center" },
+    { href: "/projects", label: "My Projects" },
     { href: "/wizard", label: "WattQuick Wizard" },
     { href: "/calculators", label: "All calculators" },
     { href: "/#calculators", label: "Quick search" },

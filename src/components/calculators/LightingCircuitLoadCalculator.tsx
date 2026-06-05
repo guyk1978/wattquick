@@ -216,7 +216,8 @@ export function LightingCircuitLoadCalculator({
         </div>
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={ampsValue}
           unit="A"

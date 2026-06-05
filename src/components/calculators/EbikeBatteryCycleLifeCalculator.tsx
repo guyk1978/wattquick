@@ -18,6 +18,7 @@ import {
   CalculatorCommandSplit,
 } from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import { buildProjectSavePayloadFromRows } from "@/lib/project-store";
 
 const CALCULATOR_ID = "ebike-battery-cycle-life" satisfies CalculatorId;
 
@@ -88,6 +89,28 @@ export function EbikeBatteryCycleLifeCalculator({
     ? parsedDetailFromRows(secondaryRows)
     : null;
 
+  const fieldLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        definition.fields.map((field) => [field.id, field.label])
+      ),
+    [definition.fields]
+  );
+
+  const saveToProject = useMemo(
+    () =>
+      hasResults
+        ? buildProjectSavePayloadFromRows({
+            calculatorSlug: CALCULATOR_ID,
+            calculatorTitle: definition.title,
+            values,
+            fieldLabels,
+            rows: output.results,
+          })
+        : undefined,
+    [definition.title, fieldLabels, hasResults, output.results, values]
+  );
+
   return (
     <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
@@ -109,7 +132,10 @@ export function EbikeBatteryCycleLifeCalculator({
                 animateNumeric={false}
               />
             </GamifiedDashboardFrame>
-            <CalculatorResultsTable rows={secondaryRows} />
+            <CalculatorResultsTable
+              rows={secondaryRows}
+              saveToProject={saveToProject ?? undefined}
+            />
           </div>
         }
       />

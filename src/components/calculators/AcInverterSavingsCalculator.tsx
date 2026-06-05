@@ -314,7 +314,8 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
         </section>
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={paybackLabel}
           detail={paybackDetail}

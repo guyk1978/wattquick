@@ -212,7 +212,8 @@ export function ElectricityRatePlanCalculator({
         </section>
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={parsed ? formatCurrency(parsed.annualSavings) : null}
           detail={savingsDetail}

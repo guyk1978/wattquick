@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { buildProjectSavePayloadFromRows } from "@/lib/project-store";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import {
@@ -50,6 +51,28 @@ export function EscooterCalculatorShell({
   const secondaryRows = output.results.slice(1);
   const hasResults = output.results.length > 0;
 
+  const fieldLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        definition.fields.map((field) => [field.id, field.label])
+      ),
+    [definition.fields]
+  );
+
+  const saveToProject = useMemo(
+    () =>
+      hasResults
+        ? buildProjectSavePayloadFromRows({
+            calculatorSlug: id,
+            calculatorTitle: definition.title,
+            values,
+            fieldLabels,
+            rows: output.results,
+          })
+        : undefined,
+    [definition.title, fieldLabels, hasResults, id, output.results, values]
+  );
+
   return (
     <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
@@ -75,7 +98,10 @@ export function EscooterCalculatorShell({
                 animateNumeric={false}
               />
             </GamifiedDashboardFrame>
-            <CalculatorResultsTable rows={secondaryRows} />
+            <CalculatorResultsTable
+              rows={secondaryRows}
+              saveToProject={saveToProject ?? undefined}
+            />
           </div>
         }
       />

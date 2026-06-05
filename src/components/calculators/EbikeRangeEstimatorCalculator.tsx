@@ -18,6 +18,7 @@ import {
   CalculatorCommandSplit,
 } from "@/components/calculator/calculator-command-layout";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
+import { buildProjectSavePayloadFromRows } from "@/lib/project-store";
 
 const CALCULATOR_ID = "ebike-range-estimator" satisfies CalculatorId;
 
@@ -85,6 +86,28 @@ export function EbikeRangeEstimatorCalculator({
   const secondaryRows = output.results.slice(1);
   const hasResults = output.results.length > 0;
 
+  const fieldLabels = useMemo(
+    () =>
+      Object.fromEntries(
+        definition.fields.map((field) => [field.id, field.label])
+      ),
+    [definition.fields]
+  );
+
+  const saveToProject = useMemo(
+    () =>
+      hasResults
+        ? buildProjectSavePayloadFromRows({
+            calculatorSlug: CALCULATOR_ID,
+            calculatorTitle: definition.title,
+            values,
+            fieldLabels,
+            rows: output.results,
+          })
+        : undefined,
+    [definition.title, fieldLabels, hasResults, output.results, values]
+  );
+
   return (
     <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
@@ -110,7 +133,10 @@ export function EbikeRangeEstimatorCalculator({
                 animateNumeric={false}
               />
             </GamifiedDashboardFrame>
-            <CalculatorResultsTable rows={secondaryRows} />
+            <CalculatorResultsTable
+              rows={secondaryRows}
+              saveToProject={saveToProject ?? undefined}
+            />
           </div>
         }
       />

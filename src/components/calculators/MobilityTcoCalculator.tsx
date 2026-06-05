@@ -411,6 +411,7 @@ export function MobilityTcoCalculator({ className }: MobilityTcoCalculatorProps)
       ) : null}
 
       <JoinMyPdfSaveReport
+        calculatorSlug={CALCULATOR_ID}
         calculatorTitle={definition.title}
         resultLabel={definition.result.label}
         value={parsed ? formatCurrency(parsed.bestSavingsVsCar) : null}

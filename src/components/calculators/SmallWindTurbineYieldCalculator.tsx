@@ -243,7 +243,8 @@ export function SmallWindTurbineYieldCalculator({
         ) : null}
 
         <JoinMyPdfSaveReport
-          calculatorTitle={definition.title}
+          calculatorSlug={CALCULATOR_ID}
+        calculatorTitle={definition.title}
           resultLabel={definition.result.label}
           value={powerValue}
           unit="W"

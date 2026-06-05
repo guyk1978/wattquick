@@ -1,3 +1,5 @@
+import { SaveToProjectButton } from "@/components/save-to-project-button";
+import type { ProjectSavePayload } from "@/lib/project-store";
 import { cn } from "@/lib/utils";
 
 export type CalculatorResultRow = {
@@ -9,12 +11,14 @@ export type CalculatorResultRow = {
 interface CalculatorResultsTableProps {
   rows: CalculatorResultRow[];
   className?: string;
+  saveToProject?: ProjectSavePayload;
 }
 
 /** Flat matte secondary results grid — label + value + unit per row */
 export function CalculatorResultsTable({
   rows,
   className,
+  saveToProject,
 }: CalculatorResultsTableProps) {
   if (rows.length === 0) return null;
 
@@ -44,6 +48,11 @@ export function CalculatorResultsTable({
           ))}
         </tbody>
       </table>
+      {saveToProject ? (
+        <div className="mt-3 flex justify-end border-t border-border/40 pt-3">
+          <SaveToProjectButton payload={saveToProject} compact />
+        </div>
+      ) : null}
     </div>
   );
 }
