@@ -1,10 +1,11 @@
-import { CalculatorCard } from "@/components/calculator-card";
+import { CategoryCalculatorListItem } from "@/components/category-calculator-list-item";
 import type { CalculatorMeta } from "@/lib/calculators";
 
 interface CategoryCalculatorGridProps {
   calculators: CalculatorMeta[];
 }
 
+/** Compact list layout for category calculator pages */
 export function CategoryCalculatorGrid({
   calculators,
 }: CategoryCalculatorGridProps) {
@@ -15,11 +16,13 @@ export function CategoryCalculatorGrid({
   }
 
   return (
-    <ul className="grid list-none gap-4 p-0 sm:grid-cols-2">
+    <ul
+      className="category-calculator-list m-0 list-none p-0"
+      role="list"
+      aria-label="Calculators in this category"
+    >
       {calculators.map((calc) => (
-        <li key={calc.id}>
-          <CalculatorCard calculator={calc} />
-        </li>
+        <CategoryCalculatorListItem key={calc.id} calculator={calc} />
       ))}
     </ul>
   );
