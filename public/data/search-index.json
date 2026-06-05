@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T09:26:54.476Z",
+  "generatedAt": "2026-06-05T09:33:31.093Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1829,6 +1829,163 @@
         "home wind power estimate",
         "wind speed cubic power",
         "hybrid solar wind sizing"
+      ]
+    },
+    {
+      "id": "ebike-range-estimator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Range Estimator",
+      "description": "Estimate riding range from battery capacity (Wh), average speed, and pedal-assist level.",
+      "href": "/ebike-range-estimator/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike range calculator",
+        "electric bike range",
+        "wh per km ebike",
+        "pedal assist range"
+      ]
+    },
+    {
+      "id": "ebike-charging-cost",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Full Charge Cost Calculator",
+      "description": "Calculate the cost of a full battery charge from pack capacity and your home electricity rate.",
+      "href": "/ebike-charging-cost/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike charging cost",
+        "electric bike electricity cost",
+        "charge cost per kwh"
+      ]
+    },
+    {
+      "id": "ebike-max-speed",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Max Speed Calculator",
+      "description": "Estimate theoretical top speed from battery voltage, motor KV rating, and wheel diameter.",
+      "href": "/ebike-max-speed/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike max speed",
+        "motor kv calculator",
+        "ebike speed voltage",
+        "electric bike rpm"
+      ]
+    },
+    {
+      "id": "ebike-charge-time",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Charge Time Calculator",
+      "description": "Estimate 0–100% charge duration from pack capacity, charger wattage, and charge efficiency.",
+      "href": "/ebike-charge-time/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike charge time",
+        "battery charging hours",
+        "ebike charger wattage"
+      ]
+    },
+    {
+      "id": "ebike-battery-c-rate",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Battery C-Rating Calculator",
+      "description": "Check whether your pack can safely deliver the continuous current your motor demands.",
+      "href": "/ebike-battery-c-rate/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike c rating",
+        "battery continuous current",
+        "ebike motor amps",
+        "lithium discharge rate"
+      ]
+    },
+    {
+      "id": "ebike-voltage-sag",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Voltage Sag Calculator",
+      "description": "Calculate voltage drop under load from internal pack resistance and motor current.",
+      "href": "/ebike-voltage-sag/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike voltage sag",
+        "battery internal resistance",
+        "voltage drop under load"
+      ]
+    },
+    {
+      "id": "ebike-weight-performance",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Weight vs Performance Calculator",
+      "description": "See how total mass (rider + bike + cargo) and terrain affect energy use and range.",
+      "href": "/ebike-weight-performance/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike weight range",
+        "rider weight ebike",
+        "cargo ebike efficiency",
+        "hilly terrain range"
+      ]
+    },
+    {
+      "id": "ebike-commute-savings",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Commute Savings Calculator",
+      "description": "Compare annual commuting cost: e-bike electricity vs car per-km vs public transit fares.",
+      "href": "/ebike-commute-savings/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike vs car cost",
+        "commute savings calculator",
+        "ebike vs transit",
+        "electric bike annual cost"
+      ]
+    },
+    {
+      "id": "ebike-controller-watts",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Controller Amps to Watts Calculator",
+      "description": "Convert controller current draw to motor input and shaft power at different battery voltages.",
+      "href": "/ebike-controller-watts/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike controller watts",
+        "amps to watts ebike",
+        "motor power calculator",
+        "ebike motor amps"
+      ]
+    },
+    {
+      "id": "ebike-battery-cycle-life",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Battery Cycle Life Calculator",
+      "description": "Estimate remaining battery life from completed cycles, average depth of discharge, and rated cycle count.",
+      "href": "/ebike-battery-cycle-life/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike battery life",
+        "cycle life calculator",
+        "depth of discharge",
+        "lithium ebike battery cycles"
       ]
     },
     {

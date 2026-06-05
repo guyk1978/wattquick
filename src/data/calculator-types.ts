@@ -14,7 +14,8 @@ export type CalculatorCategory =
   | "rv-marine"
   | "tou"
   | "green-home"
-  | "pool";
+  | "pool"
+  | "ebike";
 
 export type CalculatorFieldInputType = "text" | "select" | "range";
 
@@ -97,6 +98,7 @@ export const CALCULATOR_CATEGORY_LABELS: Record<CalculatorCategory, string> = {
   tou: "TOU",
   "green-home": "Green Home",
   pool: "Pool",
+  ebike: "E-Bike",
 };
 
 export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string> = {
@@ -114,4 +116,5 @@ export const CALCULATOR_CATEGORY_DESCRIPTIONS: Record<CalculatorCategory, string
   tou: "Time-of-use rates, peak shaving, demand charges, and arbitrage",
   "green-home": "Insulation, lighting, HVAC, and envelope efficiency",
   pool: "Pool pumps, heating, covers, and seasonal operating cost",
+  ebike: "Range, charging, motor power, and e-bike battery health",
 };

@@ -2,6 +2,7 @@ import type { LucideIcon, LucideProps } from "lucide-react";
 import {
   ArrowLeftRight,
   Battery,
+  Bike,
   Car,
   DollarSign,
   Gauge,
@@ -46,6 +47,14 @@ export const MEGA_MENU_CATEGORIES: MegaMenuCategory[] = [
     href: "/category/ev",
     icon: PlugZap,
     color: "#3B82F6",
+  },
+  {
+    category: "ebike",
+    label: CALCULATOR_CATEGORY_LABELS.ebike,
+    description: CALCULATOR_CATEGORY_DESCRIPTIONS.ebike,
+    href: "/category/ebike",
+    icon: Bike,
+    color: "#22D3EE",
   },
   {
     category: "battery",
