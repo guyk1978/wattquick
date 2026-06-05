@@ -18,8 +18,11 @@ import {
   type CriticalLoadDevice,
 } from "@/lib/calculators/battery";
 import {
+  calculateInverterLoadingCurve,
   calculateInverterPeakLoadSurge,
   INVERTER_MOTOR_LOAD_PRESETS,
+  INVERTER_OVERLOAD_PROFILE_OPTIONS,
+  isInverterOverloadProfile,
   type InverterMotorLoad,
   type InverterMotorLoadPreset,
 } from "@/lib/calculators/electrical";
@@ -274,6 +277,7 @@ export const calculatorsBattery = [
     tag: "Battery",
     category: "battery",
     suggestions: [
+      "inverter-loading-curve",
       "home-backup-sizing",
       "inverter-sizing",
       "inverter-loss-calculator",
@@ -392,6 +396,112 @@ export const calculatorsBattery = [
         value: formatNumber(result.recommendedContinuousW, { maxDecimals: 0 }),
         unit: "W",
         detail: `${formatNumber(result.continuousW, { maxDecimals: 0 })} W cont · ${formatNumber(result.peakW, { maxDecimals: 0 })} W peak · ${result.recommendedSurgeW} W surge class`,
+      };
+    },
+  },
+  {
+    slug: "inverter-loading-curve",
+    href: "/inverter-loading-curve",
+    title: "Inverter Loading Curve",
+    description:
+      "Estimate overload shutdown time from nominal power, current load, ambient temperature, and manufacturer overload curves.",
+    keywords: [
+      "inverter overload calculator",
+      "inverter thermal derating",
+      "110 percent inverter load",
+      "inverter shutdown time",
+      "off grid inverter overload",
+    ],
+    icon: Gauge,
+    tag: "Battery",
+    category: "battery",
+    suggestions: [
+      "inverter-peak-load-surge",
+      "critical-load-analysis",
+      "inverter-sizing",
+      "inverter-loss-calculator",
+    ],
+    fields: [
+      {
+        id: "nominalPowerW",
+        label: "Nominal inverter power",
+        unit: "W",
+        placeholder: "3000",
+        defaultValue: "3000",
+      },
+      {
+        id: "currentLoadW",
+        label: "Current load",
+        unit: "W",
+        placeholder: "3300",
+        defaultValue: "3300",
+        hint: "Sustained AC output demand",
+      },
+      {
+        id: "ambientTempC",
+        label: "Ambient temperature",
+        unit: "°C",
+        placeholder: "35",
+        defaultValue: "35",
+        hint: "Cabinet / install site air temp",
+      },
+      {
+        id: "inverterProfile",
+        label: "Inverter overload profile",
+        inputType: "select",
+        colSpan: 2,
+        defaultValue: "standard",
+        options: INVERTER_OVERLOAD_PROFILE_OPTIONS,
+        hint: "Manufacturer-style overload time curve",
+      },
+    ],
+    result: {
+      label: "Time to overload shutdown",
+      emptyMessage: "Enter nominal power, load, temp & profile",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Thermal derating",
+          body: "Derated power = nominal × (1 − (T − 25°C) × 0.01). Hot installs lose continuous headroom before overload timing even matters.",
+        },
+        {
+          heading: "Overload curves",
+          body: "Profiles model typical allowed run times at 110%, 120%, and above—log-interpolated between datasheet points. Always confirm against your exact model manual.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: 110% for how long? A: Depends on profile—often ~30–60 min on off-grid units, much less on grid-tie. Q: vs. surge calculator? A: Peak Load & Surge sizes motor starts; this validates sustained overload. Q: Continuous safe? A: At or below 100% of derated nominal.",
+        },
+      ],
+    },
+    compute(values) {
+      const nominalPowerW = parsePositive(values.nominalPowerW ?? "");
+      const currentLoadW = parsePositive(values.currentLoadW ?? "");
+      const ambientTempC = Number(values.ambientTempC?.trim() ?? "");
+      const profileRaw = values.inverterProfile ?? "standard";
+
+      if (
+        nominalPowerW === null ||
+        currentLoadW === null ||
+        !Number.isFinite(ambientTempC) ||
+        !isInverterOverloadProfile(profileRaw)
+      ) {
+        return { value: null };
+      }
+
+      const result = calculateInverterLoadingCurve({
+        nominalPowerW,
+        currentLoadW,
+        ambientTempC,
+        profile: profileRaw,
+      });
+
+      if (!result) return { value: null };
+
+      return {
+        value: result.shutdownLabel,
+        detail: `${result.statusLabel} · ${formatNumber(result.loadPercentOfDerated, { maxDecimals: 1 })}% load · ${formatNumber(result.deratedNominalW, { maxDecimals: 0 })} W derated`,
       };
     },
   },

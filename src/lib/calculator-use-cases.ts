@@ -81,6 +81,7 @@ export const CALCULATOR_USE_CASES: CalculatorUseCase[] = [
       "inverter-sizing",
       "battery-series-parallel",
       "inverter-peak-load-surge",
+      "inverter-loading-curve",
       "solar-array-current",
     ],
     browseHref: "/calculators/?use-case=technicians",

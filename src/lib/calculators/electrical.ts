@@ -487,3 +487,253 @@ export function calculateInverterPeakLoadSurge({ loads }: InverterPeakLoadSurgeI
         : "Very high peak—confirm split-phase or load sequencing.",
   };
 }
+
+export type InverterOverloadProfile =
+  | "standard"
+  | "victron"
+  | "sma_offgrid"
+  | "fronius_grid";
+
+export type InverterOverloadPoint = {
+  loadPercent: number;
+  minutes: number;
+};
+
+export const INVERTER_OVERLOAD_PROFILES: Record<
+  InverterOverloadProfile,
+  { label: string; hint: string; points: InverterOverloadPoint[] }
+> = {
+  standard: {
+    label: "Standard off-grid (generic)",
+    hint: "Typical pure-sine backup: 110% for ~1 hr, 120% for ~10 min",
+    points: [
+      { loadPercent: 100, minutes: Number.POSITIVE_INFINITY },
+      { loadPercent: 110, minutes: 60 },
+      { loadPercent: 120, minutes: 10 },
+      { loadPercent: 130, minutes: 3 },
+      { loadPercent: 150, minutes: 0.5 },
+      { loadPercent: 200, minutes: 0 },
+    ],
+  },
+  victron: {
+    label: "Victron MultiPlus / Quattro",
+    hint: "Generous overload — 130% for 30 min class (planning estimate)",
+    points: [
+      { loadPercent: 100, minutes: Number.POSITIVE_INFINITY },
+      { loadPercent: 130, minutes: 30 },
+      { loadPercent: 150, minutes: 10 },
+      { loadPercent: 200, minutes: 0.5 },
+      { loadPercent: 250, minutes: 0 },
+    ],
+  },
+  sma_offgrid: {
+    label: "SMA Sunny Island",
+    hint: "110% for 60 min, 120% for 5 min — off-grid islanding class",
+    points: [
+      { loadPercent: 100, minutes: Number.POSITIVE_INFINITY },
+      { loadPercent: 110, minutes: 60 },
+      { loadPercent: 120, minutes: 5 },
+      { loadPercent: 130, minutes: 1 },
+      { loadPercent: 140, minutes: 0 },
+    ],
+  },
+  fronius_grid: {
+    label: "Fronius grid-tie (Primo / Symo)",
+    hint: "Tight AC export limit — little sustained overload headroom",
+    points: [
+      { loadPercent: 100, minutes: Number.POSITIVE_INFINITY },
+      { loadPercent: 110, minutes: 5 },
+      { loadPercent: 115, minutes: 0.5 },
+      { loadPercent: 120, minutes: 0 },
+    ],
+  },
+};
+
+export const INVERTER_OVERLOAD_PROFILE_OPTIONS = (
+  Object.entries(INVERTER_OVERLOAD_PROFILES) as [
+    InverterOverloadProfile,
+    (typeof INVERTER_OVERLOAD_PROFILES)[InverterOverloadProfile],
+  ][]
+).map(([value, profile]) => ({
+  value,
+  label: profile.label,
+}));
+
+export function isInverterOverloadProfile(
+  value: string
+): value is InverterOverloadProfile {
+  return value in INVERTER_OVERLOAD_PROFILES;
+}
+
+/** Ambient derating — 1% loss per °C above 25 °C reference. */
+export function derateInverterNominalPower(
+  nominalW: number,
+  ambientTempC: number
+): number {
+  const factor = Math.max(0, 1 - (ambientTempC - 25) * 0.01);
+  return nominalW * factor;
+}
+
+const CONTINUOUS_MINUTES = 60 * 24 * 365;
+
+function interpolateOverloadMinutes(
+  loadPercent: number,
+  points: InverterOverloadPoint[]
+): number {
+  if (loadPercent <= points[0]?.loadPercent) {
+    return CONTINUOUS_MINUTES;
+  }
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const lo = points[i]!;
+    const hi = points[i + 1]!;
+    if (loadPercent < lo.loadPercent || loadPercent > hi.loadPercent) continue;
+
+    const loMinutes = Number.isFinite(lo.minutes) ? lo.minutes : CONTINUOUS_MINUTES;
+    const hiMinutes = Math.max(hi.minutes, 1 / 60);
+    const span = hi.loadPercent - lo.loadPercent;
+    if (span <= 0) return hiMinutes;
+
+    const t = (loadPercent - lo.loadPercent) / span;
+    const logLo = Math.log(Math.max(loMinutes, 1 / 60));
+    const logHi = Math.log(hiMinutes);
+    return Math.exp(logLo + t * (logHi - logLo));
+  }
+
+  return 0;
+}
+
+export function formatOverloadMinutes(minutes: number): string {
+  if (minutes >= CONTINUOUS_MINUTES / 2) return "Continuous";
+  if (minutes < 1 / 60) return "< 1 sec";
+  if (minutes < 1) return `${Math.round(minutes * 60)} sec`;
+  if (minutes < 60) return `${Math.round(minutes)} min`;
+  const hours = Math.floor(minutes / 60);
+  const rem = Math.round(minutes % 60);
+  return rem > 0 ? `${hours} hr ${rem} min` : `${hours} hr`;
+}
+
+export type InverterLoadingStatus = "safe" | "caution" | "warning" | "imminent";
+
+export interface InverterLoadingTableRow {
+  loadPercent: number;
+  loadWatts: number;
+  allowedMinutes: number;
+  allowedLabel: string;
+}
+
+export interface InverterLoadingCurvePoint {
+  loadPercent: number;
+  allowedMinutes: number;
+}
+
+export interface InverterLoadingCurveInput {
+  nominalPowerW: number;
+  currentLoadW: number;
+  ambientTempC: number;
+  profile: InverterOverloadProfile;
+}
+
+export interface InverterLoadingCurveResult {
+  nominalPowerW: number;
+  deratedNominalW: number;
+  currentLoadW: number;
+  loadPercentOfDerated: number;
+  ambientTempC: number;
+  deratingFactor: number;
+  profile: InverterOverloadProfile;
+  profileLabel: string;
+  shutdownMinutes: number;
+  shutdownLabel: string;
+  status: InverterLoadingStatus;
+  statusLabel: string;
+  recommendation: string;
+  tableRows: InverterLoadingTableRow[];
+  curvePoints: InverterLoadingCurvePoint[];
+}
+
+export function calculateInverterLoadingCurve({
+  nominalPowerW,
+  currentLoadW,
+  ambientTempC,
+  profile,
+}: InverterLoadingCurveInput): InverterLoadingCurveResult | null {
+  if (nominalPowerW <= 0 || currentLoadW < 0) return null;
+
+  const profileDef = INVERTER_OVERLOAD_PROFILES[profile];
+  const deratingFactor = Math.max(0, 1 - (ambientTempC - 25) * 0.01);
+  const deratedNominalW = nominalPowerW * deratingFactor;
+  if (deratedNominalW <= 0) return null;
+
+  const loadPercentOfDerated = (currentLoadW / deratedNominalW) * 100;
+  const shutdownMinutes = interpolateOverloadMinutes(
+    loadPercentOfDerated,
+    profileDef.points
+  );
+
+  let status: InverterLoadingStatus;
+  let statusLabel: string;
+  let recommendation: string;
+
+  if (loadPercentOfDerated <= 100) {
+    status = "safe";
+    statusLabel = "Safe for continuous operation";
+    recommendation =
+      "Load is within derated continuous rating — monitor ambient temperature on hot days.";
+  } else if (shutdownMinutes < 1) {
+    status = "imminent";
+    statusLabel = "Warning: overload imminent";
+    recommendation =
+      "Shutdown likely within minutes — shed load or upsize inverter before sustained operation.";
+  } else if (shutdownMinutes < 10) {
+    status = "warning";
+    statusLabel = "Warning: short overload window";
+    recommendation =
+      "Brief overload only — not suitable for continuous operation at this load.";
+  } else {
+    status = "caution";
+    statusLabel = "Caution: timed overload";
+    recommendation =
+      "Manufacturer curve allows temporary overload — verify against your exact datasheet.";
+  }
+
+  const tablePercents = [100, 110, 120] as const;
+  const tableRows: InverterLoadingTableRow[] = tablePercents.map((pct) => {
+    const allowedMinutes = interpolateOverloadMinutes(pct, profileDef.points);
+    return {
+      loadPercent: pct,
+      loadWatts: Math.round((deratedNominalW * pct) / 100),
+      allowedMinutes,
+      allowedLabel: formatOverloadMinutes(allowedMinutes),
+    };
+  });
+
+  const curvePercents = [90, 95, 100, 105, 110, 115, 120, 125, 130, 140, 150];
+  const curvePoints: InverterLoadingCurvePoint[] = curvePercents.map(
+    (loadPercent) => ({
+      loadPercent,
+      allowedMinutes: interpolateOverloadMinutes(
+        loadPercent,
+        profileDef.points
+      ),
+    })
+  );
+
+  return {
+    nominalPowerW,
+    deratedNominalW: Math.round(deratedNominalW),
+    currentLoadW,
+    loadPercentOfDerated: parseFloat(loadPercentOfDerated.toFixed(1)),
+    ambientTempC,
+    deratingFactor: parseFloat(deratingFactor.toFixed(3)),
+    profile,
+    profileLabel: profileDef.label,
+    shutdownMinutes,
+    shutdownLabel: formatOverloadMinutes(shutdownMinutes),
+    status,
+    statusLabel,
+    recommendation,
+    tableRows,
+    curvePoints,
+  };
+}

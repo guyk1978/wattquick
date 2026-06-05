@@ -44,6 +44,7 @@ import { EvChargingTemperatureImpactCalculator } from "@/components/calculators/
 import { EvBatteryDepletionValueLossCalculator } from "@/components/calculators/EvBatteryDepletionValueLossCalculator";
 import { DcCableVoltageDropCalculator } from "@/components/calculators/DcCableVoltageDropCalculator";
 import { InverterPeakLoadSurgeCalculator } from "@/components/calculators/InverterPeakLoadSurgeCalculator";
+import { InverterLoadingCurveCalculator } from "@/components/calculators/InverterLoadingCurveCalculator";
 import { CriticalLoadAnalysisCalculator } from "@/components/calculators/CriticalLoadAnalysisCalculator";
 import { StandbyPowerAggregatorCalculator } from "@/components/calculators/StandbyPowerAggregatorCalculator";
 import { MobilityTcoCalculator } from "@/components/calculators/MobilityTcoCalculator";
@@ -112,6 +113,9 @@ export function CalculatorPanel({
   }
   if (id === "inverter-peak-load-surge") {
     return <InverterPeakLoadSurgeCalculator className={className} />;
+  }
+  if (id === "inverter-loading-curve") {
+    return <InverterLoadingCurveCalculator className={className} />;
   }
   if (id === "critical-load-analysis") {
     return <CriticalLoadAnalysisCalculator className={className} />;

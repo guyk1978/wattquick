@@ -25,13 +25,7 @@ export interface ResolvedWizardStep {
 export const WIZARD_PLANNED_CALCULATORS: Record<
   string,
   { title: string; description: string }
-> = {
-  "inverter-loading-curve": {
-    title: "Inverter Loading Curve",
-    description:
-      "Model sustained overload beyond nameplate rating—duty cycle, thermal headroom, and surge tolerance for pro backup sizing.",
-  },
-};
+> = {};
 
 export interface WizardPathResult {
   goal: WizardGoal;

@@ -32,6 +32,11 @@ const HOME_BACKUP_CALCULATOR = {
   href: "/home-backup-sizing/",
 } as const;
 
+const LOADING_CURVE_CALCULATOR = {
+  label: "Inverter Loading Curve",
+  href: "/inverter-loading-curve/",
+} as const;
+
 const APPLIANCE_SLOTS = [1, 2, 3, 4] as const;
 
 interface InverterPeakLoadSurgeCalculatorProps {
@@ -209,7 +214,15 @@ export function InverterPeakLoadSurgeCalculator({
               <span>Soft-starters and staggered controls lower effective surge factors</span>
             </li>
           </ul>
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-4">
+            <Link
+              href={LOADING_CURVE_CALCULATOR.href}
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+            >
+              <Bolt className="size-3.5 shrink-0" aria-hidden />
+              {LOADING_CURVE_CALCULATOR.label}
+              <ArrowRight className="size-3.5 shrink-0" aria-hidden />
+            </Link>
             <Link
               href={HOME_BACKUP_CALCULATOR.href}
               className="inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline"

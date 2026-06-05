@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T16:39:23.964Z",
+  "generatedAt": "2026-06-05T16:43:51.539Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1218,6 +1218,23 @@
         "peak load inverter sizing",
         "inrush inverter backup",
         "refrigerator ac pump surge"
+      ]
+    },
+    {
+      "id": "inverter-loading-curve",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Battery",
+      "title": "Inverter Loading Curve",
+      "description": "Estimate overload shutdown time from nominal power, current load, ambient temperature, and manufacturer overload curves.",
+      "href": "/inverter-loading-curve/",
+      "tag": "Battery",
+      "keywords": [
+        "inverter overload calculator",
+        "inverter thermal derating",
+        "110 percent inverter load",
+        "inverter shutdown time",
+        "off grid inverter overload"
       ]
     },
     {
