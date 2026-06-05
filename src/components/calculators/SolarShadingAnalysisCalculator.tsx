@@ -37,6 +37,11 @@ const ARRAY_CURRENT_CALCULATOR = {
   href: "/solar-array-current/",
 } as const;
 
+const ROI_CALCULATOR = {
+  label: "Solar ROI Analysis",
+  href: "/solar-roi-analysis/",
+} as const;
+
 interface SolarShadingAnalysisCalculatorProps {
   className?: string;
 }
@@ -316,6 +321,32 @@ export function SolarShadingAnalysisCalculator({
           microinverters limit mismatch to per-module loss. Baseline kWh defaults
           to 1,400 kWh/kWp/yr when not entered.
         </CalculatorAssumptionNote>
+      ) : null}
+
+      {hasResults ? (
+        <div
+          className={cn(
+            flatAlert,
+            "flex gap-2.5 px-3 py-2.5 text-sm leading-relaxed text-muted-foreground"
+          )}
+          role="note"
+        >
+          <CheckCircle2
+            className="mt-0.5 size-4 shrink-0 text-primary"
+            aria-hidden
+          />
+          <p>
+            Production loss confirmed? Now calculate the full financial payback
+            using our{" "}
+            <Link
+              href={ROI_CALCULATOR.href}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {ROI_CALCULATOR.label}
+            </Link>
+            <ArrowRight className="ml-1 inline size-3.5 align-middle" aria-hidden />
+          </p>
+        </div>
       ) : null}
 
       <JoinMyPdfSaveReport

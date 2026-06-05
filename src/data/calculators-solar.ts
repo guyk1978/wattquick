@@ -1117,6 +1117,7 @@ export const calculatorsSolar = [
     tag: "Solar",
     category: "solar",
     suggestions: [
+      "solar-roi-analysis",
       "solar-array-current",
       "solar-daily-yield",
       "solar-panel-size",

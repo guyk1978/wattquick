@@ -7,6 +7,7 @@ import {
 import {
   PATH_TITLES,
   WIZARD_PATH_MAP,
+  WIZARD_PLANNED_CALCULATORS,
   wizardCatalogKey,
   type ResolvedWizardStep,
   type WizardExperience,
@@ -23,17 +24,34 @@ function resolveStepRef(
   const id = `${ref.kind}:${ref.slug}`;
 
   if (ref.kind === "calculator") {
-    if (!isCalculatorId(ref.slug)) return null;
-    const meta = getCalculatorMeta(ref.slug as CalculatorId);
-    return {
-      id,
-      kind: ref.kind,
-      slug: ref.slug,
-      title: meta.title,
-      description: meta.description,
-      href: meta.href,
-      stepNumber,
-    };
+    if (isCalculatorId(ref.slug)) {
+      const meta = getCalculatorMeta(ref.slug as CalculatorId);
+      return {
+        id,
+        kind: ref.kind,
+        slug: ref.slug,
+        title: meta.title,
+        description: meta.description,
+        href: meta.href,
+        stepNumber,
+      };
+    }
+
+    const planned = WIZARD_PLANNED_CALCULATORS[ref.slug];
+    if (planned) {
+      return {
+        id,
+        kind: ref.kind,
+        slug: ref.slug,
+        title: planned.title,
+        description: planned.description,
+        href: "",
+        stepNumber,
+        planned: true,
+      };
+    }
+
+    return null;
   }
 
   const post = postsBySlug.get(ref.slug);

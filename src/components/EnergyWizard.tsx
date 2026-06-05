@@ -23,6 +23,7 @@ import {
   type WizardPathResult,
   type WizardProgressState,
 } from "@/lib/wizard-paths";
+import { WizardLegend } from "@/components/wizard-legend";
 import { cn } from "@/lib/utils";
 
 interface EnergyWizardProps {
@@ -163,6 +164,8 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
           </div>
         </div>
       </div>
+
+      <WizardLegend />
 
       {phase === "goal" ? (
         <section aria-labelledby="wizard-goal-heading">
@@ -354,6 +357,11 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                             <Icon className="size-3.5" aria-hidden />
                             {step.kind === "calculator" ? "Tool" : "Guide"}
                           </span>
+                          {step.planned ? (
+                            <span className="rounded-none border border-border/60 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-wider text-muted-foreground">
+                              Soon
+                            </span>
+                          ) : null}
                         </div>
                         <h3 className="mt-2 text-base font-semibold text-foreground">
                           {step.title}
@@ -361,13 +369,19 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                           {step.description}
                         </p>
-                        <Link
-                          href={step.href}
-                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline"
-                        >
-                          Open {step.kind === "calculator" ? "tool" : "article"}
-                          <ArrowRight className="size-3.5" aria-hidden />
-                        </Link>
+                        {step.planned ? (
+                          <p className="mt-3 text-sm font-medium text-muted-foreground">
+                            Coming soon — reserved in your Pro backup path
+                          </p>
+                        ) : (
+                          <Link
+                            href={step.href}
+                            className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline"
+                          >
+                            Open {step.kind === "calculator" ? "tool" : "article"}
+                            <ArrowRight className="size-3.5" aria-hidden />
+                          </Link>
+                        )}
                       </div>
                       <button
                         type="button"

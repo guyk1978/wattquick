@@ -218,7 +218,7 @@ export function SolarRoiAnalysisCalculator({
           aria-hidden
         />
         <p>
-          Before committing capital, model shading loss with our{" "}
+          Need to maximize your yield? Check shading patterns first with our{" "}
           <Link
             href={SHADING_CALCULATOR.href}
             className="font-medium text-primary underline-offset-4 hover:underline"
@@ -226,7 +226,7 @@ export function SolarRoiAnalysisCalculator({
             {SHADING_CALCULATOR.label}
           </Link>
           <ArrowRight className="ml-1 inline size-3.5 align-middle" aria-hidden />
-          — partial shade can erase years of projected ROI.
+          — partial shade can shift payback by years.
         </p>
       </div>
 

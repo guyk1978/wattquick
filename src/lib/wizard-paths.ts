@@ -17,7 +17,21 @@ export interface ResolvedWizardStep {
   description: string;
   href: string;
   stepNumber: number;
+  /** Reserved for calculators not yet published — shown as coming soon. */
+  planned?: boolean;
 }
+
+/** Upcoming calculators slotted into wizard paths before launch. */
+export const WIZARD_PLANNED_CALCULATORS: Record<
+  string,
+  { title: string; description: string }
+> = {
+  "inverter-loading-curve": {
+    title: "Inverter Loading Curve",
+    description:
+      "Model sustained overload beyond nameplate rating—duty cycle, thermal headroom, and surge tolerance for pro backup sizing.",
+  },
+};
 
 export interface WizardPathResult {
   goal: WizardGoal;
@@ -153,6 +167,7 @@ export const WIZARD_PATH_MAP: Record<
     pro: [
       { kind: "calculator", slug: "critical-load-analysis" },
       { kind: "calculator", slug: "inverter-peak-load-surge" },
+      { kind: "calculator", slug: "inverter-loading-curve" },
       { kind: "calculator", slug: "battery-series-parallel" },
       { kind: "calculator", slug: "dc-cable-size" },
       { kind: "article", slug: "size-home-emergency-backup-battery" },
