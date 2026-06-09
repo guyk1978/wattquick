@@ -7,9 +7,11 @@
  * - NEXT_PUBLIC_ADSENSE_ID  — Google AdSense publisher ID (future)
  */
 
+import { activateGoogleAnalytics } from "@/lib/analytics";
+
 type ConsentScriptLoader = {
   id: string;
-  load: () => void;
+  load: () => void | Promise<void>;
 };
 
 function injectScript(
@@ -29,36 +31,6 @@ function injectScript(
   return script;
 }
 
-function injectInlineScript(id: string, code: string): HTMLScriptElement | null {
-  if (typeof document === "undefined") return null;
-  if (document.getElementById(id)) return null;
-
-  const script = document.createElement("script");
-  script.id = id;
-  script.textContent = code;
-  document.head.appendChild(script);
-  return script;
-}
-
-function loadGoogleAnalytics(): void {
-  const measurementId = process.env.NEXT_PUBLIC_GA_ID?.trim();
-  if (!measurementId) return;
-
-  injectScript("wq-consent-ga", `https://www.googletagmanager.com/gtag/js?id=${measurementId}`, {
-    async: true,
-  });
-
-  injectInlineScript(
-    "wq-consent-ga-init",
-    `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${measurementId}');
-    `
-  );
-}
-
 /** Placeholder — enable by setting NEXT_PUBLIC_ADSENSE_ID in Cloudflare. */
 function loadAdSense(): void {
   const publisherId = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim();
@@ -72,27 +44,25 @@ function loadAdSense(): void {
 }
 
 const CONSENT_SCRIPT_LOADERS: ConsentScriptLoader[] = [
-  { id: "google-analytics", load: loadGoogleAnalytics },
+  { id: "google-analytics", load: activateGoogleAnalytics },
   { id: "google-adsense", load: loadAdSense },
 ];
 
-let activated = false;
+let activationStarted = false;
 
 /** Load all registered consent-gated scripts once. Safe to call multiple times. */
 export function activateConsentScripts(): void {
-  if (typeof window === "undefined" || activated) return;
-  activated = true;
+  if (typeof window === "undefined" || activationStarted) return;
+  activationStarted = true;
 
   for (const loader of CONSENT_SCRIPT_LOADERS) {
-    try {
-      loader.load();
-    } catch {
+    Promise.resolve(loader.load()).catch(() => {
       // never block the app on analytics
-    }
+    });
   }
 }
 
 /** For tests or future re-consent flows. */
 export function resetConsentScriptActivation(): void {
-  activated = false;
+  activationStarted = false;
 }

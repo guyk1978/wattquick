@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -58,6 +59,7 @@ export default function RootLayout({
       </head>
       <body className="site-ambient flex min-h-full flex-col">
         <ThemeProvider>
+          <AnalyticsRouteTracker />
           <SiteHeader />
           <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
           <SiteFooter />
