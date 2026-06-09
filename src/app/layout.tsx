@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
+import { consentInitScript } from "@/lib/consent-init";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -50,6 +51,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="stylesheet" href="/assets/css/site-search.css" />
         <link rel="manifest" href="/manifest.webmanifest" />

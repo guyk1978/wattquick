@@ -61,6 +61,16 @@ function ensureGtagShim(): void {
   }
 }
 
+function grantAnalyticsConsent(): void {
+  ensureGtagShim();
+  window.gtag?.("consent", "update", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+}
+
 function injectGoogleAnalytics(measurementId: string): Promise<void> {
   return new Promise((resolve, reject) => {
     if (document.getElementById("wq-consent-ga")) {
@@ -68,20 +78,20 @@ function injectGoogleAnalytics(measurementId: string): Promise<void> {
       return;
     }
 
+    grantAnalyticsConsent();
+
+    // Official gtag pattern: queue commands before the library finishes loading.
     ensureGtagShim();
+    window.gtag?.("js", new Date());
+    window.gtag?.("config", measurementId, {
+      send_page_view: true,
+    });
 
     const script = document.createElement("script");
     script.id = "wq-consent-ga";
     script.async = true;
     script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    script.onload = () => {
-      window.gtag?.("js", new Date());
-      window.gtag?.("config", measurementId, {
-        send_page_view: true,
-        anonymize_ip: true,
-      });
-      resolve();
-    };
+    script.onload = () => resolve();
     script.onerror = () => reject(new Error("Failed to load Google Analytics"));
     document.head.appendChild(script);
   });
