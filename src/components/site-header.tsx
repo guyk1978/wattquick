@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { HeaderInstallAppButton } from "@/components/header-install-app-button";
 import { HeaderNav } from "@/components/header-nav";
+import { HeaderShareMenu } from "@/components/header-share-menu";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
 
@@ -19,6 +21,8 @@ export function SiteHeader() {
 
         <div className="glass-header__trailing">
           <ThemeToggleWithTooltip />
+          <HeaderShareMenu />
+          <HeaderInstallAppButton />
           <MobileNav />
           <div data-header-search className="glass-header__search-slot" />
         </div>

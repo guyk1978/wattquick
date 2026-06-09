@@ -51,6 +51,10 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <link rel="stylesheet" href="/assets/css/site-search.css" />
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#1a1a1a" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="site-ambient flex min-h-full flex-col">
         <ThemeProvider>

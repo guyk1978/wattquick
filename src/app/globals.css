@@ -2062,6 +2062,39 @@
   visibility: hidden !important;
 }
 
+.header-share-menu__panel {
+  border-radius: 0;
+}
+
+.header-share-menu__item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.625rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--matte-fg);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.header-share-menu__item:hover,
+.header-share-menu__item:focus-visible {
+  background: var(--matte-btn-hover);
+  color: var(--matte-fg);
+  outline: none;
+}
+
+.dark .header-share-menu__item:hover,
+.dark .header-share-menu__item:focus-visible {
+  background: var(--matte-hover-strong);
+}
+
 .glass-header .theme-toggle {
   border: 0;
   background: transparent;
