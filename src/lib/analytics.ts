@@ -1,9 +1,7 @@
 /**
  * Consent-gated Google Analytics (GA4).
- *
- * Set NEXT_PUBLIC_GA_ID in Cloudflare Pages → Settings → Environment variables
- * (Production, Build) and redeploy. Example: G-XXXXXXXXXX
  */
+import { WATTQUICK_GA_MEASUREMENT_ID } from "@/config/analytics";
 
 declare global {
   interface Window {
@@ -39,11 +37,19 @@ export async function resolveGaMeasurementId(): Promise<string | null> {
     return fromEnv;
   }
 
-  // Static export on Cloudflare may ship an empty NEXT_PUBLIC_* in the browser bundle
-  // even when the variable is set for the build — site-config.json is the fallback.
   const fromConfig = await fetchRuntimeConfig();
-  measurementIdCache = fromConfig;
-  return fromConfig;
+  if (fromConfig) {
+    measurementIdCache = fromConfig;
+    return fromConfig;
+  }
+
+  if (WATTQUICK_GA_MEASUREMENT_ID) {
+    measurementIdCache = WATTQUICK_GA_MEASUREMENT_ID;
+    return WATTQUICK_GA_MEASUREMENT_ID;
+  }
+
+  measurementIdCache = null;
+  return null;
 }
 
 function ensureGtagShim(): void {
