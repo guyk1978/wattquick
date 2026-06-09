@@ -173,9 +173,15 @@
     @apply font-sans scroll-smooth;
     color-scheme: light;
     transition: color-scheme 0.3s ease;
+    overflow-x: clip;
+    max-width: 100%;
   }
   html.dark {
     color-scheme: dark;
+  }
+  body {
+    overflow-x: clip;
+    max-width: 100%;
   }
 }
 
@@ -835,6 +841,8 @@
   display: flex;
   align-items: stretch;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 2.5rem;
   min-height: 2.5rem;
 }
@@ -876,10 +884,17 @@
 
 .glass-header__segment--logo {
   border-left: 0;
-  padding-left: 1rem;
-  padding-right: 1.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.875rem;
   justify-content: flex-start;
   cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .glass-header__segment--logo {
+    padding-left: 1rem;
+    padding-right: 1.25rem;
+  }
 }
 
 .glass-header__segment:hover,
@@ -908,6 +923,13 @@
 .dark .glass-header__segment:hover,
 .dark .glass-header__segment[aria-expanded="true"]:not(.glass-header__segment--active) {
   background: var(--matte-hover-strong);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .glass-header__nav .glass-header__segment {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
 }
 
 @media (min-width: 1024px) {

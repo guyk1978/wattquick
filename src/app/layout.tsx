@@ -55,7 +55,7 @@ export default function RootLayout({
       <body className="site-ambient flex min-h-full flex-col">
         <ThemeProvider>
           <SiteHeader />
-          <main className="flex-1">{children}</main>
+          <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
           <SiteFooter />
           <CookieConsentBanner />
         </ThemeProvider>

@@ -14,7 +14,7 @@ export function HeaderNav() {
 
   return (
     <nav
-      className="glass-header__nav hidden flex-1 items-stretch justify-center overflow-visible sm:flex"
+      className="glass-header__nav hidden min-w-0 flex-1 items-stretch justify-center overflow-visible md:flex"
       aria-label="Main navigation"
     >
       {MAIN_NAV.map((item) =>

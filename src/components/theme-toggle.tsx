@@ -29,7 +29,7 @@ export function ThemeToggle() {
       onClick={toggleTheme}
       className={cn(
         "theme-toggle glass-header__segment",
-        "flex h-full min-w-[7rem] shrink-0 items-center px-2.5 sm:min-w-[7.5rem] sm:px-3",
+        "flex h-full min-w-[5.25rem] shrink-0 items-center px-2 sm:min-w-[6.25rem] md:min-w-[7rem] md:px-2.5 lg:min-w-[7.5rem] lg:px-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       )}
     >

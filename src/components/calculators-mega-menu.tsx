@@ -115,7 +115,7 @@ export function CalculatorsMegaMenu() {
 
         <div
           className={cn(
-            "absolute left-1/2 top-full z-[60] w-[min(880px,calc(100vw-2rem))] -translate-x-1/2 pt-1.5",
+            "absolute left-1/2 top-full z-[60] w-[min(880px,calc(100dvw-2rem))] max-w-[calc(100dvw-2rem)] -translate-x-1/2 pt-1.5",
             "transition-[opacity,visibility] duration-150",
             open
               ? "visible opacity-100"
