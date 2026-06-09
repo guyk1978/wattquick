@@ -14,7 +14,12 @@ export function HeaderNavTooltip({
   className,
 }: HeaderNavTooltipProps) {
   return (
-    <span className={cn("header-nav-tooltip group/tooltip relative inline-flex", className)}>
+    <span
+      className={cn(
+        "header-nav-tooltip group/tooltip relative inline-flex h-full items-stretch",
+        className
+      )}
+    >
       {children}
       <span
         role="tooltip"

@@ -14,14 +14,18 @@ export function HeaderNav() {
 
   return (
     <nav
-      className="hidden flex-1 items-center justify-center gap-0.5 overflow-visible sm:flex"
+      className="glass-header__nav hidden flex-1 items-stretch justify-center overflow-visible sm:flex"
       aria-label="Main navigation"
     >
       {MAIN_NAV.map((item) =>
         item.label === "Calculators" ? (
           <CalculatorsMegaMenu key={item.href} />
         ) : (
-          <HeaderNavTooltip key={item.href} label={item.label}>
+          <HeaderNavTooltip
+            key={item.href}
+            label={item.label}
+            className="flex h-full items-stretch"
+          >
             <Link
               href={item.href}
               aria-label={item.label}
@@ -29,8 +33,9 @@ export function HeaderNav() {
                 isMainNavActive(item.href, pathname) ? "page" : undefined
               }
               className={cn(
-                "header-nav-link header-nav-link--icon inline-flex size-9 items-center justify-center",
-                isMainNavActive(item.href, pathname) && "header-nav-link--active"
+                "glass-header__segment header-nav-link",
+                isMainNavActive(item.href, pathname) &&
+                  "glass-header__segment--active header-nav-link--active"
               )}
             >
               {(() => {

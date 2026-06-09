@@ -53,6 +53,7 @@ import { ElectricityRatePlanCalculator } from "@/components/calculators/Electric
 import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/SolarDegradation20YearRoiCalculator";
 import { SolarRoiAnalysisCalculator } from "@/components/calculators/SolarRoiAnalysisCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
+import { CalculatorIdProvider } from "./calculator-id-context";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -73,7 +74,15 @@ interface CalculatorPanelProps {
 }
 
 /** Interactive calculator body: inputs + live result. */
-export function CalculatorPanel({
+export function CalculatorPanel(props: CalculatorPanelProps) {
+  return (
+    <CalculatorIdProvider id={props.id}>
+      <CalculatorPanelInner {...props} />
+    </CalculatorIdProvider>
+  );
+}
+
+function CalculatorPanelInner({
   id,
   className,
   onResultSnapshot,

@@ -10,17 +10,12 @@
     var header = document.querySelector("header");
     if (!header || header.querySelector(".wq-search-trigger")) return;
 
-    var row =
-      header.querySelector(":scope > div") ||
-      header.querySelector(".mx-auto") ||
-      header.firstElementChild;
-    if (!row) return;
-
-    var actions =
-      row.querySelector("[data-header-actions]") || row.lastElementChild;
-    var trigger = window.WattQuickSiteSearch.createTrigger();
+    var searchSlot = header.querySelector("[data-header-search]");
+    if (!searchSlot) return;
 
     if (typeof window.WattQuickSiteSearch === "undefined") return;
+
+    var trigger = window.WattQuickSiteSearch.createTrigger();
 
     searchInstance = new window.WattQuickSiteSearch();
     searchInstance.init().catch(function (err) {
@@ -31,11 +26,7 @@
       if (searchInstance) searchInstance.open();
     });
 
-    if (actions) {
-      actions.insertBefore(trigger, actions.firstChild);
-    } else {
-      row.appendChild(trigger);
-    }
+    searchSlot.appendChild(trigger);
   }
 
   if (document.readyState === "loading") {

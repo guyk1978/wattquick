@@ -81,7 +81,10 @@ export function CalculatorsMegaMenu() {
   return (
     <>
       <div
-        className={cn("relative", open && "calculators-mega-menu--open")}
+        className={cn(
+          "relative flex h-full items-stretch",
+          open && "calculators-mega-menu--open"
+        )}
         onMouseEnter={openMenu}
         onMouseLeave={closeMenu}
         onFocus={openMenu}
@@ -91,14 +94,17 @@ export function CalculatorsMegaMenu() {
           }
         }}
       >
-        <HeaderNavTooltip label="Calculators">
+        <HeaderNavTooltip
+          label="Calculators"
+          className="flex h-full items-stretch"
+        >
           <Link
             href="/calculators/"
             aria-label="Calculators"
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "header-nav-link header-nav-link--icon inline-flex size-9 items-center justify-center",
-              isActive && "header-nav-link--active"
+              "glass-header__segment header-nav-link",
+              isActive && "glass-header__segment--active header-nav-link--active"
             )}
             aria-expanded={open}
             aria-haspopup="true"

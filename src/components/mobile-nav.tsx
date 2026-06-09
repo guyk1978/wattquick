@@ -14,12 +14,15 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <div className="relative sm:hidden">
-      <HeaderNavTooltip label={open ? "Close menu" : "Menu"}>
+    <div className="relative flex h-full items-stretch sm:hidden">
+      <HeaderNavTooltip
+        label={open ? "Close menu" : "Menu"}
+        className="flex h-full items-stretch"
+      >
         <button
           type="button"
           onClick={() => setOpen(!open)}
-          className="header-nav-link header-nav-link--icon flex size-9 items-center justify-center text-foreground"
+          className="glass-header__segment header-nav-link text-foreground"
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
         >
