@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { OgImageSync } from "@/components/og-image-sync";
 import {
   applyThemeClass,
   resolveTheme,
@@ -64,7 +65,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 
   return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>
+      <OgImageSync />
+      {children}
+    </ThemeContext.Provider>
   );
 }
 

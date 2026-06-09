@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
+import {
+  getOgImageUrl,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+} from "@/lib/og-image";
 
 const SITE_NAME = "WattQuick";
 const SITE_URL = "https://wattquick.com";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/og.png`;
+/** Default share preview — matches default dark theme and themeInitScript. */
+const DEFAULT_OG_IMAGE = getOgImageUrl("dark");
 
 /** Normalize paths for trailingSlash: true static export */
 export function normalizePath(path: string): string {
@@ -65,8 +71,8 @@ export function createPageMetadata({
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
+          width: OG_IMAGE_WIDTH,
+          height: OG_IMAGE_HEIGHT,
           alt: shareTitle,
         },
       ],
