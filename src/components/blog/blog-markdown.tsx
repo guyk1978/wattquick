@@ -49,7 +49,7 @@ const components: Components = {
     </a>
   ),
   blockquote: ({ children }) => (
-    <blockquote className="my-8 border-l-4 border-primary/40 bg-slate-50/80 py-1 pl-5 text-lg leading-relaxed text-slate-700 italic dark:border-primary/50 dark:bg-slate-900/40 dark:text-slate-300">
+    <blockquote className="my-8 border-l-4 border-border bg-muted/50 py-1 pl-5 text-lg leading-relaxed text-muted-foreground italic dark:border-white/15 dark:bg-[#1a1a1a] dark:text-[#d4d4d4]">
       {children}
     </blockquote>
   ),

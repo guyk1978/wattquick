@@ -51,8 +51,7 @@ export function BlogPostCard({
     <article
       className={cn(
         "blog-post-card group relative flex h-full flex-col overflow-hidden rounded-none",
-        "transition-colors duration-150 hover:bg-muted/20",
-        "dark:hover:bg-[rgb(8_14_28/0.85)]",
+        "transition-colors duration-150",
         featured ? "min-h-[200px] sm:min-h-[180px]" : "min-h-[180px]",
         className
       )}
@@ -117,7 +116,7 @@ export function BlogPostCard({
             className={cn(
               "blog-tool-tag inline-flex max-w-full items-center rounded-none border border-border/50",
               "bg-transparent px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground",
-              "transition-colors hover:border-border hover:bg-muted/40 hover:text-foreground",
+              "transition-colors hover:border-[var(--matte-hover-border)] hover:bg-[var(--matte-hover-strong)] hover:text-foreground",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-1"
             )}
             title={`Open ${toolName} calculator`}

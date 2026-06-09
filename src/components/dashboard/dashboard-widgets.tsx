@@ -60,8 +60,8 @@ export function DashboardWidgets({
                 onClick={() => onOpenCalculator(entry.id)}
                 className={cn(
                   "command-center-recent-card flex w-full items-center gap-2 px-2 py-1.5 text-left",
-                  "transition-colors hover:bg-muted/30",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                  "transition-colors hover:bg-[var(--matte-hover-strong)]",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 )}
               >
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-none border border-border/50 bg-muted/30 text-primary">

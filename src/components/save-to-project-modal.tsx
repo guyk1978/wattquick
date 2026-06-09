@@ -96,7 +96,7 @@ export function SaveToProjectModal({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-slate-950/75" />
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-[#121212]/85" />
       <div className="relative z-10 w-full max-w-md rounded-none border border-border/60 bg-background p-5 shadow-xl sm:p-6">
         <div className="mb-4 flex items-start justify-between gap-3">
           <div>
@@ -126,8 +126,8 @@ export function SaveToProjectModal({
             className={cn(
               "flex-1 rounded-none border px-3 py-2 text-xs font-semibold uppercase tracking-wider",
               mode === "select"
-                ? "border-primary/40 bg-primary/10 text-foreground"
-                : "border-border/60 text-muted-foreground"
+                ? "border-[var(--matte-selected-border)] bg-[var(--matte-selected)] text-foreground"
+                : "border-border/60 text-muted-foreground hover:bg-[var(--matte-hover)]"
             )}
             onClick={() => setMode("select")}
             disabled={projects.length === 0}
@@ -139,8 +139,8 @@ export function SaveToProjectModal({
             className={cn(
               "flex-1 rounded-none border px-3 py-2 text-xs font-semibold uppercase tracking-wider",
               mode === "create"
-                ? "border-primary/40 bg-primary/10 text-foreground"
-                : "border-border/60 text-muted-foreground"
+                ? "border-[var(--matte-selected-border)] bg-[var(--matte-selected)] text-foreground"
+                : "border-border/60 text-muted-foreground hover:bg-[var(--matte-hover)]"
             )}
             onClick={() => setMode("create")}
           >
@@ -159,8 +159,8 @@ export function SaveToProjectModal({
                   className={cn(
                     "w-full rounded-none border px-3 py-2 text-left text-sm transition-colors",
                     selectedId === project.id
-                      ? "border-primary/40 bg-primary/10"
-                      : "border-border/60 hover:bg-muted/30"
+                      ? "border-[var(--matte-selected-border)] bg-[var(--matte-selected)]"
+                      : "border-border/60 hover:bg-[var(--matte-hover)] hover:border-[var(--matte-hover-border)]"
                   )}
                   onClick={() => setSelectedId(project.id)}
                 >

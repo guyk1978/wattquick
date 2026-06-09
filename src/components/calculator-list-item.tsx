@@ -30,8 +30,8 @@ export function CalculatorListItem({
         style={categoryThemeVars(theme)}
         className={cn(
           "group flex items-center gap-2.5 rounded-none border-l-2 border-l-transparent px-2.5 py-2 sm:gap-3 sm:px-3",
-          "transition-colors duration-150 hover:bg-muted/40",
-          "dark:hover:bg-[rgb(8_14_28/0.55)]",
+          "transition-colors duration-150 hover:bg-[var(--matte-hover)]",
+          "dark:hover:bg-[var(--matte-hover-strong)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         )}
       >

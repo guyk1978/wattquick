@@ -512,7 +512,7 @@ export function VampirePowerCostCalculator({ className }: VampirePowerCostCalcul
                   className={cn(
                     "group flex items-start justify-between gap-3 rounded-none border border-border/40",
                     "bg-background/40 px-4 py-3 text-sm transition-colors",
-                    "hover:border-primary/30 hover:bg-primary/5"
+                    "hover:border-[var(--matte-hover-border)] hover:bg-[var(--matte-hover)]"
                   )}
                 >
                   <span>

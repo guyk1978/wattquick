@@ -43,6 +43,7 @@ export function CalculatorsDirectory() {
       initialQuery={initialQuery}
       initialCategory={initialCategory}
       useCaseLabel={useCaseLabel}
+      layout="grid"
     />
   );
 }

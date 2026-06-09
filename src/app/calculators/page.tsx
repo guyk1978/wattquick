@@ -15,10 +15,10 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function CalculatorsPage() {
   return (
-    <PageShell className="max-w-3xl">
+    <PageShell className="max-w-6xl">
       <PageHeader
         title="All calculators"
-        description="Full directory in a scannable list. Search or filter by category—results update as you type."
+        description="Tap a cube to read what it does, then open the calculator or keep browsing. Search and category filters update the grid as you type."
       />
       <Suspense
         fallback={

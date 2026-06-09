@@ -70,7 +70,7 @@ export function ProjectApprovalModal({
       onClick={handleBackdrop}
     >
       <div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-slate-950/75"
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-[#121212]/85"
         aria-hidden
       />
 
@@ -150,7 +150,7 @@ export function ProjectApprovalModal({
               type="submit"
               className={cn(
                 calculatorCommandBtn,
-                "inline-flex h-11 items-center justify-center border-primary/40 bg-primary/10 px-5 text-sm font-semibold text-primary"
+                "inline-flex h-11 items-center justify-center border-border bg-[var(--matte-btn)] px-5 text-sm font-semibold text-foreground hover:bg-[var(--matte-btn-hover)]"
               )}
             >
               Approve &amp; notify

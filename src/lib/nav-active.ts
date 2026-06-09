@@ -34,5 +34,9 @@ export function isMainNavActive(href: string, pathname: string): boolean {
     return path === "/projects" || path.startsWith("/projects/");
   }
 
+  if (link === "/favorites") {
+    return path === "/favorites";
+  }
+
   return path === link;
 }

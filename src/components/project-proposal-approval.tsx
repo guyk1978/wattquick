@@ -96,7 +96,7 @@ export function ProjectProposalApproval({
 
   return (
     <>
-      <section className="rounded-none border border-primary/30 bg-primary/5 px-4 py-5 sm:px-6">
+      <section className="rounded-none border border-border bg-[var(--matte-hover)] px-4 py-5 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
             <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -112,7 +112,7 @@ export function ProjectProposalApproval({
             onClick={() => setModalOpen(true)}
             className={cn(
               calculatorCommandBtn,
-              "inline-flex h-11 shrink-0 items-center justify-center border-primary/40 bg-primary/10 px-5 text-sm font-semibold text-primary"
+              "inline-flex h-11 shrink-0 items-center justify-center border-border bg-[var(--matte-btn)] px-5 text-sm font-semibold text-foreground hover:bg-[var(--matte-btn-hover)]"
             )}
           >
             Approve Proposal

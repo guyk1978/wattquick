@@ -182,9 +182,9 @@ export function HomeCalculatorSection({
           className={cn(
             "inline-flex items-center gap-2 rounded-none border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground",
             "transition-[border-color,background-color] duration-150",
-            "hover:border-primary/30 hover:bg-white",
-            "dark:hover:bg-muted/30",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            "hover:border-[var(--matte-hover-border)] hover:bg-[var(--matte-hover)]",
+            "dark:hover:bg-[var(--matte-hover-strong)]",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2"
           )}
         >
           View all {totalCount} calculators
@@ -212,8 +212,7 @@ function FilterPill({
       onClick={onClick}
       className={cn(
         "filter-chip shrink-0 px-3 py-1.5 text-xs font-medium sm:text-sm",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-        active && "border-primary/30 bg-primary/10 text-primary dark:bg-primary/15"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2"
       )}
     >
       {children}

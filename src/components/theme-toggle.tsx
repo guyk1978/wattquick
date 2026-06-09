@@ -1,7 +1,19 @@
 "use client";
 
+import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
 import { useTheme } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+
+export function ThemeToggleWithTooltip() {
+  const { theme } = useTheme();
+  const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+
+  return (
+    <HeaderNavTooltip label={label}>
+      <ThemeToggle />
+    </HeaderNavTooltip>
+  );
+}
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -18,9 +30,7 @@ export function ThemeToggle() {
         "theme-toggle group relative h-8 w-[3.25rem] shrink-0 rounded-none border p-0.5",
         "transition-[border-color,background] duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        isDark
-          ? "border-border/70 bg-zinc-800"
-          : "border-border bg-card"
+        "border-border bg-[var(--matte-btn)]"
       )}
     >
       <span
@@ -28,8 +38,8 @@ export function ThemeToggle() {
           "theme-toggle__thumb absolute top-0.5 left-0.5 flex size-7 items-center justify-center rounded-none border border-border/50",
           "transition-[transform,background,color] duration-200",
           isDark
-            ? "translate-x-[1.35rem] bg-zinc-700 text-amber-300"
-            : "translate-x-0 bg-white text-amber-500"
+            ? "translate-x-[1.35rem] bg-[var(--matte-btn-hover)] text-foreground"
+            : "translate-x-0 bg-[var(--matte-card)] text-foreground"
         )}
       >
         <span className="relative block size-4" aria-hidden>

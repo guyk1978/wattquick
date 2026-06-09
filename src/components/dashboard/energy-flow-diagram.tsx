@@ -161,7 +161,7 @@ export function EnergyFlowDiagram({
               className={cn(
                 "command-center-node absolute flex flex-col items-center gap-1 rounded-none border bg-card px-2 py-1.5",
                 ACCENT_BORDER[node.accent],
-                "transition-colors hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40",
+                "transition-colors hover:bg-[var(--matte-hover-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20",
                 shouldPulse && "command-center-node--pulse",
                 isNew && "command-center-node--pulse-new"
               )}

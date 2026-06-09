@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-05T17:40:06.969Z",
+  "generatedAt": "2026-06-09T07:23:32.389Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -3511,6 +3511,21 @@
       "title": "Solar Energy for Agriculture: How to Choose a Water Pump System",
       "description": "Compare DC solar pumps and AC infrastructure for farm irrigation—how pumping depth changes energy demand and what to spec before you buy panels.",
       "href": "/blog/solar-water-pumping-agriculture/",
+      "tag": "Solar",
+      "keywords": [
+        "Solar",
+        "blog",
+        "article"
+      ]
+    },
+    {
+      "id": "system-oversizing-efficiency",
+      "type": "blog",
+      "category": "Blog Articles",
+      "group": "Solar",
+      "title": "System Oversizing & Efficiency: When Bigger Isn't Better",
+      "description": "Oversizing solar and backup systems can lead to efficiency losses and higher costs. Learn how to right-size your projects for peak performance and profit.",
+      "href": "/blog/system-oversizing-efficiency/",
       "tag": "Solar",
       "keywords": [
         "Solar",

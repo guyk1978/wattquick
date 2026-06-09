@@ -180,7 +180,7 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
               <li key={item.id}>
                 <button
                   type="button"
-                  className="energy-wizard__choice group w-full rounded-none border border-border/60 bg-background p-4 text-left transition-colors hover:border-primary/40 hover:bg-muted/30"
+                  className="energy-wizard__choice group w-full rounded-none border border-border/60 bg-background p-4 text-left"
                   onClick={() => handleGoalSelect(item.id)}
                 >
                   <span className="flex items-center justify-between gap-2">
@@ -222,7 +222,7 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
               <li key={item.id}>
                 <button
                   type="button"
-                  className="energy-wizard__choice group w-full rounded-none border border-border/60 bg-background p-4 text-left transition-colors hover:border-primary/40 hover:bg-muted/30"
+                  className="energy-wizard__choice group w-full rounded-none border border-border/60 bg-background p-4 text-left"
                   onClick={() => handleExperienceSelect(item.id)}
                 >
                   <span className="flex items-center justify-between gap-2">
@@ -307,7 +307,7 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                       className={cn(
                         "inline-flex size-7 items-center justify-center rounded-none border text-xs font-semibold",
                         done
-                          ? "border-primary/40 bg-primary/10 text-primary"
+                          ? "border-[var(--matte-selected-border)] bg-[var(--matte-selected)] text-foreground"
                           : "border-border/60 text-muted-foreground"
                       )}
                       aria-label={`Step ${step.stepNumber}${done ? " complete" : ""}`}
@@ -388,8 +388,8 @@ export function EnergyWizard({ catalog }: EnergyWizardProps) {
                         className={cn(
                           "shrink-0 rounded-none border px-3 py-2 text-xs font-semibold transition-colors",
                           done
-                            ? "border-primary/40 bg-primary/10 text-primary"
-                            : "border-border/60 text-foreground hover:bg-muted/40"
+                            ? "energy-wizard__choice--selected border text-foreground"
+                            : "border-border/60 text-foreground hover:bg-[var(--matte-hover)] hover:border-[var(--matte-hover-border)]"
                         )}
                         onClick={() => toggleStepComplete(step.id)}
                         aria-pressed={done}

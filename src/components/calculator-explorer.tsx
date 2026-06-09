@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
+import { CalculatorGridCube } from "@/components/calculator-grid-cube";
+import { CalculatorInfoModal } from "@/components/calculator-info-modal";
 import { CalculatorListItem } from "@/components/calculator-list-item";
 import { Input } from "@/components/ui/input";
 import { calculatorCommandInput } from "@/lib/glass-ui";
@@ -9,6 +11,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
   type CalculatorId,
+  type CalculatorMeta,
 } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { cn } from "@/lib/utils";
@@ -24,6 +27,8 @@ interface CalculatorExplorerProps {
   initialCategory?: CalculatorCategory;
   /** When set, the list is pre-filtered to a use-case group from the mega menu. */
   useCaseLabel?: string;
+  /** Compact icon grid with centered info popup (all-calculators page). */
+  layout?: "list" | "grid";
 }
 
 export function CalculatorExplorer({
@@ -31,6 +36,7 @@ export function CalculatorExplorer({
   initialQuery = "",
   initialCategory,
   useCaseLabel,
+  layout = "list",
 }: CalculatorExplorerProps) {
   const calculators = useMemo(
     () => ids.map((id) => getCalculatorMeta(id)),
@@ -41,6 +47,8 @@ export function CalculatorExplorer({
   const [category, setCategory] = useState<FilterCategory>(
     initialCategory ?? ALL_CATEGORY
   );
+  const [selectedCalculator, setSelectedCalculator] =
+    useState<CalculatorMeta | null>(null);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -134,6 +142,26 @@ export function CalculatorExplorer({
         <p className="rounded-none border border-dashed border-border/60 py-10 text-center text-sm text-muted-foreground">
           No calculators match your search.
         </p>
+      ) : layout === "grid" ? (
+        <>
+          <div
+            className="calculators-directory__grid grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3"
+            role="list"
+            aria-label="Calculator grid"
+          >
+            {filtered.map((calc) => (
+              <CalculatorGridCube
+                key={calc.id}
+                calculator={calc}
+                onSelect={setSelectedCalculator}
+              />
+            ))}
+          </div>
+          <CalculatorInfoModal
+            calculator={selectedCalculator}
+            onClose={() => setSelectedCalculator(null)}
+          />
+        </>
       ) : (
         <ul
           className="calculators-directory__list list-none divide-y divide-border/40 rounded-none"

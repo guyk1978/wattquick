@@ -77,7 +77,7 @@ export function CalculatorLaunchModal({
       onClick={handleBackdrop}
     >
       <div
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-slate-950/75"
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm dark:bg-[#121212]/85"
         aria-hidden
       />
 

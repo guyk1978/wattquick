@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, Menu, X } from "lucide-react";
+import { Briefcase, Menu, Star, X } from "lucide-react";
 import { useState } from "react";
+import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
 import { isMainNavActive } from "@/lib/nav-active";
 import { MAIN_NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -14,15 +15,17 @@ export function MobileNav() {
 
   return (
     <div className="relative sm:hidden">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="header-nav-link flex size-9 items-center justify-center text-white"
-        aria-expanded={open}
-        aria-label={open ? "Close menu" : "Open menu"}
-      >
-        {open ? <X className="size-5" /> : <Menu className="size-5" />}
-      </button>
+      <HeaderNavTooltip label={open ? "Close menu" : "Menu"}>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          className="header-nav-link header-nav-link--icon flex size-9 items-center justify-center text-foreground"
+          aria-expanded={open}
+          aria-label={open ? "Close menu" : "Open menu"}
+        >
+          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        </button>
+      </HeaderNavTooltip>
       {open ? (
         <nav
           className="mobile-nav-panel absolute right-0 top-full z-50 mt-1.5 min-w-[200px] p-1.5"
@@ -45,6 +48,11 @@ export function MobileNav() {
                   {item.href === "/projects" ? (
                     <>
                       <Briefcase className="size-3.5 shrink-0 opacity-80" aria-hidden />
+                      {item.label}
+                    </>
+                  ) : item.href === "/favorites" ? (
+                    <>
+                      <Star className="size-3.5 shrink-0 opacity-80" aria-hidden />
                       {item.label}
                     </>
                   ) : (

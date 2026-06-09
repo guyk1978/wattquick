@@ -18,8 +18,8 @@ export function SiteFooter() {
               href="/"
               className="site-header-logo inline-block text-xl leading-none tracking-tight"
             >
-              <span className="font-black text-white">Watt</span>
-              <span className="font-light text-neutral-400">Quick</span>
+              <span className="font-black text-foreground">Watt</span>
+              <span className="font-light text-muted-foreground">Quick</span>
             </Link>
             <p className="footer-muted max-w-xs text-sm leading-relaxed">
               {count} free micro-calculators for batteries, solar, EV charging,

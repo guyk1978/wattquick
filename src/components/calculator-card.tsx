@@ -34,9 +34,8 @@ export function CalculatorCard({
         style={categoryThemeVars(theme)}
         className={cn(
           "calc-card-related group flex items-center gap-2.5 rounded-none px-3 py-2.5",
-          "transition-colors duration-150 hover:bg-muted/30",
-          "dark:hover:bg-[rgb(8_14_28/0.85)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "transition-colors duration-150",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className
         )}
       >
@@ -78,11 +77,9 @@ export function CalculatorCard({
         style={categoryThemeVars(theme)}
         className={cn(
           "calc-card calc-card-flat group flex h-full flex-col gap-2 rounded-none border p-3 transition-colors duration-150",
-          "border-border/70 bg-card hover:border-[color-mix(in_srgb,var(--cat)_35%,transparent)] hover:bg-white",
+          "border-border/70 bg-card",
           "dark:border-border dark:bg-card/90",
-          "dark:hover:border-[color-mix(in_srgb,var(--cat)_40%,transparent)]",
-          "dark:hover:bg-[color-mix(in_srgb,var(--cat)_8%,var(--card))]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className
         )}
       >
@@ -114,11 +111,9 @@ export function CalculatorCard({
       style={categoryThemeVars(theme)}
       className={cn(
         "calc-card calc-card-flat group flex h-full flex-col gap-3 rounded-none border p-4 transition-colors duration-150",
-        "border-border/70 bg-card hover:border-[color-mix(in_srgb,var(--cat)_35%,transparent)] hover:bg-white",
+        "border-border/70 bg-card",
         "dark:border-border dark:bg-card/90",
-        "dark:hover:border-[color-mix(in_srgb,var(--cat)_40%,transparent)]",
-        "dark:hover:bg-[color-mix(in_srgb,var(--cat)_8%,var(--card))]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         isCompact ? "p-3" : "p-4",
         className
       )}
@@ -171,8 +166,8 @@ export function CalculatorCard({
         <span
           className={cn(
             "mt-auto inline-flex w-full items-center justify-center gap-2 rounded-none border font-semibold",
-            "border-[color-mix(in_srgb,var(--cat)_30%,transparent)] bg-[color-mix(in_srgb,var(--cat)_8%,transparent)] text-[var(--cat)]",
-            "transition-colors group-hover:bg-[color-mix(in_srgb,var(--cat)_14%,transparent)]",
+            "border-border/60 bg-[var(--matte-hover)] text-foreground",
+            "transition-colors group-hover:bg-[var(--matte-hover-strong)] group-hover:border-[var(--matte-hover-border)]",
             isCompact ? "px-3 py-2 text-xs" : "px-4 py-2.5 text-sm"
           )}
         >

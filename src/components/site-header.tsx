@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { HeaderNav } from "@/components/header-nav";
 import { MobileNav } from "@/components/mobile-nav";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -11,15 +11,15 @@ export function SiteHeader() {
           href="/"
           className="site-header-logo shrink-0 text-xl leading-none tracking-tight md:text-2xl"
         >
-          <span className="font-black text-white">Watt</span>
-          <span className="font-light text-neutral-400">Quick</span>
+          <span className="font-black text-foreground">Watt</span>
+          <span className="font-light text-muted-foreground">Quick</span>
         </Link>
 
         <HeaderNav />
 
         <div className="ml-auto flex items-center gap-2 sm:ml-0">
-          <div data-header-actions className="flex items-center gap-2">
-            <ThemeToggle />
+          <div data-header-actions className="flex items-center gap-1">
+            <ThemeToggleWithTooltip />
           </div>
           <MobileNav />
         </div>

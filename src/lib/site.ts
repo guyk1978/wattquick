@@ -6,6 +6,7 @@ import {
 export const MAIN_NAV = [
   { href: "/dashboard", label: "Command Center" },
   { href: "/calculators", label: "Calculators" },
+  { href: "/favorites", label: "Favorites" },
   { href: "/projects", label: "My Projects" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
@@ -28,6 +29,7 @@ export const FOOTER_LINKS = {
     { href: "/projects", label: "My Projects" },
     { href: "/wizard", label: "WattQuick Wizard" },
     { href: "/calculators", label: "All calculators" },
+    { href: "/favorites", label: "Favorites" },
     { href: "/#calculators", label: "Quick search" },
   ],
   company: [
