@@ -1,18 +1,15 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
 import { useTheme } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 
 export function ThemeToggleWithTooltip() {
-  const { theme } = useTheme();
-  const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
-
   return (
-    <HeaderNavTooltip label={label} className="flex h-full items-stretch">
+    <div className="glass-header__action">
       <ThemeToggle />
-    </HeaderNavTooltip>
+      <span className="glass-header__action-label">Theme</span>
+    </div>
   );
 }
 
@@ -28,12 +25,11 @@ export function ThemeToggle() {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       onClick={toggleTheme}
       className={cn(
-        "theme-toggle glass-header__segment",
-        "flex h-full min-w-[5.25rem] shrink-0 items-center px-2 sm:min-w-[6.25rem] md:min-w-[7rem] md:px-2.5 lg:min-w-[7.5rem] lg:px-3",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        "theme-toggle glass-header__action-control",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       )}
     >
-      <span className="theme-toggle__track flex w-full items-stretch gap-0.5">
+      <span className="theme-toggle__track">
         <span
           className={cn(
             "theme-toggle__option",
@@ -41,7 +37,7 @@ export function ThemeToggle() {
           )}
           aria-hidden
         >
-          <Sun className="size-[1.125rem]" strokeWidth={2} />
+          <Sun className="glass-header__nav-icon" strokeWidth={2} />
         </span>
         <span
           className={cn(
@@ -50,7 +46,7 @@ export function ThemeToggle() {
           )}
           aria-hidden
         >
-          <Moon className="size-[1.125rem]" strokeWidth={2} />
+          <Moon className="glass-header__nav-icon" strokeWidth={2} />
         </span>
       </span>
       <span className="sr-only">{isDark ? "Dark mode on" : "Light mode on"}</span>

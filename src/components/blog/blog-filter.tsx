@@ -12,7 +12,6 @@ interface BlogFilterProps {
   className?: string;
 }
 
-/** Matte filter bar — yellow active, red hover (matches site header). */
 export function BlogFilter({
   categories,
   selected,
@@ -23,29 +22,27 @@ export function BlogFilter({
 
   return (
     <nav
-      className={cn("blog-filter", className)}
+      className={cn("blog-hub__filters", className)}
       aria-label="Filter blog posts by category"
     >
-      <ul className="blog-filter__list m-0 flex list-none flex-wrap gap-1.5 p-0">
-        {options.map((value) => {
-          const isActive = selected === value;
-          return (
-            <li key={value}>
-              <button
-                type="button"
-                onClick={() => onSelect(value)}
-                aria-pressed={isActive}
-                className={cn(
-                  "blog-filter-btn px-3.5 py-2 text-sm font-medium",
-                  isActive && "blog-filter-btn--active"
-                )}
-              >
-                {value}
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+      {options.map((value) => {
+        const isActive = selected === value;
+        return (
+          <button
+            key={value}
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            onClick={() => onSelect(value)}
+            className={cn(
+              "blog-hub__filter",
+              isActive && "blog-hub__filter--active"
+            )}
+          >
+            {value}
+          </button>
+        );
+      })}
     </nav>
   );
 }

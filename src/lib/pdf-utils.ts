@@ -1,3 +1,6 @@
+import { buildReportPdf } from "@/lib/pdf-report-core";
+
+/** Legacy external endpoint — kept for joinmypdf.com server deploys. */
 export const PDF_GENERATE_URL = "https://joinmypdf.com/api/generate-report";
 
 export type PdfPrimitive = string | number;
@@ -38,7 +41,7 @@ export function toPdfPrimitive(
     if (!Number.isFinite(value)) return "—";
     return unit ? `${value} ${unit}`.trim() : value;
   }
-  const trimmed = value.trim();
+  const trimmed = String(value).trim();
   if (trimmed === "") return "—";
   return unit ? `${trimmed} ${unit}`.trim() : trimmed;
 }
@@ -91,31 +94,31 @@ export function buildPdfResults(
 }
 
 /**
- * Generate and download a PDF report via the WattQuick API.
- * All calculators should use this function — do not call fetch directly.
+ * Generate and download a PDF report in the browser.
+ * Uses local PDF generation (no network) so export works on localhost and static hosting.
  */
 export async function generatePDFReport(
   calculatorName: string,
   inputs: Record<string, PdfPrimitive | null | undefined>,
   results: Record<string, PdfPrimitive | null | undefined>
 ): Promise<void> {
+  if (typeof window === "undefined") {
+    throw new Error("generatePDFReport must run in the browser");
+  }
+
   const data: PdfReportData = {
     calculatorName: calculatorName.trim() || "WattQuick Calculator",
     inputs: sanitizePdfRecord(inputs),
     results: sanitizePdfRecord(results),
   };
 
-  const response = await fetch(PDF_GENERATE_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  if (!response.ok) {
-    throw new Error(`PDF generation failed (${response.status})`);
+  try {
+    const pdfBytes = buildReportPdf(data);
+    const blob = new Blob([pdfBytes as BlobPart], { type: "application/pdf" });
+    const filename = `${slugifyFilename(data.calculatorName)}-report.pdf`;
+    downloadBlob(blob, filename);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    throw new Error(`PDF generation failed: ${message}`, { cause: error });
   }
-
-  const blob = await response.blob();
-  const filename = `${slugifyFilename(data.calculatorName)}-report.pdf`;
-  downloadBlob(blob, filename);
 }

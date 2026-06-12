@@ -42,7 +42,7 @@ export function CalculatorField({
   const inputType = field.inputType ?? "text";
 
   return (
-    <div className={cn("calculator-command__field group/field flex flex-col gap-1.5", className)}>
+    <div className={cn("calculator-sidebar-field calculator-command__field group/field", className)}>
       <Label
         htmlFor={field.id}
         className="block w-full text-sm font-medium leading-snug text-foreground"

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Copy, Share2 } from "lucide-react";
-import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
+import { HeaderNavItem } from "@/components/header-nav-item";
 import {
   buildShareUrl,
   copyPageUrl,
@@ -94,22 +94,17 @@ export function HeaderShareMenu() {
   }, [pageUrl]);
 
   return (
-    <div ref={rootRef} className="relative flex h-full items-stretch">
-      <HeaderNavTooltip label="Share" className="flex h-full items-stretch">
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          className={cn(
-            "glass-header__segment header-nav-link",
-            open && "glass-header__segment--active"
-          )}
-          aria-label="Share this page"
-          aria-expanded={open}
-          aria-haspopup="menu"
-        >
-          <Share2 className="size-[1.125rem]" strokeWidth={2} aria-hidden />
-        </button>
-      </HeaderNavTooltip>
+    <div ref={rootRef} className="relative">
+      <HeaderNavItem
+        label="Share"
+        icon={Share2}
+        onClick={() => setOpen((value) => !value)}
+        active={open}
+        className="glass-header__action-item hidden sm:flex"
+        aria-label="Share this page"
+        aria-expanded={open}
+        aria-haspopup="menu"
+      />
 
       <div
         className={cn(

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { FavoritesDirectory } from "@/components/favorites-directory";
-import { PageHeader, PageShell } from "@/components/page-shell";
+import { PageShell } from "@/components/page-shell";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -13,11 +13,15 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function FavoritesPage() {
   return (
-    <PageShell className="max-w-6xl">
-      <PageHeader
-        title="Favorite calculators"
-        description="Tools you starred appear here. Favorites are stored on this device—no account required."
-      />
+    <PageShell className="calculators-hub-page max-w-[80rem]">
+      <header className="calculators-hub-page__header">
+        <p className="calculators-hub-page__eyebrow">Personal dashboard</p>
+        <h1 className="calculators-hub-page__title">Favorite calculators</h1>
+        <p className="calculators-hub-page__description">
+          Your curated collection of power tools—ready to open in one click.
+        </p>
+      </header>
+
       <Suspense
         fallback={
           <p className="text-sm text-muted-foreground">Loading favorites…</p>

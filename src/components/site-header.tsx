@@ -4,27 +4,28 @@ import { HeaderNav } from "@/components/header-nav";
 import { HeaderShareMenu } from "@/components/header-share-menu";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
-
 export function SiteHeader() {
   return (
     <header className="glass-header sticky top-0 z-50 w-full overflow-visible">
       <div className="glass-header__bar">
-        <Link
-          href="/"
-          className="glass-header__segment glass-header__segment--logo site-header-logo shrink-0 text-lg leading-none tracking-tight sm:text-xl"
-        >
-          <span className="font-black text-foreground">Watt</span>
-          <span className="font-light text-muted-foreground">Quick</span>
-        </Link>
+        <div className="glass-header__leading">
+          <Link href="/" className="glass-header__logo">
+            <span className="glass-header__logo-watt">Watt</span>
+            <span className="glass-header__logo-quick">Quick</span>
+          </Link>
 
-        <HeaderNav />
+          <HeaderNav />
+        </div>
 
         <div className="glass-header__trailing">
-          <ThemeToggleWithTooltip />
-          <HeaderShareMenu />
-          <HeaderInstallAppButton />
-          <MobileNav />
           <div data-header-search className="glass-header__search-slot" />
+
+          <div className="glass-header__actions">
+            <ThemeToggleWithTooltip />
+            <HeaderShareMenu />
+            <HeaderInstallAppButton />
+            <MobileNav />
+          </div>
         </div>
       </div>
     </header>

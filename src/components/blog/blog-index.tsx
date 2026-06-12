@@ -27,7 +27,7 @@ export function BlogIndex({ posts }: BlogIndexProps) {
   }, [posts, selected]);
 
   return (
-    <div className="space-y-6">
+    <div className="blog-hub">
       <BlogFilter
         categories={categories}
         selected={selected}
@@ -35,11 +35,17 @@ export function BlogIndex({ posts }: BlogIndexProps) {
       />
 
       {filteredPosts.length === 0 ? (
-        <p className="text-center text-sm text-muted-foreground">
-          No articles in this category yet.
-        </p>
+        <div className="blog-hub__empty" role="status">
+          <p className="blog-hub__empty-title">No articles in this category</p>
+          <p className="blog-hub__empty-text">Try another filter to browse more guides.</p>
+        </div>
       ) : (
-        <BlogPostGrid posts={filteredPosts} />
+        <>
+          <p className="blog-hub__count">
+            {filteredPosts.length} article{filteredPosts.length === 1 ? "" : "s"}
+          </p>
+          <BlogPostGrid posts={filteredPosts} />
+        </>
       )}
     </div>
   );

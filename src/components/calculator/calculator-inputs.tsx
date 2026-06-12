@@ -21,7 +21,7 @@ export function CalculatorInputs({
     <div
       role="group"
       aria-label="Calculator inputs"
-      className={cn("calculator-command__inputs-stack flex flex-col gap-5", className)}
+      className={cn("calculator-sidebar-inputs calculator-command__inputs-stack", className)}
     >
       {fields.map((field, index) => (
         <CalculatorField

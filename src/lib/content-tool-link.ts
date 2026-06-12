@@ -62,6 +62,17 @@ export function getArticleSlugFromSearchParams(
   return slug || null;
 }
 
+/** Calculator page URL with optional return-to-article query param */
+export function buildCalculatorUrl(
+  calculatorHref: string,
+  options?: { fromArticle?: string }
+): string {
+  const base = calculatorHref.endsWith("/") ? calculatorHref : `${calculatorHref}/`;
+  const articleSlug = options?.fromArticle?.trim();
+  if (!articleSlug) return base;
+  return `${base}?${URL_PARAM}=${encodeURIComponent(articleSlug)}`;
+}
+
 /** True when modal should show “Back to article” for this tool */
 export function shouldShowBackToArticle(
   toolId: CalculatorId,

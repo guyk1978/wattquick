@@ -57,8 +57,19 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
     setExporting(true);
     setExportError(null);
     try {
+      if (!project.snapshots?.length) {
+        throw new Error("Project has no saved calculations to export");
+      }
       await exportProjectPDFReport(project);
-    } catch {
+    } catch (error) {
+      console.error("[WattQuick] Project export failed", {
+        projectId: project.id,
+        projectName: project.name,
+        snapshotCount: project.snapshots?.length ?? 0,
+        error,
+        message: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined,
+      });
       setExportError("Could not export project report. Please try again.");
     } finally {
       setExporting(false);

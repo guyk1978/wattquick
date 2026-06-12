@@ -9,8 +9,7 @@ interface BlogArticleLayoutProps {
 }
 
 /**
- * Blog article template: prose column + sticky Quick Launch sidebar (desktop)
- * and footer widget (mobile / end of article).
+ * Blog article template: prose column + sticky related-tool sidebar (desktop).
  */
 export function BlogArticleLayout({ post, children }: BlogArticleLayoutProps) {
   const toolId = post.relatedToolId;
@@ -20,7 +19,7 @@ export function BlogArticleLayout({ post, children }: BlogArticleLayoutProps) {
       className={cn(
         "lg:grid lg:items-start lg:gap-12 lg:justify-center",
         toolId
-          ? "lg:grid-cols-[minmax(0,48rem)_minmax(240px,280px)]"
+          ? "lg:grid-cols-[minmax(0,48rem)_minmax(260px,300px)]"
           : "lg:grid-cols-1"
       )}
     >
@@ -28,9 +27,10 @@ export function BlogArticleLayout({ post, children }: BlogArticleLayoutProps) {
         {children}
 
         {toolId ? (
-          <div className="mt-10 lg:hidden" aria-label="Quick launch calculator">
+          <div className="mt-12 lg:hidden" aria-label="Related calculator">
             <BlogQuickLaunchWidget
               calculatorId={toolId}
+              articleSlug={post.slug}
               placement="footer"
             />
           </div>
@@ -40,11 +40,12 @@ export function BlogArticleLayout({ post, children }: BlogArticleLayoutProps) {
       {toolId ? (
         <aside
           className="mx-auto hidden w-full max-w-sm lg:mx-0 lg:block"
-          aria-label="Quick launch calculator sidebar"
+          aria-label="Related calculator sidebar"
         >
-          <div className="sticky top-24">
+          <div className="sticky top-28">
             <BlogQuickLaunchWidget
               calculatorId={toolId}
+              articleSlug={post.slug}
               placement="sidebar"
             />
           </div>

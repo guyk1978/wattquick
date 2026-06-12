@@ -457,7 +457,13 @@ export const calculatorsAppliances = [
         placeholder: "10",
         defaultValue: "10",
       },
-      { id: "ratePerKwh", label: "Electricity rate", unit: "$/kWh", placeholder: "0.14" },
+      {
+        id: "ratePerKwh",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.14",
+        defaultValue: "0.14",
+      },
     ],
     result: {
       label: "Monthly energy cost",

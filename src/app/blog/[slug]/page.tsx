@@ -3,7 +3,6 @@ import { BlogArticleHeader } from "@/components/blog/blog-article-header";
 import { BlogArticleLayout } from "@/components/blog/blog-article-layout";
 import { BlogBackLink } from "@/components/blog/blog-back-link";
 import { BlogContent } from "@/components/blog/blog-content";
-import { ToolLaunchProvider } from "@/components/content/tool-launch-context";
 import { createBlogPostMetadata } from "@/lib/blog/metadata";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 
@@ -30,22 +29,17 @@ export default async function BlogArticlePage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-8 pb-16 lg:px-6">
+    <div className="blog-article-page mx-auto max-w-6xl px-4 pt-8 pb-16 lg:px-6">
       <div className="mx-auto max-w-3xl">
         <BlogBackLink />
         <BlogArticleHeader post={post} />
       </div>
 
-      <ToolLaunchProvider
-        articleSlug={post.slug}
-        articleTitle={post.title}
-      >
-        <BlogArticleLayout post={post}>
-          <article className="mx-auto min-w-0 max-w-3xl lg:mx-0">
-            <BlogContent content={post.content} />
-          </article>
-        </BlogArticleLayout>
-      </ToolLaunchProvider>
+      <BlogArticleLayout post={post}>
+        <article className="mx-auto min-w-0 max-w-3xl lg:mx-0">
+          <BlogContent content={post.content} articleSlug={post.slug} />
+        </article>
+      </BlogArticleLayout>
     </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import { Star } from "lucide-react";
 import { useCalculatorFavorites } from "@/hooks/use-calculator-favorites";
-import { calculatorCommandShareBtn } from "@/lib/glass-ui";
 import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
@@ -22,23 +21,20 @@ export function FavoriteCalculatorButton({
     <button
       type="button"
       onClick={() => toggle(calculatorId)}
-      aria-label={
-        favorited ? "Remove from favorites" : "Add to favorites"
-      }
+      aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
       aria-pressed={favorited}
       title={favorited ? "Remove from favorites" : "Add to favorites"}
       className={cn(
-        calculatorCommandShareBtn,
-        "inline-flex size-11 shrink-0 items-center justify-center transition-colors",
-        favorited
-          ? "text-foreground"
-          : "text-muted-foreground hover:text-foreground",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "calculator-favorite-btn",
+        favorited && "calculator-favorite-btn--active",
         className
       )}
     >
       <Star
-        className={cn("size-4", favorited && "fill-current")}
+        className={cn(
+          "calculator-favorite-btn__icon",
+          favorited && "calculator-favorite-btn__icon--filled"
+        )}
         strokeWidth={2}
         aria-hidden
       />

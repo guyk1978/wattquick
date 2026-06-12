@@ -15,8 +15,10 @@ import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorAssumptionNote } from "@/components/calculator/calculator-assumption-note";
-import { CalculatorField } from "@/components/calculator/calculator-field";
 import { CalculatorPrimaryMetric } from "@/components/calculator/calculator-primary-metric";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   StandbyPowerResultsGrid,
   type StandbyPowerResultRow,
@@ -35,6 +37,13 @@ const SMART_THERMOSTAT_CALCULATOR = {
   label: "Smart Thermostat Savings Calculator",
   href: "/smart-thermostat-savings/",
 } as const;
+
+const MAX_DEVICE_ROWS = 12;
+
+const controlClassName = cn(
+  calculatorCommandInput,
+  "h-11 w-full px-3 text-sm focus-visible:outline-none"
+);
 
 interface DeviceRow {
   id: string;
@@ -246,48 +255,80 @@ export function StandbyPowerAggregatorCalculator({
     <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
         inputs={
-          <div className="flex flex-col gap-5">
-            <div className="relative border border-border bg-muted/20">
-              <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
-                <p className="text-sm font-medium text-foreground">Standby devices</p>
-                <button
+          <div className="calculator-sidebar-inputs">
+            <div className="calculator-sidebar__section">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                    Standby devices
+                  </h2>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    One row per device. Enter standby watts and quantity for each.
+                  </p>
+                </div>
+                <Button
                   type="button"
+                  variant="outline"
+                  size="sm"
                   onClick={addDevice}
-                  className="inline-flex size-8 items-center justify-center border border-border bg-background text-foreground transition-colors hover:bg-muted"
-                  aria-label="Add device"
+                  disabled={devices.length >= MAX_DEVICE_ROWS}
+                  className="shrink-0"
                 >
                   <Plus className="size-4" aria-hidden />
-                </button>
+                  Add device
+                </Button>
               </div>
 
-              <ul id={listId} className="divide-y divide-border">
+              <ul id={listId} className="calculator-sidebar-device-list" aria-label="Device list">
                 {devices.map((device, index) => (
-                  <li key={device.id} className="flex flex-col gap-3 p-3">
-                    <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,0.7fr)_minmax(0,0.6fr)_auto]">
-                      <label className="flex min-w-0 flex-col gap-1.5">
-                        <span className="text-xs font-medium text-muted-foreground">
-                          Device
-                        </span>
-                        <input
+                  <li key={device.id} className="calculator-sidebar-device-card">
+                    <div className="mb-2.5 flex items-center justify-between gap-2">
+                      <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Device {index + 1}
+                      </span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-xs"
+                        onClick={() => removeDevice(device.id)}
+                        disabled={devices.length <= 1}
+                        aria-label={`Remove device ${index + 1}`}
+                        className="text-muted-foreground hover:text-destructive"
+                      >
+                        <Trash2 className="size-3.5" aria-hidden />
+                      </Button>
+                    </div>
+
+                    <div className="calculator-sidebar-device-card__fields">
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-name`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Device name
+                        </Label>
+                        <Input
+                          id={`${device.id}-name`}
                           type="text"
                           value={device.name}
                           onChange={(event) =>
                             updateDevice(device.id, { name: event.target.value })
                           }
                           placeholder="e.g. Television"
-                          className={cn(
-                            calculatorCommandInput,
-                            "h-11 w-full rounded-none border px-3 text-sm"
-                          )}
-                          aria-label={`Device ${index + 1} name`}
+                          className={controlClassName}
+                          autoComplete="off"
                         />
-                      </label>
+                      </div>
 
-                      <label className="flex min-w-0 flex-col gap-1.5">
-                        <span className="text-xs font-medium text-muted-foreground">
-                          Standby (W)
-                        </span>
-                        <input
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-watts`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Standby power (W)
+                        </Label>
+                        <Input
+                          id={`${device.id}-watts`}
                           type="text"
                           inputMode="decimal"
                           value={device.standbyWatts}
@@ -297,19 +338,20 @@ export function StandbyPowerAggregatorCalculator({
                             })
                           }
                           placeholder="5"
-                          className={cn(
-                            calculatorCommandInput,
-                            "h-11 w-full rounded-none border px-3 text-sm tabular-nums"
-                          )}
-                          aria-label={`Device ${index + 1} standby watts`}
+                          className={cn(controlClassName, "tabular-nums")}
+                          autoComplete="off"
                         />
-                      </label>
+                      </div>
 
-                      <label className="flex min-w-0 flex-col gap-1.5">
-                        <span className="text-xs font-medium text-muted-foreground">
-                          Qty
-                        </span>
-                        <input
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-count`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Quantity
+                        </Label>
+                        <Input
+                          id={`${device.id}-count`}
                           type="text"
                           inputMode="numeric"
                           value={device.deviceCount}
@@ -319,24 +361,9 @@ export function StandbyPowerAggregatorCalculator({
                             })
                           }
                           placeholder="1"
-                          className={cn(
-                            calculatorCommandInput,
-                            "h-11 w-full rounded-none border px-3 text-sm tabular-nums"
-                          )}
-                          aria-label={`Device ${index + 1} quantity`}
+                          className={cn(controlClassName, "tabular-nums")}
+                          autoComplete="off"
                         />
-                      </label>
-
-                      <div className="flex items-end justify-end">
-                        <button
-                          type="button"
-                          onClick={() => removeDevice(device.id)}
-                          disabled={devices.length <= 1}
-                          className="inline-flex size-11 items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
-                          aria-label={`Remove device ${index + 1}`}
-                        >
-                          <Trash2 className="size-4" aria-hidden />
-                        </button>
                       </div>
                     </div>
                   </li>
@@ -345,11 +372,32 @@ export function StandbyPowerAggregatorCalculator({
             </div>
 
             {rateField ? (
-              <CalculatorField
-                field={rateField}
-                value={values.ratePerKwh ?? ""}
-                onChange={(value) => setValue("ratePerKwh", value)}
-              />
+              <div className="calculator-sidebar__section calculator-sidebar-field">
+                <div className="calculator-sidebar-field__label-row">
+                  <Label
+                    htmlFor="standby-rate-per-kwh"
+                    className="calculator-sidebar-field__label"
+                  >
+                    {rateField.label}
+                  </Label>
+                  <span className="calculator-sidebar-field__unit">$/kWh</span>
+                </div>
+                <Input
+                  id="standby-rate-per-kwh"
+                  type="text"
+                  inputMode="decimal"
+                  value={values.ratePerKwh ?? ""}
+                  onChange={(event) => setValue("ratePerKwh", event.target.value)}
+                  placeholder={rateField.placeholder ?? "0.14"}
+                  className={controlClassName}
+                  autoComplete="off"
+                />
+                {rateField.hint ? (
+                  <p className="text-xs leading-relaxed text-muted-foreground/90">
+                    {rateField.hint}
+                  </p>
+                ) : null}
+              </div>
             ) : null}
           </div>
         }

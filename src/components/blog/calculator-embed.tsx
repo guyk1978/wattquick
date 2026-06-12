@@ -1,21 +1,32 @@
-"use client";
-
-import { ToolPreview } from "@/components/content/tool-preview";
-import { isCalculatorId } from "@/lib/calculators/utils";
+import { BlogToolCard } from "@/components/blog/blog-tool-card";
 import { CalculatorSpotlight } from "@/components/blog/calculator-spotlight";
+import { isCalculatorId } from "@/lib/calculators/utils";
+import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
 interface CalculatorEmbedProps {
   slug: string;
+  articleSlug: string;
   className?: string;
 }
 
-/** In-article tool callout — uses ToolPreview when inside ToolLaunchProvider */
-export function CalculatorEmbed({ slug, className }: CalculatorEmbedProps) {
+/** In-article calculator callout — links to the full calculator page */
+export function CalculatorEmbed({ slug, articleSlug, className }: CalculatorEmbedProps) {
   if (isCalculatorId(slug)) {
-    return <ToolPreview toolId={slug} className={cn("my-10 sm:my-12", className)} />;
+    return (
+      <BlogToolCard
+        calculatorId={slug as CalculatorId}
+        articleSlug={articleSlug}
+        variant="embed"
+        className={cn("my-8 sm:my-10", className)}
+      />
+    );
   }
   return (
-    <CalculatorSpotlight slug={slug} className={cn("my-10 sm:my-12", className)} />
+    <CalculatorSpotlight
+      slug={slug}
+      articleSlug={articleSlug}
+      className={cn("my-8 sm:my-10", className)}
+    />
   );
 }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Briefcase, Menu, Star, X } from "lucide-react";
 import { useState } from "react";
-import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
+import { HeaderNavItem } from "@/components/header-nav-item";
 import { isMainNavActive } from "@/lib/nav-active";
 import { MAIN_NAV } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -14,21 +14,21 @@ export function MobileNav() {
   const pathname = usePathname();
 
   return (
-    <div className="relative flex h-full items-stretch sm:hidden">
-      <HeaderNavTooltip
-        label={open ? "Close menu" : "Menu"}
-        className="flex h-full items-stretch"
+    <div className="relative md:hidden">
+      <HeaderNavItem
+        label="Menu"
+        onClick={() => setOpen(!open)}
+        active={open}
+        className="glass-header__action-item"
+        aria-expanded={open}
+        aria-label={open ? "Close menu" : "Open menu"}
       >
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="glass-header__segment header-nav-link text-foreground"
-          aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
-      </HeaderNavTooltip>
+        {open ? (
+          <X className="glass-header__nav-icon" strokeWidth={2} />
+        ) : (
+          <Menu className="glass-header__nav-icon" strokeWidth={2} />
+        )}
+      </HeaderNavItem>
       {open ? (
         <nav
           className="mobile-nav-panel absolute right-0 top-full z-50 mt-1.5 min-w-[200px] p-1.5"

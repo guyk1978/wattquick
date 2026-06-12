@@ -6,9 +6,10 @@ import { isCalculatorId } from "@/lib/calculators/utils";
 
 interface BlogContentProps {
   content: string;
+  articleSlug: string;
 }
 
-export function BlogContent({ content }: BlogContentProps) {
+export function BlogContent({ content, articleSlug }: BlogContentProps) {
   const segments = parseBlogContent(content);
 
   return (
@@ -19,6 +20,7 @@ export function BlogContent({ content }: BlogContentProps) {
             <CalculatorEmbed
               key={`embed-${segment.slug}-${index}`}
               slug={segment.slug}
+              articleSlug={articleSlug}
             />
           );
         }
@@ -28,6 +30,7 @@ export function BlogContent({ content }: BlogContentProps) {
             <ToolPreview
               key={`preview-${segment.toolId}-${index}`}
               toolId={segment.toolId}
+              articleSlug={articleSlug}
             />
           );
         }

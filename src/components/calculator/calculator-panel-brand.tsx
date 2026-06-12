@@ -11,10 +11,7 @@ export function CalculatorPanelBrand() {
     <div className="calculator-command__brand relative flex items-center justify-center gap-2.5 pb-1">
       {calculatorId ? (
         <div className="absolute right-0 top-0">
-          <FavoriteCalculatorButton
-            calculatorId={calculatorId}
-            className="size-9"
-          />
+          <FavoriteCalculatorButton calculatorId={calculatorId} />
         </div>
       ) : null}
       <span className="flex items-center gap-1" aria-hidden>

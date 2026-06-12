@@ -24,6 +24,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.16.0",
     "next": "15.5.2",
+    "playwright": "^1.49.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^10.1.0",
@@ -43,5 +44,18 @@
     "tailwindcss": "^4",
     "tsx": "^4.19.4",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guyk1978/wattquick.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guyk1978/wattquick/issues"
+  },
+  "homepage": "https://github.com/guyk1978/wattquick#readme"
 }

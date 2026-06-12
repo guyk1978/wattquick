@@ -2,16 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
-import { CalculatorGridCube } from "@/components/calculator-grid-cube";
-import { CalculatorInfoModal } from "@/components/calculator-info-modal";
+import { CalculatorAppCard } from "@/components/calculator-app-card";
 import { CalculatorListItem } from "@/components/calculator-list-item";
-import { Input } from "@/components/ui/input";
+import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
 import { calculatorCommandInput } from "@/lib/glass-ui";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
   type CalculatorId,
-  type CalculatorMeta,
 } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { cn } from "@/lib/utils";
@@ -27,7 +25,7 @@ interface CalculatorExplorerProps {
   initialCategory?: CalculatorCategory;
   /** When set, the list is pre-filtered to a use-case group from the mega menu. */
   useCaseLabel?: string;
-  /** Compact icon grid with centered info popup (all-calculators page). */
+  /** App-launcher hub (all-calculators page) or compact list */
   layout?: "list" | "grid";
 }
 
@@ -47,8 +45,6 @@ export function CalculatorExplorer({
   const [category, setCategory] = useState<FilterCategory>(
     initialCategory ?? ALL_CATEGORY
   );
-  const [selectedCalculator, setSelectedCalculator] =
-    useState<CalculatorMeta | null>(null);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -59,8 +55,8 @@ export function CalculatorExplorer({
   }, [initialCategory]);
 
   const categories = useMemo(() => {
-    const set = new Set(calculators.map((c) => c.category));
-    return Array.from(set) as CalculatorCategory[];
+    const present = new Set(calculators.map((c) => c.category));
+    return CATEGORY_DISPLAY_ORDER.filter((cat) => present.has(cat));
   }, [calculators]);
 
   const filtered = useMemo(() => {
@@ -77,6 +73,89 @@ export function CalculatorExplorer({
       return matchesCategory && matchesQuery;
     });
   }, [calculators, query, category]);
+
+  if (layout === "grid") {
+    return (
+      <div className="calculators-hub">
+        {useCaseLabel ? (
+          <p className="calculators-hub__use-case">
+            Showing{" "}
+            <span className="font-medium text-foreground">{useCaseLabel}</span>{" "}
+            calculators.{" "}
+            <a href="/calculators/" className="calculators-hub__use-case-link">
+              View all
+            </a>
+          </p>
+        ) : null}
+
+        <div className="calculators-hub__controls">
+          <label htmlFor="calculators-hub-search" className="sr-only">
+            Search calculators
+          </label>
+          <div className="calculators-hub__search-wrap">
+            <Search className="calculators-hub__search-icon" aria-hidden />
+            <input
+              id="calculators-hub-search"
+              type="search"
+              placeholder="Search tools…"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              className={cn(calculatorCommandInput, "calculators-hub__search")}
+              autoComplete="off"
+              aria-label="Search calculators"
+            />
+          </div>
+
+          <p className="calculators-hub__count">
+            {filtered.length} of {calculators.length} tools
+          </p>
+
+          <div
+            className="calculators-hub__filters"
+            role="tablist"
+            aria-label="Filter by category"
+          >
+            <HubFilterPill
+              active={category === ALL_CATEGORY}
+              onClick={() => setCategory(ALL_CATEGORY)}
+            >
+              All
+            </HubFilterPill>
+            {categories.map((cat) => (
+              <HubFilterPill
+                key={cat}
+                active={category === cat}
+                onClick={() => setCategory(cat)}
+              >
+                {CALCULATOR_CATEGORY_LABELS[cat]}
+              </HubFilterPill>
+            ))}
+          </div>
+        </div>
+
+        {filtered.length === 0 ? (
+          <div className="calculators-hub__empty" role="status">
+            <p className="calculators-hub__empty-title">No matches</p>
+            <p className="calculators-hub__empty-text">
+              Try another keyword or select a different category.
+            </p>
+          </div>
+        ) : (
+          <div
+            className="calculators-hub__grid"
+            role="list"
+            aria-label="Calculator apps"
+          >
+            {filtered.map((calc) => (
+              <div key={calc.id} role="listitem" className="calculators-hub__grid-cell">
+                <CalculatorAppCard calculator={calc} variant="hub" />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="calculators-directory space-y-4">
@@ -99,14 +178,14 @@ export function CalculatorExplorer({
             className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden
           />
-          <Input
+          <input
             type="search"
             placeholder="Search calculators…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className={cn(
               calculatorCommandInput,
-              "h-10 rounded-none border-0 pl-9 shadow-none focus-visible:ring-0"
+              "h-10 w-full rounded-none border pl-9 shadow-none focus-visible:ring-0"
             )}
             aria-label="Search calculators"
           />
@@ -142,26 +221,6 @@ export function CalculatorExplorer({
         <p className="rounded-none border border-dashed border-border/60 py-10 text-center text-sm text-muted-foreground">
           No calculators match your search.
         </p>
-      ) : layout === "grid" ? (
-        <>
-          <div
-            className="calculators-directory__grid grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3"
-            role="list"
-            aria-label="Calculator grid"
-          >
-            {filtered.map((calc) => (
-              <CalculatorGridCube
-                key={calc.id}
-                calculator={calc}
-                onSelect={setSelectedCalculator}
-              />
-            ))}
-          </div>
-          <CalculatorInfoModal
-            calculator={selectedCalculator}
-            onClose={() => setSelectedCalculator(null)}
-          />
-        </>
       ) : (
         <ul
           className="calculators-directory__list list-none divide-y divide-border/40 rounded-none"
@@ -173,6 +232,31 @@ export function CalculatorExplorer({
         </ul>
       )}
     </div>
+  );
+}
+
+function HubFilterPill({
+  children,
+  active,
+  onClick,
+}: {
+  children: React.ReactNode;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={cn(
+        "calculators-hub__filter",
+        active && "calculators-hub__filter--active"
+      )}
+    >
+      {children}
+    </button>
   );
 }
 

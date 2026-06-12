@@ -15,8 +15,10 @@ import { formatNumber, parsePositive } from "@/lib/format";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorAssumptionNote } from "@/components/calculator/calculator-assumption-note";
-import { CalculatorField } from "@/components/calculator/calculator-field";
 import { CalculatorPrimaryMetric } from "@/components/calculator/calculator-primary-metric";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   CalculatorResultsTable,
   type CalculatorResultRow,
@@ -40,6 +42,13 @@ const INVERTER_SURGE_CALCULATOR = {
   label: "Inverter Peak Load Surge",
   href: "/inverter-peak-load-surge/",
 } as const;
+
+const MAX_DEVICE_ROWS = 12;
+
+const controlClassName = cn(
+  calculatorCommandInput,
+  "h-11 w-full px-3 text-sm focus-visible:outline-none"
+);
 
 interface DeviceRow {
   id: string;
@@ -262,125 +271,165 @@ export function CriticalLoadAnalysisCalculator({
     <CalculatorCommandShell className={className}>
       <CalculatorCommandSplit
         inputs={
-          <div className="flex flex-col gap-5">
-            <div className="relative border border-border bg-muted/20">
-              <div className="flex items-center justify-between border-b border-border px-3 py-2.5">
-                <p className="text-sm font-medium text-foreground">Essential devices</p>
-                <button
+          <div className="calculator-sidebar-inputs">
+            <div className="calculator-sidebar__section">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <h2 className="text-sm font-semibold tracking-tight text-foreground">
+                    Essential devices
+                  </h2>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    One row per appliance. Enter running watts and daily runtime.
+                  </p>
+                </div>
+                <Button
                   type="button"
+                  variant="outline"
+                  size="sm"
                   onClick={addDevice}
-                  className="inline-flex size-8 items-center justify-center border border-border bg-background text-foreground transition-colors hover:bg-muted"
-                  aria-label="Add device"
+                  disabled={devices.length >= MAX_DEVICE_ROWS}
+                  className="shrink-0"
                 >
                   <Plus className="size-4" aria-hidden />
-                </button>
+                  Add device
+                </Button>
               </div>
 
-              <ul id={listId} className="divide-y divide-border">
+              <ul id={listId} className="calculator-sidebar-device-list" aria-label="Device list">
                 {devices.map((device, index) => (
-                  <li key={device.id} className="flex flex-col gap-3 p-3">
-                    <div className="grid gap-3 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_auto]">
-                    <label className="flex min-w-0 flex-col gap-1.5">
-                      <span className="text-xs font-medium text-muted-foreground">
-                        Device
+                  <li key={device.id} className="calculator-sidebar-device-card">
+                    <div className="mb-2.5 flex items-center justify-between gap-2">
+                      <span className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Device {index + 1}
                       </span>
-                      <input
-                        type="text"
-                        value={device.name}
-                        onChange={(event) =>
-                          updateDevice(device.id, { name: event.target.value })
-                        }
-                        placeholder="e.g. Refrigerator"
-                        className={cn(
-                          calculatorCommandInput,
-                          "h-11 w-full rounded-none border px-3 text-sm"
-                        )}
-                        aria-label={`Device ${index + 1} name`}
-                      />
-                    </label>
-
-                    <label className="flex min-w-0 flex-col gap-1.5">
-                      <span className="text-xs font-medium text-muted-foreground">
-                        Running (W)
-                      </span>
-                      <input
-                        type="text"
-                        inputMode="decimal"
-                        value={device.runningWatts}
-                        onChange={(event) =>
-                          updateDevice(device.id, {
-                            runningWatts: event.target.value,
-                          })
-                        }
-                        placeholder="150"
-                        className={cn(
-                          calculatorCommandInput,
-                          "h-11 w-full rounded-none border px-3 text-sm tabular-nums"
-                        )}
-                        aria-label={`Device ${index + 1} running watts`}
-                      />
-                    </label>
-
-                    <label className="flex min-w-0 flex-col gap-1.5">
-                      <span className="text-xs font-medium text-muted-foreground">
-                        Hours/day
-                      </span>
-                      <input
-                        type="text"
-                        inputMode="decimal"
-                        value={device.hoursPerDay}
-                        onChange={(event) =>
-                          updateDevice(device.id, {
-                            hoursPerDay: event.target.value,
-                          })
-                        }
-                        placeholder="8"
-                        className={cn(
-                          calculatorCommandInput,
-                          "h-11 w-full rounded-none border px-3 text-sm tabular-nums"
-                        )}
-                        aria-label={`Device ${index + 1} hours per day`}
-                      />
-                    </label>
-
-                    <div className="flex items-end justify-end">
-                      <button
+                      <Button
                         type="button"
+                        variant="ghost"
+                        size="icon-xs"
                         onClick={() => removeDevice(device.id)}
                         disabled={devices.length <= 1}
-                        className="inline-flex size-11 items-center justify-center border border-border bg-background text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
                         aria-label={`Remove device ${index + 1}`}
+                        className="text-muted-foreground hover:text-destructive"
                       >
-                        <Trash2 className="size-4" aria-hidden />
-                      </button>
-                    </div>
+                        <Trash2 className="size-3.5" aria-hidden />
+                      </Button>
                     </div>
 
-                    <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
-                      <input
-                        type="checkbox"
-                        checked={device.highSurge}
-                        onChange={(event) =>
-                          updateDevice(device.id, {
-                            highSurge: event.target.checked,
-                          })
-                        }
-                        className="size-4 rounded-none border border-border accent-primary"
-                        aria-label={`Device ${index + 1} high surge`}
-                      />
-                      <span>High surge device</span>
-                    </label>
+                    <div className="calculator-sidebar-device-card__fields">
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-name`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Device name
+                        </Label>
+                        <Input
+                          id={`${device.id}-name`}
+                          type="text"
+                          value={device.name}
+                          onChange={(event) =>
+                            updateDevice(device.id, { name: event.target.value })
+                          }
+                          placeholder="e.g. Refrigerator"
+                          className={controlClassName}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-watts`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Running power (W)
+                        </Label>
+                        <Input
+                          id={`${device.id}-watts`}
+                          type="text"
+                          inputMode="decimal"
+                          value={device.runningWatts}
+                          onChange={(event) =>
+                            updateDevice(device.id, {
+                              runningWatts: event.target.value,
+                            })
+                          }
+                          placeholder="150"
+                          className={cn(controlClassName, "tabular-nums")}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <div className="calculator-sidebar-field">
+                        <Label
+                          htmlFor={`${device.id}-hours`}
+                          className="calculator-sidebar-field__label"
+                        >
+                          Hours per day
+                        </Label>
+                        <Input
+                          id={`${device.id}-hours`}
+                          type="text"
+                          inputMode="decimal"
+                          value={device.hoursPerDay}
+                          onChange={(event) =>
+                            updateDevice(device.id, {
+                              hoursPerDay: event.target.value,
+                            })
+                          }
+                          placeholder="8"
+                          className={cn(controlClassName, "tabular-nums")}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <label className="flex cursor-pointer items-center gap-2.5 text-sm text-muted-foreground">
+                        <input
+                          type="checkbox"
+                          checked={device.highSurge}
+                          onChange={(event) =>
+                            updateDevice(device.id, {
+                              highSurge: event.target.checked,
+                            })
+                          }
+                          className="size-4 rounded-none border border-border accent-primary"
+                          aria-label={`Device ${index + 1} high surge`}
+                        />
+                        <span>High surge device</span>
+                      </label>
+                    </div>
                   </li>
                 ))}
               </ul>
             </div>
 
             {backupTargetField ? (
-              <CalculatorField
-                field={backupTargetField}
-                value={values.backupTargetHours ?? ""}
-                onChange={(value) => setValue("backupTargetHours", value)}
-              />
+              <div className="calculator-sidebar__section calculator-sidebar-field">
+                <div className="calculator-sidebar-field__label-row">
+                  <Label
+                    htmlFor="critical-load-backup-hours"
+                    className="calculator-sidebar-field__label"
+                  >
+                    {backupTargetField.label}
+                  </Label>
+                  {backupTargetField.unit ? (
+                    <span className="calculator-sidebar-field__unit">
+                      {backupTargetField.unit}
+                    </span>
+                  ) : null}
+                </div>
+                <Input
+                  id="critical-load-backup-hours"
+                  type="text"
+                  inputMode="decimal"
+                  value={values.backupTargetHours ?? ""}
+                  onChange={(event) =>
+                    setValue("backupTargetHours", event.target.value)
+                  }
+                  placeholder={backupTargetField.placeholder ?? "8"}
+                  className={cn(controlClassName, "tabular-nums")}
+                  autoComplete="off"
+                />
+              </div>
             ) : null}
           </div>
         }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BlogIndex } from "@/components/blog/blog-index";
-import { PageHeader, PageShell } from "@/components/page-shell";
+import { PageShell } from "@/components/page-shell";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -15,11 +15,15 @@ export default function BlogPage() {
   const posts = getAllBlogPosts();
 
   return (
-    <PageShell className="max-w-6xl">
-      <PageHeader
-        title="Blog"
-        description="Expert guides on EV charging, solar, batteries, and home energy—each paired with interactive WattQuick tools."
-      />
+    <PageShell className="blog-hub-page max-w-[80rem]">
+      <header className="blog-hub-page__header">
+        <p className="blog-hub-page__eyebrow">Publication</p>
+        <h1 className="blog-hub-page__title">Blog</h1>
+        <p className="blog-hub-page__description">
+          Expert guides on EV charging, solar, batteries, and home energy—each
+          paired with interactive WattQuick tools.
+        </p>
+      </header>
 
       {posts.length === 0 ? (
         <p className="text-center text-muted-foreground">No articles yet.</p>

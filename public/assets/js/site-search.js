@@ -385,20 +385,18 @@
   };
 
   SiteSearch.createTrigger = function () {
-    var isApple = isMac();
     var parts = shortcutParts();
     var btn = document.createElement("button");
     btn.type = "button";
     btn.className = "wq-search-trigger";
-    btn.setAttribute("aria-label", "Search site (" + shortcutLabel() + ")");
+    btn.setAttribute("aria-label", "Search tools (" + shortcutLabel() + ")");
     btn.innerHTML =
       SEARCH_ICON +
-      '<span class="wq-search-trigger__label">Search</span>' +
-      '<span class="wq-search-kbd wq-search-kbd--compact" aria-hidden="true">/</span>' +
-      '<span class="wq-search-kbd wq-search-kbd--desktop" aria-hidden="true">' +
-      '<span>' +
+      '<span class="wq-search-trigger__label">Search tools...</span>' +
+      '<span class="wq-search-kbd wq-search-kbd--integrated" aria-hidden="true">' +
+      "<span>" +
       escapeHtml(parts[0]) +
-      "</span><span>" +
+      "</span><span>+</span><span>" +
       escapeHtml(parts[1]) +
       "</span></span>";
     return btn;

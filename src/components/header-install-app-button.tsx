@@ -1,7 +1,7 @@
 "use client";
 
 import { Download } from "lucide-react";
-import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
+import { HeaderNavItem } from "@/components/header-nav-item";
 import { InstallAppModal } from "@/components/install-app-modal";
 import { usePwaInstall } from "@/hooks/use-pwa-install";
 
@@ -12,16 +12,13 @@ export function HeaderInstallAppButton() {
 
   return (
     <>
-      <HeaderNavTooltip label="Install app" className="flex h-full items-stretch">
-        <button
-          type="button"
-          onClick={() => void install()}
-          className="glass-header__segment header-nav-link"
-          aria-label="Install WattQuick app"
-        >
-          <Download className="size-[1.125rem]" strokeWidth={2} aria-hidden />
-        </button>
-      </HeaderNavTooltip>
+      <HeaderNavItem
+        label="Install"
+        icon={Download}
+        onClick={() => void install()}
+        aria-label="Install WattQuick app"
+        className="glass-header__action-item hidden lg:flex"
+      />
 
       <InstallAppModal open={helpOpen} onClose={() => setHelpOpen(false)} />
     </>

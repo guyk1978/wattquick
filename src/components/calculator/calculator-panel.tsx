@@ -59,7 +59,10 @@ import {
   CalculatorCommandSplit,
 } from "./calculator-command-layout";
 import { CalculatorInputs } from "./calculator-inputs";
-import { CalculatorResult } from "./calculator-result";
+import {
+  CalculatorResultsDashboard,
+  recordToSummaryItems,
+} from "./calculator-results-dashboard";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_FOOTER_NOTES: Partial<Record<CalculatorId, string>> = {
@@ -256,8 +259,14 @@ function CalculatorPanelInner({
 
   const footerNote = CALCULATOR_FOOTER_NOTES[id];
 
-  const resultBlock =
-    usesBatteryDashboard(definition.category, id) ? (
+  const usesGamified =
+    usesBatteryDashboard(definition.category, id) ||
+    usesCostDashboard(definition.category, id) ||
+    usesEvDashboard(definition.category, id);
+
+  const gamifiedHero = usesGamified ? (
+    <div className="calculator-dashboard-hero__card calculator-dashboard-hero__card--gamified">
+      {usesBatteryDashboard(definition.category, id) ? (
         <BatteryGamifiedResult
           calculatorId={id}
           label={definition.result.label}
@@ -275,7 +284,7 @@ function CalculatorPanelInner({
           detail={result.detail}
           emptyMessage={definition.result.emptyMessage}
         />
-      ) : usesEvDashboard(definition.category, id) ? (
+      ) : (
         <EvGamifiedResult
           calculatorId={id}
           label={definition.result.label}
@@ -284,15 +293,9 @@ function CalculatorPanelInner({
           detail={result.detail}
           emptyMessage={definition.result.emptyMessage}
         />
-      ) : (
-        <CalculatorResult
-          label={definition.result.label}
-          value={result.value}
-          unit={result.unit}
-          detail={result.detail}
-          emptyMessage={definition.result.emptyMessage}
-        />
-      );
+      )}
+    </div>
+  ) : undefined;
 
   return (
     <CalculatorCommandShell className={className}>
@@ -304,7 +307,21 @@ function CalculatorPanelInner({
             onChange={setValue}
           />
         }
-        results={resultBlock}
+        results={
+          <CalculatorResultsDashboard
+            label={definition.result.label}
+            value={result.value}
+            unit={result.unit}
+            detail={result.detail}
+            emptyMessage={definition.result.emptyMessage}
+            summaryItems={
+              result.snapshotResults
+                ? recordToSummaryItems(result.snapshotResults)
+                : undefined
+            }
+            hero={gamifiedHero}
+          />
+        }
       />
 
       <JoinMyPdfSaveReport

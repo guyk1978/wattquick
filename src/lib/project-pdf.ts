@@ -1,6 +1,7 @@
 import {
   generatePDFReport,
   sanitizePdfRecord,
+  toPdfPrimitive,
   type PdfPrimitive,
 } from "@/lib/pdf-utils";
 import {
@@ -94,16 +95,16 @@ export async function exportProjectPDFReport(
     const prefix = `${index + 1}. ${snapshot.calculatorTitle}`;
     results[`${prefix} — saved`] = new Date(snapshot.timestamp).toLocaleString();
     if (snapshot.summary) {
-      results[`${prefix} — summary`] = snapshot.summary;
+      results[`${prefix} — summary`] = toPdfPrimitive(snapshot.summary);
     }
-    for (const [label, value] of Object.entries(snapshot.results)) {
-      results[`${prefix} — ${label}`] = value;
+    for (const [label, value] of Object.entries(snapshot.results ?? {})) {
+      results[`${prefix} — ${label}`] = toPdfPrimitive(value);
     }
   });
 
   await generatePDFReport(
     `${project.name} — WattQuick Project Report`,
     inputs,
-    results
+    sanitizePdfRecord(results)
   );
 }

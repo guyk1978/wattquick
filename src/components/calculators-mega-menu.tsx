@@ -7,8 +7,8 @@ import { useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Calculator, Compass, Search } from "lucide-react";
 import { CalculatorCategoryCubeGrid } from "@/components/calculator-category-cube-grid";
 import { CalculatorInfoModal } from "@/components/calculator-info-modal";
-import { HeaderNavTooltip } from "@/components/header-nav-tooltip";
 import { Input } from "@/components/ui/input";
+import { getHeaderNavShortLabel } from "@/lib/header-nav-labels";
 import {
   CALCULATOR_CATEGORY_LABELS,
   getAllCalculatorMeta,
@@ -82,7 +82,7 @@ export function CalculatorsMegaMenu() {
     <>
       <div
         className={cn(
-          "relative flex h-full items-stretch",
+          "relative flex items-center",
           open && "calculators-mega-menu--open"
         )}
         onMouseEnter={openMenu}
@@ -94,24 +94,24 @@ export function CalculatorsMegaMenu() {
           }
         }}
       >
-        <HeaderNavTooltip
-          label="Calculators"
-          className="flex h-full items-stretch"
+        <Link
+          href="/calculators/"
+          aria-label="Calculators"
+          aria-current={isActive ? "page" : undefined}
+          className={cn(
+            "glass-header__nav-item",
+            isActive && "glass-header__nav-item--active"
+          )}
+          aria-expanded={open}
+          aria-haspopup="true"
         >
-          <Link
-            href="/calculators/"
-            aria-label="Calculators"
-            aria-current={isActive ? "page" : undefined}
-            className={cn(
-              "glass-header__segment header-nav-link",
-              isActive && "glass-header__segment--active header-nav-link--active"
-            )}
-            aria-expanded={open}
-            aria-haspopup="true"
-          >
-            <Calculator className="size-[1.125rem]" strokeWidth={2} aria-hidden />
-          </Link>
-        </HeaderNavTooltip>
+          <span className="glass-header__nav-icon-wrap" aria-hidden>
+            <Calculator className="glass-header__nav-icon" strokeWidth={2} />
+          </span>
+          <span className="glass-header__nav-label">
+            {getHeaderNavShortLabel("/calculators")}
+          </span>
+        </Link>
 
         <div
           className={cn(

@@ -1,18 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { Star } from "lucide-react";
-import { CalculatorGridCube } from "@/components/calculator-grid-cube";
-import { CalculatorInfoModal } from "@/components/calculator-info-modal";
+import { useMemo } from "react";
+import { ArrowRight, Star } from "lucide-react";
+import { CalculatorAppCard } from "@/components/calculator-app-card";
 import { useCalculatorFavorites } from "@/hooks/use-calculator-favorites";
-import type { CalculatorMeta } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 
 export function FavoritesDirectory() {
   const { ids, hydrated } = useCalculatorFavorites();
-  const [selectedCalculator, setSelectedCalculator] =
-    useState<CalculatorMeta | null>(null);
 
   const calculators = useMemo(() => {
     if (!hydrated) return [];
@@ -21,61 +17,53 @@ export function FavoritesDirectory() {
 
   if (!hydrated) {
     return (
-      <p className="text-sm text-muted-foreground">Loading favorites…</p>
+      <p className="favorites-hub__loading text-sm text-muted-foreground">
+        Loading favorites…
+      </p>
     );
   }
 
   if (calculators.length === 0) {
     return (
-      <div className="rounded-none border border-dashed border-border/60 px-6 py-12 text-center">
-        <Star
-          className="mx-auto size-8 text-muted-foreground/60"
-          strokeWidth={1.5}
-          aria-hidden
-        />
-        <p className="mt-4 text-base font-medium text-foreground">
-          No favorites yet
+      <div className="favorites-hub__empty" role="status">
+        <div className="favorites-hub__empty-icon-wrap" aria-hidden>
+          <Star className="favorites-hub__empty-icon" strokeWidth={1.75} />
+        </div>
+        <h2 className="favorites-hub__empty-title">No favorites yet</h2>
+        <p className="favorites-hub__empty-text">
+          Star calculators from any tool page. Your saved tools will appear here
+          as a personal dashboard—stored on this device, no account required.
         </p>
-        <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Star calculators from the{" "}
-          <Link
-            href="/calculators/"
-            className="font-medium text-foreground underline-offset-2 hover:underline"
-          >
-            all calculators
-          </Link>{" "}
-          directory—the ones you mark will show up here.
-        </p>
+        <Link href="/calculators/" className="favorites-hub__cta">
+          Explore Calculators
+          <ArrowRight className="size-4" strokeWidth={2.5} aria-hidden />
+        </Link>
       </div>
     );
   }
 
   return (
-    <>
-      <p className="mb-4 text-sm text-muted-foreground">
+    <div className="favorites-hub">
+      <p className="favorites-hub__count">
         {calculators.length} saved{" "}
-        {calculators.length === 1 ? "calculator" : "calculators"}. Tap a tile
-        to read the summary or open the tool.
+        {calculators.length === 1 ? "tool" : "tools"}
       </p>
 
       <div
-        className="calculators-directory__grid grid grid-cols-1 gap-1 sm:grid-cols-2 lg:grid-cols-3"
+        className="calculators-hub__grid"
         role="list"
         aria-label="Favorite calculators"
       >
         {calculators.map((calc) => (
-          <CalculatorGridCube
-            key={calc.id}
-            calculator={calc}
-            onSelect={setSelectedCalculator}
-          />
+          <div key={calc.id} role="listitem" className="calculators-hub__grid-cell">
+            <CalculatorAppCard
+              calculator={calc}
+              variant="hub"
+              actionLabel="Open tool"
+            />
+          </div>
         ))}
       </div>
-
-      <CalculatorInfoModal
-        calculator={selectedCalculator}
-        onClose={() => setSelectedCalculator(null)}
-      />
-    </>
+    </div>
   );
 }
