@@ -11,6 +11,7 @@ import {
 export function useCookieConsent() {
   const [status, setStatus] = useState<CookieConsentStatus | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [declinedAttempt, setDeclinedAttempt] = useState(false);
 
   useEffect(() => {
     const stored = readCookieConsent();
@@ -22,23 +23,39 @@ export function useCookieConsent() {
     }
   }, []);
 
+  const isOverlayActive = hydrated && status !== "granted";
+
+  useEffect(() => {
+    if (!isOverlayActive) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOverlayActive]);
+
   const accept = useCallback(() => {
     writeCookieConsent("granted");
     setStatus("granted");
+    setDeclinedAttempt(false);
     activateConsentScripts();
   }, []);
 
   const decline = useCallback(() => {
     writeCookieConsent("denied");
     setStatus("denied");
+    setDeclinedAttempt(true);
   }, []);
 
-  const showBanner = hydrated && status === null;
+  const showBanner = isOverlayActive;
 
   return {
     status,
     hydrated,
+    isOverlayActive,
     showBanner,
+    declinedAttempt,
     accept,
     decline,
   };
