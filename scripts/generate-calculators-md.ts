@@ -5,6 +5,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
 } from "../src/data/calculator-types";
+import { getCalculatorHref } from "../src/lib/calculator-routes";
 
 const OUTPUT = join(process.cwd(), "CALCULATORS.md");
 const SITE_URL = "https://wattquick.com";
@@ -84,7 +85,8 @@ function generateMarkdown(): string {
     }
 
     for (const calc of items) {
-      const url = `${SITE_URL}${calc.href}/`;
+      const href = getCalculatorHref(calc.slug, calc.category);
+      const url = `${SITE_URL}${href}`;
       lines.push(
         `#### ${calc.title}`,
         "",

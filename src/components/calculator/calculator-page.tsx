@@ -1,4 +1,5 @@
 import { getCalculatorMeta, type CalculatorId } from "@/lib/calculators";
+import { CalculatorContentSection } from "./calculator-content-section";
 import { CalculatorLayout } from "./calculator-layout";
 import { CalculatorPanel } from "./calculator-panel";
 import { CalculatorSeoContent } from "./calculator-seo-content";
@@ -14,6 +15,7 @@ export function CalculatorPage({ id }: CalculatorPageProps) {
   return (
     <CalculatorLayout
       calculator={meta}
+      contentSection={<CalculatorContentSection id={id} />}
       seoContent={<CalculatorSeoContent id={id} />}
     >
       <CalculatorPanel id={id} />

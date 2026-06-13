@@ -4,6 +4,7 @@
 import { calculators } from "../src/data/calculators";
 import { CALCULATOR_CATEGORY_LABELS } from "../src/data/calculator-types";
 import { POPULAR_CALCULATOR_SLUGS } from "../src/data/popular-calculators";
+import { getCategorySeoSlug } from "../src/lib/category-routes";
 
 const POPULAR_SLUGS = POPULAR_CALCULATOR_SLUGS;
 
@@ -14,7 +15,7 @@ const items = calculators.map((calc) => ({
   group: CALCULATOR_CATEGORY_LABELS[calc.category],
   title: calc.title,
   description: calc.description,
-  href: calc.href,
+  href: `/tools/${getCategorySeoSlug(calc.category)}/${calc.slug}/`,
   tag: calc.tag,
   keywords: calc.keywords ?? [],
 }));

@@ -63,6 +63,16 @@ export interface CalculatorSeoContent {
   sections: CalculatorSeoSection[];
 }
 
+/** Desktop SEO content block below the calculator (title + formula + example). */
+export interface CalculatorContentSection {
+  /** H2 heading, e.g. "How to calculate Wh from Ah" */
+  title: string;
+  /** Body copy under the "The Formula" H3 */
+  formula: string;
+  /** Body copy under the "Practical Example" H3 */
+  example: string;
+}
+
 export type CalculatorComputeFn = (
   values: Record<string, string>
 ) => CalculatorResultDisplay;

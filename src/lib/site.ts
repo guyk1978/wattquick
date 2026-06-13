@@ -2,6 +2,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
 } from "@/lib/calculators";
+import { getCategoryPageHref } from "@/lib/category-routes";
 
 export const MAIN_NAV = [
   { href: "/dashboard", label: "Command Center" },
@@ -20,7 +21,7 @@ export const FOOTER_CALCULATOR_CATEGORIES: {
   Object.keys(CALCULATOR_CATEGORY_LABELS) as CalculatorCategory[]
 ).map((category) => ({
   category,
-  href: `/category/${category}`,
+  href: getCategoryPageHref(category),
 }));
 
 export const FOOTER_LINKS = {

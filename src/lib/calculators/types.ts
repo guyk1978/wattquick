@@ -3,6 +3,7 @@ import type { CalculatorSlug } from "@/data/calculators";
 import type {
   CalculatorCategory,
   CalculatorComputeFn,
+  CalculatorContentSection,
   CalculatorFieldDef,
   CalculatorResultConfig,
   CalculatorResultDisplay,
@@ -13,6 +14,7 @@ import type {
 export type {
   CalculatorCategory,
   CalculatorComputeFn,
+  CalculatorContentSection,
   CalculatorFieldDef,
   CalculatorFieldInputType,
   CalculatorFieldOption,

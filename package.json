@@ -11,9 +11,12 @@
     "generate:calculators": "tsx scripts/generate-calculators-md.ts",
     "generate:article-tool-map": "node scripts/generate-article-tool-map.mjs",
     "search:build": "node scripts/build-search-index.js",
+    "validate:routes": "tsx scripts/validate-tool-routes.ts",
+    "validate:sitemap": "tsx scripts/validate-sitemap.ts",
+    "generate:redirects": "node scripts/generate-tool-redirects.mjs",
     "fuse:vendor": "esbuild node_modules/fuse.js/dist/fuse.min.mjs --format=iife --global-name=Fuse --outfile=assets/js/vendor/fuse.min.js --minify --footer:js=\"if(typeof Fuse!=='undefined'&&typeof Fuse.default==='function'){Fuse=Fuse.default;}\"",
-    "prebuild": "npm run generate:calculators && npm run generate:article-tool-map && npm run search:build && node scripts/write-site-config.mjs",
-    "predev": "npm run generate:calculators && npm run search:build && node scripts/write-site-config.mjs"
+    "prebuild": "npm run generate:calculators && npm run generate:article-tool-map && npm run search:build && npm run generate:redirects && npm run validate:sitemap && node scripts/write-site-config.mjs",
+    "predev": "npm run generate:calculators && npm run search:build && npm run generate:redirects && node scripts/write-site-config.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

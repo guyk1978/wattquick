@@ -7,10 +7,16 @@ import { getArticleUrl, getArticleSlugFromSearchParams } from "@/lib/content-too
 import { cn } from "@/lib/utils";
 
 interface CalculatorPageBackLinkProps {
+  categoryHref: string;
+  categoryLabel: string;
   className?: string;
 }
 
-export function CalculatorPageBackLink({ className }: CalculatorPageBackLinkProps) {
+export function CalculatorPageBackLink({
+  categoryHref,
+  categoryLabel,
+  className,
+}: CalculatorPageBackLinkProps) {
   const searchParams = useSearchParams();
   const articleSlug = getArticleSlugFromSearchParams(searchParams);
 
@@ -34,7 +40,7 @@ export function CalculatorPageBackLink({ className }: CalculatorPageBackLinkProp
 
   return (
     <Link
-      href="/"
+      href={categoryHref}
       className={cn(
         "calculator-page-header__back",
         "inline-flex items-center gap-2 text-sm font-medium text-muted-foreground",
@@ -44,7 +50,7 @@ export function CalculatorPageBackLink({ className }: CalculatorPageBackLinkProp
       )}
     >
       <ArrowLeft className="size-4 shrink-0" aria-hidden />
-      All calculators
+      Back to {categoryLabel}
     </Link>
   );
 }

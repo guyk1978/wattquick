@@ -40,8 +40,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  jsonLd,
 }: Readonly<{
   children: React.ReactNode;
+  jsonLd: React.ReactNode;
 }>) {
   return (
     <html
@@ -53,6 +55,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {jsonLd}
         <link rel="stylesheet" href="/assets/css/site-search.css" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#1a1a1a" />

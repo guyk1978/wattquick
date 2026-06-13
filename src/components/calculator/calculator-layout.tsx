@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 interface CalculatorLayoutProps {
   calculator: CalculatorMeta;
   children: React.ReactNode;
+  contentSection?: React.ReactNode;
   seoContent?: React.ReactNode;
   className?: string;
 }
@@ -14,6 +15,7 @@ interface CalculatorLayoutProps {
 export function CalculatorLayout({
   calculator,
   children,
+  contentSection,
   seoContent,
   className,
 }: CalculatorLayoutProps) {
@@ -24,6 +26,7 @@ export function CalculatorLayout({
       <CalculatorPageLayout
         calculatorId={calculator.id}
         pageHeader={<CalculatorPageHeader calculator={calculator} />}
+        contentSection={contentSection}
         bottomContent={
           <>
             {seoContent ? (

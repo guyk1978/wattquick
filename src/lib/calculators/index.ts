@@ -11,6 +11,7 @@ export type {
   CalculatorResultDisplay,
   CalculatorSeoContent,
   CalculatorSeoSection,
+  CalculatorContentSection,
 } from "./types";
 export {
   calculators,
@@ -34,6 +35,10 @@ export {
 export { getRelatedCalculators } from "./related";
 export { isCalculatorId } from "./utils";
 export { isCalculatorCategory } from "./categories";
+export {
+  getCalculatorHref,
+  getCalculatorIdFromToolPath,
+} from "../calculator-routes";
 export {
   CALCULATOR_USE_CASES,
   getCalculatorUseCase,

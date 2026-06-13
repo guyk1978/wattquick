@@ -1,5 +1,6 @@
 import { calculators, CALCULATOR_SLUGS } from "@/data/calculators";
 import { getRelatedArticleForTool } from "@/data/article-tool-map";
+import { getCalculatorHref } from "@/lib/calculator-routes";
 import {
   toMeta,
   type CalculatorCategory,
@@ -16,7 +17,7 @@ function toDefinition(
 
   return {
     id,
-    href: entry.href,
+    href: getCalculatorHref(id, entry.category),
     title: entry.title,
     description: entry.description,
     keywords: entry.keywords,

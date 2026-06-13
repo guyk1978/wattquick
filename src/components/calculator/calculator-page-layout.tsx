@@ -10,6 +10,7 @@ import type { CalculatorId } from "@/lib/calculators";
 interface CalculatorPageLayoutProps {
   calculatorId: CalculatorId;
   pageHeader: ReactNode;
+  contentSection?: ReactNode;
   bottomContent?: ReactNode;
   children: ReactNode;
 }
@@ -21,6 +22,7 @@ interface CalculatorPageLayoutProps {
 export function CalculatorPageLayout({
   calculatorId,
   pageHeader,
+  contentSection,
   bottomContent,
   children,
 }: CalculatorPageLayoutProps) {
@@ -30,6 +32,7 @@ export function CalculatorPageLayout({
       <CalculatorPageShell
         calculatorId={calculatorId}
         pageHeader={pageHeader}
+        contentSection={contentSection}
         bottomContent={bottomContent}
       />
     </CalculatorPageShellProvider>

@@ -12,6 +12,7 @@ const DEFAULT_EMPTY_MESSAGE =
 interface CalculatorPageShellProps {
   calculatorId: CalculatorId;
   pageHeader: ReactNode;
+  contentSection?: ReactNode;
   bottomContent?: ReactNode;
   className?: string;
 }
@@ -32,12 +33,13 @@ function CalculatorPageShellEmpty() {
 export function CalculatorPageShell({
   calculatorId,
   pageHeader,
+  contentSection,
   bottomContent,
   className,
 }: CalculatorPageShellProps) {
   const slots = useCalculatorPageShellSlots();
   const hasMain = slots.main != null;
-  const hasMainFooter = Boolean(slots.footer || bottomContent);
+  const hasMainFooter = Boolean(slots.footer || contentSection || bottomContent);
 
   return (
     <div className={cn("calculator-page-shell", className)}>
@@ -78,8 +80,11 @@ export function CalculatorPageShell({
               {slots.footer ? (
                 <div className="calculator-page-shell__footer">{slots.footer}</div>
               ) : null}
-              {bottomContent ? (
-                <div className="calculator-page-shell__bottom">{bottomContent}</div>
+              {contentSection || bottomContent ? (
+                <div className="calculator-page-shell__bottom">
+                  {contentSection}
+                  {bottomContent}
+                </div>
               ) : null}
             </footer>
           ) : null}

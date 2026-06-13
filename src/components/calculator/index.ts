@@ -1,4 +1,5 @@
 export { CalculatorSeoContent } from "./calculator-seo-content";
+export { CalculatorContentSection } from "./calculator-content-section";
 export { CalculatorField } from "./calculator-field";
 export {
   CalculatorCommandShell,
