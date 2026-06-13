@@ -20,21 +20,27 @@ export function CalculatorContentSection({ id }: CalculatorContentSectionProps) 
       aria-label="Calculator guide"
       className="mt-12 hidden w-full max-w-[44rem] lg:block lg:mt-16"
     >
-      <h2 className="text-xl font-semibold tracking-tight text-white">{title}</h2>
+      <h2 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-white">
+        {title}
+      </h2>
 
       <div className="mt-8 space-y-8">
         <section>
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white">
             {CALCULATOR_CONTENT_HEADINGS.formula}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-300">{formula}</p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-800 dark:text-slate-300">
+            {formula}
+          </p>
         </section>
 
         <section>
-          <h3 className="text-base font-semibold text-white">
+          <h3 className="text-base font-semibold text-slate-900 dark:text-white">
             {CALCULATOR_CONTENT_HEADINGS.example}
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-300">{example}</p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-800 dark:text-slate-300">
+            {example}
+          </p>
         </section>
       </div>
     </section>

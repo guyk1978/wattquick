@@ -1,4 +1,4 @@
-import { CalculatorCard } from "@/components/calculator-card";
+import { CalculatorAppCard } from "@/components/calculator-app-card";
 import type { CalculatorMeta } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ export function SuggestedCalculators({
   if (calculators.length === 0) return null;
 
   return (
-    <section className={cn("space-y-4", className)} aria-labelledby="suggested-heading">
+    <section className={cn("space-y-5", className)} aria-labelledby="suggested-heading">
       <div className="space-y-0.5">
         <h2
           id="suggested-heading"
@@ -28,10 +28,17 @@ export function SuggestedCalculators({
           More tools in this category and beyond
         </p>
       </div>
-      <ul className="grid list-none gap-2 p-0 sm:grid-cols-2">
+      <ul
+        className="calculators-hub__grid list-none p-0"
+        aria-label="Related calculator apps"
+      >
         {calculators.map((calc) => (
-          <li key={calc.id}>
-            <CalculatorCard calculator={calc} variant="related" />
+          <li key={calc.id} className="calculators-hub__grid-cell">
+            <CalculatorAppCard
+              calculator={calc}
+              variant="hub"
+              actionLabel="Open app"
+            />
           </li>
         ))}
       </ul>
