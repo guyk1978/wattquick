@@ -4,6 +4,7 @@ import { HeaderNav } from "@/components/header-nav";
 import { HeaderShareMenu } from "@/components/header-share-menu";
 import { MobileNav } from "@/components/mobile-nav";
 import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
+
 export function SiteHeader() {
   return (
     <header className="glass-header sticky top-0 z-50 w-full overflow-visible">

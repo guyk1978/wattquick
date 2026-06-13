@@ -77,7 +77,7 @@ export function CalculatorCard({
         style={categoryThemeVars(theme)}
         className={cn(
           "calc-card calc-card-flat group flex h-full flex-col gap-2 rounded-none border p-3 transition-colors duration-150",
-          "border-border/70 bg-card",
+          "border-slate-200 bg-white",
           "dark:border-border dark:bg-card/90",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className
@@ -111,7 +111,7 @@ export function CalculatorCard({
       style={categoryThemeVars(theme)}
       className={cn(
         "calc-card calc-card-flat group flex h-full flex-col gap-3 rounded-none border p-4 transition-colors duration-150",
-        "border-border/70 bg-card",
+        "border-slate-200 bg-white",
         "dark:border-border dark:bg-card/90",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         isCompact ? "p-3" : "p-4",

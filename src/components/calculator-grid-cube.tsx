@@ -28,8 +28,8 @@ export function CalculatorGridCube({
       onClick={() => onSelect(calculator)}
       className={cn(
         "calculator-grid-cube group flex h-11 w-full flex-row items-center gap-2 px-2 py-1.5 sm:h-12 sm:gap-2.5 sm:px-2.5",
-        "rounded-none border border-border/70 bg-card text-left",
-        "transition-colors hover:border-[var(--matte-hover-border)] hover:bg-[var(--matte-btn-hover)]",
+        "rounded-none border border-slate-200 bg-white text-left",
+        "transition-colors hover:border-slate-300 hover:bg-slate-50",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "dark:border-white/10 dark:bg-[var(--matte-section)] dark:hover:bg-[var(--matte-hover-strong)]",
         className

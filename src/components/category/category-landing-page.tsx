@@ -47,7 +47,7 @@ export function CategoryLandingPage({
         <h2 id="category-seo-intro-heading" className="sr-only">
           About {label} calculators
         </h2>
-        <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-slate-300 sm:text-base">
+        <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-slate-800 dark:text-slate-300 sm:text-base">
           {seo.paragraphs.map((paragraph) => (
             <p key={paragraph.slice(0, 48)}>{paragraph}</p>
           ))}

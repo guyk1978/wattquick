@@ -12,7 +12,10 @@ export function HomeHero({
   className,
 }: HomeHeroProps) {
   return (
-    <section className={cn("home-hub-hero", className)} aria-labelledby="home-hub-title">
+    <section
+      className={cn("home-hub-hero relative z-10", className)}
+      aria-labelledby="home-hub-title"
+    >
       <div className="home-hub-hero__inner">
         <p className="home-hub-hero__eyebrow">WattQuick Tool Suite</p>
 
@@ -26,15 +29,15 @@ export function HomeHero({
         </p>
 
         <dl className="home-hub-hero__stats">
-          <div className="home-hub-hero__stat">
+          <div className="home-hub-hero__stat home-hub-hero__stat--overlay">
             <dt className="home-hub-hero__stat-label">Tools</dt>
             <dd className="home-hub-hero__stat-value">{calculatorCount}</dd>
           </div>
-          <div className="home-hub-hero__stat">
+          <div className="home-hub-hero__stat home-hub-hero__stat--overlay">
             <dt className="home-hub-hero__stat-label">Categories</dt>
             <dd className="home-hub-hero__stat-value">{categoryCount}</dd>
           </div>
-          <div className="home-hub-hero__stat">
+          <div className="home-hub-hero__stat home-hub-hero__stat--overlay">
             <dt className="home-hub-hero__stat-label">Latency</dt>
             <dd className="home-hub-hero__stat-value">&lt;50ms</dd>
           </div>

@@ -12,6 +12,7 @@ import {
 import { OgImageSync } from "@/components/og-image-sync";
 import {
   applyThemeClass,
+  readThemeFromDocument,
   resolveTheme,
   THEME_STORAGE_KEY,
   type Theme,
@@ -26,12 +27,7 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-
-  useEffect(() => {
-    const isDark = document.documentElement.classList.contains("dark");
-    setThemeState(isDark ? "dark" : "light");
-  }, []);
+  const [theme, setThemeState] = useState<Theme>(() => readThemeFromDocument());
 
   const setTheme = useCallback((next: Theme) => {
     setThemeState(next);
@@ -40,11 +36,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }, [setTheme, theme]);
+    setThemeState((current) => {
+      const next: Theme = current === "dark" ? "light" : "dark";
+      localStorage.setItem(THEME_STORAGE_KEY, next);
+      applyThemeClass(next);
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
-    applyThemeClass(theme);
+    setThemeState(readThemeFromDocument());
 
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onSystemChange = () => {
@@ -57,7 +58,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     mq.addEventListener("change", onSystemChange);
     return () => mq.removeEventListener("change", onSystemChange);
-  }, [theme]);
+  }, []);
 
   const value = useMemo(
     () => ({ theme, setTheme, toggleTheme }),

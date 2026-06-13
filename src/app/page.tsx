@@ -1,5 +1,6 @@
 import { CalnexAppCallout } from "@/components/CalnexAppCallout";
 import { HomeHero } from "@/components/home-hero";
+import { HomeHeroBackground } from "@/components/home-hero-background";
 import { HomeToolHub } from "@/components/home-tool-hub";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
@@ -14,10 +15,13 @@ const activeCategoryCount = CATEGORY_DISPLAY_ORDER.filter((cat) =>
 export default function HomePage() {
   return (
     <div className="home-hub-page">
-      <HomeHero
-        calculatorCount={calculators.length}
-        categoryCount={activeCategoryCount}
-      />
+      <div className="home-hub-hero-shell">
+        <HomeHeroBackground />
+        <HomeHero
+          calculatorCount={calculators.length}
+          categoryCount={activeCategoryCount}
+        />
+      </div>
 
       <div className="home-hub-page__body">
         <HomeToolHub
