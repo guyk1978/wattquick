@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Briefcase, Menu, Star, X } from "lucide-react";
 import { useState } from "react";
 import { HeaderNavItem } from "@/components/header-nav-item";
 import { isMainNavActive } from "@/lib/nav-active";
@@ -16,19 +15,13 @@ export function MobileNav() {
   return (
     <div className="relative md:hidden">
       <HeaderNavItem
-        label="Menu"
+        label={open ? "Close" : "Menu"}
         onClick={() => setOpen(!open)}
         active={open}
         className="glass-header__action-item"
         aria-expanded={open}
         aria-label={open ? "Close menu" : "Open menu"}
-      >
-        {open ? (
-          <X className="glass-header__nav-icon" strokeWidth={2} />
-        ) : (
-          <Menu className="glass-header__nav-icon" strokeWidth={2} />
-        )}
-      </HeaderNavItem>
+      />
       {open ? (
         <nav
           className="mobile-nav-panel absolute right-0 top-full z-50 mt-1.5 min-w-[200px] p-1.5"
@@ -44,23 +37,11 @@ export function MobileNav() {
                     isMainNavActive(item.href, pathname) ? "page" : undefined
                   }
                   className={cn(
-                    "header-nav-link flex items-center gap-1.5 px-3 py-2 text-sm font-medium",
+                    "header-nav-link block px-3 py-2 text-sm font-medium",
                     isMainNavActive(item.href, pathname) && "header-nav-link--active"
                   )}
                 >
-                  {item.href === "/projects" ? (
-                    <>
-                      <Briefcase className="size-3.5 shrink-0 opacity-80" aria-hidden />
-                      {item.label}
-                    </>
-                  ) : item.href === "/favorites" ? (
-                    <>
-                      <Star className="size-3.5 shrink-0 opacity-80" aria-hidden />
-                      {item.label}
-                    </>
-                  ) : (
-                    item.label
-                  )}
+                  {item.label}
                 </Link>
               </li>
             ))}

@@ -1,36 +1,21 @@
-import { CalnexAppCallout } from "@/components/CalnexAppCallout";
-import { HomeHero } from "@/components/home-hero";
-import { HomeHeroBackground } from "@/components/home-hero-background";
-import { HomeToolHub } from "@/components/home-tool-hub";
-import { CALCULATOR_SLUGS } from "@/data/calculators";
-import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
+import type { Metadata } from "next";
+import { HeroSection } from "@/components/landing/hero-section";
 import { getAllCalculatorMeta } from "@/lib/calculators";
+import { createPageMetadata } from "@/lib/seo";
 
-const calculators = getAllCalculatorMeta();
+const calculatorCount = getAllCalculatorMeta().length;
 
-const activeCategoryCount = CATEGORY_DISPLAY_ORDER.filter((cat) =>
-  calculators.some((c) => c.category === cat)
-).length;
+export const metadata: Metadata = createPageMetadata({
+  title: "WattQuick — Battery & Power Calculators",
+  description:
+    "Professional battery, solar, EV, and power micro-calculators. Instant engineering-grade results with minimal inputs — free, no sign-up.",
+  path: "",
+});
 
 export default function HomePage() {
   return (
-    <div className="home-hub-page">
-      <div className="home-hub-hero-shell">
-        <HomeHeroBackground />
-        <HomeHero
-          calculatorCount={calculators.length}
-          categoryCount={activeCategoryCount}
-        />
-      </div>
-
-      <div className="home-hub-page__body">
-        <HomeToolHub
-          allIds={[...CALCULATOR_SLUGS]}
-          totalCount={calculators.length}
-        />
-
-        <CalnexAppCallout className="home-hub-page__partner" />
-      </div>
+    <div className="landing-page landing-page--hero-only">
+      <HeroSection calculatorCount={calculatorCount} />
     </div>
   );
 }

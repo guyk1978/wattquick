@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import { useMemo, useRef, useState } from "react";
-import { ArrowUpRight, Calculator, Compass, Search } from "lucide-react";
+import { ArrowUpRight, Compass, Search } from "lucide-react";
 import { CalculatorCategoryCubeGrid } from "@/components/calculator-category-cube-grid";
 import { CalculatorInfoModal } from "@/components/calculator-info-modal";
 import { Input } from "@/components/ui/input";
@@ -105,12 +105,7 @@ export function CalculatorsMegaMenu() {
           aria-expanded={open}
           aria-haspopup="true"
         >
-          <span className="glass-header__nav-icon-wrap" aria-hidden>
-            <Calculator className="glass-header__nav-icon" strokeWidth={2} />
-          </span>
-          <span className="glass-header__nav-label">
-            {getHeaderNavShortLabel("/calculators")}
-          </span>
+          {getHeaderNavShortLabel("/calculators")}
         </Link>
 
         <div

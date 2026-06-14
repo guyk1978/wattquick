@@ -27,8 +27,8 @@ function CalculatorPageShellEmpty() {
 }
 
 /**
- * Viewport-level calculator layout: sidebar + main in document flow,
- * single page scroll; actions and related content stay in the results column.
+ * Viewport-level calculator layout: sticky sidebar (internal scroll) + main in document flow.
+ * Main column scrolls with the page; sidebar stays pinned on desktop.
  */
 export function CalculatorPageShell({
   calculatorId,

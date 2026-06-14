@@ -1,5 +1,5 @@
 /**
- * WattQuick command palette site search (Ctrl+K / ⌘+K).
+ * WattQuick header search (Ctrl+K / ⌘+K).
  * Requires Fuse global from assets/js/vendor/fuse.min.js.
  */
 (function (global) {
@@ -52,6 +52,13 @@
     return null;
   }
 
+  function badgeForItem(item) {
+    if (item.type === "blog") {
+      return { label: "Article", className: "wq-search-item__badge--article" };
+    }
+    return { label: "Tool", className: "wq-search-item__badge--tool" };
+  }
+
   function SiteSearch(options) {
     this.options = options || {};
     this.index = null;
@@ -59,16 +66,23 @@
     this.isOpen = false;
     this.activeIndex = -1;
     this.flatResults = [];
-    this.overlay = null;
+    this.root = null;
+    this.iconBtn = null;
+    this.panel = null;
     this.input = null;
     this.resultsEl = null;
     this._boundKeydown = this.onGlobalKeydown.bind(this);
+    this._boundOutsideClick = this.onOutsideClick.bind(this);
   }
 
-  SiteSearch.prototype.init = function () {
+  SiteSearch.prototype.mount = function (container) {
     var self = this;
-    this.buildModal();
+    if (!container) return Promise.reject(new Error("Search mount container missing"));
+
+    this.buildHeaderWidget(container);
     document.addEventListener("keydown", this._boundKeydown);
+    document.addEventListener("mousedown", this._boundOutsideClick);
+
     return this.loadIndex().then(function () {
       self.setupFuse();
       return self;
@@ -119,44 +133,42 @@
     }
   };
 
-  SiteSearch.prototype.buildModal = function () {
+  SiteSearch.prototype.buildHeaderWidget = function (container) {
     var parts = shortcutParts();
-    var footerKeys = isMac()
-      ? "<span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>↵</kbd> open</span><span><kbd>esc</kbd> close</span>"
-      : "<span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> open</span><span><kbd>Esc</kbd> close</span>";
-
-    var overlay = document.createElement("div");
-    overlay.className = "wq-search-overlay";
-    overlay.id = "wq-site-search";
-    overlay.setAttribute("role", "dialog");
-    overlay.setAttribute("aria-modal", "true");
-    overlay.setAttribute("aria-label", "Search WattQuick");
-    overlay.hidden = true;
-    overlay.innerHTML =
-      '<div class="wq-search-modal">' +
-      '  <div class="wq-search-input-wrap">' +
+    var root = document.createElement("div");
+    root.className = "wq-header-search";
+    root.id = "wq-site-search";
+    root.innerHTML =
+      '<button type="button" class="wq-header-search__icon-btn" aria-label="Search (' +
+      escapeHtml(shortcutLabel()) +
+      ')" aria-expanded="false" aria-controls="wq-header-search-panel">' +
       SEARCH_ICON +
-      '    <input class="wq-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="Search calculators and articles…" aria-label="Search" />' +
-      '    <span class="wq-search-hint wq-search-kbd wq-search-kbd--desktop" aria-hidden="true">' +
+      "</button>" +
+      '<div class="wq-header-search__panel" id="wq-header-search-panel" hidden>' +
+      '  <div class="wq-header-search__input-wrap">' +
+      SEARCH_ICON +
+      '    <input class="wq-header-search__input" type="search" autocomplete="off" spellcheck="false" placeholder="Search tools and articles…" aria-label="Search" aria-controls="wq-header-search-results" />' +
+      '    <span class="wq-search-kbd wq-header-search__kbd" aria-hidden="true">' +
       escapeHtml(parts[0]) +
       "+" +
       escapeHtml(parts[1]) +
       "</span>" +
       "  </div>" +
-      '  <div class="wq-search-results" role="listbox" aria-label="Search results"></div>' +
-      '  <div class="wq-search-footer">' +
-      footerKeys +
+      '  <div class="wq-header-search__dropdown">' +
+      '    <div class="wq-header-search__results" id="wq-header-search-results" role="listbox" aria-label="Search results"></div>' +
       "  </div>" +
       "</div>";
 
-    document.body.appendChild(overlay);
-    this.overlay = overlay;
-    this.input = overlay.querySelector(".wq-search-input");
-    this.resultsEl = overlay.querySelector(".wq-search-results");
+    container.appendChild(root);
+    this.root = root;
+    this.iconBtn = root.querySelector(".wq-header-search__icon-btn");
+    this.panel = root.querySelector(".wq-header-search__panel");
+    this.input = root.querySelector(".wq-header-search__input");
+    this.resultsEl = root.querySelector(".wq-header-search__results");
 
     var self = this;
-    overlay.addEventListener("click", function (e) {
-      if (e.target === overlay) self.close();
+    this.iconBtn.addEventListener("click", function () {
+      self.open();
     });
     this.input.addEventListener("input", function () {
       self.activeIndex = -1;
@@ -168,11 +180,12 @@
   };
 
   SiteSearch.prototype.open = function () {
-    if (!this.overlay || this.isOpen) return;
+    if (!this.root || this.isOpen) return;
     this.isOpen = true;
-    this.overlay.hidden = false;
-    this.overlay.classList.add("is-open");
-    document.body.classList.add("wq-search-open");
+    this.root.classList.add("is-open");
+    this.iconBtn.hidden = true;
+    this.panel.hidden = false;
+    this.iconBtn.setAttribute("aria-expanded", "true");
     this.input.value = "";
     this.activeIndex = -1;
     this.renderResults("");
@@ -183,18 +196,26 @@
   };
 
   SiteSearch.prototype.close = function () {
-    if (!this.overlay || !this.isOpen) return;
+    if (!this.root || !this.isOpen) return;
     this.isOpen = false;
-    this.overlay.classList.remove("is-open");
-    this.overlay.hidden = true;
-    document.body.classList.remove("wq-search-open");
+    this.root.classList.remove("is-open");
+    this.panel.hidden = true;
+    this.iconBtn.hidden = false;
+    this.iconBtn.setAttribute("aria-expanded", "false");
     this.activeIndex = -1;
     this.flatResults = [];
+    if (this.resultsEl) this.resultsEl.innerHTML = "";
+    if (this.input) this.input.value = "";
   };
 
   SiteSearch.prototype.toggle = function () {
     if (this.isOpen) this.close();
     else this.open();
+  };
+
+  SiteSearch.prototype.onOutsideClick = function (e) {
+    if (!this.isOpen || !this.root) return;
+    if (!this.root.contains(e.target)) this.close();
   };
 
   SiteSearch.prototype.onGlobalKeydown = function (e) {
@@ -207,10 +228,18 @@
     if (e.key === "Escape" && this.isOpen) {
       e.preventDefault();
       this.close();
+      if (this.iconBtn) this.iconBtn.focus();
     }
   };
 
   SiteSearch.prototype.onInputKeydown = function (e) {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      this.close();
+      if (this.iconBtn) this.iconBtn.focus();
+      return;
+    }
+
     if (!this.flatResults.length) return;
 
     if (e.key === "ArrowDown") {
@@ -277,30 +306,23 @@
       return (
         '<div class="wq-search-empty">' +
         '<p class="wq-search-empty__title">Search WattQuick</p>' +
-        "<p>Type to find calculators and blog articles.</p>" +
+        "<p>Type to find tools and articles.</p>" +
         "</div>"
       );
     }
 
     var html =
       '<div class="wq-search-empty">' +
-      '<p class="wq-search-empty__title">Popular calculators</p>' +
+      '<p class="wq-search-empty__title">Popular tools</p>' +
       "<p>Jump in with a quick pick, or start typing.</p>" +
       "</div>";
 
-    html += this.renderItemList(
-      [{ label: "Calculators", items: slice }],
-      0
-    );
+    html += this.renderItemList([{ label: "Calculators", items: slice }], 0);
     return html;
   };
 
   SiteSearch.prototype.renderItem = function (item, flatIndex) {
-    var badgeClass =
-      item.type === "blog"
-        ? "wq-search-item__badge--blog"
-        : "wq-search-item__badge--calc";
-    var badgeLabel = item.type === "blog" ? "Blog" : "Tool";
+    var badge = badgeForItem(item);
     var href = normalizeHref(item.href);
 
     return (
@@ -310,9 +332,9 @@
       flatIndex +
       '">' +
       '<span class="wq-search-item__badge ' +
-      badgeClass +
+      badge.className +
       '">' +
-      escapeHtml(badgeLabel) +
+      escapeHtml(badge.label) +
       "</span>" +
       '<span class="wq-search-item__body">' +
       '<span class="wq-search-item__title">' +
@@ -362,7 +384,7 @@
       if (!items.length) {
         html =
           '<div class="wq-search-empty"><p class="wq-search-empty__title">No results</p>' +
-          "<p>Try another keyword — calculator name, topic, or blog title.</p></div>";
+          "<p>Try another keyword — tool name, topic, or article title.</p></div>";
       } else {
         var groups = this.groupResults(items);
         html = this.renderItemList(groups, 0);
@@ -382,24 +404,6 @@
         node.classList.add("is-active");
       }
     });
-  };
-
-  SiteSearch.createTrigger = function () {
-    var parts = shortcutParts();
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "wq-search-trigger";
-    btn.setAttribute("aria-label", "Search tools (" + shortcutLabel() + ")");
-    btn.innerHTML =
-      SEARCH_ICON +
-      '<span class="wq-search-trigger__label">Search tools...</span>' +
-      '<span class="wq-search-kbd wq-search-kbd--integrated" aria-hidden="true">' +
-      "<span>" +
-      escapeHtml(parts[0]) +
-      "</span><span>+</span><span>" +
-      escapeHtml(parts[1]) +
-      "</span></span>";
-    return btn;
   };
 
   global.WattQuickSiteSearch = SiteSearch;

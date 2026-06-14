@@ -24,6 +24,8 @@ import { cn } from "@/lib/utils";
 const ALL_CATEGORY = "all" as const;
 type FilterCategory = CalculatorCategory | typeof ALL_CATEGORY;
 
+const CATEGORY_DEFAULT_VISIBLE = 3;
+
 interface HomeToolHubProps {
   allIds: CalculatorId[];
   totalCount: number;
@@ -160,8 +162,12 @@ function CategorySection({
   category: CalculatorCategory;
   items: ReturnType<typeof getCalculatorMeta>[];
 }) {
+  const [expanded, setExpanded] = useState(false);
   const CategoryIcon = CALCULATOR_CATEGORY_ICONS[category];
   const theme = getCategoryTheme(category);
+  const hasMore = items.length > CATEGORY_DEFAULT_VISIBLE;
+  const visibleItems =
+    expanded || !hasMore ? items : items.slice(0, CATEGORY_DEFAULT_VISIBLE);
 
   return (
     <section
@@ -175,7 +181,7 @@ function CategorySection({
         <span className="home-tool-hub__category-icon" aria-hidden>
           <CategoryIcon className="size-5" strokeWidth={2} />
         </span>
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <h2
             id={`hub-category-${category}`}
             className="home-tool-hub__category-title"
@@ -186,13 +192,29 @@ function CategorySection({
             {CALCULATOR_CATEGORY_DESCRIPTIONS[category]}
           </p>
         </div>
-        <span className="home-tool-hub__category-count">
-          {items.length} tool{items.length === 1 ? "" : "s"}
-        </span>
+        {hasMore ? (
+          <button
+            type="button"
+            className="home-tool-hub__show-more"
+            aria-expanded={expanded}
+            aria-controls={`hub-category-grid-${category}`}
+            onClick={() => setExpanded((value) => !value)}
+          >
+            {expanded ? "Show less" : "Show more"}
+          </button>
+        ) : (
+          <span className="home-tool-hub__category-count">
+            {items.length} tool{items.length === 1 ? "" : "s"}
+          </span>
+        )}
       </header>
 
-      <div className="home-tool-hub__grid" role="list">
-        {items.map((calc) => (
+      <div
+        id={`hub-category-grid-${category}`}
+        className="home-tool-hub__grid"
+        role="list"
+      >
+        {visibleItems.map((calc) => (
           <div key={calc.id} role="listitem">
             <HomeToolCard calculator={calc} />
           </div>

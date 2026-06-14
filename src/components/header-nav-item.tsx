@@ -1,11 +1,9 @@
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface HeaderNavItemBaseProps {
   label: string;
-  icon?: LucideIcon;
   active?: boolean;
   className?: string;
   children?: ReactNode;
@@ -25,23 +23,12 @@ export type HeaderNavItemProps = HeaderNavItemLinkProps | HeaderNavItemButtonPro
 
 export function HeaderNavItem({
   label,
-  icon: Icon,
   active,
   className,
   children,
   ...props
 }: HeaderNavItemProps) {
-  const content = (
-    <>
-      <span className="glass-header__nav-icon-wrap">
-        {children ??
-          (Icon ? (
-            <Icon className="glass-header__nav-icon" strokeWidth={2} aria-hidden />
-          ) : null)}
-      </span>
-      <span className="glass-header__nav-label">{label}</span>
-    </>
-  );
+  const content = children ?? label;
 
   const itemClass = cn(
     "glass-header__nav-item",

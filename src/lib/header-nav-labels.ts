@@ -1,4 +1,4 @@
-/** Concise English labels shown under header navigation icons */
+/** Concise English labels for header navigation links */
 export const HEADER_NAV_SHORT_LABELS: Record<string, string> = {
   "/dashboard": "Dashboard",
   "/calculators": "Calculators",

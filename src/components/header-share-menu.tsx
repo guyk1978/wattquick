@@ -97,10 +97,9 @@ export function HeaderShareMenu() {
     <div ref={rootRef} className="relative">
       <HeaderNavItem
         label="Share"
-        icon={Share2}
         onClick={() => setOpen((value) => !value)}
         active={open}
-        className="glass-header__action-item hidden sm:flex"
+        className="glass-header__action-item hidden sm:inline-flex"
         aria-label="Share this page"
         aria-expanded={open}
         aria-haspopup="menu"

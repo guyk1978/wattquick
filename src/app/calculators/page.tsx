@@ -1,37 +1,40 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import { CalculatorsDirectory } from "@/components/calculators-directory";
-import { PageShell } from "@/components/page-shell";
+import { CalnexAppCallout } from "@/components/CalnexAppCallout";
+import { CalculatorsHubHeader } from "@/components/calculators-hub-header";
+import { HomeToolHub } from "@/components/home-tool-hub";
+import { CALCULATOR_SLUGS } from "@/data/calculators";
+import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { createPageMetadata } from "@/lib/seo";
 
-const calculatorCount = getAllCalculatorMeta().length;
+const calculators = getAllCalculatorMeta();
+
+const activeCategoryCount = CATEGORY_DISPLAY_ORDER.filter((cat) =>
+  calculators.some((c) => c.category === cat)
+).length;
 
 export const metadata: Metadata = createPageMetadata({
   title: "All Calculators",
-  description: `Browse ${calculatorCount} free battery, solar, EV, and power micro-calculators. Instant results with minimal inputs.`,
+  description: `Browse ${calculators.length} free battery, solar, EV, and power micro-calculators. Search or filter by category, then open any tool instantly.`,
   path: "/calculators",
 });
 
 export default function CalculatorsPage() {
   return (
-    <PageShell className="calculators-hub-page max-w-[80rem]">
-      <header className="calculators-hub-page__header">
-        <p className="calculators-hub-page__eyebrow">Application launcher</p>
-        <h1 className="calculators-hub-page__title">All calculators</h1>
-        <p className="calculators-hub-page__description">
-          Browse {calculatorCount} professional power tools. Search or filter by
-          category, then open any calculator instantly.
-        </p>
-      </header>
+    <div className="calculators-directory-page">
+      <div className="calculators-directory-page__inner">
+        <CalculatorsHubHeader
+          calculatorCount={calculators.length}
+          categoryCount={activeCategoryCount}
+        />
 
-      <Suspense
-        fallback={
-          <p className="text-sm text-muted-foreground">Loading directory…</p>
-        }
-      >
-        <CalculatorsDirectory />
-      </Suspense>
-    </PageShell>
+        <HomeToolHub
+          allIds={[...CALCULATOR_SLUGS]}
+          totalCount={calculators.length}
+        />
+
+        <CalnexAppCallout className="calculators-directory-page__partner" />
+      </div>
+    </div>
   );
 }

@@ -1,37 +1,29 @@
 /**
- * WattQuick client bootstrap — injects command palette trigger into the header.
+ * WattQuick client bootstrap — injects header search into the site header.
  */
 (function () {
   "use strict";
 
   var searchInstance = null;
 
-  function mountSearchTrigger() {
+  function mountHeaderSearch() {
     var header = document.querySelector("header");
-    if (!header || header.querySelector(".wq-search-trigger")) return;
+    if (!header || header.querySelector(".wq-header-search")) return;
 
     var searchSlot = header.querySelector("[data-header-search]");
     if (!searchSlot) return;
 
     if (typeof window.WattQuickSiteSearch === "undefined") return;
 
-    var trigger = window.WattQuickSiteSearch.createTrigger();
-
     searchInstance = new window.WattQuickSiteSearch();
-    searchInstance.init().catch(function (err) {
+    searchInstance.mount(searchSlot).catch(function (err) {
       console.warn("[WattQuick] Site search failed to initialize:", err);
     });
-
-    trigger.addEventListener("click", function () {
-      if (searchInstance) searchInstance.open();
-    });
-
-    searchSlot.appendChild(trigger);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountSearchTrigger);
+    document.addEventListener("DOMContentLoaded", mountHeaderSearch);
   } else {
-    mountSearchTrigger();
+    mountHeaderSearch();
   }
 })();
