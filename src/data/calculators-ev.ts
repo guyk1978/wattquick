@@ -3,6 +3,7 @@ import {
   Cable,
   Car,
   LifeBuoy,
+  Percent,
   Plug,
   Snowflake,
   Thermometer,
@@ -20,6 +21,7 @@ import {
   calculateEvBatteryDepletionValueLoss,
   calculateEvChargingCableLoss,
   calculateEvChargingTemperatureImpact,
+  calculateEvPackSoc,
   calculateEvPreconditioningCost,
   calculateEvTireWearCost,
   calculateEvVsGasSavings,
@@ -1143,6 +1145,94 @@ export const calculatorsEv = [
         value: formatNumber(result.powerLossW, { maxDecimals: 1 }),
         unit: "W",
         detail: `${result.energyLossKwh} kWh wasted · ${formatCurrency(result.sessionCost)}/session · ${result.roundTripOhms} Ω`,
+      };
+    },
+  },
+  {
+    slug: "ev-soc-calculator",
+    href: "/ev-soc-calculator",
+    title: "EV Battery State of Charge (SoC) Calculator",
+    description:
+      "Estimate EV pack state of charge from resting voltage using configurable empty and full voltage endpoints.",
+    keywords: [
+      "ev battery soc calculator",
+      "ev state of charge",
+      "ev pack voltage soc",
+      "battery voltage curve",
+    ],
+    icon: Percent,
+    tag: "EV",
+    category: "ev",
+    suggestions: [
+      "ev-fast-charging-time",
+      "ev-battery-range",
+      "ev-charging-temperature-impact",
+    ],
+    fields: [
+      {
+        id: "packVoltage",
+        label: "Pack voltage (resting)",
+        unit: "V",
+        placeholder: "380",
+        hint: "Measure after vehicle has been idle several minutes",
+      },
+      {
+        id: "voltageEmpty",
+        label: "Empty pack voltage (~0% SOC)",
+        unit: "V",
+        placeholder: "320",
+        hint: "Manufacturer BMS empty resting endpoint",
+      },
+      {
+        id: "voltageFull",
+        label: "Full pack voltage (~100% SOC)",
+        unit: "V",
+        placeholder: "410",
+        hint: "Manufacturer BMS full resting endpoint",
+      },
+    ],
+    result: {
+      label: "Estimated state of charge",
+      emptyMessage: "Enter pack voltage and empty/full endpoints",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Voltage-based SoC estimation",
+          body: "Resting pack voltage maps to state of charge through the pack OCV curve. This tool uses a linear interpolation between your empty and full voltage endpoints—a planning baseline before applying chemistry-specific lookup tables.",
+        },
+        {
+          heading: "When readings differ from the dash",
+          body: "The vehicle BMS blends coulomb counting, temperature compensation, and cell balancing. Voltage alone under load is not reliable—always measure at rest for field checks.",
+        },
+      ],
+    },
+    compute(values) {
+      const packVoltage = parsePositive(values.packVoltage ?? "");
+      const voltageEmpty = parsePositive(values.voltageEmpty ?? "");
+      const voltageFull = parsePositive(values.voltageFull ?? "");
+      if (packVoltage === null || voltageEmpty === null || voltageFull === null) {
+        return { value: null };
+      }
+
+      const result = calculateEvPackSoc({
+        packVoltageV: packVoltage,
+        voltageEmptyV: voltageEmpty,
+        voltageFullV: voltageFull,
+      });
+      if (!result) return { value: null };
+
+      const clampNote =
+        result.isClamped === "above_full"
+          ? "Capped at 100% (voltage above full endpoint)"
+          : result.isClamped === "below_empty"
+            ? "Floored at 0% (voltage below empty endpoint)"
+            : `${result.voltageDeltaV} V above empty · ${result.spanV} V span`;
+
+      return {
+        value: formatNumber(result.socPercent, { maxDecimals: 1 }),
+        unit: "%",
+        detail: clampNote,
       };
     },
   },

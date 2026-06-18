@@ -517,3 +517,31 @@ export function calculateEvChargingCableLoss({
     wireLabel: `${crossSectionMm2} mm² copper`,
   };
 }
+
+export interface EvPackSocInput {
+  packVoltageV: number;
+  voltageEmptyV: number;
+  voltageFullV: number;
+}
+
+/** Linear resting OCV estimate between empty and full pack voltage endpoints. */
+export function calculateEvPackSoc({
+  packVoltageV,
+  voltageEmptyV,
+  voltageFullV,
+}: EvPackSocInput) {
+  const span = voltageFullV - voltageEmptyV;
+  if (span <= 0) return null;
+
+  const rawPercent = ((packVoltageV - voltageEmptyV) / span) * 100;
+  const socPercent = Math.min(100, Math.max(0, rawPercent));
+  const isClamped =
+    rawPercent > 100 ? "above_full" : rawPercent < 0 ? "below_empty" : "in_range";
+
+  return {
+    socPercent: parseFloat(socPercent.toFixed(1)),
+    isClamped,
+    voltageDeltaV: parseFloat((packVoltageV - voltageEmptyV).toFixed(1)),
+    spanV: parseFloat(span.toFixed(1)),
+  };
+}

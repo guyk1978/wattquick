@@ -147,6 +147,8 @@
 /ev-tire-wear-cost/ /tools/ev-charging/ev-tire-wear-cost/ 301
 /ev-charging-cable-loss /tools/ev-charging/ev-charging-cable-loss/ 301
 /ev-charging-cable-loss/ /tools/ev-charging/ev-charging-cable-loss/ 301
+/ev-soc-calculator /tools/ev-charging/ev-soc-calculator/ 301
+/ev-soc-calculator/ /tools/ev-charging/ev-soc-calculator/ 301
 /solar-roof-space /tools/solar-power/solar-roof-space/ 301
 /solar-roof-space/ /tools/solar-power/solar-roof-space/ 301
 /solar-payback-roi /tools/solar-power/solar-payback-roi/ 301
@@ -313,3 +315,7 @@
 /escooter-maintenance-schedule/ /tools/e-scooter/escooter-maintenance-schedule/ 301
 /mobility-tco-calculator /tools/e-bike/mobility-tco-calculator/ 301
 /mobility-tco-calculator/ /tools/e-bike/mobility-tco-calculator/ 301
+
+# guide-landing-redirects
+/tools/calculators/ev-soc-calculator /landing/ev-soc-calculator/ 301
+/tools/calculators/ev-soc-calculator/ /landing/ev-soc-calculator/ 301

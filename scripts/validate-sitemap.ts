@@ -8,11 +8,14 @@ import {
   SITEMAP_CATEGORY_COUNT,
   SITEMAP_STATIC_PATHS,
 } from "../src/lib/sitemap-entries";
+import { GUIDE_LANDING_SLUGS, getAllGuideLandings } from "../src/lib/calculators/calculator-landings-registry";
 import { getAllCalculatorMeta } from "../src/lib/calculators/registry";
-import { SITE_URL } from "../src/lib/seo";
+import { absoluteUrl, SITE_URL } from "../src/lib/seo";
 
 const ABSOLUTE_TOOL_PATTERN =
   /^https:\/\/wattquick\.com\/tools\/[a-z0-9-]+\/[a-z0-9-]+\/$/;
+const ABSOLUTE_GUIDE_PATTERN =
+  /^https:\/\/wattquick\.com\/(?:landing|tools\/calculators)\/[a-z0-9-]+\/$/;
 const ABSOLUTE_CATEGORY_PATTERN =
   /^https:\/\/wattquick\.com\/tools\/[a-z0-9-]+\/$/;
 const LEGACY_FLAT_TOOL_PATTERN =
@@ -56,7 +59,13 @@ if (unique.size !== urls.length) {
 
 // Category pages
 const categoryUrls = urls.filter((url) => ABSOLUTE_CATEGORY_PATTERN.test(url));
-const toolUrls = urls.filter((url) => ABSOLUTE_TOOL_PATTERN.test(url));
+const guideHrefs = new Set(
+  getAllGuideLandings().map((landing) => absoluteUrl(landing.href))
+);
+const guideUrls = urls.filter((url) => guideHrefs.has(url));
+const toolUrls = urls.filter(
+  (url) => ABSOLUTE_TOOL_PATTERN.test(url) && !guideHrefs.has(url)
+);
 
 if (categoryUrls.length !== SITEMAP_CATEGORY_COUNT) {
   fail(
@@ -74,6 +83,23 @@ if (toolUrls.length !== CALCULATOR_SLUGS.length) {
 } else {
   pass(`${toolUrls.length} tool pages at /tools/{category-slug}/{tool-slug}/`);
 }
+
+// Guide landing pages
+if (guideUrls.length !== GUIDE_LANDING_SLUGS.length) {
+  fail(
+    `Expected ${GUIDE_LANDING_SLUGS.length} guide landing pages, found ${guideUrls.length}`
+  );
+} else {
+  pass(`${guideUrls.length} guide pages at /landing/`);
+}
+
+for (const landing of getAllGuideLandings()) {
+  const expected = absoluteUrl(landing.href);
+  if (!guideUrls.includes(expected)) {
+    fail(`Missing guide landing page in sitemap: ${expected}`);
+  }
+}
+pass("Every guide landing href is present in the sitemap");
 
 // Registry alignment
 const metaByHref = new Map(

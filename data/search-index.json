@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-14T19:15:09.140Z",
+  "generatedAt": "2026-06-18T15:10:41.919Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1015,6 +1015,22 @@
         "cable resistance kwh waste",
         "level 2 cable gauge loss",
         "i2r charging loss calculator"
+      ]
+    },
+    {
+      "id": "ev-soc-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "EV Charging",
+      "title": "EV Battery State of Charge (SoC) Calculator",
+      "description": "Estimate EV pack state of charge from resting voltage using configurable empty and full voltage endpoints.",
+      "href": "/tools/ev-charging/ev-soc-calculator/",
+      "tag": "EV",
+      "keywords": [
+        "ev battery soc calculator",
+        "ev state of charge",
+        "ev pack voltage soc",
+        "battery voltage curve"
       ]
     },
     {

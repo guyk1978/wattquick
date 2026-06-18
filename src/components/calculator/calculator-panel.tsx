@@ -1,9 +1,9 @@
 "use client";
 
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { useCalculatorForm } from "@/hooks/use-calculator-form";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
 import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -59,6 +59,7 @@ import {
   CalculatorCommandSplit,
 } from "./calculator-command-layout";
 import { CalculatorInputs } from "./calculator-inputs";
+import { CalculatorGuideLink } from "./calculator-guide-link";
 import {
   CalculatorResultsDashboard,
   recordToSummaryItems,
@@ -338,6 +339,8 @@ function CalculatorPanelInner({
         isSaving={pdfLoading}
         saveError={pdfError}
       />
+
+      <CalculatorGuideLink calculatorId={id} className="mt-2" />
 
       <div className="calculator-command__footer flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         {footerNote ? (

@@ -1,15 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { getAllCalculatorMeta } from "@/lib/calculators";
 import {
-  CALCULATOR_CATEGORY_LABELS,
-  getAllCalculatorMeta,
-} from "@/lib/calculators";
+  getDynamicCalculatorCategoryResources,
+  getToolFooterLinksForPath,
+} from "@/lib/footerResources";
 import { FOOTER_NETWORK_PARTNERS } from "@/lib/partners";
-import {
-  FOOTER_CALCULATOR_CATEGORIES,
-  FOOTER_LINKS,
-} from "@/lib/site";
+import { FOOTER_LINKS } from "@/lib/site";
 
 export function SiteFooter() {
+  const pathname = usePathname() ?? "/";
+  const resourceLinks = getToolFooterLinksForPath(pathname);
   const count = getAllCalculatorMeta().length;
 
   return (
@@ -30,10 +33,10 @@ export function SiteFooter() {
           <div className="site-footer__column">
             <h2 className="site-footer__heading">Categories</h2>
             <ul className="site-footer__links">
-              {FOOTER_CALCULATOR_CATEGORIES.map(({ category, href }) => (
-                <li key={category}>
-                  <Link href={href} className="site-footer__link">
-                    {CALCULATOR_CATEGORY_LABELS[category]}
+              {getDynamicCalculatorCategoryResources().map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="site-footer__link">
+                    {link.label}
                   </Link>
                 </li>
               ))}
@@ -44,6 +47,21 @@ export function SiteFooter() {
               </li>
             </ul>
           </div>
+
+          {resourceLinks.length > 0 ? (
+            <div className="site-footer__column">
+              <h2 className="site-footer__heading">Resources</h2>
+              <ul className="site-footer__links">
+                {resourceLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href} className="site-footer__link">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
 
           <div className="site-footer__column">
             <h2 className="site-footer__heading">Company</h2>

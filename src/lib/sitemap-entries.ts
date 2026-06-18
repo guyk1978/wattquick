@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 import { getAllCalculatorMeta } from "@/lib/calculators";
+import { getAllGuideLandings } from "@/lib/calculators/calculator-landings-registry";
 import {
   CATEGORY_SEO_SLUG_LIST,
   getCategoryPageHref,
@@ -31,6 +32,7 @@ const CATEGORY_KEYS = Object.keys(
  * Build sitemap entries from live registry data.
  * Category pages: /tools/{category-slug}/
  * Tool pages: /tools/{category-slug}/{tool-slug}/
+ * Guide pages: /landing/{slug}/
  */
 export function buildSitemapEntries(): MetadataRoute.Sitemap {
   const calculators = getAllCalculatorMeta();
@@ -61,6 +63,15 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
+  const guideLandingEntries: MetadataRoute.Sitemap = getAllGuideLandings().map(
+    (landing) => ({
+      url: absoluteUrl(landing.href),
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })
+  );
+
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: absoluteUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.publishedAt),
@@ -72,6 +83,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     ...staticEntries,
     ...categoryEntries,
     ...toolEntries,
+    ...guideLandingEntries,
     ...blogEntries,
   ];
 }
