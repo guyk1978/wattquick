@@ -59,6 +59,26 @@ import {
   LED_SAVINGS_ROI_TOOL_PATH,
   getLedSavingsRoiToolFooterLinks,
 } from "@/lib/calculators/ledSavingsRoiLandings";
+import {
+  POOL_ENERGY_THERMAL_COVER_TOOL_PATH,
+  getPoolEnergyThermalCoverToolFooterLinks,
+} from "@/lib/calculators/poolEnergyThermalCoverLandings";
+import {
+  TOU_SHIFTING_SAVINGS_TOOL_PATH,
+  getTouShiftingSavingsToolFooterLinks,
+} from "@/lib/calculators/touShiftingSavingsLandings";
+import {
+  DEMAND_CHARGE_CALCULATOR_TOOL_PATH,
+  getDemandChargeCalculatorToolFooterLinks,
+} from "@/lib/calculators/demandChargeCalculatorLandings";
+import {
+  BATTERY_COST_TOOL_PATH,
+  getBatteryCostToolFooterLinks,
+} from "@/lib/calculators/batteryCostLandings";
+import {
+  ELECTRICITY_BILL_TOOL_PATH,
+  getElectricityBillToolFooterLinks,
+} from "@/lib/calculators/electricityBillLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -121,6 +141,11 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   [HEAT_LOSS_INSULATION_TOOL_PATH]: getHeatLossInsulationToolFooterLinks(),
   [HOME_INSULATION_SAVINGS_TOOL_PATH]: getHomeInsulationSavingsToolFooterLinks(),
   [LED_SAVINGS_ROI_TOOL_PATH]: getLedSavingsRoiToolFooterLinks(),
+  [POOL_ENERGY_THERMAL_COVER_TOOL_PATH]: getPoolEnergyThermalCoverToolFooterLinks(),
+  [TOU_SHIFTING_SAVINGS_TOOL_PATH]: getTouShiftingSavingsToolFooterLinks(),
+  [DEMAND_CHARGE_CALCULATOR_TOOL_PATH]: getDemandChargeCalculatorToolFooterLinks(),
+  [BATTERY_COST_TOOL_PATH]: getBatteryCostToolFooterLinks(),
+  [ELECTRICITY_BILL_TOOL_PATH]: getElectricityBillToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {

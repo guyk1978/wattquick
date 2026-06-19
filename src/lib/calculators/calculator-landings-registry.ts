@@ -101,6 +101,36 @@ import {
   getLedSavingsRoiLanding,
   isLedSavingsRoiLandingSlug,
 } from "@/lib/calculators/ledSavingsRoiLandings";
+import {
+  POOL_ENERGY_THERMAL_COVER_FOOTER_RESOURCES,
+  POOL_ENERGY_THERMAL_COVER_LANDING_SLUGS,
+  getPoolEnergyThermalCoverLanding,
+  isPoolEnergyThermalCoverLandingSlug,
+} from "@/lib/calculators/poolEnergyThermalCoverLandings";
+import {
+  TOU_SHIFTING_SAVINGS_FOOTER_RESOURCES,
+  TOU_SHIFTING_SAVINGS_LANDING_SLUGS,
+  getTouShiftingSavingsLanding,
+  isTouShiftingSavingsLandingSlug,
+} from "@/lib/calculators/touShiftingSavingsLandings";
+import {
+  DEMAND_CHARGE_CALCULATOR_FOOTER_RESOURCES,
+  DEMAND_CHARGE_CALCULATOR_LANDING_SLUGS,
+  getDemandChargeCalculatorLanding,
+  isDemandChargeCalculatorLandingSlug,
+} from "@/lib/calculators/demandChargeCalculatorLandings";
+import {
+  BATTERY_COST_FOOTER_RESOURCES,
+  BATTERY_COST_LANDING_SLUGS,
+  getBatteryCostLanding,
+  isBatteryCostLandingSlug,
+} from "@/lib/calculators/batteryCostLandings";
+import {
+  ELECTRICITY_BILL_FOOTER_RESOURCES,
+  ELECTRICITY_BILL_LANDING_SLUGS,
+  getElectricityBillLanding,
+  isElectricityBillLandingSlug,
+} from "@/lib/calculators/electricityBillLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -122,6 +152,11 @@ export const GUIDE_LANDING_SLUGS = [
   ...HEAT_LOSS_INSULATION_LANDING_SLUGS,
   ...HOME_INSULATION_SAVINGS_LANDING_SLUGS,
   ...LED_SAVINGS_ROI_LANDING_SLUGS,
+  ...POOL_ENERGY_THERMAL_COVER_LANDING_SLUGS,
+  ...TOU_SHIFTING_SAVINGS_LANDING_SLUGS,
+  ...DEMAND_CHARGE_CALCULATOR_LANDING_SLUGS,
+  ...BATTERY_COST_LANDING_SLUGS,
+  ...ELECTRICITY_BILL_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -148,6 +183,11 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...HEAT_LOSS_INSULATION_FOOTER_RESOURCES,
   ...HOME_INSULATION_SAVINGS_FOOTER_RESOURCES,
   ...LED_SAVINGS_ROI_FOOTER_RESOURCES,
+  ...POOL_ENERGY_THERMAL_COVER_FOOTER_RESOURCES,
+  ...TOU_SHIFTING_SAVINGS_FOOTER_RESOURCES,
+  ...DEMAND_CHARGE_CALCULATOR_FOOTER_RESOURCES,
+  ...BATTERY_COST_FOOTER_RESOURCES,
+  ...ELECTRICITY_BILL_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -230,6 +270,21 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isLedSavingsRoiLandingSlug(slug)) {
     return getLedSavingsRoiLanding(slug);
+  }
+  if (isPoolEnergyThermalCoverLandingSlug(slug)) {
+    return getPoolEnergyThermalCoverLanding(slug);
+  }
+  if (isTouShiftingSavingsLandingSlug(slug)) {
+    return getTouShiftingSavingsLanding(slug);
+  }
+  if (isDemandChargeCalculatorLandingSlug(slug)) {
+    return getDemandChargeCalculatorLanding(slug);
+  }
+  if (isBatteryCostLandingSlug(slug)) {
+    return getBatteryCostLanding(slug);
+  }
+  if (isElectricityBillLandingSlug(slug)) {
+    return getElectricityBillLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }
