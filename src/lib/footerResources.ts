@@ -8,6 +8,10 @@ import {
   getEscooterRangeToolFooterLinks,
 } from "@/lib/calculators/escooterRangeLandings";
 import {
+  ESCOOTER_TIRE_PRESSURE_TOOL_PATH,
+  getEscooterTirePressureToolFooterLinks,
+} from "@/lib/calculators/escooterTirePressureLandings";
+import {
   EV_TRUCK_RANGE_TOOL_PATH,
   getEvTruckRangeToolFooterLinks,
 } from "@/lib/calculators/evTruckRangeLandings";
@@ -119,6 +123,26 @@ import {
   BATTERY_ENERGY_TOOL_PATH,
   getBatteryEnergyToolFooterLinks,
 } from "@/lib/calculators/batteryEnergyLandings";
+import {
+  BATTERY_DEPTH_OF_DISCHARGE_TOOL_PATH,
+  getBatteryDepthOfDischargeToolFooterLinks,
+} from "@/lib/calculators/batteryDepthOfDischargeLandings";
+import {
+  BATTERY_EFFICIENCY_TOOL_PATH,
+  getBatteryEfficiencyToolFooterLinks,
+} from "@/lib/calculators/batteryEfficiencyLandings";
+import {
+  BATTERY_SERIES_PARALLEL_TOOL_PATH,
+  getBatterySeriesParallelToolFooterLinks,
+} from "@/lib/calculators/batterySeriesParallelLandings";
+import {
+  INVERTER_SIZING_TOOL_PATH,
+  getInverterSizingToolFooterLinks,
+} from "@/lib/calculators/inverterSizingLandings";
+import {
+  DC_CABLE_SIZE_TOOL_PATH,
+  getDcCableSizeToolFooterLinks,
+} from "@/lib/calculators/dcCableSizeLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -168,6 +192,7 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
     },
   ],
   [ESCOOTER_RANGE_TOOL_PATH]: getEscooterRangeToolFooterLinks(),
+  [ESCOOTER_TIRE_PRESSURE_TOOL_PATH]: getEscooterTirePressureToolFooterLinks(),
   [EV_TRUCK_RANGE_TOOL_PATH]: getEvTruckRangeToolFooterLinks(),
   [UPS_RUNTIME_TOOL_PATH]: getUpsRuntimeToolFooterLinks(),
   [BATTERY_BANK_SIZE_TOOL_PATH]: getBatteryBankSizeToolFooterLinks(),
@@ -199,6 +224,12 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   [BATTERY_RUNTIME_TOOL_PATH]: getBatteryRuntimeToolFooterLinks(),
   [BATTERY_CHARGING_TIME_TOOL_PATH]: getBatteryChargingTimeToolFooterLinks(),
   [BATTERY_ENERGY_TOOL_PATH]: getBatteryEnergyToolFooterLinks(),
+  [BATTERY_DEPTH_OF_DISCHARGE_TOOL_PATH]:
+    getBatteryDepthOfDischargeToolFooterLinks(),
+  [BATTERY_EFFICIENCY_TOOL_PATH]: getBatteryEfficiencyToolFooterLinks(),
+  [BATTERY_SERIES_PARALLEL_TOOL_PATH]: getBatterySeriesParallelToolFooterLinks(),
+  [INVERTER_SIZING_TOOL_PATH]: getInverterSizingToolFooterLinks(),
+  [DC_CABLE_SIZE_TOOL_PATH]: getDcCableSizeToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {

@@ -24,6 +24,12 @@ import {
   isEscooterRangeLandingSlug,
 } from "@/lib/calculators/escooterRangeLandings";
 import {
+  ESCOOTER_TIRE_PRESSURE_FOOTER_RESOURCES,
+  ESCOOTER_TIRE_PRESSURE_LANDING_SLUGS,
+  getEscooterTirePressureLanding,
+  isEscooterTirePressureLandingSlug,
+} from "@/lib/calculators/escooterTirePressureLandings";
+import {
   EV_TRUCK_RANGE_FOOTER_RESOURCES,
   EV_TRUCK_RANGE_LANDING_SLUGS,
   getEvTruckRangeLanding,
@@ -191,6 +197,36 @@ import {
   getBatteryEnergyLanding,
   isBatteryEnergyLandingSlug,
 } from "@/lib/calculators/batteryEnergyLandings";
+import {
+  BATTERY_DEPTH_OF_DISCHARGE_FOOTER_RESOURCES,
+  BATTERY_DEPTH_OF_DISCHARGE_LANDING_SLUGS,
+  getBatteryDepthOfDischargeLanding,
+  isBatteryDepthOfDischargeLandingSlug,
+} from "@/lib/calculators/batteryDepthOfDischargeLandings";
+import {
+  BATTERY_EFFICIENCY_FOOTER_RESOURCES,
+  BATTERY_EFFICIENCY_LANDING_SLUGS,
+  getBatteryEfficiencyLanding,
+  isBatteryEfficiencyLandingSlug,
+} from "@/lib/calculators/batteryEfficiencyLandings";
+import {
+  BATTERY_SERIES_PARALLEL_FOOTER_RESOURCES,
+  BATTERY_SERIES_PARALLEL_LANDING_SLUGS,
+  getBatterySeriesParallelLanding,
+  isBatterySeriesParallelLandingSlug,
+} from "@/lib/calculators/batterySeriesParallelLandings";
+import {
+  INVERTER_SIZING_FOOTER_RESOURCES,
+  INVERTER_SIZING_LANDING_SLUGS,
+  getInverterSizingLanding,
+  isInverterSizingLandingSlug,
+} from "@/lib/calculators/inverterSizingLandings";
+import {
+  DC_CABLE_SIZE_FOOTER_RESOURCES,
+  DC_CABLE_SIZE_LANDING_SLUGS,
+  getDcCableSizeLanding,
+  isDcCableSizeLandingSlug,
+} from "@/lib/calculators/dcCableSizeLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -199,6 +235,7 @@ export const GUIDE_LANDING_SLUGS = [
   ...EV_SOC_LANDING_SLUGS,
   ...REMAINING_BATTERY_CAPACITY_LANDING_SLUGS,
   ...ESCOOTER_RANGE_LANDING_SLUGS,
+  ...ESCOOTER_TIRE_PRESSURE_LANDING_SLUGS,
   ...EV_TRUCK_RANGE_LANDING_SLUGS,
   ...UPS_RUNTIME_LANDING_SLUGS,
   ...BATTERY_BANK_SIZE_LANDING_SLUGS,
@@ -227,6 +264,11 @@ export const GUIDE_LANDING_SLUGS = [
   ...BATTERY_RUNTIME_LANDING_SLUGS,
   ...BATTERY_CHARGING_TIME_LANDING_SLUGS,
   ...BATTERY_ENERGY_LANDING_SLUGS,
+  ...BATTERY_DEPTH_OF_DISCHARGE_LANDING_SLUGS,
+  ...BATTERY_EFFICIENCY_LANDING_SLUGS,
+  ...BATTERY_SERIES_PARALLEL_LANDING_SLUGS,
+  ...INVERTER_SIZING_LANDING_SLUGS,
+  ...DC_CABLE_SIZE_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -240,6 +282,7 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...BATTERY_PERCENTAGE_FOOTER_RESOURCES,
   ...EV_SOC_FOOTER_RESOURCES,
   ...ESCOOTER_RANGE_FOOTER_RESOURCES,
+  ...ESCOOTER_TIRE_PRESSURE_FOOTER_RESOURCES,
   ...EV_TRUCK_RANGE_FOOTER_RESOURCES,
   ...UPS_RUNTIME_FOOTER_RESOURCES,
   ...BATTERY_BANK_SIZE_FOOTER_RESOURCES,
@@ -268,6 +311,11 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...BATTERY_RUNTIME_FOOTER_RESOURCES,
   ...BATTERY_CHARGING_TIME_FOOTER_RESOURCES,
   ...BATTERY_ENERGY_FOOTER_RESOURCES,
+  ...BATTERY_DEPTH_OF_DISCHARGE_FOOTER_RESOURCES,
+  ...BATTERY_EFFICIENCY_FOOTER_RESOURCES,
+  ...BATTERY_SERIES_PARALLEL_FOOTER_RESOURCES,
+  ...INVERTER_SIZING_FOOTER_RESOURCES,
+  ...DC_CABLE_SIZE_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -311,6 +359,9 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isEscooterRangeLandingSlug(slug)) {
     return getEscooterRangeLanding(slug);
+  }
+  if (isEscooterTirePressureLandingSlug(slug)) {
+    return getEscooterTirePressureLanding(slug);
   }
   if (isEvTruckRangeLandingSlug(slug)) {
     return getEvTruckRangeLanding(slug);
@@ -395,6 +446,21 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isBatteryEnergyLandingSlug(slug)) {
     return getBatteryEnergyLanding(slug);
+  }
+  if (isBatteryDepthOfDischargeLandingSlug(slug)) {
+    return getBatteryDepthOfDischargeLanding(slug);
+  }
+  if (isBatteryEfficiencyLandingSlug(slug)) {
+    return getBatteryEfficiencyLanding(slug);
+  }
+  if (isBatterySeriesParallelLandingSlug(slug)) {
+    return getBatterySeriesParallelLanding(slug);
+  }
+  if (isInverterSizingLandingSlug(slug)) {
+    return getInverterSizingLanding(slug);
+  }
+  if (isDcCableSizeLandingSlug(slug)) {
+    return getDcCableSizeLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }

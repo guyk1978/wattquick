@@ -2391,6 +2391,81 @@
   gap: 1rem;
 }
 
+/* Visual Guide — blueprint modal trigger (calculator title) */
+.calculator-visual-guide-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--matte-border);
+  border-radius: 0;
+  background: var(--matte-chip-bg);
+  color: var(--matte-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.calculator-visual-guide-btn:hover {
+  border-color: var(--matte-hover-border);
+  background: var(--matte-chip-hover-bg);
+  color: var(--matte-fg);
+  box-shadow: var(--matte-shadow-hover);
+}
+
+.calculator-visual-guide-btn:focus-visible {
+  outline: none;
+  border-color: var(--matte-focus-border);
+  box-shadow: 0 0 0 3px var(--matte-focus-ring);
+}
+
+.calculator-visual-guide-modal__illustration-wrap {
+  border: 1px solid var(--matte-border);
+  background: var(--matte-input);
+  padding: 1rem;
+}
+
+.dark .calculator-visual-guide-modal__illustration-wrap {
+  background: rgb(18 18 18);
+}
+
+.dc-cable-size-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.battery-percentage-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.battery-runtime-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-range-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.ebike-range-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
 .calculator-favorite-btn {
   display: inline-flex;
   width: 2.5rem;

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { CalculatorPageBackLink } from "@/components/calculator/calculator-page-back-link";
+import { CalculatorVisualGuide } from "@/components/calculator/calculator-visual-guide";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
@@ -44,9 +45,12 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
           </Link>
         </div>
         <div className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl sm:leading-tight">
-            {calculator.title}
-          </h1>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl sm:leading-tight">
+              {calculator.title}
+            </h1>
+            <CalculatorVisualGuide calculatorId={calculator.id} />
+          </div>
           <p className="max-w-prose text-base leading-relaxed text-muted-foreground">
             {calculator.description}
           </p>
