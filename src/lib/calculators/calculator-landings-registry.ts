@@ -71,6 +71,36 @@ import {
   getEbikeRangeEstimatorLanding,
   isEbikeRangeEstimatorLandingSlug,
 } from "@/lib/calculators/ebikeRangeLandings";
+import {
+  RV_SOLAR_CALCULATOR_FOOTER_RESOURCES,
+  RV_SOLAR_CALCULATOR_LANDING_SLUGS,
+  getRvSolarCalculatorLanding,
+  isRvSolarCalculatorLandingSlug,
+} from "@/lib/calculators/rvSolarCalculatorLandings";
+import {
+  APPLIANCE_MONTHLY_ENERGY_FOOTER_RESOURCES,
+  APPLIANCE_MONTHLY_ENERGY_LANDING_SLUGS,
+  getApplianceMonthlyEnergyLanding,
+  isApplianceMonthlyEnergyLandingSlug,
+} from "@/lib/calculators/applianceMonthlyEnergyLandings";
+import {
+  HEAT_LOSS_INSULATION_FOOTER_RESOURCES,
+  HEAT_LOSS_INSULATION_LANDING_SLUGS,
+  getHeatLossInsulationLanding,
+  isHeatLossInsulationLandingSlug,
+} from "@/lib/calculators/heatLossInsulationLandings";
+import {
+  HOME_INSULATION_SAVINGS_FOOTER_RESOURCES,
+  HOME_INSULATION_SAVINGS_LANDING_SLUGS,
+  getHomeInsulationSavingsLanding,
+  isHomeInsulationSavingsLandingSlug,
+} from "@/lib/calculators/homeInsulationSavingsLandings";
+import {
+  LED_SAVINGS_ROI_FOOTER_RESOURCES,
+  LED_SAVINGS_ROI_LANDING_SLUGS,
+  getLedSavingsRoiLanding,
+  isLedSavingsRoiLandingSlug,
+} from "@/lib/calculators/ledSavingsRoiLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -87,6 +117,11 @@ export const GUIDE_LANDING_SLUGS = [
   ...EV_CHARGING_COST_LANDING_SLUGS,
   ...WHOLE_HOUSE_ENERGY_BUDGET_LANDING_SLUGS,
   ...EBIKE_RANGE_ESTIMATOR_LANDING_SLUGS,
+  ...RV_SOLAR_CALCULATOR_LANDING_SLUGS,
+  ...APPLIANCE_MONTHLY_ENERGY_LANDING_SLUGS,
+  ...HEAT_LOSS_INSULATION_LANDING_SLUGS,
+  ...HOME_INSULATION_SAVINGS_LANDING_SLUGS,
+  ...LED_SAVINGS_ROI_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -108,6 +143,11 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...EV_CHARGING_COST_FOOTER_RESOURCES,
   ...WHOLE_HOUSE_ENERGY_BUDGET_FOOTER_RESOURCES,
   ...EBIKE_RANGE_ESTIMATOR_FOOTER_RESOURCES,
+  ...RV_SOLAR_CALCULATOR_FOOTER_RESOURCES,
+  ...APPLIANCE_MONTHLY_ENERGY_FOOTER_RESOURCES,
+  ...HEAT_LOSS_INSULATION_FOOTER_RESOURCES,
+  ...HOME_INSULATION_SAVINGS_FOOTER_RESOURCES,
+  ...LED_SAVINGS_ROI_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -175,6 +215,21 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isEbikeRangeEstimatorLandingSlug(slug)) {
     return getEbikeRangeEstimatorLanding(slug);
+  }
+  if (isRvSolarCalculatorLandingSlug(slug)) {
+    return getRvSolarCalculatorLanding(slug);
+  }
+  if (isApplianceMonthlyEnergyLandingSlug(slug)) {
+    return getApplianceMonthlyEnergyLanding(slug);
+  }
+  if (isHeatLossInsulationLandingSlug(slug)) {
+    return getHeatLossInsulationLanding(slug);
+  }
+  if (isHomeInsulationSavingsLandingSlug(slug)) {
+    return getHomeInsulationSavingsLanding(slug);
+  }
+  if (isLedSavingsRoiLandingSlug(slug)) {
+    return getLedSavingsRoiLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }

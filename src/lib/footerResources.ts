@@ -39,6 +39,26 @@ import {
   EBIKE_RANGE_ESTIMATOR_TOOL_PATH,
   getEbikeRangeEstimatorToolFooterLinks,
 } from "@/lib/calculators/ebikeRangeLandings";
+import {
+  RV_SOLAR_CALCULATOR_TOOL_PATH,
+  getRvSolarCalculatorToolFooterLinks,
+} from "@/lib/calculators/rvSolarCalculatorLandings";
+import {
+  APPLIANCE_MONTHLY_ENERGY_TOOL_PATH,
+  getApplianceMonthlyEnergyToolFooterLinks,
+} from "@/lib/calculators/applianceMonthlyEnergyLandings";
+import {
+  HEAT_LOSS_INSULATION_TOOL_PATH,
+  getHeatLossInsulationToolFooterLinks,
+} from "@/lib/calculators/heatLossInsulationLandings";
+import {
+  HOME_INSULATION_SAVINGS_TOOL_PATH,
+  getHomeInsulationSavingsToolFooterLinks,
+} from "@/lib/calculators/homeInsulationSavingsLandings";
+import {
+  LED_SAVINGS_ROI_TOOL_PATH,
+  getLedSavingsRoiToolFooterLinks,
+} from "@/lib/calculators/ledSavingsRoiLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -96,6 +116,11 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   [EV_CHARGING_COST_TOOL_PATH]: getEvChargingCostToolFooterLinks(),
   [WHOLE_HOUSE_ENERGY_BUDGET_TOOL_PATH]: getWholeHouseEnergyBudgetToolFooterLinks(),
   [EBIKE_RANGE_ESTIMATOR_TOOL_PATH]: getEbikeRangeEstimatorToolFooterLinks(),
+  [RV_SOLAR_CALCULATOR_TOOL_PATH]: getRvSolarCalculatorToolFooterLinks(),
+  [APPLIANCE_MONTHLY_ENERGY_TOOL_PATH]: getApplianceMonthlyEnergyToolFooterLinks(),
+  [HEAT_LOSS_INSULATION_TOOL_PATH]: getHeatLossInsulationToolFooterLinks(),
+  [HOME_INSULATION_SAVINGS_TOOL_PATH]: getHomeInsulationSavingsToolFooterLinks(),
+  [LED_SAVINGS_ROI_TOOL_PATH]: getLedSavingsRoiToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {
