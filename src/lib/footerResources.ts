@@ -107,6 +107,18 @@ import {
   BATTERY_DOD_ENERGY_YIELD_TOOL_PATH,
   getBatteryDodEnergyYieldToolFooterLinks,
 } from "@/lib/calculators/batteryDodEnergyYieldLandings";
+import {
+  BATTERY_RUNTIME_TOOL_PATH,
+  getBatteryRuntimeToolFooterLinks,
+} from "@/lib/calculators/batteryRuntimeLandings";
+import {
+  BATTERY_CHARGING_TIME_TOOL_PATH,
+  getBatteryChargingTimeToolFooterLinks,
+} from "@/lib/calculators/batteryChargingTimeLandings";
+import {
+  BATTERY_ENERGY_TOOL_PATH,
+  getBatteryEnergyToolFooterLinks,
+} from "@/lib/calculators/batteryEnergyLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -184,6 +196,9 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
     getReactivePowerCalculatorToolFooterLinks(),
   [BATTERY_DOD_ENERGY_YIELD_TOOL_PATH]:
     getBatteryDodEnergyYieldToolFooterLinks(),
+  [BATTERY_RUNTIME_TOOL_PATH]: getBatteryRuntimeToolFooterLinks(),
+  [BATTERY_CHARGING_TIME_TOOL_PATH]: getBatteryChargingTimeToolFooterLinks(),
+  [BATTERY_ENERGY_TOOL_PATH]: getBatteryEnergyToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {

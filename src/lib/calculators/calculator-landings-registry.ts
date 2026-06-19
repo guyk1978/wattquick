@@ -173,6 +173,24 @@ import {
   getBatteryDodEnergyYieldLanding,
   isBatteryDodEnergyYieldLandingSlug,
 } from "@/lib/calculators/batteryDodEnergyYieldLandings";
+import {
+  BATTERY_RUNTIME_FOOTER_RESOURCES,
+  BATTERY_RUNTIME_LANDING_SLUGS,
+  getBatteryRuntimeLanding,
+  isBatteryRuntimeLandingSlug,
+} from "@/lib/calculators/batteryRuntimeLandings";
+import {
+  BATTERY_CHARGING_TIME_FOOTER_RESOURCES,
+  BATTERY_CHARGING_TIME_LANDING_SLUGS,
+  getBatteryChargingTimeLanding,
+  isBatteryChargingTimeLandingSlug,
+} from "@/lib/calculators/batteryChargingTimeLandings";
+import {
+  BATTERY_ENERGY_FOOTER_RESOURCES,
+  BATTERY_ENERGY_LANDING_SLUGS,
+  getBatteryEnergyLanding,
+  isBatteryEnergyLandingSlug,
+} from "@/lib/calculators/batteryEnergyLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -206,6 +224,9 @@ export const GUIDE_LANDING_SLUGS = [
   ...CONDUCTOR_RESISTANCE_TEMPERATURE_LANDING_SLUGS,
   ...REACTIVE_POWER_CALCULATOR_LANDING_SLUGS,
   ...BATTERY_DOD_ENERGY_YIELD_LANDING_SLUGS,
+  ...BATTERY_RUNTIME_LANDING_SLUGS,
+  ...BATTERY_CHARGING_TIME_LANDING_SLUGS,
+  ...BATTERY_ENERGY_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -244,6 +265,9 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...CONDUCTOR_RESISTANCE_TEMPERATURE_FOOTER_RESOURCES,
   ...REACTIVE_POWER_CALCULATOR_FOOTER_RESOURCES,
   ...BATTERY_DOD_ENERGY_YIELD_FOOTER_RESOURCES,
+  ...BATTERY_RUNTIME_FOOTER_RESOURCES,
+  ...BATTERY_CHARGING_TIME_FOOTER_RESOURCES,
+  ...BATTERY_ENERGY_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -362,6 +386,15 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isBatteryDodEnergyYieldLandingSlug(slug)) {
     return getBatteryDodEnergyYieldLanding(slug);
+  }
+  if (isBatteryRuntimeLandingSlug(slug)) {
+    return getBatteryRuntimeLanding(slug);
+  }
+  if (isBatteryChargingTimeLandingSlug(slug)) {
+    return getBatteryChargingTimeLanding(slug);
+  }
+  if (isBatteryEnergyLandingSlug(slug)) {
+    return getBatteryEnergyLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }
