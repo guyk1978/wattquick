@@ -131,6 +131,48 @@ import {
   getElectricityBillLanding,
   isElectricityBillLandingSlug,
 } from "@/lib/calculators/electricityBillLandings";
+import {
+  AH_TO_WH_FOOTER_RESOURCES,
+  AH_TO_WH_LANDING_SLUGS,
+  getAhToWhLanding,
+  isAhToWhLandingSlug,
+} from "@/lib/calculators/ahToWhLandings";
+import {
+  WH_TO_AH_FOOTER_RESOURCES,
+  WH_TO_AH_LANDING_SLUGS,
+  getWhToAhLanding,
+  isWhToAhLandingSlug,
+} from "@/lib/calculators/whToAhLandings";
+import {
+  KVA_TO_KW_FOOTER_RESOURCES,
+  KVA_TO_KW_LANDING_SLUGS,
+  getKvaToKwLanding,
+  isKvaToKwLandingSlug,
+} from "@/lib/calculators/kvaToKwLandings";
+import {
+  KW_TO_HP_FOOTER_RESOURCES,
+  KW_TO_HP_LANDING_SLUGS,
+  getKwToHpLanding,
+  isKwToHpLandingSlug,
+} from "@/lib/calculators/kwToHpLandings";
+import {
+  CONDUCTOR_RESISTANCE_TEMPERATURE_FOOTER_RESOURCES,
+  CONDUCTOR_RESISTANCE_TEMPERATURE_LANDING_SLUGS,
+  getConductorResistanceTemperatureLanding,
+  isConductorResistanceTemperatureLandingSlug,
+} from "@/lib/calculators/conductorResistanceTemperatureLandings";
+import {
+  REACTIVE_POWER_CALCULATOR_FOOTER_RESOURCES,
+  REACTIVE_POWER_CALCULATOR_LANDING_SLUGS,
+  getReactivePowerCalculatorLanding,
+  isReactivePowerCalculatorLandingSlug,
+} from "@/lib/calculators/reactivePowerCalculatorLandings";
+import {
+  BATTERY_DOD_ENERGY_YIELD_FOOTER_RESOURCES,
+  BATTERY_DOD_ENERGY_YIELD_LANDING_SLUGS,
+  getBatteryDodEnergyYieldLanding,
+  isBatteryDodEnergyYieldLandingSlug,
+} from "@/lib/calculators/batteryDodEnergyYieldLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -157,6 +199,13 @@ export const GUIDE_LANDING_SLUGS = [
   ...DEMAND_CHARGE_CALCULATOR_LANDING_SLUGS,
   ...BATTERY_COST_LANDING_SLUGS,
   ...ELECTRICITY_BILL_LANDING_SLUGS,
+  ...AH_TO_WH_LANDING_SLUGS,
+  ...WH_TO_AH_LANDING_SLUGS,
+  ...KVA_TO_KW_LANDING_SLUGS,
+  ...KW_TO_HP_LANDING_SLUGS,
+  ...CONDUCTOR_RESISTANCE_TEMPERATURE_LANDING_SLUGS,
+  ...REACTIVE_POWER_CALCULATOR_LANDING_SLUGS,
+  ...BATTERY_DOD_ENERGY_YIELD_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -188,6 +237,13 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...DEMAND_CHARGE_CALCULATOR_FOOTER_RESOURCES,
   ...BATTERY_COST_FOOTER_RESOURCES,
   ...ELECTRICITY_BILL_FOOTER_RESOURCES,
+  ...AH_TO_WH_FOOTER_RESOURCES,
+  ...WH_TO_AH_FOOTER_RESOURCES,
+  ...KVA_TO_KW_FOOTER_RESOURCES,
+  ...KW_TO_HP_FOOTER_RESOURCES,
+  ...CONDUCTOR_RESISTANCE_TEMPERATURE_FOOTER_RESOURCES,
+  ...REACTIVE_POWER_CALCULATOR_FOOTER_RESOURCES,
+  ...BATTERY_DOD_ENERGY_YIELD_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -285,6 +341,27 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isElectricityBillLandingSlug(slug)) {
     return getElectricityBillLanding(slug);
+  }
+  if (isAhToWhLandingSlug(slug)) {
+    return getAhToWhLanding(slug);
+  }
+  if (isWhToAhLandingSlug(slug)) {
+    return getWhToAhLanding(slug);
+  }
+  if (isKvaToKwLandingSlug(slug)) {
+    return getKvaToKwLanding(slug);
+  }
+  if (isKwToHpLandingSlug(slug)) {
+    return getKwToHpLanding(slug);
+  }
+  if (isConductorResistanceTemperatureLandingSlug(slug)) {
+    return getConductorResistanceTemperatureLanding(slug);
+  }
+  if (isReactivePowerCalculatorLandingSlug(slug)) {
+    return getReactivePowerCalculatorLanding(slug);
+  }
+  if (isBatteryDodEnergyYieldLandingSlug(slug)) {
+    return getBatteryDodEnergyYieldLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }

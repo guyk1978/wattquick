@@ -79,6 +79,34 @@ import {
   ELECTRICITY_BILL_TOOL_PATH,
   getElectricityBillToolFooterLinks,
 } from "@/lib/calculators/electricityBillLandings";
+import {
+  AH_TO_WH_TOOL_PATH,
+  getAhToWhToolFooterLinks,
+} from "@/lib/calculators/ahToWhLandings";
+import {
+  WH_TO_AH_TOOL_PATH,
+  getWhToAhToolFooterLinks,
+} from "@/lib/calculators/whToAhLandings";
+import {
+  KVA_TO_KW_TOOL_PATH,
+  getKvaToKwToolFooterLinks,
+} from "@/lib/calculators/kvaToKwLandings";
+import {
+  KW_TO_HP_TOOL_PATH,
+  getKwToHpToolFooterLinks,
+} from "@/lib/calculators/kwToHpLandings";
+import {
+  CONDUCTOR_RESISTANCE_TEMPERATURE_TOOL_PATH,
+  getConductorResistanceTemperatureToolFooterLinks,
+} from "@/lib/calculators/conductorResistanceTemperatureLandings";
+import {
+  REACTIVE_POWER_CALCULATOR_TOOL_PATH,
+  getReactivePowerCalculatorToolFooterLinks,
+} from "@/lib/calculators/reactivePowerCalculatorLandings";
+import {
+  BATTERY_DOD_ENERGY_YIELD_TOOL_PATH,
+  getBatteryDodEnergyYieldToolFooterLinks,
+} from "@/lib/calculators/batteryDodEnergyYieldLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -146,6 +174,16 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   [DEMAND_CHARGE_CALCULATOR_TOOL_PATH]: getDemandChargeCalculatorToolFooterLinks(),
   [BATTERY_COST_TOOL_PATH]: getBatteryCostToolFooterLinks(),
   [ELECTRICITY_BILL_TOOL_PATH]: getElectricityBillToolFooterLinks(),
+  [AH_TO_WH_TOOL_PATH]: getAhToWhToolFooterLinks(),
+  [WH_TO_AH_TOOL_PATH]: getWhToAhToolFooterLinks(),
+  [KVA_TO_KW_TOOL_PATH]: getKvaToKwToolFooterLinks(),
+  [KW_TO_HP_TOOL_PATH]: getKwToHpToolFooterLinks(),
+  [CONDUCTOR_RESISTANCE_TEMPERATURE_TOOL_PATH]:
+    getConductorResistanceTemperatureToolFooterLinks(),
+  [REACTIVE_POWER_CALCULATOR_TOOL_PATH]:
+    getReactivePowerCalculatorToolFooterLinks(),
+  [BATTERY_DOD_ENERGY_YIELD_TOOL_PATH]:
+    getBatteryDodEnergyYieldToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {
