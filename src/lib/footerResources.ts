@@ -31,6 +31,14 @@ import {
   EV_CHARGING_COST_TOOL_PATH,
   getEvChargingCostToolFooterLinks,
 } from "@/lib/calculators/evChargingCostLandings";
+import {
+  WHOLE_HOUSE_ENERGY_BUDGET_TOOL_PATH,
+  getWholeHouseEnergyBudgetToolFooterLinks,
+} from "@/lib/calculators/wholeHouseEnergyBudgetLandings";
+import {
+  EBIKE_RANGE_ESTIMATOR_TOOL_PATH,
+  getEbikeRangeEstimatorToolFooterLinks,
+} from "@/lib/calculators/ebikeRangeLandings";
 import { FOOTER_FEATURED_CATEGORIES } from "@/lib/site";
 
 export const TOOL_FOOTER_RESOURCE_CATEGORY = {
@@ -86,6 +94,8 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   [WATTS_TO_AMPS_TOOL_PATH]: getWattsToAmpsToolFooterLinks(),
   [SOLAR_PANEL_SIZE_TOOL_PATH]: getSolarPanelSizeToolFooterLinks(),
   [EV_CHARGING_COST_TOOL_PATH]: getEvChargingCostToolFooterLinks(),
+  [WHOLE_HOUSE_ENERGY_BUDGET_TOOL_PATH]: getWholeHouseEnergyBudgetToolFooterLinks(),
+  [EBIKE_RANGE_ESTIMATOR_TOOL_PATH]: getEbikeRangeEstimatorToolFooterLinks(),
 };
 
 function normalizePath(path: string): string {

@@ -59,6 +59,18 @@ import {
   getEvChargingCostLanding,
   isEvChargingCostLandingSlug,
 } from "@/lib/calculators/evChargingCostLandings";
+import {
+  WHOLE_HOUSE_ENERGY_BUDGET_FOOTER_RESOURCES,
+  WHOLE_HOUSE_ENERGY_BUDGET_LANDING_SLUGS,
+  getWholeHouseEnergyBudgetLanding,
+  isWholeHouseEnergyBudgetLandingSlug,
+} from "@/lib/calculators/wholeHouseEnergyBudgetLandings";
+import {
+  EBIKE_RANGE_ESTIMATOR_FOOTER_RESOURCES,
+  EBIKE_RANGE_ESTIMATOR_LANDING_SLUGS,
+  getEbikeRangeEstimatorLanding,
+  isEbikeRangeEstimatorLandingSlug,
+} from "@/lib/calculators/ebikeRangeLandings";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 /** Every slug with a guide page (any route prefix). */
@@ -73,6 +85,8 @@ export const GUIDE_LANDING_SLUGS = [
   ...WATTS_TO_AMPS_LANDING_SLUGS,
   ...SOLAR_PANEL_SIZE_LANDING_SLUGS,
   ...EV_CHARGING_COST_LANDING_SLUGS,
+  ...WHOLE_HOUSE_ENERGY_BUDGET_LANDING_SLUGS,
+  ...EBIKE_RANGE_ESTIMATOR_LANDING_SLUGS,
 ] as const;
 
 export type GuideLandingSlug = (typeof GUIDE_LANDING_SLUGS)[number];
@@ -92,6 +106,8 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...WATTS_TO_AMPS_FOOTER_RESOURCES,
   ...SOLAR_PANEL_SIZE_FOOTER_RESOURCES,
   ...EV_CHARGING_COST_FOOTER_RESOURCES,
+  ...WHOLE_HOUSE_ENERGY_BUDGET_FOOTER_RESOURCES,
+  ...EBIKE_RANGE_ESTIMATOR_FOOTER_RESOURCES,
 ] as const;
 
 /** Shortcut slug at /tools/calculators/{slug}/ → calculator id. */
@@ -153,6 +169,12 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isEvChargingCostLandingSlug(slug)) {
     return getEvChargingCostLanding(slug);
+  }
+  if (isWholeHouseEnergyBudgetLandingSlug(slug)) {
+    return getWholeHouseEnergyBudgetLanding(slug);
+  }
+  if (isEbikeRangeEstimatorLandingSlug(slug)) {
+    return getEbikeRangeEstimatorLanding(slug);
   }
   throw new Error(`Unknown guide landing slug: ${slug}`);
 }

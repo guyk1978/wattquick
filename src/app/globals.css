@@ -2398,11 +2398,11 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(64 64 64);
+  border: 1px solid rgb(226 232 240);
   border-radius: 9999px;
-  background: rgb(38 38 38);
+  background: rgb(255 255 255);
   box-shadow: none;
-  color: rgb(163 163 163);
+  color: rgb(100 116 139);
   cursor: pointer;
   transition:
     color 0.2s ease,
@@ -2413,9 +2413,9 @@
 }
 
 .calculator-favorite-btn:hover {
-  border-color: rgb(115 115 115);
-  background: rgb(38 38 38);
-  color: rgb(250 250 250);
+  border-color: rgb(203 213 225);
+  background: rgb(248 250 252);
+  color: rgb(51 65 85);
 }
 
 .calculator-favorite-btn:active {
@@ -2424,7 +2424,7 @@
 
 .calculator-favorite-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.15);
+  box-shadow: 0 0 0 2px rgb(15 23 42 / 0.12);
 }
 
 .dark .calculator-favorite-btn {
@@ -2447,13 +2447,27 @@
 }
 
 .calculator-favorite-btn--active {
+  border-color: rgb(234 179 8 / 0.45);
+  background: rgb(254 249 195 / 0.65);
+  color: rgb(202 138 4);
+  box-shadow: 0 0 12px rgb(234 179 8 / 0.15);
+}
+
+.calculator-favorite-btn--active:hover {
+  border-color: rgb(234 179 8 / 0.55);
+  background: rgb(254 249 195 / 0.85);
+  color: rgb(161 98 7);
+  box-shadow: 0 0 16px rgb(234 179 8 / 0.2);
+}
+
+.dark .calculator-favorite-btn--active {
   border-color: rgb(250 204 21 / 0.45);
   background: rgb(250 204 21 / 0.12);
   color: rgb(250 204 21);
   box-shadow: 0 0 16px rgb(250 204 21 / 0.22);
 }
 
-.calculator-favorite-btn--active:hover {
+.dark .calculator-favorite-btn--active:hover {
   border-color: rgb(250 204 21 / 0.6);
   background: rgb(250 204 21 / 0.16);
   color: rgb(253 224 71);
