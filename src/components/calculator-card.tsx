@@ -4,6 +4,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
 } from "@/lib/calculators";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import {
   categoryThemeVars,
   getCategoryTheme,
@@ -161,6 +162,7 @@ export function CalculatorCard({
               {calculator.description}
             </p>
           )}
+          <CalculatorRatingSummary calculatorId={calculator.id} />
         </div>
 
         <span

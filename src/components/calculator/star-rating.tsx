@@ -1,0 +1,82 @@
+"use client";
+
+import { Star } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface StarRatingProps {
+  value: number;
+  onChange?: (value: number) => void;
+  readOnly?: boolean;
+  size?: "sm" | "md" | "lg";
+  label?: string;
+  className?: string;
+}
+
+function clampRating(value: number): number {
+  return Math.min(5, Math.max(0, value));
+}
+
+export function StarRating({
+  value,
+  onChange,
+  readOnly = false,
+  size = "md",
+  label,
+  className,
+}: StarRatingProps) {
+  const normalized = clampRating(value);
+  const starSize =
+    size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
+  const interactive = !readOnly && onChange != null;
+
+  return (
+    <div
+      className={cn("star-rating", interactive && "star-rating--interactive", className)}
+      role={interactive ? "radiogroup" : "img"}
+      aria-label={
+        label ??
+        (interactive
+          ? "Rate this calculator"
+          : `${normalized.toFixed(1)} out of 5 stars`)
+      }
+    >
+      {Array.from({ length: 5 }, (_, index) => {
+        const starValue = index + 1;
+        const filled = normalized >= starValue;
+        const partial =
+          !filled && normalized > index && normalized < starValue;
+
+        return (
+          <button
+            key={starValue}
+            type="button"
+            disabled={!interactive}
+            tabIndex={interactive ? 0 : -1}
+            role={interactive ? "radio" : undefined}
+            aria-checked={interactive ? normalized >= starValue : undefined}
+            aria-label={`${starValue} star${starValue === 1 ? "" : "s"}`}
+            onClick={() => onChange?.(starValue)}
+            className={cn(
+              "star-rating__star",
+              interactive && "star-rating__star--button",
+              filled && "star-rating__star--filled",
+              partial && "star-rating__star--partial"
+            )}
+          >
+            <Star className={cn(starSize, "star-rating__icon")} strokeWidth={2} aria-hidden />
+            {partial ? (
+              <Star
+                className={cn(starSize, "star-rating__icon star-rating__icon--partial-fill")}
+                strokeWidth={2}
+                aria-hidden
+                style={{
+                  clipPath: `inset(0 ${100 - ((normalized - index) * 100)}% 0 0)`,
+                }}
+              />
+            ) : null}
+          </button>
+        );
+      })}
+    </div>
+  );
+}

@@ -4,6 +4,7 @@ import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
 } from "@/lib/calculators";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import {
   categoryThemeVars,
   getCategoryTheme,
@@ -57,6 +58,11 @@ export function CalculatorListItem({
           <span className="mt-0.5 block line-clamp-1 text-xs text-muted-foreground">
             {calculator.description}
           </span>
+          <CalculatorRatingSummary
+            calculatorId={calculator.id}
+            className="mt-1"
+            showCount={false}
+          />
         </span>
 
         <ArrowUpRight

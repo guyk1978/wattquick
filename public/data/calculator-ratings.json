@@ -1,0 +1,562 @@
+{
+  "ah-to-wh": {
+    "sum": 0,
+    "count": 0
+  },
+  "wh-to-ah": {
+    "sum": 0,
+    "count": 0
+  },
+  "kva-to-kw": {
+    "sum": 0,
+    "count": 0
+  },
+  "conductor-resistance-temperature": {
+    "sum": 0,
+    "count": 0
+  },
+  "reactive-power-calculator": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-dod-energy-yield": {
+    "sum": 0,
+    "count": 0
+  },
+  "kw-to-hp": {
+    "sum": 0,
+    "count": 0
+  },
+  "watts-to-amps": {
+    "sum": 0,
+    "count": 0
+  },
+  "amps-to-watts": {
+    "sum": 0,
+    "count": 0
+  },
+  "residential-voltage-drop": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-percentage": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-runtime": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-charging-time": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-bank-size": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-panel-size": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-daily-yield": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-battery-bank": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-charging-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-charge-time": {
+    "sum": 0,
+    "count": 0
+  },
+  "appliance-daily-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "appliance-monthly-energy": {
+    "sum": 0,
+    "count": 0
+  },
+  "inverter-sizing": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ups-runtime": {
+    "sum": 0,
+    "count": 0
+  },
+  "ohms-law": {
+    "sum": 0,
+    "count": 0
+  },
+  "volts-to-watts": {
+    "sum": 0,
+    "count": 0
+  },
+  "watts-to-volts": {
+    "sum": 0,
+    "count": 0
+  },
+  "power-factor": {
+    "sum": 0,
+    "count": 0
+  },
+  "energy-consumption": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-energy": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-depth-of-discharge": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-efficiency": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-charge-controller-size": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-inverter-efficiency": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-array-current": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-panel-tilt": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-cost-per-mile": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-battery-range": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-level1-vs-level2": {
+    "sum": 0,
+    "count": 0
+  },
+  "electricity-bill": {
+    "sum": 0,
+    "count": 0
+  },
+  "heater-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ac-energy-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "fridge-energy-usage": {
+    "sum": 0,
+    "count": 0
+  },
+  "dc-cable-size": {
+    "sum": 0,
+    "count": 0
+  },
+  "ac-inrush-current": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-vs-ice-maintenance": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-fast-charging-time": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-charging-temperature-impact": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-winter-range-loss": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-vs-gas-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-battery-degradation": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-battery-depletion-value-loss": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-public-charging-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-preconditioning-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-tire-wear-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-charging-cable-loss": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-soc-calculator": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-roof-space": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-payback-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-angle-optimizer": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-net-metering": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-degradation": {
+    "sum": 0,
+    "count": 0
+  },
+  "generator-vs-solar-hybrid": {
+    "sum": 0,
+    "count": 0
+  },
+  "generator-runtime-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "water-pump-solar-sizing": {
+    "sum": 0,
+    "count": 0
+  },
+  "dc-cable-voltage-drop": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-degradation-20-year-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-shading-analysis": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-roi-analysis": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-series-parallel": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-c-rate": {
+    "sum": 0,
+    "count": 0
+  },
+  "inverter-loss-calculator": {
+    "sum": 0,
+    "count": 0
+  },
+  "inverter-peak-load-surge": {
+    "sum": 0,
+    "count": 0
+  },
+  "inverter-loading-curve": {
+    "sum": 0,
+    "count": 0
+  },
+  "home-backup-sizing": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-voltage-drop": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-calendar-aging": {
+    "sum": 0,
+    "count": 0
+  },
+  "bess-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "critical-load-analysis": {
+    "sum": 0,
+    "count": 0
+  },
+  "crypto-mining-power": {
+    "sum": 0,
+    "count": 0
+  },
+  "vampire-power-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "standby-power-waste": {
+    "sum": 0,
+    "count": 0
+  },
+  "generator-fuel-consumption": {
+    "sum": 0,
+    "count": 0
+  },
+  "heat-pump-vs-resistance": {
+    "sum": 0,
+    "count": 0
+  },
+  "whole-house-energy-budget": {
+    "sum": 0,
+    "count": 0
+  },
+  "lighting-circuit-load": {
+    "sum": 0,
+    "count": 0
+  },
+  "ac-inverter-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "pool-energy-thermal-cover": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-truck-range": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-fleet-tco": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-bus-battery": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-forklift-runtime": {
+    "sum": 0,
+    "count": 0
+  },
+  "ev-delivery-van-efficiency": {
+    "sum": 0,
+    "count": 0
+  },
+  "rv-solar-calculator": {
+    "sum": 0,
+    "count": 0
+  },
+  "marine-battery-bank": {
+    "sum": 0,
+    "count": 0
+  },
+  "portable-power-station-recharge": {
+    "sum": 0,
+    "count": 0
+  },
+  "12v-to-120v-inverter": {
+    "sum": 0,
+    "count": 0
+  },
+  "camping-fridge-runtime": {
+    "sum": 0,
+    "count": 0
+  },
+  "tou-shifting-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "demand-charge-calculator": {
+    "sum": 0,
+    "count": 0
+  },
+  "v2g-financial-return": {
+    "sum": 0,
+    "count": 0
+  },
+  "battery-arbitrage-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "carbon-footprint-offset": {
+    "sum": 0,
+    "count": 0
+  },
+  "grid-frequency-reward": {
+    "sum": 0,
+    "count": 0
+  },
+  "peak-shaving-potential": {
+    "sum": 0,
+    "count": 0
+  },
+  "electricity-rate-plan": {
+    "sum": 0,
+    "count": 0
+  },
+  "heat-loss-insulation": {
+    "sum": 0,
+    "count": 0
+  },
+  "home-insulation-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "led-savings-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "led-vs-incandescent-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "smart-thermostat-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "window-solar-heat-gain": {
+    "sum": 0,
+    "count": 0
+  },
+  "microgrid-roi": {
+    "sum": 0,
+    "count": 0
+  },
+  "bess-carbon-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "solar-water-heater-efficiency": {
+    "sum": 0,
+    "count": 0
+  },
+  "small-wind-turbine-yield": {
+    "sum": 0,
+    "count": 0
+  },
+  "standby-power-aggregator": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-range-estimator": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-charging-cost": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-max-speed": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-charge-time": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-battery-c-rate": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-voltage-sag": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-weight-performance": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-commute-savings": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-controller-watts": {
+    "sum": 0,
+    "count": 0
+  },
+  "ebike-battery-cycle-life": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-range": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-tire-pressure": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-max-speed": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-hill-climb": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-tire-wear": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-charge-time": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-cost-per-km": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-weight-limit": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-peak-amps": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-brake-pad-wear": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-connector-loss": {
+    "sum": 0,
+    "count": 0
+  },
+  "escooter-maintenance-schedule": {
+    "sum": 0,
+    "count": 0
+  },
+  "mobility-tco-calculator": {
+    "sum": 0,
+    "count": 0
+  }
+}

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
+import { CalculatorRating } from "@/components/calculator/calculator-rating";
 import { useCalculatorPageShellSlots } from "@/components/calculator/calculator-page-shell-context";
 import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
@@ -68,7 +69,8 @@ export function CalculatorPageShell({
 
           <div className="calculator-page-shell__results-stage">
             <div className="calculator-page-shell__results-inner">
-              <div className="calculator-page-shell__results-favorite">
+              <div className="calculator-page-shell__results-toolbar">
+                <CalculatorRating calculatorId={calculatorId} />
                 <FavoriteCalculatorButton calculatorId={calculatorId} />
               </div>
               {hasMain ? slots.main : <CalculatorPageShellEmpty />}
