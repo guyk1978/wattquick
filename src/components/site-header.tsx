@@ -8,7 +8,7 @@ import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
-    <header className="glass-header sticky top-0 z-50 w-full overflow-visible">
+    <header className="site-header site-header--blueprint glass-header sticky top-0 z-50 w-full overflow-visible">
       <div className="glass-header__bar">
         <div className="glass-header__leading">
           <Link href="/" className="glass-header__logo">
