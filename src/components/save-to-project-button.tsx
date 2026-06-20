@@ -34,7 +34,7 @@ export function SaveToProjectButton({
           className
         )}
       >
-        <FolderPlus className="size-3.5 text-primary" aria-hidden />
+        <FolderPlus className="size-3.5 text-status-success" aria-hidden />
         Save to project
       </button>
       <SaveToProjectModal

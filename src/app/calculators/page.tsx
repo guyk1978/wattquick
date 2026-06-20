@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { CalnexAppCallout } from "@/components/CalnexAppCallout";
-import { CalculatorsHubHeader } from "@/components/calculators-hub-header";
-import { HomeToolHub } from "@/components/home-tool-hub";
+import { CalculatorsBlueprintPage } from "@/components/calculators/calculators-blueprint-page";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
 import { getAllCalculatorMeta } from "@/lib/calculators";
@@ -21,20 +19,10 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function CalculatorsPage() {
   return (
-    <div className="calculators-directory-page">
-      <div className="calculators-directory-page__inner">
-        <CalculatorsHubHeader
-          calculatorCount={calculators.length}
-          categoryCount={activeCategoryCount}
-        />
-
-        <HomeToolHub
-          allIds={[...CALCULATOR_SLUGS]}
-          totalCount={calculators.length}
-        />
-
-        <CalnexAppCallout className="calculators-directory-page__partner" />
-      </div>
-    </div>
+    <CalculatorsBlueprintPage
+      allIds={[...CALCULATOR_SLUGS]}
+      calculatorCount={calculators.length}
+      categoryCount={activeCategoryCount}
+    />
   );
 }

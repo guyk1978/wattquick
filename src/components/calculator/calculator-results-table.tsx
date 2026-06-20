@@ -14,7 +14,7 @@ interface CalculatorResultsTableProps {
   saveToProject?: ProjectSavePayload;
 }
 
-/** Flat matte secondary results grid — label + value + unit per row */
+/** Results table inside the global green status shell. */
 export function CalculatorResultsTable({
   rows,
   className,
@@ -23,7 +23,13 @@ export function CalculatorResultsTable({
   if (rows.length === 0) return null;
 
   return (
-    <div className={cn("calculator-results-table", className)}>
+    <div
+      className={cn(
+        "calculator-results-table calculator-status-board calculator-status-shell",
+        "overflow-hidden rounded-xl border-4 border-status-success bg-status-success-surface",
+        className
+      )}
+    >
       <table className="calculator-results-table__grid w-full border-collapse text-sm">
         <tbody>
           {rows.map((row) => (
@@ -35,7 +41,7 @@ export function CalculatorResultsTable({
                 {row.label}
               </th>
               <td className="calculator-results-table__value">
-                <span className="calculator-results-table__number font-semibold tabular-nums">
+                <span className="calculator-results-table__number font-semibold tabular-nums text-status-success">
                   {row.value}
                 </span>
                 {row.unit ? (
@@ -49,7 +55,7 @@ export function CalculatorResultsTable({
         </tbody>
       </table>
       {saveToProject ? (
-        <div className="mt-3 flex justify-end border-t border-border/40 pt-3">
+        <div className="mt-3 flex justify-end border-t border-status-success/20 px-4 pb-4 pt-3">
           <SaveToProjectButton payload={saveToProject} compact />
         </div>
       ) : null}

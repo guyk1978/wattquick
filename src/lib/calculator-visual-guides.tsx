@@ -9,11 +9,13 @@ import { BatteryDepthOfDischargeGuideIllustration } from "@/components/calculato
 import { BatteryEfficiencyGuideIllustration } from "@/components/calculator/visual-guides/battery-efficiency-guide-illustration";
 import { BatterySeriesParallelGuideIllustration } from "@/components/calculator/visual-guides/battery-series-parallel-guide-illustration";
 import { BatteryCRateGuideIllustration } from "@/components/calculator/visual-guides/battery-c-rate-guide-illustration";
+import { InverterSizingGuideIllustration } from "@/components/calculator/visual-guides/inverter-sizing-guide-illustration";
 import { InverterLossGuideIllustration } from "@/components/calculator/visual-guides/inverter-loss-guide-illustration";
 import { InverterPeakLoadSurgeGuideIllustration } from "@/components/calculator/visual-guides/inverter-peak-load-surge-guide-illustration";
 import { InverterLoadingCurveGuideIllustration } from "@/components/calculator/visual-guides/inverter-loading-curve-guide-illustration";
 import { HomeBackupSizingGuideIllustration } from "@/components/calculator/visual-guides/home-backup-sizing-guide-illustration";
 import { BatteryVoltageDropGuideIllustration } from "@/components/calculator/visual-guides/battery-voltage-drop-guide-illustration";
+import { ResidentialVoltageDropGuideIllustration } from "@/components/calculator/visual-guides/residential-voltage-drop-guide-illustration";
 import { BatteryCalendarAgingGuideIllustration } from "@/components/calculator/visual-guides/battery-calendar-aging-guide-illustration";
 import { BessRoiGuideIllustration } from "@/components/calculator/visual-guides/bess-roi-guide-illustration";
 import { EscooterRangeGuideIllustration } from "@/components/calculator/visual-guides/escooter-range-guide-illustration";
@@ -21,8 +23,18 @@ import { EbikeRangeGuideIllustration } from "@/components/calculator/visual-guid
 import { BatteryBankSizeGuideIllustration } from "@/components/calculator/visual-guides/battery-bank-size-guide-illustration";
 import { UpsRuntimeGuideIllustration } from "@/components/calculator/visual-guides/ups-runtime-guide-illustration";
 import { CriticalLoadAnalysisGuideIllustration } from "@/components/calculator/visual-guides/critical-load-analysis-guide-illustration";
+import { OhmsLawGuideIllustration } from "@/components/calculator/visual-guides/ohms-law-guide-illustration";
 import { WattsToAmpsGuideIllustration } from "@/components/calculator/visual-guides/watts-to-amps-guide-illustration";
+import { WattsToVoltsGuideIllustration } from "@/components/calculator/visual-guides/watts-to-volts-guide-illustration";
+import { VoltsToWattsGuideIllustration } from "@/components/calculator/visual-guides/volts-to-watts-guide-illustration";
+import { AcInrushCurrentGuideIllustration } from "@/components/calculator/visual-guides/ac-inrush-current-guide-illustration";
+import { PowerFactorGuideIllustration } from "@/components/calculator/visual-guides/power-factor-guide-illustration";
 import { AmpsToWattsGuideIllustration } from "@/components/calculator/visual-guides/amps-to-watts-guide-illustration";
+import { SolarRoofSpaceGuideIllustration } from "@/components/calculator/visual-guides/solar-roof-space-guide-illustration";
+import { SolarPanelTiltGuideIllustration } from "@/components/calculator/visual-guides/solar-panel-tilt-guide-illustration";
+import { SolarArrayCurrentGuideIllustration } from "@/components/calculator/visual-guides/solar-array-current-guide-illustration";
+import { SolarInverterEfficiencyGuideIllustration } from "@/components/calculator/visual-guides/solar-inverter-efficiency-guide-illustration";
+import { SolarChargeControllerSizeGuideIllustration } from "@/components/calculator/visual-guides/solar-charge-controller-size-guide-illustration";
 import { SolarPanelSizeGuideIllustration } from "@/components/calculator/visual-guides/solar-panel-size-guide-illustration";
 import { SolarDailyYieldGuideIllustration } from "@/components/calculator/visual-guides/solar-daily-yield-guide-illustration";
 import { SolarBatteryBankGuideIllustration } from "@/components/calculator/visual-guides/solar-battery-bank-guide-illustration";
@@ -106,6 +118,12 @@ export const CALCULATOR_VISUAL_GUIDES: Partial<
       "Enter battery capacity in amp-hours and discharge current in amps. C-rate equals current divided by capacity—50 A from a 100 Ah pack is 0.5C. Runtime hours equals Ah divided by amps, about 2 hours at constant current before the pack is empty.",
     Illustration: BatteryCRateGuideIllustration,
   },
+  "inverter-sizing": {
+    calculatorTitle: "Inverter Sizing",
+    caption:
+      "Enter simultaneous peak load in watts and a safety margin percent. Minimum inverter size equals peak times one plus margin divided by 100—1,800 W peak with 25% margin yields 2,250 W continuous. Match the datasheet continuous rating; use a higher margin or the surge calculator when motors start.",
+    Illustration: InverterSizingGuideIllustration,
+  },
   "inverter-loss-calculator": {
     calculatorTitle: "Inverter Loss Calculator",
     caption:
@@ -135,6 +153,12 @@ export const CALCULATOR_VISUAL_GUIDES: Partial<
     caption:
       "Enter load amps, one-way wire length in feet, and system voltage. The tool picks a copper AWG for ampacity, then calculates round-trip I×R drop—40 A over 15 ft on a 12 V system loses about 2.45 V (20.4%), leaving 9.55 V at the load. Aim for ≤3% on critical DC runs.",
     Illustration: BatteryVoltageDropGuideIllustration,
+  },
+  "residential-voltage-drop": {
+    calculatorTitle: "Residential AC Voltage Drop Calculator",
+    caption:
+      "Enter supply voltage, load amps, one-way cable length in meters, and copper size in AWG or mm². Round-trip resistance times current gives drop volts—20 A over 25 m on 12 AWG at 120 V loses 5.21 V (4.3%), leaving 114.8 V at the load. Target ≤3% on branch circuits and ≤5% total.",
+    Illustration: ResidentialVoltageDropGuideIllustration,
   },
   "battery-calendar-aging": {
     calculatorTitle: "Battery Calendar Aging Calculator",
@@ -184,17 +208,77 @@ export const CALCULATOR_VISUAL_GUIDES: Partial<
       "Enter electrical power in watts and system voltage. For DC circuits, current amps equals watts divided by volts (P = V × I). Use the result for fuse sizing, wire gauge checks, and battery discharge current planning.",
     Illustration: WattsToAmpsGuideIllustration,
   },
+  "ohms-law": {
+    calculatorTitle: "Ohm's Law Calculator",
+    caption:
+      "Enter any two of voltage, current, and resistance—leave the third blank. Ohm's law V = I × R rearranges to solve the unknown: 12 V and 10 A give R = 1.2 Ω. Works for resistive DC circuits; reactive AC loads need impedance, not R alone.",
+    Illustration: OhmsLawGuideIllustration,
+  },
   "amps-to-watts": {
     calculatorTitle: "Amps to Watts",
     caption:
       "Enter current in amps and system voltage. Power in watts equals amps multiplied by volts (W = A × V). Use the result to size batteries, UPS runtime, and inverter loads from measured or nameplate current.",
     Illustration: AmpsToWattsGuideIllustration,
   },
+  "volts-to-watts": {
+    calculatorTitle: "Volts to Watts Calculator",
+    caption:
+      "Enter voltage in volts and current in amps. Power in watts equals voltage times current (W = V × A)—120 V at 15 A is 1,800 W. Use the result to size breakers, estimate heat output, and compare loads; AC real power on inductive loads also depends on power factor.",
+    Illustration: VoltsToWattsGuideIllustration,
+  },
+  "watts-to-volts": {
+    calculatorTitle: "Watts to Volts Calculator",
+    caption:
+      "Enter power in watts and current in amps. Voltage equals watts divided by amps (V = W ÷ A)—1,800 W at 15 A implies 120 V nominal circuit voltage. Useful when you know appliance wattage and measured current; current must be greater than zero.",
+    Illustration: WattsToVoltsGuideIllustration,
+  },
+  "power-factor": {
+    calculatorTitle: "Power Factor Calculator",
+    caption:
+      "Enter real power in kW and apparent power in kVA. Power factor equals kW divided by kVA—8 kW on a 10 kVA service is PF 0.80 (80% of apparent power does useful work). kW must not exceed kVA; low PF increases feeder current and may need correction capacitors on motor loads.",
+    Illustration: PowerFactorGuideIllustration,
+  },
+  "ac-inrush-current": {
+    calculatorTitle: "AC Inrush Current Limit Calculator",
+    caption:
+      "Enter nominal watts, operating voltage, and inrush factor (peak ÷ running). Running amps equal watts divided by volts; peak equals running times factor—1,800 W at 120 V with 6× inrush gives 15 A run and 90 A peak. Breaker size is the larger of 125% continuous load or peak divided by the Type B/C/D magnetic trip multiple.",
+    Illustration: AcInrushCurrentGuideIllustration,
+  },
   "solar-panel-size": {
     calculatorTitle: "Solar Panel Size",
     caption:
       "Enter daily energy need in Wh, peak sun hours for your site, and system efficiency (%). Minimum panel watts equals daily Wh divided by sun hours times efficiency—how much harvest window you need to refill the load each day.",
     Illustration: SolarPanelSizeGuideIllustration,
+  },
+  "solar-charge-controller-size": {
+    calculatorTitle: "Solar Charge Controller Size Calculator",
+    caption:
+      "Enter total panel watts, battery voltage, and safety margin percent. Minimum controller amps equals panel watts divided by battery voltage, times one plus margin—800 W on a 12 V bank with 25% margin needs about 83 A. Check panel Isc on the datasheet; MPPT handles higher Voc and cold-sun boost.",
+    Illustration: SolarChargeControllerSizeGuideIllustration,
+  },
+  "solar-inverter-efficiency": {
+    calculatorTitle: "Solar Inverter Efficiency Calculator",
+    caption:
+      "Enter AC output watts and DC input watts from the PV side. Inverter efficiency equals AC divided by DC, times 100—2,850 W AC from 3,000 W DC is 95.0% with 150 W lost as heat. MPPT harvest is separate; efficiency drops at very low load.",
+    Illustration: SolarInverterEfficiencyGuideIllustration,
+  },
+  "solar-array-current": {
+    calculatorTitle: "Solar Array Current Calculator",
+    caption:
+      "Enter total array watts and operating voltage at the MPPT or string level. Array current equals watts divided by volts—1,200 W at 48 V nominal is about 25 A (~Imp). Use MPPT voltage, not Voc; fuse sizing often references higher Isc from the panel label.",
+    Illustration: SolarArrayCurrentGuideIllustration,
+  },
+  "solar-panel-tilt": {
+    calculatorTitle: "Solar Panel Tilt Calculator",
+    caption:
+      "Enter site latitude in degrees (positive north, negative south). For year-round fixed mounts, recommended tilt equals absolute latitude—40°N yields about 40° from horizontal on a south-facing rack. Seasonal tweaks: summer |lat| − 15°, winter |lat| + 15°.",
+    Illustration: SolarPanelTiltGuideIllustration,
+  },
+  "solar-roof-space": {
+    calculatorTitle: "Solar Panel Roof Space Calculator",
+    caption:
+      "Enter usable roof square feet, panel footprint, panel watt rating, and percent of roof usable for PV. Effective area equals roof times usable percent; max panels equals floor of area divided by footprint; system kW equals panels times watts divided by 1,000—800 sq ft at 80% with 20 sq ft 400 W modules fits 32 panels (12.8 kW).",
+    Illustration: SolarRoofSpaceGuideIllustration,
   },
   "solar-daily-yield": {
     calculatorTitle: "Solar Daily Yield",

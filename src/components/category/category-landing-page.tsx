@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { CategoryCalculatorGrid } from "@/components/category-calculator-grid";
-import { PageHeader, PageShell } from "@/components/page-shell";
+import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
+import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
+import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
+import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { CategoryBlueprintHeader } from "@/components/category/category-blueprint-header";
 import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
-  CALCULATOR_CATEGORY_DESCRIPTIONS,
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
 } from "@/data/calculator-types";
 import type { CalculatorMeta } from "@/lib/calculators";
-import { getCategoryPageTitle } from "@/lib/category-routes";
 
 interface CategoryLandingPageProps {
   category: CalculatorCategory;
@@ -20,49 +21,60 @@ export function CategoryLandingPage({
   calculators,
 }: CategoryLandingPageProps) {
   const label = CALCULATOR_CATEGORY_LABELS[category];
-  const summary = CALCULATOR_CATEGORY_DESCRIPTIONS[category];
   const seo = getCategorySeoContent(category);
 
   return (
-    <PageShell className="max-w-6xl">
-      <Link
-        href="/calculators/"
-        className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-      >
-        ← All calculators
-      </Link>
+    <div className="calculator-route calculator-route--blueprint">
+      <div className="calculator-page-shell calculator-blueprint-shell">
+        <CalculatorBlueprintStatsBar
+          trailing={
+            <Link href="/calculators/" className="calculator-blueprint-stats__link">
+              All tools
+            </Link>
+          }
+        />
 
-      <PageHeader
-        title={getCategoryPageTitle(category)}
-        description={summary}
-      />
+        <div className="calculator-blueprint-shell__workspace">
+          <CalculatorBlueprintCategorySidebar activeCategory={category} />
 
-      <section
-        aria-labelledby="category-seo-intro-heading"
-        className="category-seo-intro border-b border-border/50 pb-12"
-      >
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-          {seo.eyebrow}
-        </p>
-        <h2 id="category-seo-intro-heading" className="sr-only">
-          About {label} calculators
-        </h2>
-        <div className="max-w-3xl space-y-4 text-sm leading-relaxed text-slate-800 dark:text-slate-300 sm:text-base">
-          {seo.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-          ))}
+          <div className="calculator-blueprint-shell__center">
+            <CategoryBlueprintHeader
+              category={category}
+              toolCount={calculators.length}
+            />
+
+            <section
+              aria-labelledby="category-seo-intro-heading"
+              className="category-blueprint-intro"
+            >
+              <p className="category-blueprint-intro__eyebrow">{seo.eyebrow}</p>
+              <h2 id="category-seo-intro-heading" className="sr-only">
+                About {label} calculators
+              </h2>
+              <div className="category-blueprint-intro__body">
+                {seo.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+                ))}
+              </div>
+            </section>
+
+            <section aria-labelledby="category-tools-heading">
+              <h2 id="category-tools-heading" className="category-blueprint-tools__title">
+                {label} calculators
+              </h2>
+              {calculators.length === 0 ? (
+                <p className="category-blueprint-tools__empty">
+                  No calculators in this category yet.
+                </p>
+              ) : (
+                <CalculatorBlueprintToolGrid calculators={calculators} />
+              )}
+            </section>
+          </div>
+
+          <CalculatorBlueprintCategoryNav category={category} />
         </div>
-      </section>
-
-      <section aria-labelledby="category-tools-heading" className="pt-12">
-        <h2
-          id="category-tools-heading"
-          className="mb-8 text-xl font-semibold tracking-tight text-foreground"
-        >
-          All {label.toLowerCase()} tools
-        </h2>
-        <CategoryCalculatorGrid calculators={calculators} />
-      </section>
-    </PageShell>
+      </div>
+    </div>
   );
 }

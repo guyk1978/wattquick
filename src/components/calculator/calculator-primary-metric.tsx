@@ -37,7 +37,7 @@ export function CalculatorPrimaryMetric({
       ) : (
         <>
           <div className={calculatorResultValueRow}>
-            <span className={calculatorResultValue}>
+            <span className={cn(calculatorResultValue, "text-status-success")}>
               {animateNumeric && typeof value === "number" ? (
                 <AnimatedCounter target={value} decimals={decimals} />
               ) : (

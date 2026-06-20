@@ -28,12 +28,12 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, description, className }: PageHeaderProps) {
   return (
-    <header className={cn("mb-10 space-y-3 sm:mb-12", className)}>
-      <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+    <header className={cn("page-header mb-10 space-y-3 sm:mb-12", className)}>
+      <h1 className="page-header__title text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
         {title}
       </h1>
       {description ? (
-        <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="page-header__description text-base leading-relaxed text-muted-foreground sm:text-lg">
           {description}
         </p>
       ) : null}

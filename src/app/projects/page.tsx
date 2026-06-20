@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { ProjectsPageClient } from "@/components/projects-page-client";
-import { PageShell } from "@/components/page-shell";
+import { ProjectsBlueprintPage } from "@/components/projects/projects-blueprint-page";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -19,14 +18,12 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function ProjectsPage() {
   return (
-    <PageShell className="max-w-4xl">
-      <Suspense
-        fallback={
-          <p className="text-sm text-muted-foreground">Loading projects…</p>
-        }
-      >
-        <ProjectsPageClient />
-      </Suspense>
-    </PageShell>
+    <Suspense
+      fallback={
+        <p className="hub-blueprint__loading px-4 py-10">Loading projects…</p>
+      }
+    >
+      <ProjectsBlueprintPage />
+    </Suspense>
   );
 }

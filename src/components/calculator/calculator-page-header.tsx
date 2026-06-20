@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { CalculatorPageBackLink } from "@/components/calculator/calculator-page-back-link";
-import { CalculatorVisualGuide } from "@/components/calculator/calculator-visual-guide";
+import { CalculatorRatingCompact } from "@/components/calculator/calculator-rating-compact";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
@@ -20,10 +20,10 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
   const categoryHref = getCategoryPageHref(calculator.category);
 
   return (
-    <header className={cn("calculator-page-header", className)}>
+    <header className={cn("calculator-page-header calculator-page-header--blueprint", className)}>
       <Suspense
         fallback={
-          <span className="calculator-page-header__back inline-flex h-5 w-32 animate-pulse rounded-none bg-muted/40" />
+          <span className="calculator-page-header__back inline-flex h-4 w-24 animate-pulse rounded-none bg-muted/40" />
         }
       >
         <CalculatorPageBackLink
@@ -33,27 +33,23 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
       </Suspense>
 
       <div className="calculator-page-header__meta">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-none border border-border/60 bg-primary/10 text-primary">
-            <Icon className="size-5" strokeWidth={2} aria-hidden />
+        <div className="calculator-page-header__title-row">
+          <span className="calculator-page-header__icon" aria-hidden>
+            <Icon className="size-3.5" strokeWidth={2.25} />
           </span>
+          <h1 className="calculator-page-header__title">{calculator.title}</h1>
           <Link
             href={categoryHref}
-            className="rounded-none border border-border/60 bg-muted/30 px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:border-border hover:text-foreground"
+            className="calculator-page-header__tag"
           >
             {calculator.tag}
           </Link>
         </div>
-        <div className="space-y-2">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl sm:leading-tight">
-              {calculator.title}
-            </h1>
-            <CalculatorVisualGuide calculatorId={calculator.id} />
-          </div>
-          <p className="max-w-prose text-base leading-relaxed text-muted-foreground">
+        <div className="calculator-page-header__subrow">
+          <p className="calculator-page-header__description">
             {calculator.description}
           </p>
+          <CalculatorRatingCompact calculatorId={calculator.id} />
         </div>
       </div>
     </header>

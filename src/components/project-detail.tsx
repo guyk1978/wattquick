@@ -25,7 +25,7 @@ import {
   type ProjectCurrency,
   type WattQuickProject,
 } from "@/lib/project-store";
-import { calculatorCommandBtn } from "@/lib/glass-ui";
+import { calculatorCommandBtn, matteEmptyState } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
 interface ProjectDetailProps {
@@ -99,11 +99,14 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
 
   if (!project) {
     return (
-      <div className="rounded-none border border-dashed border-border/60 px-6 py-12 text-center">
+      <div className={cn(matteEmptyState, "px-6 py-12 text-center")}>
         <p className="text-sm text-muted-foreground">Project not found in this browser.</p>
         <Link
           href="/projects/"
-          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary underline-offset-4 hover:underline"
+          className={cn(
+            calculatorCommandBtn,
+            "mt-6 inline-flex h-10 items-center justify-center gap-2 px-4 text-sm font-semibold"
+          )}
         >
           <ArrowLeft className="size-3.5" aria-hidden />
           Back to projects
@@ -113,7 +116,7 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="project-detail space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <Link
@@ -192,13 +195,13 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
             {project.snapshots.map((snapshot) => (
               <li
                 key={snapshot.id}
-                className="rounded-none border border-border/50 bg-muted/10 px-4 py-3"
+                className="rounded-md border border-status-success-border/35 bg-status-success-muted/60 px-4 py-3"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
                       <Calculator
-                        className="size-3.5 shrink-0 text-primary"
+                        className="size-3.5 shrink-0 text-status-success"
                         aria-hidden
                       />
                       {snapshot.calculatorTitle}

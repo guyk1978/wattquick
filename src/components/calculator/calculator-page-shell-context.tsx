@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
@@ -88,21 +89,27 @@ export function useCalculatorPageShell() {
 
 /**
  * Push sidebar / main / footer into the page shell.
- * Updates a ref and re-renders only the shell (not the provider), avoiding infinite loops.
+ * Registers on every layout pass without clearing slots between updates.
  */
 export function useCalculatorPageSlots(slots: CalculatorPageSlots) {
   const { registerSlots, releaseSlots } = useCalculatorPageShell();
-  const { sidebar, main, footer } = slots;
   const ownerRef = useRef<symbol | null>(null);
+  const latestSlotsRef = useRef(slots);
+
   if (ownerRef.current === null) {
     ownerRef.current = Symbol("calculator-page-slots");
   }
 
+  latestSlotsRef.current = slots;
+
   useLayoutEffect(() => {
-    const owner = ownerRef.current!;
-    registerSlots(owner, { sidebar, main, footer });
-    return () => releaseSlots(owner);
+    registerSlots(ownerRef.current!, latestSlotsRef.current);
   });
+
+  useEffect(() => {
+    const owner = ownerRef.current!;
+    return () => releaseSlots(owner);
+  }, [releaseSlots]);
 }
 
 /** Subscribe the page shell to slot updates (reads from slotsRef). */

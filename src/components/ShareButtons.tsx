@@ -80,9 +80,10 @@ export function ShareButtons({ title, className }: ShareButtonsProps) {
 
   const iconButtonClass = cn(
     calculatorCommandShareBtn,
-    "inline-flex size-10 items-center justify-center text-muted-foreground",
-    "hover:text-foreground",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    "calculator-share-btn inline-flex size-10 items-center justify-center rounded-md",
+    "border border-status-success bg-status-success text-white shadow-none",
+    "hover:bg-status-success/90 hover:text-white",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-success/40 focus-visible:ring-offset-2"
   );
 
   return (
@@ -151,7 +152,7 @@ export function ShareButtons({ title, className }: ShareButtonsProps) {
           className={iconButtonClass}
         >
           {copied ? (
-            <Check className="size-4 text-primary" aria-hidden />
+            <Check className="size-4" aria-hidden />
           ) : (
             <Copy className="size-4" aria-hidden />
           )}
@@ -206,7 +207,7 @@ function MobileFallbackRow({
         <FacebookIcon />
       </ShareLinkButton>
       <ShareLinkButton label={copied ? "Link copied" : "Copy link"} onClick={onCopy} className={cn(iconButtonClass, "flex-1")}>
-        {copied ? <Check className="size-4 text-primary" /> : <Copy className="size-4" />}
+        {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
       </ShareLinkButton>
     </div>
   );

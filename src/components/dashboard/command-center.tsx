@@ -1,12 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { LayoutDashboard } from "lucide-react";
+import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
+import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorModal } from "@/components/dashboard/calculator-modal";
+import { DashboardBlueprintHeader } from "@/components/dashboard/dashboard-blueprint-header";
 import { DashboardWidgets } from "@/components/dashboard/dashboard-widgets";
 import { EnergyFlowDiagram } from "@/components/dashboard/energy-flow-diagram";
 import { EnergyProfilePicker } from "@/components/dashboard/energy-profile-picker";
 import type { CalculatorId } from "@/lib/calculators";
+import { getCalculatorMeta } from "@/lib/calculators/registry";
 import {
   DEFAULT_ENERGY_PROFILE,
   getProfileConfig,
@@ -26,7 +31,11 @@ import {
 import { glassDashboard } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
-export function CommandCenter() {
+interface CommandCenterProps {
+  variant?: "default" | "blueprint";
+}
+
+export function CommandCenter({ variant = "default" }: CommandCenterProps) {
   const [profile, setProfile] = useState<EnergySystemProfile>(
     DEFAULT_ENERGY_PROFILE
   );
@@ -104,6 +113,99 @@ export function CommandCenter() {
     refreshRecent();
   }, [refreshRecent]);
 
+  const scenarioCalculators = useMemo(
+    () => profileConfig.nodes.map((node) => getCalculatorMeta(node.calculatorId)),
+    [profileConfig.nodes]
+  );
+
+  const diagramSection = (
+    <section
+      className={cn(
+        variant === "blueprint"
+          ? "command-center-diagram command-center-diagram--blueprint"
+          : cn(glassDashboard("primary"), "command-center-diagram relative overflow-hidden p-3 sm:p-4")
+      )}
+      aria-label="Interactive energy flow diagram"
+    >
+      <div className="relative">
+        {hydrated ? (
+          <EnergyFlowDiagram
+            profile={profileConfig}
+            scenarioKey={profile}
+            onOpenCalculator={openFromNode}
+            newNodeIds={newNodeIds}
+            unvisitedNodeIds={unvisitedNodeIds}
+          />
+        ) : (
+          <div
+            className="command-center-diagram__loading flex aspect-[4/3] min-h-[220px] items-center justify-center text-sm text-muted-foreground"
+            aria-hidden
+          >
+            Loading scenario…
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
+  const profilePicker = hydrated ? (
+    <EnergyProfilePicker value={profile} onChange={handleProfileChange} />
+  ) : (
+    <div className="command-center__profile-skeleton h-7 animate-pulse rounded-none bg-muted/40" aria-hidden />
+  );
+
+  if (variant === "blueprint") {
+    return (
+      <>
+        <BlueprintHubShell
+          statsTrailing={
+            <Link href="/calculators/" className="calculator-blueprint-stats__link">
+              All tools
+            </Link>
+          }
+          rightNav={
+            <CalculatorBlueprintCategoryNav
+              title="Scenario tools"
+              calculators={scenarioCalculators}
+              activeCalculatorId={modalCalc ?? undefined}
+            />
+          }
+        >
+          <DashboardBlueprintHeader
+            profileLabel={hydrated ? profileConfig.label : undefined}
+          />
+
+          <div className="command-center command-center--blueprint">
+            <p className="command-center--blueprint__intro">
+              {hydrated
+                ? profileConfig.description
+                : "Loading your energy profile…"}{" "}
+              Pick a scenario—nodes and flows update live. Pulsing nodes are new or
+              not yet opened.
+            </p>
+
+            {profilePicker}
+
+            <div className="command-center--blueprint__workspace" aria-live="polite">
+              {diagramSection}
+              <DashboardWidgets
+                recent={recent}
+                onOpenCalculator={openCalculator}
+                className="command-center-widgets--blueprint"
+              />
+            </div>
+          </div>
+        </BlueprintHubShell>
+
+        <CalculatorModal
+          calculatorId={modalCalc}
+          onClose={closeModal}
+          onOpenCalculator={openCalculator}
+        />
+      </>
+    );
+  }
+
   return (
     <div className="command-center text-foreground">
       <header className="mb-8 space-y-4 sm:mb-10">
@@ -137,32 +239,7 @@ export function CommandCenter() {
         aria-live="polite"
         aria-atomic="false"
       >
-        <section
-          className={cn(
-            glassDashboard("primary"),
-            "command-center-diagram relative overflow-hidden p-3 sm:p-4"
-          )}
-          aria-label="Interactive energy flow diagram"
-        >
-          <div className="relative">
-            {hydrated ? (
-              <EnergyFlowDiagram
-                profile={profileConfig}
-                scenarioKey={profile}
-                onOpenCalculator={openFromNode}
-                newNodeIds={newNodeIds}
-                unvisitedNodeIds={unvisitedNodeIds}
-              />
-            ) : (
-              <div
-                className="flex aspect-[4/3] min-h-[280px] items-center justify-center text-sm text-muted-foreground"
-                aria-hidden
-              >
-                Loading scenario…
-              </div>
-            )}
-          </div>
-        </section>
+        {diagramSection}
 
         <DashboardWidgets recent={recent} onOpenCalculator={openCalculator} />
       </div>

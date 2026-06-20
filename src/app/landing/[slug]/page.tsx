@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { GuideLandingPage } from "@/components/landing/guide-landing-page";
+import { GuideLandingBlueprintPage } from "@/components/landing/guide-landing-blueprint-page";
 import {
   getGuideLanding,
   GUIDE_LANDING_SLUGS,
@@ -42,5 +42,5 @@ export default async function GuideLandingRoutePage({ params }: PageProps) {
     notFound();
   }
 
-  return <GuideLandingPage landing={getGuideLanding(slug)} />;
+  return <GuideLandingBlueprintPage landing={getGuideLanding(slug)} />;
 }

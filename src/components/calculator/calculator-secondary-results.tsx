@@ -6,13 +6,13 @@ interface CalculatorSecondaryResultsProps {
   className?: string;
 }
 
-/** Stacked secondary result cards — single column, no horizontal scroll */
+/** Stacked secondary result cards inside the global green status shell. */
 export function CalculatorSecondaryResults({
   children,
   className,
 }: CalculatorSecondaryResultsProps) {
   return (
-    <div className={cn("calculator-secondary-results", className)}>
+    <div className={cn("calculator-secondary-results calculator-status-metrics-grid", className)}>
       {children}
     </div>
   );

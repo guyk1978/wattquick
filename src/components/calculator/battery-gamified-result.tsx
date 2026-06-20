@@ -36,7 +36,9 @@ export function BatteryGamifiedResult({
         ) : (
           <>
             <div className={calculatorResultValueRow}>
-              <span className={calculatorResultValue}>{displayValue}</span>
+              <span className={cn(calculatorResultValue, "text-status-success")}>
+                {displayValue}
+              </span>
               {unit ? (
                 <span className="calculator-result-unit font-medium text-muted-foreground">
                   {unit}

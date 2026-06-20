@@ -142,6 +142,9 @@ export const calculatorsSolar = [
         value: formatNumber(result.systemKw, { maxDecimals: 2 }),
         unit: "kW",
         detail: `${result.maxPanels} panels · ${result.areaUsedSqFt} sq ft of ${result.effectiveAreaSqFt} sq ft usable`,
+        snapshotResults: {
+          "Estimated panel count": String(result.maxPanels),
+        },
       };
     },
   },

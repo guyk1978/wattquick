@@ -391,7 +391,7 @@ export function CriticalLoadAnalysisCalculator({
                               highSurge: event.target.checked,
                             })
                           }
-                          className="size-4 rounded-none border border-border accent-primary"
+                          className="size-4 rounded-none border border-border accent-background"
                           aria-label={`Device ${index + 1} high surge`}
                         />
                         <span>High surge device</span>

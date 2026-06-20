@@ -64,6 +64,7 @@ import {
   CalculatorResultsDashboard,
   recordToSummaryItems,
 } from "./calculator-results-dashboard";
+import { getCalculatorStatusAlert } from "@/lib/calculator-status";
 import { cn } from "@/lib/utils";
 
 const CALCULATOR_FOOTER_NOTES: Partial<Record<CalculatorId, string>> = {
@@ -266,11 +267,11 @@ function CalculatorPanelInner({
     usesEvDashboard(definition.category, id);
 
   const gamifiedHero = usesGamified ? (
-    <div className="calculator-dashboard-hero__card calculator-dashboard-hero__card--gamified">
+    <>
       {usesBatteryDashboard(definition.category, id) ? (
         <BatteryGamifiedResult
           calculatorId={id}
-          label={definition.result.label}
+          label=""
           value={result.value}
           unit={result.unit}
           detail={result.detail}
@@ -279,7 +280,7 @@ function CalculatorPanelInner({
       ) : usesCostDashboard(definition.category, id) ? (
         <CostGamifiedResult
           calculatorId={id}
-          label={definition.result.label}
+          label=""
           value={result.value}
           unit={result.unit}
           detail={result.detail}
@@ -288,15 +289,22 @@ function CalculatorPanelInner({
       ) : (
         <EvGamifiedResult
           calculatorId={id}
-          label={definition.result.label}
+          label=""
           value={result.value}
           unit={result.unit}
           detail={result.detail}
           emptyMessage={definition.result.emptyMessage}
         />
       )}
-    </div>
+    </>
   ) : undefined;
+
+  const statusAlert = getCalculatorStatusAlert(
+    id,
+    values,
+    definition.fields,
+    result.value !== null
+  );
 
   return (
     <CalculatorCommandShell className={className}>
@@ -321,6 +329,7 @@ function CalculatorPanelInner({
                 : undefined
             }
             hero={gamifiedHero}
+            statusAlert={statusAlert}
           />
         }
       />

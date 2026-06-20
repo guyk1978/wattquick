@@ -57,14 +57,38 @@ export const calculatorResultValue =
 /** Flat rectilinear input surface */
 export const calculatorCommandInput = "calculator-command-input";
 
+/** Valid calculator field — bold green border + mint fill (reference mockup) */
+export const calculatorFieldValidInput = cn(
+  "!rounded-md !border-2 !border-status-success !bg-status-success-input",
+  "focus-visible:!border-status-success focus-visible:!bg-status-success-input",
+  "focus-visible:!shadow-[0_0_0_3px_var(--color-status-success-muted)]"
+);
+
+/** @deprecated Use calculator-status-board CSS shell */
+export const calculatorResultSuccessCard = "";
+
+/** Primary metric value in success state */
+export const calculatorResultSuccessValue = "text-status-success";
+
+/** Warning alert bar at bottom of result card */
+export const calculatorStatusWarningAlert = cn(
+  "border-status-warning-border bg-status-warning-surface text-status-warning"
+);
+
 /** Share icon — integrated on panel, no neon pill */
 export const calculatorCommandShareBtn = "calculator-command-share-btn";
 
 /** Flat PDF save row — no neon ring */
 export const calculatorCommandPdfSection = "calculator-command-pdf";
 
-/** Flat action button inside calculator panels */
-export const calculatorCommandBtn = "calculator-command-btn";
+/** Primary / secondary action — muted green hover (site-wide) */
+export const calculatorCommandBtn = "calculator-command-btn matte-action-btn";
+
+/** Empty state panel — muted success tint */
+export const matteEmptyState = "matte-empty-state";
+
+/** Directory / hub card — subtle status border */
+export const matteStatusCard = "matte-status-card";
 
 /** Nested sub-panel (e.g. comparison cards) */
 export const calculatorCommandSubPanel = "calculator-command-subpanel";
@@ -78,10 +102,10 @@ export const neonHeroNumber =
 
 /** Grid wrappers for pairs/triplets of CalculatorResult cards */
 export const calculatorResultsGrid =
-  "calculator-results-grid calculator-secondary-results";
+  "calculator-results-grid calculator-secondary-results calculator-status-metrics-grid";
 
 export const calculatorResultsGrid3 =
-  "calculator-results-grid calculator-secondary-results";
+  "calculator-results-grid calculator-secondary-results calculator-status-metrics-grid calculator-status-metrics-grid--triple";
 
 export const calculatorResultCard = "calculator-result-card min-w-0";
 

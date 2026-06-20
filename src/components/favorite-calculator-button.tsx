@@ -8,11 +8,14 @@ import { cn } from "@/lib/utils";
 interface FavoriteCalculatorButtonProps {
   calculatorId: CalculatorId;
   className?: string;
+  /** Compact toolbar chip — pairs with Visual Guide in blueprint header */
+  variant?: "icon" | "toolbar";
 }
 
 export function FavoriteCalculatorButton({
   calculatorId,
   className,
+  variant = "icon",
 }: FavoriteCalculatorButtonProps) {
   const { hydrated, isFavorite, toggle } = useCalculatorFavorites();
   const favorited = hydrated && isFavorite(calculatorId);
@@ -26,6 +29,7 @@ export function FavoriteCalculatorButton({
       title={favorited ? "Remove from favorites" : "Add to favorites"}
       className={cn(
         "calculator-favorite-btn",
+        variant === "toolbar" && "calculator-favorite-btn--toolbar",
         favorited && "calculator-favorite-btn--active",
         className
       )}

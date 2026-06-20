@@ -2,6 +2,7 @@
 
 import {
   calculatorCommandResult,
+  calculatorResultSuccessValue,
   calculatorResultValue,
   calculatorResultValueRow,
 } from "@/lib/glass-ui";
@@ -31,35 +32,46 @@ export function CalculatorResult({
     <section
       aria-live="polite"
       aria-atomic="true"
-      className={cn(calculatorCommandResult(), className)}
+      className={cn(
+        calculatorCommandResult(),
+        "calculator-status-board__metric calculator-status-metric-card transition-colors duration-200",
+        hasResult && "calculator-command-result--success",
+        className
+      )}
     >
-      <div className="relative min-w-0">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <div className="relative min-w-0 text-center">
+        <p className="calculator-status-board__metric-label m-0 text-[0.8125rem] font-medium text-muted-foreground">
           {label}
         </p>
 
         <div
           key={resultKey}
-          className={cn("mt-3 min-h-[3.5rem] min-w-0", !hasResult && "opacity-70")}
+          className={cn("mt-2 min-h-[2.5rem] min-w-0", !hasResult && "opacity-70")}
         >
           {hasResult ? (
             <>
-              <div className={calculatorResultValueRow}>
-                <span className={calculatorResultValue}>{value}</span>
+              <div className={cn(calculatorResultValueRow, "justify-center")}>
+                <span
+                  className={cn(
+                    calculatorResultValue,
+                    calculatorResultSuccessValue,
+                    "calculator-status-board__metric-value text-[clamp(1.5rem,4vw,2rem)]"
+                  )}
+                >
+                  {value}
+                </span>
                 {unit ? (
-                  <span className="calculator-result-unit font-medium text-muted-foreground">
+                  <span className="calculator-status-board__metric-unit text-lg font-semibold text-status-success">
                     {unit}
                   </span>
                 ) : null}
               </div>
               {detail ? (
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {detail}
-                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
               ) : null}
             </>
           ) : (
-            <p className="text-lg font-medium leading-snug text-muted-foreground">
+            <p className="text-base font-medium leading-snug text-muted-foreground">
               {emptyMessage}
             </p>
           )}
