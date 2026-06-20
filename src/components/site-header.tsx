@@ -3,6 +3,7 @@ import { HeaderInstallAppButton } from "@/components/header-install-app-button";
 import { HeaderNav } from "@/components/header-nav";
 import { HeaderShareMenu } from "@/components/header-share-menu";
 import { MobileNav } from "@/components/mobile-nav";
+import { SiteHeaderSearch } from "@/components/site-header-search";
 import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
 
 export function SiteHeader() {
@@ -19,7 +20,9 @@ export function SiteHeader() {
         </div>
 
         <div className="glass-header__trailing">
-          <div data-header-search className="glass-header__search-slot" />
+          <div className="glass-header__search-slot">
+            <SiteHeaderSearch />
+          </div>
 
           <div className="glass-header__actions">
             <ThemeToggleWithTooltip />

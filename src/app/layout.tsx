@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
@@ -72,9 +71,6 @@ export default function RootLayout({
           <SiteFooter />
           <CookieConsentBanner />
         </ThemeProvider>
-        <Script src="/assets/js/vendor/fuse.min.js" strategy="beforeInteractive" />
-        <Script src="/assets/js/site-search.js" strategy="afterInteractive" />
-        <Script src="/assets/js/app.js" strategy="afterInteractive" />
       </body>
     </html>
   );

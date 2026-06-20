@@ -70,9 +70,114 @@ function copyDir(src, dest) {
   fs.cpSync(src, dest, { recursive: true });
 }
 
+function readSitePages() {
+  return [
+    {
+      id: "calculators",
+      type: "page",
+      category: "Site",
+      group: "Browse",
+      title: "All Calculators",
+      description: "Browse every battery, solar, EV, and power micro-calculator.",
+      href: "/calculators/",
+      tag: "Directory",
+      keywords: ["all tools", "calculator directory", "browse calculators"],
+    },
+    {
+      id: "dashboard",
+      type: "page",
+      category: "Site",
+      group: "Dashboard",
+      title: "Command Center",
+      description: "Interactive energy flow dashboard with scenario-based calculators.",
+      href: "/dashboard/",
+      tag: "Dashboard",
+      keywords: ["command center", "energy flow", "dashboard"],
+    },
+    {
+      id: "blog",
+      type: "page",
+      category: "Site",
+      group: "Content",
+      title: "Blog",
+      description: "Expert guides on batteries, solar, EV charging, and home energy.",
+      href: "/blog/",
+      tag: "Blog",
+      keywords: ["articles", "guides", "blog"],
+    },
+    {
+      id: "favorites",
+      type: "page",
+      category: "Site",
+      group: "Personal",
+      title: "Favorite Calculators",
+      description: "Your starred tools saved in this browser.",
+      href: "/favorites/",
+      tag: "Favorites",
+      keywords: ["saved tools", "starred calculators", "favorites"],
+    },
+    {
+      id: "projects",
+      type: "page",
+      category: "Site",
+      group: "Personal",
+      title: "My Projects",
+      description: "Save calculator runs and notes into local project workspaces.",
+      href: "/projects/",
+      tag: "Projects",
+      keywords: ["saved projects", "project workspace"],
+    },
+    {
+      id: "about",
+      type: "page",
+      category: "Site",
+      group: "Company",
+      title: "About WattQuick",
+      description: "Fast, focused tools for anyone who works with batteries and power.",
+      href: "/about/",
+      tag: "About",
+      keywords: ["about", "company", "wattquick"],
+    },
+    {
+      id: "contact",
+      type: "page",
+      category: "Site",
+      group: "Company",
+      title: "Contact",
+      description: "Questions, feedback, or calculator suggestions.",
+      href: "/contact/",
+      tag: "Contact",
+      keywords: ["email", "support", "contact"],
+    },
+    {
+      id: "privacy",
+      type: "page",
+      category: "Site",
+      group: "Legal",
+      title: "Privacy Policy",
+      description: "How WattQuick handles data when you use our calculators.",
+      href: "/privacy/",
+      tag: "Legal",
+      keywords: ["privacy", "cookies", "data"],
+    },
+    {
+      id: "terms",
+      type: "page",
+      category: "Site",
+      group: "Legal",
+      title: "Terms of Service",
+      description: "Terms of use for WattQuick battery and power micro-calculators.",
+      href: "/terms/",
+      tag: "Legal",
+      keywords: ["terms", "legal", "service"],
+    },
+  ];
+}
+
 function buildIndex() {
   const { items: calculators, popular } = readCalculators();
   const blogPosts = readBlogPosts();
+  const sitePages = readSitePages();
 
   const calculatorItems = calculators.map((item) => ({
     ...item,
@@ -89,11 +194,16 @@ function buildIndex() {
     href: ensureTrailingSlash(item.href),
   }));
 
+  const siteItems = sitePages.map((item) => ({
+    ...item,
+    href: ensureTrailingSlash(item.href),
+  }));
+
   const index = {
     version: 1,
     generatedAt: new Date().toISOString(),
     popular: popularItems,
-    items: [...calculatorItems, ...blogItems],
+    items: [...calculatorItems, ...blogItems, ...siteItems],
   };
 
   fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -105,7 +215,7 @@ function buildIndex() {
   copyDir(ASSETS_SRC, ASSETS_PUBLIC);
 
   console.log(
-    `✅ Search index: ${calculatorItems.length} calculators, ${blogItems.length} blog posts → data/search-index.json`
+    `✅ Search index: ${calculatorItems.length} calculators, ${blogItems.length} blog posts, ${siteItems.length} site pages → data/search-index.json`
   );
 }
 
