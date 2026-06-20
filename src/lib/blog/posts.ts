@@ -36,6 +36,9 @@ export interface BlogPost {
   relatedToolId: CalculatorId;
   /** Optional per-post OG image override */
   ogImage?: string;
+  /** Hero image shown below the article H1 */
+  featuredImage?: string;
+  featuredImageAlt?: string;
 }
 
 const BLOG_DIR = path.join(process.cwd(), "src/content/blog");
@@ -83,18 +86,37 @@ function readMarkdownPosts(): BlogPost[] {
           typeof data.ogImage === "string" && data.ogImage.trim()
             ? data.ogImage.trim()
             : undefined,
+        featuredImage:
+          typeof data.featuredImage === "string" && data.featuredImage.trim()
+            ? data.featuredImage.trim()
+            : undefined,
+        featuredImageAlt:
+          typeof data.featuredImageAlt === "string" &&
+          data.featuredImageAlt.trim()
+            ? data.featuredImageAlt.trim()
+            : undefined,
       };
     });
 }
 
-const markdownPosts = readMarkdownPosts();
+let productionPosts: BlogPost[] | null = null;
+
+function getMarkdownPosts(): BlogPost[] {
+  if (process.env.NODE_ENV === "development") {
+    return readMarkdownPosts();
+  }
+  if (!productionPosts) {
+    productionPosts = readMarkdownPosts();
+  }
+  return productionPosts;
+}
 
 export function getBlogPost(slug: string): BlogPost | undefined {
-  return markdownPosts.find((p) => p.slug === slug);
+  return getMarkdownPosts().find((p) => p.slug === slug);
 }
 
 export function getAllBlogPosts(): BlogPost[] {
-  return [...markdownPosts].sort(
+  return [...getMarkdownPosts()].sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );

@@ -7,6 +7,10 @@ slug: ebike-voltage-sag-guide
 category: E-Bike
 date: '2026-06-05'
 relatedToolId: ebike-voltage-sag
+featuredImage: "/images/blog/E-Bike Voltage Sag-optimized.webp"
+featuredImageAlt: >-
+  Engineering guide to e-bike voltage sag: internal resistance, pack layout,
+  and voltage drop under motor load
 ---
 
 You read 48 V on a multimeter at rest. Under full throttle on a grade the display shows sag, assist softens, and sometimes the battery management system (BMS) reduces current even though the state of charge (SOC) looked healthy a moment earlier. That behaviour is **voltage sag** — the inevitable drop across the pack's internal resistance and interconnects when current flows — not necessarily a failing cell.

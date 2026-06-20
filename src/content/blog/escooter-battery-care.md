@@ -7,6 +7,10 @@ slug: escooter-battery-care
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-charge-time
+featuredImage: "/images/blog/Small-Pack Battery Care on E-Scooters-optimized.webp"
+featuredImageAlt: >-
+  Technical guide to e-scooter small-pack battery care: charging heat, C-rates,
+  storage SOC, and longevity habits
 ---
 
 E-scooter battery packs are physically small. A typical commuter build stores **280–750 Wh** in a thin enclosure under the deck — often 10S or 13S lithium-ion with limited thermal mass and minimal passive cooling. The same chemistry rules that govern e-bike longevity apply, but **heat density** is harsher: fewer cells carry the same commute current, so each cell works harder and warms faster.

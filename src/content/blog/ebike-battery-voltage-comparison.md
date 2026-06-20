@@ -7,6 +7,10 @@ slug: ebike-battery-voltage-comparison
 category: E-Bike
 date: '2026-06-05'
 relatedToolId: ebike-max-speed
+featuredImage: "/images/blog/36V vs 48V vs 52V E-Bike Batteries-optimized.webp"
+featuredImageAlt: >-
+  Technical comparison of 36V, 48V, and 52V e-bike battery voltage tiers,
+  current draw, sag, and performance trade-offs
 ---
 
 Choosing among 36 V, 48 V, and 52 V e-bike systems is not only a question of "more volts equals faster." Nominal voltage sets the series cell count, influences current for a given mechanical power, changes **voltage sag** magnitude at equal pack resistance, and interacts with motor KV, controller limits, and regional assist-speed regulations. Wh capacity — not voltage alone — still dominates range.

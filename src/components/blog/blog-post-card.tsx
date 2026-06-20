@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
+import { BlogFeaturedImage } from "@/components/blog/blog-featured-image";
 import { getBlogCategoryTheme } from "@/lib/blog-category-theme";
 import type { BlogPost } from "@/lib/blog/posts";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
@@ -57,32 +58,44 @@ export function BlogPostCard({
         aria-label={`Read ${post.title}`}
       />
 
-      <div className="blog-post-card__top">
-        <span className="blog-post-card__category">{theme.label}</span>
-        <div className="blog-post-card__badges">
-          <span className="blog-post-card__badge">
-            <Calendar className="size-3.5" aria-hidden />
-            <time dateTime={post.publishedAt}>
-              {formatPublishedDate(post.publishedAt)}
-            </time>
-          </span>
-          <span className="blog-post-card__badge">
-            <Clock className="size-3.5" aria-hidden />
-            {post.readMinutes} min read
-          </span>
+      <div className="blog-post-card__inner">
+        {post.featuredImage ? (
+          <BlogFeaturedImage
+            src={post.featuredImage}
+            alt={post.featuredImageAlt ?? post.title}
+            variant="card"
+            cardSize={featured ? "featured" : "compact"}
+            priority={featured}
+          />
+        ) : null}
+
+        <div className="blog-post-card__top">
+          <span className="blog-post-card__category">{theme.label}</span>
+          <div className="blog-post-card__badges">
+            <span className="blog-post-card__badge">
+              <Calendar className="size-3.5" aria-hidden />
+              <time dateTime={post.publishedAt}>
+                {formatPublishedDate(post.publishedAt)}
+              </time>
+            </span>
+            <span className="blog-post-card__badge">
+              <Clock className="size-3.5" aria-hidden />
+              {post.readMinutes} min read
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="blog-post-card__body">
-        <h2 className="blog-post-card__title">{post.title}</h2>
-        <p className="blog-post-card__description">{post.description}</p>
-      </div>
+        <div className="blog-post-card__body">
+          <h2 className="blog-post-card__title">{post.title}</h2>
+          <p className="blog-post-card__description">{post.description}</p>
+        </div>
 
-      <div className="blog-post-card__footer">
-        <Link href={toolHref} className="blog-post-card__tool-link relative z-20">
-          <span className="truncate">Tool: {toolName}</span>
-          <ArrowUpRight className="size-3.5 shrink-0" aria-hidden />
-        </Link>
+        <div className="blog-post-card__footer">
+          <Link href={toolHref} className="blog-post-card__tool-link relative z-20">
+            <span className="truncate">Tool: {toolName}</span>
+            <ArrowUpRight className="size-3.5 shrink-0" aria-hidden />
+          </Link>
+        </div>
       </div>
     </article>
   );

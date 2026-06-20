@@ -7,6 +7,8 @@ slug: ebike-battery-cycle-life-guide
 category: E-Bike
 date: '2026-06-05'
 relatedToolId: ebike-battery-cycle-life
+featuredImage: /images/blog/How to Prevent Premature E-Bike Battery Wear-optimized.webp
+featuredImageAlt: Technical guide on preventing e-bike battery wear through optimal DOD and charging habits
 ---
 
 E-bike batteries are often replaced on a calendar rhythm — two seasons, three seasons — rather than on measured state of health (SOH). Some packs fail early because of heat and deep discharge; others outlast the bike because charging habits stayed shallow and cool. **Cycle life** and **calendar life** are different axes. Depth of discharge (DOD), charge voltage, temperature, and stored state of charge determine which axis dominates for your riding pattern.

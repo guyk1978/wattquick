@@ -7,6 +7,10 @@ slug: ebike-range-guide
 category: E-Bike
 date: '2026-06-05'
 relatedToolId: ebike-range-estimator
+featuredImage: "/images/blog/The Complete Guide to E-Bike Battery Range-optimized.webp"
+featuredImageAlt: >-
+  Technical guide to e-bike battery range: Wh capacity, assist levels, weight,
+  and real-world consumption planning
 ---
 
 Manufacturer range figures are useful as a starting point, not as a specification you can bank on in the field. Two riders on identical bikes can report a spread of thirty percent or more on the same route because **energy consumption is a function of physics**, not marketing copy. Watts-hours (Wh) stored in the pack, watts-hours consumed per kilometre (Wh/km) on the road, and the fraction of stored energy the battery management system (BMS) actually releases under your riding conditions together define the distance you will travel before assist fades or the controller cuts out.

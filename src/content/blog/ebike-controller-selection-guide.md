@@ -7,6 +7,10 @@ slug: ebike-controller-selection-guide
 category: E-Bike
 date: '2026-06-05'
 relatedToolId: ebike-controller-watts
+featuredImage: "/images/blog/How to Choose an E-Bike Controller-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on choosing an e-bike controller: current limits, motor
+  watts, and battery C-rating compatibility
 ---
 
 The controller is the power electronics bridge between the battery and the motor. It limits phase current, implements pedal-assist or throttle logic, talks to the display, and often negotiates with the battery management system (BMS). Oversizing or undersizing relative to the motor and pack creates heat, trips voltage limits from **sag**, or leaves performance unused.

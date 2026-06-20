@@ -36,6 +36,10 @@ export interface BlogPostFrontmatter {
   relatedTool?: CalculatorId | string;
   /** Optional custom OG image (absolute or site-relative) */
   ogImage?: string;
+  /** Hero image path (site-relative, under /public) */
+  featuredImage?: string;
+  /** Accessible alt text for featuredImage */
+  featuredImageAlt?: string;
 }
 
 /** Required frontmatter keys when authoring new posts */
@@ -51,5 +55,7 @@ export const BLOG_POST_REQUIRED_FIELDS = [
 export const BLOG_POST_OPTIONAL_FIELDS = [
   "relatedTool",
   "ogImage",
+  "featuredImage",
+  "featuredImageAlt",
   "publishedAt",
 ] as const satisfies readonly (keyof BlogPostFrontmatter)[];
