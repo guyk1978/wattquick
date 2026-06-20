@@ -30,6 +30,66 @@ import {
   isEscooterTirePressureLandingSlug,
 } from "@/lib/calculators/escooterTirePressureLandings";
 import {
+  ESCOOTER_MAX_SPEED_FOOTER_RESOURCES,
+  ESCOOTER_MAX_SPEED_LANDING_SLUGS,
+  getEscooterMaxSpeedLanding,
+  isEscooterMaxSpeedLandingSlug,
+} from "@/lib/calculators/escooterMaxSpeedLandings";
+import {
+  ESCOOTER_HILL_CLIMB_FOOTER_RESOURCES,
+  ESCOOTER_HILL_CLIMB_LANDING_SLUGS,
+  getEscooterHillClimbLanding,
+  isEscooterHillClimbLandingSlug,
+} from "@/lib/calculators/escooterHillClimbLandings";
+import {
+  ESCOOTER_TIRE_WEAR_FOOTER_RESOURCES,
+  ESCOOTER_TIRE_WEAR_LANDING_SLUGS,
+  getEscooterTireWearLanding,
+  isEscooterTireWearLandingSlug,
+} from "@/lib/calculators/escooterTireWearLandings";
+import {
+  ESCOOTER_CHARGE_TIME_FOOTER_RESOURCES,
+  ESCOOTER_CHARGE_TIME_LANDING_SLUGS,
+  getEscooterChargeTimeLanding,
+  isEscooterChargeTimeLandingSlug,
+} from "@/lib/calculators/escooterChargeTimeLandings";
+import {
+  ESCOOTER_COST_PER_KM_FOOTER_RESOURCES,
+  ESCOOTER_COST_PER_KM_LANDING_SLUGS,
+  getEscooterCostPerKmLanding,
+  isEscooterCostPerKmLandingSlug,
+} from "@/lib/calculators/escooterCostPerKmLandings";
+import {
+  ESCOOTER_WEIGHT_LIMIT_FOOTER_RESOURCES,
+  ESCOOTER_WEIGHT_LIMIT_LANDING_SLUGS,
+  getEscooterWeightLimitLanding,
+  isEscooterWeightLimitLandingSlug,
+} from "@/lib/calculators/escooterWeightLimitLandings";
+import {
+  ESCOOTER_PEAK_AMPS_FOOTER_RESOURCES,
+  ESCOOTER_PEAK_AMPS_LANDING_SLUGS,
+  getEscooterPeakAmpsLanding,
+  isEscooterPeakAmpsLandingSlug,
+} from "@/lib/calculators/escooterPeakAmpsLandings";
+import {
+  ESCOOTER_BRAKE_PAD_WEAR_FOOTER_RESOURCES,
+  ESCOOTER_BRAKE_PAD_WEAR_LANDING_SLUGS,
+  getEscooterBrakePadWearLanding,
+  isEscooterBrakePadWearLandingSlug,
+} from "@/lib/calculators/escooterBrakePadWearLandings";
+import {
+  ESCOOTER_CONNECTOR_LOSS_FOOTER_RESOURCES,
+  ESCOOTER_CONNECTOR_LOSS_LANDING_SLUGS,
+  getEscooterConnectorLossLanding,
+  isEscooterConnectorLossLandingSlug,
+} from "@/lib/calculators/escooterConnectorLossLandings";
+import {
+  ESCOOTER_MAINTENANCE_SCHEDULE_FOOTER_RESOURCES,
+  ESCOOTER_MAINTENANCE_SCHEDULE_LANDING_SLUGS,
+  getEscooterMaintenanceScheduleLanding,
+  isEscooterMaintenanceScheduleLandingSlug,
+} from "@/lib/calculators/escooterMaintenanceScheduleLandings";
+import {
   EV_TRUCK_RANGE_FOOTER_RESOURCES,
   EV_TRUCK_RANGE_LANDING_SLUGS,
   getEvTruckRangeLanding,
@@ -236,6 +296,16 @@ export const GUIDE_LANDING_SLUGS = [
   ...REMAINING_BATTERY_CAPACITY_LANDING_SLUGS,
   ...ESCOOTER_RANGE_LANDING_SLUGS,
   ...ESCOOTER_TIRE_PRESSURE_LANDING_SLUGS,
+  ...ESCOOTER_MAX_SPEED_LANDING_SLUGS,
+  ...ESCOOTER_HILL_CLIMB_LANDING_SLUGS,
+  ...ESCOOTER_TIRE_WEAR_LANDING_SLUGS,
+  ...ESCOOTER_CHARGE_TIME_LANDING_SLUGS,
+  ...ESCOOTER_COST_PER_KM_LANDING_SLUGS,
+  ...ESCOOTER_WEIGHT_LIMIT_LANDING_SLUGS,
+  ...ESCOOTER_PEAK_AMPS_LANDING_SLUGS,
+  ...ESCOOTER_BRAKE_PAD_WEAR_LANDING_SLUGS,
+  ...ESCOOTER_CONNECTOR_LOSS_LANDING_SLUGS,
+  ...ESCOOTER_MAINTENANCE_SCHEDULE_LANDING_SLUGS,
   ...EV_TRUCK_RANGE_LANDING_SLUGS,
   ...UPS_RUNTIME_LANDING_SLUGS,
   ...BATTERY_BANK_SIZE_LANDING_SLUGS,
@@ -283,6 +353,16 @@ export const ALL_GUIDE_LANDING_FOOTER_RESOURCES = [
   ...EV_SOC_FOOTER_RESOURCES,
   ...ESCOOTER_RANGE_FOOTER_RESOURCES,
   ...ESCOOTER_TIRE_PRESSURE_FOOTER_RESOURCES,
+  ...ESCOOTER_MAX_SPEED_FOOTER_RESOURCES,
+  ...ESCOOTER_HILL_CLIMB_FOOTER_RESOURCES,
+  ...ESCOOTER_TIRE_WEAR_FOOTER_RESOURCES,
+  ...ESCOOTER_CHARGE_TIME_FOOTER_RESOURCES,
+  ...ESCOOTER_COST_PER_KM_FOOTER_RESOURCES,
+  ...ESCOOTER_WEIGHT_LIMIT_FOOTER_RESOURCES,
+  ...ESCOOTER_PEAK_AMPS_FOOTER_RESOURCES,
+  ...ESCOOTER_BRAKE_PAD_WEAR_FOOTER_RESOURCES,
+  ...ESCOOTER_CONNECTOR_LOSS_FOOTER_RESOURCES,
+  ...ESCOOTER_MAINTENANCE_SCHEDULE_FOOTER_RESOURCES,
   ...EV_TRUCK_RANGE_FOOTER_RESOURCES,
   ...UPS_RUNTIME_FOOTER_RESOURCES,
   ...BATTERY_BANK_SIZE_FOOTER_RESOURCES,
@@ -362,6 +442,36 @@ export function getGuideLanding(slug: GuideLandingSlug): GuideLandingDefinition 
   }
   if (isEscooterTirePressureLandingSlug(slug)) {
     return getEscooterTirePressureLanding(slug);
+  }
+  if (isEscooterMaxSpeedLandingSlug(slug)) {
+    return getEscooterMaxSpeedLanding(slug);
+  }
+  if (isEscooterHillClimbLandingSlug(slug)) {
+    return getEscooterHillClimbLanding(slug);
+  }
+  if (isEscooterTireWearLandingSlug(slug)) {
+    return getEscooterTireWearLanding(slug);
+  }
+  if (isEscooterChargeTimeLandingSlug(slug)) {
+    return getEscooterChargeTimeLanding(slug);
+  }
+  if (isEscooterCostPerKmLandingSlug(slug)) {
+    return getEscooterCostPerKmLanding(slug);
+  }
+  if (isEscooterWeightLimitLandingSlug(slug)) {
+    return getEscooterWeightLimitLanding(slug);
+  }
+  if (isEscooterPeakAmpsLandingSlug(slug)) {
+    return getEscooterPeakAmpsLanding(slug);
+  }
+  if (isEscooterBrakePadWearLandingSlug(slug)) {
+    return getEscooterBrakePadWearLanding(slug);
+  }
+  if (isEscooterConnectorLossLandingSlug(slug)) {
+    return getEscooterConnectorLossLanding(slug);
+  }
+  if (isEscooterMaintenanceScheduleLandingSlug(slug)) {
+    return getEscooterMaintenanceScheduleLanding(slug);
   }
   if (isEvTruckRangeLandingSlug(slug)) {
     return getEvTruckRangeLanding(slug);

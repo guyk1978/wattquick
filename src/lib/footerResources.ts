@@ -12,6 +12,46 @@ import {
   getEscooterTirePressureToolFooterLinks,
 } from "@/lib/calculators/escooterTirePressureLandings";
 import {
+  ESCOOTER_MAX_SPEED_TOOL_PATH,
+  getEscooterMaxSpeedToolFooterLinks,
+} from "@/lib/calculators/escooterMaxSpeedLandings";
+import {
+  ESCOOTER_HILL_CLIMB_TOOL_PATH,
+  getEscooterHillClimbToolFooterLinks,
+} from "@/lib/calculators/escooterHillClimbLandings";
+import {
+  ESCOOTER_TIRE_WEAR_TOOL_PATH,
+  getEscooterTireWearToolFooterLinks,
+} from "@/lib/calculators/escooterTireWearLandings";
+import {
+  ESCOOTER_CHARGE_TIME_TOOL_PATH,
+  getEscooterChargeTimeToolFooterLinks,
+} from "@/lib/calculators/escooterChargeTimeLandings";
+import {
+  ESCOOTER_COST_PER_KM_TOOL_PATH,
+  getEscooterCostPerKmToolFooterLinks,
+} from "@/lib/calculators/escooterCostPerKmLandings";
+import {
+  ESCOOTER_WEIGHT_LIMIT_TOOL_PATH,
+  getEscooterWeightLimitToolFooterLinks,
+} from "@/lib/calculators/escooterWeightLimitLandings";
+import {
+  ESCOOTER_PEAK_AMPS_TOOL_PATH,
+  getEscooterPeakAmpsToolFooterLinks,
+} from "@/lib/calculators/escooterPeakAmpsLandings";
+import {
+  ESCOOTER_BRAKE_PAD_WEAR_TOOL_PATH,
+  getEscooterBrakePadWearToolFooterLinks,
+} from "@/lib/calculators/escooterBrakePadWearLandings";
+import {
+  ESCOOTER_CONNECTOR_LOSS_TOOL_PATH,
+  getEscooterConnectorLossToolFooterLinks,
+} from "@/lib/calculators/escooterConnectorLossLandings";
+import {
+  ESCOOTER_MAINTENANCE_SCHEDULE_TOOL_PATH,
+  getEscooterMaintenanceScheduleToolFooterLinks,
+} from "@/lib/calculators/escooterMaintenanceScheduleLandings";
+import {
   EV_TRUCK_RANGE_TOOL_PATH,
   getEvTruckRangeToolFooterLinks,
 } from "@/lib/calculators/evTruckRangeLandings";
@@ -193,6 +233,17 @@ export const toolFooterLinks: Record<string, readonly ToolFooterLink[]> = {
   ],
   [ESCOOTER_RANGE_TOOL_PATH]: getEscooterRangeToolFooterLinks(),
   [ESCOOTER_TIRE_PRESSURE_TOOL_PATH]: getEscooterTirePressureToolFooterLinks(),
+  [ESCOOTER_MAX_SPEED_TOOL_PATH]: getEscooterMaxSpeedToolFooterLinks(),
+  [ESCOOTER_HILL_CLIMB_TOOL_PATH]: getEscooterHillClimbToolFooterLinks(),
+  [ESCOOTER_TIRE_WEAR_TOOL_PATH]: getEscooterTireWearToolFooterLinks(),
+  [ESCOOTER_CHARGE_TIME_TOOL_PATH]: getEscooterChargeTimeToolFooterLinks(),
+  [ESCOOTER_COST_PER_KM_TOOL_PATH]: getEscooterCostPerKmToolFooterLinks(),
+  [ESCOOTER_WEIGHT_LIMIT_TOOL_PATH]: getEscooterWeightLimitToolFooterLinks(),
+  [ESCOOTER_PEAK_AMPS_TOOL_PATH]: getEscooterPeakAmpsToolFooterLinks(),
+  [ESCOOTER_BRAKE_PAD_WEAR_TOOL_PATH]: getEscooterBrakePadWearToolFooterLinks(),
+  [ESCOOTER_CONNECTOR_LOSS_TOOL_PATH]: getEscooterConnectorLossToolFooterLinks(),
+  [ESCOOTER_MAINTENANCE_SCHEDULE_TOOL_PATH]:
+    getEscooterMaintenanceScheduleToolFooterLinks(),
   [EV_TRUCK_RANGE_TOOL_PATH]: getEvTruckRangeToolFooterLinks(),
   [UPS_RUNTIME_TOOL_PATH]: getUpsRuntimeToolFooterLinks(),
   [BATTERY_BANK_SIZE_TOOL_PATH]: getBatteryBankSizeToolFooterLinks(),

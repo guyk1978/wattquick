@@ -2466,6 +2466,150 @@
   color: var(--matte-fg);
 }
 
+.battery-bank-size-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.ups-runtime-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.critical-load-analysis-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.watts-to-amps-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.amps-to-watts-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.solar-panel-size-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.solar-daily-yield-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.solar-battery-bank-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.rv-solar-calculator-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.marine-battery-bank-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.portable-power-station-recharge-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.inverter-load-planner-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.camping-fridge-runtime-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-tire-pressure-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-max-speed-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-hill-climb-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-tire-wear-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-charge-time-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-cost-per-km-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-weight-limit-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-peak-amps-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-brake-pad-wear-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-connector-loss-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
+.escooter-maintenance-schedule-guide-illustration {
+  display: block;
+  margin: 0 auto;
+  color: var(--matte-fg);
+}
+
 .calculator-favorite-btn {
   display: inline-flex;
   width: 2.5rem;
