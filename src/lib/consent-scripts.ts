@@ -8,6 +8,7 @@
  */
 
 import { activateGoogleAnalytics } from "@/lib/analytics";
+import { ADSENSE_PUBLISHER_ID, ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 
 type ConsentScriptLoader = {
   id: string;
@@ -31,14 +32,19 @@ function injectScript(
   return script;
 }
 
-/** Placeholder — enable by setting NEXT_PUBLIC_ADSENSE_ID in Cloudflare. */
+/** Loads AdSense if not already injected in root layout `<head>`. */
 function loadAdSense(): void {
-  const publisherId = process.env.NEXT_PUBLIC_ADSENSE_ID?.trim();
-  if (!publisherId) return;
+  if (typeof document === "undefined") return;
+  if (document.querySelector('script[src*="adsbygoogle.js"]')) return;
+
+  const publisherId =
+    process.env.NEXT_PUBLIC_ADSENSE_ID?.trim() || ADSENSE_PUBLISHER_ID;
 
   injectScript(
     "wq-consent-adsense",
-    `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`,
+    publisherId === ADSENSE_PUBLISHER_ID
+      ? ADSENSE_SCRIPT_SRC
+      : `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${publisherId}`,
     { async: true, crossOrigin: "anonymous" }
   );
 }

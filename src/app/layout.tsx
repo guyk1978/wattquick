@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getAllCalculatorMeta } from "@/lib/calculators";
+import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { consentInitScript } from "@/lib/consent-init";
 import { themeInitScript } from "@/lib/theme";
@@ -55,6 +56,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script async src={ADSENSE_SCRIPT_SRC} crossOrigin="anonymous" />
         {jsonLd}
         <link rel="stylesheet" href="/assets/css/site-search.css" />
         <link rel="manifest" href="/manifest.webmanifest" />
