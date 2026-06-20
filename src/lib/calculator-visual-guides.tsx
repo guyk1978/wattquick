@@ -3,6 +3,19 @@ import type { CalculatorId } from "@/lib/calculators";
 import { DcCableSizeGuideIllustration } from "@/components/calculator/visual-guides/dc-cable-size-guide-illustration";
 import { BatteryPercentageGuideIllustration } from "@/components/calculator/visual-guides/battery-percentage-guide-illustration";
 import { BatteryRuntimeGuideIllustration } from "@/components/calculator/visual-guides/battery-runtime-guide-illustration";
+import { BatteryChargingTimeGuideIllustration } from "@/components/calculator/visual-guides/battery-charging-time-guide-illustration";
+import { BatteryEnergyGuideIllustration } from "@/components/calculator/visual-guides/battery-energy-guide-illustration";
+import { BatteryDepthOfDischargeGuideIllustration } from "@/components/calculator/visual-guides/battery-depth-of-discharge-guide-illustration";
+import { BatteryEfficiencyGuideIllustration } from "@/components/calculator/visual-guides/battery-efficiency-guide-illustration";
+import { BatterySeriesParallelGuideIllustration } from "@/components/calculator/visual-guides/battery-series-parallel-guide-illustration";
+import { BatteryCRateGuideIllustration } from "@/components/calculator/visual-guides/battery-c-rate-guide-illustration";
+import { InverterLossGuideIllustration } from "@/components/calculator/visual-guides/inverter-loss-guide-illustration";
+import { InverterPeakLoadSurgeGuideIllustration } from "@/components/calculator/visual-guides/inverter-peak-load-surge-guide-illustration";
+import { InverterLoadingCurveGuideIllustration } from "@/components/calculator/visual-guides/inverter-loading-curve-guide-illustration";
+import { HomeBackupSizingGuideIllustration } from "@/components/calculator/visual-guides/home-backup-sizing-guide-illustration";
+import { BatteryVoltageDropGuideIllustration } from "@/components/calculator/visual-guides/battery-voltage-drop-guide-illustration";
+import { BatteryCalendarAgingGuideIllustration } from "@/components/calculator/visual-guides/battery-calendar-aging-guide-illustration";
+import { BessRoiGuideIllustration } from "@/components/calculator/visual-guides/bess-roi-guide-illustration";
 import { EscooterRangeGuideIllustration } from "@/components/calculator/visual-guides/escooter-range-guide-illustration";
 import { EbikeRangeGuideIllustration } from "@/components/calculator/visual-guides/ebike-range-guide-illustration";
 import { BatteryBankSizeGuideIllustration } from "@/components/calculator/visual-guides/battery-bank-size-guide-illustration";
@@ -56,6 +69,84 @@ export const CALCULATOR_VISUAL_GUIDES: Partial<
     caption:
       "Enter battery capacity in mAh, nominal voltage, and load power in watts. The tool converts mAh to watt-hours (÷ 1,000 × V), then divides Wh by watts to estimate how long the pack lasts at that draw.",
     Illustration: BatteryRuntimeGuideIllustration,
+  },
+  "battery-charging-time": {
+    calculatorTitle: "Battery Charging Time",
+    caption:
+      "Enter battery capacity in mAh, charger current in mA, and charge efficiency (%). Base time equals mAh divided by mA; actual charge time equals base time divided by efficiency—accounting for heat loss and taper above ~80% state of charge.",
+    Illustration: BatteryChargingTimeGuideIllustration,
+  },
+  "battery-energy": {
+    calculatorTitle: "Battery Energy Calculator",
+    caption:
+      "Enter battery capacity in amp-hours and nominal voltage. Stored energy in watt-hours equals Ah multiplied by V—a 100 Ah 12 V pack holds 1,200 Wh. Use Wh to compare packs at different voltages before sizing runtime or solar storage.",
+    Illustration: BatteryEnergyGuideIllustration,
+  },
+  "battery-depth-of-discharge": {
+    calculatorTitle: "Battery Depth of Discharge Calculator",
+    caption:
+      "Enter energy used in watt-hours and total pack capacity in watt-hours. Depth of discharge equals used divided by total, times 100—a 600 Wh draw from a 1,200 Wh pack is 50% DoD. State of charge is 100% minus DoD.",
+    Illustration: BatteryDepthOfDischargeGuideIllustration,
+  },
+  "battery-efficiency": {
+    calculatorTitle: "Battery Efficiency Calculator",
+    caption:
+      "Enter energy retrieved on discharge (Wh out) and energy consumed during charging (Wh in). Round-trip efficiency equals output divided by input, times 100—charging 1,000 Wh and getting 950 Wh back is 95% efficiency, with the remainder lost as heat and BMS overhead.",
+    Illustration: BatteryEfficiencyGuideIllustration,
+  },
+  "battery-series-parallel": {
+    calculatorTitle: "Battery Series & Parallel Calculator",
+    caption:
+      "Enter cells in series (S), strings in parallel (P), cell voltage, and cell amp-hours. Pack voltage equals S × cell V; pack Ah equals P × cell Ah; pack Wh equals V × Ah—a 4S2P layout with 3.2 V 100 Ah cells yields 12.8 V, 200 Ah, and 2,560 Wh.",
+    Illustration: BatterySeriesParallelGuideIllustration,
+  },
+  "battery-c-rate": {
+    calculatorTitle: "Battery C-Rate Calculator",
+    caption:
+      "Enter battery capacity in amp-hours and discharge current in amps. C-rate equals current divided by capacity—50 A from a 100 Ah pack is 0.5C. Runtime hours equals Ah divided by amps, about 2 hours at constant current before the pack is empty.",
+    Illustration: BatteryCRateGuideIllustration,
+  },
+  "inverter-loss-calculator": {
+    calculatorTitle: "Inverter Loss Calculator",
+    caption:
+      "Enter DC input watts and inverter efficiency (%). AC output equals DC times efficiency—1,200 W DC at 92% yields 1,104 W AC. Loss watts equals DC minus AC (96 W, 8%) and dissipates as heat in the inverter; size batteries for DC draw including this overhead.",
+    Illustration: InverterLossGuideIllustration,
+  },
+  "inverter-peak-load-surge": {
+    calculatorTitle: "Inverter Peak Load & Surge Calculator",
+    caption:
+      "Enter each load's running watts and surge factor (motors typically 3×–7×). Continuous watts sum all running loads; peak adds the largest surge margin plus 35% of the second-largest for staggered starts—then snaps to a standard pure-sine inverter tier with ~2× surge rating and headroom.",
+    Illustration: InverterPeakLoadSurgeGuideIllustration,
+  },
+  "inverter-loading-curve": {
+    calculatorTitle: "Inverter Loading Curve",
+    caption:
+      "Enter nominal inverter watts, sustained AC load, ambient temperature, and manufacturer overload profile. Derate nominal power for heat (1% loss per °C above 25°C), compute load as a percent of derated capacity, then interpolate the overload curve—3,300 W on a 3,000 W unit at 35°C is ~122% with roughly 8 minutes before shutdown.",
+    Illustration: InverterLoadingCurveGuideIllustration,
+  },
+  "home-backup-sizing": {
+    calculatorTitle: "Home Backup Battery Sizing Calculator",
+    caption:
+      "Enter essential load watts, backup hours, system voltage, usable depth of discharge, and inverter efficiency. Load Wh equals watts times hours divided by efficiency; bank Wh equals load Wh divided by DoD; bank Ah equals bank Wh divided by voltage—800 W for 8 hours at 48 V and 80% DoD needs about 181 Ah.",
+    Illustration: HomeBackupSizingGuideIllustration,
+  },
+  "battery-voltage-drop": {
+    calculatorTitle: "Battery Voltage Drop Calculator",
+    caption:
+      "Enter load amps, one-way wire length in feet, and system voltage. The tool picks a copper AWG for ampacity, then calculates round-trip I×R drop—40 A over 15 ft on a 12 V system loses about 2.45 V (20.4%), leaving 9.55 V at the load. Aim for ≤3% on critical DC runs.",
+    Illustration: BatteryVoltageDropGuideIllustration,
+  },
+  "battery-calendar-aging": {
+    calculatorTitle: "Battery Calendar Aging Calculator",
+    caption:
+      "Enter average storage temperature, mean state of charge while idle, and pack age in years. Baseline calendar fade is about 2% per year at 25°C and 50% SOC, scaled up for heat and high SOC—three years at ideal storage yields roughly 6% capacity loss and 94% remaining SoH. Cycle wear is not included.",
+    Illustration: BatteryCalendarAgingGuideIllustration,
+  },
+  "bess-roi": {
+    calculatorTitle: "BESS ROI Calculator (Battery Energy Storage System)",
+    caption:
+      "Enter battery kWh, install cost, peak and off-peak $/kWh rates, cycles per day, life years, DoD, and round-trip efficiency. Charge off-peak and discharge at peak—daily savings equals price spread times shifted kWh; payback equals cost divided by annual savings; LCOS equals cost divided by lifetime kWh delivered.",
+    Illustration: BessRoiGuideIllustration,
   },
   "escooter-range": {
     calculatorTitle: "E-Scooter Range Calculator",
