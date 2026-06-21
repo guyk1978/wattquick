@@ -4031,12 +4031,22 @@
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     gap: 2rem;
     padding: 3.5rem 2.5rem 2.5rem;
+    align-items: stretch;
   }
 }
 
 .calculator-focus-overlay__inputs,
 .calculator-focus-overlay__results {
   min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .calculator-focus-overlay__inputs,
+  .calculator-focus-overlay__results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 .calculator-focus-overlay .calculator-sidebar-inputs {
@@ -4112,30 +4122,70 @@
 .calculator-focus-overlay .calculator-results-dashboard {
   gap: 0;
   margin: 0;
+  width: 100%;
 }
 
-.calculator-focus-overlay .calculator-status-board,
-.calculator-focus-overlay .calculator-status-shell {
-  border: none;
-  background: transparent;
-  padding: 0;
+.calculator-focus-overlay .calculator-dashboard-hero {
+  width: 100%;
+}
+
+.calculator-focus-overlay .calculator-status-board.calculator-status-shell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 8.5rem;
+  border: 1px solid var(--status-success-border) !important;
+  border-radius: 0.5rem !important;
+  background: var(--status-success-muted) !important;
+  padding: 1.25rem 1.5rem !important;
+  text-align: center;
   box-shadow: none;
 }
 
 .calculator-focus-overlay .calculator-status-board__eyebrow {
   font-size: 0.8125rem;
   letter-spacing: 0.14em;
-  margin-bottom: 0.75rem;
+  margin: 0;
 }
 
 .calculator-focus-overlay .calculator-status-board__empty {
   font-size: clamp(1.25rem, 3vw, 1.75rem);
-  margin: 1rem 0;
+  margin: 0.5rem 0 0;
 }
 
 .calculator-focus-overlay .calculator-status-shell__body {
-  margin-top: 0;
-  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.625rem !important;
+  padding-bottom: 0 !important;
+}
+
+.calculator-focus-overlay .calculator-status-shell__hero {
+  width: 100%;
+}
+
+.calculator-focus-overlay .calculator-result-primary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.calculator-focus-overlay .calculator-result-value-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.5rem;
+  width: auto !important;
+  min-width: 0;
+  text-align: center;
 }
 
 .calculator-focus-overlay .calculator-result-value {
@@ -4143,27 +4193,65 @@
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.03em;
+  text-align: center;
 }
 
 .calculator-focus-overlay .calculator-result-unit {
   font-size: clamp(1.125rem, 3vw, 1.75rem) !important;
   font-weight: 500;
+  text-align: center;
 }
 
 .calculator-focus-overlay .calculator-result-primary__detail,
 .calculator-focus-overlay .calculator-status-board__metric-label {
+  margin: 0;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.calculator-focus-overlay .calculator-status-board__metrics {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.calculator-focus-overlay .calculator-status-board__metric {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  text-align: center;
 }
 
 .calculator-focus-overlay .calculator-status-board__metric-value {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem 0.5rem;
   font-size: clamp(2rem, 6vw, 3.25rem);
   font-weight: 700;
   line-height: 1.1;
+  text-align: center;
 }
 
 .calculator-focus-overlay .calculator-status-board__metric-unit {
   font-size: clamp(1rem, 2.5vw, 1.375rem);
+}
+
+.calculator-focus-overlay .calculator-status-shell__hero .calculator-command-result {
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.calculator-focus-overlay .calculator-status-shell__hero .calculator-command-result > div > div {
+  margin-top: 0 !important;
 }
 
 .calculator-focus-overlay .calculator-status-alert,
@@ -4173,7 +4261,12 @@
 }
 
 .calculator-blueprint-workbench--focus-active {
-  opacity: 0.72;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.calculator-blueprint-workbench--focus-active .calculator-blueprint-workbench__callouts {
+  display: none;
 }
 
 .calculator-blueprint-workbench__placeholder {
