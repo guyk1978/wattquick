@@ -9,7 +9,7 @@ import {
 } from "@/lib/calculators/calculator-landings-registry";
 import { getCalculatorMeta, isCalculatorId } from "@/lib/calculators";
 import { getCalculatorToolHref } from "@/lib/calculators/landing-types";
-import { createPageMetadata } from "@/lib/seo";
+import { getCalculatorPageMetadata } from "@/lib/calculator-share";
 
 export const dynamicParams = false;
 export const dynamic = "force-static";
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const meta = getCalculatorMeta(calculatorId);
 
-  return createPageMetadata({
+  return getCalculatorPageMetadata(calculatorId, {
     title: meta.title,
     description: meta.description,
     path: getCalculatorToolHref(slug),

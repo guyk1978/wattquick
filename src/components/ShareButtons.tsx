@@ -1,15 +1,24 @@
 "use client";
 
 import { Check, Copy, Share2 } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCalculatorId } from "@/components/calculator/calculator-id-context";
+import {
+  getCalculatorShareDescription,
+  getCalculatorShareTitle,
+} from "@/lib/calculator-share";
+import type { CalculatorId } from "@/lib/calculators";
 import { calculatorCommandShareBtn } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
-const SHARE_MESSAGE = "Try this free calculator on WattQuick";
+const DEFAULT_SHARE_MESSAGE = "Try this free calculator on WattQuick";
 
 interface ShareButtonsProps {
-  title: string;
+  /** Fallback when no calculatorShareData entry exists for this page */
+  title?: string;
   className?: string;
+  /** Optional override; otherwise reads CalculatorIdProvider context */
+  calculatorId?: CalculatorId;
 }
 
 function buildShareUrl(
@@ -32,7 +41,30 @@ function buildShareUrl(
   }
 }
 
-export function ShareButtons({ title, className }: ShareButtonsProps) {
+export function ShareButtons({
+  title: titleFallback = "WattQuick Calculator",
+  className,
+  calculatorId: calculatorIdProp,
+}: ShareButtonsProps) {
+  const calculatorIdFromContext = useCalculatorId();
+  const calculatorId = calculatorIdProp ?? calculatorIdFromContext;
+
+  const title = useMemo(
+    () =>
+      calculatorId
+        ? getCalculatorShareTitle(calculatorId, titleFallback)
+        : titleFallback,
+    [calculatorId, titleFallback]
+  );
+
+  const shareDescription = useMemo(
+    () =>
+      calculatorId
+        ? getCalculatorShareDescription(calculatorId, DEFAULT_SHARE_MESSAGE)
+        : DEFAULT_SHARE_MESSAGE,
+    [calculatorId]
+  );
+
   const [pageUrl, setPageUrl] = useState("");
   const [canNativeShare, setCanNativeShare] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -42,20 +74,20 @@ export function ShareButtons({ title, className }: ShareButtonsProps) {
     setCanNativeShare(typeof navigator !== "undefined" && !!navigator.share);
   }, []);
 
-  const shareText = `${SHARE_MESSAGE} — ${title}`;
+  const shareText = `${shareDescription} — ${title}`;
 
   const handleNativeShare = useCallback(async () => {
     if (!navigator.share) return;
     try {
       await navigator.share({
         title,
-        text: SHARE_MESSAGE,
+        text: shareDescription,
         url: pageUrl || window.location.href,
       });
     } catch {
       /* user cancelled */
     }
-  }, [pageUrl, title]);
+  }, [pageUrl, shareDescription, title]);
 
   const handleCopy = useCallback(async () => {
     const url = pageUrl || window.location.href;

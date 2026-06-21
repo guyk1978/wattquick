@@ -9,7 +9,7 @@ import {
   type CalculatorId,
 } from "@/lib/calculators";
 import { getCategorySeoSlug } from "@/lib/category-routes";
-import { createPageMetadata } from "@/lib/seo";
+import { getCalculatorPageMetadata } from "@/lib/calculator-share";
 
 export const dynamicParams = false;
 export const dynamic = "force-static";
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!id) return {};
 
   const meta = getCalculatorMeta(id);
-  return createPageMetadata({
+  return getCalculatorPageMetadata(id, {
     title: meta.title,
     description: meta.description,
     path: meta.href,
