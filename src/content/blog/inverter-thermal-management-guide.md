@@ -7,6 +7,10 @@ slug: inverter-thermal-management-guide
 category: Guides
 date: '2026-06-05'
 relatedToolId: inverter-loading-curve
+featuredImage: "/images/blog/Thermal Limits-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on inverter thermal limits — heat derating, overload cycles,
+  and summer shutdown prevention
 ---
 
 Every summer, technicians field calls about inverters tripping during peak loads. Often, the culprit is not a faulty unit—it is **thermal derating**. Inverters are rated at 25°C ambient. When the install closet, garage, or equipment room climbs toward 35–40°C, effective capacity drops and the inverter's tolerance for sustained overload shrinks fast.

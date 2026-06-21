@@ -7,6 +7,10 @@ slug: escooter-power-drop-guide
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-hill-climb
+featuredImage: "/images/blog/Why Your E-Scooter Slows Down at Half Battery-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on e-scooter power drop below 50% SOC — voltage sag, internal
+  resistance, and hill-climb performance
 ---
 
 Every commuter who rides past the first battery bar has felt it: at **100 % state of charge (SOC)** the deck accelerates crisply and climbs familiar ramps without drama. Below **50 % SOC**, the same hill feels steeper, throttle response softens, and crawl speed on bridges may collapse toward walking pace. That is not imagination, worn bearings, or a motor that suddenly "got weak" — it is **voltage sag** and **available electrical power** falling together as the pack delivers energy.

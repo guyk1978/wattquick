@@ -7,6 +7,10 @@ slug: escooter-brakes-safety
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-brake-pad-wear
+featuredImage: "/images/blog/E-Scooter Braking Safety-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on e-scooter braking safety — friction brakes, regen limits,
+  and stopping on steep downhills
 ---
 
 Regenerative braking on e-scooters feels modern and efficient — until a long **8–12 %** descent on a wet bridge. Hub-motor regen can slow the deck on flats and gentle rollers, but it cannot replace **friction brakes** when potential energy overwhelms motor/controller recovery limits, or when the battery is already full and has nowhere to put electrons.

@@ -7,6 +7,10 @@ slug: escooter-commute-optimization
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-cost-per-km
+featuredImage: "/images/blog/E-Scooter Commute Optimization-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on e-scooter commute optimization — range tuning, Wh/km
+  efficiency, and lower cost per kilometre
 ---
 
 Daily e-scooter commuting optimizes two numbers that look different but share the same physics: **kilometres per charge** and **dollars per kilometre**. The first is Wh/km engineering; the second multiplies Wh/km by your electricity rate and compares against transit fares, wear items, and time value. A rider who only chases top speed often worsens both; a rider who calibrates pressure, route, and charge windows often beats public transit on marginal cost without upgrading the pack.

@@ -7,6 +7,10 @@ slug: escooter-range-guide
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-range
+featuredImage: "/images/blog/E-Scooter Tyre Engineering-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on e-scooter tyre engineering — air pressure, rolling
+  resistance, and range on 8–10 inch wheels
 ---
 
 Commuter e-scooters are not miniature e-bikes. They run lower nominal voltages (typically **36 V or 48 V**), weigh far less, and — critically — use **8–10 inch wheels** with a standing rider who presents more frontal area per kilogram of vehicle mass. Manufacturer range claims often assume firm tyres, flat asphalt, and a rider near the rated mass. Change tyre pressure alone and the same pack can lose double-digit percentage range without any electrical fault.

@@ -7,6 +7,10 @@ slug: escooter-motor-power-guide
 category: E-Scooter
 date: '2026-06-05'
 relatedToolId: escooter-hill-climb
+featuredImage: "/images/blog/E-Scooter Motor Power Truth-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on e-scooter motor power — continuous watts, burst current,
+  hill climbing, and 500W vs 1000W trade-offs
 ---
 
 Retail listings shout motor watts the way car ads shout horsepower. On a **14 kg folding scooter** with a **36 V or 48 V** pack, the number on the sticker is at best a continuous thermal rating and at worst a peak marketing figure that never maps to sustainable hill climbing. More watts can mean safer grades and snappier acceleration — or simply faster battery drain and hotter windings if the pack and controller cannot support the load.

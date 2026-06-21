@@ -7,6 +7,10 @@ slug: home-backup-load-guide
 category: Backup
 date: '2026-06-05'
 relatedToolId: critical-load-analysis
+featuredImage: "/images/blog/Home Backup Planning-optimized.webp"
+featuredImageAlt: >-
+  Technical guide on home backup planning — critical load analysis, Wh capacity
+  sizing, and outage runtime for essential circuits
 ---
 
 Most homeowners planning backup power rely on rough estimates—"I need a big battery." The engineering approach starts with **critical load analysis**: list only the circuits that must stay alive during an outage, not every HVAC zone and dryer.

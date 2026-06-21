@@ -42,7 +42,7 @@ export function BlogPostCard({
   return (
     <article
       className={cn(
-        "blog-post-card group relative flex h-full min-h-[15rem] flex-col",
+        "blog-post-card group relative flex h-full min-h-[18rem] flex-col",
         featured && "blog-post-card--featured",
         className
       )}
