@@ -100,6 +100,116 @@ export const calculatorShareData: Partial<
     description: "Size copper DC homeruns from panels to charge controller—minimum mm² / AWG for amp load, length in meters, and max voltage drop.",
     imageUrl: "/images/share/dc-cable-voltage-drop.webp",
   },
+  "ev-battery-degradation": {
+    title: "EV Battery Health & Degradation Estimator Calculator",
+    description: "Rough state-of-health estimate from age, mileage, and DC fast-charging habits.",
+    imageUrl: "/images/share/ev-battery-degradation.webp",
+  },
+  "ev-battery-depletion-value-loss": {
+    title: "EV Battery Depletion & Value Loss Calculator",
+    description: "Estimate battery SoH from age, mileage, and DC fast-charging habits—then convert capacity fade to dollar value lost and resale value.",
+    imageUrl: "/images/share/ev-battery-depletion-value-loss.webp",
+  },
+  "ev-battery-range": {
+    title: "EV Battery Range Calculator",
+    description: "Estimate driving range from battery size, efficiency, and consumption.",
+    imageUrl: "/images/share/ev-battery-range.webp",
+  },
+  "ev-bus-battery": {
+    title: "Transit Bus Battery kWh per Mile Calculator",
+    description: "Calculate energy intensity from route miles and metered kWh use.",
+    imageUrl: "/images/share/ev-bus-battery.webp",
+  },
+  "ev-charge-time": {
+    title: "EV Charge Time Calculator",
+    description: "Estimate how long an EV charge takes at a given charger power.",
+    imageUrl: "/images/share/ev-charge-time.webp",
+  },
+  "ev-charging-cable-loss": {
+    title: "EV Charging Cable Power Loss Calculator",
+    description: "Estimate I²R heat loss in copper charging cables from amps, length, mm² cross-section, and session hours.",
+    imageUrl: "/images/share/ev-charging-cable-loss.webp",
+  },
+  "ev-charging-cost": {
+    title: "EV Charging Cost Calculator",
+    description: "Estimate home charging cost from energy used and your utility rate.",
+    imageUrl: "/images/share/ev-charging-cost.webp",
+  },
+  "ev-charging-temperature-impact": {
+    title: "EV Charging Temperature Impact Calculator",
+    description: "See how extreme cold or heat extends DC fast-charge time via BMS thermal limits—base 10–80% time plus added delay.",
+    imageUrl: "/images/share/ev-charging-temperature-impact.webp",
+  },
+  "ev-cost-per-mile": {
+    title: "EV Cost Per Mile Calculator",
+    description: "Estimate driving cost from electricity rate and energy used per mile.",
+    imageUrl: "/images/share/ev-cost-per-mile.webp",
+  },
+  "ev-delivery-van-efficiency": {
+    title: "Delivery Van Stop-and-Go Efficiency Calculator",
+    description: "Model urban kWh/mile from highway baseline and stops per mile.",
+    imageUrl: "/images/share/ev-delivery-van-efficiency.webp",
+  },
+  "ev-fast-charging-time": {
+    title: "EV DC Fast Charging Calculator (10–80%)",
+    description: "Estimate DC fast-charge time with taper above 80% SOC—live as you adjust pack size and charger power.",
+    imageUrl: "/images/share/ev-fast-charging-time.webp",
+  },
+  "ev-fleet-tco": {
+    title: "EV Fleet TCO vs. Gas Calculator",
+    description: "Compare annual fuel energy cost for gas and electric fleets by mileage.",
+    imageUrl: "/images/share/ev-fleet-tco.webp",
+  },
+  "ev-forklift-runtime": {
+    title: "Electric Forklift Shift Runtime Calculator",
+    description: "Estimate shift hours from industrial battery Ah, voltage, and average load amps.",
+    imageUrl: "/images/share/ev-forklift-runtime.webp",
+  },
+  "ev-level1-vs-level2": {
+    title: "Level 1 vs Level 2 EV Charging Time Calculator",
+    description: "Compare how long the same charge takes on Level 1 and Level 2 home charging.",
+    imageUrl: "/images/share/ev-level1-vs-level2.webp",
+  },
+  "ev-preconditioning-cost": {
+    title: "EV Battery Pre-conditioning Cost Calculator",
+    description: "Estimate electricity cost to heat or cool your pack before DC fast charging—from BMS draw, runtime, and your kWh rate.",
+    imageUrl: "/images/share/ev-preconditioning-cost.webp",
+  },
+  "ev-public-charging-cost": {
+    title: "EV Public Charging & Idle Fee Calculator",
+    description: "Total session cost including energy, connection fee, and idle penalties—updates live.",
+    imageUrl: "/images/share/ev-public-charging-cost.webp",
+  },
+  "ev-soc-calculator": {
+    title: "EV Battery State of Charge (SoC) Calculator",
+    description: "Estimate EV pack state of charge from resting voltage using configurable empty and full voltage endpoints.",
+    imageUrl: "/images/share/ev-soc-calculator.webp",
+  },
+  "ev-tire-wear-cost": {
+    title: "EV Tire Wear Cost Calculator",
+    description: "Estimate annual tire depreciation for electric vehicles vs. comparable gas cars—km driven, set cost, ICE tire life, and EV wear factor.",
+    imageUrl: "/images/share/ev-tire-wear-cost.webp",
+  },
+  "ev-truck-range": {
+    title: "EV Truck Range vs. Payload Calculator",
+    description: "Estimate how cargo weight reduces electric truck range from rated empty miles.",
+    imageUrl: "/images/share/ev-truck-range.webp",
+  },
+  "ev-vs-gas-savings": {
+    title: "EV vs. Gas Car Savings Calculator",
+    description: "Compare monthly and yearly fuel costs between gasoline and electric driving.",
+    imageUrl: "/images/share/ev-vs-gas-savings.webp",
+  },
+  "ev-vs-ice-maintenance": {
+    title: "EV vs ICE Maintenance Cost Calculator",
+    description: "Compare scheduled maintenance for EV vs. gas cars over 5–10 years, including optional battery replacement risk.",
+    imageUrl: "/images/share/ev-vs-ice-maintenance.webp",
+  },
+  "ev-winter-range-loss": {
+    title: "EV Winter Range Loss Calculator",
+    description: "Estimate cold-weather driving range from EPA rating, temperature, and cabin heat use.",
+    imageUrl: "/images/share/ev-winter-range-loss.webp",
+  },
   "generator-runtime-savings": {
     title: "Generator Run-Time Savings Calculator",
     description: "Estimate daily engine hours saved with a solar+battery hybrid, maintenance dollars avoided, and longer generator life.",
