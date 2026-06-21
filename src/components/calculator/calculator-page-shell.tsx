@@ -1,12 +1,11 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
+import { CalculatorBlueprintToolbar } from "@/components/calculator/calculator-blueprint-toolbar";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
-import { CalculatorVisualGuide } from "@/components/calculator/calculator-visual-guide";
 import { useCalculatorPageShellSlots } from "@/components/calculator/calculator-page-shell-context";
 import { getDiscoveryCalculators } from "@/lib/calculator-discovery";
 import type { CalculatorId } from "@/lib/calculators";
@@ -98,15 +97,7 @@ export function CalculatorPageShell({
   return (
     <div className={cn("calculator-page-shell calculator-blueprint-shell", className)}>
       <CalculatorBlueprintStatsBar
-        trailing={
-          <>
-            <FavoriteCalculatorButton
-              calculatorId={calculatorId}
-              variant="toolbar"
-            />
-            <CalculatorVisualGuide calculatorId={calculatorId} />
-          </>
-        }
+        trailing={<CalculatorBlueprintToolbar calculatorId={calculatorId} />}
       />
 
       <div className="calculator-blueprint-shell__workspace">

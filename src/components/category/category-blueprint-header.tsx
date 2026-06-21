@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CategoryVisualGuide } from "@/components/category/category-visual-guide";
 import {
   CALCULATOR_CATEGORY_DESCRIPTIONS,
   CALCULATOR_CATEGORY_LABELS,
@@ -47,6 +48,7 @@ export function CategoryBlueprintHeader({
           <h1 className="calculator-page-header__title">
             {getCategoryPageTitle(category)}
           </h1>
+          <CategoryVisualGuide category={category} />
           <span className="calculator-page-header__tag">
             {toolCount} {toolCount === 1 ? "tool" : "tools"}
           </span>

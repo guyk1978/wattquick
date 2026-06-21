@@ -49,7 +49,7 @@ export function CalculatorResult({
           className={cn("mt-2 min-h-[2.5rem] min-w-0", !hasResult && "opacity-70")}
         >
           {hasResult ? (
-            <>
+            <div className="calculator-result-primary">
               <div className={cn(calculatorResultValueRow, "justify-center")}>
                 <span
                   className={cn(
@@ -67,9 +67,9 @@ export function CalculatorResult({
                 ) : null}
               </div>
               {detail ? (
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
+                <p className="calculator-result-primary__detail">{detail}</p>
               ) : null}
-            </>
+            </div>
           ) : (
             <p className="text-base font-medium leading-snug text-muted-foreground">
               {emptyMessage}

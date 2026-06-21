@@ -28,13 +28,13 @@ export function BatteryGamifiedResult({
 
   return (
     <GamifiedDashboardFrame accent="battery" label={label} className={className}>
-      <div className={cn("mt-3", !hasResult && "opacity-70")}>
+      <div className={cn(!hasResult && "opacity-70")}>
         {!hasResult ? (
           <p className="text-lg font-medium leading-snug text-muted-foreground">
             {emptyMessage}
           </p>
         ) : (
-          <>
+          <div className="calculator-result-primary">
             <div className={calculatorResultValueRow}>
               <span className={cn(calculatorResultValue, "text-status-success")}>
                 {displayValue}
@@ -46,11 +46,9 @@ export function BatteryGamifiedResult({
               ) : null}
             </div>
             {detail ? (
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {detail}
-              </p>
+              <p className="calculator-result-primary__detail">{detail}</p>
             ) : null}
-          </>
+          </div>
         )}
       </div>
     </GamifiedDashboardFrame>
