@@ -1,6 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { useCalculatorFocusMode } from "@/components/calculator/calculator-focus-mode-context";
+import { CalculatorFocusOverlay } from "@/components/calculator/calculator-focus-overlay";
 import { CalculatorBlueprintToolbar } from "@/components/calculator/calculator-blueprint-toolbar";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
@@ -89,10 +91,19 @@ export function CalculatorPageShell({
   bottomContent,
   className,
 }: CalculatorPageShellProps) {
+  const { isOpen: focusOpen, close: closeFocus } = useCalculatorFocusMode();
   const slots = useCalculatorPageShellSlots();
   const hasMain = slots.main != null;
   const discoveryTools = getDiscoveryCalculators(calculatorId);
   const hasMainFooter = Boolean(slots.footer || contentSection || bottomContent);
+
+  const inputSlot =
+    slots.sidebar ?? (
+      <p className="calculator-page-shell__sidebar-placeholder">
+        Loading parameters…
+      </p>
+    );
+  const resultSlot = hasMain ? slots.main : <CalculatorPageShellEmpty />;
 
   return (
     <div className={cn("calculator-page-shell calculator-blueprint-shell", className)}>
@@ -106,20 +117,43 @@ export function CalculatorPageShell({
         <div className="calculator-blueprint-shell__center">
           <div className="calculator-blueprint-shell__header">{pageHeader}</div>
 
-          <div className="calculator-blueprint-workbench">
-            <div className="calculator-blueprint-workbench__inputs">
-              {slots.sidebar ?? (
-                <p className="calculator-page-shell__sidebar-placeholder">
-                  Loading parameters…
-                </p>
-              )}
-            </div>
+          <div
+            className={cn(
+              "calculator-blueprint-workbench",
+              focusOpen && "calculator-blueprint-workbench--focus-active"
+            )}
+          >
+            {!focusOpen ? (
+              <>
+                <div className="calculator-blueprint-workbench__inputs">
+                  {inputSlot}
+                </div>
 
-            <CalculatorBlueprintCallouts />
+                <CalculatorBlueprintCallouts />
 
-            <div className="calculator-blueprint-workbench__results">
-              {hasMain ? slots.main : <CalculatorPageShellEmpty />}
-            </div>
+                <div className="calculator-blueprint-workbench__results">
+                  {resultSlot}
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className="calculator-blueprint-workbench__inputs calculator-blueprint-workbench__placeholder"
+                  aria-hidden
+                >
+                  <CalculatorPageShellEmpty />
+                </div>
+
+                <CalculatorBlueprintCallouts />
+
+                <div
+                  className="calculator-blueprint-workbench__results calculator-blueprint-workbench__placeholder"
+                  aria-hidden
+                >
+                  <CalculatorPageShellEmpty />
+                </div>
+              </>
+            )}
           </div>
 
           {hasMainFooter ? (
@@ -141,6 +175,13 @@ export function CalculatorPageShell({
 
         <CalculatorBlueprintCategoryNav calculatorId={calculatorId} />
       </div>
+
+      <CalculatorFocusOverlay
+        open={focusOpen}
+        onClose={closeFocus}
+        inputs={inputSlot}
+        results={resultSlot}
+      />
     </div>
   );
 }

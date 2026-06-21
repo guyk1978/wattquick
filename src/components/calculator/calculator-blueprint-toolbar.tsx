@@ -1,6 +1,7 @@
 "use client";
 
 import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
+import { CalculatorFocusModeButton } from "@/components/calculator/calculator-focus-mode-button";
 import { CalculatorVisualGuide } from "@/components/calculator/calculator-visual-guide";
 import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ export function CalculatorBlueprintToolbar({
         calculatorId={calculatorId}
         className="calculator-blueprint-toolbar__guide"
       />
+      <CalculatorFocusModeButton className="calculator-blueprint-toolbar__focus" />
       <FavoriteCalculatorButton calculatorId={calculatorId} variant="toolbar" />
     </div>
   );

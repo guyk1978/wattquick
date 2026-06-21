@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { CalculatorFocusModeProvider } from "@/components/calculator/calculator-focus-mode-context";
 import {
   CalculatorPageShellProvider,
 } from "@/components/calculator/calculator-page-shell-context";
@@ -27,14 +28,16 @@ export function CalculatorPageLayout({
   children,
 }: CalculatorPageLayoutProps) {
   return (
-    <CalculatorPageShellProvider key={calculatorId}>
-      {children}
-      <CalculatorPageShell
-        calculatorId={calculatorId}
-        pageHeader={pageHeader}
-        contentSection={contentSection}
-        bottomContent={bottomContent}
-      />
-    </CalculatorPageShellProvider>
+    <CalculatorFocusModeProvider>
+      <CalculatorPageShellProvider key={calculatorId}>
+        {children}
+        <CalculatorPageShell
+          calculatorId={calculatorId}
+          pageHeader={pageHeader}
+          contentSection={contentSection}
+          bottomContent={bottomContent}
+        />
+      </CalculatorPageShellProvider>
+    </CalculatorFocusModeProvider>
   );
 }
