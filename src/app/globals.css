@@ -4391,6 +4391,161 @@
   color: var(--muted-foreground);
 }
 
+/* Category Focus View — large tools grid overlay */
+.category-tools-focus-overlay__panel {
+  max-height: min(92vh, 56rem);
+  border: 1px solid var(--blueprint-line-strong);
+  border-radius: 0.5rem;
+  background: var(--blueprint-panel);
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%),
+    0 32px 64px rgb(0 0 0 / 18%);
+}
+
+.dark .category-tools-focus-overlay__panel {
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 6%),
+    0 40px 80px rgb(0 0 0 / 55%);
+}
+
+.category-tools-focus-overlay__body {
+  padding: 3.25rem 1.25rem 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .category-tools-focus-overlay__body {
+    padding: 3.5rem 2rem 2rem;
+  }
+}
+
+.category-tools-focus-overlay__header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.category-tools-focus-overlay__eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--status-success);
+}
+
+.category-tools-focus-overlay__title {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.category-tools-focus-overlay__count {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  color: var(--muted-foreground);
+}
+
+.category-tools-focus-grid {
+  display: grid;
+  gap: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 640px) {
+  .category-tools-focus-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-tools-focus-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.125rem;
+  }
+}
+
+.category-tools-focus-grid__card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  min-height: 5.5rem;
+  height: 100%;
+  border: 1px solid var(--blueprint-line-strong);
+  border-radius: 0.5rem;
+  background: var(--blueprint-inset);
+  padding: 1rem 1.125rem;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.category-tools-focus-grid__card:hover {
+  border-color: var(--status-success-border);
+  background: var(--status-success-muted);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--status-success) 20%, transparent);
+}
+
+.category-tools-focus-grid__card:focus-visible {
+  outline: none;
+  border-color: var(--status-success-border);
+  box-shadow: 0 0 0 3px var(--matte-focus-ring);
+}
+
+.category-tools-focus-grid__icon {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--blueprint-line-strong);
+  border-radius: 0.375rem;
+  color: var(--status-success);
+  background: var(--blueprint-surface);
+}
+
+.category-tools-focus-grid__body {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.category-tools-focus-grid__title {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+.category-tools-focus-grid__desc {
+  font-size: clamp(0.875rem, 1.8vw, 1rem);
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+.category-tools-focus-grid__arrow {
+  margin-top: 0.125rem;
+  color: var(--muted-foreground);
+  opacity: 0.7;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+.category-tools-focus-grid__card:hover .category-tools-focus-grid__arrow {
+  color: var(--status-success);
+  opacity: 1;
+}
+
 .calculator-blueprint-nav__empty {
   margin: 0.25rem 0 0;
   font-size: 0.5625rem;

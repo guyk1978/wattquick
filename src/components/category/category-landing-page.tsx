@@ -4,6 +4,7 @@ import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calc
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
 import { CategoryBlueprintHeader } from "@/components/category/category-blueprint-header";
+import { CategoryToolsFocus } from "@/components/category/category-tools-focus";
 import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -28,9 +29,20 @@ export function CategoryLandingPage({
       <div className="calculator-page-shell calculator-blueprint-shell">
         <CalculatorBlueprintStatsBar
           trailing={
-            <Link href="/calculators/" className="calculator-blueprint-stats__link">
-              All tools
-            </Link>
+            <div className="calculator-blueprint-toolbar">
+              <CategoryToolsFocus
+                calculators={calculators.map(({ id, href, title, description }) => ({
+                  id,
+                  href,
+                  title,
+                  description,
+                }))}
+                categoryLabel={label}
+              />
+              <Link href="/calculators/" className="calculator-blueprint-stats__link">
+                All tools
+              </Link>
+            </div>
           }
         />
 

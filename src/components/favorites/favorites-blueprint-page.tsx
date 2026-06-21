@@ -7,6 +7,7 @@ import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculat
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { CategoryToolsFocus } from "@/components/category/category-tools-focus";
 import { FavoritesBlueprintHeader } from "@/components/favorites/favorites-blueprint-header";
 import { useCalculatorFavorites } from "@/hooks/use-calculator-favorites";
 import { calculatorCommandBtn } from "@/lib/glass-ui";
@@ -21,14 +22,32 @@ export function FavoritesBlueprintPage() {
     return ids.map((id) => getCalculatorMeta(id));
   }, [ids, hydrated]);
 
+  const focusItems = useMemo(
+    () =>
+      calculators.map(({ id, href, title, description }) => ({
+        id,
+        href,
+        title,
+        description,
+      })),
+    [calculators]
+  );
+
   return (
     <div className="calculator-route calculator-route--blueprint">
       <div className="calculator-page-shell calculator-blueprint-shell">
         <CalculatorBlueprintStatsBar
           trailing={
-            <Link href="/calculators/" className="calculator-blueprint-stats__link">
-              All tools
-            </Link>
+            <div className="calculator-blueprint-toolbar">
+              <CategoryToolsFocus
+                calculators={focusItems}
+                categoryLabel="Favorites"
+                title="Saved tools"
+              />
+              <Link href="/calculators/" className="calculator-blueprint-stats__link">
+                All tools
+              </Link>
+            </div>
           }
         />
 
