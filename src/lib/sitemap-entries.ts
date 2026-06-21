@@ -16,7 +16,9 @@ import { absoluteUrl } from "@/lib/seo";
 export const SITEMAP_STATIC_PATHS = [
   "",
   "/calculators",
+  "/dashboard",
   "/favorites",
+  "/wizard",
   "/blog",
   "/about",
   "/contact",
