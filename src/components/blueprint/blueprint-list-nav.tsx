@@ -1,17 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import type { LucideIcon } from "lucide-react";
 import { CalculatorEngineeringStamp } from "@/components/calculator/calculator-engineering-stamp";
 import { BlueprintRightNavHeader } from "@/components/blueprint/blueprint-right-nav-header";
 import { useBlueprintRightSidebar } from "@/components/blueprint/blueprint-right-sidebar-context";
+import {
+  resolveBlueprintListNavIcon,
+} from "@/lib/blueprint-list-nav-icons";
+import type { BlueprintListNavIconKey } from "@/lib/blueprint-list-nav-icon-keys";
 import { cn } from "@/lib/utils";
 
 export interface BlueprintListNavItem {
   href: string;
   label: string;
   id?: string;
-  icon?: LucideIcon;
+  iconKey?: BlueprintListNavIconKey;
 }
 
 interface BlueprintListNavProps {
@@ -49,7 +52,7 @@ export function BlueprintListNav({
       ) : (
         <ul className="calculator-blueprint-nav__list" role="list">
           {items.map((item) => {
-            const Icon = item.icon;
+            const Icon = resolveBlueprintListNavIcon(item.iconKey);
             const active = activeId != null && item.id === activeId;
             return (
               <li key={item.href}>

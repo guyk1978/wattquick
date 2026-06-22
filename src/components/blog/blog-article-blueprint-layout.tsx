@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { BookOpen } from "lucide-react";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
 import { BlueprintListNav } from "@/components/blueprint/blueprint-list-nav";
 import { getBlogPostsByCategory, type BlogPost } from "@/lib/blog/posts";
@@ -18,7 +17,7 @@ export function BlogArticleBlueprintLayout({
     id: item.slug,
     href: `/blog/${item.slug}/`,
     label: item.title,
-    icon: BookOpen,
+    iconKey: "book-open" as const,
   }));
 
   return (

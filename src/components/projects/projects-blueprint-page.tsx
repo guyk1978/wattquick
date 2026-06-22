@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { FolderKanban } from "lucide-react";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
 import { BlueprintListNav } from "@/components/blueprint/blueprint-list-nav";
 import { ProjectDetail } from "@/components/project-detail";
@@ -31,7 +30,7 @@ export function ProjectsBlueprintPage() {
       id: project.id,
       href: `/projects/?id=${project.id}`,
       label: project.name,
-      icon: FolderKanban,
+      iconKey: "folder-kanban" as const,
     }));
   }, [hydrated, projectCount, projectId]);
 

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { FileText } from "lucide-react";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
 import { BlueprintListNav } from "@/components/blueprint/blueprint-list-nav";
 import { GuideLandingArticle } from "@/components/landing/guide-landing-article";
@@ -17,7 +16,7 @@ export function GuideLandingBlueprintPage({ landing }: GuideLandingBlueprintPage
     id: item.slug,
     href: item.href,
     label: item.title,
-    icon: FileText,
+    iconKey: "file-text" as const,
   }));
 
   return (

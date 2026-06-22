@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BookOpen } from "lucide-react";
 import { BlogFilter, type BlogFilterValue } from "@/components/blog/blog-filter";
 import { BlogBlueprintHeader } from "@/components/blog/blog-blueprint-header";
 import { BlogPostGrid } from "@/components/blog/blog-post-grid";
@@ -36,7 +35,7 @@ export function BlogBlueprintPage({ posts }: BlogBlueprintPageProps) {
         id: post.slug,
         href: `/blog/${post.slug}/`,
         label: post.title,
-        icon: BookOpen,
+        iconKey: "book-open" as const,
       })),
     [filteredPosts]
   );
