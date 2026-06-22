@@ -383,7 +383,7 @@ export const calculatorShareData: Partial<
   "heat-loss-insulation": {
     title: "Building Heat Loss & Insulation Calculator",
     description: "Estimate heat loss watts from envelope area, ΔT, and R-value.",
-    imageUrl: "/images/share/heat-loss-insulation.jpg",
+    imageUrl: "/images/share/heat-loss-insulation.webp",
   },
   "heat-pump-vs-resistance": {
     title: "Heat Pump vs. Resistance Heat Calculator",

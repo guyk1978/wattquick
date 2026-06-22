@@ -7,6 +7,9 @@ import {
 
 const SITE_NAME = "WattQuick";
 const SITE_URL = "https://wattquick.com";
+/** Set NEXT_PUBLIC_FACEBOOK_APP_ID in env (Facebook App Dashboard → Settings → Basic). */
+export const FACEBOOK_APP_ID =
+  process.env.NEXT_PUBLIC_FACEBOOK_APP_ID?.trim() || "YOUR_APP_ID_HERE";
 /** Default share preview — matches default dark theme and themeInitScript. */
 const DEFAULT_OG_IMAGE = getOgImageUrl("dark");
 

@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
-import { createPageMetadata, SITE_URL } from "@/lib/seo";
+import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
 import { consentInitScript } from "@/lib/consent-init";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
@@ -60,6 +60,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/assets/css/site-search.css" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#fafafa" />
+        <meta property="fb:app_id" content={FACEBOOK_APP_ID} />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
