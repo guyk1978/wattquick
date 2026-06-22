@@ -54,6 +54,7 @@ import { SolarDegradation20YearRoiCalculator } from "@/components/calculators/So
 import { SolarRoiAnalysisCalculator } from "@/components/calculators/SolarRoiAnalysisCalculator";
 import { BessRoiCalculator } from "@/components/calculators/BessRoiCalculator";
 import { CalculatorIdProvider } from "./calculator-id-context";
+import { CalculatorRecentHistorySync } from "./calculator-recent-history-sync";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -65,7 +66,9 @@ import {
   recordToSummaryItems,
 } from "./calculator-results-dashboard";
 import { getCalculatorStatusAlert } from "@/lib/calculator-status";
+import { updateRecentSnapshot } from "@/lib/dashboard-storage";
 import { cn } from "@/lib/utils";
+import { formatCalculatorResultSnapshot } from "./calculator-recent-history-sync";
 
 const CALCULATOR_FOOTER_NOTES: Partial<Record<CalculatorId, string>> = {
   "battery-charging-time": "Note: Heat loss & taper accounted.",
@@ -82,6 +85,7 @@ interface CalculatorPanelProps {
 export function CalculatorPanel(props: CalculatorPanelProps) {
   return (
     <CalculatorIdProvider id={props.id}>
+      <CalculatorRecentHistorySync calculatorId={props.id} />
       <CalculatorPanelInner {...props} />
     </CalculatorIdProvider>
   );
@@ -219,12 +223,10 @@ function CalculatorPanelInner({
   );
 
   useEffect(() => {
-    if (!onResultSnapshot) return;
-    const snapshot = result.value
-      ? `${result.value}${result.unit ? ` ${result.unit}` : ""}`.trim()
-      : null;
-    onResultSnapshot(snapshot);
-  }, [onResultSnapshot, result.unit, result.value]);
+    const snapshot = formatCalculatorResultSnapshot(result.value, result.unit);
+    updateRecentSnapshot(id, snapshot);
+    onResultSnapshot?.(snapshot);
+  }, [id, onResultSnapshot, result.unit, result.value]);
 
   const fieldLabels = useMemo(
     () => Object.fromEntries(definition.fields.map((f) => [f.id, f.label])),

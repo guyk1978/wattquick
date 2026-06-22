@@ -1,5 +1,6 @@
 import type { CalculatorId } from "@/lib/calculators";
 import type { EnergySystemProfile, FlowNodeId } from "@/lib/dashboard-config";
+import { notifyRecentCalculatorsChanged } from "@/lib/recent-calculators-events";
 
 const PROFILE_KEY = "wattquick-energy-profile";
 const RECENT_KEY = "wattquick-recent-calculators";
@@ -115,6 +116,7 @@ export function recordCalculatorUse(
       ...prev,
     ].slice(0, MAX_RECENT);
     localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+    notifyRecentCalculatorsChanged();
   } catch {
     /* ignore */
   }
@@ -133,6 +135,7 @@ export function updateRecentSnapshot(
       ...list.slice(1),
     ];
     localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+    notifyRecentCalculatorsChanged();
   } catch {
     /* ignore */
   }

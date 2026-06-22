@@ -10,6 +10,7 @@ import {
   type RecentCalculatorEntry,
 } from "@/lib/dashboard-storage";
 import { formatRelativeTime } from "@/lib/format-relative-time";
+import { RECENT_CALCULATORS_CHANGED_EVENT } from "@/lib/recent-calculators-events";
 import { cn } from "@/lib/utils";
 
 const DISPLAY_SLOTS = 4;
@@ -23,8 +24,18 @@ export function CalculatorsRecentHistory({ className }: CalculatorsRecentHistory
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setRecent(loadRecentCalculators());
+    const refresh = () => setRecent(loadRecentCalculators());
+
+    refresh();
     setHydrated(true);
+
+    window.addEventListener(RECENT_CALCULATORS_CHANGED_EVENT, refresh);
+    window.addEventListener("focus", refresh);
+
+    return () => {
+      window.removeEventListener(RECENT_CALCULATORS_CHANGED_EVENT, refresh);
+      window.removeEventListener("focus", refresh);
+    };
   }, []);
 
   return (
