@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { getCalculatorMeta } from "../src/lib/calculators/registry";
 import { isCalculatorId } from "../src/lib/calculators/utils";
+import { normalizeAssetPath } from "../src/lib/seo";
 import type { CalculatorId } from "../src/lib/calculators";
 
 const CUSTOM_DESCRIPTIONS: Partial<Record<CalculatorId, string>> = {
@@ -62,7 +63,7 @@ for (const id of sortedSlugs) {
   const meta = getCalculatorMeta(id);
   const title = shareTitle(meta.title);
   const description = CUSTOM_DESCRIPTIONS[id] ?? meta.description;
-  const imageUrl = `/images/share/${file}`;
+  const imageUrl = normalizeAssetPath(`/images/share/${file}`);
 
   entries.push(
     `  "${id}": {\n` +

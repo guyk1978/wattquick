@@ -19,9 +19,27 @@ export function normalizePath(path: string): string {
   return path.endsWith("/") ? path : `${path}/`;
 }
 
+/** Strip trailing slashes from static asset paths (images, fonts, etc.). */
+export function normalizeAssetPath(path: string): string {
+  const trimmed = path.trim();
+  if (!trimmed || trimmed === "/") return "/";
+  const withoutTrailing = trimmed.replace(/\/+$/, "");
+  return withoutTrailing.startsWith("/") ? withoutTrailing : `/${withoutTrailing}`;
+}
+
 export function absoluteUrl(path: string): string {
   const normalized = normalizePath(path);
   return normalized === "/" ? SITE_URL : `${SITE_URL}${normalized}`;
+}
+
+/** Absolute URL for static files — never appends a trailing slash. */
+export function absoluteAssetUrl(path: string): string {
+  const trimmed = path.trim();
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed.replace(/\/+$/, "");
+  }
+  const assetPath = normalizeAssetPath(trimmed);
+  return assetPath === "/" ? SITE_URL : `${SITE_URL}${assetPath}`;
 }
 
 export function createPageMetadata({
@@ -53,9 +71,7 @@ export function createPageMetadata({
       ? ogTitle
       : `${ogTitle} | ${SITE_NAME}`
     : fullTitle;
-  const imageUrl = ogImage.startsWith("http")
-    ? ogImage
-    : absoluteUrl(ogImage.startsWith("/") ? ogImage : `/${ogImage}`);
+  const imageUrl = absoluteAssetUrl(ogImage);
 
   return {
     title,

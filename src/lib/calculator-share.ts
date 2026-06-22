@@ -4,7 +4,7 @@ import {
   type CalculatorShareEntry,
 } from "@/constants/calculatorShareData";
 import type { CalculatorId } from "@/lib/calculators";
-import { absoluteUrl, createPageMetadata, SITE_NAME } from "@/lib/seo";
+import { absoluteAssetUrl, createPageMetadata, SITE_NAME } from "@/lib/seo";
 
 export function getCalculatorShareData(
   id: CalculatorId
@@ -17,9 +17,7 @@ export function hasCalculatorShareData(id: CalculatorId): boolean {
 }
 
 export function resolveCalculatorShareImageUrl(imageUrl: string): string {
-  return imageUrl.startsWith("http")
-    ? imageUrl
-    : absoluteUrl(imageUrl.startsWith("/") ? imageUrl : `/${imageUrl}`);
+  return absoluteAssetUrl(imageUrl);
 }
 
 export function getCalculatorShareTitle(
