@@ -14,17 +14,46 @@ function shareTitle(registryTitle: string): string {
     : `${registryTitle} Calculator`;
 }
 
+const SHARE_IMAGE_PATTERN = /\.(webp|jpe?g)$/i;
+const EXT_PRIORITY: Record<string, number> = { webp: 0, jpg: 1, jpeg: 2 };
+
+function shareImageSlug(filename: string): string | null {
+  const match = filename.match(/^(.+)\.(webp|jpe?g)$/i);
+  return match ? match[1] : null;
+}
+
 const shareDir = path.join(process.cwd(), "public/images/share");
 const files = fs
   .readdirSync(shareDir)
-  .filter((file) => file.endsWith(".webp"))
-  .sort();
+  .filter((file) => SHARE_IMAGE_PATTERN.test(file));
+
+/** One image per slug — prefer .webp over .jpg */
+const fileBySlug = new Map<string, string>();
+for (const file of files) {
+  const slug = shareImageSlug(file);
+  if (!slug) continue;
+
+  const ext = file.match(/\.(webp|jpe?g)$/i)?.[1].toLowerCase() ?? "";
+  const existing = fileBySlug.get(slug);
+  if (!existing) {
+    fileBySlug.set(slug, file);
+    continue;
+  }
+
+  const existingExt =
+    existing.match(/\.(webp|jpe?g)$/i)?.[1].toLowerCase() ?? "";
+  if ((EXT_PRIORITY[ext] ?? 99) < (EXT_PRIORITY[existingExt] ?? 99)) {
+    fileBySlug.set(slug, file);
+  }
+}
+
+const sortedSlugs = [...fileBySlug.keys()].sort();
 
 const entries: string[] = [];
 const skipped: string[] = [];
 
-for (const file of files) {
-  const id = file.replace(/\.webp$/, "");
+for (const id of sortedSlugs) {
+  const file = fileBySlug.get(id)!;
   if (!isCalculatorId(id)) {
     skipped.push(id);
     continue;
@@ -56,7 +85,7 @@ export type CalculatorShareEntry = {
 /**
  * Per-calculator share copy and OG preview image.
  * Add a key + image file only — ShareButtons and metadata pick it up automatically.
- * Generated from public/images/share/*.webp via scripts/generate-calculator-share-data.ts
+ * Generated from public/images/share/*.{webp,jpg,jpeg} via scripts/generate-calculator-share-data.ts
  */
 export const calculatorShareData: Partial<
   Record<CalculatorId, CalculatorShareEntry>

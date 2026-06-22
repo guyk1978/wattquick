@@ -10,7 +10,7 @@ export type CalculatorShareEntry = {
 /**
  * Per-calculator share copy and OG preview image.
  * Add a key + image file only — ShareButtons and metadata pick it up automatically.
- * Generated from public/images/share/*.webp via scripts/generate-calculator-share-data.ts
+ * Generated from public/images/share/*.{webp,jpg,jpeg} via scripts/generate-calculator-share-data.ts
  */
 export const calculatorShareData: Partial<
   Record<CalculatorId, CalculatorShareEntry>
@@ -380,6 +380,11 @@ export const calculatorShareData: Partial<
     description: "Compare 5- and 10-year cumulative costs of diesel generator-only power vs. a solar+battery hybrid—and estimate annual savings.",
     imageUrl: "/images/share/generator-vs-solar-hybrid.webp",
   },
+  "heat-loss-insulation": {
+    title: "Building Heat Loss & Insulation Calculator",
+    description: "Estimate heat loss watts from envelope area, ΔT, and R-value.",
+    imageUrl: "/images/share/heat-loss-insulation.jpg",
+  },
   "heat-pump-vs-resistance": {
     title: "Heat Pump vs. Resistance Heat Calculator",
     description: "Compare electric heating cost: resistance strips (COP 1) vs. heat pump COP.",
@@ -480,15 +485,15 @@ export const calculatorShareData: Partial<
     description: "Estimate daily energy output from panel wattage and sun hours.",
     imageUrl: "/images/share/solar-daily-yield.webp",
   },
-  "solar-degradation-20-year-roi": {
-    title: "Solar System Degradation & 20-Year ROI Calculator",
-    description: "Model 20 years of declining PV output, rising electricity rates, cumulative savings, and break-even with annual degradation.",
-    imageUrl: "/images/share/solar-degradation-20-year-roi.webp",
-  },
   "solar-degradation": {
     title: "Solar Panel Degradation Calculator",
     description: "Estimate remaining annual output and capacity after years of panel degradation.",
     imageUrl: "/images/share/solar-degradation.webp",
+  },
+  "solar-degradation-20-year-roi": {
+    title: "Solar System Degradation & 20-Year ROI Calculator",
+    description: "Model 20 years of declining PV output, rising electricity rates, cumulative savings, and break-even with annual degradation.",
+    imageUrl: "/images/share/solar-degradation-20-year-roi.webp",
   },
   "solar-inverter-efficiency": {
     title: "Solar Inverter Efficiency Calculator",
