@@ -15,15 +15,40 @@ export type CalculatorShareEntry = {
 export const calculatorShareData: Partial<
   Record<CalculatorId, CalculatorShareEntry>
 > = {
+  "12v-to-120v-inverter": {
+    title: "12V to 120V Inverter Load Planner Calculator",
+    description: "Check continuous and surge loads against inverter ratings.",
+    imageUrl: "/images/share/12v-to-120v-inverter.webp",
+  },
+  "ac-energy-cost": {
+    title: "Air Conditioner Energy Cost Calculator",
+    description: "Estimate monthly AC electricity cost from watts, daily hours, and rate.",
+    imageUrl: "/images/share/ac-energy-cost.webp",
+  },
   "ac-inrush-current": {
     title: "AC Inrush Current Limit Calculator",
     description: "Find nominal amps, peak motor inrush, and recommended breaker size with B/C/D curve guidance.",
     imageUrl: "/images/share/ac-inrush-current.webp",
   },
+  "ac-inverter-savings": {
+    title: "AC Efficiency & Inverter Savings Calculator",
+    description: "Compare on/off vs. inverter air conditioner monthly electricity cost, energy savings, and purchase payback period.",
+    imageUrl: "/images/share/ac-inverter-savings.webp",
+  },
   "amps-to-watts": {
     title: "Amps to Watts Calculator",
     description: "Convert current (amps) and voltage into power (watts).",
     imageUrl: "/images/share/amps-to-watts.webp",
+  },
+  "appliance-daily-cost": {
+    title: "Appliance Daily Cost Calculator",
+    description: "Calculate daily electricity cost for any appliance from watts and runtime.",
+    imageUrl: "/images/share/appliance-daily-cost.webp",
+  },
+  "appliance-monthly-energy": {
+    title: "Appliance Monthly Energy Calculator",
+    description: "Convert appliance watts and daily use into monthly kWh.",
+    imageUrl: "/images/share/appliance-monthly-energy.webp",
   },
   "battery-bank-size": {
     title: "Battery Bank Size (Ah) Calculator",
@@ -85,10 +110,20 @@ export const calculatorShareData: Partial<
     description: "See if adding battery storage to existing solar pays back from peak vs. off-peak TOU arbitrage—daily savings, payback years, and LCOS.",
     imageUrl: "/images/share/bess-roi.webp",
   },
+  "camping-fridge-runtime": {
+    title: "12V Camping Fridge Runtime Calculator",
+    description: "Ambient temperature effect on compressor duty cycle and battery days.",
+    imageUrl: "/images/share/camping-fridge-runtime.webp",
+  },
   "critical-load-analysis": {
     title: "Critical Load Analysis Calculator",
     description: "Plan home backup power by listing essential devices, daily runtime, and target outage hours.",
     imageUrl: "/images/share/critical-load-analysis.webp",
+  },
+  "crypto-mining-power": {
+    title: "Crypto Mining Power Calculator",
+    description: "Estimate kWh and electricity cost for GPU/ASIC rigs by wattage and run hours.",
+    imageUrl: "/images/share/crypto-mining-power.webp",
   },
   "dc-cable-size": {
     title: "DC Cable Size Calculator",
@@ -99,6 +134,121 @@ export const calculatorShareData: Partial<
     title: "DC Cable Size & Voltage Drop Calculator",
     description: "Size copper DC homeruns from panels to charge controller—minimum mm² / AWG for amp load, length in meters, and max voltage drop.",
     imageUrl: "/images/share/dc-cable-voltage-drop.webp",
+  },
+  "ebike-battery-c-rate": {
+    title: "E-Bike Battery C-Rating Calculator",
+    description: "Check whether your pack can safely deliver the continuous current your motor demands.",
+    imageUrl: "/images/share/ebike-battery-c-rate.webp",
+  },
+  "ebike-battery-cycle-life": {
+    title: "E-Bike Battery Cycle Life Calculator",
+    description: "Estimate remaining cycle life using k × DOD⁻¹·⁵ decay and manufacturer 80% SOH ratings.",
+    imageUrl: "/images/share/ebike-battery-cycle-life.webp",
+  },
+  "ebike-charge-time": {
+    title: "E-Bike Charge Time Calculator",
+    description: "Estimate 0–100% charge duration from pack capacity, charger wattage, and charge efficiency.",
+    imageUrl: "/images/share/ebike-charge-time.webp",
+  },
+  "ebike-charging-cost": {
+    title: "E-Bike Full Charge Cost Calculator",
+    description: "Calculate the cost of a full battery charge from pack capacity and your home electricity rate.",
+    imageUrl: "/images/share/ebike-charging-cost.webp",
+  },
+  "ebike-commute-savings": {
+    title: "E-Bike Commute Savings Calculator",
+    description: "Compare annual commuting cost: e-bike electricity vs car per-km vs public transit fares.",
+    imageUrl: "/images/share/ebike-commute-savings.webp",
+  },
+  "ebike-controller-watts": {
+    title: "E-Bike Controller Amps to Watts Calculator",
+    description: "Convert controller current draw to motor input and shaft power at different battery voltages.",
+    imageUrl: "/images/share/ebike-controller-watts.webp",
+  },
+  "ebike-max-speed": {
+    title: "E-Bike Max Speed Calculator",
+    description: "Estimate theoretical top speed from battery voltage, motor KV rating, and wheel diameter.",
+    imageUrl: "/images/share/ebike-max-speed.webp",
+  },
+  "ebike-range-estimator": {
+    title: "E-Bike Range Estimator Calculator",
+    description: "Physics-based range estimate from battery Wh, assist level, rider weight, and wind/terrain factors.",
+    imageUrl: "/images/share/ebike-range-estimator.webp",
+  },
+  "ebike-voltage-sag": {
+    title: "E-Bike Voltage Sag Calculator",
+    description: "Calculate dynamic voltage sag from cell resistance, S×P pack layout, and max controller current.",
+    imageUrl: "/images/share/ebike-voltage-sag.webp",
+  },
+  "ebike-weight-performance": {
+    title: "E-Bike Weight vs Performance Calculator",
+    description: "See how total mass (rider + bike + cargo) and terrain affect energy use and range.",
+    imageUrl: "/images/share/ebike-weight-performance.webp",
+  },
+  "energy-consumption": {
+    title: "Energy Consumption Calculator",
+    description: "Estimate total kWh from watts, hours per day, and number of days.",
+    imageUrl: "/images/share/energy-consumption.webp",
+  },
+  "escooter-brake-pad-wear": {
+    title: "E-Scooter Brake Pad Wear Calculator",
+    description: "Pad life in km from regen share, hill riding, and weekly distance.",
+    imageUrl: "/images/share/escooter-brake-pad-wear.webp",
+  },
+  "escooter-charge-time": {
+    title: "E-Scooter Charge Time Calculator",
+    description: "Compare 2 A / 3 A / 4 A charger times for typical 36 V and 48 V packs.",
+    imageUrl: "/images/share/escooter-charge-time.webp",
+  },
+  "escooter-connector-loss": {
+    title: "E-Scooter Connector Power Loss Calculator",
+    description: "I²R heat at XT30/XT60/XT90 pairs under ride and charge current.",
+    imageUrl: "/images/share/escooter-connector-loss.webp",
+  },
+  "escooter-cost-per-km": {
+    title: "E-Scooter Cost per km Calculator",
+    description: "Electricity cost per km versus public transit for commute planning.",
+    imageUrl: "/images/share/escooter-cost-per-km.webp",
+  },
+  "escooter-hill-climb": {
+    title: "E-Scooter Hill Climb Grade Calculator",
+    description: "Maximum climb grade with dynamic SOC (20–100 %) and voltage sag torque drop at 36 / 48 / 52 V.",
+    imageUrl: "/images/share/escooter-hill-climb.webp",
+  },
+  "escooter-maintenance-schedule": {
+    title: "E-Scooter Maintenance Schedule Calculator",
+    description: "Km and weeks until tyre, brake, and bolt-torque service intervals.",
+    imageUrl: "/images/share/escooter-maintenance-schedule.webp",
+  },
+  "escooter-max-speed": {
+    title: "E-Scooter Max Speed Calculator",
+    description: "Theoretical top speed from voltage, motor KV, and wheel diameter.",
+    imageUrl: "/images/share/escooter-max-speed.webp",
+  },
+  "escooter-peak-amps": {
+    title: "E-Scooter Peak Discharge Amps Calculator",
+    description: "Check acceleration peaks against controller and pack C-rating.",
+    imageUrl: "/images/share/escooter-peak-amps.webp",
+  },
+  "escooter-range": {
+    title: "E-Scooter Range Calculator",
+    description: "Estimate remaining range with SOC slider, tyre pressure, and voltage sag at 36 / 48 / 52 V.",
+    imageUrl: "/images/share/escooter-range.webp",
+  },
+  "escooter-tire-pressure": {
+    title: "E-Scooter Tyre Pressure & Rolling Resistance Calculator",
+    description: "See how under-inflation on 8–10″ wheels raises Wh/km and cuts range.",
+    imageUrl: "/images/share/escooter-tire-pressure.webp",
+  },
+  "escooter-tire-wear": {
+    title: "E-Scooter Tyre Wear Life Calculator",
+    description: "Estimate tread life in km and weeks from weekly distance and surface type.",
+    imageUrl: "/images/share/escooter-tire-wear.webp",
+  },
+  "escooter-weight-limit": {
+    title: "E-Scooter Rider Weight Limit Calculator",
+    description: "Stress factor on motor and deck when exceeding rated rider mass.",
+    imageUrl: "/images/share/escooter-weight-limit.webp",
   },
   "ev-battery-degradation": {
     title: "EV Battery Health & Degradation Estimator Calculator",
@@ -210,6 +360,16 @@ export const calculatorShareData: Partial<
     description: "Estimate cold-weather driving range from EPA rating, temperature, and cabin heat use.",
     imageUrl: "/images/share/ev-winter-range-loss.webp",
   },
+  "fridge-energy-usage": {
+    title: "Refrigerator Energy Usage Calculator",
+    description: "Estimate refrigerator kWh and cost from wattage and electricity rate.",
+    imageUrl: "/images/share/fridge-energy-usage.webp",
+  },
+  "generator-fuel-consumption": {
+    title: "Generator Fuel Consumption Calculator",
+    description: "Estimate fuel use per hour and runtime from tank size at your load level.",
+    imageUrl: "/images/share/generator-fuel-consumption.webp",
+  },
   "generator-runtime-savings": {
     title: "Generator Run-Time Savings Calculator",
     description: "Estimate daily engine hours saved with a solar+battery hybrid, maintenance dollars avoided, and longer generator life.",
@@ -219,6 +379,16 @@ export const calculatorShareData: Partial<
     title: "Off-Grid Generator vs. Solar Hybrid Calculator",
     description: "Compare 5- and 10-year cumulative costs of diesel generator-only power vs. a solar+battery hybrid—and estimate annual savings.",
     imageUrl: "/images/share/generator-vs-solar-hybrid.webp",
+  },
+  "heat-pump-vs-resistance": {
+    title: "Heat Pump vs. Resistance Heat Calculator",
+    description: "Compare electric heating cost: resistance strips (COP 1) vs. heat pump COP.",
+    imageUrl: "/images/share/heat-pump-vs-resistance.webp",
+  },
+  "heater-cost": {
+    title: "Electric Heater Cost Calculator",
+    description: "Estimate heating cost from wattage, run hours, days, and electricity rate.",
+    imageUrl: "/images/share/heater-cost.webp",
   },
   "home-backup-sizing": {
     title: "Home Backup Battery Sizing Calculator",
@@ -245,10 +415,30 @@ export const calculatorShareData: Partial<
     description: "Find minimum inverter size from peak load and safety margin.",
     imageUrl: "/images/share/inverter-sizing.webp",
   },
+  "lighting-circuit-load": {
+    title: "Lighting Circuit Load Calculator",
+    description: "Sum fixture watts, compute circuit amps, and check breaker utilization against the 80% continuous-load guideline.",
+    imageUrl: "/images/share/lighting-circuit-load.webp",
+  },
+  "marine-battery-bank": {
+    title: "Marine Trolling Motor Runtime Calculator",
+    description: "Continuous amp draw vs. bank Ah for trolling and house loads.",
+    imageUrl: "/images/share/marine-battery-bank.webp",
+  },
+  "mobility-tco-calculator": {
+    title: "Mobility TCO Calculator",
+    description: "Compare 3-year total cost of ownership: car vs e-bike vs e-scooter for commuting and urban mobility.",
+    imageUrl: "/images/share/mobility-tco-calculator.webp",
+  },
   "ohms-law": {
     title: "Ohm's Law Calculator",
     description: "Find voltage, current, or resistance when you know any two values (V = I × R).",
     imageUrl: "/images/share/ohms-law.webp",
+  },
+  "portable-power-station-recharge": {
+    title: "Portable Power Station Recharge Times Calculator",
+    description: "Compare wall AC, car 12V, and solar MPPT hours to refill Wh capacity.",
+    imageUrl: "/images/share/portable-power-station-recharge.webp",
   },
   "power-factor": {
     title: "Power Factor Calculator",
@@ -259,6 +449,11 @@ export const calculatorShareData: Partial<
     title: "Residential AC Voltage Drop Calculator",
     description: "Calculate AC voltage drop in home wiring from supply voltage, amps, cable length (m), and AWG or mm² copper size.",
     imageUrl: "/images/share/residential-voltage-drop.webp",
+  },
+  "rv-solar-calculator": {
+    title: "RV Solar & House Battery Calculator",
+    description: "Match rooftop panel yield to daily 12V/24V loads and bank Ah shortfall.",
+    imageUrl: "/images/share/rv-solar-calculator.webp",
   },
   "solar-angle-optimizer": {
     title: "Solar Panel Angle & Tilt Optimizer Calculator",
@@ -335,10 +530,20 @@ export const calculatorShareData: Partial<
     description: "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",
     imageUrl: "/images/share/solar-shading-analysis.webp",
   },
+  "standby-power-waste": {
+    title: "Standby Power Waste Calculator",
+    description: "Quantify phantom load cost from devices left plugged in 24/7 on standby.",
+    imageUrl: "/images/share/standby-power-waste.webp",
+  },
   "ups-runtime": {
     title: "UPS Runtime Calculator",
     description: "Estimate backup time from battery energy and load power.",
     imageUrl: "/images/share/ups-runtime.webp",
+  },
+  "vampire-power-cost": {
+    title: "Vampire Power Cost Calculator",
+    description: "Estimate yearly electricity cost for TVs, chargers, and other devices drawing power in standby.",
+    imageUrl: "/images/share/vampire-power-cost.webp",
   },
   "volts-to-watts": {
     title: "Volts to Watts Calculator",
@@ -359,5 +564,10 @@ export const calculatorShareData: Partial<
     title: "Watts to Volts Calculator",
     description: "Find voltage from power and current (V = W ÷ A).",
     imageUrl: "/images/share/watts-to-volts.webp",
+  },
+  "whole-house-energy-budget": {
+    title: "Whole House Energy Budget Calculator",
+    description: "Sum daily kWh by category and estimate monthly and annual electricity cost.",
+    imageUrl: "/images/share/whole-house-energy-budget.webp",
   },
 };
