@@ -35,6 +35,11 @@ export const calculatorShareData: Partial<
     description: "Compare on/off vs. inverter air conditioner monthly electricity cost, energy savings, and purchase payback period.",
     imageUrl: "/images/share/ac-inverter-savings.webp",
   },
+  "ah-to-wh": {
+    title: "Ah to Wh Converter Calculator",
+    description: "Convert amp-hours to watt-hours using battery voltage.",
+    imageUrl: "/images/share/ah-to-wh.webp",
+  },
   "amps-to-watts": {
     title: "Amps to Watts Calculator",
     description: "Convert current (amps) and voltage into power (watts).",
@@ -49,6 +54,11 @@ export const calculatorShareData: Partial<
     title: "Appliance Monthly Energy Calculator",
     description: "Convert appliance watts and daily use into monthly kWh.",
     imageUrl: "/images/share/appliance-monthly-energy.webp",
+  },
+  "battery-arbitrage-roi": {
+    title: "Home Battery Arbitrage ROI Calculator",
+    description: "Profit from charging on cheap night rates and discharging at peak.",
+    imageUrl: "/images/share/battery-arbitrage-roi.webp",
   },
   "battery-bank-size": {
     title: "Battery Bank Size (Ah) Calculator",
@@ -70,10 +80,20 @@ export const calculatorShareData: Partial<
     description: "Calculate how long it takes to charge a battery at a given current.",
     imageUrl: "/images/share/battery-charging-time.webp",
   },
+  "battery-cost": {
+    title: "Battery Cost Estimator Calculator",
+    description: "Estimate pack cost from capacity, voltage, and price per watt-hour.",
+    imageUrl: "/images/share/battery-cost.webp",
+  },
   "battery-depth-of-discharge": {
     title: "Battery Depth of Discharge Calculator",
     description: "Calculate how much of a battery's capacity has been used (DoD %).",
     imageUrl: "/images/share/battery-depth-of-discharge.webp",
+  },
+  "battery-dod-energy-yield": {
+    title: "Battery DoD to Energy Yield Calculator",
+    description: "Convert nominal battery capacity and depth of discharge to usable kWh for backup and critical-load planning.",
+    imageUrl: "/images/share/battery-dod-energy-yield.webp",
   },
   "battery-efficiency": {
     title: "Battery Efficiency Calculator",
@@ -105,6 +125,11 @@ export const calculatorShareData: Partial<
     description: "Estimate DC wire voltage drop and voltage at the load from amps, length, and system voltage.",
     imageUrl: "/images/share/battery-voltage-drop.webp",
   },
+  "bess-carbon-cost": {
+    title: "BESS Round-trip Carbon Cost Calculator",
+    description: "Estimate annual kg CO₂ from battery round-trip conversion losses and compare grid charging vs. renewable charging.",
+    imageUrl: "/images/share/bess-carbon-cost.webp",
+  },
   "bess-roi": {
     title: "BESS ROI Calculator (Battery Energy Storage System)",
     description: "See if adding battery storage to existing solar pays back from peak vs. off-peak TOU arbitrage—daily savings, payback years, and LCOS.",
@@ -114,6 +139,16 @@ export const calculatorShareData: Partial<
     title: "12V Camping Fridge Runtime Calculator",
     description: "Ambient temperature effect on compressor duty cycle and battery days.",
     imageUrl: "/images/share/camping-fridge-runtime.webp",
+  },
+  "carbon-footprint-offset": {
+    title: "Solar & EV Carbon Offset Calculator",
+    description: "kg CO₂ avoided from clean kWh vs. grid emissions factor.",
+    imageUrl: "/images/share/carbon-footprint-offset.webp",
+  },
+  "conductor-resistance-temperature": {
+    title: "Conductor Resistance & Temperature Calculator",
+    description: "Calculate copper or aluminum conductor resistance from cross-section, length, and operating temperature.",
+    imageUrl: "/images/share/conductor-resistance-temperature.webp",
   },
   "critical-load-analysis": {
     title: "Critical Load Analysis Calculator",
@@ -134,6 +169,11 @@ export const calculatorShareData: Partial<
     title: "DC Cable Size & Voltage Drop Calculator",
     description: "Size copper DC homeruns from panels to charge controller—minimum mm² / AWG for amp load, length in meters, and max voltage drop.",
     imageUrl: "/images/share/dc-cable-voltage-drop.webp",
+  },
+  "demand-charge-calculator": {
+    title: "Commercial Demand Charge Calculator",
+    description: "Monthly penalty from peak kW demand and $/kW tariff.",
+    imageUrl: "/images/share/demand-charge-calculator.webp",
   },
   "ebike-battery-c-rate": {
     title: "E-Bike Battery C-Rating Calculator",
@@ -184,6 +224,16 @@ export const calculatorShareData: Partial<
     title: "E-Bike Weight vs Performance Calculator",
     description: "See how total mass (rider + bike + cargo) and terrain affect energy use and range.",
     imageUrl: "/images/share/ebike-weight-performance.webp",
+  },
+  "electricity-bill": {
+    title: "Electricity Bill Estimator Calculator",
+    description: "Estimate your bill from total kWh usage and rate per kWh.",
+    imageUrl: "/images/share/electricity-bill.webp",
+  },
+  "electricity-rate-plan": {
+    title: "Electricity Rate Plan Calculator (TOU vs Flat)",
+    description: "Compare flat-rate vs. time-of-use monthly bills from your kWh split and peak, shoulder, and off-peak tariffs—see annual savings.",
+    imageUrl: "/images/share/electricity-rate-plan.webp",
   },
   "energy-consumption": {
     title: "Energy Consumption Calculator",
@@ -380,6 +430,11 @@ export const calculatorShareData: Partial<
     description: "Compare 5- and 10-year cumulative costs of diesel generator-only power vs. a solar+battery hybrid—and estimate annual savings.",
     imageUrl: "/images/share/generator-vs-solar-hybrid.webp",
   },
+  "grid-frequency-reward": {
+    title: "Grid Frequency Response Reward Calculator",
+    description: "Estimate monthly and annual revenue from battery or DER frequency-response programs—capacity kW, participation hours, and availability.",
+    imageUrl: "/images/share/grid-frequency-reward.webp",
+  },
   "heat-loss-insulation": {
     title: "Building Heat Loss & Insulation Calculator",
     description: "Estimate heat loss watts from envelope area, ΔT, and R-value.",
@@ -399,6 +454,11 @@ export const calculatorShareData: Partial<
     title: "Home Backup Battery Sizing Calculator",
     description: "Size a backup battery bank for essential loads, runtime, voltage, and depth of discharge.",
     imageUrl: "/images/share/home-backup-sizing.webp",
+  },
+  "home-insulation-savings": {
+    title: "Home Insulation Savings Calculator",
+    description: "Estimate annual heating and cooling savings from upgrading wall insulation and windows—before/after energy use and efficiency score.",
+    imageUrl: "/images/share/home-insulation-savings.webp",
   },
   "inverter-loading-curve": {
     title: "Inverter Loading Curve Calculator",
@@ -420,6 +480,26 @@ export const calculatorShareData: Partial<
     description: "Find minimum inverter size from peak load and safety margin.",
     imageUrl: "/images/share/inverter-sizing.webp",
   },
+  "kva-to-kw": {
+    title: "kVA to kW Converter Calculator",
+    description: "Convert apparent power (kVA) to real power (kW) using power factor.",
+    imageUrl: "/images/share/kva-to-kw.webp",
+  },
+  "kw-to-hp": {
+    title: "kW to HP Converter Calculator",
+    description: "Convert kilowatts to mechanical horsepower instantly.",
+    imageUrl: "/images/share/kw-to-hp.webp",
+  },
+  "led-savings-roi": {
+    title: "LED Savings & ROI Calculator",
+    description: "Compare legacy bulb vs. LED costs, CO₂ savings, and payback time for a single fixture.",
+    imageUrl: "/images/share/led-savings-roi.webp",
+  },
+  "led-vs-incandescent-roi": {
+    title: "LED vs. Incandescent ROI Calculator",
+    description: "Energy and bulb replacement savings when matching lumens with lower watts.",
+    imageUrl: "/images/share/led-vs-incandescent-roi.webp",
+  },
   "lighting-circuit-load": {
     title: "Lighting Circuit Load Calculator",
     description: "Sum fixture watts, compute circuit amps, and check breaker utilization against the 80% continuous-load guideline.",
@@ -429,6 +509,11 @@ export const calculatorShareData: Partial<
     title: "Marine Trolling Motor Runtime Calculator",
     description: "Continuous amp draw vs. bank Ah for trolling and house loads.",
     imageUrl: "/images/share/marine-battery-bank.webp",
+  },
+  "microgrid-roi": {
+    title: "Microgrid ROI Calculator",
+    description: "Break-even timeline and 10–20 year returns for solar, storage, and on-site generation microgrids.",
+    imageUrl: "/images/share/microgrid-roi.webp",
   },
   "mobility-tco-calculator": {
     title: "Mobility TCO Calculator",
@@ -440,6 +525,16 @@ export const calculatorShareData: Partial<
     description: "Find voltage, current, or resistance when you know any two values (V = I × R).",
     imageUrl: "/images/share/ohms-law.webp",
   },
+  "peak-shaving-potential": {
+    title: "Peak Shaving Potential Calculator",
+    description: "Estimate monthly and annual TOU savings from shifting peak kWh to off-peak—compare bills before and after load shifting.",
+    imageUrl: "/images/share/peak-shaving-potential.webp",
+  },
+  "pool-energy-thermal-cover": {
+    title: "Pool Energy Cost & Thermal Cover Savings Calculator",
+    description: "Pool pump and heating cost by technology (resistance vs. heat pump COP) plus thermal cover savings on evaporation load.",
+    imageUrl: "/images/share/pool-energy-thermal-cover.webp",
+  },
   "portable-power-station-recharge": {
     title: "Portable Power Station Recharge Times Calculator",
     description: "Compare wall AC, car 12V, and solar MPPT hours to refill Wh capacity.",
@@ -450,6 +545,11 @@ export const calculatorShareData: Partial<
     description: "Calculate power factor from real power (kW) and apparent power (kVA).",
     imageUrl: "/images/share/power-factor.webp",
   },
+  "reactive-power-calculator": {
+    title: "Reactive Power & Power Factor Calculator",
+    description: "Convert kVA to real kW and reactive kVAR for motor and driver loads—plan inverter and conductor sizing.",
+    imageUrl: "/images/share/reactive-power-calculator.webp",
+  },
   "residential-voltage-drop": {
     title: "Residential AC Voltage Drop Calculator",
     description: "Calculate AC voltage drop in home wiring from supply voltage, amps, cable length (m), and AWG or mm² copper size.",
@@ -459,6 +559,16 @@ export const calculatorShareData: Partial<
     title: "RV Solar & House Battery Calculator",
     description: "Match rooftop panel yield to daily 12V/24V loads and bank Ah shortfall.",
     imageUrl: "/images/share/rv-solar-calculator.webp",
+  },
+  "small-wind-turbine-yield": {
+    title: "Small Wind Turbine Yield Calculator",
+    description: "Estimate rotor power (W), daily kWh, and annual energy from blade diameter, average wind speed, and system efficiency.",
+    imageUrl: "/images/share/small-wind-turbine-yield.webp",
+  },
+  "smart-thermostat-savings": {
+    title: "Smart Thermostat Savings Calculator",
+    description: "HVAC kWh reduction from setback schedules and seasonal rates.",
+    imageUrl: "/images/share/smart-thermostat-savings.webp",
   },
   "solar-angle-optimizer": {
     title: "Solar Panel Angle & Tilt Optimizer Calculator",
@@ -535,15 +645,35 @@ export const calculatorShareData: Partial<
     description: "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",
     imageUrl: "/images/share/solar-shading-analysis.webp",
   },
+  "solar-water-heater-efficiency": {
+    title: "Solar Water Heater Efficiency Calculator",
+    description: "Estimate thermal efficiency, absorbed kWh, and electric heating savings from tank volume, ΔT, sun hours, and collector area.",
+    imageUrl: "/images/share/solar-water-heater-efficiency.webp",
+  },
+  "standby-power-aggregator": {
+    title: "Standby Power Aggregator Calculator",
+    description: "Add TVs, chargers, consoles, and adapters to see total vampire power cost and what you could buy instead.",
+    imageUrl: "/images/share/standby-power-aggregator.webp",
+  },
   "standby-power-waste": {
     title: "Standby Power Waste Calculator",
     description: "Quantify phantom load cost from devices left plugged in 24/7 on standby.",
     imageUrl: "/images/share/standby-power-waste.webp",
   },
+  "tou-shifting-savings": {
+    title: "Time-of-Use Load Shifting Savings Calculator",
+    description: "Savings from moving kWh from peak to off-peak rate periods.",
+    imageUrl: "/images/share/tou-shifting-savings.webp",
+  },
   "ups-runtime": {
     title: "UPS Runtime Calculator",
     description: "Estimate backup time from battery energy and load power.",
     imageUrl: "/images/share/ups-runtime.webp",
+  },
+  "v2g-financial-return": {
+    title: "V2G Grid Buyback Revenue Calculator",
+    description: "Estimate monthly revenue from bidirectional EV export at utility buyback rates.",
+    imageUrl: "/images/share/v2g-financial-return.webp",
   },
   "vampire-power-cost": {
     title: "Vampire Power Cost Calculator",
@@ -570,9 +700,19 @@ export const calculatorShareData: Partial<
     description: "Find voltage from power and current (V = W ÷ A).",
     imageUrl: "/images/share/watts-to-volts.webp",
   },
+  "wh-to-ah": {
+    title: "Wh to Ah Converter Calculator",
+    description: "Convert watt-hours to amp-hours using system voltage.",
+    imageUrl: "/images/share/wh-to-ah.webp",
+  },
   "whole-house-energy-budget": {
     title: "Whole House Energy Budget Calculator",
     description: "Sum daily kWh by category and estimate monthly and annual electricity cost.",
     imageUrl: "/images/share/whole-house-energy-budget.webp",
+  },
+  "window-solar-heat-gain": {
+    title: "Window Solar Heat Gain (SHGC) Calculator",
+    description: "Cooling load from glazing SHGC, area, and sun exposure.",
+    imageUrl: "/images/share/window-solar-heat-gain.webp",
   },
 };
