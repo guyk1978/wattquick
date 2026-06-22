@@ -4,7 +4,7 @@ import type { EnergySystemProfile, FlowNodeId } from "@/lib/dashboard-config";
 const PROFILE_KEY = "wattquick-energy-profile";
 const RECENT_KEY = "wattquick-recent-calculators";
 const VISITED_NODES_KEY = "wattquick-visited-flow-nodes";
-const MAX_RECENT = 3;
+const MAX_RECENT = 4;
 
 export interface RecentCalculatorEntry {
   id: CalculatorId;

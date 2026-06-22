@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
+import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
+import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import type { CalculatorCategory } from "@/lib/calculators";
 
 interface BlueprintHubShellProps {
@@ -25,17 +27,17 @@ export function BlueprintHubShell({
 }: BlueprintHubShellProps) {
   return (
     <div className="calculator-route calculator-route--blueprint">
-      <div className="calculator-page-shell calculator-blueprint-shell">
+      <BlueprintShellFrame>
         <CalculatorBlueprintStatsBar trailing={statsTrailing} />
 
-        <div className="calculator-blueprint-shell__workspace">
+        <BlueprintShellWorkspace>
           <CalculatorBlueprintCategorySidebar activeCategory={activeCategory} />
 
           <div className="calculator-blueprint-shell__center">{children}</div>
 
           {rightNav}
-        </div>
-      </div>
+        </BlueprintShellWorkspace>
+      </BlueprintShellFrame>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import { getAllCalculatorMeta } from "@/lib/calculators/registry";
 import { getCalculatorCategoryCount } from "@/lib/calculator-discovery";
+import { BlueprintLeftSidebarToggle } from "@/components/blueprint/blueprint-left-sidebar-toggle";
+import { BlueprintRightSidebarToggle } from "@/components/blueprint/blueprint-right-sidebar-toggle";
 
 interface CalculatorBlueprintStatsBarProps {
   trailing?: React.ReactNode;
@@ -13,6 +15,7 @@ export function CalculatorBlueprintStatsBar({
 
   return (
     <div className="calculator-blueprint-stats">
+      <BlueprintLeftSidebarToggle className="calculator-blueprint-stats__sidebar-toggle" />
       <div className="calculator-blueprint-stats__points" aria-label="Site statistics">
         <span className="calculator-blueprint-stats__point">
           <strong>{toolCount}</strong> Tools
@@ -27,8 +30,13 @@ export function CalculatorBlueprintStatsBar({
         </span>
       </div>
       {trailing ? (
-        <div className="calculator-blueprint-stats__trailing">{trailing}</div>
-      ) : null}
+        <div className="calculator-blueprint-stats__trailing">
+          <BlueprintRightSidebarToggle className="calculator-blueprint-stats__right-sidebar-toggle" />
+          {trailing}
+        </div>
+      ) : (
+        <BlueprintRightSidebarToggle className="calculator-blueprint-stats__right-sidebar-toggle calculator-blueprint-stats__right-sidebar-toggle--solo" />
+      )}
     </div>
   );
 }

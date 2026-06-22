@@ -13,7 +13,7 @@ const activeCategoryCount = CATEGORY_DISPLAY_ORDER.filter((cat) =>
 
 export const metadata: Metadata = createPageMetadata({
   title: "All Calculators",
-  description: `Browse ${calculators.length} free battery, solar, EV, and power micro-calculators. Search or filter by category, then open any tool instantly.`,
+  description: `Browse ${calculators.length} free battery, solar, EV, and power micro-calculators. Featured spotlight, recent history, and the full tool directory.`,
   path: "/calculators",
 });
 

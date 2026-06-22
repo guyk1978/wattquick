@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   getCalculatorMeta,
@@ -5,6 +7,8 @@ import {
 } from "@/lib/calculators/registry";
 import type { CalculatorCategory, CalculatorId, CalculatorMeta } from "@/lib/calculators";
 import { CalculatorEngineeringStamp } from "@/components/calculator/calculator-engineering-stamp";
+import { BlueprintRightNavHeader } from "@/components/blueprint/blueprint-right-nav-header";
+import { useBlueprintRightSidebar } from "@/components/blueprint/blueprint-right-sidebar-context";
 import { cn } from "@/lib/utils";
 
 interface CalculatorBlueprintCategoryNavProps {
@@ -16,7 +20,8 @@ interface CalculatorBlueprintCategoryNavProps {
   activeCalculatorId?: CalculatorId;
 }
 
-function shortenTitle(title: string): string {
+function formatNavTitle(title: string, wide: boolean): string {
+  if (wide) return title;
   return title
     .replace(/\s*calculator\s*/gi, "")
     .replace(/\s*calculator$/i, "")
@@ -31,6 +36,7 @@ export function CalculatorBlueprintCategoryNav({
   category,
   activeCalculatorId,
 }: CalculatorBlueprintCategoryNavProps) {
+  const { wide } = useBlueprintRightSidebar();
   const resolvedCategory =
     category ?? (calculatorId ? getCalculatorMeta(calculatorId).category : undefined);
   const peers =
@@ -41,10 +47,11 @@ export function CalculatorBlueprintCategoryNav({
 
   return (
     <aside
+      id="blueprint-tools-sidebar"
       className={cn("calculator-blueprint-nav", className)}
       aria-label={title}
     >
-      <p className="calculator-blueprint-nav__title">{title}</p>
+      <BlueprintRightNavHeader title={title} />
       {peers.length === 0 ? (
         <p className="calculator-blueprint-nav__empty">No tools to list yet.</p>
       ) : (
@@ -64,7 +71,7 @@ export function CalculatorBlueprintCategoryNav({
                 >
                   <Icon className="calculator-blueprint-nav__icon" strokeWidth={2} aria-hidden />
                   <span className="calculator-blueprint-nav__label">
-                    {shortenTitle(calc.title)}
+                    {formatNavTitle(calc.title, wide)}
                   </span>
                 </Link>
               </li>

@@ -17,7 +17,7 @@ export function DashboardWidgets({
   onOpenCalculator,
   className,
 }: DashboardWidgetsProps) {
-  const slots = [0, 1, 2] as const;
+  const slots = [0, 1, 2, 3] as const;
 
   return (
     <aside

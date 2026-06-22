@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -10,6 +12,7 @@ import {
   CATEGORY_DISPLAY_ORDER,
 } from "@/lib/calculator-category-icons";
 import { getCategoryPageHref } from "@/lib/category-routes";
+import { BlueprintLeftSidebarToggle } from "@/components/blueprint/blueprint-left-sidebar-toggle";
 import { cn } from "@/lib/utils";
 
 interface CalculatorBlueprintCategorySidebarProps {
@@ -30,10 +33,17 @@ export function CalculatorBlueprintCategorySidebar({
 
   return (
     <aside
+      id="blueprint-categories-sidebar"
       className={cn("calculator-blueprint-categories", className)}
       aria-label="Categories"
     >
-      <p className="calculator-blueprint-categories__title">Categories</p>
+      <div className="calculator-blueprint-categories__header">
+        <p className="calculator-blueprint-categories__title">Categories</p>
+        <BlueprintLeftSidebarToggle
+          className="calculator-blueprint-categories__collapse"
+          showLabel={false}
+        />
+      </div>
       <ul className="calculator-blueprint-categories__list" role="list">
         {CATEGORY_DISPLAY_ORDER.map((category) => {
           const Icon = CALCULATOR_CATEGORY_ICONS[category];

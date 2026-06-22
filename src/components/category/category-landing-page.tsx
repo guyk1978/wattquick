@@ -3,6 +3,8 @@ import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculat
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
+import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import { CategoryBlueprintHeader } from "@/components/category/category-blueprint-header";
 import { CategoryToolsFocus } from "@/components/category/category-tools-focus";
 import { getCategorySeoContent } from "@/data/category-seo-content";
@@ -26,7 +28,7 @@ export function CategoryLandingPage({
 
   return (
     <div className="calculator-route calculator-route--blueprint">
-      <div className="calculator-page-shell calculator-blueprint-shell">
+      <BlueprintShellFrame>
         <CalculatorBlueprintStatsBar
           trailing={
             <div className="calculator-blueprint-toolbar">
@@ -46,7 +48,7 @@ export function CategoryLandingPage({
           }
         />
 
-        <div className="calculator-blueprint-shell__workspace">
+        <BlueprintShellWorkspace>
           <CalculatorBlueprintCategorySidebar activeCategory={category} />
 
           <div className="calculator-blueprint-shell__center">
@@ -85,8 +87,8 @@ export function CategoryLandingPage({
           </div>
 
           <CalculatorBlueprintCategoryNav category={category} />
-        </div>
-      </div>
+        </BlueprintShellWorkspace>
+      </BlueprintShellFrame>
     </div>
   );
 }

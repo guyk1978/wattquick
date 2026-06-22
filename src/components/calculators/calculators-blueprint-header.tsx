@@ -39,8 +39,9 @@ export function CalculatorsBlueprintHeader({
         </div>
         <div className="calculator-page-header__subrow">
           <p className="calculator-page-header__description">
-            Search or filter {categoryCount} categories—battery, solar, EV, and
-            power micro-calculators with instant results.
+            {categoryCount} categories—battery, solar, EV, and power
+            micro-calculators with instant results. Pick a spotlight tool or browse
+            the full directory below.
           </p>
           <span className="calculators-blueprint-header__label">Directory</span>
         </div>

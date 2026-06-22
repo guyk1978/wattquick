@@ -8,6 +8,8 @@ import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculat
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
+import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import { useCalculatorPageShellSlots } from "@/components/calculator/calculator-page-shell-context";
 import { getDiscoveryCalculators } from "@/lib/calculator-discovery";
 import type { CalculatorId } from "@/lib/calculators";
@@ -106,12 +108,12 @@ export function CalculatorPageShell({
   const resultSlot = hasMain ? slots.main : <CalculatorPageShellEmpty />;
 
   return (
-    <div className={cn("calculator-page-shell calculator-blueprint-shell", className)}>
+    <BlueprintShellFrame className={className}>
       <CalculatorBlueprintStatsBar
         trailing={<CalculatorBlueprintToolbar calculatorId={calculatorId} />}
       />
 
-      <div className="calculator-blueprint-shell__workspace">
+      <BlueprintShellWorkspace>
         <CalculatorBlueprintCategorySidebar calculatorId={calculatorId} />
 
         <div className="calculator-blueprint-shell__center">
@@ -174,7 +176,7 @@ export function CalculatorPageShell({
         </div>
 
         <CalculatorBlueprintCategoryNav calculatorId={calculatorId} />
-      </div>
+      </BlueprintShellWorkspace>
 
       <CalculatorFocusOverlay
         open={focusOpen}
@@ -182,6 +184,6 @@ export function CalculatorPageShell({
         inputs={inputSlot}
         results={resultSlot}
       />
-    </div>
+    </BlueprintShellFrame>
   );
 }

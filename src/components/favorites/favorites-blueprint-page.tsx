@@ -7,6 +7,8 @@ import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculat
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
+import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import { CategoryToolsFocus } from "@/components/category/category-tools-focus";
 import { FavoritesBlueprintHeader } from "@/components/favorites/favorites-blueprint-header";
 import { useCalculatorFavorites } from "@/hooks/use-calculator-favorites";
@@ -35,7 +37,7 @@ export function FavoritesBlueprintPage() {
 
   return (
     <div className="calculator-route calculator-route--blueprint">
-      <div className="calculator-page-shell calculator-blueprint-shell">
+      <BlueprintShellFrame>
         <CalculatorBlueprintStatsBar
           trailing={
             <div className="calculator-blueprint-toolbar">
@@ -51,7 +53,7 @@ export function FavoritesBlueprintPage() {
           }
         />
 
-        <div className="calculator-blueprint-shell__workspace">
+        <BlueprintShellWorkspace>
           <CalculatorBlueprintCategorySidebar activeCategory={null} />
 
           <div className="calculator-blueprint-shell__center">
@@ -96,8 +98,8 @@ export function FavoritesBlueprintPage() {
             title="Calculators"
             calculators={hydrated ? calculators : []}
           />
-        </div>
-      </div>
+        </BlueprintShellWorkspace>
+      </BlueprintShellFrame>
     </div>
   );
 }

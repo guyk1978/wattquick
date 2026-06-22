@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import { CalculatorEngineeringStamp } from "@/components/calculator/calculator-engineering-stamp";
+import { BlueprintRightNavHeader } from "@/components/blueprint/blueprint-right-nav-header";
+import { useBlueprintRightSidebar } from "@/components/blueprint/blueprint-right-sidebar-context";
 import { cn } from "@/lib/utils";
 
 export interface BlueprintListNavItem {
@@ -18,8 +22,9 @@ interface BlueprintListNavProps {
   className?: string;
 }
 
-function shortenLabel(label: string, max = 32): string {
+function formatListLabel(label: string, wide: boolean, max = 32): string {
   const trimmed = label.trim();
+  if (wide) return trimmed;
   return trimmed.length > max ? `${trimmed.slice(0, max - 1)}…` : trimmed;
 }
 
@@ -30,9 +35,15 @@ export function BlueprintListNav({
   emptyMessage = "No items yet.",
   className,
 }: BlueprintListNavProps) {
+  const { wide } = useBlueprintRightSidebar();
+
   return (
-    <aside className={cn("calculator-blueprint-nav", className)} aria-label={title}>
-      <p className="calculator-blueprint-nav__title">{title}</p>
+    <aside
+      id="blueprint-tools-sidebar"
+      className={cn("calculator-blueprint-nav", className)}
+      aria-label={title}
+    >
+      <BlueprintRightNavHeader title={title} />
       {items.length === 0 ? (
         <p className="calculator-blueprint-nav__empty">{emptyMessage}</p>
       ) : (
@@ -54,7 +65,7 @@ export function BlueprintListNav({
                     <Icon className="calculator-blueprint-nav__icon" strokeWidth={2} aria-hidden />
                   ) : null}
                   <span className="calculator-blueprint-nav__label">
-                    {shortenLabel(item.label)}
+                    {formatListLabel(item.label, wide)}
                   </span>
                 </Link>
               </li>
