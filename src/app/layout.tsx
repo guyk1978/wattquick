@@ -5,8 +5,8 @@ import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
-// [SLIDING_DOORS] Remove SiteRouteTransition import + wrapper to disable transition
-import { SiteRouteTransition } from "@/components/transitions/SiteRouteTransition";
+import { NavigationLoadingOverlay } from "@/components/navigation-loading-overlay";
+import { PageTransition } from "@/components/transitions/PageTransition";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
@@ -68,12 +68,12 @@ export default function RootLayout({
       </head>
       <body className="site-ambient flex min-h-full flex-col bg-bg-primary text-text-primary">
         <ThemeProvider>
+          <NavigationLoadingOverlay />
           <AnalyticsRouteTracker />
           <SiteHeader />
-          {/* [SLIDING_DOORS] Remove SiteRouteTransition wrapper to revert */}
-          <SiteRouteTransition>
+          <PageTransition>
             <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
-          </SiteRouteTransition>
+          </PageTransition>
           <SiteFooter />
           <CookieConsentBanner />
         </ThemeProvider>

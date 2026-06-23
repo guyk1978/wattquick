@@ -40,34 +40,25 @@ export function CalculatorsRecentHistory({ className }: CalculatorsRecentHistory
 
   return (
     <aside
-      className={cn(
-        "flex h-full flex-col rounded-xl border border-border bg-card/80 p-4",
-        "dark:border-white/10 dark:bg-zinc-950/60",
-        className
-      )}
+      className={cn("calculators-recent-history", className)}
       aria-labelledby="calculators-recent-history-heading"
     >
-      <h3
+      <h2
         id="calculators-recent-history-heading"
-        className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground"
+        className="calculators-recent-history__heading"
       >
-        Your recent history
-      </h3>
+        Recent history
+      </h2>
 
-      <ul className="mt-3 flex flex-1 list-none flex-col gap-1 p-0">
+      <ul className="calculators-recent-history__list">
         {Array.from({ length: DISPLAY_SLOTS }, (_, index) => {
           const entry = hydrated ? recent[index] : undefined;
 
           if (!entry) {
             return (
               <li key={`empty-${index}`}>
-                <div
-                  className={cn(
-                    "rounded-lg border border-dashed border-border px-3 py-2.5",
-                    "dark:border-white/10"
-                  )}
-                >
-                  <p className="text-sm text-muted-foreground">
+                <div className="calculators-recent-history__empty-slot">
+                  <p className="calculators-recent-history__empty-text">
                     {hydrated
                       ? "Open a calculator to log activity here."
                       : "Loading history…"}
@@ -84,34 +75,19 @@ export function CalculatorsRecentHistory({ className }: CalculatorsRecentHistory
 
           return (
             <li key={`${entry.id}-${entry.usedAt}`}>
-              <Link
-                href={meta.href}
-                className={cn(
-                  "group flex items-center gap-3 rounded-lg border border-transparent px-2 py-2",
-                  "transition-colors hover:border-border hover:bg-muted/50",
-                  "dark:hover:border-white/10 dark:hover:bg-white/[0.04]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50"
-                )}
-              >
-                <span
-                  className={cn(
-                    "flex size-9 shrink-0 items-center justify-center rounded-md",
-                    "border border-border bg-muted/50 text-emerald-600",
-                    "dark:border-white/10 dark:bg-black/40 dark:text-emerald-400"
-                  )}
-                  aria-hidden
-                >
+              <Link href={meta.href} className="calculators-recent-history__item">
+                <span className="calculators-recent-history__item-icon" aria-hidden>
                   <Icon className="size-4" strokeWidth={2} />
                 </span>
 
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-medium text-foreground">
+                <span className="calculators-recent-history__item-copy">
+                  <span className="calculators-recent-history__item-title">
                     {meta.title}
                   </span>
-                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                  <span className="calculators-recent-history__item-meta">
                     {formatRelativeTime(entry.usedAt)}
                     {snapshot ? (
-                      <span className="text-muted-foreground/80">
+                      <span className="calculators-recent-history__item-snapshot">
                         {" "}
                         · {snapshot}
                       </span>
@@ -120,7 +96,7 @@ export function CalculatorsRecentHistory({ className }: CalculatorsRecentHistory
                 </span>
 
                 <ArrowUpRight
-                  className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-emerald-500 dark:group-hover:text-emerald-400"
+                  className="calculators-recent-history__item-arrow"
                   strokeWidth={2}
                   aria-hidden
                 />

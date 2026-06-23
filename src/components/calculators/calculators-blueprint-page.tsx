@@ -5,7 +5,6 @@ import { CalnexAppCallout } from "@/components/CalnexAppCallout";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
-import { CalculatorsBlueprintHeader } from "@/components/calculators/calculators-blueprint-header";
 import { CalculatorsHubHero } from "@/components/calculators/calculators-hub-hero";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
@@ -41,13 +40,11 @@ export function CalculatorsBlueprintPage({
         />
       }
     >
-      <CalculatorsBlueprintHeader
-        calculatorCount={calculatorCount}
-        categoryCount={categoryCount}
-      />
-
       <div className="calculators-hub calculators-hub--blueprint">
-        <CalculatorsHubHero className="mb-4" />
+        <CalculatorsHubHero
+          calculatorCount={calculatorCount}
+          categoryCount={categoryCount}
+        />
 
         <CalculatorBlueprintToolGrid calculators={calculators} />
       </div>
