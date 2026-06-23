@@ -20,7 +20,7 @@ interface SiteRouteTransitionProps {
 }
 
 /**
- * Plays SlidingDoors on every client route change (and once on first paint).
+ * Plays SlidingDoors on client-side route changes only (not on hard refresh).
  * Zero overhead while idle — overlay mounts only during the ~0.8s animation.
  * Mounted from root layout — remove that import to revert entirely.
  */
@@ -28,18 +28,25 @@ export function SiteRouteTransition({ children }: SiteRouteTransitionProps) {
   const pathname = usePathname() ?? "/";
   const prefersReducedMotion = useReducedMotion();
   const previousPathRef = useRef<string | null>(null);
+  const skipNextAnimationRef = useRef(true);
   const [phase, setPhase] = useState<SlidingDoorsPhase | null>(null);
   const handleComplete = useCallback(() => setPhase(null), []);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
 
-    const previous = previousPathRef.current;
-    const current = normalizePath(pathname);
+    // Hard refresh / first paint: show page immediately, no overlay.
+    if (skipNextAnimationRef.current) {
+      skipNextAnimationRef.current = false;
+      previousPathRef.current = pathname;
+      return;
+    }
 
-    if (previous === null) {
-      setPhase("opening");
-    } else if (normalizePath(previous) !== current) {
+    const previous = previousPathRef.current;
+    if (
+      previous !== null &&
+      normalizePath(previous) !== normalizePath(pathname)
+    ) {
       setPhase("opening");
     }
 

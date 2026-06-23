@@ -9262,6 +9262,11 @@
   inset: 0;
   z-index: 200;
   overflow: hidden;
+  pointer-events: none;
+}
+
+.sliding-doors[data-phase="opening"],
+.sliding-doors[data-phase="closing"] {
   pointer-events: auto;
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +18,10 @@ export interface SlidingDoorsProps {
   className?: string;
 }
 
+function getTotalDuration(phase: SlidingDoorsPhase): number {
+  return phase === "opening" ? CLOSE_DURATION + OPEN_DURATION : CLOSE_DURATION;
+}
+
 /**
  * Industrial Matte sliding doors — two panels meet at center, then slide back out.
  * Fixed overlay: does not affect document flow or cause layout shift.
@@ -25,18 +29,28 @@ export interface SlidingDoorsProps {
 export function SlidingDoors({ phase, onComplete, className }: SlidingDoorsProps) {
   const completedRef = useRef(false);
 
-  const handleAnimationComplete = useCallback(() => {
+  const finish = useCallback(() => {
     if (completedRef.current) return;
     completedRef.current = true;
     onComplete?.();
   }, [onComplete]);
 
+  useEffect(() => {
+    if (!phase) return;
+
+    completedRef.current = false;
+    const ms = getTotalDuration(phase) * 1000 + 120;
+    const timeoutId = window.setTimeout(finish, ms);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [phase, finish]);
+
   if (!phase) return null;
 
   const isOpening = phase === "opening";
-  const totalDuration = isOpening
-    ? CLOSE_DURATION + OPEN_DURATION
-    : CLOSE_DURATION;
+  const totalDuration = getTotalDuration(phase);
   const closeFraction = isOpening ? CLOSE_DURATION / totalDuration : 1;
 
   const leftKeyframes = isOpening ? ["-100%", "0%", "-100%"] : ["-100%", "0%"];
@@ -49,20 +63,11 @@ export function SlidingDoors({ phase, onComplete, className }: SlidingDoorsProps
       aria-hidden
       data-phase={phase}
     >
-      <motion.div
-        className="sliding-doors__scrim"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: isOpening ? [1, 1, 0] : 1 }}
-        transition={{
-          duration: totalDuration,
-          times: keyframeTimes,
-          ease: "linear",
-        }}
-      />
+      <div className="sliding-doors__scrim" />
 
       <motion.div
         className="sliding-doors__panel sliding-doors__panel--left"
-        initial={false}
+        initial={{ x: "-100%" }}
         animate={{ x: leftKeyframes }}
         transition={{
           duration: totalDuration,
@@ -77,14 +82,14 @@ export function SlidingDoors({ phase, onComplete, className }: SlidingDoorsProps
 
       <motion.div
         className="sliding-doors__panel sliding-doors__panel--right"
-        initial={false}
+        initial={{ x: "100%" }}
         animate={{ x: rightKeyframes }}
         transition={{
           duration: totalDuration,
           times: keyframeTimes,
           ease: EASE_INDUSTRIAL,
         }}
-        onAnimationComplete={handleAnimationComplete}
+        onAnimationComplete={finish}
       >
         <div className="sliding-doors__panel-inner">
           <span className="sliding-doors__panel-label">WQ</span>
