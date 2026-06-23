@@ -43,7 +43,10 @@ export function CalculatorsBlueprintPage({
       <div className="calculators-hub calculators-hub--blueprint bg-white text-black dark:bg-black dark:text-white">
         <CalculatorsHubHero toolCount={calculators.length} />
 
-        <div className="mt-5 border-t border-black/8 pt-5 dark:border-white/10">
+        <div
+          id="calculators-tool-grid"
+          className="mt-5 border-t border-black/8 pt-5 dark:border-white/10"
+        >
           <CalculatorBlueprintToolGrid calculators={calculators} variant="tech-hub" />
         </div>
       </div>
