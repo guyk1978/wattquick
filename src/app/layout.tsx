@@ -5,6 +5,8 @@ import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+// [SLIDING_DOORS] Remove SiteRouteTransition import + wrapper to disable transition
+import { SiteRouteTransition } from "@/components/transitions/SiteRouteTransition";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
@@ -68,7 +70,10 @@ export default function RootLayout({
         <ThemeProvider>
           <AnalyticsRouteTracker />
           <SiteHeader />
-          <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
+          {/* [SLIDING_DOORS] Remove SiteRouteTransition wrapper to revert */}
+          <SiteRouteTransition>
+            <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
+          </SiteRouteTransition>
           <SiteFooter />
           <CookieConsentBanner />
         </ThemeProvider>
