@@ -61,7 +61,7 @@ export default function RootLayout({
         {jsonLd}
         <link rel="stylesheet" href="/assets/css/site-search.css" />
         <link rel="manifest" href="/manifest.webmanifest" />
-        <meta name="theme-color" content="#fafafa" />
+        <meta name="theme-color" content="#ffffff" />
         <meta property="fb:app_id" content={FACEBOOK_APP_ID} />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/icon-192.png" />

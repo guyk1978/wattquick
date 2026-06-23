@@ -1,34 +1,34 @@
 /* WattQuick header search — light/dark via html.dark class */
 
 :root {
-  --wq-search-bg: #ececec;
-  --wq-search-surface: #f5f5f5;
-  --wq-search-surface-2: #e0e0e0;
-  --wq-search-fg: #171717;
-  --wq-search-muted: #525252;
-  --wq-search-border: rgb(0 0 0 / 10%);
-  --wq-search-primary: #262626;
-  --wq-search-primary-dim: rgb(38 38 38 / 12%);
+  --wq-search-bg: #ffffff;
+  --wq-search-surface: #ffffff;
+  --wq-search-surface-2: #ffffff;
+  --wq-search-fg: #000000;
+  --wq-search-muted: #000000;
+  --wq-search-border: rgb(0 0 0 / 8%);
+  --wq-search-primary: #000000;
+  --wq-search-primary-dim: rgb(0 0 0 / 6%);
   --wq-search-green: #16a34a;
   --wq-search-green-dim: rgb(22 163 74 / 14%);
   --wq-search-radius: 0;
   --wq-search-shadow: 0 16px 48px rgb(0 0 0 / 12%);
-  --wq-search-meta: #737373;
+  --wq-search-meta: #000000;
 }
 
 .dark {
-  --wq-search-bg: #121212;
-  --wq-search-surface: #1a1a1a;
-  --wq-search-surface-2: #242424;
-  --wq-search-fg: #f5f5f5;
-  --wq-search-muted: #a3a3a3;
-  --wq-search-border: rgb(255 255 255 / 8%);
-  --wq-search-primary: #e5e5e5;
-  --wq-search-primary-dim: rgb(229 229 229 / 14%);
+  --wq-search-bg: #000000;
+  --wq-search-surface: #000000;
+  --wq-search-surface-2: #000000;
+  --wq-search-fg: #ffffff;
+  --wq-search-muted: #ffffff;
+  --wq-search-border: rgb(255 255 255 / 10%);
+  --wq-search-primary: #ffffff;
+  --wq-search-primary-dim: rgb(255 255 255 / 8%);
   --wq-search-green: #22c55e;
   --wq-search-green-dim: rgb(34 197 94 / 18%);
   --wq-search-shadow: 0 20px 56px rgb(0 0 0 / 55%);
-  --wq-search-meta: #737373;
+  --wq-search-meta: #ffffff;
 }
 
 /* ── Header search widget ── */

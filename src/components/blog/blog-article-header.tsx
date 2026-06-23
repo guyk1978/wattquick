@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
 import { Calendar, Clock } from "lucide-react";
-import { BlogFeaturedImage } from "@/components/blog/blog-featured-image";
 import { getBlogCategoryTheme } from "@/lib/blog-category-theme";
 import type { BlogPost } from "@/lib/blog/posts";
 import { cn } from "@/lib/utils";
@@ -25,19 +24,7 @@ export function BlogArticleHeader({ post, className }: BlogArticleHeaderProps) {
     <header className={cn("blog-article-header", className)}>
       <h1 className="blog-article-header__title">{post.title}</h1>
 
-      {post.featuredImage ? (
-        <BlogFeaturedImage
-          src={post.featuredImage}
-          alt={
-            post.featuredImageAlt ??
-            `Featured image for ${post.title}`
-          }
-        />
-      ) : null}
-
-      {!post.featuredImage ? (
-        <p className="blog-article-header__description">{post.description}</p>
-      ) : null}
+      <p className="blog-article-header__description">{post.description}</p>
 
       <div className="blog-article-header__meta">
         <span

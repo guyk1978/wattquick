@@ -8,6 +8,7 @@ import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculat
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
 import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-blueprint-tool-grid";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
 import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import { useCalculatorPageShellSlots } from "@/components/calculator/calculator-page-shell-context";
@@ -97,7 +98,7 @@ export function CalculatorPageShell({
   const slots = useCalculatorPageShellSlots();
   const hasMain = slots.main != null;
   const discoveryTools = getDiscoveryCalculators(calculatorId);
-  const hasMainFooter = Boolean(slots.footer || contentSection || bottomContent);
+  const showPageFooter = !focusOpen;
 
   const inputSlot =
     slots.sidebar ?? (
@@ -158,11 +159,12 @@ export function CalculatorPageShell({
             )}
           </div>
 
-          {hasMainFooter ? (
+          {showPageFooter ? (
             <footer className="calculator-blueprint-shell__footer">
               {slots.footer ? (
                 <div className="calculator-page-shell__footer">{slots.footer}</div>
               ) : null}
+              <CalculatorAdSlots />
               {contentSection || bottomContent ? (
                 <div className="calculator-page-shell__bottom">
                   {contentSection}

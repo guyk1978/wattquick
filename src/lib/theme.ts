@@ -15,7 +15,7 @@ export function applyThemeClass(theme: Theme) {
   root.style.colorScheme = theme;
   root.dataset.theme = theme;
 
-  const themeColor = theme === "dark" ? "#0a0a0a" : "#fafafa";
+  const themeColor = theme === "dark" ? "#000000" : "#ffffff";
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute("content", themeColor);
 }
@@ -31,4 +31,4 @@ function ogImageUrlForTheme(theme: Theme): string {
 }
 
 /** Inline script for layout `<head>` — runs before paint to avoid theme flash. */
-export const themeInitScript = `(function(){try{var k="${THEME_STORAGE_KEY}";var s=localStorage.getItem(k);var d=window.matchMedia("(prefers-color-scheme: dark)").matches;var t=s==="light"||s==="dark"?s:(d?"dark":"light");var r=document.documentElement;r.classList.toggle("dark",t==="dark");r.style.colorScheme=t;r.dataset.theme=t;var tc=t==="dark"?"#0a0a0a":"#fafafa";function m(a,key,val){var el=document.querySelector("meta["+a+'="'+key+'"]');if(!el){el=document.createElement("meta");el.setAttribute(a,key);document.head.appendChild(el);}el.setAttribute("content",val);}m("name","theme-color",tc);var og=t==="dark"?"${ogImageUrlForTheme("dark")}":"${ogImageUrlForTheme("light")}";m("property","og:image",og);m("name","twitter:image",og);}catch(e){}})();`;
+export const themeInitScript = `(function(){try{var k="${THEME_STORAGE_KEY}";var s=localStorage.getItem(k);var d=window.matchMedia("(prefers-color-scheme: dark)").matches;var t=s==="light"||s==="dark"?s:(d?"dark":"light");var r=document.documentElement;r.classList.toggle("dark",t==="dark");r.style.colorScheme=t;r.dataset.theme=t;var tc=t==="dark"?"#000000":"#ffffff";function m(a,key,val){var el=document.querySelector("meta["+a+'="'+key+'"]');if(!el){el=document.createElement("meta");el.setAttribute(a,key);document.head.appendChild(el);}el.setAttribute("content",val);}m("name","theme-color",tc);var og=t==="dark"?"${ogImageUrlForTheme("dark")}":"${ogImageUrlForTheme("light")}";m("property","og:image",og);m("name","twitter:image",og);}catch(e){}})();`;

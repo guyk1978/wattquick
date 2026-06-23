@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { CalculatorMeta } from "@/lib/calculators";
+import { getCategoryTheme } from "@/lib/calculator-category-theme";
 import { cn } from "@/lib/utils";
 
 interface CalculatorBlueprintToolGridProps {
   calculators: CalculatorMeta[];
   className?: string;
+  /** Bold tech-forward cards for the calculators hub (light mode). */
+  variant?: "default" | "tech-hub";
 }
 
 function shortenTitle(title: string): string {
@@ -16,17 +19,68 @@ function shortenTitle(title: string): string {
 export function CalculatorBlueprintToolGrid({
   calculators,
   className,
+  variant = "default",
 }: CalculatorBlueprintToolGridProps) {
   if (calculators.length === 0) return null;
 
+  const isTechHub = variant === "tech-hub";
+
   return (
     <section
-      className={cn("calculator-blueprint-tool-grid", className)}
-      aria-label="Related tools"
+      className={cn(
+        isTechHub
+          ? "calculator-blueprint-tool-grid-tech"
+          : "calculator-blueprint-tool-grid",
+        className
+      )}
+      aria-label={isTechHub ? "All calculators" : "Related tools"}
     >
-      <ul className="calculator-blueprint-tool-grid__list" role="list">
+      <ul
+        className={cn(
+          isTechHub
+            ? "grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 xl:grid-cols-3"
+            : "calculator-blueprint-tool-grid__list"
+        )}
+        role="list"
+      >
         {calculators.map((calc) => {
           const Icon = calc.icon;
+          const theme = getCategoryTheme(calc.category);
+
+          if (isTechHub) {
+            return (
+              <li key={calc.id}>
+                <Link
+                  href={calc.href}
+                  className={cn(
+                    "calculator-tech-card group flex h-full flex-col rounded-xl border bg-white p-4 shadow-sm dark:bg-black",
+                    "transition-all hover:-translate-y-0.5 hover:shadow-md",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/35 focus-visible:ring-offset-2"
+                  )}
+                  style={{
+                    borderColor: theme.color,
+                  }}
+                >
+                  <span className="flex items-start gap-2">
+                    <span
+                      className="calculator-tech-card__icon mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border bg-transparent"
+                      style={{ borderColor: `${theme.color}55`, color: theme.color }}
+                      aria-hidden
+                    >
+                      <Icon className="size-3.5" strokeWidth={2.25} />
+                    </span>
+                    <span className="block text-sm font-bold leading-snug text-black">
+                      {shortenTitle(calc.title)}
+                    </span>
+                  </span>
+                  <span className="mt-2 line-clamp-2 pl-9 text-xs leading-relaxed text-black dark:text-white">
+                    {calc.description}
+                  </span>
+                </Link>
+              </li>
+            );
+          }
+
           return (
             <li key={calc.id} className="calculator-blueprint-tool-grid__cell">
               <Link href={calc.href} className="calculator-blueprint-tool-card">

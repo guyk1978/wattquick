@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { LayoutDashboard } from "lucide-react";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorModal } from "@/components/dashboard/calculator-modal";
 import { DashboardBlueprintHeader } from "@/components/dashboard/dashboard-blueprint-header";
@@ -174,6 +175,8 @@ export function CommandCenter({ variant = "default" }: CommandCenterProps) {
           <DashboardBlueprintHeader
             profileLabel={hydrated ? profileConfig.label : undefined}
           />
+
+          <CalculatorAdSlots />
 
           <div className="command-center command-center--blueprint">
             <p className="command-center--blueprint__intro">

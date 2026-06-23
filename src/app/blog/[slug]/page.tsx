@@ -4,6 +4,7 @@ import { BlogArticleBlueprintLayout } from "@/components/blog/blog-article-bluep
 import { BlogArticleHeader } from "@/components/blog/blog-article-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { BlogQuickLaunchWidget } from "@/components/blog/blog-quick-launch-widget";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { createBlogPostMetadata } from "@/lib/blog/metadata";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 
@@ -39,6 +40,8 @@ export default async function BlogArticlePage({ params }: PageProps) {
       </Link>
 
       <BlogArticleHeader post={post} className="blog-article-header--blueprint" />
+
+      <CalculatorAdSlots />
 
       <article className="blog-article-body blog-article-body--blueprint min-w-0">
         <BlogContent content={post.content} articleSlug={post.slug} />

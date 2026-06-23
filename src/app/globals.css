@@ -72,56 +72,56 @@
   --border-default: var(--matte-border);
 }
 
-/* Light mode — neutral industrial matte */
+/* Light mode — pure white canvas, dark text (no gray surfaces) */
 :root {
-  --site-canvas: rgb(250 250 250);
-  --matte-body: rgb(250 250 250);
-  --matte-section: rgb(245 245 245);
-  --matte-card: rgb(245 245 245);
-  --matte-input: rgb(255 255 255);
-  --matte-border: rgb(0 0 0 / 10%);
-  --matte-border-strong: rgb(226 232 240);
-  --matte-border-hover: rgb(203 213 225);
-  --matte-fg: rgb(23 23 23);
-  --matte-muted: rgb(82 82 82);
-  --matte-accent: rgb(38 38 38);
-  --matte-btn: rgb(229 229 229);
-  --matte-btn-hover: rgb(212 212 212);
-  --matte-btn-active: rgb(200 200 200);
-  --matte-card-hover: rgb(241 245 249);
+  --site-canvas: #ffffff;
+  --matte-body: #ffffff;
+  --matte-section: #ffffff;
+  --matte-card: #ffffff;
+  --matte-input: #ffffff;
+  --matte-border: rgb(0 0 0 / 8%);
+  --matte-border-strong: rgb(0 0 0 / 12%);
+  --matte-border-hover: rgb(0 0 0 / 18%);
+  --matte-fg: #000000;
+  --matte-muted: #000000;
+  --matte-accent: #000000;
+  --matte-btn: #ffffff;
+  --matte-btn-hover: #ffffff;
+  --matte-btn-active: #ffffff;
+  --matte-card-hover: #ffffff;
   --matte-hover: rgb(0 0 0 / 4%);
   --matte-hover-strong: rgb(0 0 0 / 7%);
   --matte-hover-border: rgb(0 0 0 / 12%);
-  --matte-selected: rgb(0 0 0 / 8%);
+  --matte-selected: rgb(0 0 0 / 6%);
   --matte-selected-border: rgb(0 0 0 / 16%);
-  --matte-focus-border: rgb(148 163 184);
-  --matte-focus-ring: rgb(15 23 42 / 0.08);
-  --matte-shadow-hover: 0 8px 24px rgb(0 0 0 / 0.08);
-  --matte-chip-border: rgb(226 232 240);
-  --matte-chip-bg: rgb(255 255 255);
-  --matte-chip-fg: rgb(51 65 85);
-  --matte-chip-hover-border: rgb(203 213 225);
-  --matte-chip-hover-bg: rgb(248 250 252);
-  --matte-chip-hover-fg: rgb(15 23 42);
-  --matte-chip-active-border: rgb(15 23 42);
-  --matte-chip-active-bg: rgb(241 245 249);
-  --matte-chip-active-fg: rgb(15 23 42);
-  --matte-header-bg: rgb(255 255 255);
-  --matte-header-border: rgb(226 232 240);
-  --matte-header-fg: rgb(23 23 23);
-  --matte-header-muted: rgb(115 115 115);
-  --matte-footer-bg: rgb(245 245 245);
-  --matte-footer-border: rgb(229 229 229);
-  --matte-footer-fg: rgb(115 115 115);
-  --matte-footer-link: rgb(82 82 82);
-  --matte-footer-link-hover: rgb(23 23 23);
-  --matte-grid-line: rgb(0 0 0 / 0.035);
-  --matte-grid-line-strong: rgb(0 0 0 / 0.05);
-  --matte-glow: rgb(0 0 0 / 0.06);
-  --matte-sidebar-bg: rgb(245 245 245 / 0.88);
-  --matte-sidebar-border: rgb(229 229 229);
-  --matte-sidebar-title: rgb(82 82 82);
-  --matte-sidebar-subtitle: rgb(115 115 115);
+  --matte-focus-border: rgb(0 0 0 / 28%);
+  --matte-focus-ring: rgb(0 0 0 / 8%);
+  --matte-shadow-hover: 0 8px 24px rgb(0 0 0 / 0.06);
+  --matte-chip-border: rgb(0 0 0 / 12%);
+  --matte-chip-bg: #ffffff;
+  --matte-chip-fg: #000000;
+  --matte-chip-hover-border: rgb(0 0 0 / 18%);
+  --matte-chip-hover-bg: #ffffff;
+  --matte-chip-hover-fg: #000000;
+  --matte-chip-active-border: #000000;
+  --matte-chip-active-bg: #ffffff;
+  --matte-chip-active-fg: #000000;
+  --matte-header-bg: #14532d;
+  --matte-header-border: #052e16;
+  --matte-header-fg: #ffffff;
+  --matte-header-muted: rgb(255 255 255 / 0.72);
+  --matte-footer-bg: #ffffff;
+  --matte-footer-border: rgb(0 0 0 / 8%);
+  --matte-footer-fg: #000000;
+  --matte-footer-link: #000000;
+  --matte-footer-link-hover: #000000;
+  --matte-grid-line: rgb(0 0 0 / 0.04);
+  --matte-grid-line-strong: rgb(0 0 0 / 0.07);
+  --matte-glow: rgb(0 0 0 / 0.04);
+  --matte-sidebar-bg: #ffffff;
+  --matte-sidebar-border: rgb(0 0 0 / 8%);
+  --matte-sidebar-title: #000000;
+  --matte-sidebar-subtitle: #000000;
   --site-header-height: 3.75rem;
   --brand-green: #16a34a;
   --blueprint-canvas: var(--matte-body);
@@ -132,7 +132,7 @@
   --blueprint-line: var(--matte-grid-line);
   --blueprint-line-strong: var(--matte-border-strong);
   --blueprint-callout: color-mix(in srgb, var(--foreground) 32%, transparent);
-  --blueprint-bar-bg: color-mix(in srgb, var(--matte-body) 88%, var(--foreground) 12%);
+  --blueprint-bar-bg: #14532d;
   --bp-text-2xs: 0.6875rem;
   --bp-text-xs: 0.75rem;
   --bp-text-sm: 0.875rem;
@@ -159,13 +159,13 @@
   --card-foreground: var(--text-primary);
   --popover: var(--bg-surface);
   --popover-foreground: var(--text-primary);
-  --primary: rgb(38 38 38);
-  --primary-foreground: rgb(250 250 250);
-  --secondary: var(--bg-muted);
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
   --secondary-foreground: var(--text-primary);
-  --muted: var(--bg-muted);
-  --muted-foreground: var(--text-secondary);
-  --accent: rgb(229 229 229);
+  --muted: #ffffff;
+  --muted-foreground: #000000;
+  --accent: #ffffff;
   --accent-foreground: var(--text-primary);
   --destructive: oklch(0.55 0.22 25);
   --status-success: #2e7d32;
@@ -188,64 +188,64 @@
   --radius: 0;
   --sidebar: var(--bg-surface);
   --sidebar-foreground: var(--text-primary);
-  --sidebar-primary: rgb(38 38 38);
-  --sidebar-primary-foreground: rgb(250 250 250);
-  --sidebar-accent: var(--bg-muted);
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffffff;
   --sidebar-accent-foreground: var(--text-primary);
   --sidebar-border: var(--border-default);
   --sidebar-ring: rgb(0 0 0 / 18%);
 }
 
-/* Dark mode — neutral-950 industrial matte */
+/* Dark mode — matte black canvas, bright text (no gray surfaces) */
 .dark {
-  --site-canvas: rgb(10 10 10);
-  --matte-body: rgb(10 10 10);
-  --matte-section: rgb(23 23 23);
-  --matte-card: rgb(23 23 23);
-  --matte-input: rgb(23 23 23);
+  --site-canvas: #000000;
+  --matte-body: #000000;
+  --matte-section: #000000;
+  --matte-card: #000000;
+  --matte-input: #000000;
   --matte-border: rgb(255 255 255 / 8%);
-  --matte-border-strong: rgb(38 38 38);
-  --matte-border-hover: rgb(82 82 82);
-  --matte-fg: rgb(250 250 250);
-  --matte-muted: rgb(163 163 163);
-  --matte-accent: rgb(229 229 229);
-  --matte-btn: rgb(23 23 23);
-  --matte-btn-hover: rgb(38 38 38);
-  --matte-btn-active: rgb(64 64 64);
-  --matte-card-hover: rgb(38 38 38);
+  --matte-border-strong: rgb(255 255 255 / 12%);
+  --matte-border-hover: rgb(255 255 255 / 18%);
+  --matte-fg: #ffffff;
+  --matte-muted: #ffffff;
+  --matte-accent: #ffffff;
+  --matte-btn: #000000;
+  --matte-btn-hover: #000000;
+  --matte-btn-active: #000000;
+  --matte-card-hover: #000000;
   --matte-hover: rgb(255 255 255 / 6%);
   --matte-hover-strong: rgb(255 255 255 / 10%);
   --matte-hover-border: rgb(255 255 255 / 12%);
   --matte-selected: rgb(255 255 255 / 10%);
   --matte-selected-border: rgb(255 255 255 / 18%);
-  --matte-focus-border: rgb(115 115 115);
-  --matte-focus-ring: rgb(255 255 255 / 0.08);
-  --matte-shadow-hover: 0 12px 32px rgb(0 0 0 / 0.28);
-  --matte-chip-border: rgb(255 255 255 / 0.1);
-  --matte-chip-bg: transparent;
-  --matte-chip-fg: rgb(163 163 163);
-  --matte-chip-hover-border: rgb(255 255 255 / 0.16);
-  --matte-chip-hover-bg: rgb(255 255 255 / 0.06);
-  --matte-chip-hover-fg: rgb(250 250 250);
-  --matte-chip-active-border: rgb(255 255 255 / 0.18);
-  --matte-chip-active-bg: rgb(255 255 255 / 0.1);
-  --matte-chip-active-fg: rgb(250 250 250);
-  --matte-header-bg: rgb(10 10 10);
-  --matte-header-border: rgb(38 38 38);
-  --matte-header-fg: rgb(250 250 250);
-  --matte-header-muted: rgb(163 163 163);
-  --matte-footer-bg: rgb(10 10 10);
-  --matte-footer-border: rgb(23 23 23);
-  --matte-footer-fg: rgb(163 163 163);
-  --matte-footer-link: rgb(163 163 163);
-  --matte-footer-link-hover: rgb(250 250 250);
-  --matte-grid-line: rgb(255 255 255 / 0.04);
-  --matte-grid-line-strong: rgb(255 255 255 / 0.06);
+  --matte-focus-border: rgb(255 255 255 / 28%);
+  --matte-focus-ring: rgb(255 255 255 / 0.1);
+  --matte-shadow-hover: 0 12px 32px rgb(0 0 0 / 0.45);
+  --matte-chip-border: rgb(255 255 255 / 12%);
+  --matte-chip-bg: #000000;
+  --matte-chip-fg: #ffffff;
+  --matte-chip-hover-border: rgb(255 255 255 / 18%);
+  --matte-chip-hover-bg: #000000;
+  --matte-chip-hover-fg: #ffffff;
+  --matte-chip-active-border: #ffffff;
+  --matte-chip-active-bg: #000000;
+  --matte-chip-active-fg: #ffffff;
+  --matte-header-bg: #14532d;
+  --matte-header-border: #052e16;
+  --matte-header-fg: #ffffff;
+  --matte-header-muted: rgb(255 255 255 / 0.72);
+  --matte-footer-bg: #000000;
+  --matte-footer-border: rgb(255 255 255 / 8%);
+  --matte-footer-fg: #ffffff;
+  --matte-footer-link: #ffffff;
+  --matte-footer-link-hover: #ffffff;
+  --matte-grid-line: rgb(255 255 255 / 0.05);
+  --matte-grid-line-strong: rgb(255 255 255 / 0.08);
   --matte-glow: rgb(255 255 255 / 0.04);
-  --matte-sidebar-bg: rgb(10 10 10 / 0.72);
-  --matte-sidebar-border: rgb(23 23 23);
-  --matte-sidebar-title: rgb(212 212 212);
-  --matte-sidebar-subtitle: rgb(163 163 163);
+  --matte-sidebar-bg: #000000;
+  --matte-sidebar-border: rgb(255 255 255 / 8%);
+  --matte-sidebar-title: #ffffff;
+  --matte-sidebar-subtitle: #ffffff;
   --brand-green: #22c55e;
   --status-success: #81c784;
   --status-success-muted: rgb(129 199 132 / 0.14);
@@ -256,15 +256,15 @@
   --status-warning-muted: rgb(239 154 154 / 0.14);
   --status-warning-border: rgb(239 154 154 / 0.45);
   --status-warning-surface: rgb(198 40 40 / 0.16);
-  --blueprint-canvas: #121212;
-  --blueprint-panel: rgb(18 18 18 / 0.92);
-  --blueprint-surface: rgb(0 0 0 / 0.22);
-  --blueprint-inset: rgb(255 255 255 / 0.03);
-  --blueprint-hover: rgb(255 255 255 / 0.06);
+  --blueprint-canvas: #000000;
+  --blueprint-panel: #000000;
+  --blueprint-surface: #000000;
+  --blueprint-inset: rgb(255 255 255 / 0.04);
+  --blueprint-hover: rgb(255 255 255 / 0.07);
   --blueprint-line: rgb(255 255 255 / 0.08);
-  --blueprint-line-strong: rgb(255 255 255 / 0.14);
+  --blueprint-line-strong: rgb(255 255 255 / 0.12);
   --blueprint-callout: rgb(255 255 255 / 0.35);
-  --blueprint-bar-bg: rgb(0 0 0 / 0.35);
+  --blueprint-bar-bg: #14532d;
 
   --background: var(--bg-primary);
   --foreground: var(--text-primary);
@@ -272,24 +272,24 @@
   --card-foreground: var(--text-primary);
   --popover: var(--bg-surface);
   --popover-foreground: var(--text-primary);
-  --primary: rgb(229 229 229);
-  --primary-foreground: rgb(10 10 10);
-  --secondary: var(--bg-muted);
-  --secondary-foreground: rgb(245 245 245);
-  --muted: var(--bg-muted);
-  --muted-foreground: var(--text-secondary);
-  --accent: rgb(38 38 38);
-  --accent-foreground: var(--text-primary);
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --muted: #000000;
+  --muted-foreground: #ffffff;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.65 0.2 25);
   --border: var(--border-default);
   --input: var(--matte-input);
   --ring: rgb(255 255 255 / 20%);
-  --sidebar: var(--bg-muted);
-  --sidebar-foreground: var(--text-primary);
-  --sidebar-primary: rgb(229 229 229);
-  --sidebar-primary-foreground: rgb(10 10 10);
-  --sidebar-accent: var(--bg-surface);
-  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #000000;
+  --sidebar-accent-foreground: #ffffff;
   --sidebar-border: var(--border-default);
   --sidebar-ring: rgb(255 255 255 / 20%);
 }
@@ -3171,26 +3171,30 @@
   --blueprint-canvas: var(--matte-body);
   --blueprint-panel: var(--matte-card);
   --blueprint-surface: var(--matte-section);
-  --blueprint-inset: var(--matte-hover);
+  --blueprint-inset: #ffffff;
   --blueprint-hover: var(--matte-hover-strong);
   --blueprint-line: var(--matte-grid-line);
   --blueprint-line-strong: var(--matte-border-strong);
   --blueprint-callout: color-mix(in srgb, var(--foreground) 32%, transparent);
-  --blueprint-bar-bg: color-mix(in srgb, var(--matte-body) 88%, var(--foreground) 12%);
+  --blueprint-bar-bg: #ffffff;
   background: var(--blueprint-canvas);
   color: var(--foreground);
 }
 
+:root:not(.dark) .calculator-route--blueprint::before {
+  display: none;
+}
+
 .dark .calculator-route--blueprint {
-  --blueprint-canvas: #121212;
-  --blueprint-panel: rgb(18 18 18 / 0.92);
-  --blueprint-surface: rgb(0 0 0 / 0.22);
-  --blueprint-inset: rgb(255 255 255 / 0.03);
-  --blueprint-hover: rgb(255 255 255 / 0.06);
+  --blueprint-canvas: #000000;
+  --blueprint-panel: #000000;
+  --blueprint-surface: #000000;
+  --blueprint-inset: #000000;
+  --blueprint-hover: rgb(255 255 255 / 0.07);
   --blueprint-line: rgb(255 255 255 / 0.08);
-  --blueprint-line-strong: rgb(255 255 255 / 0.14);
+  --blueprint-line-strong: rgb(255 255 255 / 0.12);
   --blueprint-callout: rgb(255 255 255 / 0.35);
-  --blueprint-bar-bg: rgb(0 0 0 / 0.35);
+  --blueprint-bar-bg: #000000;
 }
 
 .calculator-route--blueprint::before {
@@ -3317,7 +3321,7 @@
   font-size: var(--bp-text-sm);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .calculator-blueprint-stats__point strong {
@@ -3458,7 +3462,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .calculator-blueprint-categories__collapse {
@@ -3487,7 +3491,7 @@
   font-size: var(--bp-text-sm);
   font-weight: 500;
   line-height: 1.3;
-  color: var(--muted-foreground);
+  color: var(--foreground);
   text-decoration: none;
   transition:
     background-color 0.15s ease,
@@ -3502,9 +3506,9 @@
 }
 
 .calculator-blueprint-categories__item--active {
-  border-color: var(--status-success-border);
-  background: var(--status-success-muted);
-  color: var(--status-success);
+  border-color: var(--foreground);
+  background: transparent;
+  color: var(--foreground);
   font-weight: 600;
 }
 
@@ -3559,7 +3563,7 @@
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .calculator-blueprint-nav__widen,
@@ -3588,7 +3592,7 @@
   font-size: var(--bp-text-sm);
   font-weight: 500;
   line-height: 1.3;
-  color: var(--muted-foreground);
+  color: var(--foreground);
   text-decoration: none;
   transition:
     background-color 0.15s ease,
@@ -3696,10 +3700,10 @@
   height: 1.25rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--status-success-border);
+  border: 1px solid var(--blueprint-line-strong);
   border-radius: 0.25rem;
-  background: var(--status-success);
-  color: #fff;
+  background: transparent;
+  color: var(--foreground);
 }
 
 .calculator-page-header--blueprint .calculator-page-header__title {
@@ -4517,8 +4521,8 @@
 }
 
 .calculator-blueprint-tool-card:hover {
-  border-color: var(--status-success-border);
-  background: var(--status-success-muted);
+  border-color: var(--matte-border-hover);
+  background: transparent;
 }
 
 .calculator-blueprint-tool-card__icon {
@@ -4528,9 +4532,10 @@
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--blueprint-line-strong);
+  border: none;
   border-radius: 0.125rem;
-  color: var(--status-success);
+  background: transparent;
+  color: var(--foreground);
 }
 
 .calculator-blueprint-tool-card__body {
@@ -4558,20 +4563,20 @@
   -webkit-line-clamp: 2;
   font-size: var(--bp-text-xs);
   line-height: 1.35;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .calculator-blueprint-tool-card__arrow {
   flex-shrink: 0;
   margin-top: 0.0625rem;
-  color: var(--muted-foreground);
+  color: var(--foreground);
   opacity: 0;
   transition: opacity 0.15s ease;
 }
 
 .calculator-blueprint-tool-card:hover .calculator-blueprint-tool-card__arrow {
   opacity: 1;
-  color: var(--status-success);
+  color: var(--foreground);
 }
 
 /* Category landing — blueprint layout */
@@ -4581,11 +4586,11 @@
   height: 1.75rem;
   border: 1px solid var(--matte-border);
   border-radius: 0.25rem;
-  background: var(--matte-chip-bg);
+  background: transparent;
   padding: 0 0.625rem;
   font-size: var(--bp-text-xs);
   font-weight: 600;
-  color: var(--muted-foreground);
+  color: var(--foreground);
   text-decoration: none;
   transition:
     border-color 0.15s ease,
@@ -4594,9 +4599,9 @@
 }
 
 .calculator-blueprint-stats__link:hover {
-  border-color: var(--status-success-border);
-  background: var(--status-success-muted);
-  color: var(--status-success);
+  border-color: var(--matte-border-hover);
+  background: transparent;
+  color: var(--foreground);
 }
 
 .category-blueprint-header__label {
@@ -4605,13 +4610,13 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--status-success);
+  color: var(--foreground);
 }
 
 .category-blueprint-intro {
   border: 1px solid var(--blueprint-line-strong);
   border-radius: 0.25rem;
-  background: var(--blueprint-inset);
+  background: #ffffff;
   padding: 0.625rem 0.75rem;
 }
 
@@ -4621,7 +4626,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .category-blueprint-intro__body {
@@ -4634,7 +4639,7 @@
   margin: 0;
   font-size: var(--bp-text-base);
   line-height: 1.5;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .category-blueprint-tools__title {
@@ -4643,13 +4648,13 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 .category-blueprint-tools__empty {
   margin: 0;
   font-size: var(--bp-text-base);
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 /* Category Focus View — large tools grid overlay */
@@ -4898,7 +4903,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--status-success);
+  color: var(--foreground);
 }
 
 /* Projects + blog inside blueprint shell */
@@ -8114,6 +8119,83 @@
   color: var(--muted-foreground);
 }
 
+/* Blog listing — Google-style search results */
+.blog-results-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.blog-result {
+  padding: 1.125rem 0;
+  border-bottom: 1px solid var(--matte-border);
+}
+
+.blog-result:first-child {
+  padding-top: 0.25rem;
+}
+
+.blog-result:last-child {
+  border-bottom: none;
+  padding-bottom: 0.25rem;
+}
+
+.blog-result__title {
+  display: inline;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.blog-result__title:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.blog-result__url {
+  margin: 0.2rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  opacity: 0.68;
+}
+
+.blog-result__snippet {
+  margin: 0.3rem 0 0;
+  max-width: 42rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--foreground);
+  opacity: 0.9;
+}
+
+.calculator-route--blueprint .blog-results-list {
+  margin-top: 0.25rem;
+}
+
+.calculator-route--blueprint .blog-result {
+  border-bottom-color: var(--blueprint-line-strong);
+}
+
+.calculator-route--blueprint .blog-result__title {
+  font-size: var(--bp-text-lg);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.calculator-route--blueprint .blog-result__url {
+  font-size: var(--bp-text-xs);
+}
+
+.calculator-route--blueprint .blog-result__snippet {
+  font-size: var(--bp-text-sm);
+  line-height: 1.5;
+}
+
 .blog-post-card {
   display: flex;
   flex-direction: column;
@@ -9387,323 +9469,545 @@
   }
 }
 
-/* Calculators hub — Featured & Trending dashboard */
-.calculators-hub-hero {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--blueprint-line-strong);
-  background: var(--blueprint-panel);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.03);
+/* [CALCULATORS_TECH_HUB] Pure white hub */
+.calculator-route--blueprint.calculator-route--tech-hub {
+  --blueprint-canvas: #ffffff;
+  --blueprint-panel: #ffffff;
+  --blueprint-bar-bg: #ffffff;
+  --blueprint-line: rgb(0 0 0 / 6%);
+  --blueprint-line-strong: rgb(0 0 0 / 10%);
+  background: #ffffff !important;
 }
 
-.calculators-hub-hero__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
+.calculator-route--blueprint.calculator-route--tech-hub::before,
+.calculator-route--blueprint.calculator-route--tech-hub::after {
+  display: none !important;
 }
 
-.calculators-hub-hero__back {
-  font-size: var(--bp-text-xs);
-  font-weight: 600;
-  color: var(--muted-foreground);
-  text-decoration: none;
-  transition: color 0.15s ease;
+.calculator-route--tech-hub .calculator-page-shell {
+  position: relative;
+  z-index: 1;
 }
 
-.calculators-hub-hero__back:hover {
+.calculator-route--tech-hub .calculator-blueprint-shell__center {
+  background: #ffffff !important;
+  border-inline-color: rgb(0 0 0 / 8%) !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-stats--tech-hub {
+  background: #ffffff !important;
+  border-bottom-color: rgb(0 0 0 / 8%) !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-stats--tech-hub .calculator-blueprint-stats__point,
+.calculator-route--tech-hub .calculator-blueprint-stats--tech-hub .calculator-blueprint-stats__point strong {
+  color: #000000 !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-categories,
+.calculator-route--tech-hub .calculator-blueprint-nav {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 8%) !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-categories__title,
+.calculator-route--tech-hub .calculator-blueprint-categories__item,
+.calculator-route--tech-hub .calculator-blueprint-nav__title,
+.calculator-route--tech-hub .calculator-blueprint-nav__item {
+  color: #000000 !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-categories__icon {
+  color: #000000 !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-categories__item:hover {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 12%) !important;
+  color: #000000 !important;
+}
+
+.calculator-route--tech-hub .calculator-blueprint-categories__item--active {
+  background: #ffffff !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.dark .calculator-route--blueprint .calculator-blueprint-categories__item:hover,
+.dark .calculator-route--tech-hub .calculator-blueprint-categories__item:hover {
+  background: rgb(255 255 255 / 0.1) !important;
+  border-color: rgb(255 255 255 / 0.2) !important;
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--blueprint .calculator-blueprint-categories__item--active,
+.dark .calculator-route--tech-hub .calculator-blueprint-categories__item--active {
+  background: rgb(255 255 255 / 0.14) !important;
+  border-color: rgb(255 255 255 / 0.35) !important;
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--blueprint .calculator-blueprint-categories__icon,
+.dark .calculator-route--tech-hub .calculator-blueprint-categories__icon {
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--blueprint .calculator-blueprint-nav__item:hover,
+.dark .calculator-route--tech-hub .calculator-blueprint-nav__item:hover {
+  background: rgb(255 255 255 / 0.1) !important;
+  border-color: rgb(255 255 255 / 0.2) !important;
+  color: #ffffff !important;
+}
+
+/* Individual calculator — transparent in-page header (green only in site header) */
+.calculator-route--status-ui .calculator-blueprint-shell__header .calculator-page-header--blueprint {
+  gap: 0.375rem;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.75rem 0.875rem 0.5rem;
+}
+
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__back,
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__title,
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__description {
   color: var(--foreground);
 }
 
-.calculators-hub-hero__badge {
-  font-size: var(--bp-text-xs);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--status-success);
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__back:hover {
+  color: var(--foreground);
+  opacity: 0.72;
 }
 
-.calculators-hub-hero__intro {
-  margin-top: 0.875rem;
-}
-
-.calculators-hub-hero__title-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-}
-
-.calculators-hub-hero__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__icon {
   border: 1px solid var(--blueprint-line-strong);
-  background: color-mix(in srgb, var(--blueprint-panel) 80%, var(--foreground) 20%);
-  color: var(--status-success);
-}
-
-.calculators-hub-hero__title {
-  margin: 0;
-  font-size: var(--bp-text-md);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  background: transparent;
   color: var(--foreground);
 }
 
-.calculators-hub-hero__count {
-  font-size: var(--bp-text-xs);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-  border: 1px solid var(--blueprint-line);
-  padding: 0.15rem 0.45rem;
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__tag {
+  border: 1px solid var(--blueprint-line-strong);
+  background: transparent;
+  color: var(--foreground);
 }
 
-.calculators-hub-hero__description {
-  margin: 0.5rem 0 0;
-  max-width: 42rem;
-  font-size: var(--bp-text-sm);
-  line-height: 1.5;
-  color: var(--muted-foreground);
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-page-header__tag:hover {
+  background: var(--matte-hover);
+  color: var(--foreground);
 }
 
-.calculators-hub-hero__grid {
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-rating-compact,
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-rating-compact__meta,
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-rating-compact__vote-label,
+.calculator-route--status-ui .calculator-page-header--blueprint .calculator-rating-compact__aggregate {
+  color: var(--foreground);
+}
+
+.calculator-route--status-ui .calculator-blueprint-stats {
+  background: #ffffff;
+  border-bottom-color: rgb(0 0 0 / 8%);
+}
+
+.dark .calculator-route--status-ui .calculator-blueprint-stats {
+  background: #000000;
+  border-bottom-color: rgb(255 255 255 / 10%);
+}
+
+.dark .calculator-route--status-ui .calculator-blueprint-stats__point,
+.dark .calculator-route--status-ui .calculator-blueprint-stats__point strong {
+  color: #ffffff;
+}
+
+/* Calculator page — AdSense placeholders (below workbench, above guide) */
+.calculator-ad-slots {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.calculator-ad-slots__grid {
   display: grid;
   gap: 0.75rem;
-  margin-top: 1rem;
+  grid-template-columns: 1fr;
 }
 
-@media (min-width: 1024px) {
-  .calculators-hub-hero__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+@media (min-width: 640px) {
+  .calculator-ad-slots__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.calculators-spotlight {
-  position: relative;
+.calculator-ad-slot {
   display: flex;
-  flex-direction: column;
-  min-height: 100%;
+  min-height: 7.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgb(0 0 0 / 15%);
+  border-radius: 0.5rem;
+  background: transparent;
   padding: 1rem;
-  border: 1px solid color-mix(in srgb, var(--status-success) 28%, var(--blueprint-line-strong));
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--blueprint-panel) 88%, var(--status-success) 12%), var(--blueprint-panel));
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.04);
-  overflow: hidden;
 }
 
-.calculators-spotlight__glow {
-  position: absolute;
-  right: -2rem;
-  top: -2rem;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--status-success) 18%, transparent);
-  filter: blur(24px);
-  pointer-events: none;
+.dark .calculator-ad-slot {
+  border-color: rgb(255 255 255 / 15%);
 }
 
-.calculators-spotlight__body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
+.calculator-ad-slot__label {
+  margin: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #000000;
+}
+
+.dark .calculator-ad-slot__label {
+  color: #ffffff;
+}
+
+.calculator-route--status-ui .calculator-blueprint-shell__center,
+.calculator-route--status-ui .calculator-blueprint-categories,
+.calculator-route--status-ui .calculator-blueprint-nav {
+  background: #ffffff;
+}
+
+.dark .calculator-route--status-ui .calculator-blueprint-shell__center,
+.dark .calculator-route--status-ui .calculator-blueprint-categories,
+.dark .calculator-route--status-ui .calculator-blueprint-nav {
+  background: #000000;
+}
+
+.dark .calculator-route--status-ui .calculator-blueprint-categories__title,
+.dark .calculator-route--status-ui .calculator-blueprint-categories__item,
+.dark .calculator-route--status-ui .calculator-blueprint-nav__title,
+.dark .calculator-route--status-ui .calculator-blueprint-nav__item {
+  color: #ffffff;
+}
+
+.calculator-route--tech-hub .calculators-hub {
+  color: #000000;
+}
+
+.calculator-blueprint-tool-grid-tech ul {
   gap: 1rem;
 }
 
-@media (min-width: 640px) {
-  .calculators-spotlight__body {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-}
-
-.calculators-spotlight__icon-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.5rem;
-  height: 3.5rem;
-  flex-shrink: 0;
-  border: 1px solid color-mix(in srgb, var(--status-success) 35%, var(--blueprint-line-strong));
-  background: color-mix(in srgb, var(--status-success) 10%, var(--blueprint-panel));
-  color: var(--status-success);
-}
-
-.calculators-spotlight__copy {
-  min-width: 0;
-  flex: 1;
-}
-
-.calculators-spotlight__eyebrow {
-  margin: 0;
-  font-size: var(--bp-text-xs);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--status-success);
-}
-
-.calculators-spotlight__title {
-  margin: 0.5rem 0 0;
-  font-size: var(--bp-text-md);
-  font-weight: 700;
-  line-height: 1.3;
-  color: var(--foreground);
-}
-
-.calculators-spotlight__description {
-  margin: 0.5rem 0 0;
-  font-size: var(--bp-text-sm);
-  line-height: 1.5;
-  color: var(--muted-foreground);
-}
-
-.calculators-spotlight__cta {
-  position: relative;
-  margin-top: 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 0.65rem 1rem;
-  font-size: var(--bp-text-xs);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: rgb(10 10 10);
-  background: var(--status-success);
-  border: 1px solid color-mix(in srgb, var(--status-success) 70%, black);
-  transition: filter 0.15s ease, transform 0.15s ease;
-}
-
-.calculators-spotlight__cta:hover {
-  filter: brightness(1.06);
-}
-
-.calculators-spotlight__cta:focus-visible {
-  outline: 2px solid var(--status-success);
-  outline-offset: 2px;
-}
-
-@media (min-width: 640px) {
-  .calculators-spotlight__cta {
-    width: auto;
-  }
-}
-
-.calculators-recent-history {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  padding: 1rem;
-  border: 1px solid var(--blueprint-line-strong);
-  background: color-mix(in srgb, var(--blueprint-panel) 94%, var(--foreground) 6%);
-}
-
-.calculators-recent-history__heading {
-  margin: 0;
-  font-size: var(--bp-text-xs);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-}
-
-.calculators-recent-history__list {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin: 0.75rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.calculators-recent-history__empty-slot {
-  padding: 0.55rem 0.75rem;
-  border: 1px dashed var(--blueprint-line);
-}
-
-.calculators-recent-history__empty-text {
-  margin: 0;
-  font-size: var(--bp-text-sm);
-  color: var(--muted-foreground);
-}
-
-.calculators-recent-history__item {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.35rem 0.45rem;
-  border: 1px solid transparent;
-  text-decoration: none;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.calculators-recent-history__item:hover {
-  border-color: var(--blueprint-line-strong);
-  background: color-mix(in srgb, var(--foreground) 4%, transparent);
-}
-
-.calculators-recent-history__item:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--status-success) 50%, transparent);
-  outline-offset: 1px;
-}
-
-.calculators-recent-history__item-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex-shrink: 0;
-  border: 1px solid var(--blueprint-line);
-  background: color-mix(in srgb, var(--blueprint-panel) 90%, var(--foreground) 10%);
-  color: var(--status-success);
-}
-
-.calculators-recent-history__item-copy {
-  min-width: 0;
-  flex: 1;
-}
-
-.calculators-recent-history__item-title {
-  display: block;
+.calculator-route--tech-hub .calculator-tech-card {
+  border-radius: 0.75rem !important;
+  border-width: 1.5px !important;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: var(--bp-text-sm);
-  font-weight: 600;
-  color: var(--foreground);
+  background: #ffffff !important;
+  box-shadow: none !important;
+  color: #000000 !important;
 }
 
-.calculators-recent-history__item-meta {
-  display: block;
-  margin-top: 0.1rem;
-  font-size: var(--bp-text-xs);
-  color: var(--muted-foreground);
+.calculator-route--tech-hub .calculator-tech-card:hover {
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.06) !important;
 }
 
-.calculators-recent-history__item-snapshot {
-  color: color-mix(in srgb, var(--muted-foreground) 85%, transparent);
+.calculator-route--tech-hub .calculators-tech-spotlight-ad {
+  border-radius: 1rem !important;
+  border-width: 1px !important;
+  border-color: rgb(0 0 0 / 10%) !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-.calculators-recent-history__item-arrow {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
-  color: var(--muted-foreground);
-  transition: color 0.15s ease;
+.dark .calculator-route--tech-hub .calculators-tech-spotlight-ad,
+.dark .calculators-tech-spotlight-ad {
+  border-color: rgb(255 255 255 / 10%) !important;
+  background: transparent !important;
 }
 
-.calculators-recent-history__item:hover .calculators-recent-history__item-arrow {
-  color: var(--status-success);
+.dark .calculator-route--tech-hub .calculators-tech-spotlight-ad__label,
+.dark .calculators-tech-spotlight-ad__label {
+  color: #ffffff !important;
+}
+
+.calculator-route--tech-hub .calculators-tech-history {
+  border-radius: 1rem !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-tech-card .text-black {
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-tech-card .text-black\/65 {
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--blueprint.calculator-route--tech-hub {
+  background: #000000 !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-blueprint-shell__center,
+.dark .calculator-route--tech-hub .calculator-blueprint-categories,
+.dark .calculator-route--tech-hub .calculator-blueprint-nav,
+.dark .calculator-route--tech-hub .calculator-blueprint-stats--tech-hub {
+  background: #000000 !important;
+  border-color: rgb(255 255 255 / 10%) !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-blueprint-categories__title,
+.dark .calculator-route--tech-hub .calculator-blueprint-categories__item,
+.dark .calculator-route--tech-hub .calculator-blueprint-nav__title,
+.dark .calculator-route--tech-hub .calculator-blueprint-nav__item,
+.dark .calculator-route--tech-hub .calculator-blueprint-stats--tech-hub .calculator-blueprint-stats__point,
+.dark .calculator-route--tech-hub .calculator-blueprint-stats--tech-hub .calculator-blueprint-stats__point strong {
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--tech-hub .calculators-hub,
+.dark .calculators-hub.calculators-hub--blueprint {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.dark .calculators-hub .text-black {
+  color: #ffffff !important;
+}
+
+.dark .calculators-hub .text-black\/65 {
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-tech-card {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.dark .calculator-route--tech-hub .calculator-tech-card__icon {
+  background: transparent !important;
+}
+
+/* Forest-green header — site-wide (light + dark) */
+.site-header--blueprint.site-header--forest.glass-header {
+  background: #14532d !important;
+  border-bottom-color: #052e16 !important;
+  color: #ffffff !important;
+}
+
+.site-header--forest .glass-header__logo-watt {
+  color: #ffffff !important;
+}
+
+.site-header--forest .glass-header__logo-quick {
+  color: #fcd34d !important;
+}
+
+.site-header--forest .glass-header__nav-item {
+  color: #ffffff !important;
+}
+
+.site-header--forest .glass-header__nav-item:hover,
+.site-header--forest .glass-header__nav-item[aria-expanded="true"]:not(.glass-header__nav-item--active) {
+  background: #166534 !important;
+  border-color: #15803d !important;
+  color: #ffffff !important;
+}
+
+.site-header--forest .glass-header__nav-item--active,
+.site-header--forest .glass-header__nav-item--active:hover {
+  background: transparent !important;
+  border-color: rgb(255 255 255 / 0.92) !important;
+  border-radius: 0.375rem !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.site-header--forest .glass-header__action-item,
+.site-header--forest .glass-header__action-item.glass-header__nav-item,
+.site-header--forest .theme-switch__label {
+  color: #ffffff !important;
+}
+
+.site-header--forest .glass-header__action-item:hover {
+  background: #166534 !important;
+  color: #ffffff !important;
+}
+
+.site-header--forest .wq-header-search__input-wrap {
+  height: 1.75rem !important;
+  padding-inline: 0.5rem !important;
+  border: 1px solid rgb(255 255 255 / 0.28) !important;
+  border-radius: 0.375rem !important;
+  background: rgb(255 255 255 / 0.96) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.site-header--forest .wq-header-search.is-open .wq-header-search__input-wrap,
+.site-header--forest .wq-header-search__input-wrap:focus-within {
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.28) !important;
+}
+
+.site-header--forest .wq-header-search__input {
+  font-size: 0.6875rem !important;
+  border: none !important;
+  background: transparent !important;
+  color: #14532d !important;
+}
+
+.site-header--forest .wq-header-search__input::placeholder {
+  color: rgb(0 0 0 / 0.55) !important;
+}
+
+.site-header--forest .wq-header-search__leading-icon {
+  color: #166534 !important;
+}
+
+.site-header--forest .wq-search-kbd {
+  height: 1.125rem !important;
+  min-width: 1.125rem !important;
+  font-size: 0.5625rem !important;
+  color: #14532d !important;
+  border-color: rgb(0 0 0 / 12%) !important;
+  background: #ffffff !important;
+}
+
+.site-header--forest .wq-header-search__results {
+  border-color: rgb(0 0 0 / 10%) !important;
+  border-radius: 0.375rem !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.12) !important;
+}
+
+.site-header--forest .wq-search-group__label,
+.site-header--forest .wq-search-item__title,
+.site-header--forest .wq-search-item__desc,
+.site-header--forest .wq-search-item__meta,
+.site-header--forest .wq-search-empty,
+.site-header--forest .wq-search-empty__title {
+  color: #000000 !important;
+}
+
+.dark .site-header--forest .wq-header-search__input-wrap {
+  border: 1px solid rgb(255 255 255 / 0.22) !important;
+  background: rgb(0 0 0 / 0.55) !important;
+}
+
+.dark .site-header--forest .wq-header-search.is-open .wq-header-search__input-wrap,
+.dark .site-header--forest .wq-header-search__input-wrap:focus-within {
+  border-color: rgb(255 255 255 / 0.4) !important;
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 0.12) !important;
+}
+
+.dark .site-header--forest .wq-header-search__input {
+  color: #ffffff !important;
+}
+
+.dark .site-header--forest .wq-header-search__input::placeholder {
+  color: rgb(255 255 255 / 0.55) !important;
+}
+
+.dark .site-header--forest .wq-header-search__leading-icon {
+  color: #86efac !important;
+}
+
+.dark .site-header--forest .wq-search-kbd {
+  color: rgb(255 255 255 / 0.8) !important;
+  border-color: rgb(255 255 255 / 0.2) !important;
+  background: rgb(255 255 255 / 0.08) !important;
+}
+
+.dark .site-header--forest .wq-header-search__results {
+  border-color: rgb(255 255 255 / 12%) !important;
+  background: #000000 !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.55) !important;
+}
+
+.dark .site-header--forest .wq-search-group__label,
+.dark .site-header--forest .wq-search-item__title,
+.dark .site-header--forest .wq-search-item__desc,
+.dark .site-header--forest .wq-search-item__meta,
+.dark .site-header--forest .wq-search-empty,
+.dark .site-header--forest .wq-search-empty__title {
+  color: #ffffff !important;
+}
+
+.dark .site-header--forest .wq-search-item:hover,
+.dark .site-header--forest .wq-search-item.is-active {
+  background: rgb(255 255 255 / 0.08) !important;
+  border-color: rgb(255 255 255 / 0.12) !important;
+}
+
+.dark .site-header--forest .mobile-nav-panel,
+.dark .site-header--forest .calculators-mega-menu__panel {
+  background: #000000 !important;
+  border-color: rgb(255 255 255 / 12%) !important;
+  color: #ffffff !important;
+}
+
+.dark .site-header--forest .calculators-mega-menu__tab {
+  background: #000000 !important;
+  border-color: rgb(255 255 255 / 12%) !important;
+  color: #ffffff !important;
+}
+
+.dark .site-header--forest .header-nav-link {
+  color: #ffffff !important;
+}
+
+.site-header--forest .theme-switch {
+  border-color: rgb(255 255 255 / 0.35) !important;
+  background: rgb(5 46 22 / 0.35) !important;
+}
+
+.site-header--forest .theme-switch__thumb {
+  background: #ffffff !important;
+}
+
+.site-header--forest .glass-header__logo {
+  border-left-color: #fcd34d !important;
+  border-right-color: rgb(255 255 255 / 0.22) !important;
+}
+
+.site-header--forest .glass-header__logo-quick {
+  opacity: 1 !important;
+}
+
+.site-header--forest .mobile-nav-panel,
+.site-header--forest .calculators-mega-menu__panel {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 10%) !important;
+  color: #000000 !important;
+}
+
+.site-header--forest .calculators-mega-menu__tab {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 12%) !important;
+  color: #000000 !important;
+}
+
+.site-header--forest .header-nav-link {
+  color: #000000 !important;
+}
+
+/* Blueprint routes — enforce white/black surfaces (category pages + hub) */
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-categories__item,
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-tool-card {
+  background: #ffffff !important;
+  border-color: rgb(0 0 0 / 8%) !important;
+  color: #000000 !important;
+}
+
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-categories,
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-nav,
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-shell__center,
+:root:not(.dark) .calculator-route--blueprint .calculator-blueprint-stats {
+  background: #ffffff !important;
+}
+
+.dark .calculator-route--blueprint .calculator-blueprint-categories,
+.dark .calculator-route--blueprint .calculator-blueprint-nav,
+.dark .calculator-route--blueprint .calculator-blueprint-shell__center,
+.dark .calculator-route--blueprint .calculator-blueprint-stats {
+  background: #000000 !important;
+  border-color: rgb(255 255 255 / 10%) !important;
+}
+
+.dark .category-blueprint-intro {
+  background: #000000;
 }

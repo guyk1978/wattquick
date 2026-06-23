@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { ArrowRight, Star } from "lucide-react";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
@@ -60,6 +61,8 @@ export function FavoritesBlueprintPage() {
             <FavoritesBlueprintHeader
               toolCount={hydrated ? calculators.length : undefined}
             />
+
+            <CalculatorAdSlots />
 
             {!hydrated ? (
               <p className="favorites-blueprint__loading">Loading favorites…</p>

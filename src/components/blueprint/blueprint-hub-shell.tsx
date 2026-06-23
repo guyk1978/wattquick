@@ -5,12 +5,15 @@ import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-
 import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
 import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import type { CalculatorCategory } from "@/lib/calculators";
+import { cn } from "@/lib/utils";
 
 interface BlueprintHubShellProps {
   children: ReactNode;
   rightNav: ReactNode;
   statsTrailing?: ReactNode;
   activeCategory?: CalculatorCategory | null;
+  /** Bold tech-forward calculators hub (light mode). */
+  techHub?: boolean;
 }
 
 const defaultStatsTrailing = (
@@ -24,11 +27,20 @@ export function BlueprintHubShell({
   rightNav,
   statsTrailing = defaultStatsTrailing,
   activeCategory = null,
+  techHub = false,
 }: BlueprintHubShellProps) {
   return (
-    <div className="calculator-route calculator-route--blueprint">
+    <div
+      className={cn(
+        "calculator-route calculator-route--blueprint",
+        techHub && "calculator-route--tech-hub"
+      )}
+    >
       <BlueprintShellFrame>
-        <CalculatorBlueprintStatsBar trailing={statsTrailing} />
+        <CalculatorBlueprintStatsBar
+          trailing={statsTrailing}
+          variant={techHub ? "tech-hub" : "default"}
+        />
 
         <BlueprintShellWorkspace>
           <CalculatorBlueprintCategorySidebar activeCategory={activeCategory} />
