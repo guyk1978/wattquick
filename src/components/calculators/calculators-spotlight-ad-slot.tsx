@@ -1,10 +1,12 @@
+import { AdSenseInArticleUnit } from "@/components/adsense/adsense-in-article-unit";
+import { ADSENSE_SITE_IN_ARTICLE_SLOT } from "@/lib/adsense";
 import { cn } from "@/lib/utils";
 
 interface CalculatorsSpotlightAdSlotProps {
   className?: string;
 }
 
-/** Full-width AdSense placeholder on the calculators hub hero. */
+/** Full-width AdSense unit on the calculators hub hero. */
 export function CalculatorsSpotlightAdSlot({
   className,
 }: CalculatorsSpotlightAdSlotProps) {
@@ -19,14 +21,12 @@ export function CalculatorsSpotlightAdSlot({
     >
       <div
         className={cn(
-          "calculators-tech-spotlight-ad__frame flex h-full min-h-[15rem] w-full items-center justify-center",
-          "border border-dashed border-black/15 bg-transparent px-4 py-6",
-          "dark:border-white/15"
+          "calculators-tech-spotlight-ad__frame calculators-tech-spotlight-ad__frame--live",
+          "flex h-full min-h-[15rem] w-full items-center justify-center overflow-hidden",
+          "bg-transparent px-4 py-6"
         )}
       >
-        <p className="calculators-tech-spotlight-ad__label text-center text-sm font-medium tracking-wide text-black dark:text-white">
-          AdSense coming soon
-        </p>
+        <AdSenseInArticleUnit slotId={ADSENSE_SITE_IN_ARTICLE_SLOT} />
       </div>
     </aside>
   );

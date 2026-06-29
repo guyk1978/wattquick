@@ -1,13 +1,13 @@
 import { AdSenseInArticleUnit } from "@/components/adsense/adsense-in-article-unit";
-import { ADSENSE_SITE_IN_ARTICLE_SLOT } from "@/lib/adsense";
+import { ADSENSE_BLOG_IN_ARTICLE_SLOT } from "@/lib/adsense";
 import { cn } from "@/lib/utils";
 
-interface CalculatorAdSlotsProps {
+interface BlogAdSlotsProps {
   className?: string;
 }
 
-/** Live AdSense slots for hub and utility pages (dashboard, category, favorites, projects, site pages). */
-export function CalculatorAdSlots({ className }: CalculatorAdSlotsProps) {
+/** Live AdSense slots between the article header and body (same grid layout as placeholders). */
+export function BlogAdSlots({ className }: BlogAdSlotsProps) {
   return (
     <aside
       className={cn("calculator-ad-slots", className)}
@@ -15,10 +15,10 @@ export function CalculatorAdSlots({ className }: CalculatorAdSlotsProps) {
     >
       <div className="calculator-ad-slots__grid">
         <div className="calculator-ad-slot calculator-ad-slot--live">
-          <AdSenseInArticleUnit slotId={ADSENSE_SITE_IN_ARTICLE_SLOT} />
+          <AdSenseInArticleUnit slotId={ADSENSE_BLOG_IN_ARTICLE_SLOT} />
         </div>
         <div className="calculator-ad-slot calculator-ad-slot--live">
-          <AdSenseInArticleUnit slotId={ADSENSE_SITE_IN_ARTICLE_SLOT} />
+          <AdSenseInArticleUnit slotId={ADSENSE_BLOG_IN_ARTICLE_SLOT} />
         </div>
       </div>
     </aside>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Shield } from "lucide-react";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { SiteBlueprintHeader } from "@/components/site/site-blueprint-header";
 import { SiteBlueprintLayout } from "@/components/site/site-blueprint-layout";
 import { createPageMetadata } from "@/lib/seo";
@@ -19,6 +20,8 @@ export default function PrivacyPage() {
         description="Last updated: March 2026"
         label="Legal"
       />
+
+      <CalculatorAdSlots />
 
       <div className="blueprint-prose-body site-page-body min-w-0">
         <h2>Overview</h2>

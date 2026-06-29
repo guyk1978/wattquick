@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail } from "lucide-react";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { SiteBlueprintHeader } from "@/components/site/site-blueprint-header";
 import { SiteBlueprintLayout } from "@/components/site/site-blueprint-layout";
 import { CONTACT_EMAIL } from "@/lib/site";
@@ -20,6 +21,8 @@ export default function ContactPage() {
         title="Contact"
         description="Questions, feedback, or ideas—we'd love to hear from you."
       />
+
+      <CalculatorAdSlots />
 
       <div className="site-contact-panel">
         <span className="site-contact-panel__icon" aria-hidden>

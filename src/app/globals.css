@@ -9773,6 +9773,22 @@
   color: #ffffff;
 }
 
+.calculator-ad-slot--live {
+  min-height: auto;
+  border-style: solid;
+  border-color: transparent;
+  padding: 0;
+  overflow: hidden;
+}
+
+.calculators-tech-spotlight-ad__frame--live {
+  border-style: solid;
+  border-color: transparent;
+  min-height: auto;
+  padding: 0;
+  overflow: hidden;
+}
+
 .calculator-route--status-ui .calculator-blueprint-shell__center,
 .calculator-route--status-ui .calculator-blueprint-categories,
 .calculator-route--status-ui .calculator-blueprint-nav {

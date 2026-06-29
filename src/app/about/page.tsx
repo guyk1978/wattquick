@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Info } from "lucide-react";
+import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { SiteBlueprintHeader } from "@/components/site/site-blueprint-header";
 import { SiteBlueprintLayout } from "@/components/site/site-blueprint-layout";
 import { createPageMetadata } from "@/lib/seo";
@@ -20,6 +21,8 @@ export default function AboutPage() {
         title="About WattQuick"
         description="Fast, focused tools for anyone who works with batteries and power."
       />
+
+      <CalculatorAdSlots />
 
       <div className="blueprint-prose-body site-page-body min-w-0">
         <p>
