@@ -7,6 +7,7 @@ import {
   writeCookieConsent,
   type CookieConsentStatus,
 } from "@/lib/cookie-consent";
+import { grantAllTrackingConsent } from "@/lib/grant-consent";
 
 export function useCookieConsent() {
   const [status, setStatus] = useState<CookieConsentStatus | null>(null);
@@ -19,6 +20,7 @@ export function useCookieConsent() {
     setHydrated(true);
 
     if (stored === "granted") {
+      grantAllTrackingConsent();
       activateConsentScripts();
     }
   }, []);
@@ -39,6 +41,7 @@ export function useCookieConsent() {
     writeCookieConsent("granted");
     setStatus("granted");
     setDeclinedAttempt(false);
+    grantAllTrackingConsent();
     activateConsentScripts();
   }, []);
 

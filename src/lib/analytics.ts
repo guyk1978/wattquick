@@ -2,6 +2,7 @@
  * Consent-gated Google Analytics (GA4).
  */
 import { WATTQUICK_GA_MEASUREMENT_ID } from "@/config/analytics";
+import { grantAllTrackingConsent } from "@/lib/grant-consent";
 
 declare global {
   interface Window {
@@ -61,15 +62,6 @@ function ensureGtagShim(): void {
   }
 }
 
-function grantAnalyticsConsent(): void {
-  ensureGtagShim();
-  window.gtag?.("consent", "update", {
-    analytics_storage: "granted",
-    ad_storage: "denied",
-    ad_user_data: "denied",
-    ad_personalization: "denied",
-  });
-}
 
 function injectGoogleAnalytics(measurementId: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -78,7 +70,7 @@ function injectGoogleAnalytics(measurementId: string): Promise<void> {
       return;
     }
 
-    grantAnalyticsConsent();
+    grantAllTrackingConsent();
 
     // Official gtag pattern: queue commands before the library finishes loading.
     ensureGtagShim();
