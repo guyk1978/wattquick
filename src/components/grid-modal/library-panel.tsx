@@ -125,6 +125,8 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
         aria-modal="true"
         aria-labelledby="library-panel-title"
         className="library-panel__drawer"
+        onClick={(event) => event.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
       >
         <header className="library-panel__header">
           <div className="library-panel__title-wrap">
@@ -209,7 +211,7 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                       <Link
                         href={tool.href}
                         className="library-panel__row"
-                        onClick={onClose}
+                        onClick={(event) => event.stopPropagation()}
                       >
                         <span className="library-panel__row-icon" aria-hidden>
                           <Icon strokeWidth={1.75} className="size-4" />
@@ -224,7 +226,10 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                           type="button"
                           className="library-panel__remove"
                           aria-label={`Remove ${tool.title} from favorites`}
-                          onClick={() => handleRemoveFavorite(tool.id)}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            handleRemoveFavorite(tool.id);
+                          }}
                         >
                           <Trash2 className="size-3.5" aria-hidden />
                         </button>
@@ -245,7 +250,10 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                   <button
                     type="button"
                     className="library-panel__row"
-                    onClick={() => handleOpenProject(project)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleOpenProject(project);
+                    }}
                   >
                     <span className="library-panel__row-icon" aria-hidden>
                       <FolderKanban strokeWidth={1.75} className="size-4" />
@@ -263,7 +271,10 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                       type="button"
                       className="library-panel__remove"
                       aria-label={`Delete project ${project.name}`}
-                      onClick={() => handleDeleteProject(project.id)}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleDeleteProject(project.id);
+                      }}
                     >
                       <Trash2 className="size-3.5" aria-hidden />
                     </button>

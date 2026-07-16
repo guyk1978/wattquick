@@ -57,11 +57,11 @@ export const calculatorResultValue =
 /** Flat rectilinear input surface */
 export const calculatorCommandInput = "calculator-command-input";
 
-/** Valid calculator field — bold green border + mint fill (reference mockup) */
+/** Valid calculator field — dark matte surface; green glow only on focus */
 export const calculatorFieldValidInput = cn(
-  "!rounded-md !border-2 !border-status-success !bg-status-success-input",
-  "focus-visible:!border-status-success focus-visible:!bg-status-success-input",
-  "focus-visible:!shadow-[0_0_0_3px_var(--color-status-success-muted)]"
+  "!rounded-none !border !border-[#333] !bg-[#121212] !text-[#ededed]",
+  "focus-visible:!border-[#4ade80] focus-visible:!bg-[#121212]",
+  "focus-visible:!shadow-[0_0_0_3px_rgb(74_222_128_/_0.18)]"
 );
 
 /** @deprecated Use calculator-status-board CSS shell */

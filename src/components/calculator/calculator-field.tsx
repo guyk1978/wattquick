@@ -24,11 +24,10 @@ interface CalculatorFieldProps {
 function getControlClassName(isValid: boolean) {
   return cn(
     calculatorCommandInput,
-    "input-dark h-12 w-full px-3.5 text-base text-foreground shadow-none transition-colors duration-200",
-    "focus-visible:outline-none",
-    isValid
-      ? calculatorFieldValidInput
-      : "rounded-none border-0 focus-visible:border-0 focus-visible:ring-0"
+    "input-dark h-12 w-full rounded-none border border-[#333] bg-[#121212] px-3.5 text-base text-[#ededed] shadow-none transition-colors duration-200",
+    "focus-visible:border-[#4ade80] focus-visible:bg-[#121212] focus-visible:outline-none focus-visible:ring-0",
+    "focus-visible:shadow-[0_0_0_3px_rgb(74_222_128_/_0.18)]",
+    isValid && calculatorFieldValidInput
   );
 }
 
@@ -195,7 +194,7 @@ function CalculatorFieldClassic({
     >
       <Label
         htmlFor={field.id}
-        className="calculator-field__label flex items-center gap-2 text-sm font-medium leading-snug text-foreground"
+        className="calculator-field__label mb-1.5 flex items-center gap-2 text-sm font-medium leading-snug text-[#a3a3a3]"
       >
         <span className="calculator-field__icon" aria-hidden>
           <FieldIcon className="size-3.5" strokeWidth={2.25} />
@@ -216,7 +215,7 @@ function CalculatorFieldClassic({
           className={cn(
             "flex flex-col gap-2 transition-colors duration-200",
             isValid
-              ? "rounded-md border-2 border-status-success bg-status-success-input p-3"
+              ? "rounded-none border border-[#333] bg-[#121212] p-3"
               : "rounded-none"
           )}
         >
