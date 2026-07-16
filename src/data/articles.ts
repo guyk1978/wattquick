@@ -1,3 +1,4 @@
+import "server-only";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 
 export type Article = {

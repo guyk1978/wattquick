@@ -1,5 +1,3 @@
-"use client";
-
 import { BlogPostList } from "@/components/blog/blog-post-list";
 import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { GlobalPageLayout } from "@/components/layout/global-page-layout";
@@ -9,6 +7,7 @@ interface BlogBlueprintPageProps {
   posts: BlogPost[];
 }
 
+/** Server component — wraps the blog index in GlobalPageLayout (fs legal docs). */
 export function BlogBlueprintPage({ posts }: BlogBlueprintPageProps) {
   const countLabel =
     posts.length === 1 ? "1 article" : `${posts.length} articles`;
