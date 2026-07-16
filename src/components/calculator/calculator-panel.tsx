@@ -79,6 +79,11 @@ interface CalculatorPanelProps {
   className?: string;
   /** Command Center: persist live result text for recent widgets */
   onResultSnapshot?: (snapshot: string | null) => void;
+  /**
+   * `modal` — Grid-to-Modal workspace: inputs + large result only
+   * (no gauges, share strip, or PDF chrome).
+   */
+  variant?: "default" | "modal";
 }
 
 /** Interactive calculator body: inputs + live result. */
@@ -95,123 +100,127 @@ function CalculatorPanelInner({
   id,
   className,
   onResultSnapshot,
+  variant = "default",
 }: CalculatorPanelProps) {
+  const isModal = variant === "modal";
+  const shellClassName = cn(className, isModal && "calculator-embed-shell--modal");
+
   if (id === "microgrid-roi") {
-    return <MicrogridRoiCalculator className={className} />;
+    return <MicrogridRoiCalculator className={shellClassName} />;
   }
   if (id === "ev-preconditioning-cost") {
-    return <EvPreconditioningCostCalculator className={className} />;
+    return <EvPreconditioningCostCalculator className={shellClassName} />;
   }
   if (id === "ev-charging-temperature-impact") {
-    return <EvChargingTemperatureImpactCalculator className={className} />;
+    return <EvChargingTemperatureImpactCalculator className={shellClassName} />;
   }
   if (id === "ev-battery-depletion-value-loss") {
-    return <EvBatteryDepletionValueLossCalculator className={className} />;
+    return <EvBatteryDepletionValueLossCalculator className={shellClassName} />;
   }
   if (id === "ev-tire-wear-cost") {
-    return <EvTireWearCostCalculator className={className} />;
+    return <EvTireWearCostCalculator className={shellClassName} />;
   }
   if (id === "generator-vs-solar-hybrid") {
-    return <GeneratorVsSolarHybridCalculator className={className} />;
+    return <GeneratorVsSolarHybridCalculator className={shellClassName} />;
   }
   if (id === "generator-runtime-savings") {
-    return <GeneratorRuntimeSavingsCalculator className={className} />;
+    return <GeneratorRuntimeSavingsCalculator className={shellClassName} />;
   }
   if (id === "solar-degradation-20-year-roi") {
-    return <SolarDegradation20YearRoiCalculator className={className} />;
+    return <SolarDegradation20YearRoiCalculator className={shellClassName} />;
   }
   if (id === "water-pump-solar-sizing") {
-    return <WaterPumpSolarSizingCalculator className={className} />;
+    return <WaterPumpSolarSizingCalculator className={shellClassName} />;
   }
   if (id === "grid-frequency-reward") {
-    return <GridFrequencyRewardCalculator className={className} />;
+    return <GridFrequencyRewardCalculator className={shellClassName} />;
   }
   if (id === "residential-voltage-drop") {
-    return <ResidentialVoltageDropCalculator className={className} />;
+    return <ResidentialVoltageDropCalculator className={shellClassName} />;
   }
   if (id === "inverter-peak-load-surge") {
-    return <InverterPeakLoadSurgeCalculator className={className} />;
+    return <InverterPeakLoadSurgeCalculator className={shellClassName} />;
   }
   if (id === "inverter-loading-curve") {
-    return <InverterLoadingCurveCalculator className={className} />;
+    return <InverterLoadingCurveCalculator className={shellClassName} />;
   }
   if (id === "critical-load-analysis") {
-    return <CriticalLoadAnalysisCalculator className={className} />;
+    return <CriticalLoadAnalysisCalculator className={shellClassName} />;
   }
   if (id === "standby-power-aggregator") {
-    return <StandbyPowerAggregatorCalculator className={className} />;
+    return <StandbyPowerAggregatorCalculator className={shellClassName} />;
   }
   if (id === "mobility-tco-calculator") {
-    return <MobilityTcoCalculator className={className} />;
+    return <MobilityTcoCalculator className={shellClassName} />;
   }
   if (id === "solar-shading-analysis") {
-    return <SolarShadingAnalysisCalculator className={className} />;
+    return <SolarShadingAnalysisCalculator className={shellClassName} />;
   }
   if (id === "solar-roi-analysis") {
-    return <SolarRoiAnalysisCalculator className={className} />;
+    return <SolarRoiAnalysisCalculator className={shellClassName} />;
   }
   if (id === "dc-cable-voltage-drop") {
-    return <DcCableVoltageDropCalculator className={className} />;
+    return <DcCableVoltageDropCalculator className={shellClassName} />;
   }
   if (id === "bess-carbon-cost") {
-    return <BessCarbonCostCalculator className={className} />;
+    return <BessCarbonCostCalculator className={shellClassName} />;
   }
   if (id === "bess-roi") {
-    return <BessRoiCalculator className={className} />;
+    return <BessRoiCalculator className={shellClassName} />;
   }
   if (id === "lighting-circuit-load") {
-    return <LightingCircuitLoadCalculator className={className} />;
+    return <LightingCircuitLoadCalculator className={shellClassName} />;
   }
   if (id === "solar-water-heater-efficiency") {
-    return <SolarWaterHeaterEfficiencyCalculator className={className} />;
+    return <SolarWaterHeaterEfficiencyCalculator className={shellClassName} />;
   }
   if (id === "peak-shaving-potential") {
-    return <PeakShavingPotentialCalculator className={className} />;
+    return <PeakShavingPotentialCalculator className={shellClassName} />;
   }
   if (id === "electricity-rate-plan") {
-    return <ElectricityRatePlanCalculator className={className} />;
+    return <ElectricityRatePlanCalculator className={shellClassName} />;
   }
   if (id === "ev-charging-cable-loss") {
-    return <EvChargingCableLossCalculator className={className} />;
+    return <EvChargingCableLossCalculator className={shellClassName} />;
   }
   if (id === "battery-calendar-aging") {
-    return <BatteryCalendarAgingCalculator className={className} />;
+    return <BatteryCalendarAgingCalculator className={shellClassName} />;
   }
   if (id === "small-wind-turbine-yield") {
-    return <SmallWindTurbineYieldCalculator className={className} />;
+    return <SmallWindTurbineYieldCalculator className={shellClassName} />;
   }
   if (id === "ac-inrush-current") {
-    return <AcInrushCurrentCalculator className={className} />;
+    return <AcInrushCurrentCalculator className={shellClassName} />;
   }
   if (id === "vampire-power-cost") {
-    return <VampirePowerCostCalculator className={className} />;
+    return <VampirePowerCostCalculator className={shellClassName} />;
   }
   if (id === "led-savings-roi") {
-    return <LedSavingsRoiCalculator className={className} />;
+    return <LedSavingsRoiCalculator className={shellClassName} />;
   }
   if (id === "home-insulation-savings") {
-    return <HomeInsulationSavingsCalculator className={className} />;
+    return <HomeInsulationSavingsCalculator className={shellClassName} />;
   }
   if (id === "ac-inverter-savings") {
-    return <AcInverterSavingsCalculator className={className} />;
+    return <AcInverterSavingsCalculator className={shellClassName} />;
   }
   if (id === "pool-energy-thermal-cover") {
-    return <PoolEnergyThermalCoverCalculator className={className} />;
+    return <PoolEnergyThermalCoverCalculator className={shellClassName} />;
   }
   if (id === "ev-vs-ice-maintenance") {
-    return <EvVsIceMaintenanceCalculator className={className} />;
+    return <EvVsIceMaintenanceCalculator className={shellClassName} />;
   }
   if (id === "ebike-range-estimator") {
-    return <EbikeRangeEstimatorCalculator className={className} />;
+    return <EbikeRangeEstimatorCalculator className={shellClassName} />;
   }
   if (id === "ebike-voltage-sag") {
-    return <EbikeVoltageSagCalculator className={className} />;
+    return <EbikeVoltageSagCalculator className={shellClassName} />;
   }
   if (id === "ebike-battery-cycle-life") {
-    return <EbikeBatteryCycleLifeCalculator className={className} />;
+    return <EbikeBatteryCycleLifeCalculator className={shellClassName} />;
   }
   if ((ESCOOTER_CALCULATOR_IDS as readonly string[]).includes(id)) {
-    return <EscooterCalculatorShell id={id} className={className} />;
+    return <EscooterCalculatorShell id={id} className={shellClassName} />;
   }
 
   const definition = getCalculatorDefinition(id);
@@ -264,9 +273,10 @@ function CalculatorPanelInner({
   const footerNote = CALCULATOR_FOOTER_NOTES[id];
 
   const usesGamified =
-    usesBatteryDashboard(definition.category, id) ||
-    usesCostDashboard(definition.category, id) ||
-    usesEvDashboard(definition.category, id);
+    !isModal &&
+    (usesBatteryDashboard(definition.category, id) ||
+      usesCostDashboard(definition.category, id) ||
+      usesEvDashboard(definition.category, id));
 
   const gamifiedHero = usesGamified ? (
     <>
@@ -309,8 +319,9 @@ function CalculatorPanelInner({
   );
 
   return (
-    <CalculatorCommandShell className={className}>
+    <CalculatorCommandShell className={shellClassName}>
       <CalculatorCommandSplit
+        scrollable={isModal}
         inputs={
           <CalculatorInputs
             fields={definition.fields}
@@ -331,36 +342,41 @@ function CalculatorPanelInner({
                 : undefined
             }
             hero={gamifiedHero}
-            statusAlert={statusAlert}
+            statusAlert={isModal ? null : statusAlert}
+            className={isModal ? "calculator-results-dashboard--modal" : undefined}
           />
         }
       />
 
-      <JoinMyPdfSaveReport
-        calculatorTitle={definition.title}
-        calculatorSlug={id}
-        resultLabel={definition.result.label}
-        value={result.value}
-        unit={result.unit}
-        detail={result.detail}
-        values={values}
-        fieldLabels={fieldLabels}
-        projectResults={result.snapshotResults}
-        onSaveToPdf={handleSaveToPDF}
-        isSaving={pdfLoading}
-        saveError={pdfError}
-      />
+      {isModal ? null : (
+        <>
+          <JoinMyPdfSaveReport
+            calculatorTitle={definition.title}
+            calculatorSlug={id}
+            resultLabel={definition.result.label}
+            value={result.value}
+            unit={result.unit}
+            detail={result.detail}
+            values={values}
+            fieldLabels={fieldLabels}
+            projectResults={result.snapshotResults}
+            onSaveToPdf={handleSaveToPDF}
+            isSaving={pdfLoading}
+            saveError={pdfError}
+          />
 
-      <CalculatorGuideLink calculatorId={id} className="mt-2" />
+          <CalculatorGuideLink calculatorId={id} className="mt-2" />
 
-      <div className="calculator-command__footer flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        {footerNote ? (
-          <p className="text-xs leading-relaxed text-muted-foreground">{footerNote}</p>
-        ) : (
-          <span className="hidden sm:block" aria-hidden />
-        )}
-        <ShareButtons title={definition.title} className="sm:ml-auto" />
-      </div>
+          <div className="calculator-command__footer flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            {footerNote ? (
+              <p className="text-xs leading-relaxed text-muted-foreground">{footerNote}</p>
+            ) : (
+              <span className="hidden sm:block" aria-hidden />
+            )}
+            <ShareButtons title={definition.title} className="sm:ml-auto" />
+          </div>
+        </>
+      )}
     </CalculatorCommandShell>
   );
 }

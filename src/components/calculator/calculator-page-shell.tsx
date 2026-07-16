@@ -111,6 +111,7 @@ export function CalculatorPageShell({
   return (
     <BlueprintShellFrame className={className}>
       <CalculatorBlueprintStatsBar
+        calculatorId={calculatorId}
         trailing={<CalculatorBlueprintToolbar calculatorId={calculatorId} />}
       />
 

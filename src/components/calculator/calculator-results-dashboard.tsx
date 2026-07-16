@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import type { CalculatorStatusAlert } from "@/lib/calculator-status";
 import { cn } from "@/lib/utils";
 import { CalculatorStatusShell } from "./calculator-status-shell";
+import { CalculatorResultActions } from "./calculator-result-actions";
 
 export interface CalculatorSummaryItem {
   label: string;
@@ -171,6 +172,15 @@ export function CalculatorResultsDashboard({
             />
           ) : null}
         </CalculatorStatusShell>
+        {hasResult && value ? (
+          <CalculatorResultActions
+            label={label}
+            value={value}
+            unit={unit}
+            detail={detail}
+            className="calculator-results-dashboard__actions"
+          />
+        ) : null}
       </div>
 
       {showExternalSummaryGrid ? (

@@ -70,3 +70,8 @@ export function toggleCalculatorFavorite(id: CalculatorId): {
   const ids = addCalculatorFavorite(id);
   return { ids, favorited: true };
 }
+
+export function clearAllCalculatorFavorites(): CalculatorId[] {
+  writeFavoriteCalculatorIds([]);
+  return [];
+}

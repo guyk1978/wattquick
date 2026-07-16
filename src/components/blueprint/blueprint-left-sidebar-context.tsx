@@ -82,6 +82,10 @@ export function BlueprintLeftSidebarProvider({ children }: { children: ReactNode
   );
 }
 
+export function useBlueprintLeftSidebarOptional() {
+  return useContext(BlueprintLeftSidebarContext);
+}
+
 export function useBlueprintLeftSidebar() {
   const ctx = useContext(BlueprintLeftSidebarContext);
   if (!ctx) {

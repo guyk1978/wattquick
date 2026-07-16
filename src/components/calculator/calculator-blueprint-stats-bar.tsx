@@ -2,16 +2,20 @@ import { getAllCalculatorMeta } from "@/lib/calculators/registry";
 import { getCalculatorCategoryCount } from "@/lib/calculator-discovery";
 import { BlueprintLeftSidebarToggle } from "@/components/blueprint/blueprint-left-sidebar-toggle";
 import { BlueprintRightSidebarToggle } from "@/components/blueprint/blueprint-right-sidebar-toggle";
+import { CalculatorToolsDrawer } from "@/components/calculator/calculator-tools-drawer";
+import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
 interface CalculatorBlueprintStatsBarProps {
   trailing?: React.ReactNode;
   variant?: "default" | "tech-hub";
+  calculatorId?: CalculatorId;
 }
 
 export function CalculatorBlueprintStatsBar({
   trailing,
   variant = "default",
+  calculatorId,
 }: CalculatorBlueprintStatsBarProps) {
   const toolCount = getAllCalculatorMeta().length;
   const categoryCount = getCalculatorCategoryCount();
@@ -24,6 +28,10 @@ export function CalculatorBlueprintStatsBar({
         isTechHub && "calculator-blueprint-stats--tech-hub",
       )}
     >
+      <CalculatorToolsDrawer
+        calculatorId={calculatorId}
+        className="calculator-blueprint-stats__mobile-tools"
+      />
       <BlueprintLeftSidebarToggle className="calculator-blueprint-stats__sidebar-toggle" />
       <div className="calculator-blueprint-stats__points" aria-label="Site statistics">
         <span className="calculator-blueprint-stats__point">

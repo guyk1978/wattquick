@@ -45,12 +45,18 @@ function writeStoredBoolean(key: string, value: boolean) {
 }
 
 export function BlueprintRightSidebarProvider({ children }: { children: ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false);
+  /** Default collapsed so the workbench stays primary; users can expand peers. */
+  const [collapsed, setCollapsed] = useState(true);
   const [wide, setWideState] = useState(false);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setCollapsed(readStoredBoolean(COLLAPSED_KEY));
+    const stored = readStoredBoolean(COLLAPSED_KEY);
+    // If the user never set a preference, stay collapsed (uncluttered default).
+    const hasPreference =
+      typeof window !== "undefined" &&
+      window.localStorage.getItem(COLLAPSED_KEY) != null;
+    setCollapsed(hasPreference ? stored : true);
     setWideState(readStoredBoolean(WIDE_KEY));
     setHydrated(true);
   }, []);

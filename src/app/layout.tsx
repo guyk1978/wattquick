@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
+import { ArticlePortalRoot } from "@/components/article-portal/article-portal-root";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -60,22 +61,24 @@ export default function RootLayout({
         <script async src={ADSENSE_SCRIPT_SRC} crossOrigin="anonymous" />
         {jsonLd}
         <link rel="stylesheet" href="/assets/css/site-search.css" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-        <meta name="theme-color" content="#ffffff" />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0a0a0a" />
         <meta property="fb:app_id" content={FACEBOOK_APP_ID} />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="site-ambient flex min-h-full flex-col bg-bg-primary text-text-primary">
         <ThemeProvider>
-          <NavigationLoadingOverlay />
-          <AnalyticsRouteTracker />
-          <SiteHeader />
-          <PageTransition>
-            <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
-          </PageTransition>
-          <SiteFooter />
-          <CookieConsentBanner />
+          <ArticlePortalRoot>
+            <NavigationLoadingOverlay />
+            <AnalyticsRouteTracker />
+            <SiteHeader />
+            <PageTransition>
+              <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
+            </PageTransition>
+            <SiteFooter />
+            <CookieConsentBanner />
+          </ArticlePortalRoot>
         </ThemeProvider>
       </body>
     </html>

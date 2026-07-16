@@ -115,6 +115,15 @@ export function getBlogPost(slug: string): BlogPost | undefined {
   return getMarkdownPosts().find((p) => p.slug === slug);
 }
 
+/** Lookup posts by slug, preserving the caller's ID order. */
+export function getBlogPostsBySlugs(slugs: string[]): BlogPost[] {
+  const unique = [...new Set(slugs)];
+  const posts = getMarkdownPosts();
+  return unique
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter((post): post is BlogPost => post != null);
+}
+
 export function getAllBlogPosts(): BlogPost[] {
   return [...getMarkdownPosts()].sort(
     (a, b) =>

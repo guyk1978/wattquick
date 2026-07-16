@@ -5,6 +5,12 @@ export {
   CalculatorCommandShell,
   CalculatorCommandSplit,
 } from "./calculator-command-layout";
+export {
+  CalculatorModalWrapper,
+  RelatedArticlesWorkspaceProvider,
+  useCalculatorModalRelatedArticles,
+  useCalculatorModalWorkspace,
+} from "./calculator-modal-wrapper";
 export { CalculatorPageLayout } from "./calculator-page-layout";
 export { CalculatorPageShell } from "./calculator-page-shell";
 export {

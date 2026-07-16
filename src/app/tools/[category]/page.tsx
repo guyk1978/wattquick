@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CategoryLandingPage } from "@/components/category/category-landing-page";
+import { CategoryGridLanding } from "@/components/grid-modal/category-grid-landing";
 import {
   CALCULATOR_CATEGORY_DESCRIPTIONS,
   CALCULATOR_CATEGORY_LABELS,
@@ -57,6 +57,6 @@ export default async function ToolsCategoryPage({ params }: PageProps) {
   const calculators = getCalculatorsByCategory(category);
 
   return (
-    <CategoryLandingPage category={category} calculators={calculators} />
+    <CategoryGridLanding category={category} calculators={calculators} />
   );
 }

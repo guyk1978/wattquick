@@ -41,8 +41,10 @@ export interface CalculatorMeta {
   tag: string;
   category: CalculatorCategory;
   suggestions: CalculatorId[];
-  /** Blog slug for complementary guide (bidirectional content link) */
+  /** Primary complementary blog article slug */
   relatedArticleId?: string;
+  /** Related blog articles shown in the documentation modal */
+  relatedArticleIds?: string[];
 }
 
 export interface CalculatorDefinition extends CalculatorMeta {
@@ -64,5 +66,6 @@ export function toMeta(definition: CalculatorDefinition): CalculatorMeta {
     category: definition.category,
     suggestions: definition.suggestions,
     relatedArticleId: definition.relatedArticleId,
+    relatedArticleIds: definition.relatedArticleIds,
   };
 }

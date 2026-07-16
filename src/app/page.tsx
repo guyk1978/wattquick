@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/landing/hero-section";
+import { CalculatorsGridHub } from "@/components/grid-modal/calculators-grid-hub";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -14,8 +14,12 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function HomePage() {
   return (
-    <div className="landing-page landing-page--hero-only">
-      <HeroSection calculatorCount={calculatorCount} />
+    <div className="landing-page landing-page--grid-modal">
+      <CalculatorsGridHub />
+      <p className="sr-only">
+        WattQuick offers {calculatorCount} free calculators for batteries, solar,
+        EV charging, and electrical power.
+      </p>
     </div>
   );
 }

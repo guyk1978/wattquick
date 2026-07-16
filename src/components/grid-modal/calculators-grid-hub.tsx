@@ -1,0 +1,26 @@
+import { CategoryGrid } from "@/components/grid-modal/category-grid";
+import { GridShell } from "@/components/grid-modal/grid-shell";
+import { getAllCalculatorMeta } from "@/lib/calculators";
+import type { LegalDocId } from "@/lib/legal-types";
+
+type CalculatorsGridHubProps = {
+  /** Deep-link into LegalModal (used by /privacy and /terms). */
+  initialLegalDoc?: LegalDocId | null;
+};
+
+/** Hub: category grid entry point for Grid-to-Modal. */
+export function CalculatorsGridHub({
+  initialLegalDoc = null,
+}: CalculatorsGridHubProps = {}) {
+  const count = getAllCalculatorMeta().length;
+
+  return (
+    <GridShell
+      initialLegalDoc={initialLegalDoc}
+      title="Calculators"
+      description={`${count} free battery, solar, EV, and power tools. Pick a category, then open a calculator.`}
+    >
+      <CategoryGrid />
+    </GridShell>
+  );
+}

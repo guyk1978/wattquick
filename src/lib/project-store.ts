@@ -5,6 +5,7 @@ import {
 } from "@/lib/project-currency";
 
 export const PROJECTS_STORAGE_KEY = "wattquick_projects";
+export const PROJECTS_CHANGED_EVENT = "wattquick:projects-changed";
 
 export type { ProjectCurrency };
 
@@ -68,6 +69,7 @@ function readProjectsRaw(): WattQuickProject[] {
 
 function writeProjects(projects: WattQuickProject[]): void {
   window.localStorage.setItem(PROJECTS_STORAGE_KEY, JSON.stringify(projects));
+  window.dispatchEvent(new Event(PROJECTS_CHANGED_EVENT));
 }
 
 function newId(): string {
@@ -128,6 +130,10 @@ export function renameProject(projectId: string, name: string): WattQuickProject
 
 export function deleteProject(projectId: string): void {
   writeProjects(listProjects().filter((project) => project.id !== projectId));
+}
+
+export function clearAllProjects(): void {
+  writeProjects([]);
 }
 
 export function addSnapshotToProject(

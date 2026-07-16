@@ -39,6 +39,11 @@ export interface CalculatorFieldDef {
   min?: number;
   max?: number;
   step?: number;
+  /**
+   * Progressive disclosure: hidden behind the Advanced toggle.
+   * When unset, fields beyond the first three are treated as advanced.
+   */
+  advanced?: boolean;
 }
 
 export interface CalculatorResultDisplay {
@@ -90,6 +95,8 @@ export interface CalculatorDataEntry {
   suggestions: string[];
   /** Primary complementary blog article slug (under /blog/) */
   relatedArticleId?: string;
+  /** Additional related blog articles for documentation modal */
+  relatedArticleIds?: string[];
   fields: CalculatorFieldDef[];
   result: CalculatorResultConfig;
   seo: CalculatorSeoContent;

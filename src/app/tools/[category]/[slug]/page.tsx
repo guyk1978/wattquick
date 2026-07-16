@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CalculatorPage } from "@/components/calculator/calculator-page";
+import { CalculatorGridModalPage } from "@/components/grid-modal/calculator-grid-modal-page";
 import { CALCULATOR_SLUGS } from "@/data/calculators";
 import { getCalculatorIdFromToolPath } from "@/lib/calculator-routes";
 import {
@@ -50,5 +50,5 @@ export default async function ToolRoutePage({ params }: PageProps) {
     notFound();
   }
 
-  return <CalculatorPage id={id} />;
+  return <CalculatorGridModalPage id={id} />;
 }

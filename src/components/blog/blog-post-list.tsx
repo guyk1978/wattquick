@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import { getBlogCategoryTheme } from "@/lib/blog-category-theme";
 import type { BlogPost } from "@/lib/blog/posts";
 import { cn } from "@/lib/utils";
@@ -19,17 +21,22 @@ interface BlogPostListProps {
 }
 
 export function BlogPostList({ posts, className }: BlogPostListProps) {
+  const { openArticle } = useArticlePortal();
+
   return (
     <ul className={cn("blog-results-list", className)}>
       {posts.map((post) => {
-        const href = `/blog/${post.slug}/`;
         const theme = getBlogCategoryTheme(post.category);
 
         return (
           <li key={post.slug} className="blog-result">
-            <Link href={href} className="blog-result__title">
+            <button
+              type="button"
+              className="blog-result__title article-link"
+              onClick={() => openArticle(post.slug)}
+            >
               {post.title}
-            </Link>
+            </button>
             <p className="blog-result__url">
               {SITE_HOST}
               <span aria-hidden> › </span>

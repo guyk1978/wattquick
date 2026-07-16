@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ArrowLeft, ArrowUpRight, BookOpen, X } from "lucide-react";
+import { ArrowLeft, BookOpen, X } from "lucide-react";
+import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { calculatorCommandShareBtn } from "@/lib/glass-ui";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition, getCalculatorMeta } from "@/lib/calculators/registry";
 import {
-  getArticleUrl,
   getToolLaunchContext,
   shouldShowBackToArticle,
   type ToolLaunchContext,
@@ -33,6 +32,7 @@ export function CalculatorLaunchModal({
   const meta = calculatorId ? getCalculatorMeta(calculatorId) : null;
   const definition = calculatorId ? getCalculatorDefinition(calculatorId) : null;
   const [ctx, setCtx] = useState<ToolLaunchContext | null>(launchContextProp ?? null);
+  const { openArticle } = useArticlePortal();
 
   useEffect(() => {
     if (launchContextProp) {
@@ -92,14 +92,17 @@ export function CalculatorLaunchModal({
       >
         <div className="flex shrink-0 flex-col gap-2 border-b border-border/50 px-4 py-3 sm:px-5">
           {showBack && ctx ? (
-            <Link
-              href={getArticleUrl(ctx.articleSlug)}
-              onClick={onClose}
+            <button
+              type="button"
+              onClick={() => {
+                openArticle(ctx.articleSlug);
+                onClose();
+              }}
               className="inline-flex w-fit items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               <ArrowLeft className="size-3.5" aria-hidden />
               <span className="max-w-[16rem] truncate sm:max-w-none">Back to article</span>
-            </Link>
+            </button>
           ) : null}
           <div className="flex items-center justify-between gap-3">
             <h2
@@ -136,11 +139,14 @@ export function CalculatorLaunchModal({
             <p className="mb-2 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
               Complementary guide
             </p>
-            <Link
-              href={getArticleUrl(relatedArticle)}
-              onClick={onClose}
+            <button
+              type="button"
+              onClick={() => {
+                openArticle(relatedArticle);
+                onClose();
+              }}
               className={cn(
-                "calculator-launch-modal__guide-link group flex items-center gap-2.5 rounded-none px-3 py-2",
+                "calculator-launch-modal__guide-link group flex w-full items-center gap-2.5 rounded-none px-3 py-2 text-left",
                 "bg-muted/40 transition-colors hover:bg-muted/60",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               )}
@@ -157,11 +163,7 @@ export function CalculatorLaunchModal({
                   /blog/{relatedArticle}/
                 </span>
               </span>
-              <ArrowUpRight
-                className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
-                aria-hidden
-              />
-            </Link>
+            </button>
           </div>
         ) : null}
       </div>

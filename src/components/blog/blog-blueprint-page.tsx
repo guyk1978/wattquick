@@ -1,11 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
-import { BlogBlueprintHeader } from "@/components/blog/blog-blueprint-header";
 import { BlogPostList } from "@/components/blog/blog-post-list";
 import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
-import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
-import { BlueprintListNav } from "@/components/blueprint/blueprint-list-nav";
+import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import type { BlogPost } from "@/lib/blog/posts";
 
 interface BlogBlueprintPageProps {
@@ -13,34 +10,21 @@ interface BlogBlueprintPageProps {
 }
 
 export function BlogBlueprintPage({ posts }: BlogBlueprintPageProps) {
-  const navItems = useMemo(
-    () =>
-      posts.map((post) => ({
-        id: post.slug,
-        href: `/blog/${post.slug}/`,
-        label: post.title,
-        iconKey: "book-open" as const,
-      })),
-    [posts]
-  );
+  const countLabel =
+    posts.length === 1 ? "1 article" : `${posts.length} articles`;
 
   return (
-    <BlueprintHubShell
-      rightNav={
-        <BlueprintListNav
-          title="Articles"
-          items={navItems}
-          emptyMessage="No articles yet."
-        />
-      }
+    <GlobalPageLayout
+      breadcrumbs={[{ label: "Blog" }]}
+      title="Blog"
+      description={`Expert guides on EV charging, solar, batteries, and home energy—${countLabel}, each paired with interactive WattQuick tools.`}
+      width="wide"
     >
-      <BlogBlueprintHeader articleCount={posts.length} />
-
       <CalculatorAdSlots />
 
-      <div className="blog-hub blog-hub--blueprint">
+      <div className="blog-hub blog-hub--matte">
         {posts.length === 0 ? (
-          <div className="blog-hub__empty blog-hub__empty--blueprint" role="status">
+          <div className="blog-hub__empty" role="status">
             <p className="blog-hub__empty-title">No articles yet</p>
             <p className="blog-hub__empty-text">Check back soon for new guides.</p>
           </div>
@@ -48,6 +32,6 @@ export function BlogBlueprintPage({ posts }: BlogBlueprintPageProps) {
           <BlogPostList posts={posts} />
         )}
       </div>
-    </BlueprintHubShell>
+    </GlobalPageLayout>
   );
 }

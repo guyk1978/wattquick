@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
-import { SiteBlueprintHeader } from "@/components/site/site-blueprint-header";
-import { SiteBlueprintLayout } from "@/components/site/site-blueprint-layout";
+import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import { CONTACT_EMAIL } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -15,13 +14,11 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function ContactPage() {
   return (
-    <SiteBlueprintLayout activeId="contact">
-      <SiteBlueprintHeader
-        icon={Mail}
-        title="Contact"
-        description="Questions, feedback, or ideas—we'd love to hear from you."
-      />
-
+    <GlobalPageLayout
+      breadcrumbs={[{ label: "Contact" }]}
+      title="Contact"
+      description="Questions, feedback, or ideas—we'd love to hear from you."
+    >
       <CalculatorAdSlots />
 
       <div className="site-contact-panel">
@@ -38,6 +35,6 @@ export default function ContactPage() {
           </Link>
         </div>
       </div>
-    </SiteBlueprintLayout>
+    </GlobalPageLayout>
   );
 }

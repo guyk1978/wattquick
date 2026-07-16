@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
+import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import { HeaderInstallAppButton } from "@/components/header-install-app-button";
 import { HeaderNav } from "@/components/header-nav";
 import { HeaderShareMenu } from "@/components/header-share-menu";
@@ -10,6 +12,8 @@ import { ThemeToggleWithTooltip } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 export function SiteHeaderBar() {
+  const { openArticle, isOpen } = useArticlePortal();
+
   return (
     <header
       className={cn(
@@ -32,6 +36,16 @@ export function SiteHeaderBar() {
           </div>
 
           <div className="glass-header__actions">
+            <button
+              type="button"
+              className="glass-header__articles-btn"
+              onClick={() => openArticle()}
+              aria-pressed={isOpen}
+              aria-label="Open articles"
+            >
+              <BookOpen className="size-3.5" aria-hidden />
+              <span>Articles</span>
+            </button>
             <ThemeToggleWithTooltip />
             <HeaderShareMenu />
             <HeaderInstallAppButton />

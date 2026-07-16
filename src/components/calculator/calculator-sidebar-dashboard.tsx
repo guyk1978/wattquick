@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +6,8 @@ export interface CalculatorSidebarDashboardProps {
   results: ReactNode;
   footer?: ReactNode;
   className?: string;
+  /** Native scroll containers for modal columns (Inputs + Results). */
+  scrollable?: boolean;
 }
 
 /**
@@ -19,6 +19,7 @@ export function CalculatorSidebarDashboard({
   results,
   footer,
   className,
+  scrollable = false,
 }: CalculatorSidebarDashboardProps) {
   return (
     <div className={cn("calculator-sidebar-dashboard", className)}>
@@ -29,12 +30,26 @@ export function CalculatorSidebarDashboard({
             Adjust values to update results live
           </p>
         </div>
-        <div className="calculator-sidebar-dashboard__sidebar-scroll">{inputs}</div>
+        <div
+          className={cn(
+            "calculator-sidebar-dashboard__sidebar-scroll",
+            scrollable && "scroll-container"
+          )}
+        >
+          {inputs}
+        </div>
       </aside>
 
       <div className="calculator-sidebar-dashboard__main">
         <div className="calculator-sidebar-dashboard__results">
-          <div className="calculator-sidebar-dashboard__results-body">{results}</div>
+          <div
+            className={cn(
+              "calculator-sidebar-dashboard__results-body",
+              scrollable && "scroll-container"
+            )}
+          >
+            {results}
+          </div>
         </div>
         {footer ? (
           <div className="calculator-sidebar-dashboard__footer">{footer}</div>

@@ -9,15 +9,22 @@ import {
   type ReactNode,
 } from "react";
 import {
+  CalculatorModalWrapper,
+  useCalculatorModalWorkspace,
+} from "@/components/calculator/calculator-modal-wrapper";
+import {
   CalculatorPageShellContext,
   useCalculatorPageSlots,
 } from "@/components/calculator/calculator-page-shell-context";
 import { CalculatorSidebarDashboard } from "@/components/calculator/calculator-sidebar-dashboard";
+import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
 import { cn } from "@/lib/utils";
 
 interface CalculatorCommandShellProps {
   className?: string;
   children: ReactNode;
+  /** Further Reading cards forwarded into CalculatorModalWrapper (modal only). */
+  relatedArticles?: RelatedArticleCard[];
 }
 
 function isCalculatorCommandSplit(
@@ -28,9 +35,14 @@ function isCalculatorCommandSplit(
   return type.displayName === "CalculatorCommandSplit";
 }
 
+function isModalShellClassName(className?: string): boolean {
+  return Boolean(className?.includes("calculator-embed-shell--modal"));
+}
+
 export function CalculatorCommandShell({
   className,
   children,
+  relatedArticles,
 }: CalculatorCommandShellProps) {
   const items = Children.toArray(children);
   const splitIndex = items.findIndex(isCalculatorCommandSplit);
@@ -50,22 +62,33 @@ export function CalculatorCommandShell({
   }
 
   const inPageShell = useContext(CalculatorPageShellContext) !== null;
+  const body = (
+    <>
+      {leading}
+      {dashboard ?? items}
+    </>
+  );
 
   if (inPageShell) {
     return (
       <div className={cn("calculator-route-registrar", className)} aria-hidden>
-        {leading}
-        {dashboard ?? items}
+        {body}
       </div>
     );
   }
 
-  return (
-    <div className={cn("calculator-embed-shell", className)}>
-      {leading}
-      {dashboard ?? items}
-    </div>
-  );
+  if (isModalShellClassName(className)) {
+    return (
+      <CalculatorModalWrapper
+        className={className}
+        relatedArticles={relatedArticles}
+      >
+        {body}
+      </CalculatorModalWrapper>
+    );
+  }
+
+  return <div className={cn("calculator-embed-shell", className)}>{body}</div>;
 }
 
 export interface CalculatorCommandSplitProps {
@@ -74,6 +97,7 @@ export interface CalculatorCommandSplitProps {
   footer?: ReactNode;
   shellFooter?: ReactNode;
   className?: string;
+  scrollable?: boolean;
 }
 
 function CalculatorCommandSplitPage({
@@ -94,13 +118,16 @@ function CalculatorCommandSplitInline({
   results,
   footer,
   className,
+  scrollable,
 }: CalculatorCommandSplitProps) {
+  const inModalWorkspace = useCalculatorModalWorkspace();
   return (
     <CalculatorSidebarDashboard
       inputs={inputs}
       results={results}
       footer={footer}
       className={className}
+      scrollable={scrollable ?? inModalWorkspace}
     />
   );
 }

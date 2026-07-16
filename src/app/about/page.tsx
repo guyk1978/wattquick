@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Info } from "lucide-react";
 import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
-import { SiteBlueprintHeader } from "@/components/site/site-blueprint-header";
-import { SiteBlueprintLayout } from "@/components/site/site-blueprint-layout";
+import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -15,13 +13,11 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function AboutPage() {
   return (
-    <SiteBlueprintLayout activeId="about">
-      <SiteBlueprintHeader
-        icon={Info}
-        title="About WattQuick"
-        description="Fast, focused tools for anyone who works with batteries and power."
-      />
-
+    <GlobalPageLayout
+      breadcrumbs={[{ label: "About" }]}
+      title="About WattQuick"
+      description="Fast, focused tools for anyone who works with batteries and power."
+    >
       <CalculatorAdSlots />
 
       <div className="blueprint-prose-body site-page-body min-w-0">
@@ -48,6 +44,6 @@ export default function AboutPage() {
           <Link href="/contact/">Get in touch</Link>.
         </p>
       </div>
-    </SiteBlueprintLayout>
+    </GlobalPageLayout>
   );
 }

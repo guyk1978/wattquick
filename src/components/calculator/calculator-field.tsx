@@ -24,7 +24,7 @@ interface CalculatorFieldProps {
 function getControlClassName(isValid: boolean) {
   return cn(
     calculatorCommandInput,
-    "h-12 w-full px-3.5 text-base text-foreground shadow-none transition-colors duration-200",
+    "input-dark h-12 w-full px-3.5 text-base text-foreground shadow-none transition-colors duration-200",
     "focus-visible:outline-none",
     isValid
       ? calculatorFieldValidInput
@@ -136,7 +136,7 @@ function CalculatorFieldBlueprint({
           onChange={(e) => onChange(e.target.value)}
           className={cn(
             calculatorCommandInput,
-            "calculator-param-block__control calculator-param-block__select",
+            "input-dark calculator-param-block__control calculator-param-block__select",
             isValid && calculatorFieldValidInput
           )}
         >
@@ -156,7 +156,7 @@ function CalculatorFieldBlueprint({
           placeholder={field.placeholder}
           className={cn(
             calculatorCommandInput,
-            "calculator-param-block__control calculator-param-block__input",
+            "input-dark calculator-param-block__control calculator-param-block__input",
             isValid && calculatorFieldValidInput,
             "placeholder:text-muted-foreground/50"
           )}
@@ -248,7 +248,7 @@ function CalculatorFieldClassic({
           id={field.id}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={cn(controlClassName, "cursor-pointer")}
+          className={cn(controlClassName, "input-dark cursor-pointer")}
         >
           {field.options.map((opt) => (
             <option key={opt.value} value={opt.value}>

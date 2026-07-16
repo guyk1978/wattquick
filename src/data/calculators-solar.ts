@@ -1106,7 +1106,10 @@ export const calculatorsSolar = [
   {
     slug: "solar-shading-analysis",
     href: "/solar-shading-analysis",
-    relatedArticleId: "shading-and-strings-guide",
+    relatedArticleIds: [
+      "shading-and-strings-guide",
+      "solar-panel-degradation-expectations",
+    ],
     title: "Solar Shading Analysis",
     description:
       "Estimate annual kWh and dollar loss from partial shading on string inverters vs module optimizers.",
@@ -1267,7 +1270,10 @@ export const calculatorsSolar = [
   {
     slug: "solar-roi-analysis",
     href: "/solar-roi-analysis",
-    relatedArticleId: "the-20-year-solar-ledger",
+    relatedArticleIds: [
+      "the-20-year-solar-ledger",
+      "solar-roi-payback-period-guide",
+    ],
     title: "Solar ROI Analysis",
     description:
       "Advanced 20-year solar payback with degradation, rate inflation, export credits, incentives, and cumulative savings vs. status quo.",

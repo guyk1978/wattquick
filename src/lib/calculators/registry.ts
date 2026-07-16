@@ -25,10 +25,18 @@ function toDefinition(
     tag: entry.tag,
     category: entry.category,
     suggestions: entry.suggestions as CalculatorId[],
+    relatedArticleIds:
+      "relatedArticleIds" in entry && entry.relatedArticleIds?.length
+        ? entry.relatedArticleIds
+        : undefined,
     relatedArticleId:
       ("relatedArticleId" in entry && entry.relatedArticleId
         ? entry.relatedArticleId
-        : undefined) ?? linkedArticle?.articleSlug,
+        : undefined) ??
+      ("relatedArticleIds" in entry && entry.relatedArticleIds?.[0]
+        ? entry.relatedArticleIds[0]
+        : undefined) ??
+      linkedArticle?.articleSlug,
     fields: entry.fields,
     result: entry.result,
     seo: entry.seo,

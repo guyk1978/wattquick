@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { BlogArticleBlueprintLayout } from "@/components/blog/blog-article-blueprint-layout";
 import { BlogArticleHeader } from "@/components/blog/blog-article-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { BlogQuickLaunchWidget } from "@/components/blog/blog-quick-launch-widget";
 import { BlogAdSlots } from "@/components/blog/blog-ad-slots";
+import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import { createBlogPostMetadata } from "@/lib/blog/metadata";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 
@@ -31,29 +31,31 @@ export default async function BlogArticlePage({ params }: PageProps) {
   if (!post) notFound();
 
   return (
-    <BlogArticleBlueprintLayout post={post}>
-      <Link
-        href="/blog/"
-        className="calculator-page-header__back mb-1 inline-flex text-muted-foreground hover:text-foreground"
-      >
+    <GlobalPageLayout
+      breadcrumbs={[
+        { label: "Blog", href: "/blog/" },
+        { label: post.title },
+      ]}
+    >
+      <Link href="/blog/" className="global-page-layout__back">
         ← Back to blog
       </Link>
 
-      <BlogArticleHeader post={post} className="blog-article-header--blueprint" />
+      <BlogArticleHeader post={post} className="blog-article-header--matte" />
 
       <BlogAdSlots />
 
-      <article className="blog-article-body blog-article-body--blueprint min-w-0">
+      <article className="blog-article-body blog-article-body--matte min-w-0">
         <BlogContent content={post.content} articleSlug={post.slug} />
       </article>
 
-      <div className="blog-article-tool mt-3">
+      <div className="blog-article-tool mt-6">
         <BlogQuickLaunchWidget
           calculatorId={post.relatedToolId}
           articleSlug={post.slug}
           placement="footer"
         />
       </div>
-    </BlogArticleBlueprintLayout>
+    </GlobalPageLayout>
   );
 }

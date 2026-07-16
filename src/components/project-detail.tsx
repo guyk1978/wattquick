@@ -30,9 +30,12 @@ import { cn } from "@/lib/utils";
 
 interface ProjectDetailProps {
   projectId: string;
+  /** Modal overlay — hides legacy page navigation chrome. */
+  variant?: "default" | "modal";
 }
 
-export function ProjectDetail({ projectId }: ProjectDetailProps) {
+export function ProjectDetail({ projectId, variant = "default" }: ProjectDetailProps) {
+  const isModal = variant === "modal";
   const [project, setProject] = useState<WattQuickProject | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const [exporting, setExporting] = useState(false);
@@ -101,16 +104,18 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
     return (
       <div className={cn(matteEmptyState, "px-6 py-12 text-center")}>
         <p className="text-sm text-muted-foreground">Project not found in this browser.</p>
-        <Link
-          href="/projects/"
-          className={cn(
-            calculatorCommandBtn,
-            "mt-6 inline-flex h-10 items-center justify-center gap-2 px-4 text-sm font-semibold"
-          )}
-        >
-          <ArrowLeft className="size-3.5" aria-hidden />
-          Back to projects
-        </Link>
+        {!isModal ? (
+          <Link
+            href="/projects/"
+            className={cn(
+              calculatorCommandBtn,
+              "mt-6 inline-flex h-10 items-center justify-center gap-2 px-4 text-sm font-semibold"
+            )}
+          >
+            <ArrowLeft className="size-3.5" aria-hidden />
+            Back to projects
+          </Link>
+        ) : null}
       </div>
     );
   }
@@ -119,17 +124,21 @@ export function ProjectDetail({ projectId }: ProjectDetailProps) {
     <div className="project-detail space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <Link
-            href="/projects/"
-            className="mb-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="size-3.5" aria-hidden />
-            All projects
-          </Link>
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            {project.name}
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          {!isModal ? (
+            <Link
+              href="/projects/"
+              className="mb-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            >
+              <ArrowLeft className="size-3.5" aria-hidden />
+              All projects
+            </Link>
+          ) : null}
+          {!isModal ? (
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+              {project.name}
+            </h1>
+          ) : null}
+          <p className={cn("text-sm text-muted-foreground", !isModal && "mt-1")}>
             {project.snapshots.length} snapshot
             {project.snapshots.length === 1 ? "" : "s"} · Updated{" "}
             {new Date(project.updatedAt).toLocaleString()}

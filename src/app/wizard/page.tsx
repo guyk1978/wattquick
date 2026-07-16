@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { EnergyWizard } from "@/components/EnergyWizard";
-import { PageHeader, PageShell } from "@/components/page-shell";
+import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import { createPageMetadata } from "@/lib/seo";
 import { buildWizardCatalog } from "@/lib/wizard-resolve";
 
@@ -22,13 +22,13 @@ export default function WizardPage() {
   const catalog = buildWizardCatalog();
 
   return (
-    <PageShell className="max-w-3xl">
-      <PageHeader
-        title="Start planning"
-        description="The WattQuick Wizard builds a structured path—tools and articles in the order that matches your goal and experience level."
-      />
+    <GlobalPageLayout
+      breadcrumbs={[{ label: "Wizard" }]}
+      title="Start planning"
+      description="The WattQuick Wizard builds a structured path—tools and articles in the order that matches your goal and experience level."
+    >
       <CalculatorAdSlots />
       <EnergyWizard catalog={catalog} />
-    </PageShell>
+    </GlobalPageLayout>
   );
 }
