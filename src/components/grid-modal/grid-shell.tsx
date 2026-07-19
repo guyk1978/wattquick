@@ -15,6 +15,11 @@ type GridShellProps = {
   modalOpen?: boolean;
   /** Open LegalModal on mount (e.g. /privacy or /terms deep links). */
   initialLegalDoc?: LegalDocId | null;
+  /**
+   * Category accent color (from categoryConfig.json) injected as
+   * `--category-color` so tool cards inside pick up the theme.
+   */
+  themeColor?: string;
 };
 
 /** Page wrapper for Grid-to-Modal architecture (replaces blueprint sidebars). */
@@ -26,6 +31,7 @@ export function GridShell({
   className,
   modalOpen = false,
   initialLegalDoc = null,
+  themeColor,
 }: GridShellProps) {
   const legalDocuments = getAllLegalDocuments();
 
@@ -40,6 +46,11 @@ export function GridShell({
           modalOpen && "grid-modal-root--modal-open",
           className
         )}
+        style={
+          themeColor
+            ? ({ "--category-color": themeColor } as React.CSSProperties)
+            : undefined
+        }
       >
         <GridNav breadcrumbs={breadcrumbs} />
         <div className="grid-modal-shell">

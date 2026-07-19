@@ -1,3 +1,4 @@
+import { CollapsibleSection } from "@/components/collapsible-section";
 import type { GuideLandingDefinition } from "@/lib/calculators/landing-types";
 
 interface GuideLandingArticleProps {
@@ -60,16 +61,17 @@ export function GuideLandingArticle({ landing }: GuideLandingArticleProps) {
         </ul>
       </section>
 
-      <div className="mt-8 space-y-8 border-t border-border/50 pt-8">
+      <div className="mt-8 border-t border-border/50 pt-8">
         {landing.seo.sections.map((section) => (
-          <section key={section.heading} className="space-y-2">
-            <h2 className="text-base font-semibold tracking-tight text-foreground">
-              {section.heading}
-            </h2>
+          <CollapsibleSection
+            key={section.heading}
+            title={section.heading}
+            headingLevel="h2"
+          >
             <p className="text-sm leading-relaxed text-muted-foreground">
               {section.body}
             </p>
-          </section>
+          </CollapsibleSection>
         ))}
       </div>
     </article>

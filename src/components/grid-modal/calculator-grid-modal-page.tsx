@@ -4,6 +4,7 @@ import {
   ToolModalDocumentation,
   ToolModalDocumentationCrawl,
 } from "@/components/grid-modal/tool-modal-documentation";
+import { ToolModalRelated } from "@/components/grid-modal/tool-modal-related";
 import { ToolWorkspaceModal } from "@/components/grid-modal/tool-workspace-modal";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -14,6 +15,7 @@ import {
   getRelatedArticlesForCalculator,
 } from "@/lib/calculators/related-articles";
 import { getCalculatorMeta, getCalculatorsByCategory } from "@/lib/calculators/registry";
+import { getCategoryColor } from "@/lib/category-theme";
 import { getCategoryPageHref } from "@/lib/category-routes";
 
 type CalculatorGridModalPageProps = {
@@ -42,6 +44,7 @@ export function CalculatorGridModalPage({ id }: CalculatorGridModalPageProps) {
         ]}
         title={categoryLabel}
         description={`Browse ${peers.length} ${categoryLabel.toLowerCase()} tools. Opening ${meta.title}.`}
+        themeColor={getCategoryColor(meta.category)}
       >
         <ToolGrid calculators={peers} activeId={id} />
       </GridShell>
@@ -53,6 +56,7 @@ export function CalculatorGridModalPage({ id }: CalculatorGridModalPageProps) {
         documentation={
           <ToolModalDocumentation id={id} relatedArticles={relatedArticles} />
         }
+        related={<ToolModalRelated id={id} />}
       />
 
       {/* Crawl-only copy: always in DOM for indexing, never shown to users */}

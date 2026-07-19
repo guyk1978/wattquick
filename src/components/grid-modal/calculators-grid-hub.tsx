@@ -1,5 +1,6 @@
 import { CategoryGrid } from "@/components/grid-modal/category-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
+import { PlatformOverview } from "@/components/grid-modal/platform-overview";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import type { LegalDocId } from "@/lib/legal-types";
 
@@ -21,6 +22,7 @@ export function CalculatorsGridHub({
       description={`${count} free battery, solar, EV, and power tools. Pick a category, then open a calculator.`}
     >
       <CategoryGrid />
+      <PlatformOverview />
     </GridShell>
   );
 }

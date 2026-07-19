@@ -2,14 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { FileText, FolderPlus, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
-import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
+import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
+import { useCalculatorRating } from "@/hooks/use-calculator-rating";
 import type { CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
+import { categoryThemeStyle } from "@/lib/category-theme";
 import { getCategoryPageHref } from "@/lib/category-routes";
 import {
   addSnapshotToProject,
@@ -25,6 +26,8 @@ type ToolWorkspaceModalProps = {
   className?: string;
   /** Guide + SEO article content shown in the documentation pane. */
   documentation?: ReactNode;
+  /** Related calculators shown in the RELATED tab. */
+  related?: ReactNode;
   /** Further Reading cards shared with CalculatorModalWrapper + Documentation. */
   relatedArticles?: RelatedArticleCard[];
 };
@@ -38,12 +41,14 @@ export function ToolWorkspaceModal({
   open = true,
   className,
   documentation,
+  related,
   relatedArticles = [],
 }: ToolWorkspaceModalProps) {
   const router = useRouter();
   const meta = getCalculatorMeta(calculatorId);
   const categoryHref = getCategoryPageHref(meta.category);
-  const [showDocs, setShowDocs] = useState(false);
+  const [activeTab, setActiveTab] = useState<ToolHeaderTab>("calc");
+  const { stats } = useCalculatorRating(calculatorId);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const [savePromptOpen, setSavePromptOpen] = useState(false);
@@ -173,9 +178,10 @@ export function ToolWorkspaceModal({
     setSavePromptOpen(true);
   }, []);
 
-  const showDocsRef = useRef(showDocs);
-  showDocsRef.current = showDocs;
+  const activeTabRef = useRef(activeTab);
+  activeTabRef.current = activeTab;
   const hasDocumentation = documentation != null;
+  const hasRelated = related != null;
 
   const close = useCallback(() => {
     router.push(categoryHref, { scroll: false });
@@ -183,7 +189,7 @@ export function ToolWorkspaceModal({
 
   useEffect(() => {
     if (!open) {
-      setShowDocs(false);
+      setActiveTab("calc");
       return;
     }
     const prevBody = document.body.style.overflow;
@@ -200,8 +206,8 @@ export function ToolWorkspaceModal({
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
-      if (showDocsRef.current) {
-        setShowDocs(false);
+      if (activeTabRef.current !== "calc") {
+        setActiveTab("calc");
         return;
       }
       close();
@@ -227,70 +233,30 @@ export function ToolWorkspaceModal({
         onClick={close}
       />
 
+      {/* Category theme color scopes the panel; ToolHeader accents read it. */}
       <motion.div
         className="tool-workspace-modal__panel"
         ref={panelRef}
+        style={categoryThemeStyle(meta.category)}
         initial={{ scale: 0.92, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 380, damping: 28 }}
       >
-        <header className="tool-workspace-modal__header">
-          <div className="min-w-0">
-            <p className="tool-workspace-modal__eyebrow">
-              {showDocs ? "Documentation" : meta.tag}
-            </p>
-            <h2
-              id="tool-workspace-modal-title"
-              className="tool-workspace-modal__title"
-            >
-              {meta.title}
-            </h2>
-          </div>
-
-          <div className="tool-workspace-modal__actions">
-            <button
-              type="button"
-              className="tool-workspace-modal__save"
-              aria-label="Save project"
-              onClick={onRequestSaveProject}
-              title="Save project"
-            >
-              <FolderPlus className="size-4" strokeWidth={2} aria-hidden />
-            </button>
-            <FavoriteCalculatorButton
-              calculatorId={calculatorId}
-              variant="toolbar"
-              className="tool-workspace-modal__favorite"
-            />
-            {hasDocumentation ? (
-              <button
-                type="button"
-                className={cn(
-                  "tool-workspace-modal__doc-toggle",
-                  showDocs && "tool-workspace-modal__doc-toggle--active"
-                )}
-                onClick={() => setShowDocs((value) => !value)}
-                aria-pressed={showDocs}
-                aria-label={
-                  showDocs ? "Show calculator" : "Show documentation"
-                }
-              >
-                <FileText className="size-4" aria-hidden />
-                <span className="tool-workspace-modal__doc-toggle-label">
-                  {showDocs ? "Calc" : "Doc"}
-                </span>
-              </button>
-            ) : null}
-            <button
-              type="button"
-              className="tool-workspace-modal__close"
-              onClick={close}
-              aria-label="Close"
-            >
-              <X className="size-5" aria-hidden />
-            </button>
-          </div>
-        </header>
+        <ToolHeader
+          title={meta.title}
+          rating={stats.average}
+          ratingCount={stats.count}
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          hasDocTab={hasDocumentation}
+          hasRelatedTab={hasRelated}
+          calculatorId={calculatorId}
+          onSaveProject={onRequestSaveProject}
+          fullscreenTargetRef={panelRef}
+          shareText={meta.description}
+          onClose={close}
+          titleId="tool-workspace-modal-title"
+        />
 
         {savePromptOpen ? (
           <div className="tool-workspace-modal__saveprompt-backdrop" role="dialog" aria-modal="true">
@@ -334,9 +300,9 @@ export function ToolWorkspaceModal({
           <div
             className={cn(
               "tool-workspace-modal__view tool-workspace-modal__view--calc",
-              !showDocs && "tool-workspace-modal__view--active"
+              activeTab === "calc" && "tool-workspace-modal__view--active"
             )}
-            aria-hidden={showDocs}
+            aria-hidden={activeTab !== "calc"}
           >
             <CalculatorPanel
               id={calculatorId}
@@ -349,12 +315,26 @@ export function ToolWorkspaceModal({
             <div
               className={cn(
                 "tool-workspace-modal__view tool-workspace-modal__view--docs",
-                showDocs && "tool-workspace-modal__view--active"
+                activeTab === "doc" && "tool-workspace-modal__view--active"
               )}
-              aria-hidden={!showDocs}
+              aria-hidden={activeTab !== "doc"}
             >
               <div className="tool-workspace-modal__docs-scroll">
                 {documentation}
+              </div>
+            </div>
+          ) : null}
+
+          {hasRelated ? (
+            <div
+              className={cn(
+                "tool-workspace-modal__view tool-workspace-modal__view--related",
+                activeTab === "related" && "tool-workspace-modal__view--active"
+              )}
+              aria-hidden={activeTab !== "related"}
+            >
+              <div className="tool-workspace-modal__docs-scroll">
+                {related}
               </div>
             </div>
           ) : null}

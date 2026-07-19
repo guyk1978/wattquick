@@ -4,6 +4,7 @@ import {
   CALCULATOR_CONTENT_HEADINGS,
   getCalculatorContentSection,
 } from "@/data/calculator-content";
+import { CollapsibleSection } from "@/components/collapsible-section";
 import { RelatedArticles } from "@/components/grid-modal/related-articles";
 import { getCalculatorDefinition, type CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleForModal } from "@/lib/calculators/related-articles";
@@ -60,10 +61,13 @@ function CalculatorDocsBody({
             About {title}
           </h4>
           {seo.sections.map((section) => (
-            <section key={section.heading} className="tool-modal-docs__section">
-              <h5 className="tool-modal-docs__subheading">{section.heading}</h5>
+            <CollapsibleSection
+              key={section.heading}
+              title={section.heading}
+              headingLevel="h5"
+            >
               <p className="tool-modal-docs__paragraph">{section.body}</p>
-            </section>
+            </CollapsibleSection>
           ))}
         </div>
       ) : null}

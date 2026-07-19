@@ -1,3 +1,4 @@
+import { CollapsibleSEOContent } from "@/components/collapsible-seo-content";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
 import { getCategorySeoContent } from "@/data/category-seo-content";
@@ -7,6 +8,7 @@ import {
   type CalculatorCategory,
 } from "@/data/calculator-types";
 import type { CalculatorMeta } from "@/lib/calculators";
+import { getCategoryColor } from "@/lib/category-theme";
 
 type CategoryGridLandingProps = {
   category: CalculatorCategory;
@@ -26,6 +28,7 @@ export function CategoryGridLanding({
       breadcrumbs={[{ label }]}
       title={label}
       description={CALCULATOR_CATEGORY_DESCRIPTIONS[category]}
+      themeColor={getCategoryColor(category)}
     >
       <ToolGrid calculators={calculators} />
 
@@ -33,10 +36,7 @@ export function CategoryGridLanding({
         <h2 id="category-seo-heading" className="sr-only">
           About {label} calculators
         </h2>
-        <p className="grid-modal-seo-inline__eyebrow">{seo.eyebrow}</p>
-        {seo.paragraphs.map((paragraph) => (
-          <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-        ))}
+        <CollapsibleSEOContent title={seo.eyebrow} content={seo.paragraphs} />
       </section>
     </GridShell>
   );

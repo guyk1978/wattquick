@@ -1,0 +1,18 @@
+{
+  "battery": "#a3e635",
+  "sizing": "#34d399",
+  "backup": "#f87171",
+  "power": "#facc15",
+  "solar": "#fb923c",
+  "ev": "#22d3ee",
+  "commercial-ev": "#38bdf8",
+  "ebike": "#c084fc",
+  "escooter": "#e879f9",
+  "rv-marine": "#60a5fa",
+  "appliance": "#a78bfa",
+  "green-home": "#4ade80",
+  "pool": "#2dd4bf",
+  "tou": "#f472b6",
+  "cost": "#fbbf24",
+  "convert": "#818cf8"
+}

@@ -10,6 +10,7 @@ import {
 } from "@/lib/calculator-category-icons";
 import { getCategoryPageHref } from "@/lib/category-routes";
 import { getCalculatorsByCategory } from "@/lib/calculators/registry";
+import { categoryThemeStyle } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 type CategoryGridProps = {
@@ -32,6 +33,7 @@ export function CategoryGrid({
             <Link
               href={getCategoryPageHref(category)}
               className="wq-category-card"
+              style={categoryThemeStyle(category)}
             >
               <span className="wq-category-card__icon" aria-hidden>
                 <Icon strokeWidth={1.75} className="size-6" />
