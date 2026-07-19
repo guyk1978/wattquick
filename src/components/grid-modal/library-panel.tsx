@@ -8,6 +8,7 @@ import { useCalculatorFavorites } from "@/hooks/use-calculator-favorites";
 import { useProjects } from "@/hooks/use-projects";
 import { clearAllCalculatorFavorites, removeCalculatorFavorite } from "@/lib/calculator-favorites";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
+import { categoryThemeStyle } from "@/lib/category-theme";
 import {
   clearAllProjects,
   deleteProject,
@@ -154,7 +155,10 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
               "library-panel__tab",
               tab === "favorites" && "library-panel__tab--active"
             )}
-            onClick={() => setTab("favorites")}
+            onClick={() => {
+              setTab("favorites");
+              setEditing(false);
+            }}
           >
             Favorites
           </button>
@@ -181,17 +185,19 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
           >
             Clear
           </button>
-          <button
-            type="button"
-            className={cn(
-              "library-panel__toolbar-btn",
-              editing && "library-panel__toolbar-btn--active"
-            )}
-            onClick={() => setEditing((value) => !value)}
-            aria-pressed={editing}
-          >
-            {editing ? "Done" : "Edit"}
-          </button>
+          {tab === "projects" ? (
+            <button
+              type="button"
+              className={cn(
+                "library-panel__toolbar-btn",
+                editing && "library-panel__toolbar-btn--active"
+              )}
+              onClick={() => setEditing((value) => !value)}
+              aria-pressed={editing}
+            >
+              {editing ? "Done" : "Edit"}
+            </button>
+          ) : null}
         </div>
 
         <div className="library-panel__body" role="tabpanel">
@@ -207,7 +213,11 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                 {favorites.map((tool) => {
                   const Icon = tool.icon;
                   return (
-                    <li key={tool.id} className="library-panel__item">
+                    <li
+                      key={tool.id}
+                      className="library-panel__item"
+                      style={categoryThemeStyle(tool.category)}
+                    >
                       <Link
                         href={tool.href}
                         className="library-panel__row"
@@ -221,19 +231,17 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                           <span className="library-panel__row-meta">{tool.tag}</span>
                         </span>
                       </Link>
-                      {editing ? (
-                        <button
-                          type="button"
-                          className="library-panel__remove"
-                          aria-label={`Remove ${tool.title} from favorites`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            handleRemoveFavorite(tool.id);
-                          }}
-                        >
-                          <Trash2 className="size-3.5" aria-hidden />
-                        </button>
-                      ) : null}
+                      <button
+                        type="button"
+                        className="library-panel__remove"
+                        aria-label={`Remove ${tool.title} from favorites`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleRemoveFavorite(tool.id);
+                        }}
+                      >
+                        <Trash2 className="size-3.5" aria-hidden />
+                      </button>
                     </li>
                   );
                 })}

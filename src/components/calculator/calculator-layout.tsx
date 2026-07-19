@@ -1,6 +1,7 @@
 import type { CalculatorMeta } from "@/lib/calculators";
 import { CalculatorPageHeader } from "./calculator-page-header";
 import { CalculatorPageLayout } from "./calculator-page-layout";
+import { categoryThemeStyle } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 interface CalculatorLayoutProps {
@@ -19,7 +20,10 @@ export function CalculatorLayout({
   className,
 }: CalculatorLayoutProps) {
   return (
-    <div className={cn("calculator-route calculator-route--status-ui calculator-route--blueprint", className)}>
+    <div
+      className={cn("calculator-route calculator-route--status-ui calculator-route--blueprint", className)}
+      style={categoryThemeStyle(calculator.category)}
+    >
       <CalculatorPageLayout
         calculatorId={calculator.id}
         pageHeader={<CalculatorPageHeader calculator={calculator} />}

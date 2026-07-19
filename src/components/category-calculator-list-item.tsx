@@ -67,6 +67,7 @@ export function CategoryCalculatorCard({
 
           <CalculatorRatingSummary
             calculatorId={calculator.id}
+            color={theme.color}
             className="relative z-10 mt-3"
           />
           <span

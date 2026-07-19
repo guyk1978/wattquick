@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import type { CalculatorId } from "@/lib/calculators";
+import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 export interface CategoryToolsFocusItem {
@@ -33,7 +34,9 @@ export function CategoryToolsFocusGrid({
       role="list"
     >
       {calculators.map((calc) => {
-        const Icon = getCalculatorMeta(calc.id).icon;
+        const meta = getCalculatorMeta(calc.id);
+        const Icon = meta.icon;
+        const accent = getCategoryColor(meta.category);
         return (
           <li key={calc.id} className="category-tools-focus-grid__cell">
             <div className="category-tools-focus-grid__card relative">
@@ -55,6 +58,7 @@ export function CategoryToolsFocusGrid({
                 </span>
                 <CalculatorRatingSummary
                   calculatorId={calc.id}
+                  color={accent}
                   className="relative z-10 mt-1"
                   showCount={false}
                 />

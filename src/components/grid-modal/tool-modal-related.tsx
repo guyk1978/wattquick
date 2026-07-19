@@ -2,6 +2,7 @@ import Link from "next/link";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorId } from "@/lib/calculators";
 import { getRelatedCalculators } from "@/lib/calculators/related";
+import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 type ToolModalRelatedProps = {
@@ -24,6 +25,7 @@ export function ToolModalRelated({ id, className }: ToolModalRelatedProps) {
       <ul className="wq-tool-grid tool-modal-related__grid" role="list">
         {related.map((tool) => {
           const Icon = tool.icon;
+          const accent = getCategoryColor(tool.category);
           return (
             <li key={tool.id}>
               <div className="wq-tool-card">
@@ -39,6 +41,7 @@ export function ToolModalRelated({ id, className }: ToolModalRelatedProps) {
                 <span className="wq-tool-card__meta">{tool.description}</span>
                 <CalculatorRatingSummary
                   calculatorId={tool.id}
+                  color={accent}
                   className="wq-card-rating"
                 />
               </div>

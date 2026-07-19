@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ToolCardFavoriteBadge } from "@/components/grid-modal/tool-card-favorite-badge";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorMeta } from "@/lib/calculators";
+import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 type ToolGridProps = {
@@ -17,6 +18,7 @@ export function ToolGrid({ calculators, activeId, className }: ToolGridProps) {
       {calculators.map((tool) => {
         const Icon = tool.icon;
         const active = activeId != null && tool.id === activeId;
+        const accent = getCategoryColor(tool.category);
         return (
           <li key={tool.id}>
             <div
@@ -36,6 +38,7 @@ export function ToolGrid({ calculators, activeId, className }: ToolGridProps) {
               <span className="wq-tool-card__meta">{tool.description}</span>
               <CalculatorRatingSummary
                 calculatorId={tool.id}
+                color={accent}
                 className="wq-card-rating"
               />
             </div>

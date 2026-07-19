@@ -61,6 +61,7 @@ export function BlogToolCard({
           )}
           <CalculatorRatingSummary
             calculatorId={meta.id}
+            color={theme.color}
             className="mt-1.5"
           />
         </div>

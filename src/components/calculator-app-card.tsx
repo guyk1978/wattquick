@@ -59,7 +59,10 @@ export function CalculatorAppCard({
       <div className="calculator-app-card__body">
         <h3 className="calculator-app-card__title">{calculator.title}</h3>
         <p className="calculator-app-card__description">{calculator.description}</p>
-        <CalculatorRatingSummary calculatorId={calculator.id} />
+        <CalculatorRatingSummary
+          calculatorId={calculator.id}
+          color={theme.color}
+        />
       </div>
 
       <span className="calculator-app-card__action">

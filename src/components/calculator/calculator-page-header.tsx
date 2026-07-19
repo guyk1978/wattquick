@@ -7,6 +7,7 @@ import {
   type CalculatorMeta,
 } from "@/lib/calculators";
 import { getCategoryPageHref } from "@/lib/category-routes";
+import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 interface CalculatorPageHeaderProps {
@@ -18,6 +19,7 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
   const Icon = calculator.icon;
   const categoryLabel = CALCULATOR_CATEGORY_LABELS[calculator.category];
   const categoryHref = getCategoryPageHref(calculator.category);
+  const accent = getCategoryColor(calculator.category);
 
   return (
     <header className={cn("calculator-page-header calculator-page-header--blueprint", className)}>
@@ -49,7 +51,10 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
           <p className="calculator-page-header__description">
             {calculator.description}
           </p>
-          <CalculatorRatingCompact calculatorId={calculator.id} />
+          <CalculatorRatingCompact
+            calculatorId={calculator.id}
+            color={accent}
+          />
         </div>
       </div>
     </header>

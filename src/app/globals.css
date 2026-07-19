@@ -588,26 +588,30 @@
 .calculator-command-input:focus-visible {
   outline: none !important;
   background: #121212 !important;
-  border: 1px solid #4ade80 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  border: 1px solid var(--category-color, #4ade80) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-field--valid .calculator-command-input:focus-visible {
-  border: 1px solid #4ade80 !important;
+  border: 1px solid var(--category-color, #4ade80) !important;
   background: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .dark .calculator-command-input:focus-visible {
   background: #121212 !important;
-  border: 1px solid #4ade80 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  border: 1px solid var(--category-color, #4ade80) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .dark .calculator-field--valid .calculator-command-input:focus-visible {
-  border: 1px solid #4ade80 !important;
+  border: 1px solid var(--category-color, #4ade80) !important;
   background: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-result-value {
@@ -865,7 +869,8 @@
 
 .calculator-command .calculator-command-input:focus-visible {
   --tw-ring-shadow: 0 0 #0000;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-command .rounded-2xl,
@@ -3021,6 +3026,10 @@
 
 /* ?? Calculator star ratings ?? */
 .star-rating {
+  --star-rating-accent: var(
+    --star-rating-color,
+    var(--category-color, var(--cat, rgb(250 204 21)))
+  );
   display: inline-flex;
   align-items: center;
   gap: 0.1875rem;
@@ -3034,32 +3043,32 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgb(100 116 139);
+  color: color-mix(in srgb, var(--star-rating-accent) 62%, #525252);
+  transition: color 220ms ease, transform 220ms ease;
 }
 
 .dark .star-rating__star {
-  color: rgb(148 163 184 / 0.75);
+  color: color-mix(in srgb, var(--star-rating-accent) 58%, #737373);
 }
 
 .star-rating__star--button {
   cursor: pointer;
-  transition: color 150ms ease, transform 150ms ease;
 }
 
 .star-rating__star--button:hover,
 .star-rating__star--button:focus-visible {
-  color: rgb(234 179 8);
+  color: var(--star-rating-accent);
   outline: none;
 }
 
 .star-rating__star--filled,
 .star-rating__star--partial {
-  color: rgb(234 179 8);
+  color: var(--star-rating-accent);
 }
 
 .dark .star-rating__star--filled,
 .dark .star-rating__star--partial {
-  color: rgb(250 204 21);
+  color: var(--star-rating-accent);
 }
 
 .star-rating__icon {
@@ -3114,7 +3123,7 @@
 
 .calculator-rating__average {
   font-weight: 600;
-  color: var(--foreground);
+  color: var(--star-rating-color, var(--category-color, var(--cat, var(--foreground))));
 }
 
 .calculator-rating__separator {
@@ -3157,7 +3166,7 @@
 
 .calculator-rating-summary__average {
   font-weight: 600;
-  color: var(--foreground);
+  color: var(--star-rating-color, var(--category-color, var(--cat, rgb(250 204 21))));
 }
 
 .calculator-rating-summary__count,
@@ -3167,12 +3176,12 @@
 
 .calculator-rating-summary__empty {
   font-weight: 600;
-  color: rgb(234 179 8);
+  color: var(--star-rating-color, var(--category-color, var(--cat, rgb(250 204 21))));
 }
 
 .calculator-rating-summary__thanks {
   font-weight: 650;
-  color: var(--category-color, var(--cat, rgb(250 204 21)));
+  color: var(--star-rating-color, var(--category-color, var(--cat, rgb(250 204 21))));
 }
 
 .calculator-rating-summary .star-rating__star--button {
@@ -3183,7 +3192,7 @@
 
 .calculator-rating-summary .star-rating__star--button:hover,
 .calculator-rating-summary .star-rating__star--button:focus-visible {
-  color: var(--category-color, var(--cat, rgb(250 204 21)));
+  color: var(--star-rating-color, var(--category-color, var(--cat, rgb(250 204 21))));
 }
 
 .calculator-page-shell__results-toolbar {
@@ -4277,7 +4286,7 @@
 
 .calculator-rating-compact__average {
   font-weight: 700;
-  color: var(--foreground);
+  color: var(--star-rating-color, var(--category-color, var(--foreground)));
 }
 
 /* Workbench ? parameters + results */
@@ -4394,9 +4403,10 @@
 .calculator-route--blueprint .calculator-param-block__select:focus,
 .calculator-route--blueprint .calculator-param-block__select:focus-visible {
   outline: none !important;
-  border-color: #4ade80 !important;
+  border-color: var(--category-color, #4ade80) !important;
   background: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-route--blueprint .calculator-param-block--valid .calculator-param-block__input,
@@ -6487,7 +6497,7 @@
 
 .calculator-command__field.calculator-field--valid .calculator-field__icon {
   border-color: #333 !important;
-  color: #4ade80 !important;
+  color: var(--category-color, #4ade80) !important;
 }
 
 .calculator-route--status-ui .calculator-field__icon {
@@ -6510,7 +6520,7 @@
 .calculator-route--status-ui .calculator-field--valid .calculator-field__icon {
   border-color: #333 !important;
   background: #171717 !important;
-  color: #4ade80 !important;
+  color: var(--category-color, #4ade80) !important;
 }
 
 .calculator-route--status-ui .calculator-field__label {
@@ -12227,7 +12237,7 @@ body:has(.legal-modal) .grid-modal-shell {
 
 .wq-card-rating .calculator-rating-summary__average,
 .wq-card-rating .calculator-rating-summary__thanks {
-  color: var(--category-color, #a3e635);
+  color: var(--star-rating-color, var(--category-color, #a3e635));
 }
 
 .tool-workspace-modal {
@@ -12321,6 +12331,43 @@ body:has(.legal-modal) .grid-modal-shell {
   border-bottom: 1px solid #262626;
 }
 
+/*
+ * Category accent theming — inside a themed tool scope every "success"/accent
+ * token resolves to the category color (EV blue, Power yellow, Backup red…)
+ * instead of static brand green. Result labels, sliders, focus rings, chips,
+ * and valid-state styling all read these tokens, so one override recolors the
+ * whole calculator UI. Falls back to brand green outside a themed scope.
+ * Category palette colors are Tailwind 400-level pastels chosen for contrast
+ * on the dark matte surfaces.
+ */
+.tool-workspace-modal__panel,
+.dark .calculator-route--blueprint {
+  --status-success: var(--category-color, #a3e635);
+  --status-success-muted: color-mix(in srgb, var(--category-color, #a3e635) 12%, transparent);
+  --status-success-border: color-mix(in srgb, var(--category-color, #a3e635) 40%, transparent);
+  --status-success-surface: color-mix(in srgb, var(--category-color, #a3e635) 8%, transparent);
+  --matte-accent: var(--category-color, #a3e635);
+  --energy-accent: var(--category-color, #a3e635);
+  --matte-focus-border: var(--category-color, #a3e635);
+  --matte-focus-ring: color-mix(in srgb, var(--category-color, #a3e635) 22%, transparent);
+  --matte-selected: color-mix(in srgb, var(--category-color, #a3e635) 12%, transparent);
+  --matte-selected-border: color-mix(in srgb, var(--category-color, #a3e635) 45%, transparent);
+  --matte-chip-active-border: var(--category-color, #a3e635);
+  --matte-chip-active-bg: color-mix(in srgb, var(--category-color, #a3e635) 10%, transparent);
+  --matte-chip-active-fg: var(--category-color, #a3e635);
+  --blueprint-callout: color-mix(in srgb, var(--category-color, #a3e635) 35%, transparent);
+  --primary: var(--category-color, #a3e635);
+  --ring: color-mix(in srgb, var(--category-color, #a3e635) 35%, transparent);
+}
+
+/*
+ * Light mode: pastel category colors fail contrast on white, so darken them
+ * (~brightness 0.7) for text-bearing accents while keeping the hue.
+ */
+.calculator-route--blueprint:not(.dark .calculator-route--blueprint) {
+  --status-success: color-mix(in srgb, var(--category-color, #2e7d32) 70%, #000000);
+}
+
 /* Unified tool window header — shared across all calculator tools. */
 .wq-tool-header {
   position: relative;
@@ -12365,16 +12412,6 @@ body:has(.legal-modal) .grid-modal-shell {
   /* Isolate star clicks from tabs / controls — rating must not steal or
      be stolen by [CALC]/[DOC]/[RELATED] hit targets. */
   pointer-events: auto;
-}
-
-.wq-tool-header__rating .calculator-rating-summary__average,
-.wq-tool-header__rating .calculator-rating-summary__thanks {
-  color: var(--category-color, #a3e635);
-}
-
-.wq-tool-header__rating .star-rating__star--filled,
-.wq-tool-header__rating .star-rating__star--partial {
-  color: rgb(250 204 21);
 }
 
 .wq-tool-header__tabs {
@@ -12541,7 +12578,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .collapsible-section__trigger:focus-visible {
-  outline: 1px solid #a3e635;
+  outline: 1px solid var(--category-color, #a3e635);
   outline-offset: 2px;
 }
 
@@ -12621,7 +12658,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .tool-workspace-modal__eyebrow {
@@ -12630,7 +12667,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .tool-workspace-modal__title {
@@ -12656,8 +12693,8 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-workspace-modal__close:hover {
-  border-color: #a3e635;
-  color: #a3e635;
+  border-color: var(--category-color, #a3e635);
+  color: var(--category-color, #a3e635);
 }
 
 .tool-workspace-modal__saveprompt-backdrop {
@@ -12686,7 +12723,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .tool-workspace-modal__saveprompt-input {
@@ -12700,7 +12737,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-workspace-modal__saveprompt-input:focus-visible {
-  outline: 1px solid #a3e635;
+  outline: 1px solid var(--category-color, #a3e635);
   outline-offset: 2px;
 }
 
@@ -12733,13 +12770,13 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-workspace-modal__saveprompt-btn--primary {
-  border-color: #a3e635;
-  color: #a3e635;
-  background: rgb(163 230 53 / 0.08);
+  border-color: var(--category-color, #a3e635);
+  color: var(--category-color, #a3e635);
+  background: color-mix(in srgb, var(--category-color, #a3e635) 8%, transparent);
 }
 
 .tool-workspace-modal__saveprompt-btn--primary:hover {
-  background: rgb(163 230 53 / 0.14);
+  background: color-mix(in srgb, var(--category-color, #a3e635) 14%, transparent);
 }
 
 .tool-workspace-modal__saveprompt-btn[disabled] {
@@ -12884,7 +12921,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-modal-docs__heading--eyebrow {
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .tool-modal-docs__subheading {
@@ -12920,7 +12957,7 @@ body:has(.legal-modal) .grid-modal-shell {
 .related-articles__icon {
   width: 0.85rem;
   height: 0.85rem;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .related-articles__title {
@@ -12929,7 +12966,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 .related-articles__grid {
@@ -12969,14 +13006,15 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .related-articles__card:hover {
-  border-color: #a3e635;
+  border-color: var(--category-color, #a3e635);
   background: #1a1a1a;
 }
 
 .related-articles__card:focus-visible {
   outline: none;
-  border-color: #a3e635;
-  box-shadow: 0 0 0 2px rgb(163 230 53 / 0.22);
+  border-color: var(--category-color, #a3e635);
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--category-color, #a3e635) 22%, transparent);
 }
 
 .related-articles__card-title {
@@ -13010,7 +13048,7 @@ body:has(.legal-modal) .grid-modal-shell {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
   font: inherit;
   font-size: 0.75rem;
   font-weight: 600;
@@ -13018,7 +13056,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-modal-docs__back:hover {
-  color: #bef264;
+  color: color-mix(in srgb, var(--category-color, #a3e635) 80%, #ffffff);
 }
 
 .tool-modal-docs__article-meta {
@@ -13059,7 +13097,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-modal-docs__prose a {
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -13426,9 +13464,10 @@ body:has(.legal-modal) .grid-modal-shell {
 .calculator-modal-wrapper [data-slot="input"]:focus,
 .calculator-modal-wrapper [data-slot="input"]:focus-visible {
   outline: none !important;
-  border-color: #4ade80 !important;
+  border-color: var(--category-color, #4ade80) !important;
   background-color: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-embed-shell--modal .scroll-container {
@@ -13617,17 +13656,19 @@ body:has(.legal-modal) .grid-modal-shell {
 .calculator-embed-shell--modal [data-slot="input"]:focus,
 .calculator-embed-shell--modal [data-slot="input"]:focus-visible {
   outline: none !important;
-  border-color: #4ade80 !important;
+  border-color: var(--category-color, #4ade80) !important;
   background-color: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-embed-shell--modal select:focus,
 .calculator-embed-shell--modal select:focus-visible {
   outline: none !important;
-  border-color: #4ade80 !important;
+  border-color: var(--category-color, #4ade80) !important;
   background-color: #121212 !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-embed-shell--modal .calculator-field--valid input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
@@ -13643,10 +13684,11 @@ body:has(.legal-modal) .grid-modal-shell {
 .calculator-embed-shell--modal .calculator-field--valid select:focus-visible,
 .calculator-embed-shell--modal .calculator-param-block--valid input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):focus-visible,
 .calculator-embed-shell--modal .calculator-param-block--valid select:focus-visible {
-  border-color: #4ade80 !important;
+  border-color: var(--category-color, #4ade80) !important;
   background-color: #121212 !important;
   color: #ededed !important;
-  box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18) !important;
+  box-shadow: 0 0 0 3px
+    color-mix(in srgb, var(--category-color, #4ade80) 18%, transparent) !important;
 }
 
 .calculator-embed-shell--modal .calculator-inputs-advanced {
@@ -13743,7 +13785,7 @@ body:has(.legal-modal) .grid-modal-shell {
 
 .calculator-results-dashboard--modal .calculator-status-board__eyebrow,
 .calculator-embed-shell--modal .calculator-status-board__eyebrow {
-  color: #a3e635 !important;
+  color: var(--category-color, #a3e635) !important;
   font-size: 0.5625rem !important;
   flex-shrink: 0;
 }
@@ -13789,7 +13831,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .calculator-results-dashboard--modal .calculator-status-board__eyebrow {
-  color: #a3e635 !important;
+  color: var(--category-color, #a3e635) !important;
 }
 
 .grid-modal-seo {
@@ -13830,7 +13872,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a3e635;
+  color: var(--category-color, #a3e635);
 }
 
 /* Library drawer ? Favorites & Projects */
@@ -14085,6 +14127,8 @@ body:has(.legal-modal) .grid-modal-shell {
   background: rgb(255 255 255 / 0.03);
 }
 
+/* Icon container inherits the tool's category accent (red Backup, yellow
+   Power…); falls back to brand green for uncategorized rows (projects). */
 .library-panel__row-icon {
   display: inline-flex;
   flex-shrink: 0;
@@ -14092,9 +14136,10 @@ body:has(.legal-modal) .grid-modal-shell {
   justify-content: center;
   width: 1.85rem;
   height: 1.85rem;
-  border: 1px solid #262626;
-  background: #0a0a0a;
-  color: #a3e635;
+  border: 1px solid
+    color-mix(in srgb, var(--category-color, #a3e635) 35%, #262626);
+  background: color-mix(in srgb, var(--category-color, #a3e635) 7%, #0a0a0a);
+  color: var(--category-color, #a3e635);
 }
 
 .library-panel__row-text {
@@ -14121,23 +14166,35 @@ body:has(.legal-modal) .grid-modal-shell {
   text-overflow: ellipsis;
 }
 
+/* Always-visible destructive action — low-profile grey until hovered. */
 .library-panel__remove {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 2.5rem;
-  margin-right: 0.35rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.55rem;
   align-self: center;
-  border: 1px solid #262626;
-  background: #0a0a0a;
-  color: #888888;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #666666;
   cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .library-panel__remove:hover {
-  border-color: #ef4444;
+  border-color: rgb(239 68 68 / 0.55);
+  background: rgb(239 68 68 / 0.08);
   color: #ef4444;
+}
+
+.library-panel__remove:focus-visible {
+  outline: 1px solid #ef4444;
+  outline-offset: 2px;
 }
 
 /* Project modal ? opened from Library without leaving the grid */

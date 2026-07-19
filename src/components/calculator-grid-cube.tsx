@@ -58,6 +58,7 @@ export function CalculatorGridCube({
       </button>
       <CalculatorRatingSummary
         calculatorId={calculator.id}
+        color={theme.color}
         className="px-2 pb-1.5"
         showCount={false}
       />

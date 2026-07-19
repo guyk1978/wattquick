@@ -11,6 +11,8 @@ import { FolderPlus, Maximize2, Minimize2, Share2, X } from "lucide-react";
 import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorId } from "@/lib/calculators";
+import { getCalculatorMeta } from "@/lib/calculators/registry";
+import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 export type ToolHeaderTab = "calc" | "doc" | "related";
@@ -142,6 +144,7 @@ export function ToolHeader({
         {calculatorId ? (
           <CalculatorRatingSummary
             calculatorId={calculatorId}
+            color={getCategoryColor(getCalculatorMeta(calculatorId).category)}
             className="wq-tool-header__rating"
           />
         ) : null}

@@ -83,6 +83,7 @@ export function CalculatorBlueprintToolGrid({
                   </span>
                   <CalculatorRatingSummary
                     calculatorId={calc.id}
+                    color={theme.color}
                     className="relative z-10 mt-2 pl-9"
                   />
                 </div>
@@ -110,6 +111,7 @@ export function CalculatorBlueprintToolGrid({
                   </span>
                   <CalculatorRatingSummary
                     calculatorId={calc.id}
+                    color={theme.color}
                     className="relative z-10 mt-1"
                     showCount={false}
                   />

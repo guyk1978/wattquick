@@ -64,6 +64,7 @@ export function CalculatorListItem({
           </span>
           <CalculatorRatingSummary
             calculatorId={calculator.id}
+            color={theme.color}
             className="relative z-10 mt-1"
             showCount={false}
           />

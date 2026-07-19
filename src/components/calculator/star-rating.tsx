@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +11,11 @@ interface StarRatingProps {
   size?: "sm" | "md" | "lg";
   label?: string;
   className?: string;
+  /**
+   * Category accent used for filled, outline, and hover stars.
+   * Falls back to inherited `--category-color`, then gold.
+   */
+  color?: string;
 }
 
 function clampRating(value: number): number {
@@ -23,15 +29,20 @@ export function StarRating({
   size = "md",
   label,
   className,
+  color,
 }: StarRatingProps) {
   const normalized = clampRating(value);
   const starSize =
     size === "sm" ? "size-3.5" : size === "lg" ? "size-5" : "size-4";
   const interactive = !readOnly && onChange != null;
+  const style = color
+    ? ({ "--star-rating-color": color } as CSSProperties)
+    : undefined;
 
   return (
     <div
       className={cn("star-rating", interactive && "star-rating--interactive", className)}
+      style={style}
       role={interactive ? "radiogroup" : "img"}
       aria-label={
         label ??

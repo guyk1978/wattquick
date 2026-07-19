@@ -27,6 +27,7 @@ export function CalculatorCard({
   const isMinimal = variant === "minimal";
   const isRelated = variant === "related";
   const theme = getCategoryTheme(calculator.category);
+  const accent = theme.color;
 
   if (isRelated) {
     return (
@@ -67,6 +68,7 @@ export function CalculatorCard({
 
         <CalculatorRatingSummary
           calculatorId={calculator.id}
+          color={accent}
           showCount={false}
           className="relative z-10 shrink-0"
         />
@@ -116,6 +118,7 @@ export function CalculatorCard({
           </p>
           <CalculatorRatingSummary
             calculatorId={calculator.id}
+            color={accent}
             className="relative z-10"
           />
         </div>
@@ -185,6 +188,7 @@ export function CalculatorCard({
           )}
           <CalculatorRatingSummary
             calculatorId={calculator.id}
+            color={accent}
             className="relative z-10"
           />
         </div>

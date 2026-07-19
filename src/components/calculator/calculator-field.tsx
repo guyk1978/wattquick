@@ -25,8 +25,8 @@ function getControlClassName(isValid: boolean) {
   return cn(
     calculatorCommandInput,
     "input-dark h-12 w-full rounded-none border border-[#333] bg-[#121212] px-3.5 text-base text-[#ededed] shadow-none transition-colors duration-200",
-    "focus-visible:border-[#4ade80] focus-visible:bg-[#121212] focus-visible:outline-none focus-visible:ring-0",
-    "focus-visible:shadow-[0_0_0_3px_rgb(74_222_128_/_0.18)]",
+    "focus-visible:border-[var(--category-color,#4ade80)] focus-visible:bg-[#121212] focus-visible:outline-none focus-visible:ring-0",
+    "focus-visible:shadow-[0_0_0_3px_color-mix(in_srgb,var(--category-color,#4ade80)_18%,transparent)]",
     isValid && calculatorFieldValidInput
   );
 }
