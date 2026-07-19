@@ -1,4 +1,6 @@
 import { calculators, CALCULATOR_SLUGS } from "@/data/calculators";
+import { getCalculatorBenefit } from "@/data/calculator-benefits";
+import { getCalculatorExample } from "@/data/calculator-examples";
 import { getRelatedArticleForTool } from "@/data/article-tool-map";
 import { getCalculatorHref } from "@/lib/calculator-routes";
 import {
@@ -20,6 +22,8 @@ function toDefinition(
     href: getCalculatorHref(id, entry.category),
     title: entry.title,
     description: entry.description,
+    benefit: getCalculatorBenefit(id),
+    example: getCalculatorExample(id),
     keywords: entry.keywords,
     icon: entry.icon,
     tag: entry.tag,

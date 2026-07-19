@@ -228,7 +228,9 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
                         </span>
                         <span className="library-panel__row-text">
                           <span className="library-panel__row-title">{tool.title}</span>
-                          <span className="library-panel__row-meta">{tool.tag}</span>
+                          <span className="library-panel__row-meta">
+                            {tool.tag} · {tool.benefit}
+                          </span>
                         </span>
                       </Link>
                       <button

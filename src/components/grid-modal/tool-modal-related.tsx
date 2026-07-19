@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
+import { ToolCardExample } from "@/components/calculator/tool-card-example";
+import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
 import type { CalculatorId } from "@/lib/calculators";
 import { getRelatedCalculators } from "@/lib/calculators/related";
 import { getCategoryColor } from "@/lib/category-theme";
@@ -34,11 +36,14 @@ export function ToolModalRelated({ id, className }: ToolModalRelatedProps) {
                   className="wq-card-overlay-link"
                   aria-label={`Open ${tool.title}`}
                 />
+                <ToolCardFocus calculatorId={tool.id} />
                 <span className="wq-tool-card__icon" aria-hidden>
                   <Icon strokeWidth={1.75} className="size-5" />
                 </span>
                 <span className="wq-tool-card__title">{tool.title}</span>
                 <span className="wq-tool-card__meta">{tool.description}</span>
+                <span className="wq-tool-card__benefit">{tool.benefit}</span>
+                <ToolCardExample example={tool.example} />
                 <CalculatorRatingSummary
                   calculatorId={tool.id}
                   color={accent}

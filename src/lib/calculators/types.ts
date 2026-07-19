@@ -36,6 +36,10 @@ export interface CalculatorMeta {
   href: string;
   title: string;
   description: string;
+  /** Plain-English utility line ("Use this to … so you can …") shown on cards */
+  benefit: string;
+  /** Real-world usage example ("[value] = [benefit]") for the card Example box */
+  example: string;
   keywords: string[];
   icon: LucideIcon;
   tag: string;
@@ -60,6 +64,8 @@ export function toMeta(definition: CalculatorDefinition): CalculatorMeta {
     href: definition.href,
     title: definition.title,
     description: definition.description,
+    benefit: definition.benefit,
+    example: definition.example,
     keywords: definition.keywords,
     icon: definition.icon,
     tag: definition.tag,

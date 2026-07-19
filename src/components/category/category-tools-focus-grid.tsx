@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
+import { ToolCardExample } from "@/components/calculator/tool-card-example";
+import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCategoryColor } from "@/lib/category-theme";
@@ -46,6 +48,7 @@ export function CategoryToolsFocusGrid({
                 aria-label={`Open ${calc.title}`}
                 onClick={onNavigate}
               />
+              <ToolCardFocus calculatorId={calc.id} />
               <span className="category-tools-focus-grid__icon" aria-hidden>
                 <Icon className="size-5" strokeWidth={2} />
               </span>
@@ -56,6 +59,10 @@ export function CategoryToolsFocusGrid({
                 <span className="category-tools-focus-grid__desc">
                   {calc.description}
                 </span>
+                <span className="category-tools-focus-grid__benefit">
+                  {meta.benefit}
+                </span>
+                <ToolCardExample example={meta.example} className="mt-1" />
                 <CalculatorRatingSummary
                   calculatorId={calc.id}
                   color={accent}

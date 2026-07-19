@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ToolCardFavoriteBadge } from "@/components/grid-modal/tool-card-favorite-badge";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
+import { ToolCardExample } from "@/components/calculator/tool-card-example";
+import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
 import type { CalculatorMeta } from "@/lib/calculators";
 import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
@@ -31,11 +33,14 @@ export function ToolGrid({ calculators, activeId, className }: ToolGridProps) {
                 aria-current={active ? "page" : undefined}
               />
               <ToolCardFavoriteBadge toolId={tool.id} />
+              <ToolCardFocus calculatorId={tool.id} />
               <span className="wq-tool-card__icon" aria-hidden>
                 <Icon strokeWidth={1.75} className="size-5" />
               </span>
               <span className="wq-tool-card__title">{tool.title}</span>
               <span className="wq-tool-card__meta">{tool.description}</span>
+              <span className="wq-tool-card__benefit">{tool.benefit}</span>
+              <ToolCardExample example={tool.example} />
               <CalculatorRatingSummary
                 calculatorId={tool.id}
                 color={accent}
