@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorMeta } from "@/lib/calculators";
 import { getCategoryTheme } from "@/lib/calculator-category-theme";
 import { cn } from "@/lib/utils";
@@ -50,10 +51,9 @@ export function CalculatorBlueprintToolGrid({
           if (isTechHub) {
             return (
               <li key={calc.id}>
-                <Link
-                  href={calc.href}
+                <div
                   className={cn(
-                    "calculator-tech-card group flex h-full flex-col rounded-xl border bg-white p-4 shadow-sm dark:bg-black",
+                    "calculator-tech-card group relative flex h-full flex-col rounded-xl border bg-white p-4 shadow-sm dark:bg-black",
                     "transition-all hover:-translate-y-0.5 hover:shadow-md",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600/35 focus-visible:ring-offset-2"
                   )}
@@ -61,6 +61,11 @@ export function CalculatorBlueprintToolGrid({
                     borderColor: theme.color,
                   }}
                 >
+                  <Link
+                    href={calc.href}
+                    className="absolute inset-0 z-[1]"
+                    aria-label={`Open ${calc.title}`}
+                  />
                   <span className="flex items-start gap-2">
                     <span
                       className="calculator-tech-card__icon mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border bg-transparent"
@@ -76,14 +81,23 @@ export function CalculatorBlueprintToolGrid({
                   <span className="mt-2 line-clamp-2 pl-9 text-xs leading-relaxed text-black dark:text-white">
                     {calc.description}
                   </span>
-                </Link>
+                  <CalculatorRatingSummary
+                    calculatorId={calc.id}
+                    className="relative z-10 mt-2 pl-9"
+                  />
+                </div>
               </li>
             );
           }
 
           return (
             <li key={calc.id} className="calculator-blueprint-tool-grid__cell">
-              <Link href={calc.href} className="calculator-blueprint-tool-card">
+              <div className="calculator-blueprint-tool-card relative">
+                <Link
+                  href={calc.href}
+                  className="absolute inset-0 z-[1]"
+                  aria-label={`Open ${calc.title}`}
+                />
                 <span className="calculator-blueprint-tool-card__icon" aria-hidden>
                   <Icon className="size-3" strokeWidth={2} />
                 </span>
@@ -94,13 +108,18 @@ export function CalculatorBlueprintToolGrid({
                   <span className="calculator-blueprint-tool-card__desc">
                     {calc.description}
                   </span>
+                  <CalculatorRatingSummary
+                    calculatorId={calc.id}
+                    className="relative z-10 mt-1"
+                    showCount={false}
+                  />
                 </span>
                 <ArrowUpRight
                   className="calculator-blueprint-tool-card__arrow size-3"
                   strokeWidth={2.5}
                   aria-hidden
                 />
-              </Link>
+              </div>
             </li>
           );
         })}

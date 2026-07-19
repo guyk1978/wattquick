@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorId } from "@/lib/calculators";
 import { getRelatedCalculators } from "@/lib/calculators/related";
 import { cn } from "@/lib/utils";
@@ -25,13 +26,22 @@ export function ToolModalRelated({ id, className }: ToolModalRelatedProps) {
           const Icon = tool.icon;
           return (
             <li key={tool.id}>
-              <Link href={tool.href} className="wq-tool-card">
+              <div className="wq-tool-card">
+                <Link
+                  href={tool.href}
+                  className="wq-card-overlay-link"
+                  aria-label={`Open ${tool.title}`}
+                />
                 <span className="wq-tool-card__icon" aria-hidden>
                   <Icon strokeWidth={1.75} className="size-5" />
                 </span>
                 <span className="wq-tool-card__title">{tool.title}</span>
                 <span className="wq-tool-card__meta">{tool.description}</span>
-              </Link>
+                <CalculatorRatingSummary
+                  calculatorId={tool.id}
+                  className="wq-card-rating"
+                />
+              </div>
             </li>
           );
         })}

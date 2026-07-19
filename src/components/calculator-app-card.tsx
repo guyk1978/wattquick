@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorMeta,
@@ -30,8 +31,7 @@ export function CalculatorAppCard({
   const isHub = variant === "hub";
 
   return (
-    <Link
-      href={calculator.href}
+    <div
       style={categoryThemeVars(theme)}
       className={cn(
         "calculator-app-card group",
@@ -39,6 +39,11 @@ export function CalculatorAppCard({
         className
       )}
     >
+      <Link
+        href={calculator.href}
+        className="calculator-app-card__overlay-link"
+        aria-label={`Open ${calculator.title}`}
+      />
       <div className="calculator-app-card__header">
         <span className="calculator-app-card__icon" aria-hidden>
           <Icon
@@ -54,6 +59,7 @@ export function CalculatorAppCard({
       <div className="calculator-app-card__body">
         <h3 className="calculator-app-card__title">{calculator.title}</h3>
         <p className="calculator-app-card__description">{calculator.description}</p>
+        <CalculatorRatingSummary calculatorId={calculator.id} />
       </div>
 
       <span className="calculator-app-card__action">
@@ -61,6 +67,6 @@ export function CalculatorAppCard({
         <ArrowUpRight className="size-3.5" strokeWidth={2.5} aria-hidden />
       </span>
       <span className="sr-only">Open {calculator.title}</span>
-    </Link>
+    </div>
   );
 }

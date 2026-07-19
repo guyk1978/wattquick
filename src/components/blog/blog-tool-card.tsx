@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import {
@@ -58,6 +59,10 @@ export function BlogToolCard({
               {meta.tag} · instant results
             </p>
           )}
+          <CalculatorRatingSummary
+            calculatorId={meta.id}
+            className="mt-1.5"
+          />
         </div>
       </div>
 

@@ -12,6 +12,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -146,6 +147,13 @@ export function BatteryCalendarAgingCalculator({
                       % SoH
                     </span>
                   </div>
+                  <ResultInterpreter
+                    calculatorId={CALCULATOR_ID}
+                    value={String(parsed.remainingSoh)}
+                    unit="% SoH"
+                    detail={sohDetail}
+                    values={values}
+                  />
                   {sohDetail ? (
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {sohDetail}

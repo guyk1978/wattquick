@@ -59,6 +59,12 @@ export function formatRatingAverage(average: number | null): string {
 export function formatRatingCount(count: number): string {
   if (count === 0) return "No ratings yet";
   if (count === 1) return "1 rating";
+  if (count >= 1000) {
+    const compact = count >= 10000
+      ? Math.round(count / 1000).toString()
+      : (count / 1000).toFixed(1).replace(/\.0$/, "");
+    return `${compact}k ratings`;
+  }
   return `${count} ratings`;
 }
 
@@ -109,7 +115,10 @@ export function setUserCalculatorRating(
     return readUserCalculatorRatings();
   }
 
-  const next = { ...readUserCalculatorRatings(), [id]: rating };
+  const current = readUserCalculatorRatings();
+  if (current[id] != null) return current;
+
+  const next = { ...current, [id]: rating };
   writeUserCalculatorRatings(next);
   return next;
 }

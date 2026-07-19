@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { CalculatorStatusAlert } from "@/lib/calculator-status";
 import { cn } from "@/lib/utils";
 import { CalculatorStatusShell } from "./calculator-status-shell";
@@ -95,36 +95,47 @@ function CalculatorStatusMetrics({
   unit,
   summaries,
   detail,
+  interpreter,
 }: {
   label: string;
   value: string;
   unit?: string;
   summaries: CalculatorSummaryItem[];
   detail?: string | null;
+  interpreter?: ReactNode;
 }) {
   const metrics = buildStatusMetrics(label, value, unit, summaries, detail);
 
   return (
     <div className="calculator-status-board__metrics" role="list">
-      {metrics.map((metric) => {
+      {metrics.map((metric, index) => {
         const metricUnit = formatMetricUnit(metric.unit, metric.label);
         return (
-          <div
-            key={`${metric.label}-${metric.value}`}
-            className="calculator-status-board__metric"
-            role="listitem"
-          >
-            <p className="calculator-status-board__metric-value">
-              {metric.value}
-              {metricUnit ? (
-                <span className="calculator-status-board__metric-unit">
-                  {" "}
-                  {metricUnit}
-                </span>
-              ) : null}
-            </p>
-            <p className="calculator-status-board__metric-label">{metric.label}</p>
-          </div>
+          <Fragment key={`${metric.label}-${metric.value}`}>
+            <div
+              className="calculator-status-board__metric"
+              role="listitem"
+            >
+              <p className="calculator-status-board__metric-value">
+                {metric.value}
+                {metricUnit ? (
+                  <span className="calculator-status-board__metric-unit">
+                    {" "}
+                    {metricUnit}
+                  </span>
+                ) : null}
+              </p>
+              <p className="calculator-status-board__metric-label">{metric.label}</p>
+            </div>
+            {index === 0 && interpreter ? (
+              <div
+                className="calculator-status-board__interpreter"
+                role="presentation"
+              >
+                {interpreter}
+              </div>
+            ) : null}
+          </Fragment>
         );
       })}
     </div>
@@ -173,17 +184,17 @@ export function CalculatorResultsDashboard({
               unit={unit}
               summaries={summaries}
               detail={detail}
+              interpreter={
+                <ResultInterpreter
+                  value={value}
+                  unit={unit}
+                  detail={detail}
+                  values={values}
+                />
+              }
             />
           ) : null}
         </CalculatorStatusShell>
-        {hasResult && value ? (
-          <ResultInterpreter
-            value={value}
-            unit={unit}
-            detail={detail}
-            values={values}
-          />
-        ) : null}
         {hasResult && value ? (
           <CalculatorResultActions
             label={label}

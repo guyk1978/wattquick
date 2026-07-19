@@ -56,9 +56,14 @@ export function CalculatorRatingCompact({
 
       <div className="calculator-rating-compact__vote">
         <span className="calculator-rating-compact__vote-label">
-          {userRating != null ? "Your rating" : "Rate"}
+          {userRating != null ? "Thanks!" : "Rate"}
         </span>
-        <StarRating value={userRating ?? 0} onChange={rate} size="sm" />
+        <StarRating
+          value={userRating ?? 0}
+          onChange={userRating == null ? rate : undefined}
+          readOnly={userRating != null}
+          size="sm"
+        />
         {!hydrated ? <span className="sr-only">Loading saved rating…</span> : null}
       </div>
     </div>

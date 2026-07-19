@@ -2,6 +2,7 @@
 
 import type { CalculatorId } from "@/lib/calculators";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { VampireLineBreakdown, VampireParsedResult } from "./types";
@@ -38,6 +39,12 @@ export function CalculatorResults({
           detail={parsed ? null : annualDetail}
           emptyMessage={emptyMessage}
           className="calculator-dashboard-hero__card calculator-dashboard-hero__card--gamified"
+        />
+        <ResultInterpreter
+          calculatorId={calculatorId}
+          value={annualValue}
+          unit="/yr"
+          detail={annualDetail}
         />
       </div>
 

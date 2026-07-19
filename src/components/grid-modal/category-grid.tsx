@@ -30,11 +30,15 @@ export function CategoryGrid({
         const count = getCalculatorsByCategory(category).length;
         return (
           <li key={category}>
-            <Link
-              href={getCategoryPageHref(category)}
+            <div
               className="wq-category-card"
               style={categoryThemeStyle(category)}
             >
+              <Link
+                href={getCategoryPageHref(category)}
+                className="wq-card-overlay-link"
+                aria-label={`Open ${CALCULATOR_CATEGORY_LABELS[category]} calculators`}
+              />
               <span className="wq-category-card__icon" aria-hidden>
                 <Icon strokeWidth={1.75} className="size-6" />
               </span>
@@ -44,7 +48,7 @@ export function CategoryGrid({
               <span className="wq-category-card__meta">
                 {count} tools · {CALCULATOR_CATEGORY_DESCRIPTIONS[category]}
               </span>
-            </Link>
+            </div>
           </li>
         );
       })}

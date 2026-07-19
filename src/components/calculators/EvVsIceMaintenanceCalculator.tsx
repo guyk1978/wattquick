@@ -35,6 +35,7 @@ import {
 } from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { EvMaintenanceCumulativeVisual } from "@/components/calculator/ev-maintenance-cumulative-visual";
 import {
   calculatorResultsGrid,
@@ -262,6 +263,16 @@ export function EvVsIceMaintenanceCalculator({ className }: EvVsIceMaintenanceCa
                   formatCurrency(parsed.netSavings)
                 )}
               </div>
+              <ResultInterpreter
+                calculatorId={CALCULATOR_ID}
+                value={formatCurrency(parsed.netSavings)}
+                detail={
+                  parsed.netSavingsPositive
+                    ? "Still ahead after battery risk"
+                    : "Battery scenario exceeds service savings"
+                }
+                values={values}
+              />
               <p className="mt-1 text-xs text-muted-foreground">
                 {parsed.netSavingsPositive
                   ? "Still ahead after battery risk"

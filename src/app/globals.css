@@ -1413,6 +1413,7 @@
 
 /* Shared app / tool cards ? homepage hub + calculators directory */
 .calculator-app-card {
+  position: relative;
   display: flex;
   height: 100%;
   min-height: 11.5rem;
@@ -1425,10 +1426,33 @@
   text-decoration: none;
   box-shadow: none;
   transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.calculator-app-card__overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.calculator-app-card:has(.calculator-app-card__overlay-link:focus-visible) {
+  border-color: var(--cat);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--cat) 25%, transparent);
+}
+
+.calculator-app-card .calculator-rating-summary {
+  position: relative;
+  z-index: 2;
+}
+
+.calculator-app-card__header,
+.calculator-app-card__title,
+.calculator-app-card__description,
+.calculator-app-card__action {
+  pointer-events: none;
 }
 
 .calculator-app-card:hover {
@@ -3144,6 +3168,22 @@
 .calculator-rating-summary__empty {
   font-weight: 600;
   color: rgb(234 179 8);
+}
+
+.calculator-rating-summary__thanks {
+  font-weight: 650;
+  color: var(--category-color, var(--cat, rgb(250 204 21)));
+}
+
+.calculator-rating-summary .star-rating__star--button {
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.calculator-rating-summary .star-rating__star--button:hover,
+.calculator-rating-summary .star-rating__star--button:focus-visible {
+  color: var(--category-color, var(--cat, rgb(250 204 21)));
 }
 
 .calculator-page-shell__results-toolbar {
@@ -6771,16 +6811,29 @@
 .calculator-result-interpreter {
   margin: 1.25rem auto 0;
   max-width: 44ch;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--wq-card-border, #2a2a2a);
+  border-left: 2px solid
+    var(--category-color, var(--cat, #a3e635));
+  background: var(--wq-card-bg, #111);
   font-size: 1.25rem;
   line-height: 1.6;
   letter-spacing: 0.01em;
   text-align: center;
   color: #b5b5b5;
   text-wrap: balance;
+  transition:
+    border-color 300ms ease,
+    background-color 300ms ease;
 }
 
 .calculator-primary-metric .calculator-result-interpreter {
   margin-top: 1.35rem;
+}
+
+.calculator-status-board__interpreter {
+  grid-column: 1 / -1;
+  width: 100%;
 }
 
 .calculator-results-dashboard--modal .calculator-result-interpreter {
@@ -7034,9 +7087,9 @@
   text-transform: uppercase;
   cursor: pointer;
   transition:
-    border-color 0.15s ease,
-    color 0.15s ease,
-    background 0.15s ease;
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease;
 }
 
 .glass-header__articles-btn:hover,
@@ -10353,7 +10406,9 @@
 }
 
 .category-carousel__slide {
+  display: flex;
   flex: 0 0 100%;
+  flex-direction: column;
   min-width: 0;
   padding-right: 0.75rem;
 }
@@ -10384,7 +10439,7 @@
 .category-carousel--matte .category-carousel__card {
   position: relative;
   display: block;
-  height: 100%;
+  flex: 1;
   min-height: 8.25rem;
   border: 1px solid #333333;
   border-radius: 0;
@@ -10393,9 +10448,9 @@
   color: #ffffff;
   text-decoration: none;
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 @media (hover: hover) {
@@ -11994,6 +12049,24 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 /*
+ * Equal-height cards: each <li> is a grid item that stretches to the row's
+ * tallest card; the card itself fills the item. The card's own flex column
+ * plus `margin-top: auto` on .wq-card-rating keeps ratings bottom-aligned.
+ */
+.wq-category-grid > li,
+.wq-tool-grid > li {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.wq-category-grid > li > .wq-category-card,
+.wq-tool-grid > li > .wq-tool-card {
+  flex: 1;
+  min-width: 0;
+}
+
+/*
  * Per-category accent colors live in src/data/categoryConfig.json and are
  * injected as `--category-color` inline (category cards, GridShell,
  * ToolWorkspaceModal). CSS only ever reads var(--category-color, fallback).
@@ -12023,9 +12096,9 @@ body:has(.legal-modal) .grid-modal-shell {
   color: #ededed;
   text-decoration: none;
   transition:
-    border-color 0.15s ease,
-    background-color 0.15s ease,
-    transform 0.15s ease;
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .wq-tool-card {
@@ -12034,8 +12107,8 @@ body:has(.legal-modal) .grid-modal-shell {
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease,
-    background-color 0.15s ease,
-    transform 0.15s ease;
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 /* Tool cards inherit --category-color from the themed page scope. */
@@ -12059,11 +12132,24 @@ body:has(.legal-modal) .grid-modal-shell {
  */
 .wq-category-card {
   --category-color: #a3e635;
+  position: relative;
   box-sizing: border-box;
   transition:
     border-color 0.3s ease,
     box-shadow 0.3s ease,
-    transform 0.15s ease;
+    transform 0.3s ease;
+}
+
+.wq-card-overlay-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.wq-category-card:has(.wq-card-overlay-link:focus-visible),
+.wq-tool-card:has(.wq-card-overlay-link:focus-visible) {
+  outline: 1px solid var(--category-color, #a3e635);
+  outline-offset: 2px;
 }
 
 .wq-category-card:hover {
@@ -12106,6 +12192,7 @@ body:has(.legal-modal) .grid-modal-shell {
   border: 1px solid #262626;
   background: #0a0a0a;
   color: var(--category-color, #a3e635);
+  pointer-events: none;
 }
 
 .wq-category-card__title,
@@ -12114,6 +12201,7 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 650;
   letter-spacing: -0.01em;
   color: #ededed;
+  pointer-events: none;
 }
 
 .wq-category-card__meta,
@@ -12125,6 +12213,21 @@ body:has(.legal-modal) .grid-modal-shell {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  pointer-events: none;
+}
+
+.wq-card-rating {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding-top: 0.45rem;
+  border-top: 1px solid
+    color-mix(in srgb, var(--category-color, #a3e635) 18%, transparent);
+}
+
+.wq-card-rating .calculator-rating-summary__average,
+.wq-card-rating .calculator-rating-summary__thanks {
+  color: var(--category-color, #a3e635);
 }
 
 .tool-workspace-modal {
@@ -12253,30 +12356,30 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .wq-tool-header__rating {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   gap: 0.4rem;
+  /* Isolate star clicks from tabs / controls — rating must not steal or
+     be stolen by [CALC]/[DOC]/[RELATED] hit targets. */
+  pointer-events: auto;
 }
 
-.wq-tool-header__stars .star-rating__star--filled,
-.wq-tool-header__stars .star-rating__star--partial {
+.wq-tool-header__rating .calculator-rating-summary__average,
+.wq-tool-header__rating .calculator-rating-summary__thanks {
+  color: var(--category-color, #a3e635);
+}
+
+.wq-tool-header__rating .star-rating__star--filled,
+.wq-tool-header__rating .star-rating__star--partial {
   color: rgb(250 204 21);
 }
 
-.wq-tool-header__rating-average {
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: #ededed;
-}
-
-.wq-tool-header__rating-count {
-  font-size: 0.75rem;
-  color: #737373;
-  white-space: nowrap;
-}
-
 .wq-tool-header__tabs {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
@@ -12398,7 +12501,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 @media (max-width: 480px) {
-  .wq-tool-header__rating-count {
+  .wq-tool-header__rating .calculator-rating-summary__count {
     display: none;
   }
 }

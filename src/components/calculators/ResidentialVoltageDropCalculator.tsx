@@ -15,6 +15,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import {
   CalculatorCommandShell,
@@ -156,6 +157,14 @@ export function ResidentialVoltageDropCalculator({
                 <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
                   V
                 </span>
+                <ResultInterpreter
+                  calculatorId={CALCULATOR_ID}
+                  value={String(parsed.dropVolts)}
+                  unit="V"
+                  detail={`${parsed.dropPercent}% of supply voltage`}
+                  values={values}
+                  className="w-full"
+                />
                 <span className="w-full text-sm text-muted-foreground">
                   {parsed.dropPercent}% of {formatNumber(supplyVoltage, { maxDecimals: 0 })} V
                   supply

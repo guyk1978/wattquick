@@ -19,6 +19,7 @@ import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -145,23 +146,34 @@ export function EvChargingTemperatureImpactCalculator({
           />
         }
         results={
-          parsed ? (
-            <EvGamifiedResult
+          <div className="flex w-full min-w-0 flex-col">
+            {parsed ? (
+              <EvGamifiedResult
+                calculatorId={CALCULATOR_ID}
+                label={definition.result.label}
+                value={parsed.totalFormatted}
+                detail={null}
+                emptyMessage={definition.result.emptyMessage}
+              />
+            ) : (
+              <EvGamifiedResult
+                calculatorId={CALCULATOR_ID}
+                label={definition.result.label}
+                value={null}
+                detail={null}
+                emptyMessage={definition.result.emptyMessage}
+              />
+            )}
+            <ResultInterpreter
               calculatorId={CALCULATOR_ID}
-              label={definition.result.label}
-              value={parsed.totalFormatted}
+              value={parsed?.totalFormatted ?? null}
               detail={totalDetail}
-              emptyMessage={definition.result.emptyMessage}
+              values={values}
             />
-          ) : (
-            <EvGamifiedResult
-              calculatorId={CALCULATOR_ID}
-              label={definition.result.label}
-              value={null}
-              detail={null}
-              emptyMessage={definition.result.emptyMessage}
-            />
-          )
+            {totalDetail ? (
+              <p className="calculator-result-primary__detail">{totalDetail}</p>
+            ) : null}
+          </div>
         }
       />
 

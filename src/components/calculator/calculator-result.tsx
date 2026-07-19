@@ -6,6 +6,9 @@ import {
   calculatorResultValue,
   calculatorResultValueRow,
 } from "@/lib/glass-ui";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
+import { useCalculatorId } from "@/components/calculator/calculator-id-context";
+import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { cn } from "@/lib/utils";
 
 export interface CalculatorResultProps {
@@ -14,6 +17,8 @@ export interface CalculatorResultProps {
   unit?: string;
   detail?: string | null;
   emptyMessage?: string;
+  /** Override registry-label detection for custom primary result labels. */
+  interpret?: boolean;
   className?: string;
 }
 
@@ -23,9 +28,17 @@ export function CalculatorResult({
   unit,
   detail,
   emptyMessage = "Enter values to calculate",
+  interpret,
   className,
 }: CalculatorResultProps) {
   const hasResult = value !== null;
+  const calculatorId = useCalculatorId();
+  const primaryLabel = calculatorId
+    ? getCalculatorDefinition(calculatorId).result.label
+    : null;
+  const isPrimaryResult =
+    interpret ??
+    (primaryLabel?.trim().toLowerCase() === label.trim().toLowerCase());
   const resultKey = hasResult ? `${value}-${unit ?? ""}-${detail ?? ""}` : "empty";
 
   return (
@@ -66,6 +79,13 @@ export function CalculatorResult({
                   </span>
                 ) : null}
               </div>
+              {isPrimaryResult ? (
+                <ResultInterpreter
+                  value={value}
+                  unit={unit}
+                  detail={detail}
+                />
+              ) : null}
               {detail ? (
                 <p className="calculator-result-primary__detail">{detail}</p>
               ) : null}

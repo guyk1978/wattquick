@@ -13,6 +13,7 @@ import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CarbonSavingsVisual } from "@/components/calculator/carbon-savings-visual";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -132,6 +133,13 @@ export function BessCarbonCostCalculator({ className }: BessCarbonCostCalculator
                 <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
                   kg CO₂/yr
                 </span>
+                <ResultInterpreter
+                  calculatorId={CALCULATOR_ID}
+                  value={String(parsed.lossCarbonGridKg)}
+                  unit="kg CO₂/yr"
+                  values={values}
+                  className="w-full"
+                />
               </div>
             )}
           </GamifiedDashboardFrame>

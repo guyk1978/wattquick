@@ -16,6 +16,7 @@ import {
 } from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { InrushSpikeVisual } from "@/components/calculator/inrush-spike-visual";
 import { calculatorResultValue } from "@/lib/glass-ui";
@@ -146,6 +147,13 @@ export function AcInrushCurrentCalculator({
                       A peak
                     </span>
                   </div>
+                  <ResultInterpreter
+                    calculatorId={CALCULATOR_ID}
+                    value={String(parsed.peakInrushAmps)}
+                    unit="A peak"
+                    detail={peakDetail}
+                    values={values}
+                  />
                   {peakDetail ? (
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {peakDetail}

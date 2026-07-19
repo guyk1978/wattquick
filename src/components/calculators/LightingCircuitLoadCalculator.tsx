@@ -12,6 +12,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { CircuitLoadGauge } from "@/components/calculator/circuit-load-gauge";
 import {
   CalculatorCommandShell,
@@ -155,6 +156,14 @@ export function LightingCircuitLoadCalculator({
                 <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
                   A
                 </span>
+                <ResultInterpreter
+                  calculatorId={CALCULATOR_ID}
+                  value={String(parsed.loadAmps)}
+                  unit="A"
+                  detail={`${parsed.totalWatts} W total circuit load`}
+                  values={values}
+                  className="w-full"
+                />
                 <span className="w-full text-sm text-muted-foreground">
                   {parsed.totalWatts} W @ {values.circuitVoltage ?? "120"} V
                 </span>

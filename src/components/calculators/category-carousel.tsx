@@ -8,6 +8,7 @@ import { CategoryCarouselIllustration } from "@/components/calculators/category-
 import { CALCULATOR_CATEGORY_LABELS } from "@/data/calculator-types";
 import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
 import { getCategoryPageHref } from "@/lib/category-routes";
+import { categoryThemeStyle } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 interface CategoryCarouselProps {
@@ -91,7 +92,11 @@ export function CategoryCarousel({
               const link = getCategoryPageHref(category);
 
               return (
-                <li key={category} className="category-carousel__slide">
+                <li
+                  key={category}
+                  className="category-carousel__slide"
+                  style={categoryThemeStyle(category)}
+                >
                   <Link href={link} className="category-carousel__card" aria-label={name}>
                     <span className="category-carousel__icon-wrap" aria-hidden="true">
                       <CategoryCarouselIllustration category={category} />

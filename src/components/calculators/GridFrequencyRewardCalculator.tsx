@@ -16,6 +16,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -167,6 +168,13 @@ export function GridFrequencyRewardCalculator({
                 <span className="pb-1 text-xl font-medium text-muted-foreground sm:text-2xl">
                   /mo
                 </span>
+                <ResultInterpreter
+                  calculatorId={CALCULATOR_ID}
+                  value={formatCurrency(parsed.result.monthlyRevenue)}
+                  unit="/mo"
+                  values={values}
+                  className="w-full"
+                />
               </div>
             )}
           </div>

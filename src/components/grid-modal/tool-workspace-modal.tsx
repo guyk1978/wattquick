@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
-import { useCalculatorRating } from "@/hooks/use-calculator-rating";
 import type { CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
@@ -48,7 +47,6 @@ export function ToolWorkspaceModal({
   const meta = getCalculatorMeta(calculatorId);
   const categoryHref = getCategoryPageHref(meta.category);
   const [activeTab, setActiveTab] = useState<ToolHeaderTab>("calc");
-  const { stats } = useCalculatorRating(calculatorId);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const [savePromptOpen, setSavePromptOpen] = useState(false);
@@ -244,8 +242,6 @@ export function ToolWorkspaceModal({
       >
         <ToolHeader
           title={meta.title}
-          rating={stats.average}
-          ratingCount={stats.count}
           activeTab={activeTab}
           onTabChange={setActiveTab}
           hasDocTab={hasDocumentation}

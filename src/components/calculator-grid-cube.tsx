@@ -1,5 +1,6 @@
 "use client";
 
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorMeta } from "@/lib/calculators";
 import {
   categoryThemeVars,
@@ -22,32 +23,44 @@ export function CalculatorGridCube({
   const theme = getCategoryTheme(calculator.category);
 
   return (
-    <button
-      type="button"
+    <div
       style={categoryThemeVars(theme)}
-      onClick={() => onSelect(calculator)}
       className={cn(
-        "calculator-grid-cube group flex h-11 w-full flex-row items-center gap-2 px-2 py-1.5 sm:h-12 sm:gap-2.5 sm:px-2.5",
-        "rounded-none border border-slate-200 bg-white text-left",
-        "transition-colors hover:border-slate-300 hover:bg-slate-50",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        "dark:border-white/10 dark:bg-[var(--matte-section)] dark:hover:bg-[var(--matte-hover-strong)]",
+        "calculator-grid-cube group flex w-full flex-col rounded-none border border-slate-200 bg-white",
+        "dark:border-white/10 dark:bg-[var(--matte-section)]",
         className
       )}
-      aria-label={`${calculator.title} — show description`}
     >
-      <span
+      <button
+        type="button"
+        onClick={() => onSelect(calculator)}
         className={cn(
-          "flex size-7 shrink-0 items-center justify-center rounded-none sm:size-8",
-          "bg-[color-mix(in_srgb,var(--cat)_12%,transparent)] text-[var(--cat)]",
-          "transition-transform duration-150 group-hover:scale-105"
+        "flex h-11 w-full flex-row items-center gap-2 px-2 py-1.5 text-left sm:h-12 sm:gap-2.5 sm:px-2.5",
+        "rounded-none bg-white text-left",
+        "transition-colors hover:bg-slate-50",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "dark:bg-[var(--matte-section)] dark:hover:bg-[var(--matte-hover-strong)]"
         )}
+        aria-label={`${calculator.title} — show description`}
       >
-        <Icon className="size-3.5 sm:size-4" strokeWidth={2} aria-hidden />
-      </span>
-      <span className="line-clamp-2 min-w-0 flex-1 text-left text-xs font-medium leading-snug text-foreground sm:text-sm">
-        {calculator.title}
-      </span>
-    </button>
+        <span
+          className={cn(
+            "flex size-7 shrink-0 items-center justify-center rounded-none sm:size-8",
+            "bg-[color-mix(in_srgb,var(--cat)_12%,transparent)] text-[var(--cat)]",
+            "transition-transform duration-300 group-hover:scale-105"
+          )}
+        >
+          <Icon className="size-3.5 sm:size-4" strokeWidth={2} aria-hidden />
+        </span>
+        <span className="line-clamp-2 min-w-0 flex-1 text-left text-xs font-medium leading-snug text-foreground sm:text-sm">
+          {calculator.title}
+        </span>
+      </button>
+      <CalculatorRatingSummary
+        calculatorId={calculator.id}
+        className="px-2 pb-1.5"
+        showCount={false}
+      />
+    </div>
   );
 }

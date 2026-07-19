@@ -12,6 +12,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -110,14 +111,26 @@ export function EvTireWearCostCalculator({
           />
         }
         results={
-          <CostGamifiedResult
-            calculatorId={CALCULATOR_ID}
-            label="Annual EV tire depreciation"
-            value={evAnnualValue}
-            unit="/yr"
-            detail={evAnnualDetail}
-            emptyMessage={definition.result.emptyMessage}
-          />
+          <div className="flex w-full min-w-0 flex-col">
+            <CostGamifiedResult
+              calculatorId={CALCULATOR_ID}
+              label="Annual EV tire depreciation"
+              value={evAnnualValue}
+              unit="/yr"
+              detail={null}
+              emptyMessage={definition.result.emptyMessage}
+            />
+            <ResultInterpreter
+              calculatorId={CALCULATOR_ID}
+              value={evAnnualValue}
+              unit="/yr"
+              detail={evAnnualDetail}
+              values={values}
+            />
+            {evAnnualDetail ? (
+              <p className="calculator-result-primary__detail">{evAnnualDetail}</p>
+            ) : null}
+          </div>
         }
       />
 

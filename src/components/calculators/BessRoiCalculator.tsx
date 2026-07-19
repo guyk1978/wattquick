@@ -150,6 +150,7 @@ export function BessRoiCalculator({ className }: BessRoiCalculatorProps) {
               label="Payback period (years)"
               value={paybackDisplay}
               unit={parsed.paybackYears !== null ? "yr" : undefined}
+              interpret
               detail={
                 parsed.paybackYears !== null && installCostDisplay
                   ? `Install ${installCostDisplay} ÷ ${formatCurrency(parsed.annualSavings)}/yr`

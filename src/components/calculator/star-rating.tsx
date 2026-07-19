@@ -47,15 +47,30 @@ export function StarRating({
           !filled && normalized > index && normalized < starValue;
 
         return (
-          <button
+          <span
             key={starValue}
-            type="button"
-            disabled={!interactive}
-            tabIndex={interactive ? 0 : -1}
+            tabIndex={
+              interactive &&
+              (normalized === starValue || (normalized === 0 && starValue === 1))
+                ? 0
+                : -1
+            }
             role={interactive ? "radio" : undefined}
-            aria-checked={interactive ? normalized >= starValue : undefined}
+            aria-checked={interactive ? normalized === starValue : undefined}
             aria-label={`${starValue} star${starValue === 1 ? "" : "s"}`}
-            onClick={() => onChange?.(starValue)}
+            onClick={interactive ? (event) => {
+              // Card ratings often sit inside a linked card. Rating must not
+              // also navigate to the tool.
+              event.preventDefault();
+              event.stopPropagation();
+              onChange?.(starValue);
+            } : undefined}
+            onKeyDown={interactive ? (event) => {
+              if (event.key !== "Enter" && event.key !== " ") return;
+              event.preventDefault();
+              event.stopPropagation();
+              onChange?.(starValue);
+            } : undefined}
             className={cn(
               "star-rating__star",
               interactive && "star-rating__star--button",
@@ -74,7 +89,7 @@ export function StarRating({
                 }}
               />
             ) : null}
-          </button>
+          </span>
         );
       })}
     </div>

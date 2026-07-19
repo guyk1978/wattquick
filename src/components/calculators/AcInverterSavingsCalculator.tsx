@@ -31,6 +31,7 @@ import {
 } from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   calculatorResultsGrid,
   calculatorResultsGrid3,
@@ -184,6 +185,12 @@ export function AcInverterSavingsCalculator({ className }: AcInverterSavingsCalc
                 Payback period
               </p>
               <p className={cn("mt-2", calculatorResultValue)}>{paybackLabel}</p>
+              <ResultInterpreter
+                calculatorId={CALCULATOR_ID}
+                value={paybackLabel}
+                detail={`${formatCurrency(parsed.monthlySavings)}/mo estimated savings`}
+                values={values}
+              />
               <p className="mt-2 text-sm text-muted-foreground">
                 {parsed.pricePremium > 0 ? (
                   <>

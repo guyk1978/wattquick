@@ -21,6 +21,7 @@ import { JoinMyPdfSaveReport } from "@/components/JoinMyPdfSaveReport";
 import { ShareButtons } from "@/components/ShareButtons";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   CalculatorCommandShell,
   CalculatorCommandSplit,
@@ -122,23 +123,35 @@ export function GeneratorRuntimeSavingsCalculator({
           />
         }
         results={
-          parsed ? (
-            <CostGamifiedResult
+          <div className="flex w-full min-w-0 flex-col">
+            {parsed ? (
+              <CostGamifiedResult
+                calculatorId={CALCULATOR_ID}
+                label={definition.result.label}
+                value={annualSavingsValue}
+                detail={null}
+                emptyMessage={definition.result.emptyMessage}
+              />
+            ) : (
+              <CostGamifiedResult
+                calculatorId={CALCULATOR_ID}
+                label={definition.result.label}
+                value={null}
+                detail={null}
+                emptyMessage={definition.result.emptyMessage}
+              />
+            )}
+            <ResultInterpreter
               calculatorId={CALCULATOR_ID}
-              label={definition.result.label}
               value={annualSavingsValue}
+              unit="/yr"
               detail={annualDetail}
-              emptyMessage={definition.result.emptyMessage}
+              values={values}
             />
-          ) : (
-            <CostGamifiedResult
-              calculatorId={CALCULATOR_ID}
-              label={definition.result.label}
-              value={null}
-              detail={null}
-              emptyMessage={definition.result.emptyMessage}
-            />
-          )
+            {annualDetail ? (
+              <p className="calculator-result-primary__detail">{annualDetail}</p>
+            ) : null}
+          </div>
         }
       />
 

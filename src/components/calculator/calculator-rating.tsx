@@ -56,11 +56,12 @@ export function CalculatorRating({
 
       <div className="calculator-rating__input">
         <span className="calculator-rating__input-label">
-          {userRating != null ? "Your rating" : "Rate this calculator"}
+          {userRating != null ? "Thanks for rating!" : "Rate this calculator"}
         </span>
         <StarRating
           value={userRating ?? 0}
-          onChange={rate}
+          onChange={userRating == null ? rate : undefined}
+          readOnly={userRating != null}
           size="lg"
         />
         {!hydrated ? (

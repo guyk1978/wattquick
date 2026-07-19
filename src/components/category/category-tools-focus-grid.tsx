@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
@@ -35,11 +36,13 @@ export function CategoryToolsFocusGrid({
         const Icon = getCalculatorMeta(calc.id).icon;
         return (
           <li key={calc.id} className="category-tools-focus-grid__cell">
-            <Link
-              href={calc.href}
-              className="category-tools-focus-grid__card"
-              onClick={onNavigate}
-            >
+            <div className="category-tools-focus-grid__card relative">
+              <Link
+                href={calc.href}
+                className="absolute inset-0 z-[1]"
+                aria-label={`Open ${calc.title}`}
+                onClick={onNavigate}
+              />
               <span className="category-tools-focus-grid__icon" aria-hidden>
                 <Icon className="size-5" strokeWidth={2} />
               </span>
@@ -50,13 +53,18 @@ export function CategoryToolsFocusGrid({
                 <span className="category-tools-focus-grid__desc">
                   {calc.description}
                 </span>
+                <CalculatorRatingSummary
+                  calculatorId={calc.id}
+                  className="relative z-10 mt-1"
+                  showCount={false}
+                />
               </span>
               <ArrowUpRight
                 className="category-tools-focus-grid__arrow size-5 shrink-0"
                 strokeWidth={2.25}
                 aria-hidden
               />
-            </Link>
+            </div>
           </li>
         );
       })}

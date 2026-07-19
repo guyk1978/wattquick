@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import type { CalculatorId } from "@/lib/calculators";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { calculatorResultValue, calculatorResultValueRow } from "@/lib/glass-ui";
@@ -11,6 +12,7 @@ export interface BatteryGamifiedResultProps {
   value: string | null;
   unit?: string;
   detail?: string | null;
+  interpreter?: ReactNode;
   emptyMessage?: string;
   className?: string;
 }
@@ -20,6 +22,7 @@ export function BatteryGamifiedResult({
   value,
   unit,
   detail,
+  interpreter,
   emptyMessage = "Enter values to calculate",
   className,
 }: BatteryGamifiedResultProps) {
@@ -45,6 +48,7 @@ export function BatteryGamifiedResult({
                 </span>
               ) : null}
             </div>
+            {interpreter}
             {detail ? (
               <p className="calculator-result-primary__detail">{detail}</p>
             ) : null}

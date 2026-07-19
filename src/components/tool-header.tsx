@@ -9,7 +9,7 @@ import {
 } from "react";
 import { FolderPlus, Maximize2, Minimize2, Share2, X } from "lucide-react";
 import { FavoriteCalculatorButton } from "@/components/favorite-calculator-button";
-import { StarRating } from "@/components/calculator/star-rating";
+import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import type { CalculatorId } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
@@ -24,17 +24,13 @@ const TAB_LABELS: Record<ToolHeaderTab, string> = {
 interface ToolHeaderProps {
   /** Tool display name, e.g. "Solar ROI Analysis". */
   title: string;
-  /** Aggregate rating average (0–5); null hides the numeric value. */
-  rating?: number | null;
-  /** Total number of ratings, shown as "47,637 ratings". */
-  ratingCount?: number;
   /** Currently active view tab. CALC is the calculator itself. */
   activeTab?: ToolHeaderTab;
   onTabChange?: (tab: ToolHeaderTab) => void;
   /** Tabs to render; CALC is always present. */
   hasDocTab?: boolean;
   hasRelatedTab?: boolean;
-  /** Enables the favorite toggle for this tool. */
+  /** Enables the favorite toggle and interactive rating for this tool. */
   calculatorId?: CalculatorId;
   /** Renders the save-to-project control when provided. */
   onSaveProject?: () => void;
@@ -48,10 +44,6 @@ interface ToolHeaderProps {
   className?: string;
 }
 
-function formatRatingCountLabel(count: number): string {
-  return `${count.toLocaleString("en-US")} ${count === 1 ? "rating" : "ratings"}`;
-}
-
 /**
  * Unified tool window header: title + rating on the left,
  * [CALC]/[DOC]/[RELATED] tabs in the middle, controls on the right.
@@ -59,8 +51,6 @@ function formatRatingCountLabel(count: number): string {
  */
 export function ToolHeader({
   title,
-  rating = null,
-  ratingCount = 0,
   activeTab = "calc",
   onTabChange,
   hasDocTab = false,
@@ -149,28 +139,11 @@ export function ToolHeader({
         <h2 id={titleId} className="wq-tool-header__title">
           {title}
         </h2>
-        {ratingCount > 0 ? (
-          <span className="wq-tool-header__rating" aria-label="Tool rating">
-            <StarRating
-              value={rating ?? 0}
-              readOnly
-              size="sm"
-              label={
-                rating != null
-                  ? `${rating.toFixed(1)} out of 5 stars`
-                  : "No ratings yet"
-              }
-              className="wq-tool-header__stars"
-            />
-            {rating != null ? (
-              <span className="wq-tool-header__rating-average">
-                {rating.toFixed(1)}
-              </span>
-            ) : null}
-            <span className="wq-tool-header__rating-count">
-              {formatRatingCountLabel(ratingCount)}
-            </span>
-          </span>
+        {calculatorId ? (
+          <CalculatorRatingSummary
+            calculatorId={calculatorId}
+            className="wq-tool-header__rating"
+          />
         ) : null}
       </div>
 

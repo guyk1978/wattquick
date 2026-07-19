@@ -12,6 +12,7 @@ import { ShareButtons } from "@/components/ShareButtons";
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import {
   CalculatorCommandShell,
@@ -172,6 +173,13 @@ export function PeakShavingPotentialCalculator({
                       /mo saved
                     </span>
                   </div>
+                  <ResultInterpreter
+                    calculatorId={CALCULATOR_ID}
+                    value={formatCurrency(parsed.monthlySavings)}
+                    unit="/mo"
+                    detail={monthlySavingsDetail}
+                    values={values}
+                  />
                   {monthlySavingsDetail ? (
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {monthlySavingsDetail}

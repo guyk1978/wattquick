@@ -62,9 +62,6 @@ export function CalculatorPrimaryMetric({
               </span>
             ) : null}
           </div>
-          {detail ? (
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
-          ) : null}
           <ResultInterpreter
             calculatorId={calculatorId}
             value={displayValue}
@@ -72,6 +69,9 @@ export function CalculatorPrimaryMetric({
             detail={detail}
             values={values}
           />
+          {detail ? (
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
+          ) : null}
         </>
       )}
     </div>

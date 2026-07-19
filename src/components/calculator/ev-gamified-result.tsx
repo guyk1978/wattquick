@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import type { CalculatorId } from "@/lib/calculators";
 import { GamifiedDashboardFrame } from "@/components/calculator/gamified-dashboard-frame";
 import { calculatorResultValue, calculatorResultValueRow } from "@/lib/glass-ui";
@@ -11,6 +12,7 @@ export interface EvGamifiedResultProps {
   value: string | null;
   unit?: string;
   detail?: string | null;
+  interpreter?: ReactNode;
   emptyMessage?: string;
   className?: string;
 }
@@ -20,6 +22,7 @@ export function EvGamifiedResult({
   value,
   unit,
   detail,
+  interpreter,
   emptyMessage = "Enter values to calculate",
   className,
 }: EvGamifiedResultProps) {
@@ -43,6 +46,7 @@ export function EvGamifiedResult({
                 </span>
               ) : null}
             </div>
+            {interpreter}
             {detail ? (
               <p className="calculator-result-primary__detail">{detail}</p>
             ) : null}

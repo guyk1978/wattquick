@@ -16,6 +16,7 @@ import {
 import { CostGamifiedResult } from "@/components/calculator/cost-gamified-result";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import { cn } from "@/lib/utils";
 import { Flame, Snowflake, Thermometer } from "lucide-react";
 
@@ -133,13 +134,24 @@ export function EvPreconditioningCostCalculator({
           />
         }
         results={
-          <CostGamifiedResult
-            calculatorId={CALCULATOR_ID}
-            label={definition.result.label}
-            value={costValue}
-            detail={costDetail}
-            emptyMessage={definition.result.emptyMessage}
-          />
+          <div className="flex w-full min-w-0 flex-col">
+            <CostGamifiedResult
+              calculatorId={CALCULATOR_ID}
+              label={definition.result.label}
+              value={costValue}
+              detail={null}
+              emptyMessage={definition.result.emptyMessage}
+            />
+            <ResultInterpreter
+              calculatorId={CALCULATOR_ID}
+              value={costValue}
+              detail={costDetail}
+              values={values}
+            />
+            {costDetail ? (
+              <p className="calculator-result-primary__detail">{costDetail}</p>
+            ) : null}
+          </div>
         }
       />
 

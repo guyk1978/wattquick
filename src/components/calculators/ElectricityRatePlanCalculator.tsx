@@ -146,6 +146,7 @@ export function ElectricityRatePlanCalculator({
               value={formatCurrency(parsed.annualSavings)}
               unit="/yr"
               detail={savingsDetail}
+              interpret
               emptyMessage="—"
             />
             </div>

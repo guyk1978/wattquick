@@ -30,16 +30,20 @@ export function CalculatorCard({
 
   if (isRelated) {
     return (
-      <Link
-        href={calculator.href}
+      <div
         style={categoryThemeVars(theme)}
         className={cn(
-          "calc-card-related group flex items-center gap-2.5 rounded-none px-3 py-2.5",
+          "calc-card-related group relative flex items-center gap-2.5 rounded-none px-3 py-2.5",
           "transition-colors duration-150",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className
         )}
       >
+        <Link
+          href={calculator.href}
+          className="absolute inset-0 z-[1]"
+          aria-label={`Open ${calculator.title}`}
+        />
         <span
           className={cn(
             "flex size-7 shrink-0 items-center justify-center rounded-none",
@@ -61,29 +65,38 @@ export function CalculatorCard({
           </span>
         </span>
 
+        <CalculatorRatingSummary
+          calculatorId={calculator.id}
+          showCount={false}
+          className="relative z-10 shrink-0"
+        />
         <ArrowUpRight
           className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100"
           strokeWidth={2}
           aria-hidden
         />
         <span className="sr-only">Open {calculator.title}</span>
-      </Link>
+      </div>
     );
   }
 
   if (isMinimal) {
     return (
-      <Link
-        href={calculator.href}
+      <div
         style={categoryThemeVars(theme)}
         className={cn(
-          "calc-card calc-card-flat group flex h-full flex-col gap-2 rounded-none border p-3 transition-colors duration-150",
+          "calc-card calc-card-flat group relative flex h-full flex-col gap-2 rounded-none border p-3 transition-colors duration-300",
           "border-slate-200 bg-white",
           "dark:border-border dark:bg-card/90",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           className
         )}
       >
+        <Link
+          href={calculator.href}
+          className="absolute inset-0 z-[1]"
+          aria-label={`Open ${calculator.title}`}
+        />
         <span
           className={cn(
             "flex size-8 shrink-0 items-center justify-center rounded-none border",
@@ -101,17 +114,20 @@ export function CalculatorCard({
           <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
             {calculator.description}
           </p>
+          <CalculatorRatingSummary
+            calculatorId={calculator.id}
+            className="relative z-10"
+          />
         </div>
-      </Link>
+      </div>
     );
   }
 
   return (
-    <Link
-      href={calculator.href}
+    <div
       style={categoryThemeVars(theme)}
       className={cn(
-        "calc-card calc-card-flat group flex h-full flex-col gap-3 rounded-none border p-4 transition-colors duration-150",
+        "calc-card calc-card-flat group relative flex h-full flex-col gap-3 rounded-none border p-4 transition-colors duration-300",
         "border-slate-200 bg-white",
         "dark:border-border dark:bg-card/90",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -119,6 +135,11 @@ export function CalculatorCard({
         className
       )}
     >
+      <Link
+        href={calculator.href}
+        className="absolute inset-0 z-[1]"
+        aria-label={`Open ${calculator.title}`}
+      />
       <div className={cn("flex flex-1 flex-col", isCompact ? "gap-2.5" : "gap-3")}>
         <div className="flex items-start justify-between gap-3">
           <span
@@ -162,7 +183,10 @@ export function CalculatorCard({
               {calculator.description}
             </p>
           )}
-          <CalculatorRatingSummary calculatorId={calculator.id} />
+          <CalculatorRatingSummary
+            calculatorId={calculator.id}
+            className="relative z-10"
+          />
         </div>
 
         <span
@@ -177,6 +201,6 @@ export function CalculatorCard({
           <ArrowUpRight className={cn(isCompact ? "size-3" : "size-4")} strokeWidth={2.5} />
         </span>
       </div>
-    </Link>
+    </div>
   );
 }

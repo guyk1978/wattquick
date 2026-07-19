@@ -31,6 +31,7 @@ import {
 } from "@/components/calculator/calculator-command-layout";
 import { CalculatorInputs } from "@/components/calculator/calculator-inputs";
 import { CalculatorResult } from "@/components/calculator/calculator-result";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
 import {
   LedSavingsBarVisual,
   type LedSavingsChartView,
@@ -277,6 +278,13 @@ export function LedSavingsRoiCalculator({ className }: LedSavingsRoiCalculatorPr
                     <div className={calculatorResultValueRow}>
                       <span className={calculatorResultValue}>{breakEvenValue}</span>
                     </div>
+                    <ResultInterpreter
+                      calculatorId={CALCULATOR_ID}
+                      value={breakEvenValue}
+                      unit=""
+                      detail={breakEvenDetail}
+                      values={values}
+                    />
                     {breakEvenDetail ? (
                       <p className="text-sm leading-relaxed text-muted-foreground">
                         {breakEvenDetail}

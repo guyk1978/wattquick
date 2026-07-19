@@ -13,6 +13,7 @@ import { usesEvDashboard } from "@/lib/ev-dashboard";
 import { BatteryGamifiedResult } from "./battery-gamified-result";
 import { CostGamifiedResult } from "./cost-gamified-result";
 import { EvGamifiedResult } from "./ev-gamified-result";
+import { ResultInterpreter } from "./result-interpreter";
 import { EvPreconditioningCostCalculator } from "@/components/calculators/EvPreconditioningCostCalculator";
 import { EvTireWearCostCalculator } from "@/components/calculators/EvTireWearCostCalculator";
 import { GeneratorVsSolarHybridCalculator } from "@/components/calculators/GeneratorVsSolarHybridCalculator";
@@ -278,6 +279,16 @@ function CalculatorPanelInner({
       usesCostDashboard(definition.category, id) ||
       usesEvDashboard(definition.category, id));
 
+  const gamifiedInterpreter = result.value ? (
+    <ResultInterpreter
+      calculatorId={id}
+      value={result.value}
+      unit={result.unit}
+      detail={result.detail}
+      values={values}
+    />
+  ) : null;
+
   const gamifiedHero = usesGamified ? (
     <>
       {usesBatteryDashboard(definition.category, id) ? (
@@ -287,6 +298,7 @@ function CalculatorPanelInner({
           value={result.value}
           unit={result.unit}
           detail={result.detail}
+          interpreter={gamifiedInterpreter}
           emptyMessage={definition.result.emptyMessage}
         />
       ) : usesCostDashboard(definition.category, id) ? (
@@ -296,6 +308,7 @@ function CalculatorPanelInner({
           value={result.value}
           unit={result.unit}
           detail={result.detail}
+          interpreter={gamifiedInterpreter}
           emptyMessage={definition.result.emptyMessage}
         />
       ) : (
@@ -305,6 +318,7 @@ function CalculatorPanelInner({
           value={result.value}
           unit={result.unit}
           detail={result.detail}
+          interpreter={gamifiedInterpreter}
           emptyMessage={definition.result.emptyMessage}
         />
       )}

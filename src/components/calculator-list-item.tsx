@@ -26,16 +26,20 @@ export function CalculatorListItem({
 
   return (
     <li className={cn("calculator-list-item", className)}>
-      <Link
-        href={calculator.href}
+      <div
         style={categoryThemeVars(theme)}
         className={cn(
-          "group flex items-center gap-2.5 rounded-none border-l-2 border-l-transparent px-2.5 py-2 sm:gap-3 sm:px-3",
-          "transition-colors duration-150 hover:bg-[var(--matte-hover)]",
+          "group relative flex items-center gap-2.5 rounded-none border-l-2 border-l-transparent px-2.5 py-2 sm:gap-3 sm:px-3",
+          "transition-colors duration-300 hover:bg-[var(--matte-hover)]",
           "dark:hover:bg-[var(--matte-hover-strong)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cat)]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         )}
       >
+        <Link
+          href={calculator.href}
+          className="absolute inset-0 z-[1]"
+          aria-label={`Open ${calculator.title}`}
+        />
         <span
           className={cn(
             "flex size-7 shrink-0 items-center justify-center rounded-none sm:size-8",
@@ -60,7 +64,7 @@ export function CalculatorListItem({
           </span>
           <CalculatorRatingSummary
             calculatorId={calculator.id}
-            className="mt-1"
+            className="relative z-10 mt-1"
             showCount={false}
           />
         </span>
@@ -69,7 +73,7 @@ export function CalculatorListItem({
           className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity duration-150 group-hover:opacity-100"
           aria-hidden
         />
-      </Link>
+      </div>
     </li>
   );
 }
