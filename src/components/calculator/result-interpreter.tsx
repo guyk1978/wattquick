@@ -1,6 +1,7 @@
 "use client";
 
 import { useCalculatorId } from "@/components/calculator/calculator-id-context";
+import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorDefinition } from "@/lib/calculators/registry";
 import { interpretResult } from "@/lib/calculators/result-interpreter";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,8 @@ interface ResultInterpreterProps {
   detail?: string | null;
   /** Raw calculator inputs, when available, for richer phrasing. */
   values?: Record<string, string>;
+  /** Explicit calculator id; falls back to the panel's id context. */
+  calculatorId?: CalculatorId;
   className?: string;
 }
 
@@ -25,9 +28,11 @@ export function ResultInterpreter({
   unit,
   detail,
   values,
+  calculatorId,
   className,
 }: ResultInterpreterProps) {
-  const id = useCalculatorId();
+  const contextId = useCalculatorId();
+  const id = calculatorId ?? contextId;
 
   if (!id || value == null || !value.trim()) return null;
 

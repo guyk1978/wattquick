@@ -1,4 +1,8 @@
+"use client";
+
 import { AnimatedCounter } from "@/components/calculator/animated-counter";
+import { ResultInterpreter } from "@/components/calculator/result-interpreter";
+import type { CalculatorId } from "@/lib/calculators";
 import {
   calculatorResultValue,
   calculatorResultValueRow,
@@ -14,9 +18,13 @@ interface CalculatorPrimaryMetricProps {
   animateNumeric?: boolean;
   decimals?: number;
   className?: string;
+  /** Raw inputs for the plain-English ResultInterpreter. */
+  values?: Record<string, string>;
+  /** Explicit calculator id; falls back to panel context. */
+  calculatorId?: CalculatorId;
 }
 
-/** Large value + unit row for primary results (no side visuals) */
+/** Large value + unit row for primary results, with a plain-English summary underneath. */
 export function CalculatorPrimaryMetric({
   value,
   unit,
@@ -25,8 +33,12 @@ export function CalculatorPrimaryMetric({
   animateNumeric = false,
   decimals = 1,
   className,
+  values,
+  calculatorId,
 }: CalculatorPrimaryMetricProps) {
   const hasResult = value !== null && value !== "";
+  const displayValue =
+    typeof value === "number" ? String(value) : (value as string | null);
 
   return (
     <div className={cn("calculator-primary-metric", !hasResult && "opacity-70", className)}>
@@ -53,6 +65,13 @@ export function CalculatorPrimaryMetric({
           {detail ? (
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{detail}</p>
           ) : null}
+          <ResultInterpreter
+            calculatorId={calculatorId}
+            value={displayValue}
+            unit={unit}
+            detail={detail}
+            values={values}
+          />
         </>
       )}
     </div>

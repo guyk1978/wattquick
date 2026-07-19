@@ -1,5 +1,3 @@
-import { SaveToProjectButton } from "@/components/save-to-project-button";
-import type { ProjectSavePayload } from "@/lib/project-store";
 import { cn } from "@/lib/utils";
 
 export type CalculatorResultRow = {
@@ -11,14 +9,12 @@ export type CalculatorResultRow = {
 interface CalculatorResultsTableProps {
   rows: CalculatorResultRow[];
   className?: string;
-  saveToProject?: ProjectSavePayload;
 }
 
 /** Results table inside the global green status shell. */
 export function CalculatorResultsTable({
   rows,
   className,
-  saveToProject,
 }: CalculatorResultsTableProps) {
   if (rows.length === 0) return null;
 
@@ -54,11 +50,6 @@ export function CalculatorResultsTable({
           ))}
         </tbody>
       </table>
-      {saveToProject ? (
-        <div className="mt-3 flex justify-end border-t border-status-success/20 px-4 pb-4 pt-3">
-          <SaveToProjectButton payload={saveToProject} compact />
-        </div>
-      ) : null}
     </div>
   );
 }

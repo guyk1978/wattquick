@@ -1,10 +1,8 @@
 "use client";
 
 import { FileDown, Loader2 } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
-import { SaveToProjectButton } from "@/components/save-to-project-button";
+import { useCallback, useState } from "react";
 import { buildPdfInputs, buildPdfResults, generatePDFReport } from "@/lib/pdf-utils";
-import { buildProjectResults } from "@/lib/project-store";
 import { calculatorCommandBtn, calculatorCommandPdfSection } from "@/lib/glass-ui";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +14,9 @@ interface JoinMyPdfSaveReportProps {
   detail?: string | null;
   values: Record<string, string>;
   fieldLabels: Record<string, string>;
+  /** @deprecated Header Save is the project entry point; kept for call-site compatibility. */
   calculatorSlug?: string;
+  /** @deprecated Unused — project save lives in ToolHeader. */
   projectResults?: Record<string, string>;
   onSaveToPdf?: () => Promise<void>;
   isSaving?: boolean;
@@ -32,8 +32,6 @@ export function JoinMyPdfSaveReport({
   detail,
   values,
   fieldLabels,
-  calculatorSlug,
-  projectResults,
   onSaveToPdf,
   isSaving: isSavingProp,
   saveError: saveErrorProp,
@@ -74,32 +72,6 @@ export function JoinMyPdfSaveReport({
 
   const handleSave = onSaveToPdf ?? defaultSaveToPdf;
 
-  const projectPayload = useMemo(() => {
-    if (!calculatorSlug || !hasResult || value === null) return null;
-    const summary = `${value}${unit ? ` ${unit}` : ""}`.trim();
-    return {
-      calculatorSlug,
-      calculatorTitle: calculatorTitle,
-      values,
-      fieldLabels,
-      results:
-        projectResults ??
-        buildProjectResults(resultLabel, value, unit, detail ?? null),
-      summary,
-    };
-  }, [
-    calculatorSlug,
-    calculatorTitle,
-    detail,
-    fieldLabels,
-    hasResult,
-    projectResults,
-    resultLabel,
-    unit,
-    value,
-    values,
-  ]);
-
   if (!hasResult) return null;
 
   return (
@@ -111,17 +83,7 @@ export function JoinMyPdfSaveReport({
         <p className="text-sm leading-relaxed text-muted-foreground">
           <span className="font-medium text-foreground">Save Report:</span>{" "}
           Download a PDF via{" "}
-          <span className="font-medium text-foreground">JoinMyPDF</span>
-          {projectPayload ? (
-            <>
-              {" "}
-              or add this run to a{" "}
-              <span className="font-medium text-foreground">project</span> for a
-              combined export.
-            </>
-          ) : (
-            "."
-          )}
+          <span className="font-medium text-foreground">JoinMyPDF</span>.
           {saveError ? (
             <span className="mt-1 block text-xs text-destructive">{saveError}</span>
           ) : null}
@@ -146,9 +108,6 @@ export function JoinMyPdfSaveReport({
             )}
             {isSaving ? "Generating PDF…" : "Save via JoinMyPDF"}
           </button>
-          {projectPayload ? (
-            <SaveToProjectButton payload={projectPayload} />
-          ) : null}
         </div>
       </div>
     </section>
