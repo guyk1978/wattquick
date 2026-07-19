@@ -6764,6 +6764,31 @@
   text-align: center;
 }
 
+/*
+ * Plain-English result explanation. Larger, softer, lower-contrast than the
+ * technical value so the number stays the hero and this reads as a friendly aside.
+ */
+.calculator-result-interpreter {
+  margin: 0.85rem auto 0;
+  max-width: 44ch;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #b5b5b5;
+  text-wrap: balance;
+}
+
+.calculator-results-dashboard--modal .calculator-result-interpreter {
+  font-size: 1.15rem;
+}
+
+@media (max-width: 640px) {
+  .calculator-result-interpreter {
+    font-size: 1.125rem;
+  }
+}
+
 .calculator-result-value-row > .neon-hero-number {
   flex-shrink: 1;
 }

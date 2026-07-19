@@ -343,6 +343,7 @@ function CalculatorPanelInner({
             }
             hero={gamifiedHero}
             statusAlert={isModal ? null : statusAlert}
+            values={values}
             className={isModal ? "calculator-results-dashboard--modal" : undefined}
           />
         }

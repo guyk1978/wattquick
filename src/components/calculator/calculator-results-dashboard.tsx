@@ -5,6 +5,7 @@ import type { CalculatorStatusAlert } from "@/lib/calculator-status";
 import { cn } from "@/lib/utils";
 import { CalculatorStatusShell } from "./calculator-status-shell";
 import { CalculatorResultActions } from "./calculator-result-actions";
+import { ResultInterpreter } from "./result-interpreter";
 
 export interface CalculatorSummaryItem {
   label: string;
@@ -24,6 +25,8 @@ export interface CalculatorResultsDashboardProps {
   children?: ReactNode;
   className?: string;
   statusAlert?: CalculatorStatusAlert | null;
+  /** Raw inputs, forwarded to the plain-English ResultInterpreter. */
+  values?: Record<string, string>;
 }
 
 function recordToSummaryItems(
@@ -139,6 +142,7 @@ export function CalculatorResultsDashboard({
   children,
   className,
   statusAlert,
+  values,
 }: CalculatorResultsDashboardProps) {
   const hasResult = value !== null;
   const hasExplicitSummary = summaryItems !== undefined && summaryItems.length > 0;
@@ -172,6 +176,14 @@ export function CalculatorResultsDashboard({
             />
           ) : null}
         </CalculatorStatusShell>
+        {hasResult && value ? (
+          <ResultInterpreter
+            value={value}
+            unit={unit}
+            detail={detail}
+            values={values}
+          />
+        ) : null}
         {hasResult && value ? (
           <CalculatorResultActions
             label={label}
