@@ -11455,27 +11455,27 @@ body:has(.global-page-layout)::-webkit-scrollbar-thumb {
   line-height: 1;
 }
 
-/* PWA Install ? Industrial Matte, visible only when installable */
+/* PWA Install — square header icon; hidden until beforeinstallprompt */
 .pwa-install-btn {
-  display: inline-flex;
+  display: none;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
+  width: 2.15rem;
   height: 2.15rem;
-  padding: 0 0.65rem;
+  padding: 0;
   border: 1px solid #262626;
-  background: #171717;
+  background: #121212;
   color: #a3a3a3;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   cursor: pointer;
   transition:
     border-color 0.15s ease,
     color 0.15s ease,
     background 0.15s ease;
+}
+
+.pwa-install-btn--available:not([hidden]) {
+  display: inline-flex;
 }
 
 .pwa-install-btn:hover {
@@ -11489,27 +11489,8 @@ body:has(.global-page-layout)::-webkit-scrollbar-thumb {
   outline-offset: 2px;
 }
 
-.pwa-install-btn__label {
-  line-height: 1;
-}
-
-@media (max-width: 520px) {
-  .pwa-install-btn__label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .pwa-install-btn {
-    width: 2.15rem;
-    padding: 0;
-  }
+.pwa-install-btn--grid {
+  background: #121212;
 }
 
 @media (max-width: 520px) {
@@ -11989,15 +11970,27 @@ body:has(.legal-modal) .grid-modal-shell {
  * ToolWorkspaceModal). CSS only ever reads var(--category-color, fallback).
  */
 
+/*
+ * Industrial-matte card tokens — single source of truth for every
+ * card-like surface (category cards, tool cards, collapsible SEO blocks).
+ * Change the matte tone here and the whole site follows.
+ */
+:root {
+  --wq-card-bg: #121212;
+  --wq-card-border: #262626;
+  --wq-card-padding-y: 1rem;
+  --wq-card-padding-x: 1.05rem;
+}
+
 .wq-category-card,
 .wq-tool-card {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   min-height: 8.5rem;
-  padding: 1rem 1.05rem;
-  border: 1px solid #262626;
-  background: #121212;
+  padding: var(--wq-card-padding-y) var(--wq-card-padding-x);
+  border: 1px solid var(--wq-card-border);
+  background: var(--wq-card-bg);
   color: #ededed;
   text-decoration: none;
   transition:
@@ -12381,11 +12374,15 @@ body:has(.legal-modal) .grid-modal-shell {
   }
 }
 
-/* SEO-friendly collapsible text section — content always in the DOM. */
+/*
+ * SEO-friendly collapsible text section — content always in the DOM.
+ * Shares the industrial-matte card surface (same bg/border tokens as
+ * .wq-tool-card) so it reads as one cohesive card in both states.
+ */
 .collapsible-section {
-  border: 1px solid var(--border);
-  border-radius: 0.5rem;
-  background: transparent;
+  border: 1px solid var(--wq-card-border);
+  border-radius: 0;
+  background: var(--wq-card-bg);
 }
 
 .collapsible-section + .collapsible-section {
@@ -12403,7 +12400,7 @@ body:has(.legal-modal) .grid-modal-shell {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.8rem 1rem;
+  padding: var(--wq-card-padding-y) var(--wq-card-padding-x);
   border: 0;
   background: transparent;
   text-align: left;
@@ -12458,7 +12455,7 @@ body:has(.legal-modal) .grid-modal-shell {
  * (not pure white) on dark, generous line-height and letter-spacing.
  */
 .collapsible-section__body {
-  padding: 0 1rem 1.25rem;
+  padding: 0 var(--wq-card-padding-x) 1.25rem;
   font-size: 1.1rem;
   line-height: 1.7;
   letter-spacing: 0.01em;

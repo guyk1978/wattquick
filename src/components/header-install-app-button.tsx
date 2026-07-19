@@ -4,5 +4,5 @@ import { PWAInstaller } from "@/components/pwa-installer";
 
 /** Site header Install control — visible only when the PWA is installable. */
 export function HeaderInstallAppButton() {
-  return <PWAInstaller variant="header" className="hidden sm:inline-flex" />;
+  return <PWAInstaller variant="header" />;
 }

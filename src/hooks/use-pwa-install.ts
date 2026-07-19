@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-interface BeforeInstallPromptEvent extends Event {
+export interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
@@ -15,19 +15,21 @@ function isStandaloneDisplay(): boolean {
   );
 }
 
-function isIosDevice(): boolean {
-  if (typeof navigator === "undefined") return false;
-  return /iphone|ipad|ipod/i.test(navigator.userAgent);
-}
-
-export function usePwaInstall() {
+/**
+ * Captures the browser's `beforeinstallprompt` event so a custom Install
+ * button can call `prompt()` later. Hides itself once the app is installed
+ * (standalone display or `appinstalled`).
+ */
+export function usePWAInstall() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [installed, setInstalled] = useState(false);
-  const [helpOpen, setHelpOpen] = useState(false);
 
   useEffect(() => {
-    setInstalled(isStandaloneDisplay());
+    if (isStandaloneDisplay()) {
+      setInstalled(true);
+      return;
+    }
 
     const onBeforeInstall = (event: Event) => {
       event.preventDefault();
@@ -39,35 +41,50 @@ export function usePwaInstall() {
       setDeferredPrompt(null);
     };
 
+    const onDisplayModeChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setInstalled(true);
+        setDeferredPrompt(null);
+      }
+    };
+
+    const standaloneMq = window.matchMedia("(display-mode: standalone)");
+
     window.addEventListener("beforeinstallprompt", onBeforeInstall);
     window.addEventListener("appinstalled", onInstalled);
+    standaloneMq.addEventListener("change", onDisplayModeChange);
+
     return () => {
       window.removeEventListener("beforeinstallprompt", onBeforeInstall);
       window.removeEventListener("appinstalled", onInstalled);
+      standaloneMq.removeEventListener("change", onDisplayModeChange);
     };
   }, []);
 
-  const install = useCallback(async () => {
-    if (installed) return;
+  const canInstall = !installed && deferredPrompt != null;
 
-    if (deferredPrompt) {
-      await deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === "accepted") {
-        setInstalled(true);
-      }
-      setDeferredPrompt(null);
-      return;
+  const promptInstall = useCallback(async () => {
+    if (!deferredPrompt || installed) return false;
+
+    await deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    setDeferredPrompt(null);
+    if (outcome === "accepted") {
+      setInstalled(true);
+      return true;
     }
-
-    setHelpOpen(true);
+    return false;
   }, [deferredPrompt, installed]);
 
   return {
+    /** True when the deferred install prompt is available and the app is not already installed. */
+    canInstall,
+    /** True when running as an installed PWA (or just accepted install). */
     installed,
-    install,
-    helpOpen,
-    setHelpOpen,
-    isIos: isIosDevice(),
+    /** Triggers the native install sheet via the stored beforeinstallprompt event. */
+    promptInstall,
   };
 }
+
+/** @deprecated Prefer `usePWAInstall`. */
+export const usePwaInstall = usePWAInstall;

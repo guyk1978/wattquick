@@ -1,13 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
 import { Download } from "lucide-react";
+import { usePWAInstall } from "@/hooks/use-pwa-install";
 import { cn } from "@/lib/utils";
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
-}
 
 type PWAInstallerProps = {
   className?: string;
@@ -16,67 +11,33 @@ type PWAInstallerProps = {
 };
 
 /**
- * Listens for `beforeinstallprompt`, stores the deferred prompt,
- * and renders an Install button only when the app is installable.
+ * Square Install control for the header/grid nav.
+ * Hidden with `display: none` until `beforeinstallprompt` fires;
+ * disappears again once the app is installed.
  */
 export function PWAInstaller({
   className,
   variant = "grid",
 }: PWAInstallerProps) {
-  const [deferredPrompt, setDeferredPrompt] =
-    useState<BeforeInstallPromptEvent | null>(null);
-
-  useEffect(() => {
-    const standalone =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as Navigator & { standalone?: boolean }).standalone ===
-        true;
-    if (standalone) return;
-
-    const onBeforeInstall = (event: Event) => {
-      event.preventDefault();
-      setDeferredPrompt(event as BeforeInstallPromptEvent);
-    };
-
-    const onInstalled = () => {
-      setDeferredPrompt(null);
-    };
-
-    window.addEventListener("beforeinstallprompt", onBeforeInstall);
-    window.addEventListener("appinstalled", onInstalled);
-    return () => {
-      window.removeEventListener("beforeinstallprompt", onBeforeInstall);
-      window.removeEventListener("appinstalled", onInstalled);
-    };
-  }, []);
-
-  const handleInstallClick = useCallback(async () => {
-    if (!deferredPrompt) return;
-    await deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === "accepted") {
-      setDeferredPrompt(null);
-    } else {
-      setDeferredPrompt(null);
-    }
-  }, [deferredPrompt]);
-
-  if (!deferredPrompt) return null;
+  const { canInstall, promptInstall } = usePWAInstall();
 
   return (
     <button
       type="button"
       className={cn(
-        variant === "grid" ? "grid-nav__library-btn pwa-install-btn" : "pwa-install-btn",
+        "pwa-install-btn",
+        variant === "grid" && "pwa-install-btn--grid",
+        canInstall && "pwa-install-btn--available",
         className
       )}
-      onClick={() => void handleInstallClick()}
+      onClick={() => void promptInstall()}
       aria-label="Install WattQuick app"
+      title="Install app"
+      hidden={!canInstall}
+      tabIndex={canInstall ? 0 : -1}
+      aria-hidden={!canInstall}
     >
-      <Download className="size-4" aria-hidden />
-      <span className="pwa-install-btn__label">Install</span>
+      <Download className="size-4" strokeWidth={2} aria-hidden />
     </button>
   );
 }
-
-export type { BeforeInstallPromptEvent };

@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NavigationLoadingOverlay } from "@/components/navigation-loading-overlay";
 import { PageTransition } from "@/components/transitions/PageTransition";
+import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
@@ -78,6 +79,7 @@ export default function RootLayout({
             </PageTransition>
             <SiteFooter />
             <CookieConsentBanner />
+            <ServiceWorkerRegistration />
           </ArticlePortalRoot>
         </ThemeProvider>
       </body>
