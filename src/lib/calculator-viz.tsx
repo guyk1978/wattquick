@@ -3,17 +3,26 @@
 import type { ComponentType } from "react";
 import type { CalculatorId } from "@/lib/calculators";
 import { AmpsToWattsViz } from "@/components/calculator/viz/amps-to-watts-viz";
+import { ApplianceDailyCostViz } from "@/components/calculator/viz/appliance-daily-cost-viz";
+import { ApplianceMonthlyEnergyViz } from "@/components/calculator/viz/appliance-monthly-energy-viz";
+import { TwelveVTo120VInverterViz } from "@/components/calculator/viz/12v-to-120v-inverter-viz";
 import { BatteryBankSizeViz } from "@/components/calculator/viz/battery-bank-size-viz";
 import { BatteryChargingTimeViz } from "@/components/calculator/viz/battery-charging-time-viz";
 import { BatteryEnergyViz } from "@/components/calculator/viz/battery-energy-viz";
 import { BatteryPercentageViz } from "@/components/calculator/viz/battery-percentage-viz";
 import { BatteryRuntimeViz } from "@/components/calculator/viz/battery-runtime-viz";
+import { CampingFridgeRuntimeViz } from "@/components/calculator/viz/camping-fridge-runtime-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
 import { DcCableSizeViz } from "@/components/calculator/viz/dc-cable-size-viz";
 import { EbikeChargeTimeViz } from "@/components/calculator/viz/ebike-charge-time-viz";
 import { EbikeChargingCostViz } from "@/components/calculator/viz/ebike-charging-cost-viz";
 import { EbikeMaxSpeedViz } from "@/components/calculator/viz/ebike-max-speed-viz";
 import { EbikeRangeViz } from "@/components/calculator/viz/ebike-range-viz";
+import { EnergyConsumptionViz } from "@/components/calculator/viz/energy-consumption-viz";
+import { EscooterHillClimbViz } from "@/components/calculator/viz/escooter-hill-climb-viz";
+import { EscooterMaxSpeedViz } from "@/components/calculator/viz/escooter-max-speed-viz";
+import { EscooterRangeViz } from "@/components/calculator/viz/escooter-range-viz";
+import { EscooterTirePressureViz } from "@/components/calculator/viz/escooter-tire-pressure-viz";
 import { EvBatteryRangeViz } from "@/components/calculator/viz/ev-battery-range-viz";
 import { EvChargeTimeViz } from "@/components/calculator/viz/ev-charge-time-viz";
 import { EvChargingCostViz } from "@/components/calculator/viz/ev-charging-cost-viz";
@@ -27,9 +36,13 @@ import { EvForkliftRuntimeViz } from "@/components/calculator/viz/ev-forklift-ru
 import { EvLevel1VsLevel2Viz } from "@/components/calculator/viz/ev-level1-vs-level2-viz";
 import { EvTruckRangeViz } from "@/components/calculator/viz/ev-truck-range-viz";
 import { EvVsIceMaintenanceViz } from "@/components/calculator/viz/ev-vs-ice-maintenance-viz";
+import { HeaterCostViz } from "@/components/calculator/viz/heater-cost-viz";
 import { InverterSizingViz } from "@/components/calculator/viz/inverter-sizing-viz";
+import { MarineBatteryBankViz } from "@/components/calculator/viz/marine-battery-bank-viz";
 import { OhmsLawViz } from "@/components/calculator/viz/ohms-law-viz";
+import { PortablePowerStationRechargeViz } from "@/components/calculator/viz/portable-power-station-recharge-viz";
 import { ResidentialVoltageDropViz } from "@/components/calculator/viz/residential-voltage-drop-viz";
+import { RvSolarCalculatorViz } from "@/components/calculator/viz/rv-solar-calculator-viz";
 import { SolarBatteryBankViz } from "@/components/calculator/viz/solar-battery-bank-viz";
 import { SolarChargeControllerSizeViz } from "@/components/calculator/viz/solar-charge-controller-size-viz";
 import { SolarDailyYieldViz } from "@/components/calculator/viz/solar-daily-yield-viz";
@@ -184,6 +197,58 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "ev-delivery-van-efficiency": {
       calculatorTitle: "Delivery Van Stop-and-Go Efficiency",
       Viz: EvDeliveryVanEfficiencyViz,
+    },
+    "escooter-range": {
+      calculatorTitle: "E-Scooter Range Calculator",
+      Viz: EscooterRangeViz,
+    },
+    "escooter-tire-pressure": {
+      calculatorTitle: "E-Scooter Tyre Pressure & Rolling Resistance",
+      Viz: EscooterTirePressureViz,
+    },
+    "escooter-max-speed": {
+      calculatorTitle: "E-Scooter Max Speed Calculator",
+      Viz: EscooterMaxSpeedViz,
+    },
+    "escooter-hill-climb": {
+      calculatorTitle: "E-Scooter Hill Climb Grade Calculator",
+      Viz: EscooterHillClimbViz,
+    },
+    "rv-solar-calculator": {
+      calculatorTitle: "RV Solar & House Battery Calculator",
+      Viz: RvSolarCalculatorViz,
+    },
+    "marine-battery-bank": {
+      calculatorTitle: "Marine Trolling Motor Runtime Calculator",
+      Viz: MarineBatteryBankViz,
+    },
+    "portable-power-station-recharge": {
+      calculatorTitle: "Portable Power Station Recharge Times",
+      Viz: PortablePowerStationRechargeViz,
+    },
+    "12v-to-120v-inverter": {
+      calculatorTitle: "12V to 120V Inverter Load Planner",
+      Viz: TwelveVTo120VInverterViz,
+    },
+    "camping-fridge-runtime": {
+      calculatorTitle: "12V Camping Fridge Runtime Calculator",
+      Viz: CampingFridgeRuntimeViz,
+    },
+    "appliance-daily-cost": {
+      calculatorTitle: "Appliance Daily Cost",
+      Viz: ApplianceDailyCostViz,
+    },
+    "appliance-monthly-energy": {
+      calculatorTitle: "Appliance Monthly Energy",
+      Viz: ApplianceMonthlyEnergyViz,
+    },
+    "energy-consumption": {
+      calculatorTitle: "Energy Consumption Calculator",
+      Viz: EnergyConsumptionViz,
+    },
+    "heater-cost": {
+      calculatorTitle: "Electric Heater Cost Calculator",
+      Viz: HeaterCostViz,
     },
   };
 

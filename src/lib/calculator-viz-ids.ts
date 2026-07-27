@@ -40,6 +40,19 @@ const VIZ_CALCULATOR_IDS = [
   "ev-bus-battery",
   "ev-forklift-runtime",
   "ev-delivery-van-efficiency",
+  "escooter-range",
+  "escooter-tire-pressure",
+  "escooter-max-speed",
+  "escooter-hill-climb",
+  "rv-solar-calculator",
+  "marine-battery-bank",
+  "portable-power-station-recharge",
+  "12v-to-120v-inverter",
+  "camping-fridge-runtime",
+  "appliance-daily-cost",
+  "appliance-monthly-energy",
+  "energy-consumption",
+  "heater-cost",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);

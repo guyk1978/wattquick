@@ -14634,6 +14634,317 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* E-Scooter Range discharge path */
+.esr-viz-soc-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.esr-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.esr-viz-scooter,
+.esr-viz-wheel,
+.esr-viz-road {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.esr-viz-range-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.esr-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Tyre Pressure · rolling resistance path */
+.estp-viz-pressure-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.estp-viz-tyre-soft,
+.estp-viz-contact-soft {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.estp-viz-friction {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.estp-viz-mult-bar,
+.estp-viz-wh-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.estp-viz-mult-value,
+.estp-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.estp-viz-tyre-firm,
+.estp-viz-contact-firm {
+  animation: cl-viz-dot-blink 2.8s ease-in-out infinite;
+  animation-delay: 0.4s;
+}
+
+/* E-Scooter Max Speed · V×KV → RPM → km/h */
+.esms-viz-hub,
+.esms-viz-wheel,
+.esms-viz-spoke {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: esms-viz-spin 2.4s linear infinite;
+}
+
+.esms-viz-road,
+.esms-viz-velocity {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.esms-viz-speed-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.esms-viz-rpm-value,
+.esms-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Hill Climb · SOC sag → grade % */
+.eshc-viz-soc-bar,
+.eshc-viz-power-bar,
+.eshc-viz-grade-bar,
+.eshc-viz-ref-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.eshc-viz-slope,
+.eshc-viz-scooter,
+.eshc-viz-force {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.eshc-viz-power-value,
+.eshc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* RV Solar · yield vs house load balance */
+.rvs-viz-panel,
+.rvs-viz-sun {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.rvs-viz-bank-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.rvs-viz-yield-bar,
+.rvs-viz-load-bar,
+.rvs-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.rvs-viz-yield-value,
+.rvs-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Marine Trolling Motor Runtime · Ah × DoD ÷ A */
+.mbb-viz-prop,
+.mbb-viz-boat,
+.mbb-viz-water,
+.mbb-viz-clock {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.mbb-viz-bank-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.mbb-viz-drain-bar,
+.mbb-viz-runtime-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ups-viz-drain 3.8s ease-in-out infinite;
+}
+
+.mbb-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+.mbb-viz-usable-value,
+.mbb-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Portable Power Station Recharge · Wh ÷ (W × η) */
+.pps-viz-sources,
+.pps-viz-inlet {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.pps-viz-station-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 3s ease-in-out infinite;
+}
+
+.pps-viz-wall-bar,
+.pps-viz-solar-bar,
+.pps-viz-car-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.pps-viz-eff-value,
+.pps-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* 12V→120V Inverter Load Planner · load vs rating */
+.vti-viz-battery,
+.vti-viz-inverter {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.vti-viz-cont-bar,
+.vti-viz-surge-bar,
+.vti-viz-pct-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.vti-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* 12V Camping Fridge Runtime · ambient × Wh/day → days */
+.cfr-viz-fridge,
+.cfr-viz-cool {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.cfr-viz-bank-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.cfr-viz-drain-bar,
+.cfr-viz-runtime-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ups-viz-drain 3.8s ease-in-out infinite;
+}
+
+.cfr-viz-draw-value,
+.cfr-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Appliance Daily Cost · W × hrs → kWh × rate */
+.adc-viz-appliance,
+.adc-viz-bolt,
+.adc-viz-meter {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.adc-viz-cost-bar,
+.adc-viz-day-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.adc-viz-kwh-value,
+.adc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Appliance Monthly Energy · W × hrs × 30 → kWh/mo */
+.ame-viz-appliance,
+.ame-viz-day-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.ame-viz-accum-bar,
+.ame-viz-month-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.ame-viz-daily-value,
+.ame-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Energy Consumption · W × hrs × days → kWh */
+.enc-viz-load,
+.enc-viz-bolt,
+.enc-viz-meter {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.enc-viz-accum-bar,
+.enc-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.enc-viz-daily-value,
+.enc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Electric Heater Cost · W × hrs × days × rate */
+.htc-viz-heater,
+.htc-viz-heat,
+.htc-viz-meter {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.htc-viz-cost-bar,
+.htc-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.htc-viz-kwh-value,
+.htc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes esms-viz-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes ups-viz-drain {
   0% {
     transform: scaleX(1);
@@ -14922,7 +15233,107 @@ body:has(.legal-modal) .grid-modal-shell {
   .edv-viz-cycle,
   .edv-viz-urban-bar,
   .edv-viz-output-delta,
-  .edv-viz-output-value {
+  .edv-viz-output-value,
+  .esr-viz-soc-bar,
+  .esr-viz-battery-fill,
+  .esr-viz-scooter,
+  .esr-viz-wheel,
+  .esr-viz-road,
+  .esr-viz-range-bar,
+  .esr-viz-output-value,
+  .estp-viz-pressure-fill,
+  .estp-viz-tyre-soft,
+  .estp-viz-contact-soft,
+  .estp-viz-friction,
+  .estp-viz-mult-bar,
+  .estp-viz-wh-bar,
+  .estp-viz-mult-value,
+  .estp-viz-output-value,
+  .estp-viz-tyre-firm,
+  .estp-viz-contact-firm,
+  .esms-viz-hub,
+  .esms-viz-wheel,
+  .esms-viz-spoke,
+  .esms-viz-road,
+  .esms-viz-velocity,
+  .esms-viz-speed-bar,
+  .esms-viz-rpm-value,
+  .esms-viz-output-value,
+  .eshc-viz-soc-bar,
+  .eshc-viz-power-bar,
+  .eshc-viz-grade-bar,
+  .eshc-viz-ref-bar,
+  .eshc-viz-slope,
+  .eshc-viz-scooter,
+  .eshc-viz-force,
+  .eshc-viz-power-value,
+  .eshc-viz-output-value,
+  .rvs-viz-panel,
+  .rvs-viz-sun,
+  .rvs-viz-bank-fill,
+  .rvs-viz-yield-bar,
+  .rvs-viz-load-bar,
+  .rvs-viz-output-bar,
+  .rvs-viz-yield-value,
+  .rvs-viz-output-value,
+  .mbb-viz-prop,
+  .mbb-viz-boat,
+  .mbb-viz-water,
+  .mbb-viz-clock,
+  .mbb-viz-bank-fill,
+  .mbb-viz-drain-bar,
+  .mbb-viz-runtime-bar,
+  .mbb-viz-clock-hand,
+  .mbb-viz-usable-value,
+  .mbb-viz-output-value,
+  .pps-viz-sources,
+  .pps-viz-inlet,
+  .pps-viz-station-fill,
+  .pps-viz-wall-bar,
+  .pps-viz-solar-bar,
+  .pps-viz-car-bar,
+  .pps-viz-eff-value,
+  .pps-viz-output-value,
+  .vti-viz-battery,
+  .vti-viz-inverter,
+  .vti-viz-cont-bar,
+  .vti-viz-surge-bar,
+  .vti-viz-pct-bar,
+  .vti-viz-output-value,
+  .cfr-viz-fridge,
+  .cfr-viz-cool,
+  .cfr-viz-bank-fill,
+  .cfr-viz-drain-bar,
+  .cfr-viz-runtime-bar,
+  .cfr-viz-draw-value,
+  .cfr-viz-output-value,
+  .adc-viz-appliance,
+  .adc-viz-bolt,
+  .adc-viz-meter,
+  .adc-viz-cost-bar,
+  .adc-viz-day-bar,
+  .adc-viz-kwh-value,
+  .adc-viz-output-value,
+  .ame-viz-appliance,
+  .ame-viz-day-tick,
+  .ame-viz-accum-bar,
+  .ame-viz-month-bar,
+  .ame-viz-daily-value,
+  .ame-viz-output-value,
+  .enc-viz-load,
+  .enc-viz-bolt,
+  .enc-viz-meter,
+  .enc-viz-accum-bar,
+  .enc-viz-output-bar,
+  .enc-viz-daily-value,
+  .enc-viz-output-value,
+  .htc-viz-heater,
+  .htc-viz-heat,
+  .htc-viz-meter,
+  .htc-viz-cost-bar,
+  .htc-viz-output-bar,
+  .htc-viz-kwh-value,
+  .htc-viz-output-value {
     animation: none;
   }
 
@@ -15166,6 +15577,49 @@ body:has(.legal-modal) .grid-modal-shell {
   .edv-viz-cycle {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
+  }
+
+  .esr-viz-soc-bar,
+  .esr-viz-range-bar,
+  .estp-viz-mult-bar,
+  .estp-viz-wh-bar,
+  .esms-viz-speed-bar,
+  .eshc-viz-soc-bar,
+  .eshc-viz-power-bar,
+  .eshc-viz-grade-bar,
+  .eshc-viz-ref-bar,
+  .rvs-viz-yield-bar,
+  .rvs-viz-load-bar,
+  .rvs-viz-output-bar,
+  .mbb-viz-drain-bar,
+  .mbb-viz-runtime-bar,
+  .pps-viz-wall-bar,
+  .pps-viz-solar-bar,
+  .pps-viz-car-bar,
+  .vti-viz-cont-bar,
+  .vti-viz-surge-bar,
+  .vti-viz-pct-bar,
+  .cfr-viz-drain-bar,
+  .cfr-viz-runtime-bar,
+  .adc-viz-cost-bar,
+  .adc-viz-day-bar,
+  .ame-viz-accum-bar,
+  .ame-viz-month-bar,
+  .enc-viz-accum-bar,
+  .enc-viz-output-bar,
+  .htc-viz-cost-bar,
+  .htc-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .estp-viz-pressure-fill,
+  .rvs-viz-bank-fill,
+  .mbb-viz-bank-fill,
+  .pps-viz-station-fill,
+  .cfr-viz-bank-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
   }
 }
 
