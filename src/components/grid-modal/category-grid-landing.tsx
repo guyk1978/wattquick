@@ -1,9 +1,9 @@
 import { CollapsibleSEOContent } from "@/components/collapsible-seo-content";
+import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
 import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
-  CALCULATOR_CATEGORY_DESCRIPTIONS,
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
 } from "@/data/calculator-types";
@@ -15,7 +15,7 @@ type CategoryGridLandingProps = {
   calculators: CalculatorMeta[];
 };
 
-/** Category route: tool grid inside Grid-to-Modal shell. */
+/** Category route: hero schematic + tool grid inside Grid-to-Modal shell. */
 export function CategoryGridLanding({
   category,
   calculators,
@@ -26,10 +26,9 @@ export function CategoryGridLanding({
   return (
     <GridShell
       breadcrumbs={[{ label }]}
-      title={label}
-      description={CALCULATOR_CATEGORY_DESCRIPTIONS[category]}
       themeColor={getCategoryColor(category)}
     >
+      <CategoryEcosystemHero category={category} />
       <ToolGrid calculators={calculators} />
 
       <section className="grid-modal-seo-inline" aria-labelledby="category-seo-heading">

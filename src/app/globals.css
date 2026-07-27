@@ -12051,6 +12051,252 @@ body:has(.legal-modal) .grid-modal-shell {
   color: #a3a3a3;
 }
 
+/* —— WattQuick homepage ecosystem canvas —— */
+.wq-eco {
+  display: block;
+  width: 100%;
+  margin: 0 0 1.5rem;
+}
+
+.wq-eco__frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0.35rem;
+  border: 1px solid #262626;
+  background: #0a0a0a;
+  overflow: hidden;
+  /* Safe inset so SVG content never kisses the outer chrome */
+  padding: 0;
+}
+
+.wq-eco__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 16rem;
+  max-height: min(70vh, 40rem);
+}
+
+.wq-eco__node-link {
+  cursor: pointer;
+  outline: none;
+}
+
+.wq-eco__node-link:focus-visible circle[fill="transparent"] {
+  stroke: #a3e635;
+  stroke-width: 1.25;
+  stroke-dasharray: 4 3;
+}
+
+.wq-eco__trace {
+  transition: opacity 0.2s ease;
+}
+
+.wq-eco__trace--dim {
+  filter: none;
+}
+
+.wq-eco__trace--hot {
+  stroke-width: 2;
+}
+
+.wq-eco__node {
+  transition: opacity 0.2s ease;
+}
+
+.wq-eco__node--dim {
+  pointer-events: auto;
+}
+
+.wq-eco__badge-dot {
+  animation: wq-eco-badge-pulse 2.2s ease-in-out infinite;
+}
+
+.wq-eco__sun {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wq-eco-sun-glow 3.2s ease-in-out infinite;
+}
+
+.wq-eco__sun-rays {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wq-eco-sun-glow 3.2s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.wq-eco__turbine {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: wq-eco-spin 4.5s linear infinite;
+}
+
+.wq-eco__battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.wq-eco__water {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.wq-eco__badge--active text {
+  fill: #a3e635;
+}
+
+@keyframes wq-eco-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wq-eco-sun-glow {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes wq-eco-badge-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wq-eco__badge-dot,
+  .wq-eco__sun,
+  .wq-eco__sun-rays,
+  .wq-eco__turbine,
+  .wq-eco__battery-fill,
+  .wq-eco__water {
+    animation: none;
+  }
+
+  .wq-eco__turbine {
+    transform: none;
+  }
+}
+
+/* —— Category landing ecosystem hero —— */
+.wq-cat-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 0 1.5rem;
+  --wq-cat-accent: #a3e635;
+}
+
+.wq-cat-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 40rem;
+}
+
+.wq-cat-hero__eyebrow {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--wq-cat-accent) 75%, #737373);
+}
+
+.wq-cat-hero__title {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #ededed;
+}
+
+.wq-cat-hero__subtitle {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #a3a3a3;
+}
+
+.wq-cat-hero__frame {
+  position: relative;
+  width: 100%;
+  border-radius: 0.35rem;
+  border: 1px solid #262626;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.wq-cat-hero__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 11rem;
+  max-height: min(42vh, 20rem);
+}
+
+.wq-cat-hero__trace {
+  transition: opacity 0.2s ease;
+}
+
+.wq-cat-hero__hub-fill {
+  animation: wq-cat-hero-fill 3.2s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.wq-cat-hero__pulse {
+  animation: wq-cat-hero-pulse 2.4s ease-in-out infinite;
+}
+
+.wq-cat-hero__sat {
+  transition: stroke-width 0.2s ease;
+}
+
+.wq-cat-hero__sat-dot {
+  animation: wq-cat-hero-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes wq-cat-hero-fill {
+  0%,
+  100% {
+    opacity: 0.28;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes wq-cat-hero-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wq-cat-hero__hub-fill,
+  .wq-cat-hero__pulse,
+  .wq-cat-hero__sat-dot {
+    animation: none;
+  }
+}
+
 .wq-category-grid,
 .wq-tool-grid {
   display: grid;
