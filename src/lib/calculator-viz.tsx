@@ -2,6 +2,10 @@
 
 import type { ComponentType } from "react";
 import type { CalculatorId } from "@/lib/calculators";
+import { BatteryChargingTimeViz } from "@/components/calculator/viz/battery-charging-time-viz";
+import { BatteryEnergyViz } from "@/components/calculator/viz/battery-energy-viz";
+import { BatteryPercentageViz } from "@/components/calculator/viz/battery-percentage-viz";
+import { BatteryRuntimeViz } from "@/components/calculator/viz/battery-runtime-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
 import { EbikeChargeTimeViz } from "@/components/calculator/viz/ebike-charge-time-viz";
 import { EbikeChargingCostViz } from "@/components/calculator/viz/ebike-charging-cost-viz";
@@ -44,6 +48,22 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "ebike-charge-time": {
       calculatorTitle: "E-Bike Charge Time Calculator",
       Viz: EbikeChargeTimeViz,
+    },
+    "battery-percentage": {
+      calculatorTitle: "Battery Percentage",
+      Viz: BatteryPercentageViz,
+    },
+    "battery-runtime": {
+      calculatorTitle: "Battery Runtime",
+      Viz: BatteryRuntimeViz,
+    },
+    "battery-charging-time": {
+      calculatorTitle: "Battery Charging Time",
+      Viz: BatteryChargingTimeViz,
+    },
+    "battery-energy": {
+      calculatorTitle: "Battery Energy Calculator",
+      Viz: BatteryEnergyViz,
     },
   };
 

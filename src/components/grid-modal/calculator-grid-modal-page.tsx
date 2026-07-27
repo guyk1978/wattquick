@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
 import {
@@ -49,15 +50,17 @@ export function CalculatorGridModalPage({ id }: CalculatorGridModalPageProps) {
         <ToolGrid calculators={peers} activeId={id} />
       </GridShell>
 
-      <ToolWorkspaceModal
-        calculatorId={id}
-        open
-        relatedArticles={relatedArticleCards}
-        documentation={
-          <ToolModalDocumentation id={id} relatedArticles={relatedArticles} />
-        }
-        related={<ToolModalRelated id={id} />}
-      />
+      <Suspense fallback={null}>
+        <ToolWorkspaceModal
+          calculatorId={id}
+          open
+          relatedArticles={relatedArticleCards}
+          documentation={
+            <ToolModalDocumentation id={id} relatedArticles={relatedArticles} />
+          }
+          related={<ToolModalRelated id={id} />}
+        />
+      </Suspense>
 
       {/* Crawl-only copy: always in DOM for indexing, never shown to users */}
       <ToolModalDocumentationCrawl id={id} />

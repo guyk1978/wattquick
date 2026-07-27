@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import { ToolCardExample } from "@/components/calculator/tool-card-example";
-import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
+import { ToolCardHeaderActions } from "@/components/calculator/tool-card-header-actions";
 import type { CalculatorMeta } from "@/lib/calculators";
 import { getCategoryTheme } from "@/lib/calculator-category-theme";
 import { cn } from "@/lib/utils";
@@ -68,7 +68,7 @@ export function CalculatorBlueprintToolGrid({
                     className="absolute inset-0 z-[1]"
                     aria-label={`Open ${calc.title}`}
                   />
-                  <ToolCardFocus calculatorId={calc.id} />
+                  <ToolCardHeaderActions calculatorId={calc.id} />
                   <span className="flex items-start gap-2">
                     <span
                       className="calculator-tech-card__icon mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border bg-transparent"
@@ -106,7 +106,7 @@ export function CalculatorBlueprintToolGrid({
                   className="absolute inset-0 z-[1]"
                   aria-label={`Open ${calc.title}`}
                 />
-                <ToolCardFocus calculatorId={calc.id} />
+                <ToolCardHeaderActions calculatorId={calc.id} />
                 <span className="calculator-blueprint-tool-card__icon" aria-hidden>
                   <Icon className="size-3" strokeWidth={2} />
                 </span>

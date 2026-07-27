@@ -12364,16 +12364,21 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 /*
- * Tool card Focus mode — Maximize2 button in the card's top-right corner
- * opens a centered overlay with a 2x re-render of the card. Doubled rem
- * sizes instead of transform: scale(2) keep text crisp; opacity + transform
- * keyframes give the "zoom into center" feel.
+ * Tool card header actions — pin, [VIZ], and focus expand grouped in the
+ * card's top-right corner (bookmark shifts left to avoid overlap).
  */
-.tool-card-focus__expand {
+.tool-card-actions {
   position: absolute;
   top: 0.4rem;
   right: 0.4rem;
   z-index: 6;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.tool-card-action-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -12381,7 +12386,6 @@ body:has(.legal-modal) .grid-modal-shell {
   height: 1.7rem;
   border: 1px solid transparent;
   background: transparent;
-  /* Medium grey — permanently visible without requiring hover. */
   color: color-mix(in srgb, var(--foreground) 72%, transparent);
   cursor: pointer;
   transition:
@@ -12390,33 +12394,222 @@ body:has(.legal-modal) .grid-modal-shell {
     background 0.15s ease;
 }
 
-.tool-card-focus__expand:hover {
+.tool-card-action-btn:hover {
   color: var(--category-color, #a3e635);
   border-color: color-mix(in srgb, var(--category-color, #a3e635) 40%, transparent);
   background: color-mix(in srgb, var(--category-color, #a3e635) 8%, transparent);
 }
 
-.tool-card-focus__expand:focus-visible {
+.tool-card-action-btn:focus-visible {
   outline: 1px solid var(--category-color, #a3e635);
   outline-offset: 2px;
 }
 
+.tool-card-action-btn__icon {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.tool-card-action-btn--viz {
+  width: auto;
+  min-width: 1.7rem;
+  padding: 0 0.35rem;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.tool-card-action-btn__viz-label {
+  line-height: 1;
+}
+
+.tool-card-action-btn--pin-active {
+  color: var(--category-color, #a3e635);
+  border-color: color-mix(in srgb, var(--category-color, #a3e635) 45%, transparent);
+  background: color-mix(in srgb, var(--category-color, #a3e635) 12%, transparent);
+}
+
+.tool-card-actions .tool-card-focus__expand {
+  position: static;
+}
+
+.wq-tool-card:has(.tool-card-actions) .wq-tool-card__bookmark {
+  right: 6.55rem;
+}
+
+.wq-tool-card--pinned {
+  border-color: color-mix(in srgb, var(--category-color, #a3e635) 55%, #262626);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--category-color, #a3e635) 25%, transparent),
+    0 12px 28px rgb(0 0 0 / 0.35);
+}
+
+/*
+ * Transparent sticky pinned calculator — docks under fixed grid-nav.
+ */
+.grid-pinned-calc {
+  position: sticky;
+  top: 3.35rem;
+  z-index: 35;
+  flex-shrink: 0;
+  background: transparent;
+  pointer-events: none;
+}
+
+.grid-pinned-calc__rail {
+  pointer-events: auto;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0.35rem 1rem 0.65rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, #0a0a0a 72%, transparent) 0%,
+    transparent 100%
+  );
+}
+
+.grid-pinned-calc__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  margin-bottom: 0.35rem;
+}
+
+.grid-pinned-calc__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, var(--category-color, #a3e635) 35%, transparent);
+  color: var(--category-color, #a3e635);
+}
+
+.grid-pinned-calc__titles {
+  min-width: 0;
+  flex: 1;
+}
+
+.grid-pinned-calc__eyebrow {
+  margin: 0;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+}
+
+.grid-pinned-calc__title {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+.grid-pinned-calc__unpin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+  background: transparent;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.grid-pinned-calc__unpin:hover {
+  color: var(--category-color, #a3e635);
+  border-color: color-mix(in srgb, var(--category-color, #a3e635) 40%, transparent);
+  background: color-mix(in srgb, var(--category-color, #a3e635) 8%, transparent);
+}
+
+.grid-pinned-calc__unpin-text {
+  line-height: 1;
+}
+
+.grid-pinned-calc__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.grid-pinned-calc__close:hover {
+  color: var(--foreground);
+  border-color: color-mix(in srgb, var(--foreground) 22%, transparent);
+}
+
+.grid-pinned-calc__body {
+  max-height: min(42vh, 26rem);
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  background: color-mix(in srgb, #0a0a0a 35%, transparent);
+}
+
+.grid-pinned-calc__panel {
+  min-height: 12rem;
+}
+
+.grid-modal-root--modal-open .grid-pinned-calc {
+  display: none;
+}
+
+.grid-modal-root:has(.grid-pinned-calc) .grid-modal-shell__intro {
+  scroll-margin-top: 4rem;
+}
+
+@media (max-width: 640px) {
+  .grid-pinned-calc__unpin-text {
+    display: none;
+  }
+}
+
+/*
+ * Tool card Focus mode — Maximize2 button in the card's top-right corner
+ * opens a centered overlay with a 2x re-render of the card. Doubled rem
+ * sizes instead of transform: scale(2) keep text crisp; opacity + transform
+ * keyframes give the "zoom into center" feel.
+ */
 .tool-card-focus__expand-icon {
   width: 0.85rem;
   height: 0.85rem;
 }
 
-/* The favorite bookmark used to own the top-right corner; slide it left so
-   it never collides with the expand button. */
-.wq-tool-card:has(.tool-card-focus__expand) .wq-tool-card__bookmark {
+/* Legacy single-button bookmark offset (cards without .tool-card-actions). */
+.wq-tool-card:has(.tool-card-focus__expand):not(:has(.tool-card-actions))
+  .wq-tool-card__bookmark {
   right: 2.35rem;
 }
 
 /* Blueprint-style cards show a decorative hover arrow in the same corner;
    the expand button replaces it as the corner affordance. */
-.calculator-blueprint-tool-card:has(.tool-card-focus__expand)
+.calculator-blueprint-tool-card:has(.tool-card-actions)
   .calculator-blueprint-tool-card__arrow,
-.category-tools-focus-grid__card:has(.tool-card-focus__expand)
+.category-tools-focus-grid__card:has(.tool-card-actions)
+  .category-tools-focus-grid__arrow,
+.calculator-blueprint-tool-card:has(.tool-card-focus__expand):not(:has(.tool-card-actions))
+  .calculator-blueprint-tool-card__arrow,
+.category-tools-focus-grid__card:has(.tool-card-focus__expand):not(:has(.tool-card-actions))
   .category-tools-focus-grid__arrow {
   display: none;
 }
@@ -13550,6 +13743,163 @@ body:has(.legal-modal) .grid-modal-shell {
   }
 }
 
+/* Battery Percentage SoC fill + gauge */
+.bp-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.bp-viz-battery-fill--partial {
+  animation-delay: 0.2s;
+}
+
+.bp-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 3.6s ease-in-out infinite;
+}
+
+.bp-viz-soc-label {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.bp-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.bp-viz-gauge-arc {
+  animation: bp-viz-gauge-pulse 3.6s ease-in-out infinite;
+}
+
+@keyframes bp-viz-soc-rise {
+  0% {
+    transform: scaleY(0.12);
+    opacity: 0.55;
+  }
+  55% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0.12);
+    opacity: 0.55;
+  }
+}
+
+@keyframes bp-viz-gauge-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.55;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+/* Battery Runtime drain + clock */
+.br-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.br-viz-load-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.br-viz-drain-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ups-viz-drain 3.6s ease-in-out infinite;
+}
+
+.br-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.br-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 24px 24px;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+@keyframes br-viz-clock-tick {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Battery Charging Time fill + flow */
+.bct-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.bct-viz-bolt {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.bct-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 4s ease-in-out infinite;
+}
+
+.bct-viz-flow-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+.bct-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.bct-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 24px 24px;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+/* Battery Energy multiply + tank fill */
+.be-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.be-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.be-viz-multiply {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.be-viz-ah-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+}
+
+.be-viz-v-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.be-viz-energy-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.be-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
 @keyframes ups-viz-drain {
   0% {
     transform: scaleX(1);
@@ -13669,7 +14019,30 @@ body:has(.legal-modal) .grid-modal-shell {
   .ebike-max-speed-viz-speed-arrow,
   .ebike-charge-time-viz-bolt,
   .ebike-charge-time-viz-flow-bar,
-  .ebike-charge-time-viz-fill-bar {
+  .ebike-charge-time-viz-fill-bar,
+  .bp-viz-battery-fill,
+  .bp-viz-soc-fill,
+  .bp-viz-soc-label,
+  .bp-viz-output-value,
+  .bp-viz-gauge-arc,
+  .br-viz-battery-fill,
+  .br-viz-load-bolt,
+  .br-viz-drain-bar,
+  .br-viz-output-value,
+  .br-viz-clock-hand,
+  .bct-viz-battery-fill,
+  .bct-viz-bolt,
+  .bct-viz-pack-fill,
+  .bct-viz-flow-bar,
+  .bct-viz-output-value,
+  .bct-viz-clock-hand,
+  .be-viz-battery-fill,
+  .be-viz-v-pulse,
+  .be-viz-multiply,
+  .be-viz-ah-bar,
+  .be-viz-v-bar,
+  .be-viz-energy-fill,
+  .be-viz-output-value {
     animation: none;
   }
 
@@ -13687,6 +14060,33 @@ body:has(.legal-modal) .grid-modal-shell {
   }
 
   .ebike-viz-road-progress {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bp-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+
+  .br-viz-drain-bar {
+    transform: scaleX(0.55);
+    opacity: 0.75;
+  }
+
+  .bct-viz-pack-fill {
+    transform: scaleY(1);
+    opacity: 0.7;
+  }
+
+  .bct-viz-flow-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .be-viz-ah-bar,
+  .be-viz-v-bar,
+  .be-viz-energy-fill {
     transform: scaleX(1);
     opacity: 0.85;
   }

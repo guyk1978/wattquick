@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
 import { ToolCardExample } from "@/components/calculator/tool-card-example";
-import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
+import { ToolCardHeaderActions } from "@/components/calculator/tool-card-header-actions";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCategoryColor } from "@/lib/category-theme";
@@ -48,7 +48,7 @@ export function CategoryToolsFocusGrid({
                 aria-label={`Open ${calc.title}`}
                 onClick={onNavigate}
               />
-              <ToolCardFocus calculatorId={calc.id} />
+              <ToolCardHeaderActions calculatorId={calc.id} />
               <span className="category-tools-focus-grid__icon" aria-hidden>
                 <Icon className="size-5" strokeWidth={2} />
               </span>

@@ -12,6 +12,10 @@ const VIZ_CALCULATOR_IDS = [
   "ebike-charging-cost",
   "ebike-max-speed",
   "ebike-charge-time",
+  "battery-percentage",
+  "battery-runtime",
+  "battery-charging-time",
+  "battery-energy",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);

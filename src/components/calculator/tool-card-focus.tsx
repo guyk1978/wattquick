@@ -48,7 +48,10 @@ export function ToolCardFocus({ calculatorId, className }: ToolCardFocusProps) {
     <>
       <button
         type="button"
-        className={cn("tool-card-focus__expand", className)}
+        className={cn(
+          "tool-card-action-btn tool-card-focus__expand",
+          className
+        )}
         aria-label={`Expand ${meta.title}`}
         aria-haspopup="dialog"
         title="Focus mode"

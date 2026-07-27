@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
@@ -25,6 +25,8 @@ type ToolWorkspaceModalProps = {
   calculatorId: CalculatorId;
   open?: boolean;
   className?: string;
+  /** Initial header tab when the modal opens (client may also read `?view=viz`). */
+  initialTab?: ToolHeaderTab;
   /** Guide + SEO article content shown in the documentation pane. */
   documentation?: ReactNode;
   /** Related calculators shown in the RELATED tab. */
@@ -41,14 +43,17 @@ export function ToolWorkspaceModal({
   calculatorId,
   open = true,
   className,
+  initialTab = "calc",
   documentation,
   related,
   relatedArticles = [],
 }: ToolWorkspaceModalProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const viewFromUrl = searchParams.get("view");
   const meta = getCalculatorMeta(calculatorId);
   const categoryHref = getCategoryPageHref(meta.category);
-  const [activeTab, setActiveTab] = useState<ToolHeaderTab>("calc");
+  const [activeTab, setActiveTab] = useState<ToolHeaderTab>(initialTab);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const [savePromptOpen, setSavePromptOpen] = useState(false);
@@ -193,6 +198,17 @@ export function ToolWorkspaceModal({
       setActiveTab("calc");
       return;
     }
+    const wantsViz =
+      initialTab === "viz" || viewFromUrl === "viz";
+    if (wantsViz && hasCalculatorViz(calculatorId)) {
+      setActiveTab("viz");
+    } else if (initialTab && initialTab !== "calc") {
+      setActiveTab(initialTab);
+    }
+  }, [open, initialTab, viewFromUrl, calculatorId]);
+
+  useEffect(() => {
+    if (!open) return;
     const prevBody = document.body.style.overflow;
     const prevHtml = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";

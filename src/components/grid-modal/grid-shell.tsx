@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { GridFooter } from "@/components/grid-modal/grid-footer";
 import { GridNav, type GridBreadcrumb } from "@/components/grid-modal/grid-nav";
+import { GridPinnedCalculatorBar } from "@/components/grid-modal/grid-pinned-calculator-bar";
+import { GridPinnedCalculatorProvider } from "@/components/grid-modal/grid-pinned-calculator-context";
 import { LegalModalProvider } from "@/components/grid-modal/legal-modal-provider";
 import { getAllLegalDocuments, type LegalDocId } from "@/lib/legal-docs";
 import { cn } from "@/lib/utils";
@@ -40,6 +42,7 @@ export function GridShell({
       documents={legalDocuments}
       initialDoc={initialLegalDoc}
     >
+      <GridPinnedCalculatorProvider>
       <div
         className={cn(
           "grid-modal-root",
@@ -53,6 +56,7 @@ export function GridShell({
         }
       >
         <GridNav breadcrumbs={breadcrumbs} />
+        <GridPinnedCalculatorBar />
         <div className="grid-modal-shell">
           {title ? (
             <header className="grid-modal-shell__intro">
@@ -66,6 +70,7 @@ export function GridShell({
         </div>
         <GridFooter />
       </div>
+      </GridPinnedCalculatorProvider>
     </LegalModalProvider>
   );
 }
