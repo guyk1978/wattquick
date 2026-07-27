@@ -68,7 +68,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="eshc-viz-pulse"
@@ -77,9 +77,9 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="eshc-viz-soc"
@@ -88,8 +88,8 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="eshc-viz-grade"
@@ -98,8 +98,8 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -179,7 +179,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
             <text
               x="56"
               y="136"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -351,7 +351,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
             <text
               x="346"
               y="166"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -423,14 +423,14 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
                 className="eshc-viz-slope"
                 d="M 0 90 L 220 20"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
               {/* Scooter on slope */}
               <g className="eshc-viz-scooter" transform="translate(95, 42)">
-                <circle cx="0" cy="18" r="8" fill="none" stroke="#a3e635" strokeWidth="1.5" />
-                <circle cx="28" cy="10" r="8" fill="none" stroke="#a3e635" strokeWidth="1.5" />
+                <circle cx="0" cy="18" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <circle cx="28" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
                 <path
                   d="M 0 18 L 28 10 M 28 10 L 34 -6"
                   fill="none"
@@ -451,7 +451,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
                 className="eshc-viz-force"
                 d="M 130 55 L 130 78"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 markerEnd="url(#eshc-viz-arrow)"
               />
@@ -524,7 +524,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
             <text
               x="706"
               y="160"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="48"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -613,7 +613,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
             <text
               x="706"
               y="400"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -667,7 +667,7 @@ export function EscooterHillClimbViz({ className }: EscooterHillClimbVizProps) {
             <text
               x="500"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

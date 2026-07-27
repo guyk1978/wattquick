@@ -67,12 +67,12 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="bp-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="bp-viz-fill-grad"
@@ -81,8 +81,8 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.55" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.55" />
             </linearGradient>
             <clipPath id="bp-viz-cell-clip">
               <rect x="412" y="198" width="136" height="168" rx="4" />
@@ -182,7 +182,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
                 width="24"
                 height="28"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.88"
                 stroke="none"
               />
@@ -191,7 +191,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
             <text
               x="106"
               y="162"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -259,7 +259,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
                 width="24"
                 height="40"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.55"
                 stroke="none"
               />
@@ -268,7 +268,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
             <text
               x="106"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -366,9 +366,9 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
               fontFamily="ui-monospace, monospace"
               textAnchor="middle"
             >
-              <tspan fill="#a3e635">3200</tspan>
+              <tspan fill="#ededed">3200</tspan>
               <tspan fill="#888888"> ÷ </tspan>
-              <tspan fill="#a3e635">5000</tspan>
+              <tspan fill="#ededed">5000</tspan>
               <tspan fill="#888888"> × 100</tspan>
             </text>
 
@@ -500,7 +500,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -530,7 +530,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
               cy="248"
               r="48"
               fill="none"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="6"
               strokeLinecap="round"
               strokeDasharray="193 302"
@@ -539,7 +539,7 @@ export function BatteryPercentageViz({ className }: BatteryPercentageVizProps) {
             <text
               x="810"
               y="242"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

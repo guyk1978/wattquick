@@ -66,7 +66,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="enc-viz-pulse"
@@ -75,9 +75,9 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="enc-viz-bar"
@@ -86,8 +86,8 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -167,7 +167,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
             <text
               x="56"
               y="140"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -210,7 +210,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
             <text
               x="56"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -334,7 +334,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -395,14 +395,14 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
                 height="40"
                 rx="3"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <path
                 className="enc-viz-bolt"
                 d="M 18 10 L 30 10 L 26 22 L 36 22 L 22 40 L 26 26 L 14 26 Z"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
               />
               <path
@@ -419,7 +419,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
                 cy="20"
                 r="20"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <text
@@ -521,7 +521,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
             <text
               x="706"
               y="160"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="44"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -650,7 +650,7 @@ export function EnergyConsumptionViz({ className }: EnergyConsumptionVizProps) {
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

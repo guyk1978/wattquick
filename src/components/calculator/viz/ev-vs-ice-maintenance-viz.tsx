@@ -70,7 +70,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="eim-viz-pulse"
@@ -79,9 +79,9 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="eim-viz-ice-bar"
@@ -90,8 +90,8 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.45" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.15" />
             </linearGradient>
             <linearGradient
               id="eim-viz-ev-bar"
@@ -100,8 +100,8 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.4" />
             </linearGradient>
           </defs>
 
@@ -196,7 +196,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="56"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="18"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -238,7 +238,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="56"
               y="278"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="15"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -280,7 +280,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="56"
               y="404"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="18"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -399,7 +399,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="352"
               y="208"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -442,7 +442,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               height="154"
               rx="3"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1"
               strokeOpacity="0.35"
             />
@@ -477,7 +477,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="352"
               y="376"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -637,7 +637,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
               height="122"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -654,7 +654,7 @@ export function EvVsIceMaintenanceViz({ className }: EvVsIceMaintenanceVizProps)
             <text
               x="696"
               y="404"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

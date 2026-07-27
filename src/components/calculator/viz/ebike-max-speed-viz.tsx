@@ -65,7 +65,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ebike-speed-viz-pulse"
@@ -74,9 +74,9 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -168,7 +168,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
                 x="16"
                 y="36"
                 textAnchor="middle"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="11"
                 fontFamily="ui-monospace, monospace"
@@ -180,7 +180,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
             <text
               x="106"
               y="158"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -232,12 +232,12 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
                 className="ebike-max-speed-viz-motor"
                 d="M18 6 V22 M18 22 L28 32 M18 22 L8 32"
               />
-              <circle cx="18" cy="22" r="3" fill="#a3e635" stroke="none" />
+              <circle cx="18" cy="22" r="3" fill="currentColor" stroke="none" />
             </g>
             <text
               x="106"
               y="318"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -332,7 +332,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               x="580"
               y="162"
               textAnchor="end"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -395,7 +395,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
                 />
                 <line x1="20" y1="2" x2="20" y2="38" stroke="#333333" strokeWidth="1" />
                 <line x1="2" y1="20" x2="38" y2="20" stroke="#333333" strokeWidth="1" />
-                <circle cx="20" cy="20" r="3" fill="#a3e635" />
+                <circle cx="20" cy="20" r="3" fill="currentColor" />
               </g>
             </g>
 
@@ -456,7 +456,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               height="376"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -483,7 +483,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               <path
                 className="ebike-max-speed-viz-speed-arrow"
                 d="M8 44 H28"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="2"
               />
             </g>
@@ -493,7 +493,7 @@ export function EbikeMaxSpeedViz({ className }: EbikeMaxSpeedVizProps) {
               x="810"
               y="220"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="38"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

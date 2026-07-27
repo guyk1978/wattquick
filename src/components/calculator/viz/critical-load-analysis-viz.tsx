@@ -67,12 +67,12 @@ export function CriticalLoadAnalysisViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="cl-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -150,7 +150,7 @@ export function CriticalLoadAnalysisViz({
               strokeWidth="1.2"
               strokeLinejoin="round"
             />
-            <circle cx="65" cy="108" r="2" fill="#a3e635" />
+            <circle cx="65" cy="108" r="2" fill="currentColor" />
             <text
               x="88"
               y="94"
@@ -164,7 +164,7 @@ export function CriticalLoadAnalysisViz({
             <text
               x="88"
               y="114"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
@@ -224,7 +224,7 @@ export function CriticalLoadAnalysisViz({
               cx="67"
               cy="185"
               r="2.5"
-              fill="#a3e635"
+              fill="currentColor"
             />
             <text
               x="88"
@@ -239,7 +239,7 @@ export function CriticalLoadAnalysisViz({
             <text
               x="88"
               y="202"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
@@ -274,7 +274,7 @@ export function CriticalLoadAnalysisViz({
               strokeWidth="1.2"
               strokeLinejoin="round"
             />
-            <circle cx="67" cy="272" r="1.8" fill="#a3e635" />
+            <circle cx="67" cy="272" r="1.8" fill="currentColor" />
             <text
               x="88"
               y="270"
@@ -288,7 +288,7 @@ export function CriticalLoadAnalysisViz({
             <text
               x="88"
               y="290"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
@@ -345,7 +345,7 @@ export function CriticalLoadAnalysisViz({
             <text
               x="88"
               y="378"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
@@ -548,7 +548,7 @@ export function CriticalLoadAnalysisViz({
               height="280"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -568,7 +568,7 @@ export function CriticalLoadAnalysisViz({
               x="810"
               y="210"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -618,7 +618,7 @@ export function CriticalLoadAnalysisViz({
                 width="20"
                 height="20"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.85"
                 stroke="none"
               />
@@ -631,7 +631,7 @@ export function CriticalLoadAnalysisViz({
                 width="20"
                 height="20"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.85"
                 stroke="none"
               />

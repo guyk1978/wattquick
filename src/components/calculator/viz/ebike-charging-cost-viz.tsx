@@ -65,7 +65,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ebike-cost-viz-pulse"
@@ -74,9 +74,9 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -173,7 +173,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
                 width="24"
                 height="28"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.88"
                 stroke="none"
               />
@@ -182,7 +182,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
             <text
               x="106"
               y="162"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -247,7 +247,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
                 cx="18"
                 cy="28"
                 r="4"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.45"
               />
             </g>
@@ -255,7 +255,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
             <text
               x="106"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -367,7 +367,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               x="580"
               y="186"
               textAnchor="end"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -382,7 +382,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
                 cy="20"
                 r="18"
                 fill="#0a0a0a"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 strokeOpacity="0.55"
               />
@@ -391,7 +391,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
                 x="20"
                 y="26"
                 textAnchor="middle"
-                fill="#a3e635"
+                fill="#ededed"
                 fontSize="20"
                 fontFamily="ui-monospace, monospace"
                 fontWeight="700"
@@ -434,7 +434,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               x="580"
               y="322"
               textAnchor="end"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -490,7 +490,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               height="328"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -518,7 +518,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
                 x="24"
                 y="30"
                 textAnchor="middle"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="20"
                 fontFamily="ui-monospace, monospace"
@@ -533,7 +533,7 @@ export function EbikeChargingCostViz({ className }: EbikeChargingCostVizProps) {
               x="810"
               y="240"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

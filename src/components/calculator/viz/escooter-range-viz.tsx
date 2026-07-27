@@ -67,7 +67,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="esr-viz-pulse"
@@ -76,9 +76,9 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="esr-viz-soc"
@@ -87,8 +87,8 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="esr-viz-range"
@@ -97,8 +97,8 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -178,7 +178,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
             <text
               x="56"
               y="132"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -245,7 +245,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
                 width="18"
                 height="20"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.75"
                 stroke="none"
               />
@@ -253,7 +253,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
             <text
               x="96"
               y="282"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="18"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -308,7 +308,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
             <text
               x="120"
               y="408"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="16"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -412,7 +412,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               fontFamily="ui-monospace, monospace"
             >
               720 × 0.60 × 0.90 ={" "}
-              <tspan fill="#a3e635">389 Wh</tspan>
+              <tspan fill="#ededed">389 Wh</tspan>
             </text>
 
             <rect
@@ -565,7 +565,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -599,7 +599,7 @@ export function EscooterRangeViz({ className }: EscooterRangeVizProps) {
             <text
               x="810"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

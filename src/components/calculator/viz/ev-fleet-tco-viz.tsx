@@ -68,7 +68,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="eft-viz-pulse"
@@ -77,9 +77,9 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="eft-viz-gas"
@@ -88,8 +88,8 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.15" />
             </linearGradient>
             <linearGradient
               id="eft-viz-ev"
@@ -98,8 +98,8 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -189,7 +189,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
             <text
               x="56"
               y="158"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -222,7 +222,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
             <text
               x="56"
               y="258"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -391,7 +391,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
             <text
               x="352"
               y="216"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="16"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -425,7 +425,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               height="154"
               rx="3"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1"
               strokeOpacity="0.35"
             />
@@ -460,7 +460,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
             <text
               x="352"
               y="384"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="16"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -593,7 +593,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
               height="146"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -610,7 +610,7 @@ export function EvFleetTcoViz({ className }: EvFleetTcoVizProps) {
             <text
               x="810"
               y="388"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

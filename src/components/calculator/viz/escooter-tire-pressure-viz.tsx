@@ -70,7 +70,7 @@ export function EscooterTirePressureViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="estp-viz-pulse"
@@ -79,9 +79,9 @@ export function EscooterTirePressureViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="estp-viz-pressure"
@@ -90,8 +90,8 @@ export function EscooterTirePressureViz({
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="estp-viz-wh"
@@ -100,8 +100,8 @@ export function EscooterTirePressureViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -181,7 +181,7 @@ export function EscooterTirePressureViz({
             <text
               x="56"
               y="132"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -342,7 +342,7 @@ export function EscooterTirePressureViz({
                 rx="62"
                 ry="42"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="2"
               />
               <ellipse
@@ -366,7 +366,7 @@ export function EscooterTirePressureViz({
                 className="estp-viz-contact-soft"
                 d="M 22 90 Q 70 78 118 90"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
@@ -387,14 +387,14 @@ export function EscooterTirePressureViz({
               <path
                 d="M 0 20 L 48 20"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
                 markerEnd="url(#estp-viz-arrow)"
               />
               <path
                 d="M 8 36 L 48 36"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 opacity="0.7"
                 markerEnd="url(#estp-viz-arrow)"
@@ -402,7 +402,7 @@ export function EscooterTirePressureViz({
               <path
                 d="M 16 52 L 48 52"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1"
                 opacity="0.45"
                 markerEnd="url(#estp-viz-arrow)"
@@ -445,7 +445,7 @@ export function EscooterTirePressureViz({
             <text
               x="346"
               y="352"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -548,7 +548,7 @@ export function EscooterTirePressureViz({
             <text
               x="706"
               y="148"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -647,7 +647,7 @@ export function EscooterTirePressureViz({
             <text
               x="706"
               y="400"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -701,7 +701,7 @@ export function EscooterTirePressureViz({
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

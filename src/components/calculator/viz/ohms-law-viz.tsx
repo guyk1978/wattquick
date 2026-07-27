@@ -64,12 +64,12 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="ohm-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -156,7 +156,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               <text
                 x="16"
                 y="29"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="14"
                 fontFamily="ui-monospace, monospace"
@@ -170,7 +170,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
             <text
               x="106"
               y="166"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -228,7 +228,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
             <text
               x="106"
               y="318"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -255,7 +255,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               height="88"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1"
               strokeOpacity="0.45"
               strokeDasharray="4 3"
@@ -346,7 +346,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               <text
                 x="70"
                 y="55"
-                fill="#a3e635"
+                fill="#ededed"
                 fontSize="22"
                 fontFamily="ui-monospace, monospace"
                 fontWeight="700"
@@ -484,13 +484,13 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               height="40"
               rx="2"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeOpacity="0.5"
             />
             <text
               x="490"
               y="443"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -533,7 +533,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -561,7 +561,7 @@ export function OhmsLawViz({ className }: OhmsLawVizProps) {
             <text
               x="810"
               y="270"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

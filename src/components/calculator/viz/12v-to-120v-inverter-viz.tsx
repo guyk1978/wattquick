@@ -70,7 +70,7 @@ export function TwelveVTo120VInverterViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="vti-viz-pulse"
@@ -79,9 +79,9 @@ export function TwelveVTo120VInverterViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="vti-viz-bar"
@@ -90,8 +90,8 @@ export function TwelveVTo120VInverterViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -171,7 +171,7 @@ export function TwelveVTo120VInverterViz({
             <text
               x="56"
               y="136"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -233,7 +233,7 @@ export function TwelveVTo120VInverterViz({
             <text
               x="56"
               y="316"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -334,10 +334,10 @@ export function TwelveVTo120VInverterViz({
                 height="48"
                 rx="2"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
-              <rect x="12" y="2" width="16" height="6" rx="1" fill="#a3e635" />
+              <rect x="12" y="2" width="16" height="6" rx="1" fill="currentColor" />
               <rect
                 className="vti-viz-battery"
                 x="4"
@@ -369,14 +369,14 @@ export function TwelveVTo120VInverterViz({
                 height="56"
                 rx="3"
                 fill="#0a0a0a"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <text
                 x="40"
                 y="24"
                 textAnchor="middle"
-                fill="#a3e635"
+                fill="#ededed"
                 fontSize="11"
                 fontFamily="ui-monospace, monospace"
                 fontWeight="700"
@@ -404,12 +404,12 @@ export function TwelveVTo120VInverterViz({
                 height="40"
                 rx="2"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
-              <circle cx="14" cy="14" r="4" fill="none" stroke="#a3e635" strokeWidth="1.25" />
-              <circle cx="30" cy="14" r="4" fill="none" stroke="#a3e635" strokeWidth="1.25" />
-              <rect x="18" y="26" width="8" height="6" rx="1" fill="#a3e635" />
+              <circle cx="14" cy="14" r="4" fill="none" stroke="currentColor" strokeWidth="1.25" />
+              <circle cx="30" cy="14" r="4" fill="none" stroke="currentColor" strokeWidth="1.25" />
+              <rect x="18" y="26" width="8" height="6" rx="1" fill="currentColor" />
               <text
                 x="22"
                 y="58"
@@ -585,7 +585,7 @@ export function TwelveVTo120VInverterViz({
             <text
               x="706"
               y="160"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="48"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -616,7 +616,7 @@ export function TwelveVTo120VInverterViz({
             <text
               x="706"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -718,7 +718,7 @@ export function TwelveVTo120VInverterViz({
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

@@ -64,12 +64,12 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="atw-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="atw-viz-power"
@@ -78,8 +78,8 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -185,7 +185,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
             <text
               x="112"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -244,7 +244,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               <text
                 x="16"
                 y="29"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="14"
                 fontFamily="ui-monospace, monospace"
@@ -258,7 +258,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
             <text
               x="112"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -355,9 +355,9 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               fontFamily="ui-monospace, monospace"
               textAnchor="middle"
             >
-              <tspan fill="#a3e635">10 A</tspan>
+              <tspan fill="#ededed">10 A</tspan>
               <tspan fill="#888888"> × </tspan>
-              <tspan fill="#a3e635">12 V</tspan>
+              <tspan fill="#ededed">12 V</tspan>
             </text>
             <text
               x="490"
@@ -397,7 +397,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               width="120"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.7"
             />
 
@@ -427,7 +427,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               width="96"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.7"
             />
 
@@ -505,7 +505,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -527,7 +527,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
                 strokeWidth="1.3"
                 strokeLinejoin="round"
                 className="atw-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
@@ -535,7 +535,7 @@ export function AmpsToWattsViz({ className }: AmpsToWattsVizProps) {
             <text
               x="810"
               y="290"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

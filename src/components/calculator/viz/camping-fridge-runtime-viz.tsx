@@ -70,7 +70,7 @@ export function CampingFridgeRuntimeViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="cfr-viz-pulse"
@@ -79,9 +79,9 @@ export function CampingFridgeRuntimeViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="cfr-viz-bank"
@@ -90,8 +90,8 @@ export function CampingFridgeRuntimeViz({
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="cfr-viz-bar"
@@ -100,8 +100,8 @@ export function CampingFridgeRuntimeViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -181,7 +181,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="56"
               y="140"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -198,7 +198,7 @@ export function CampingFridgeRuntimeViz({
                 fill="#0a0a0a"
                 stroke="#333333"
               />
-              <rect x="14" y="0" width="16" height="6" rx="1" fill="#a3e635" />
+              <rect x="14" y="0" width="16" height="6" rx="1" fill="currentColor" />
               <rect
                 className="cfr-viz-bank-fill"
                 x="4"
@@ -245,7 +245,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="56"
               y="306"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -348,7 +348,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -400,24 +400,24 @@ export function CampingFridgeRuntimeViz({
                 height="80"
                 rx="3"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <line x1="0" y1="36" x2="56" y2="36" stroke="#333333" strokeWidth="1" />
-              <rect x="44" y="16" width="4" height="12" rx="1" fill="#a3e635" />
+              <rect x="44" y="16" width="4" height="12" rx="1" fill="currentColor" />
               <rect x="44" y="48" width="4" height="12" rx="1" fill="#555555" />
               <path
                 className="cfr-viz-cool"
                 d="M 70 20 Q 82 28 70 36"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
               />
               <path
                 className="cfr-viz-cool"
                 d="M 74 40 Q 86 48 74 56"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 opacity="0.6"
               />
@@ -527,7 +527,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="706"
               y="156"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -605,7 +605,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="706"
               y="400"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -659,7 +659,7 @@ export function CampingFridgeRuntimeViz({
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

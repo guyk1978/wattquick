@@ -65,12 +65,12 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="sps-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="sps-viz-sun"
@@ -79,8 +79,8 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
           </defs>
 
@@ -164,14 +164,14 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
                 strokeWidth="1.2"
                 strokeLinejoin="round"
                 className="sps-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
             <text
               x="100"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -222,7 +222,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
                 cx="16"
                 cy="22"
                 r="12"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.25"
               />
               <path
@@ -234,7 +234,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
             <text
               x="100"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -277,7 +277,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
             <text
               x="56"
               y="410"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -362,14 +362,14 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
                 cy="24"
                 r="14"
                 fill="url(#sps-viz-sun)"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.2"
               />
               <path
                 className="sps-viz-sun-rays"
                 d="M28 2 V-4 M28 46 V52 M6 24 H0 M50 24 H56 M10 10 L5 5 M46 10 L51 5 M10 38 L5 43 M46 38 L51 43"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.2"
                 strokeLinecap="round"
                 opacity="0.7"
@@ -402,7 +402,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
                 width="68"
                 height="36"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.12"
                 stroke="none"
               />
@@ -436,7 +436,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
               fontFamily="ui-monospace, monospace"
             >
               5 h × 0.80 ={" "}
-              <tspan fill="#a3e635">4.0 h</tspan>
+              <tspan fill="#ededed">4.0 h</tspan>
             </text>
 
             <rect
@@ -552,7 +552,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -584,7 +584,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
                 width="92"
                 height="48"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.15"
                 stroke="none"
               />
@@ -593,7 +593,7 @@ export function SolarPanelSizeViz({ className }: SolarPanelSizeVizProps) {
             <text
               x="810"
               y="290"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

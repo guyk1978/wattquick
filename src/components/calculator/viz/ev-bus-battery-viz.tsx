@@ -67,7 +67,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ebb-viz-pulse"
@@ -76,9 +76,9 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="ebb-viz-energy"
@@ -87,8 +87,8 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
             <linearGradient
               id="ebb-viz-route"
@@ -97,8 +97,8 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
           </defs>
 
@@ -200,7 +200,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
             <text
               x="56"
               y="214"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -258,7 +258,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
                 width="24"
                 height="32"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.75"
                 stroke="none"
               />
@@ -266,7 +266,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
             <text
               x="108"
               y="350"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -396,7 +396,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
             <text
               x="490"
               y="228"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -480,7 +480,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               fontFamily="ui-monospace, monospace"
             >
               180 ÷ 90 ={" "}
-              <tspan fill="#a3e635">2.00</tspan>
+              <tspan fill="#ededed">2.00</tspan>
             </text>
 
             <text
@@ -537,7 +537,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -554,7 +554,7 @@ export function EvBusBatteryViz({ className }: EvBusBatteryVizProps) {
             <text
               x="810"
               y="230"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="30"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

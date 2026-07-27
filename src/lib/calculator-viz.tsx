@@ -37,9 +37,14 @@ import { EvLevel1VsLevel2Viz } from "@/components/calculator/viz/ev-level1-vs-le
 import { EvTruckRangeViz } from "@/components/calculator/viz/ev-truck-range-viz";
 import { EvVsIceMaintenanceViz } from "@/components/calculator/viz/ev-vs-ice-maintenance-viz";
 import { HeaterCostViz } from "@/components/calculator/viz/heater-cost-viz";
+import { HeatLossInsulationViz } from "@/components/calculator/viz/heat-loss-insulation-viz";
+import { HomeInsulationSavingsViz } from "@/components/calculator/viz/home-insulation-savings-viz";
 import { InverterSizingViz } from "@/components/calculator/viz/inverter-sizing-viz";
+import { LedSavingsRoiViz } from "@/components/calculator/viz/led-savings-roi-viz";
+import { LedVsIncandescentRoiViz } from "@/components/calculator/viz/led-vs-incandescent-roi-viz";
 import { MarineBatteryBankViz } from "@/components/calculator/viz/marine-battery-bank-viz";
 import { OhmsLawViz } from "@/components/calculator/viz/ohms-law-viz";
+import { PoolEnergyThermalCoverViz } from "@/components/calculator/viz/pool-energy-thermal-cover-viz";
 import { PortablePowerStationRechargeViz } from "@/components/calculator/viz/portable-power-station-recharge-viz";
 import { ResidentialVoltageDropViz } from "@/components/calculator/viz/residential-voltage-drop-viz";
 import { RvSolarCalculatorViz } from "@/components/calculator/viz/rv-solar-calculator-viz";
@@ -249,6 +254,26 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "heater-cost": {
       calculatorTitle: "Electric Heater Cost Calculator",
       Viz: HeaterCostViz,
+    },
+    "pool-energy-thermal-cover": {
+      calculatorTitle: "Pool Energy Cost & Thermal Cover Savings Calculator",
+      Viz: PoolEnergyThermalCoverViz,
+    },
+    "heat-loss-insulation": {
+      calculatorTitle: "Building Heat Loss & Insulation Calculator",
+      Viz: HeatLossInsulationViz,
+    },
+    "home-insulation-savings": {
+      calculatorTitle: "Home Insulation Savings Calculator",
+      Viz: HomeInsulationSavingsViz,
+    },
+    "led-savings-roi": {
+      calculatorTitle: "LED Savings & ROI Calculator",
+      Viz: LedSavingsRoiViz,
+    },
+    "led-vs-incandescent-roi": {
+      calculatorTitle: "LED vs. Incandescent ROI Calculator",
+      Viz: LedVsIncandescentRoiViz,
     },
   };
 

@@ -68,7 +68,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="adc-viz-pulse"
@@ -77,9 +77,9 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="adc-viz-bar"
@@ -88,8 +88,8 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -169,7 +169,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="56"
               y="140"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -212,7 +212,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="56"
               y="288"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -336,7 +336,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -388,13 +388,13 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
                 height="48"
                 rx="3"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <path
                 d="M 20 16 L 32 16 L 28 28 L 40 28 L 24 48 L 28 32 L 16 32 Z"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 className="adc-viz-bolt"
               />
@@ -412,7 +412,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
                 cy="24"
                 r="22"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <text
@@ -514,7 +514,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="706"
               y="160"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -564,7 +564,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="706"
               y="310"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -645,7 +645,7 @@ export function ApplianceDailyCostViz({ className }: ApplianceDailyCostVizProps)
             <text
               x="540"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

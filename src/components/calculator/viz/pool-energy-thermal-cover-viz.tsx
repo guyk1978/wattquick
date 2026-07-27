@@ -2,57 +2,60 @@
 
 import { cn } from "@/lib/utils";
 
-interface PortablePowerStationRechargeVizProps {
+interface PoolEnergyThermalCoverVizProps {
   className?: string;
 }
 
 /**
- * Industrial Matte animated schematic for Portable Power Station Recharge [VIZ].
- * Hours = Wh ÷ (input W × charge η). Compare wall / car / solar.
- * Sample: 1,000 Wh · 90% · 600 / 120 / 200 W → 1h 51m / 9h 16m / 5h 34m.
+ * Industrial Matte animated schematic for Pool Energy & Thermal Cover [VIZ].
+ * Pump kWh + evaporation heat demand → cover cuts thermal load → heating ÷ COP
+ * → daily / monthly / annual cost & savings.
+ * Sample: 1.5 kW · 8 h · $0.14/kWh · COP 5 · 40% cover → $1.88/day · $341/yr saved.
  */
-export function PortablePowerStationRechargeViz({
+export function PoolEnergyThermalCoverViz({
   className,
-}: PortablePowerStationRechargeVizProps) {
+}: PoolEnergyThermalCoverVizProps) {
   return (
     <section
-      className={cn(
-        "tool-viz tool-viz--portable-power-station-recharge",
-        className
-      )}
-      aria-label="Portable power station recharge visual breakdown"
+      className={cn("tool-viz tool-viz--pool-energy-thermal-cover", className)}
+      aria-label="Pool energy and thermal cover visual breakdown"
     >
       <header className="tool-viz__header">
         <p className="tool-viz__eyebrow">FIG. VIZ — DATA FLOW</p>
-        <h3 className="tool-viz__title">Portable Power Station Recharge</h3>
+        <h3 className="tool-viz__title">
+          Pool Energy Cost &amp; Thermal Cover Savings
+        </h3>
         <p className="tool-viz__subtitle">
-          Capacity divided by effective charge watts (input × efficiency) gives
-          refill time — wall AC usually wins over car socket or small solar.
+          Pump schedules set circulation energy; evaporation drives heater
+          demand. A thermal cover blocks surface heat loss so the heat pump
+          runs less — cutting daily spend and annual operating cost.
         </p>
       </header>
 
       <div className="tool-viz__stage">
         <svg
           viewBox="0 0 960 560"
-          className="tool-viz__svg portable-power-station-recharge-viz"
+          className="tool-viz__svg pool-energy-thermal-cover-viz"
           role="img"
-          aria-labelledby="pps-viz-title pps-viz-desc"
+          aria-labelledby="petc-viz-title petc-viz-desc"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title id="pps-viz-title">
-            Portable power station recharge animated flow diagram
+          <title id="petc-viz-title">
+            Pool energy and thermal cover animated flow diagram
           </title>
-          <desc id="pps-viz-desc">
-            Battery capacity in watt-hours is divided by each charging source
-            wattage times charge efficiency to estimate refill time. Sample: a
-            1000 watt-hour station at 90 percent efficiency recharges in about
-            1 hour 51 minutes from 600 watt wall AC, 9 hours 16 minutes from a
-            120 watt car socket, and 5 hours 34 minutes from 200 watt solar.
+          <desc id="petc-viz-desc">
+            Pool pump power and run hours produce daily pump kilowatt-hours.
+            Evaporation heat demand feeds a heater path. A thermal cover reduces
+            that demand before COP converts heat into grid energy. Sample: 1.5
+            kilowatt pump, 8 hours per day, 14 cents per kilowatt-hour, COP 5,
+            and a 40 percent cover yield about 1 dollar 88 cents per day with
+            roughly 341 dollars total annual savings versus open water and
+            resistance heat.
           </desc>
 
           <defs>
             <pattern
-              id="pps-viz-grid"
+              id="petc-viz-grid"
               width="24"
               height="24"
               patternUnits="userSpaceOnUse"
@@ -65,7 +68,7 @@ export function PortablePowerStationRechargeViz({
               />
             </pattern>
             <marker
-              id="pps-viz-arrow"
+              id="petc-viz-arrow"
               markerWidth="8"
               markerHeight="8"
               refX="6"
@@ -76,7 +79,7 @@ export function PortablePowerStationRechargeViz({
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
-              id="pps-viz-pulse"
+              id="petc-viz-pulse"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -87,17 +90,7 @@ export function PortablePowerStationRechargeViz({
               <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
-              id="pps-viz-fill"
-              x1="0%"
-              y1="100%"
-              x2="0%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
-            </linearGradient>
-            <linearGradient
-              id="pps-viz-bar"
+              id="petc-viz-bar"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -105,6 +98,26 @@ export function PortablePowerStationRechargeViz({
             >
               <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
               <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
+            </linearGradient>
+            <linearGradient
+              id="petc-viz-water"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.12" />
+            </linearGradient>
+            <linearGradient
+              id="petc-viz-heat-up"
+              x1="0%"
+              y1="100%"
+              x2="0%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.15" />
             </linearGradient>
           </defs>
 
@@ -114,7 +127,7 @@ export function PortablePowerStationRechargeViz({
             y="1"
             width="958"
             height="558"
-            fill="url(#pps-viz-grid)"
+            fill="url(#petc-viz-grid)"
             opacity="0.55"
           />
           <rect
@@ -139,14 +152,14 @@ export function PortablePowerStationRechargeViz({
             INPUTS
           </text>
           <text
-            x="350"
+            x="340"
             y="48"
             fill="#888888"
             fontSize="11"
             fontFamily="ui-monospace, monospace"
             letterSpacing="0.14em"
           >
-            CHARGE PATH
+            THERMAL · COVER PATH
           </text>
           <text
             x="700"
@@ -159,11 +172,97 @@ export function PortablePowerStationRechargeViz({
             OUTPUT
           </text>
 
-          {/* —— INPUT: Capacity —— */}
+          {/* —— INPUT: Pump —— */}
           <g>
             <rect
               x="40"
               y="72"
+              width="230"
+              height="100"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="56"
+              y="98"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              POOL PUMP
+            </text>
+            <text
+              x="56"
+              y="134"
+              fill="#ededed"
+              fontSize="26"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              1.5 kW
+            </text>
+            <text
+              x="56"
+              y="158"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              nameplate draw
+            </text>
+          </g>
+
+          {/* —— INPUT: Hours —— */}
+          <g>
+            <rect
+              x="40"
+              y="188"
+              width="230"
+              height="100"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="56"
+              y="214"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              RUN HOURS
+            </text>
+            <text
+              x="56"
+              y="250"
+              fill="#ededed"
+              fontSize="26"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              8 hrs/day
+            </text>
+            <text
+              x="56"
+              y="274"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              filtration schedule
+            </text>
+          </g>
+
+          {/* —— INPUT: Rate + COP + Cover —— */}
+          <g>
+            <rect
+              x="40"
+              y="304"
               width="230"
               height="120"
               rx="4"
@@ -173,195 +272,99 @@ export function PortablePowerStationRechargeViz({
             />
             <text
               x="56"
-              y="98"
+              y="330"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              CAPACITY
+              RATE · HEAT · COVER
             </text>
             <text
               x="56"
-              y="140"
+              y="362"
               fill="#ededed"
-              fontSize="26"
+              fontSize="18"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
             >
-              1,000 Wh
+              $0.14/kWh
             </text>
             <text
               x="56"
-              y="170"
+              y="388"
+              fill="#ededed"
+              fontSize="14"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="600"
+            >
+              COP 5 · cover −40%
+            </text>
+            <text
+              x="56"
+              y="410"
               fill="#888888"
-              fontSize="12"
+              fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              η charge 90%
+              heat pump · idle cover
             </text>
           </g>
 
-          {/* —— INPUT: Sources —— */}
-          <g>
-            <rect
-              x="40"
-              y="210"
-              width="230"
-              height="218"
-              rx="4"
-              fill="#111111"
-              stroke="#333333"
-              strokeWidth="1"
-            />
-            <text
-              x="56"
-              y="236"
-              fill="#888888"
-              fontSize="10"
-              fontFamily="ui-monospace, monospace"
-              letterSpacing="0.1em"
-            >
-              INPUT SOURCES
-            </text>
-
-            <text
-              x="56"
-              y="272"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-            >
-              Wall AC
-            </text>
-            <text
-              x="180"
-              y="272"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-              textAnchor="end"
-            >
-              600 W
-            </text>
-
-            <text
-              x="56"
-              y="312"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-            >
-              Car 12V
-            </text>
-            <text
-              x="180"
-              y="312"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-              textAnchor="end"
-            >
-              120 W
-            </text>
-
-            <text
-              x="56"
-              y="352"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-            >
-              Solar MPPT
-            </text>
-            <text
-              x="180"
-              y="352"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-              textAnchor="end"
-            >
-              200 W
-            </text>
-
-            <g className="pps-viz-sources" transform="translate(56, 378)">
-              <rect
-                x="0"
-                y="0"
-                width="22"
-                height="22"
-                rx="2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.25"
-              />
-              <path d="M 7 6 L 15 11 L 7 16 Z" fill="currentColor" />
-              <circle
-                cx="48"
-                cy="11"
-                r="10"
-                fill="none"
-                stroke="#555555"
-                strokeWidth="1.25"
-              />
-              <rect
-                x="72"
-                y="2"
-                width="28"
-                height="18"
-                rx="1"
-                fill="none"
-                stroke="#555555"
-                strokeWidth="1.25"
-              />
-              <line x1="81" y1="2" x2="81" y2="20" stroke="#333333" />
-              <line x1="91" y1="2" x2="91" y2="20" stroke="#333333" />
-            </g>
-          </g>
-
-          {/* —— Flow: capacity → station —— */}
+          {/* —— Flow inputs → mid —— */}
           <path
-            d="M 270 132 L 320 132"
+            d="M 270 122 L 320 122"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#pps-viz-arrow)"
+            markerEnd="url(#petc-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 270 132 L 320 132"
+            d="M 270 122 L 320 122"
             fill="none"
-            stroke="url(#pps-viz-pulse)"
+            stroke="url(#petc-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
           <path
-            d="M 270 319 L 300 319 L 300 200 L 320 200"
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#pps-viz-arrow)"
+            markerEnd="url(#petc-viz-arrow)"
+          />
+          <path
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--delay"
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
+            fill="none"
+            stroke="url(#petc-viz-pulse)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 270 364 L 295 364 L 295 280 L 320 280"
+            fill="none"
+            stroke="#333333"
+            strokeWidth="1.5"
+            markerEnd="url(#petc-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 270 319 L 300 319 L 300 200 L 320 200"
+            d="M 270 364 L 295 364 L 295 280 L 320 280"
             fill="none"
-            stroke="url(#pps-viz-pulse)"
+            stroke="url(#petc-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
 
-          {/* —— FLOW: Effective watts —— */}
+          {/* —— MID: Pump kWh —— */}
           <g>
             <rect
               x="330"
               y="72"
-              width="300"
-              height="140"
+              width="280"
+              height="110"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -375,46 +378,37 @@ export function PortablePowerStationRechargeViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              EFFECTIVE CHARGE W
+              PUMP ENERGY
             </text>
             <text
               x="346"
-              y="124"
+              y="128"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              input W × 0.90
+              kW × hrs/day
             </text>
             <text
               x="346"
-              y="160"
+              y="162"
               fill="#ededed"
-              fontSize="22"
+              fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
-              className="pps-viz-eff-value"
+              className="petc-viz-pump-value"
             >
-              540 W wall
-            </text>
-            <text
-              x="346"
-              y="188"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              car 108 W · solar 180 W
+              12.0 kWh/day
             </text>
           </g>
 
-          {/* —— FLOW: Station filling —— */}
+          {/* —— MID: Pool + evaporation / cover —— */}
           <g>
             <rect
               x="330"
-              y="230"
-              width="300"
-              height="198"
+              y="200"
+              width="280"
+              height="210"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -422,96 +416,181 @@ export function PortablePowerStationRechargeViz({
             />
             <text
               x="346"
-              y="256"
+              y="226"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              Wh ÷ (W × η)
+              SURFACE HEAT BALANCE
             </text>
 
-            {/* Power station body */}
-            <g transform="translate(380, 280)">
+            {/* Pool basin glyph */}
+            <g transform="translate(360, 248)">
               <rect
+                className="petc-viz-pool"
                 x="0"
-                y="0"
+                y="28"
                 width="120"
-                height="80"
-                rx="4"
-                fill="#0a0a0a"
+                height="52"
+                rx="3"
+                fill="url(#petc-viz-water)"
                 stroke="currentColor"
                 strokeWidth="1.5"
               />
+              <path
+                className="petc-viz-wave"
+                d="M 8 44 Q 20 38 32 44 T 56 44 T 80 44 T 104 44"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                opacity="0.85"
+              />
+              <path
+                className="petc-viz-wave petc-viz-wave--delay"
+                d="M 8 56 Q 20 50 32 56 T 56 56 T 80 56 T 104 56"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                opacity="0.55"
+              />
+              {/* Evaporation rising */}
+              <path
+                className="petc-viz-vapor"
+                d="M 30 24 Q 34 12 38 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.25"
+              />
+              <path
+                className="petc-viz-vapor"
+                d="M 54 22 Q 58 8 62 22"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                opacity="0.7"
+              />
+              <path
+                className="petc-viz-vapor"
+                d="M 78 24 Q 82 12 86 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.25"
+                opacity="0.45"
+              />
+              {/* Thermal cover sliding over */}
               <rect
-                className="pps-viz-station-fill"
-                x="8"
-                y="10"
-                width="104"
-                height="48"
-                rx="2"
-                fill="url(#pps-viz-fill)"
+                className="petc-viz-cover"
+                x="4"
+                y="22"
+                width="112"
+                height="8"
+                rx="1"
+                fill="currentColor"
+                fillOpacity="0.35"
+                stroke="currentColor"
+                strokeWidth="1.25"
               />
               <text
                 x="60"
-                y="72"
+                y="98"
                 textAnchor="middle"
                 fill="#888888"
                 fontSize="10"
                 fontFamily="ui-monospace, monospace"
               >
-                PACK
+                cover on idle
               </text>
-              {/* AC inlet spark */}
-              <path
-                className="pps-viz-inlet"
-                d="M -24 40 L -4 40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                markerEnd="url(#pps-viz-arrow)"
-              />
             </g>
 
             <text
-              x="346"
-              y="400"
+              x="500"
+              y="270"
               fill="#888888"
-              fontSize="12"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.08em"
+            >
+              HEAT DEMAND
+            </text>
+            <text
+              x="500"
+              y="298"
+              fill="#ededed"
+              fontSize="16"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              12 → 7.2 kWh
+            </text>
+            <text
+              x="500"
+              y="322"
+              fill="#888888"
+              fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              1,000 ÷ 540 = 1.85 h
+              −40% evaporation
+            </text>
+
+            <rect
+              x="500"
+              y="340"
+              width="90"
+              height="10"
+              rx="2"
+              fill="#0a0a0a"
+              stroke="#333333"
+            />
+            <rect
+              className="petc-viz-loss-bar"
+              x="502"
+              y="342"
+              width="54"
+              height="6"
+              rx="1"
+              fill="url(#petc-viz-bar)"
+            />
+
+            <text
+              x="346"
+              y="390"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              heating grid = demand ÷ COP 5 → 1.44 kWh
             </text>
           </g>
 
           {/* —— Flow mid → output —— */}
           <path
-            d="M 630 142 L 680 142"
+            d="M 610 127 L 680 127"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#pps-viz-arrow)"
+            markerEnd="url(#petc-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 630 142 L 680 142"
+            d="M 610 127 L 680 127"
             fill="none"
-            stroke="url(#pps-viz-pulse)"
+            stroke="url(#petc-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
           <path
-            d="M 630 329 L 655 329 L 655 230 L 680 230"
+            d="M 610 305 L 645 305 L 645 220 L 680 220"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#pps-viz-arrow)"
+            markerEnd="url(#petc-viz-arrow)"
           />
           <path
-            className="tool-viz-flow__pulse"
-            d="M 630 329 L 655 329 L 655 230 L 680 230"
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--out"
+            d="M 610 305 L 645 305 L 645 220 L 680 220"
             fill="none"
-            stroke="url(#pps-viz-pulse)"
+            stroke="url(#petc-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
@@ -522,7 +601,7 @@ export function PortablePowerStationRechargeViz({
               x="690"
               y="72"
               width="230"
-              height="356"
+              height="352"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -536,145 +615,108 @@ export function PortablePowerStationRechargeViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              FASTEST · WALL AC
+              DAILY COST
             </text>
             <text
               x="706"
-              y="152"
+              y="148"
               fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
-              className="pps-viz-output-value"
+              className="petc-viz-output-value"
             >
-              1h 51m
+              $1.88
             </text>
             <text
               x="706"
-              y="182"
-              fill="#ededed"
-              fontSize="14"
+              y="176"
+              fill="#888888"
+              fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              1.85 hours
+              with cover · COP 5
             </text>
 
             <rect
               x="706"
-              y="200"
+              y="196"
               width="198"
-              height="10"
+              height="12"
               rx="2"
               fill="#0a0a0a"
               stroke="#333333"
             />
             <rect
-              className="pps-viz-wall-bar"
+              className="petc-viz-output-bar"
               x="708"
-              y="202"
-              width="40"
-              height="6"
+              y="198"
+              width="150"
+              height="8"
               rx="1"
-              fill="url(#pps-viz-bar)"
+              fill="url(#petc-viz-bar)"
             />
 
             <text
               x="706"
-              y="248"
+              y="244"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              COMPARE
+              MONTHLY SAVINGS
             </text>
-
             <text
               x="706"
-              y="280"
+              y="278"
               fill="#ededed"
-              fontSize="13"
-              fontFamily="ui-monospace, monospace"
-            >
-              Solar
-            </text>
-            <text
-              x="888"
-              y="280"
-              textAnchor="end"
-              fill="#ededed"
-              fontSize="13"
+              fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
+              className="petc-viz-month-value"
             >
-              5h 34m
-            </text>
-            <rect
-              x="706"
-              y="290"
-              width="198"
-              height="8"
-              rx="2"
-              fill="#0a0a0a"
-              stroke="#333333"
-            />
-            <rect
-              className="pps-viz-solar-bar"
-              x="708"
-              y="292"
-              width="110"
-              height="4"
-              rx="1"
-              fill="#555555"
-            />
-
-            <text
-              x="706"
-              y="334"
-              fill="#ededed"
-              fontSize="13"
-              fontFamily="ui-monospace, monospace"
-            >
-              Car 12V
+              $28.39
             </text>
             <text
-              x="888"
-              y="334"
-              textAnchor="end"
-              fill="#ededed"
-              fontSize="13"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-            >
-              9h 16m
-            </text>
-            <rect
               x="706"
-              y="344"
-              width="198"
-              height="8"
-              rx="2"
-              fill="#0a0a0a"
-              stroke="#333333"
-            />
-            <rect
-              className="pps-viz-car-bar"
-              x="708"
-              y="346"
-              width="176"
-              height="4"
-              rx="1"
-              fill="#444444"
-            />
-
-            <text
-              x="706"
-              y="400"
+              y="302"
               fill="#888888"
               fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              hours = Wh ÷ (W × η)
+              cover + HP vs resistance
+            </text>
+
+            <text
+              x="706"
+              y="340"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              ANNUAL SAVINGS
+            </text>
+            <text
+              x="706"
+              y="378"
+              fill="#ededed"
+              fontSize="26"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+              className="petc-viz-year-value"
+            >
+              $341.38
+            </text>
+            <text
+              x="706"
+              y="404"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              open pool without cover: $2.02/day
             </text>
           </g>
 
@@ -707,7 +749,7 @@ export function PortablePowerStationRechargeViz({
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              Wh ÷ (input W × η) → wall / car / solar hours
+              pump kWh + (heat demand × cover) ÷ COP → $ cost · savings
             </text>
             <text
               x="500"
@@ -726,7 +768,7 @@ export function PortablePowerStationRechargeViz({
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              1,000 Wh · 600 W wall · 90% → 1h 51m
+              1.5 kW · 8 h · $0.14 · COP 5 · −40% → $341/yr
             </text>
           </g>
         </svg>

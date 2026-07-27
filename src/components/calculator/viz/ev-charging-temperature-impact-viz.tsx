@@ -73,7 +73,7 @@ export function EvChargingTemperatureImpactViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="eti-viz-pulse"
@@ -82,9 +82,9 @@ export function EvChargingTemperatureImpactViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="eti-viz-thermo"
@@ -93,8 +93,8 @@ export function EvChargingTemperatureImpactViz({
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
             <linearGradient
               id="eti-viz-power"
@@ -103,8 +103,8 @@ export function EvChargingTemperatureImpactViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -184,7 +184,7 @@ export function EvChargingTemperatureImpactViz({
             <text
               x="56"
               y="128"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="16"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -227,7 +227,7 @@ export function EvChargingTemperatureImpactViz({
             <text
               x="56"
               y="256"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="18"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -294,7 +294,7 @@ export function EvChargingTemperatureImpactViz({
             <text
               x="90"
               y="400"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -406,7 +406,7 @@ export function EvChargingTemperatureImpactViz({
               width="90"
               height="6"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.55"
             />
             <circle
@@ -414,7 +414,7 @@ export function EvChargingTemperatureImpactViz({
               cx="392"
               cy="151"
               r="4"
-              fill="#a3e635"
+              fill="currentColor"
             />
             <text
               x="364"
@@ -457,7 +457,7 @@ export function EvChargingTemperatureImpactViz({
             <text
               x="364"
               y="248"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
@@ -491,7 +491,7 @@ export function EvChargingTemperatureImpactViz({
               fontFamily="ui-monospace, monospace"
             >
               150 × 0.66 ={" "}
-              <tspan fill="#a3e635">98.6 kW</tspan>
+              <tspan fill="#ededed">98.6 kW</tspan>
             </text>
             <rect
               x="364"
@@ -651,7 +651,7 @@ export function EvChargingTemperatureImpactViz({
               height="158"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -668,7 +668,7 @@ export function EvChargingTemperatureImpactViz({
             <text
               x="810"
               y="380"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="34"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

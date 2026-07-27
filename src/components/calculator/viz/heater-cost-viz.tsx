@@ -68,7 +68,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="htc-viz-pulse"
@@ -77,9 +77,9 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="htc-viz-bar"
@@ -88,8 +88,8 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
             <linearGradient
               id="htc-viz-heat"
@@ -98,8 +98,8 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
           </defs>
 
@@ -179,7 +179,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
             <text
               x="56"
               y="138"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -222,7 +222,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
             <text
               x="56"
               y="262"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -356,7 +356,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -408,7 +408,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
                 height="48"
                 rx="3"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <line x1="12" y1="28" x2="58" y2="28" stroke="#333333" strokeWidth="1" />
@@ -418,14 +418,14 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
                 className="htc-viz-heat"
                 d="M 14 8 Q 20 0 26 8"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
               />
               <path
                 className="htc-viz-heat"
                 d="M 32 8 Q 38 0 44 8"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 opacity="0.7"
               />
@@ -433,7 +433,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
                 className="htc-viz-heat"
                 d="M 50 8 Q 56 0 62 8"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
                 opacity="0.45"
               />
@@ -451,7 +451,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
                 cy="40"
                 r="20"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <text
@@ -553,7 +553,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
             <text
               x="706"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -683,7 +683,7 @@ export function HeaterCostViz({ className }: HeaterCostVizProps) {
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

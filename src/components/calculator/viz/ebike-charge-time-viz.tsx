@@ -65,7 +65,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ebike-charge-viz-pulse"
@@ -74,9 +74,9 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="ebike-charge-viz-fill"
@@ -85,8 +85,8 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.95" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.95" />
             </linearGradient>
             <clipPath id="ebike-charge-viz-battery-clip">
               <rect x="376" y="218" width="228" height="48" rx="2" />
@@ -182,7 +182,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
             <text
               x="106"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -228,7 +228,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
                 className="ebike-charge-time-viz-bolt"
                 d="M20 10 L12 28 H18 L14 46 L28 24 H20 Z"
                 strokeWidth="1.2"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
                 strokeLinejoin="round"
               />
@@ -236,7 +236,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
             <text
               x="106"
               y="282"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -279,7 +279,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
             <text
               x="56"
               y="382"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -483,7 +483,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
               height="388"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -514,7 +514,7 @@ export function EbikeChargeTimeViz({ className }: EbikeChargeTimeVizProps) {
               x="810"
               y="220"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

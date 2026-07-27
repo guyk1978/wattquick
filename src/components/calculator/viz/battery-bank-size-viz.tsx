@@ -67,12 +67,12 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="bbs-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="bbs-viz-fill"
@@ -81,8 +81,8 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -166,14 +166,14 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
                 strokeWidth="1.2"
                 strokeLinejoin="round"
                 className="bbs-viz-load-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
             <text
               x="100"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -226,7 +226,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
                   y1="22"
                   x2="14"
                   y2="10"
-                  stroke="#a3e635"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
@@ -236,7 +236,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
             <text
               x="100"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -286,7 +286,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
               <text
                 x="14"
                 y="27"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="12"
                 fontFamily="ui-monospace, monospace"
@@ -300,7 +300,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
             <text
               x="100"
               y="410"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -409,7 +409,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
             <text
               x="388"
               y="188"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="16"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -507,7 +507,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
                     width="28"
                     height="18"
                     rx="1"
-                    fill="#a3e635"
+                    fill="currentColor"
                     fillOpacity="0.55"
                     stroke="none"
                     style={{ animationDelay: `${i * 0.2}s` }}
@@ -570,7 +570,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -588,7 +588,7 @@ export function BatteryBankSizeViz({ className }: BatteryBankSizeVizProps) {
             <text
               x="810"
               y="240"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="34"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

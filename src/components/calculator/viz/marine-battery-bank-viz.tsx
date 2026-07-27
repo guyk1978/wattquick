@@ -67,7 +67,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="mbb-viz-pulse"
@@ -76,9 +76,9 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="mbb-viz-bank"
@@ -87,8 +87,8 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="mbb-viz-drain"
@@ -97,8 +97,8 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -178,7 +178,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             <text
               x="56"
               y="140"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -196,9 +196,9 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             </text>
             {/* Prop glyph */}
             <g className="mbb-viz-prop" transform="translate(200, 145)">
-              <circle cx="0" cy="0" r="18" fill="none" stroke="#a3e635" strokeWidth="1.5" />
-              <ellipse cx="0" cy="0" rx="16" ry="5" fill="none" stroke="#a3e635" strokeWidth="1" />
-              <ellipse cx="0" cy="0" rx="5" ry="16" fill="none" stroke="#a3e635" strokeWidth="1" opacity="0.6" />
+              <circle cx="0" cy="0" r="18" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              <ellipse cx="0" cy="0" rx="16" ry="5" fill="none" stroke="currentColor" strokeWidth="1" />
+              <ellipse cx="0" cy="0" rx="5" ry="16" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.6" />
             </g>
           </g>
 
@@ -227,7 +227,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             <text
               x="56"
               y="298"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -252,7 +252,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               fill="#0a0a0a"
               stroke="#333333"
             />
-            <rect x="74" y="344" width="20" height="6" rx="1" fill="#a3e635" />
+            <rect x="74" y="344" width="20" height="6" rx="1" fill="currentColor" />
             <rect
               className="mbb-viz-bank-fill"
               x="60"
@@ -348,7 +348,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -431,7 +431,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
                 className="mbb-viz-boat"
                 d="M 40 28 L 70 28 L 78 40 L 32 40 Z"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <line
@@ -445,7 +445,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
               <path
                 d="M 55 12 L 72 20 L 55 22 Z"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1"
               />
             </g>
@@ -517,7 +517,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             <text
               x="706"
               y="160"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -571,7 +571,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
                 cy="0"
                 r="36"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
               <line
@@ -580,7 +580,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
                 y1="0"
                 x2="0"
                 y2="-22"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
               />
@@ -650,7 +650,7 @@ export function MarineBatteryBankViz({ className }: MarineBatteryBankVizProps) {
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

@@ -68,7 +68,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="el12-viz-pulse"
@@ -77,9 +77,9 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="el12-viz-slow"
@@ -88,8 +88,8 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.55" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
             <linearGradient
               id="el12-viz-fast"
@@ -98,8 +98,8 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.4" />
             </linearGradient>
           </defs>
 
@@ -194,7 +194,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
                 width="18"
                 height="20"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.75"
                 stroke="none"
               />
@@ -202,7 +202,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
             <text
               x="98"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -245,7 +245,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
             <text
               x="56"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -295,7 +295,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               <path
                 d="M18 8 L10 22 H16 L12 32 L24 16 H18 Z"
                 className="el12-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.45"
                 strokeLinejoin="round"
               />
@@ -303,7 +303,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
             <text
               x="100"
               y="408"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -409,7 +409,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               fontFamily="ui-monospace, monospace"
             >
               50 ÷ 1.4 ={" "}
-              <tspan fill="#a3e635">35.7 h</tspan>
+              <tspan fill="#ededed">35.7 h</tspan>
             </text>
             <text
               x="352"
@@ -456,7 +456,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               height="150"
               rx="3"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1"
               strokeOpacity="0.35"
             />
@@ -478,7 +478,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               fontFamily="ui-monospace, monospace"
             >
               50 ÷ 7.2 ={" "}
-              <tspan fill="#a3e635">6.9 h</tspan>
+              <tspan fill="#ededed">6.9 h</tspan>
             </text>
             <text
               x="352"
@@ -582,7 +582,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
                   y1="14"
                   x2="14"
                   y2="6"
-                  stroke="#a3e635"
+                  stroke="currentColor"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -591,7 +591,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
             <text
               x="740"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -618,7 +618,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
               height="150"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -645,7 +645,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
                   y1="14"
                   x2="14"
                   y2="6"
-                  stroke="#a3e635"
+                  stroke="currentColor"
                   strokeWidth="1.8"
                   strokeLinecap="round"
                 />
@@ -654,7 +654,7 @@ export function EvLevel1VsLevel2Viz({ className }: EvLevel1VsLevel2VizProps) {
             <text
               x="740"
               y="318"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

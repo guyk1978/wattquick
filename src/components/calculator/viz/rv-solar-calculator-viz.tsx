@@ -68,7 +68,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="rvs-viz-pulse"
@@ -77,9 +77,9 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="rvs-viz-sun"
@@ -88,8 +88,8 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               x2="100%"
               y2="100%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
             <linearGradient
               id="rvs-viz-energy"
@@ -98,8 +98,8 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
             <linearGradient
               id="rvs-viz-bank"
@@ -108,8 +108,8 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -189,7 +189,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="56"
               y="136"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -206,7 +206,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
                 height="28"
                 rx="2"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.25"
               />
               <line x1="17" y1="0" x2="17" y2="28" stroke="#333333" strokeWidth="1" />
@@ -249,7 +249,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="56"
               y="286"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -262,7 +262,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
               cy="278"
               r="14"
               fill="url(#rvs-viz-sun)"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1"
             />
           </g>
@@ -382,7 +382,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="346"
               y="164"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -489,10 +489,10 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
                 height="28"
                 rx="2"
                 fill="none"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.5"
               />
-              <rect x="48" y="8" width="5" height="12" rx="1" fill="#a3e635" />
+              <rect x="48" y="8" width="5" height="12" rx="1" fill="currentColor" />
               <rect
                 className="rvs-viz-bank-fill"
                 x="4"
@@ -571,7 +571,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="706"
               y="152"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -630,7 +630,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="706"
               y="318"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -711,7 +711,7 @@ export function RvSolarCalculatorViz({ className }: RvSolarCalculatorVizProps) {
             <text
               x="520"
               y="52"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >

@@ -67,7 +67,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ecpm-viz-pulse"
@@ -76,9 +76,9 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="ecpm-viz-cost"
@@ -87,8 +87,8 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -181,7 +181,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
                 width="18"
                 height="10"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.7"
                 stroke="none"
               />
@@ -189,7 +189,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
             <text
               x="56"
               y="210"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -234,7 +234,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
               <text
                 x="20"
                 y="23"
-                fill="#a3e635"
+                fill="#ededed"
                 fontSize="14"
                 fontFamily="ui-monospace, monospace"
                 fontWeight="700"
@@ -249,14 +249,14 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
                 cx="48"
                 cy="18"
                 r="3"
-                fill="#a3e635"
+                fill="currentColor"
                 stroke="none"
               />
             </g>
             <text
               x="56"
               y="392"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -359,7 +359,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
             <text
               x="490"
               y="230"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -482,7 +482,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -515,7 +515,7 @@ export function EvCostPerMileViz({ className }: EvCostPerMileVizProps) {
             <text
               x="810"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

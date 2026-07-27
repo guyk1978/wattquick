@@ -63,12 +63,12 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="ups-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="ups-viz-drain"
@@ -77,8 +77,8 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
             <clipPath id="ups-viz-gauge-clip">
               <rect x="396" y="268" width="208" height="16" rx="2" />
@@ -179,7 +179,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
                 width="26"
                 height="33"
                 rx="1.5"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.88"
                 stroke="none"
               />
@@ -188,7 +188,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
             <text
               x="112"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -246,7 +246,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
                 strokeWidth="1.3"
                 strokeLinejoin="round"
                 className="ups-viz-load-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
@@ -254,7 +254,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
             <text
               x="112"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -347,7 +347,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
               x="500"
               y="218"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="15"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -497,7 +497,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
               height="280"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -529,7 +529,7 @@ export function UpsRuntimeViz({ className }: UpsRuntimeVizProps) {
               x="810"
               y="248"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="34"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

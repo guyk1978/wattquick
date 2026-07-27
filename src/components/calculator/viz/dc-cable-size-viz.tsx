@@ -65,12 +65,12 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="dcs-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="dcs-viz-conductor"
@@ -79,9 +79,9 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.25" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
           </defs>
 
@@ -165,14 +165,14 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
                 strokeWidth="1.2"
                 strokeLinejoin="round"
                 className="dcs-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
             <text
               x="100"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -226,14 +226,14 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
                 cx="16"
                 cy="18"
                 r="3"
-                fill="#a3e635"
+                fill="currentColor"
                 stroke="none"
               />
             </g>
             <text
               x="100"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -283,7 +283,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               <text
                 x="14"
                 y="27"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="12"
                 fontFamily="ui-monospace, monospace"
@@ -297,7 +297,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
             <text
               x="100"
               y="410"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -490,7 +490,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               fontFamily="ui-monospace, monospace"
             >
               40 A → copper table →{" "}
-              <tspan fill="#a3e635">8 AWG</tspan>
+              <tspan fill="#ededed">8 AWG</tspan>
             </text>
 
             <rect
@@ -556,7 +556,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
                     cy="16"
                     r={wire.r}
                     fill="none"
-                    stroke={wire.label === "8" ? "#a3e635" : "#555555"}
+                    stroke={wire.label === "8" ? "currentColor" : "#555555"}
                     strokeWidth={wire.label === "8" ? 1.6 : 1.1}
                     className={
                       wire.label === "8" ? "dcs-viz-awg-active" : undefined
@@ -566,7 +566,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
                     cx="16"
                     cy="16"
                     r={Math.max(2, wire.r - 3)}
-                    fill={wire.label === "8" ? "#a3e635" : "#333333"}
+                    fill={wire.label === "8" ? "currentColor" : "#333333"}
                     fillOpacity={wire.label === "8" ? 0.55 : 0.8}
                     stroke="none"
                     className={
@@ -576,7 +576,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
                   <text
                     x="16"
                     y="42"
-                    fill={wire.label === "8" ? "#a3e635" : "#555555"}
+                    fill={wire.label === "8" ? "currentColor" : "#555555"}
                     fontSize="9"
                     fontFamily="ui-monospace, monospace"
                     textAnchor="middle"
@@ -620,7 +620,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -648,7 +648,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
               cx="810"
               cy="230"
               r="28"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.55"
               stroke="none"
             />
@@ -667,7 +667,7 @@ export function DcCableSizeViz({ className }: DcCableSizeVizProps) {
             <text
               x="810"
               y="300"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="28"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

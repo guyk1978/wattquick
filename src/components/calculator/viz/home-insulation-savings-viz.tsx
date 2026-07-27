@@ -2,52 +2,58 @@
 
 import { cn } from "@/lib/utils";
 
-interface ApplianceMonthlyEnergyVizProps {
+interface HomeInsulationSavingsVizProps {
   className?: string;
 }
 
 /**
- * Industrial Matte animated schematic for Appliance Monthly Energy [VIZ] tab.
- * Monthly kWh = (W × hrs/day × 30) ÷ 1000.
- * Sample: 200 W · 5 hrs · 30 days → 30 kWh/mo.
+ * Industrial Matte animated schematic for Home Insulation Savings [VIZ].
+ * Baseline envelope U / heat loss vs advanced + Low-E upgrade → HVAC $ saved.
+ * Sample: 120 m² · standard walls · double glass · moderate · $0.14
+ * → U 0.83→0.37 · 0.64→0.29 kW · $665.70/yr.
  */
-export function ApplianceMonthlyEnergyViz({
+export function HomeInsulationSavingsViz({
   className,
-}: ApplianceMonthlyEnergyVizProps) {
+}: HomeInsulationSavingsVizProps) {
   return (
     <section
-      className={cn("tool-viz tool-viz--appliance-monthly-energy", className)}
-      aria-label="Appliance monthly energy visual breakdown"
+      className={cn("tool-viz tool-viz--home-insulation-savings", className)}
+      aria-label="Home insulation savings visual breakdown"
     >
       <header className="tool-viz__header">
         <p className="tool-viz__eyebrow">FIG. VIZ — DATA FLOW</p>
-        <h3 className="tool-viz__title">Appliance Monthly Energy</h3>
+        <h3 className="tool-viz__title">Home Insulation Savings</h3>
         <p className="tool-viz__subtitle">
-          Daily watt-hours accumulate across a 30-day billing cycle to show how
-          much energy each appliance adds to the month.
+          Floor area and climate set HVAC intensity. Upgrading walls and
+          windows lowers composite U-value and design heat loss — cutting
+          annual heating and cooling kilowatt-hours and cost.
         </p>
       </header>
 
       <div className="tool-viz__stage">
         <svg
           viewBox="0 0 960 560"
-          className="tool-viz__svg appliance-monthly-energy-viz"
+          className="tool-viz__svg home-insulation-savings-viz"
           role="img"
-          aria-labelledby="ame-viz-title ame-viz-desc"
+          aria-labelledby="his-viz-title his-viz-desc"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title id="ame-viz-title">
-            Appliance monthly energy animated flow diagram
+          <title id="his-viz-title">
+            Home insulation savings animated flow diagram
           </title>
-          <desc id="ame-viz-desc">
-            Appliance power in watts multiplied by hours per day and thirty days
-            yields monthly kilowatt-hours. Sample: a 200 watt television running
-            5 hours per day uses 30 kilowatt-hours per month.
+          <desc id="his-viz-desc">
+            Conditioned floor area, current wall insulation, and window glazing
+            set a baseline composite U-value and design heat loss. Upgrading to
+            advanced insulation and Low-E glass reduces thermal transmittance
+            and annual HVAC energy. Sample: 120 square meters, standard walls,
+            double glazing, moderate climate at 14 cents per kilowatt-hour
+            saves about 666 dollars per year with U falling from 0.83 to 0.37
+            and heat loss from 0.64 to 0.29 kilowatts.
           </desc>
 
           <defs>
             <pattern
-              id="ame-viz-grid"
+              id="his-viz-grid"
               width="24"
               height="24"
               patternUnits="userSpaceOnUse"
@@ -60,7 +66,7 @@ export function ApplianceMonthlyEnergyViz({
               />
             </pattern>
             <marker
-              id="ame-viz-arrow"
+              id="his-viz-arrow"
               markerWidth="8"
               markerHeight="8"
               refX="6"
@@ -71,7 +77,7 @@ export function ApplianceMonthlyEnergyViz({
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
-              id="ame-viz-pulse"
+              id="his-viz-pulse"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -82,7 +88,7 @@ export function ApplianceMonthlyEnergyViz({
               <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
-              id="ame-viz-bar"
+              id="his-viz-bar"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -90,6 +96,16 @@ export function ApplianceMonthlyEnergyViz({
             >
               <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
               <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
+            </linearGradient>
+            <linearGradient
+              id="his-viz-fill"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.12" />
             </linearGradient>
           </defs>
 
@@ -99,7 +115,7 @@ export function ApplianceMonthlyEnergyViz({
             y="1"
             width="958"
             height="558"
-            fill="url(#ame-viz-grid)"
+            fill="url(#his-viz-grid)"
             opacity="0.55"
           />
           <rect
@@ -124,14 +140,14 @@ export function ApplianceMonthlyEnergyViz({
             INPUTS
           </text>
           <text
-            x="350"
+            x="340"
             y="48"
             fill="#888888"
             fontSize="11"
             fontFamily="ui-monospace, monospace"
             letterSpacing="0.14em"
           >
-            30-DAY ACCUMULATION
+            BEFORE → AFTER
           </text>
           <text
             x="700"
@@ -144,13 +160,13 @@ export function ApplianceMonthlyEnergyViz({
             OUTPUT
           </text>
 
-          {/* —— INPUT: Watts —— */}
+          {/* —— INPUT: Floor area —— */}
           <g>
             <rect
               x="40"
               y="72"
               width="230"
-              height="160"
+              height="100"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -164,64 +180,36 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              POWER DRAW
+              FLOOR AREA
             </text>
             <text
               x="56"
-              y="148"
+              y="134"
               fill="#ededed"
-              fontSize="32"
+              fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
             >
-              200 W
+              120 m²
             </text>
             <text
               x="56"
-              y="184"
+              y="158"
               fill="#888888"
-              fontSize="12"
+              fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              TV / set-top load
+              conditioned space
             </text>
-            <g className="ame-viz-appliance" transform="translate(180, 120)">
-              <rect
-                x="0"
-                y="0"
-                width="52"
-                height="36"
-                rx="2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="10"
-                y1="42"
-                x2="42"
-                y2="42"
-                stroke="#555555"
-                strokeWidth="1.5"
-              />
-              <line
-                x1="26"
-                y1="36"
-                x2="26"
-                y2="42"
-                stroke="#555555"
-                strokeWidth="1.5"
-              />
-            </g>
           </g>
 
-          {/* —— INPUT: Hours —— */}
+          {/* —— INPUT: Insulation —— */}
           <g>
             <rect
               x="40"
-              y="250"
+              y="188"
               width="230"
-              height="178"
+              height="100"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -229,82 +217,132 @@ export function ApplianceMonthlyEnergyViz({
             />
             <text
               x="56"
-              y="276"
+              y="214"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              HOURS / DAY
+              WALL INSULATION
             </text>
             <text
               x="56"
-              y="324"
+              y="250"
               fill="#ededed"
-              fontSize="32"
+              fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
             >
-              5.0 hrs
+              Standard
             </text>
             <text
               x="56"
-              y="360"
+              y="274"
               fill="#888888"
-              fontSize="12"
+              fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              evening schedule
-            </text>
-            <text
-              x="56"
-              y="396"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              × 30-day cycle
+              upgrade → advanced
             </text>
           </g>
 
-          {/* —— Flow: inputs → mid —— */}
+          {/* —— INPUT: Climate / rate —— */}
+          <g>
+            <rect
+              x="40"
+              y="304"
+              width="230"
+              height="100"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="56"
+              y="330"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              CLIMATE · RATE
+            </text>
+            <text
+              x="56"
+              y="362"
+              fill="#ededed"
+              fontSize="18"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              Moderate
+            </text>
+            <text
+              x="56"
+              y="388"
+              fill="#ededed"
+              fontSize="14"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="600"
+            >
+              $0.14/kWh · double glass
+            </text>
+          </g>
+
+          {/* —— Flow inputs → mid —— */}
           <path
-            d="M 270 152 L 320 152"
+            d="M 270 122 L 320 122"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#his-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 270 152 L 320 152"
+            d="M 270 122 L 320 122"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#his-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
           <path
-            d="M 270 339 L 300 339 L 300 210 L 320 210"
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#his-viz-arrow)"
+          />
+          <path
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--delay"
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
+            fill="none"
+            stroke="url(#his-viz-pulse)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 270 354 L 295 354 L 295 280 L 320 280"
+            fill="none"
+            stroke="#333333"
+            strokeWidth="1.5"
+            markerEnd="url(#his-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 270 339 L 300 339 L 300 210 L 320 210"
+            d="M 270 354 L 295 354 L 295 280 L 320 280"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#his-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
 
-          {/* —— FLOW: Daily Wh —— */}
+          {/* —— MID: Before —— */}
           <g>
             <rect
               x="330"
               y="72"
-              width="300"
+              width="280"
               height="150"
               rx="4"
               fill="#111111"
@@ -319,46 +357,83 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              DAILY ENERGY
+              BASELINE ENVELOPE
             </text>
             <text
               x="346"
-              y="124"
+              y="128"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              W × hrs ÷ 1000
+              Composite U
             </text>
             <text
               x="346"
-              y="164"
+              y="158"
               fill="#ededed"
-              fontSize="28"
+              fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
-              className="ame-viz-daily-value"
+              className="his-viz-u-before"
             >
-              1.0 kWh/day
+              0.83
             </text>
             <text
-              x="346"
-              y="196"
+              x="430"
+              y="158"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              200 × 5 ÷ 1000
+              W/m²·K
             </text>
+            <text
+              x="346"
+              y="188"
+              fill="#888888"
+              fontSize="12"
+              fontFamily="ui-monospace, monospace"
+            >
+              Design heat loss
+            </text>
+            <text
+              x="346"
+              y="210"
+              fill="#ededed"
+              fontSize="16"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              0.64 kW
+            </text>
+            <rect
+              x="470"
+              y="198"
+              width="120"
+              height="10"
+              rx="2"
+              fill="#0a0a0a"
+              stroke="#333333"
+            />
+            <rect
+              className="his-viz-before-bar"
+              x="472"
+              y="200"
+              width="100"
+              height="6"
+              rx="1"
+              fill="url(#his-viz-bar)"
+            />
           </g>
 
-          {/* —— FLOW: 30-day stack —— */}
+          {/* —— MID: After upgrade house glyph —— */}
           <g>
             <rect
               x="330"
               y="240"
-              width="300"
-              height="188"
+              width="280"
+              height="170"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -372,92 +447,117 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              MONTHLY STACK
-            </text>
-            <text
-              x="346"
-              y="296"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              daily kWh × 30
+              UPGRADED ENVELOPE
             </text>
 
-            {/* Calendar / day ticks */}
-            <g transform="translate(360, 320)">
-              {Array.from({ length: 10 }).map((_, i) => (
-                <rect
-                  key={i}
-                  className="ame-viz-day-tick"
-                  x={i * 18}
-                  y={0}
-                  width="12"
-                  height="28"
-                  rx="1"
-                  fill={i < 7 ? "currentColor" : "#333333"}
-                  opacity={i < 7 ? 0.35 + i * 0.08 : 0.5}
-                />
-              ))}
-              <text
-                x="0"
-                y="52"
-                fill="#888888"
-                fontSize="11"
-                fontFamily="ui-monospace, monospace"
-              >
-                days accumulate →
-              </text>
+            {/* House outline with thicker insulation */}
+            <g transform="translate(360, 286)">
+              <path
+                className="his-viz-house"
+                d="M 8 52 L 48 18 L 88 52 V 88 H 8 Z"
+                fill="url(#his-viz-fill)"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinejoin="round"
+              />
+              <rect
+                x="38"
+                y="58"
+                width="20"
+                height="30"
+                fill="#0a0a0a"
+                stroke="currentColor"
+                strokeWidth="1.25"
+              />
+              {/* Insulation thickness rings */}
+              <path
+                className="his-viz-shell"
+                d="M 2 54 L 48 12 L 94 54"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinejoin="round"
+                opacity="0.7"
+              />
+              <path
+                className="tool-viz-flow__pulse"
+                d="M 100 50 L 130 50"
+                fill="none"
+                stroke="url(#his-viz-pulse)"
+                strokeWidth="2"
+                markerEnd="url(#his-viz-arrow)"
+              />
             </g>
 
-            <rect
-              x="346"
+            <text
+              x="500"
+              y="310"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              Advanced + Low-E
+            </text>
+            <text
+              x="500"
+              y="340"
+              fill="#ededed"
+              fontSize="22"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+              className="his-viz-u-after"
+            >
+              U 0.37
+            </text>
+            <text
+              x="500"
+              y="368"
+              fill="#ededed"
+              fontSize="14"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="600"
+            >
+              0.29 kW loss
+            </text>
+            <text
+              x="500"
               y="392"
-              width="240"
-              height="12"
-              rx="2"
-              fill="#0a0a0a"
-              stroke="#333333"
-            />
-            <rect
-              className="ame-viz-accum-bar"
-              x="348"
-              y="394"
-              width="200"
-              height="8"
-              rx="1"
-              fill="url(#ame-viz-bar)"
-            />
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              −55% HVAC kWh
+            </text>
           </g>
 
           {/* —— Flow mid → output —— */}
           <path
-            d="M 630 147 L 680 147"
+            d="M 610 147 L 680 147"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#his-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 630 147 L 680 147"
+            d="M 610 147 L 680 147"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#his-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
           <path
-            d="M 630 334 L 655 334 L 655 230 L 680 230"
+            d="M 610 325 L 645 325 L 645 220 L 680 220"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#his-viz-arrow)"
           />
           <path
-            className="tool-viz-flow__pulse"
-            d="M 630 334 L 655 334 L 655 230 L 680 230"
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--out"
+            d="M 610 325 L 645 325 L 645 220 L 680 220"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#his-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
@@ -468,7 +568,7 @@ export function ApplianceMonthlyEnergyViz({
               x="690"
               y="72"
               width="230"
-              height="356"
+              height="352"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -482,32 +582,32 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              MONTHLY ENERGY
+              ANNUAL HVAC SAVINGS
             </text>
             <text
               x="706"
-              y="168"
+              y="152"
               fill="#ededed"
-              fontSize="48"
+              fontSize="34"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
-              className="ame-viz-output-value"
+              className="his-viz-output-value"
             >
-              30
+              $665.70
             </text>
             <text
               x="706"
-              y="204"
-              fill="#ededed"
-              fontSize="18"
+              y="180"
+              fill="#888888"
+              fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              kWh/mo
+              ≈ $55.48 / month
             </text>
 
             <rect
               x="706"
-              y="228"
+              y="200"
               width="198"
               height="12"
               rx="2"
@@ -515,60 +615,73 @@ export function ApplianceMonthlyEnergyViz({
               stroke="#333333"
             />
             <rect
-              className="ame-viz-month-bar"
+              className="his-viz-savings-bar"
               x="708"
-              y="230"
+              y="202"
               width="160"
               height="8"
               rx="1"
-              fill="url(#ame-viz-bar)"
+              fill="url(#his-viz-bar)"
             />
 
             <text
               x="706"
-              y="280"
+              y="248"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              BREAKDOWN
+              ENERGY CUT
             </text>
             <text
               x="706"
-              y="312"
+              y="280"
               fill="#ededed"
-              fontSize="14"
+              fontSize="18"
               fontFamily="ui-monospace, monospace"
+              fontWeight="700"
             >
-              1.0 kWh × 30 days
+              8,640 → 3,885
             </text>
             <text
               x="706"
-              y="344"
+              y="304"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              200 W × 5 h × 30
+              kWh/yr · 55% less
             </text>
+
             <text
               x="706"
-              y="368"
+              y="340"
               fill="#888888"
-              fontSize="12"
+              fontSize="10"
               fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
             >
-              ÷ 1000 = 30.0
+              BILL BEFORE → AFTER
             </text>
             <text
               x="706"
-              y="404"
+              y="370"
+              fill="#ededed"
+              fontSize="15"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="600"
+            >
+              $1,209.60 → $543.90
+            </text>
+            <text
+              x="706"
+              y="398"
               fill="#888888"
               fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              billable month factor
+              score 7.8 → 9.7 / 10
             </text>
           </g>
 
@@ -601,10 +714,10 @@ export function ApplianceMonthlyEnergyViz({
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              (W × hrs × 30) ÷ 1000 → kWh/mo
+              area × climate × U-multiplier → kWh × $/kWh → savings
             </text>
             <text
-              x="480"
+              x="520"
               y="28"
               fill="#888888"
               fontSize="10"
@@ -614,13 +727,13 @@ export function ApplianceMonthlyEnergyViz({
               SAMPLE
             </text>
             <text
-              x="480"
+              x="520"
               y="52"
               fill="#ededed"
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              200 W · 5 h/day · 30 d → 30 kWh/mo
+              120 m² · standard → advanced · $666/yr
             </text>
           </g>
         </svg>

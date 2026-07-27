@@ -68,12 +68,12 @@ export function SolarChargeControllerSizeViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="scc-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="scc-viz-current"
@@ -82,8 +82,8 @@ export function SolarChargeControllerSizeViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -177,7 +177,7 @@ export function SolarChargeControllerSizeViz({
                 width="32"
                 height="24"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.15"
                 stroke="none"
               />
@@ -185,7 +185,7 @@ export function SolarChargeControllerSizeViz({
             <text
               x="108"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -243,7 +243,7 @@ export function SolarChargeControllerSizeViz({
                 width="20"
                 height="26"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.75"
                 stroke="none"
               />
@@ -251,7 +251,7 @@ export function SolarChargeControllerSizeViz({
             <text
               x="100"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -294,7 +294,7 @@ export function SolarChargeControllerSizeViz({
             <text
               x="56"
               y="410"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -414,14 +414,14 @@ export function SolarChargeControllerSizeViz({
                 height="40"
                 rx="3"
                 fill="#0a0a0a"
-                stroke="#a3e635"
+                stroke="currentColor"
                 strokeWidth="1.3"
                 strokeOpacity="0.55"
               />
               <text
                 x="106"
                 y="28"
-                fill="#a3e635"
+                fill="#ededed"
                 fontSize="9"
                 fontFamily="ui-monospace, monospace"
                 fontWeight="700"
@@ -494,7 +494,7 @@ export function SolarChargeControllerSizeViz({
               fontFamily="ui-monospace, monospace"
             >
               800 W ÷ 12 V ={" "}
-              <tspan fill="#a3e635">66.7 A</tspan>
+              <tspan fill="#ededed">66.7 A</tspan>
             </text>
 
             <rect
@@ -562,7 +562,7 @@ export function SolarChargeControllerSizeViz({
               width="140"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.55"
             />
             <text
@@ -647,7 +647,7 @@ export function SolarChargeControllerSizeViz({
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -669,13 +669,13 @@ export function SolarChargeControllerSizeViz({
               height="48"
               rx="3"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeOpacity="0.5"
             />
             <text
               x="810"
               y="226"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="14"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -687,7 +687,7 @@ export function SolarChargeControllerSizeViz({
             <text
               x="810"
               y="290"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

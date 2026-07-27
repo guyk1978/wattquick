@@ -63,12 +63,12 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="wta-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="wta-viz-current"
@@ -77,9 +77,9 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.2" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
           </defs>
 
@@ -163,14 +163,14 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
                 strokeWidth="1.3"
                 strokeLinejoin="round"
                 className="wta-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
             <text
               x="112"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -229,7 +229,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               <text
                 x="16"
                 y="29"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="14"
                 fontFamily="ui-monospace, monospace"
@@ -243,7 +243,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
             <text
               x="112"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -340,9 +340,9 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               fontFamily="ui-monospace, monospace"
               textAnchor="middle"
             >
-              <tspan fill="#a3e635">120 W</tspan>
+              <tspan fill="#ededed">120 W</tspan>
               <tspan fill="#888888"> ÷ </tspan>
-              <tspan fill="#a3e635">12 V</tspan>
+              <tspan fill="#ededed">12 V</tspan>
             </text>
             <text
               x="490"
@@ -382,7 +382,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               width="180"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.7"
             />
 
@@ -412,7 +412,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               width="72"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.7"
             />
 
@@ -489,7 +489,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -524,11 +524,11 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
             <path
               className="wta-viz-needle"
               d="M 810 228 L 810 200"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
             />
-            <circle cx="810" cy="228" r="4" fill="#a3e635" />
+            <circle cx="810" cy="228" r="4" fill="currentColor" />
             <text
               x="810"
               y="262"
@@ -543,7 +543,7 @@ export function WattsToAmpsViz({ className }: WattsToAmpsVizProps) {
             <text
               x="810"
               y="310"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

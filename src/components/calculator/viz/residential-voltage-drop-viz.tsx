@@ -70,12 +70,12 @@ export function ResidentialVoltageDropViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="rvd-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="rvd-viz-voltage-fade"
@@ -84,8 +84,8 @@ export function ResidentialVoltageDropViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
           </defs>
 
@@ -164,7 +164,7 @@ export function ResidentialVoltageDropViz({
             <text
               x="48"
               y="116"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -205,7 +205,7 @@ export function ResidentialVoltageDropViz({
             <text
               x="48"
               y="216"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -246,7 +246,7 @@ export function ResidentialVoltageDropViz({
             <text
               x="48"
               y="316"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -287,7 +287,7 @@ export function ResidentialVoltageDropViz({
             <text
               x="48"
               y="416"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="20"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -514,7 +514,7 @@ export function ResidentialVoltageDropViz({
               fontFamily="ui-monospace, monospace"
             >
               20 A × 0.261 Ω ={" "}
-              <tspan fill="#a3e635">5.21 V</tspan>
+              <tspan fill="#ededed">5.21 V</tspan>
             </text>
 
             {/* Threshold gauge */}
@@ -545,7 +545,7 @@ export function ResidentialVoltageDropViz({
               width="210"
               height="14"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.75"
             />
             <line
@@ -631,7 +631,7 @@ export function ResidentialVoltageDropViz({
               height="280"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -649,7 +649,7 @@ export function ResidentialVoltageDropViz({
             <text
               x="810"
               y="210"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="30"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -697,13 +697,13 @@ export function ResidentialVoltageDropViz({
               height="28"
               rx="2"
               fill="#0a0a0a"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeOpacity="0.6"
             />
             <text
               x="848"
               y="281"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               textAnchor="middle"

@@ -69,12 +69,12 @@ export function BatteryChargingTimeViz({
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="bct-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="bct-viz-fill"
@@ -83,8 +83,8 @@ export function BatteryChargingTimeViz({
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -179,7 +179,7 @@ export function BatteryChargingTimeViz({
                 width="22"
                 height="20"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.75"
                 stroke="none"
               />
@@ -187,7 +187,7 @@ export function BatteryChargingTimeViz({
             <text
               x="102"
               y="156"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -239,7 +239,7 @@ export function BatteryChargingTimeViz({
               <path
                 d="M20 16 L12 30 H18 L14 42 L26 24 H20 Z"
                 className="bct-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.4"
                 strokeLinejoin="round"
               />
@@ -247,7 +247,7 @@ export function BatteryChargingTimeViz({
             <text
               x="102"
               y="306"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -290,7 +290,7 @@ export function BatteryChargingTimeViz({
             <text
               x="56"
               y="444"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -431,7 +431,7 @@ export function BatteryChargingTimeViz({
                 width="58"
                 height="48"
                 rx="2"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.55"
               />
             </g>
@@ -572,7 +572,7 @@ export function BatteryChargingTimeViz({
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -600,7 +600,7 @@ export function BatteryChargingTimeViz({
                   y1="24"
                   x2="24"
                   y2="10"
-                  stroke="#a3e635"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
@@ -611,7 +611,7 @@ export function BatteryChargingTimeViz({
             <text
               x="810"
               y="290"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="30"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

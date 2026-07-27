@@ -13919,6 +13919,7 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .tool-viz {
+  --viz-accent: var(--category-color, #a3e635);
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -13984,6 +13985,8 @@ body:has(.legal-modal) .grid-modal-shell {
   max-height: min(70vh, 640px);
   min-height: 280px;
   aspect-ratio: 960 / 560;
+  /* Accent strokes/fills in schematics inherit category neon via currentColor */
+  color: var(--viz-accent, var(--category-color, #a3e635));
 }
 
 /* Flow pulse: dash travels along connector paths */
@@ -15337,6 +15340,140 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* Pool Energy · Thermal Cover · pump + evaporation + COP */
+.petc-viz-pool,
+.petc-viz-wave,
+.petc-viz-vapor,
+.petc-viz-cover {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.petc-viz-wave--delay,
+.petc-viz-vapor:nth-of-type(2) {
+  animation-delay: 0.35s;
+}
+
+.petc-viz-cover {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: petc-viz-cover-slide 4.2s ease-in-out infinite;
+}
+
+.petc-viz-loss-bar,
+.petc-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.petc-viz-pump-value,
+.petc-viz-output-value,
+.petc-viz-month-value,
+.petc-viz-year-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Heat Loss · Insulation · (A × ΔT) ÷ R → BTU/hr */
+.hli-viz-insulation {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.hli-viz-r-bar,
+.hli-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.5s ease-in-out infinite;
+}
+
+.hli-viz-drive-value,
+.hli-viz-output-value,
+.hli-viz-kw-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Home Insulation Savings · baseline → upgrade → $ */
+.his-viz-house,
+.his-viz-shell {
+  animation: cl-viz-dot-blink 2.3s ease-in-out infinite;
+}
+
+.his-viz-before-bar,
+.his-viz-savings-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.5s ease-in-out infinite;
+}
+
+.his-viz-u-before,
+.his-viz-u-after,
+.his-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* LED Savings ROI · legacy → LED → payback / CO₂ */
+.lsr-viz-bulb,
+.lsr-viz-legacy-glow,
+.lsr-viz-led-glow {
+  animation: cl-viz-dot-blink 2.1s ease-in-out infinite;
+}
+
+.lsr-viz-bulb--led,
+.lsr-viz-led-glow {
+  animation-delay: 0.35s;
+}
+
+.lsr-viz-legacy-bar,
+.lsr-viz-led-bar,
+.lsr-viz-payback-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.lsr-viz-led-cost,
+.lsr-viz-output-value,
+.lsr-viz-savings-value,
+.lsr-viz-co2-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* LED vs Incandescent ROI · multi-bulb fleet */
+.lvi-viz-bulb,
+.lvi-viz-glow {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.lvi-viz-array .lvi-viz-bulb:nth-child(odd),
+.lvi-viz-array .lvi-viz-glow:nth-child(odd) {
+  animation-delay: 0.25s;
+}
+
+.lvi-viz-energy-bar,
+.lvi-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.5s ease-in-out infinite;
+}
+
+.lvi-viz-fleet-value,
+.lvi-viz-output-value,
+.lvi-viz-payback-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes petc-viz-cover-slide {
+  0%,
+  100% {
+    transform: scaleX(0.28);
+    opacity: 0.55;
+  }
+  45%,
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
 @keyframes esms-viz-spin {
   from {
     transform: rotate(0deg);
@@ -15408,11 +15545,11 @@ body:has(.legal-modal) .grid-modal-shell {
 @keyframes cl-viz-value-glow {
   0%,
   100% {
-    fill: #a3e635;
+    fill: #ededed;
     opacity: 0.88;
   }
   50% {
-    fill: #bef264;
+    fill: #ffffff;
     opacity: 1;
   }
 }
@@ -15734,7 +15871,47 @@ body:has(.legal-modal) .grid-modal-shell {
   .htc-viz-cost-bar,
   .htc-viz-output-bar,
   .htc-viz-kwh-value,
-  .htc-viz-output-value {
+  .htc-viz-output-value,
+  .petc-viz-pool,
+  .petc-viz-wave,
+  .petc-viz-vapor,
+  .petc-viz-cover,
+  .petc-viz-loss-bar,
+  .petc-viz-output-bar,
+  .petc-viz-pump-value,
+  .petc-viz-output-value,
+  .petc-viz-month-value,
+  .petc-viz-year-value,
+  .hli-viz-insulation,
+  .hli-viz-r-bar,
+  .hli-viz-output-bar,
+  .hli-viz-drive-value,
+  .hli-viz-output-value,
+  .hli-viz-kw-value,
+  .his-viz-house,
+  .his-viz-shell,
+  .his-viz-before-bar,
+  .his-viz-savings-bar,
+  .his-viz-u-before,
+  .his-viz-u-after,
+  .his-viz-output-value,
+  .lsr-viz-bulb,
+  .lsr-viz-legacy-glow,
+  .lsr-viz-led-glow,
+  .lsr-viz-legacy-bar,
+  .lsr-viz-led-bar,
+  .lsr-viz-payback-bar,
+  .lsr-viz-led-cost,
+  .lsr-viz-output-value,
+  .lsr-viz-savings-value,
+  .lsr-viz-co2-value,
+  .lvi-viz-bulb,
+  .lvi-viz-glow,
+  .lvi-viz-energy-bar,
+  .lvi-viz-output-bar,
+  .lvi-viz-fleet-value,
+  .lvi-viz-output-value,
+  .lvi-viz-payback-value {
     animation: none;
   }
 
@@ -15742,7 +15919,7 @@ body:has(.legal-modal) .grid-modal-shell {
   .cl-viz-flow__pulse {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.45;
   }
 
@@ -15797,7 +15974,7 @@ body:has(.legal-modal) .grid-modal-shell {
   .dcs-viz-current-flow {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.55;
   }
 
@@ -15810,7 +15987,7 @@ body:has(.legal-modal) .grid-modal-shell {
   .wta-viz-current-flow {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.55;
   }
 
@@ -15828,14 +16005,14 @@ body:has(.legal-modal) .grid-modal-shell {
   .atw-viz-current-flow {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.55;
   }
 
   .rvd-viz-current-flow {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.55;
   }
 
@@ -15847,7 +16024,7 @@ body:has(.legal-modal) .grid-modal-shell {
   .ohm-viz-current-flow {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
-    stroke: #a3e635;
+    stroke: var(--category-color, #a3e635);
     stroke-opacity: 0.55;
   }
 
@@ -16009,7 +16186,23 @@ body:has(.legal-modal) .grid-modal-shell {
   .enc-viz-accum-bar,
   .enc-viz-output-bar,
   .htc-viz-cost-bar,
-  .htc-viz-output-bar {
+  .htc-viz-output-bar,
+  .petc-viz-loss-bar,
+  .petc-viz-output-bar,
+  .hli-viz-r-bar,
+  .hli-viz-output-bar,
+  .his-viz-before-bar,
+  .his-viz-savings-bar,
+  .lsr-viz-legacy-bar,
+  .lsr-viz-led-bar,
+  .lsr-viz-payback-bar,
+  .lvi-viz-energy-bar,
+  .lvi-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .petc-viz-cover {
     transform: scaleX(1);
     opacity: 0.85;
   }

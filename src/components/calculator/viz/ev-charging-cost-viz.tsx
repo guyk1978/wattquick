@@ -65,12 +65,12 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="evc-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="evc-viz-cost"
@@ -79,8 +79,8 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -175,7 +175,7 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
                 width="24"
                 height="36"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.85"
                 stroke="none"
               />
@@ -183,7 +183,7 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
             <text
               x="106"
               y="162"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -246,14 +246,14 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
                 cx="18"
                 cy="28"
                 r="4"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.45"
               />
             </g>
             <text
               x="106"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -374,7 +374,7 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
                 width="44"
                 height="24"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
                 stroke="none"
               />
@@ -398,9 +398,9 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
               fontFamily="ui-monospace, monospace"
               textAnchor="middle"
             >
-              <tspan fill="#a3e635">60 kWh</tspan>
+              <tspan fill="#ededed">60 kWh</tspan>
               <tspan fill="#888888"> × </tspan>
-              <tspan fill="#a3e635">$0.15</tspan>
+              <tspan fill="#ededed">$0.15</tspan>
             </text>
             <text
               x="490"
@@ -487,7 +487,7 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -505,7 +505,7 @@ export function EvChargingCostViz({ className }: EvChargingCostVizProps) {
             <text
               x="810"
               y="250"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="40"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

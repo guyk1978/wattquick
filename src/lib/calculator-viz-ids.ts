@@ -53,6 +53,11 @@ const VIZ_CALCULATOR_IDS = [
   "appliance-monthly-energy",
   "energy-consumption",
   "heater-cost",
+  "pool-energy-thermal-cover",
+  "heat-loss-insulation",
+  "home-insulation-savings",
+  "led-savings-roi",
+  "led-vs-incandescent-roi",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);

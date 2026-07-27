@@ -2,52 +2,57 @@
 
 import { cn } from "@/lib/utils";
 
-interface ApplianceMonthlyEnergyVizProps {
+interface HeatLossInsulationVizProps {
   className?: string;
 }
 
 /**
- * Industrial Matte animated schematic for Appliance Monthly Energy [VIZ] tab.
- * Monthly kWh = (W × hrs/day × 30) ÷ 1000.
- * Sample: 200 W · 5 hrs · 30 days → 30 kWh/mo.
+ * Industrial Matte animated schematic for Building Heat Loss & Insulation [VIZ].
+ * Q (BTU/hr) = (Area × ΔT) ÷ R.
+ * Sample: 2,000 sq ft · 40 °F · R-20 → 4,000 BTU/hr · ~1.17 kW.
  */
-export function ApplianceMonthlyEnergyViz({
+export function HeatLossInsulationViz({
   className,
-}: ApplianceMonthlyEnergyVizProps) {
+}: HeatLossInsulationVizProps) {
   return (
     <section
-      className={cn("tool-viz tool-viz--appliance-monthly-energy", className)}
-      aria-label="Appliance monthly energy visual breakdown"
+      className={cn("tool-viz tool-viz--heat-loss-insulation", className)}
+      aria-label="Building heat loss and insulation visual breakdown"
     >
       <header className="tool-viz__header">
         <p className="tool-viz__eyebrow">FIG. VIZ — DATA FLOW</p>
-        <h3 className="tool-viz__title">Appliance Monthly Energy</h3>
+        <h3 className="tool-viz__title">
+          Building Heat Loss &amp; Insulation
+        </h3>
         <p className="tool-viz__subtitle">
-          Daily watt-hours accumulate across a 30-day billing cycle to show how
-          much energy each appliance adds to the month.
+          Envelope area and indoor–outdoor ΔT drive conduction. Raising R-value
+          increases thermal resistance so fewer BTUs leak through the wall each
+          hour.
         </p>
       </header>
 
       <div className="tool-viz__stage">
         <svg
           viewBox="0 0 960 560"
-          className="tool-viz__svg appliance-monthly-energy-viz"
+          className="tool-viz__svg heat-loss-insulation-viz"
           role="img"
-          aria-labelledby="ame-viz-title ame-viz-desc"
+          aria-labelledby="hli-viz-title hli-viz-desc"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <title id="ame-viz-title">
-            Appliance monthly energy animated flow diagram
+          <title id="hli-viz-title">
+            Building heat loss and insulation animated flow diagram
           </title>
-          <desc id="ame-viz-desc">
-            Appliance power in watts multiplied by hours per day and thirty days
-            yields monthly kilowatt-hours. Sample: a 200 watt television running
-            5 hours per day uses 30 kilowatt-hours per month.
+          <desc id="hli-viz-desc">
+            Envelope area and temperature difference push heat across a wall.
+            R-value resists that flow. Heat loss equals area times delta T
+            divided by R. Sample: 2000 square feet, 40 degrees Fahrenheit
+            difference, and R-20 yield 4000 BTU per hour, about 1172 watts or
+            1.17 kilowatts of steady loss.
           </desc>
 
           <defs>
             <pattern
-              id="ame-viz-grid"
+              id="hli-viz-grid"
               width="24"
               height="24"
               patternUnits="userSpaceOnUse"
@@ -60,7 +65,7 @@ export function ApplianceMonthlyEnergyViz({
               />
             </pattern>
             <marker
-              id="ame-viz-arrow"
+              id="hli-viz-arrow"
               markerWidth="8"
               markerHeight="8"
               refX="6"
@@ -71,7 +76,7 @@ export function ApplianceMonthlyEnergyViz({
               <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
-              id="ame-viz-pulse"
+              id="hli-viz-pulse"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -82,7 +87,7 @@ export function ApplianceMonthlyEnergyViz({
               <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
-              id="ame-viz-bar"
+              id="hli-viz-bar"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -90,6 +95,16 @@ export function ApplianceMonthlyEnergyViz({
             >
               <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
               <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
+            </linearGradient>
+            <linearGradient
+              id="hli-viz-heat"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.15" />
             </linearGradient>
           </defs>
 
@@ -99,7 +114,7 @@ export function ApplianceMonthlyEnergyViz({
             y="1"
             width="958"
             height="558"
-            fill="url(#ame-viz-grid)"
+            fill="url(#hli-viz-grid)"
             opacity="0.55"
           />
           <rect
@@ -124,14 +139,14 @@ export function ApplianceMonthlyEnergyViz({
             INPUTS
           </text>
           <text
-            x="350"
+            x="340"
             y="48"
             fill="#888888"
             fontSize="11"
             fontFamily="ui-monospace, monospace"
             letterSpacing="0.14em"
           >
-            30-DAY ACCUMULATION
+            CONDUCTION PATH
           </text>
           <text
             x="700"
@@ -144,13 +159,13 @@ export function ApplianceMonthlyEnergyViz({
             OUTPUT
           </text>
 
-          {/* —— INPUT: Watts —— */}
+          {/* —— INPUT: Area —— */}
           <g>
             <rect
               x="40"
               y="72"
               width="230"
-              height="160"
+              height="100"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -164,300 +179,372 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              POWER DRAW
+              ENVELOPE AREA
             </text>
             <text
               x="56"
-              y="148"
+              y="134"
               fill="#ededed"
-              fontSize="32"
+              fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
             >
-              200 W
+              2,000 sq ft
             </text>
             <text
               x="56"
-              y="184"
+              y="158"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              wall / roof segment
+            </text>
+          </g>
+
+          {/* —— INPUT: ΔT —— */}
+          <g>
+            <rect
+              x="40"
+              y="188"
+              width="230"
+              height="100"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="56"
+              y="214"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              ΔT (INDOOR − OUT)
+            </text>
+            <text
+              x="56"
+              y="250"
+              fill="#ededed"
+              fontSize="26"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              40 °F
+            </text>
+            <text
+              x="56"
+              y="274"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              design temperature gap
+            </text>
+          </g>
+
+          {/* —— INPUT: R-value —— */}
+          <g>
+            <rect
+              x="40"
+              y="304"
+              width="230"
+              height="100"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="56"
+              y="330"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              WALL R-VALUE
+            </text>
+            <text
+              x="56"
+              y="366"
+              fill="#ededed"
+              fontSize="26"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+            >
+              R-20
+            </text>
+            <text
+              x="56"
+              y="390"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              thermal resistance
+            </text>
+          </g>
+
+          {/* —— Flow inputs → mid —— */}
+          <path
+            d="M 270 122 L 320 122"
+            fill="none"
+            stroke="#333333"
+            strokeWidth="1.5"
+            markerEnd="url(#hli-viz-arrow)"
+          />
+          <path
+            className="tool-viz-flow__pulse"
+            d="M 270 122 L 320 122"
+            fill="none"
+            stroke="url(#hli-viz-pulse)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
+            fill="none"
+            stroke="#333333"
+            strokeWidth="1.5"
+            markerEnd="url(#hli-viz-arrow)"
+          />
+          <path
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--delay"
+            d="M 270 238 L 295 238 L 295 200 L 320 200"
+            fill="none"
+            stroke="url(#hli-viz-pulse)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M 270 354 L 295 354 L 295 280 L 320 280"
+            fill="none"
+            stroke="#333333"
+            strokeWidth="1.5"
+            markerEnd="url(#hli-viz-arrow)"
+          />
+          <path
+            className="tool-viz-flow__pulse"
+            d="M 270 354 L 295 354 L 295 280 L 320 280"
+            fill="none"
+            stroke="url(#hli-viz-pulse)"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+
+          {/* —— MID: Product A×ΔT —— */}
+          <g>
+            <rect
+              x="330"
+              y="72"
+              width="280"
+              height="110"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="346"
+              y="98"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              DRIVING FORCE
+            </text>
+            <text
+              x="346"
+              y="128"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              TV / set-top load
+              Area × ΔT
             </text>
-            <g className="ame-viz-appliance" transform="translate(180, 120)">
+            <text
+              x="346"
+              y="162"
+              fill="#ededed"
+              fontSize="24"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+              className="hli-viz-drive-value"
+            >
+              80,000
+            </text>
+            <text
+              x="470"
+              y="162"
+              fill="#888888"
+              fontSize="12"
+              fontFamily="ui-monospace, monospace"
+            >
+              sq ft·°F
+            </text>
+          </g>
+
+          {/* —— MID: Wall section / conduction —— */}
+          <g>
+            <rect
+              x="330"
+              y="200"
+              width="280"
+              height="210"
+              rx="4"
+              fill="#111111"
+              stroke="#333333"
+              strokeWidth="1"
+            />
+            <text
+              x="346"
+              y="226"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+              letterSpacing="0.1em"
+            >
+              ENVELOPE BARRIER
+            </text>
+
+            {/* Indoor warm side */}
+            <text
+              x="360"
+              y="258"
+              fill="#888888"
+              fontSize="10"
+              fontFamily="ui-monospace, monospace"
+            >
+              IN 70°F
+            </text>
+            {/* Wall layers */}
+            <g transform="translate(360, 272)">
               <rect
                 x="0"
                 y="0"
-                width="52"
-                height="36"
-                rx="2"
-                fill="none"
+                width="28"
+                height="88"
+                fill="#0a0a0a"
+                stroke="#444444"
+                strokeWidth="1"
+              />
+              <rect
+                className="hli-viz-insulation"
+                x="28"
+                y="0"
+                width="64"
+                height="88"
+                fill="url(#hli-viz-heat)"
+                fillOpacity="0.25"
                 stroke="currentColor"
                 strokeWidth="1.5"
               />
-              <line
-                x1="10"
-                y1="42"
-                x2="42"
-                y2="42"
-                stroke="#555555"
-                strokeWidth="1.5"
+              {/* Insulation hatch */}
+              <path
+                d="M 32 8 L 88 64 M 32 28 L 72 68 M 32 48 L 56 72 M 48 8 L 88 48 M 68 8 L 88 28"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.75"
+                opacity="0.55"
               />
-              <line
-                x1="26"
-                y1="36"
-                x2="26"
-                y2="42"
-                stroke="#555555"
-                strokeWidth="1.5"
+              <rect
+                x="92"
+                y="0"
+                width="28"
+                height="88"
+                fill="#0a0a0a"
+                stroke="#444444"
+                strokeWidth="1"
+              />
+              {/* Heat flow arrows through wall */}
+              <path
+                className="tool-viz-flow__pulse"
+                d="M -16 44 L 0 44"
+                fill="none"
+                stroke="url(#hli-viz-pulse)"
+                strokeWidth="2"
+                markerEnd="url(#hli-viz-arrow)"
+              />
+              <path
+                className="tool-viz-flow__pulse tool-viz-flow__pulse--delay"
+                d="M 120 44 L 148 44"
+                fill="none"
+                stroke="url(#hli-viz-pulse)"
+                strokeWidth="2"
+                markerEnd="url(#hli-viz-arrow)"
               />
             </g>
-          </g>
-
-          {/* —— INPUT: Hours —— */}
-          <g>
-            <rect
-              x="40"
-              y="250"
-              width="230"
-              height="178"
-              rx="4"
-              fill="#111111"
-              stroke="#333333"
-              strokeWidth="1"
-            />
             <text
-              x="56"
-              y="276"
+              x="520"
+              y="258"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
-              letterSpacing="0.1em"
             >
-              HOURS / DAY
+              OUT 30°F
             </text>
-            <text
-              x="56"
-              y="324"
-              fill="#ededed"
-              fontSize="32"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-            >
-              5.0 hrs
-            </text>
-            <text
-              x="56"
-              y="360"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              evening schedule
-            </text>
-            <text
-              x="56"
-              y="396"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              × 30-day cycle
-            </text>
-          </g>
 
-          {/* —— Flow: inputs → mid —— */}
-          <path
-            d="M 270 152 L 320 152"
-            fill="none"
-            stroke="#333333"
-            strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
-          />
-          <path
-            className="tool-viz-flow__pulse"
-            d="M 270 152 L 320 152"
-            fill="none"
-            stroke="url(#ame-viz-pulse)"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-          <path
-            d="M 270 339 L 300 339 L 300 210 L 320 210"
-            fill="none"
-            stroke="#333333"
-            strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
-          />
-          <path
-            className="tool-viz-flow__pulse"
-            d="M 270 339 L 300 339 L 300 210 L 320 210"
-            fill="none"
-            stroke="url(#ame-viz-pulse)"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-
-          {/* —— FLOW: Daily Wh —— */}
-          <g>
+            <text
+              x="346"
+              y="390"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              ÷ R-20 slows conduction
+            </text>
             <rect
-              x="330"
-              y="72"
-              width="300"
-              height="150"
-              rx="4"
-              fill="#111111"
-              stroke="#333333"
-              strokeWidth="1"
-            />
-            <text
-              x="346"
-              y="98"
-              fill="#888888"
-              fontSize="10"
-              fontFamily="ui-monospace, monospace"
-              letterSpacing="0.1em"
-            >
-              DAILY ENERGY
-            </text>
-            <text
-              x="346"
-              y="124"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              W × hrs ÷ 1000
-            </text>
-            <text
-              x="346"
-              y="164"
-              fill="#ededed"
-              fontSize="28"
-              fontFamily="ui-monospace, monospace"
-              fontWeight="700"
-              className="ame-viz-daily-value"
-            >
-              1.0 kWh/day
-            </text>
-            <text
-              x="346"
-              y="196"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              200 × 5 ÷ 1000
-            </text>
-          </g>
-
-          {/* —— FLOW: 30-day stack —— */}
-          <g>
-            <rect
-              x="330"
-              y="240"
-              width="300"
-              height="188"
-              rx="4"
-              fill="#111111"
-              stroke="#333333"
-              strokeWidth="1"
-            />
-            <text
-              x="346"
-              y="266"
-              fill="#888888"
-              fontSize="10"
-              fontFamily="ui-monospace, monospace"
-              letterSpacing="0.1em"
-            >
-              MONTHLY STACK
-            </text>
-            <text
-              x="346"
-              y="296"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              daily kWh × 30
-            </text>
-
-            {/* Calendar / day ticks */}
-            <g transform="translate(360, 320)">
-              {Array.from({ length: 10 }).map((_, i) => (
-                <rect
-                  key={i}
-                  className="ame-viz-day-tick"
-                  x={i * 18}
-                  y={0}
-                  width="12"
-                  height="28"
-                  rx="1"
-                  fill={i < 7 ? "currentColor" : "#333333"}
-                  opacity={i < 7 ? 0.35 + i * 0.08 : 0.5}
-                />
-              ))}
-              <text
-                x="0"
-                y="52"
-                fill="#888888"
-                fontSize="11"
-                fontFamily="ui-monospace, monospace"
-              >
-                days accumulate →
-              </text>
-            </g>
-
-            <rect
-              x="346"
-              y="392"
-              width="240"
-              height="12"
+              x="500"
+              y="372"
+              width="90"
+              height="10"
               rx="2"
               fill="#0a0a0a"
               stroke="#333333"
             />
             <rect
-              className="ame-viz-accum-bar"
-              x="348"
-              y="394"
-              width="200"
-              height="8"
+              className="hli-viz-r-bar"
+              x="502"
+              y="374"
+              width="70"
+              height="6"
               rx="1"
-              fill="url(#ame-viz-bar)"
+              fill="url(#hli-viz-bar)"
             />
           </g>
 
           {/* —— Flow mid → output —— */}
           <path
-            d="M 630 147 L 680 147"
+            d="M 610 127 L 680 127"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#hli-viz-arrow)"
           />
           <path
             className="tool-viz-flow__pulse"
-            d="M 630 147 L 680 147"
+            d="M 610 127 L 680 127"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#hli-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
           <path
-            d="M 630 334 L 655 334 L 655 230 L 680 230"
+            d="M 610 305 L 645 305 L 645 220 L 680 220"
             fill="none"
             stroke="#333333"
             strokeWidth="1.5"
-            markerEnd="url(#ame-viz-arrow)"
+            markerEnd="url(#hli-viz-arrow)"
           />
           <path
-            className="tool-viz-flow__pulse"
-            d="M 630 334 L 655 334 L 655 230 L 680 230"
+            className="tool-viz-flow__pulse tool-viz-flow__pulse--out"
+            d="M 610 305 L 645 305 L 645 220 L 680 220"
             fill="none"
-            stroke="url(#ame-viz-pulse)"
+            stroke="url(#hli-viz-pulse)"
             strokeWidth="2"
             strokeLinecap="round"
           />
@@ -468,7 +555,7 @@ export function ApplianceMonthlyEnergyViz({
               x="690"
               y="72"
               width="230"
-              height="356"
+              height="352"
               rx="4"
               fill="#111111"
               stroke="#333333"
@@ -482,32 +569,33 @@ export function ApplianceMonthlyEnergyViz({
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              MONTHLY ENERGY
+              HEAT LOSS RATE
             </text>
             <text
               x="706"
-              y="168"
+              y="152"
               fill="#ededed"
-              fontSize="48"
+              fontSize="32"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
-              className="ame-viz-output-value"
+              className="hli-viz-output-value"
             >
-              30
+              4,000
             </text>
             <text
               x="706"
-              y="204"
+              y="182"
               fill="#ededed"
               fontSize="18"
               fontFamily="ui-monospace, monospace"
+              fontWeight="600"
             >
-              kWh/mo
+              BTU/hr
             </text>
 
             <rect
               x="706"
-              y="228"
+              y="204"
               width="198"
               height="12"
               rx="2"
@@ -515,60 +603,72 @@ export function ApplianceMonthlyEnergyViz({
               stroke="#333333"
             />
             <rect
-              className="ame-viz-month-bar"
+              className="hli-viz-output-bar"
               x="708"
-              y="230"
+              y="206"
               width="160"
               height="8"
               rx="1"
-              fill="url(#ame-viz-bar)"
+              fill="url(#hli-viz-bar)"
             />
 
             <text
               x="706"
-              y="280"
+              y="252"
               fill="#888888"
               fontSize="10"
               fontFamily="ui-monospace, monospace"
               letterSpacing="0.1em"
             >
-              BREAKDOWN
+              ELECTRIC EQUIVALENT
+            </text>
+            <text
+              x="706"
+              y="286"
+              fill="#ededed"
+              fontSize="22"
+              fontFamily="ui-monospace, monospace"
+              fontWeight="700"
+              className="hli-viz-kw-value"
+            >
+              1.17 kW
             </text>
             <text
               x="706"
               y="312"
-              fill="#ededed"
-              fontSize="14"
-              fontFamily="ui-monospace, monospace"
-            >
-              1.0 kWh × 30 days
-            </text>
-            <text
-              x="706"
-              y="344"
               fill="#888888"
               fontSize="12"
               fontFamily="ui-monospace, monospace"
             >
-              200 W × 5 h × 30
+              1,172 W steady
             </text>
+
             <text
               x="706"
-              y="368"
-              fill="#888888"
-              fontSize="12"
-              fontFamily="ui-monospace, monospace"
-            >
-              ÷ 1000 = 30.0
-            </text>
-            <text
-              x="706"
-              y="404"
+              y="352"
               fill="#888888"
               fontSize="11"
               fontFamily="ui-monospace, monospace"
             >
-              billable month factor
+              (A × ΔT) ÷ R = Q
+            </text>
+            <text
+              x="706"
+              y="376"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              80,000 ÷ 20 = 4,000
+            </text>
+            <text
+              x="706"
+              y="400"
+              fill="#888888"
+              fontSize="11"
+              fontFamily="ui-monospace, monospace"
+            >
+              raise R to cut BTU/hr
             </text>
           </g>
 
@@ -601,7 +701,7 @@ export function ApplianceMonthlyEnergyViz({
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              (W × hrs × 30) ÷ 1000 → kWh/mo
+              (Area × ΔT) ÷ R → BTU/hr · W · kW
             </text>
             <text
               x="480"
@@ -620,7 +720,7 @@ export function ApplianceMonthlyEnergyViz({
               fontSize="13"
               fontFamily="ui-monospace, monospace"
             >
-              200 W · 5 h/day · 30 d → 30 kWh/mo
+              2,000 sq ft · 40 °F · R-20 → 4,000 BTU/hr
             </text>
           </g>
         </svg>

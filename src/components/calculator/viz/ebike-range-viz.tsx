@@ -66,7 +66,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="ebike-viz-pulse"
@@ -75,9 +75,9 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="ebike-viz-road"
@@ -86,8 +86,8 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.2" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
             </linearGradient>
           </defs>
 
@@ -184,7 +184,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
                 width="24"
                 height="28"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.88"
                 stroke="none"
               />
@@ -193,7 +193,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
             <text
               x="106"
               y="144"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -236,7 +236,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
             <text
               x="56"
               y="284"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -483,7 +483,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
             <text
               x="376"
               y="402"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="24"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -529,7 +529,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
               height="364"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.35"
               strokeOpacity="0.65"
             />
@@ -565,7 +565,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
                 cx="14"
                 cy="42"
                 r="2.5"
-                fill="#a3e635"
+                fill="currentColor"
                 stroke="none"
               />
               <circle
@@ -573,7 +573,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
                 cx="66"
                 cy="42"
                 r="2.5"
-                fill="#a3e635"
+                fill="currentColor"
                 stroke="none"
               />
             </g>
@@ -583,7 +583,7 @@ export function EbikeRangeViz({ className }: EbikeRangeVizProps) {
               x="810"
               y="220"
               textAnchor="middle"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

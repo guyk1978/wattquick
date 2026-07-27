@@ -64,12 +64,12 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient id="inv-viz-pulse" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="inv-viz-expand"
@@ -78,8 +78,8 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.3" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
             </linearGradient>
           </defs>
 
@@ -163,14 +163,14 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
                 strokeWidth="1.3"
                 strokeLinejoin="round"
                 className="inv-viz-load-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.35"
               />
             </g>
             <text
               x="112"
               y="168"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -231,14 +231,14 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
                 y1="22"
                 x2="18"
                 y2="30"
-                stroke="#a3e635"
+                stroke="currentColor"
                 className="inv-viz-margin-pulse"
               />
               <circle
                 cx="18"
                 cy="36"
                 r="1.5"
-                fill="#a3e635"
+                fill="currentColor"
                 stroke="none"
                 className="inv-viz-margin-pulse"
               />
@@ -246,7 +246,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
             <text
               x="112"
               y="348"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="26"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -352,7 +352,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               fontSize="14"
               fontFamily="ui-monospace, monospace"
             >
-              1 + 25/100 = <tspan fill="#a3e635">1.25×</tspan>
+              1 + 25/100 = <tspan fill="#ededed">1.25×</tspan>
             </text>
 
             <rect
@@ -421,7 +421,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               width="140"
               height="8"
               rx="1"
-              fill="#a3e635"
+              fill="currentColor"
               fillOpacity="0.55"
             />
             <text
@@ -496,7 +496,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               height="240"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -528,7 +528,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
               <text
                 x="48"
                 y="44"
-                fill="#a3e635"
+                fill="#ededed"
                 stroke="none"
                 fontSize="11"
                 fontFamily="ui-monospace, monospace"
@@ -559,7 +559,7 @@ export function InverterSizingViz({ className }: InverterSizingVizProps) {
             <text
               x="810"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="30"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"

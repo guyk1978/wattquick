@@ -67,7 +67,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               orient="auto"
               markerUnits="strokeWidth"
             >
-              <path d="M0,0 L6,3 L0,6 Z" fill="#a3e635" />
+              <path d="M0,0 L6,3 L0,6 Z" fill="currentColor" />
             </marker>
             <linearGradient
               id="efc-viz-pulse"
@@ -76,9 +76,9 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0" />
-              <stop offset="50%" stopColor="#a3e635" stopOpacity="1" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0" />
+              <stop offset="50%" stopColor="currentColor" stopOpacity="1" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
             <linearGradient
               id="efc-viz-power"
@@ -87,9 +87,9 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               x2="100%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.95" />
-              <stop offset="70%" stopColor="#a3e635" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.95" />
+              <stop offset="70%" stopColor="currentColor" stopOpacity="0.75" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
             </linearGradient>
             <linearGradient
               id="efc-viz-soc"
@@ -98,8 +98,8 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               x2="0%"
               y2="0%"
             >
-              <stop offset="0%" stopColor="#a3e635" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#a3e635" stopOpacity="0.35" />
+              <stop offset="0%" stopColor="currentColor" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="currentColor" stopOpacity="0.35" />
             </linearGradient>
           </defs>
 
@@ -194,7 +194,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
                 width="20"
                 height="16"
                 rx="1"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.7"
                 stroke="none"
               />
@@ -202,7 +202,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
             <text
               x="100"
               y="142"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -245,7 +245,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
             <text
               x="56"
               y="276"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -304,7 +304,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               <path
                 d="M20 8 L11 24 H17 L13 36 L26 18 H20 Z"
                 className="efc-viz-bolt"
-                fill="#a3e635"
+                fill="currentColor"
                 fillOpacity="0.5"
                 strokeLinejoin="round"
               />
@@ -312,7 +312,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
             <text
               x="104"
               y="410"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="22"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
@@ -429,12 +429,12 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               cx="446"
               cy="168"
               r="4"
-              fill="#a3e635"
+              fill="currentColor"
             />
             <text
               x="378"
               y="156"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="9"
               fontFamily="ui-monospace, monospace"
             >
@@ -598,7 +598,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
               height="250"
               rx="4"
               fill="#111111"
-              stroke="#a3e635"
+              stroke="currentColor"
               strokeWidth="1.25"
               strokeOpacity="0.45"
             />
@@ -626,7 +626,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
                   y1="24"
                   x2="24"
                   y2="10"
-                  stroke="#a3e635"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
@@ -637,7 +637,7 @@ export function EvFastChargingTimeViz({ className }: EvFastChargingTimeVizProps)
             <text
               x="810"
               y="280"
-              fill="#a3e635"
+              fill="#ededed"
               fontSize="36"
               fontFamily="ui-monospace, monospace"
               fontWeight="700"
