@@ -2,22 +2,28 @@
 
 import type { ComponentType } from "react";
 import type { CalculatorId } from "@/lib/calculators";
+import { AhToWhViz } from "@/components/calculator/viz/ah-to-wh-viz";
 import { AmpsToWattsViz } from "@/components/calculator/viz/amps-to-watts-viz";
 import { ApplianceDailyCostViz } from "@/components/calculator/viz/appliance-daily-cost-viz";
 import { ApplianceMonthlyEnergyViz } from "@/components/calculator/viz/appliance-monthly-energy-viz";
 import { TwelveVTo120VInverterViz } from "@/components/calculator/viz/12v-to-120v-inverter-viz";
+import { BatteryArbitrageRoiViz } from "@/components/calculator/viz/battery-arbitrage-roi-viz";
 import { BatteryBankSizeViz } from "@/components/calculator/viz/battery-bank-size-viz";
 import { BatteryChargingTimeViz } from "@/components/calculator/viz/battery-charging-time-viz";
+import { BatteryCostViz } from "@/components/calculator/viz/battery-cost-viz";
 import { BatteryEnergyViz } from "@/components/calculator/viz/battery-energy-viz";
 import { BatteryPercentageViz } from "@/components/calculator/viz/battery-percentage-viz";
 import { BatteryRuntimeViz } from "@/components/calculator/viz/battery-runtime-viz";
 import { CampingFridgeRuntimeViz } from "@/components/calculator/viz/camping-fridge-runtime-viz";
+import { ConductorResistanceTemperatureViz } from "@/components/calculator/viz/conductor-resistance-temperature-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
 import { DcCableSizeViz } from "@/components/calculator/viz/dc-cable-size-viz";
+import { DemandChargeCalculatorViz } from "@/components/calculator/viz/demand-charge-calculator-viz";
 import { EbikeChargeTimeViz } from "@/components/calculator/viz/ebike-charge-time-viz";
 import { EbikeChargingCostViz } from "@/components/calculator/viz/ebike-charging-cost-viz";
 import { EbikeMaxSpeedViz } from "@/components/calculator/viz/ebike-max-speed-viz";
 import { EbikeRangeViz } from "@/components/calculator/viz/ebike-range-viz";
+import { ElectricityBillViz } from "@/components/calculator/viz/electricity-bill-viz";
 import { EnergyConsumptionViz } from "@/components/calculator/viz/energy-consumption-viz";
 import { EscooterHillClimbViz } from "@/components/calculator/viz/escooter-hill-climb-viz";
 import { EscooterMaxSpeedViz } from "@/components/calculator/viz/escooter-max-speed-viz";
@@ -40,8 +46,10 @@ import { HeaterCostViz } from "@/components/calculator/viz/heater-cost-viz";
 import { HeatLossInsulationViz } from "@/components/calculator/viz/heat-loss-insulation-viz";
 import { HomeInsulationSavingsViz } from "@/components/calculator/viz/home-insulation-savings-viz";
 import { InverterSizingViz } from "@/components/calculator/viz/inverter-sizing-viz";
+import { KvaToKwViz } from "@/components/calculator/viz/kva-to-kw-viz";
 import { LedSavingsRoiViz } from "@/components/calculator/viz/led-savings-roi-viz";
 import { LedVsIncandescentRoiViz } from "@/components/calculator/viz/led-vs-incandescent-roi-viz";
+import { TouShiftingSavingsViz } from "@/components/calculator/viz/tou-shifting-savings-viz";
 import { MarineBatteryBankViz } from "@/components/calculator/viz/marine-battery-bank-viz";
 import { OhmsLawViz } from "@/components/calculator/viz/ohms-law-viz";
 import { PoolEnergyThermalCoverViz } from "@/components/calculator/viz/pool-energy-thermal-cover-viz";
@@ -53,7 +61,9 @@ import { SolarChargeControllerSizeViz } from "@/components/calculator/viz/solar-
 import { SolarDailyYieldViz } from "@/components/calculator/viz/solar-daily-yield-viz";
 import { SolarPanelSizeViz } from "@/components/calculator/viz/solar-panel-size-viz";
 import { UpsRuntimeViz } from "@/components/calculator/viz/ups-runtime-viz";
+import { V2gFinancialReturnViz } from "@/components/calculator/viz/v2g-financial-return-viz";
 import { WattsToAmpsViz } from "@/components/calculator/viz/watts-to-amps-viz";
+import { WhToAhViz } from "@/components/calculator/viz/wh-to-ah-viz";
 import { hasCalculatorViz } from "@/lib/calculator-viz-ids";
 
 export interface CalculatorVizConfig {
@@ -274,6 +284,46 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "led-vs-incandescent-roi": {
       calculatorTitle: "LED vs. Incandescent ROI Calculator",
       Viz: LedVsIncandescentRoiViz,
+    },
+    "tou-shifting-savings": {
+      calculatorTitle: "Time-of-Use Load Shifting Savings",
+      Viz: TouShiftingSavingsViz,
+    },
+    "demand-charge-calculator": {
+      calculatorTitle: "Commercial Demand Charge Calculator",
+      Viz: DemandChargeCalculatorViz,
+    },
+    "v2g-financial-return": {
+      calculatorTitle: "V2G Grid Buyback Revenue Calculator",
+      Viz: V2gFinancialReturnViz,
+    },
+    "battery-arbitrage-roi": {
+      calculatorTitle: "Home Battery Arbitrage ROI Calculator",
+      Viz: BatteryArbitrageRoiViz,
+    },
+    "battery-cost": {
+      calculatorTitle: "Battery Cost Estimator",
+      Viz: BatteryCostViz,
+    },
+    "electricity-bill": {
+      calculatorTitle: "Electricity Bill Estimator",
+      Viz: ElectricityBillViz,
+    },
+    "ah-to-wh": {
+      calculatorTitle: "Ah to Wh Converter",
+      Viz: AhToWhViz,
+    },
+    "wh-to-ah": {
+      calculatorTitle: "Wh to Ah Converter",
+      Viz: WhToAhViz,
+    },
+    "kva-to-kw": {
+      calculatorTitle: "kVA to kW Converter",
+      Viz: KvaToKwViz,
+    },
+    "conductor-resistance-temperature": {
+      calculatorTitle: "Conductor Resistance & Temperature Calculator",
+      Viz: ConductorResistanceTemperatureViz,
     },
   };
 

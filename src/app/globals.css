@@ -15461,6 +15461,398 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* TOU Load Shifting Savings · peak → off-peak tariff path */
+.tss-viz-tariff-line {
+  stroke-dasharray: 8 6;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.tss-viz-tariff-fill {
+  animation: cl-viz-dot-blink 3.4s ease-in-out infinite;
+}
+
+.tss-viz-peak-dot,
+.tss-viz-valley-dot {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.tss-viz-valley-dot {
+  animation-delay: 0.55s;
+}
+
+.tss-viz-shift-path {
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.tss-viz-load-packet {
+  offset-path: path("M 470 150 Q 540 180 610 310");
+  offset-rotate: 0deg;
+  animation: tss-viz-packet-travel 3.6s linear infinite;
+}
+
+.tss-viz-spread-bar,
+.tss-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.tss-viz-load-value,
+.tss-viz-peak-value,
+.tss-viz-offpeak-value,
+.tss-viz-spread-value,
+.tss-viz-output-value,
+.tss-viz-annual-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Commercial Demand Charge · peak kW spike × $/kW */
+.dcc-viz-spike-bar {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: dcc-viz-spike-grow 3.2s ease-in-out infinite;
+}
+
+.dcc-viz-spike-dot,
+.dcc-viz-spike-label {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.dcc-viz-scale-bar,
+.dcc-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.dcc-viz-peak-value,
+.dcc-viz-rate-value,
+.dcc-viz-math-value,
+.dcc-viz-output-value,
+.dcc-viz-annual-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* V2G Grid Buyback · EV export → grid revenue */
+.v2g-viz-ev,
+.v2g-viz-grid-tower,
+.v2g-viz-grid-dot {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.v2g-viz-grid-tower,
+.v2g-viz-grid-dot {
+  animation-delay: 0.4s;
+}
+
+.v2g-viz-batt-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: dcc-viz-spike-grow 3.4s ease-in-out infinite;
+}
+
+.v2g-viz-export-path,
+.v2g-viz-return-path {
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.v2g-viz-energy-packet {
+  offset-path: path("M 460 170 L 560 170");
+  offset-rotate: 0deg;
+  animation: v2g-viz-packet-travel 2.8s linear infinite;
+}
+
+.v2g-viz-scale-bar,
+.v2g-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.v2g-viz-kwh-value,
+.v2g-viz-rate-value,
+.v2g-viz-sessions-value,
+.v2g-viz-math-value,
+.v2g-viz-flow-label,
+.v2g-viz-output-value,
+.v2g-viz-annual-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Home Battery Arbitrage · night charge → peak discharge */
+.bar-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bar-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.6s ease-in-out infinite;
+}
+
+.bar-viz-charge-path,
+.bar-viz-discharge-path {
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.bar-viz-discharge-path {
+  animation-delay: 0.45s;
+}
+
+.bar-viz-energy-packet {
+  offset-path: path("M 430 158 L 520 158 L 605 158");
+  offset-rotate: 0deg;
+  animation: bar-viz-packet-travel 3.4s linear infinite;
+}
+
+.bar-viz-scale-bar,
+.bar-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bar-viz-kwh-value,
+.bar-viz-rte-value,
+.bar-viz-rates-value,
+.bar-viz-cycles-value,
+.bar-viz-night-value,
+.bar-viz-peak-value,
+.bar-viz-math-value,
+.bar-viz-output-value,
+.bar-viz-month-value,
+.bar-viz-year-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery Cost Estimator · Ah × V → Wh × $/Wh */
+.bco-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bco-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.4s ease-in-out infinite;
+}
+
+.bco-viz-scale-bar,
+.bco-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bco-viz-ah-value,
+.bco-viz-v-value,
+.bco-viz-price-value,
+.bco-viz-ah-chip,
+.bco-viz-v-chip,
+.bco-viz-wh-value,
+.bco-viz-math-value,
+.bco-viz-output-value,
+.bco-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Electricity Bill Estimator · kWh × $/kWh */
+.ebe-viz-dollar-dot {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.ebe-viz-usage-bar,
+.ebe-viz-scale-bar,
+.ebe-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ebe-viz-kwh-value,
+.ebe-viz-rate-value,
+.ebe-viz-meter-value,
+.ebe-viz-rate-chip,
+.ebe-viz-math-value,
+.ebe-viz-output-value,
+.ebe-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Ah to Wh Converter · Ah × V → Wh */
+.atw-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.atw-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.4s ease-in-out infinite;
+}
+
+.atw-viz-scale-bar,
+.atw-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.atw-viz-ah-value,
+.atw-viz-v-value,
+.atw-viz-ah-chip,
+.atw-viz-v-chip,
+.atw-viz-math-value,
+.atw-viz-output-value,
+.atw-viz-kwh-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Wh to Ah Converter · Wh ÷ V → Ah */
+.wta-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.wta-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.4s ease-in-out infinite;
+}
+
+.wta-viz-scale-bar,
+.wta-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.wta-viz-wh-value,
+.wta-viz-v-value,
+.wta-viz-wh-chip,
+.wta-viz-v-chip,
+.wta-viz-math-value,
+.wta-viz-output-value,
+.wta-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* kVA to kW Converter · apparent × PF → real */
+.ktk-viz-s-hyp,
+.ktk-viz-p-leg,
+.ktk-viz-vertex {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ktk-viz-q-leg {
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ktk-viz-triangle-fill {
+  animation: cl-viz-dot-blink 3.4s ease-in-out infinite;
+}
+
+.ktk-viz-scale-bar,
+.ktk-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ktk-viz-kva-value,
+.ktk-viz-pf-value,
+.ktk-viz-p-label,
+.ktk-viz-s-label,
+.ktk-viz-math-value,
+.ktk-viz-output-value,
+.ktk-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Conductor Resistance & Temperature · ρL/A × temp factor */
+.crt-viz-wire,
+.crt-viz-core,
+.crt-viz-heat-wave {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.crt-viz-heat-wave:nth-of-type(2) {
+  animation-delay: 0.25s;
+}
+
+.crt-viz-heat-wave:nth-of-type(3) {
+  animation-delay: 0.5s;
+}
+
+.crt-viz-scale-bar,
+.crt-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.crt-viz-mat-value,
+.crt-viz-area-value,
+.crt-viz-len-value,
+.crt-viz-temp-value,
+.crt-viz-r20-chip,
+.crt-viz-base-math,
+.crt-viz-factor-math,
+.crt-viz-output-value,
+.crt-viz-r20-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes bar-viz-soc-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.55;
+  }
+  35%,
+  55% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bar-viz-packet-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes v2g-viz-packet-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes dcc-viz-spike-grow {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.55;
+  }
+  40%,
+  65% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tss-viz-packet-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
 @keyframes petc-viz-cover-slide {
   0%,
   100% {
@@ -15911,7 +16303,138 @@ body:has(.legal-modal) .grid-modal-shell {
   .lvi-viz-output-bar,
   .lvi-viz-fleet-value,
   .lvi-viz-output-value,
-  .lvi-viz-payback-value {
+  .lvi-viz-payback-value,
+  .tss-viz-tariff-line,
+  .tss-viz-tariff-fill,
+  .tss-viz-peak-dot,
+  .tss-viz-valley-dot,
+  .tss-viz-shift-path,
+  .tss-viz-load-packet,
+  .tss-viz-spread-bar,
+  .tss-viz-output-bar,
+  .tss-viz-load-value,
+  .tss-viz-peak-value,
+  .tss-viz-offpeak-value,
+  .tss-viz-spread-value,
+  .tss-viz-output-value,
+  .tss-viz-annual-value,
+  .dcc-viz-spike-bar,
+  .dcc-viz-spike-dot,
+  .dcc-viz-spike-label,
+  .dcc-viz-scale-bar,
+  .dcc-viz-output-bar,
+  .dcc-viz-peak-value,
+  .dcc-viz-rate-value,
+  .dcc-viz-math-value,
+  .dcc-viz-output-value,
+  .dcc-viz-annual-value,
+  .v2g-viz-ev,
+  .v2g-viz-grid-tower,
+  .v2g-viz-grid-dot,
+  .v2g-viz-batt-fill,
+  .v2g-viz-export-path,
+  .v2g-viz-return-path,
+  .v2g-viz-energy-packet,
+  .v2g-viz-scale-bar,
+  .v2g-viz-output-bar,
+  .v2g-viz-kwh-value,
+  .v2g-viz-rate-value,
+  .v2g-viz-sessions-value,
+  .v2g-viz-math-value,
+  .v2g-viz-flow-label,
+  .v2g-viz-output-value,
+  .v2g-viz-annual-value,
+  .bar-viz-pack,
+  .bar-viz-soc-fill,
+  .bar-viz-charge-path,
+  .bar-viz-discharge-path,
+  .bar-viz-energy-packet,
+  .bar-viz-scale-bar,
+  .bar-viz-output-bar,
+  .bar-viz-kwh-value,
+  .bar-viz-rte-value,
+  .bar-viz-rates-value,
+  .bar-viz-cycles-value,
+  .bar-viz-night-value,
+  .bar-viz-peak-value,
+  .bar-viz-math-value,
+  .bar-viz-output-value,
+  .bar-viz-month-value,
+  .bar-viz-year-value,
+  .bco-viz-pack,
+  .bco-viz-soc-fill,
+  .bco-viz-scale-bar,
+  .bco-viz-output-bar,
+  .bco-viz-ah-value,
+  .bco-viz-v-value,
+  .bco-viz-price-value,
+  .bco-viz-ah-chip,
+  .bco-viz-v-chip,
+  .bco-viz-wh-value,
+  .bco-viz-math-value,
+  .bco-viz-output-value,
+  .bco-viz-detail-value,
+  .ebe-viz-dollar-dot,
+  .ebe-viz-usage-bar,
+  .ebe-viz-scale-bar,
+  .ebe-viz-output-bar,
+  .ebe-viz-kwh-value,
+  .ebe-viz-rate-value,
+  .ebe-viz-meter-value,
+  .ebe-viz-rate-chip,
+  .ebe-viz-math-value,
+  .ebe-viz-output-value,
+  .ebe-viz-detail-value,
+  .atw-viz-pack,
+  .atw-viz-soc-fill,
+  .atw-viz-scale-bar,
+  .atw-viz-output-bar,
+  .atw-viz-ah-value,
+  .atw-viz-v-value,
+  .atw-viz-ah-chip,
+  .atw-viz-v-chip,
+  .atw-viz-math-value,
+  .atw-viz-output-value,
+  .atw-viz-kwh-value,
+  .wta-viz-pack,
+  .wta-viz-soc-fill,
+  .wta-viz-scale-bar,
+  .wta-viz-output-bar,
+  .wta-viz-wh-value,
+  .wta-viz-v-value,
+  .wta-viz-wh-chip,
+  .wta-viz-v-chip,
+  .wta-viz-math-value,
+  .wta-viz-output-value,
+  .wta-viz-detail-value,
+  .ktk-viz-s-hyp,
+  .ktk-viz-p-leg,
+  .ktk-viz-q-leg,
+  .ktk-viz-vertex,
+  .ktk-viz-triangle-fill,
+  .ktk-viz-scale-bar,
+  .ktk-viz-output-bar,
+  .ktk-viz-kva-value,
+  .ktk-viz-pf-value,
+  .ktk-viz-p-label,
+  .ktk-viz-s-label,
+  .ktk-viz-math-value,
+  .ktk-viz-output-value,
+  .ktk-viz-detail-value,
+  .crt-viz-wire,
+  .crt-viz-core,
+  .crt-viz-heat-wave,
+  .crt-viz-scale-bar,
+  .crt-viz-output-bar,
+  .crt-viz-mat-value,
+  .crt-viz-area-value,
+  .crt-viz-len-value,
+  .crt-viz-temp-value,
+  .crt-viz-r20-chip,
+  .crt-viz-base-math,
+  .crt-viz-factor-math,
+  .crt-viz-output-value,
+  .crt-viz-r20-value {
     animation: none;
   }
 
@@ -16197,7 +16720,105 @@ body:has(.legal-modal) .grid-modal-shell {
   .lsr-viz-led-bar,
   .lsr-viz-payback-bar,
   .lvi-viz-energy-bar,
-  .lvi-viz-output-bar {
+  .lvi-viz-output-bar,
+  .tss-viz-spread-bar,
+  .tss-viz-output-bar,
+  .dcc-viz-scale-bar,
+  .dcc-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .tss-viz-load-packet {
+    offset-distance: 55%;
+    opacity: 0.85;
+  }
+
+  .dcc-viz-spike-bar {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .v2g-viz-scale-bar,
+  .v2g-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .v2g-viz-batt-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .v2g-viz-energy-packet {
+    offset-distance: 55%;
+    opacity: 0.85;
+  }
+
+  .bar-viz-scale-bar,
+  .bar-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bar-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .bar-viz-energy-packet {
+    offset-distance: 55%;
+    opacity: 0.85;
+  }
+
+  .bco-viz-scale-bar,
+  .bco-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bco-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .ebe-viz-usage-bar,
+  .ebe-viz-scale-bar,
+  .ebe-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .atw-viz-scale-bar,
+  .atw-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .atw-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .wta-viz-scale-bar,
+  .wta-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .wta-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .ktk-viz-scale-bar,
+  .ktk-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .crt-viz-scale-bar,
+  .crt-viz-output-bar {
     transform: scaleX(1);
     opacity: 0.85;
   }
@@ -17205,6 +17826,18 @@ body:has(.legal-modal) .grid-modal-shell {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: #a3a3a3;
+}
+
+/* Category nav → SEO accordion (hub + category landings): seamless join */
+.wq-cat-nav:has(+ .grid-modal-seo-inline) {
+  margin-bottom: 0;
+}
+
+.wq-cat-nav + .grid-modal-seo-inline,
+.platform-overview.grid-modal-seo-inline {
+  margin-top: 0.75rem;
+  padding-top: 0;
+  border-top: none;
 }
 
 .grid-modal-seo-inline__eyebrow {

@@ -58,6 +58,16 @@ const VIZ_CALCULATOR_IDS = [
   "home-insulation-savings",
   "led-savings-roi",
   "led-vs-incandescent-roi",
+  "tou-shifting-savings",
+  "demand-charge-calculator",
+  "v2g-financial-return",
+  "battery-arbitrage-roi",
+  "battery-cost",
+  "electricity-bill",
+  "ah-to-wh",
+  "wh-to-ah",
+  "kva-to-kw",
+  "conductor-resistance-temperature",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);
