@@ -1,5 +1,6 @@
 import { WattQuickEcosystem } from "@/components/home/wattquick-ecosystem";
 import { GridShell } from "@/components/grid-modal/grid-shell";
+import { HubCategoryGrid } from "@/components/grid-modal/hub-category-grid";
 import { PlatformOverview } from "@/components/grid-modal/platform-overview";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import type { LegalDocId } from "@/lib/legal-types";
@@ -22,6 +23,7 @@ export function CalculatorsGridHub({
       description={`${count} free battery, solar, EV, and power tools. Pick a category, then open a calculator.`}
     >
       <WattQuickEcosystem />
+      <HubCategoryGrid />
       <PlatformOverview />
     </GridShell>
   );

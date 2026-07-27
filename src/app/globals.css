@@ -12297,6 +12297,91 @@ body:has(.legal-modal) .grid-modal-shell {
   }
 }
 
+/* —— Homepage hub category launcher (under ecosystem hero) —— */
+.wq-hub-cat-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .wq-hub-cat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .wq-hub-cat-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.wq-hub-cat-grid > li {
+  display: flex;
+  min-width: 0;
+}
+
+.wq-hub-cat-card {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 3.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--wq-card-border, #262626);
+  background: var(--wq-card-bg, #121212);
+  color: #a3e635;
+  text-decoration: none;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.wq-hub-cat-card:hover {
+  border-color: color-mix(in srgb, #a3e635 55%, #262626);
+  background: color-mix(in srgb, #a3e635 6%, #121212);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #a3e635 22%, transparent);
+  transform: translateY(-1px);
+}
+
+.wq-hub-cat-card:focus-visible {
+  outline: 1px solid #a3e635;
+  outline-offset: 2px;
+}
+
+.wq-hub-cat-card__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid #262626;
+  background: #0a0a0a;
+  color: #a3e635;
+}
+
+.wq-hub-cat-card:hover .wq-hub-cat-card__icon {
+  border-color: color-mix(in srgb, #a3e635 40%, #262626);
+}
+
+.wq-hub-cat-card__title {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: #a3e635;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .wq-category-grid,
 .wq-tool-grid {
   display: grid;
