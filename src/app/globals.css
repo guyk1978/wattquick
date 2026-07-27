@@ -13900,6 +13900,336 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* Battery Bank Size capacity build */
+.bbs-viz-load-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.bbs-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.bbs-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 14px 22px;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+.bbs-viz-capacity-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.bbs-viz-cell-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.bbs-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Inverter Sizing expansion bars */
+.inv-viz-load-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.inv-viz-margin-pulse {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.inv-viz-peak-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+}
+
+.inv-viz-margin-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.inv-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* DC Cable Size current flow + AWG highlight */
+.dcs-viz-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.dcs-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.dcs-viz-length-dot {
+  animation: cl-viz-dot-blink 1.4s ease-in-out infinite;
+}
+
+.dcs-viz-current-flow {
+  stroke-dasharray: 14 40;
+  stroke-dashoffset: 54;
+  animation: dcs-viz-flow 1.8s linear infinite;
+}
+
+.dcs-viz-current-flow--return {
+  animation-delay: 0.35s;
+}
+
+.dcs-viz-awg-active {
+  animation: cl-viz-value-glow 2.8s ease-in-out infinite;
+}
+
+.dcs-viz-awg-fill {
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.dcs-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes dcs-viz-flow {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Watts to Amps divide + current channel */
+.wta-viz-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.wta-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.wta-viz-power-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+}
+
+.wta-viz-voltage-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.wta-viz-current-flow {
+  stroke-dasharray: 16 36;
+  stroke-dashoffset: 52;
+  animation: dcs-viz-flow 1.6s linear infinite;
+}
+
+.wta-viz-needle {
+  transform-box: fill-box;
+  transform-origin: 810px 228px;
+  animation: wta-viz-needle-sweep 3.2s ease-in-out infinite;
+}
+
+.wta-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes wta-viz-needle-sweep {
+  0%,
+  100% {
+    transform: rotate(-28deg);
+  }
+  50% {
+    transform: rotate(28deg);
+  }
+}
+
+/* Amps to Watts multiply + power product */
+.atw-viz-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.atw-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.atw-viz-current-flow {
+  stroke-dasharray: 8 20;
+  stroke-dashoffset: 28;
+  animation: dcs-viz-flow 1.4s linear infinite;
+}
+
+.atw-viz-multiply {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.atw-viz-amps-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+}
+
+.atw-viz-voltage-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.atw-viz-power-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.atw-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Residential AC voltage drop path + threshold bar */
+.rvd-viz-current-flow {
+  stroke-dasharray: 14 36;
+  stroke-dashoffset: 50;
+  animation: dcs-viz-flow 1.8s linear infinite;
+}
+
+.rvd-viz-current-flow--return {
+  animation-delay: 0.35s;
+}
+
+.rvd-viz-drop-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.rvd-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Ohm's Law triangle + circuit */
+.ohm-viz-v-pulse {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.ohm-viz-current-flow {
+  stroke-dasharray: 10 22;
+  stroke-dashoffset: 32;
+  animation: dcs-viz-flow 1.5s linear infinite;
+}
+
+.ohm-viz-resistor {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.ohm-viz-active-formula {
+  animation: cl-viz-value-glow 2.8s ease-in-out infinite;
+}
+
+.ohm-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Panel Size sun + array */
+.sps-viz-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.sps-viz-sun {
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.sps-viz-sun-rays {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.sps-viz-panel-glow {
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.sps-viz-array-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.sps-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Battery Bank autonomy + DoD fill */
+.sbb-viz-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.sbb-viz-days {
+  animation: cl-viz-value-glow 2.8s ease-in-out infinite;
+}
+
+.sbb-viz-dod-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.sbb-viz-cell-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 3.6s ease-in-out infinite;
+}
+
+.sbb-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Charge Controller sizing bars */
+.scc-viz-panel-glow {
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.scc-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.scc-viz-base-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.8s ease-in-out infinite;
+}
+
+.scc-viz-margin-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.scc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Daily Yield generation fill */
+.sdy-viz-panel-glow {
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.sdy-viz-sun {
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.sdy-viz-sun-rays {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.sdy-viz-yield-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.sdy-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
 @keyframes ups-viz-drain {
   0% {
     transform: scaleX(1);
@@ -14042,7 +14372,69 @@ body:has(.legal-modal) .grid-modal-shell {
   .be-viz-ah-bar,
   .be-viz-v-bar,
   .be-viz-energy-fill,
-  .be-viz-output-value {
+  .be-viz-output-value,
+  .bbs-viz-load-bolt,
+  .bbs-viz-v-pulse,
+  .bbs-viz-clock-hand,
+  .bbs-viz-capacity-bar,
+  .bbs-viz-cell-fill,
+  .bbs-viz-output-value,
+  .inv-viz-load-bolt,
+  .inv-viz-margin-pulse,
+  .inv-viz-peak-bar,
+  .inv-viz-margin-bar,
+  .inv-viz-output-value,
+  .dcs-viz-bolt,
+  .dcs-viz-v-pulse,
+  .dcs-viz-length-dot,
+  .dcs-viz-current-flow,
+  .dcs-viz-awg-active,
+  .dcs-viz-awg-fill,
+  .dcs-viz-output-value,
+  .wta-viz-bolt,
+  .wta-viz-v-pulse,
+  .wta-viz-power-bar,
+  .wta-viz-voltage-bar,
+  .wta-viz-current-flow,
+  .wta-viz-needle,
+  .wta-viz-output-value,
+  .atw-viz-bolt,
+  .atw-viz-v-pulse,
+  .atw-viz-current-flow,
+  .atw-viz-multiply,
+  .atw-viz-amps-bar,
+  .atw-viz-voltage-bar,
+  .atw-viz-power-fill,
+  .atw-viz-output-value,
+  .rvd-viz-current-flow,
+  .rvd-viz-drop-bar,
+  .rvd-viz-output-value,
+  .ohm-viz-v-pulse,
+  .ohm-viz-current-flow,
+  .ohm-viz-resistor,
+  .ohm-viz-active-formula,
+  .ohm-viz-output-value,
+  .sps-viz-bolt,
+  .sps-viz-sun,
+  .sps-viz-sun-rays,
+  .sps-viz-panel-glow,
+  .sps-viz-array-bar,
+  .sps-viz-output-value,
+  .sbb-viz-bolt,
+  .sbb-viz-days,
+  .sbb-viz-dod-fill,
+  .sbb-viz-cell-fill,
+  .sbb-viz-output-value,
+  .scc-viz-panel-glow,
+  .scc-viz-battery-fill,
+  .scc-viz-base-bar,
+  .scc-viz-margin-bar,
+  .scc-viz-output-value,
+  .sdy-viz-panel-glow,
+  .sdy-viz-sun,
+  .sdy-viz-sun-rays,
+  .sdy-viz-yield-bar,
+  .sdy-viz-output-value {
     animation: none;
   }
 
@@ -14087,6 +14479,96 @@ body:has(.legal-modal) .grid-modal-shell {
   .be-viz-ah-bar,
   .be-viz-v-bar,
   .be-viz-energy-fill {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bbs-viz-capacity-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .inv-viz-peak-bar,
+  .inv-viz-margin-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .dcs-viz-current-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.55;
+  }
+
+  .wta-viz-power-bar,
+  .wta-viz-voltage-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .wta-viz-current-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.55;
+  }
+
+  .wta-viz-needle {
+    transform: rotate(0deg);
+  }
+
+  .atw-viz-amps-bar,
+  .atw-viz-voltage-bar,
+  .atw-viz-power-fill {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .atw-viz-current-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.55;
+  }
+
+  .rvd-viz-current-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.55;
+  }
+
+  .rvd-viz-drop-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ohm-viz-current-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.55;
+  }
+
+  .sps-viz-array-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .sbb-viz-cell-fill,
+  .sbb-viz-dod-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .scc-viz-base-bar,
+  .scc-viz-margin-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .sdy-viz-yield-bar {
     transform: scaleX(1);
     opacity: 0.85;
   }
