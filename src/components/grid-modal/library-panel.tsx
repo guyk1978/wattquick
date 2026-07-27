@@ -131,7 +131,7 @@ export function LibraryPanel({ open, onClose, className }: LibraryPanelProps) {
       >
         <header className="library-panel__header">
           <div className="library-panel__title-wrap">
-            <Library className="size-4 text-[#a3e635]" aria-hidden />
+            <Library className="library-panel__title-icon size-4" aria-hidden />
             <h2 id="library-panel-title" className="library-panel__title">
               Library
             </h2>

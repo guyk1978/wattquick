@@ -29,8 +29,15 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
       <header className={cn("grid-nav", className)}>
         <div className="grid-nav__bar">
           <div className="grid-nav__leading">
-            <Link href="/" className="grid-nav__logo" aria-label="WattQuick home">
-              <span className="grid-nav__logo-mark" aria-hidden>
+            <Link
+              href="/"
+              className="grid-nav__logo group"
+              aria-label="WattQuick home"
+            >
+              <span
+                className="grid-nav__logo-mark transition-colors duration-300 group-hover:text-[var(--category-color,#a3e635)]"
+                aria-hidden
+              >
                 <svg viewBox="0 0 24 24" className="grid-nav__logo-icon" fill="none">
                   <path
                     d="M4 14.5 10.5 4l3 7H20L12.5 20l-2.5-6H4Z"
@@ -42,7 +49,9 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
               </span>
               <span className="grid-nav__logo-text">
                 <span className="grid-nav__logo-watt">Watt</span>
-                <span className="grid-nav__logo-quick">Quick</span>
+                <span className="grid-nav__logo-quick transition-colors duration-300 group-hover:text-[var(--category-color,#a3e635)]">
+                  Quick
+                </span>
               </span>
             </Link>
 

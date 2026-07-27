@@ -1,5 +1,6 @@
 import { CollapsibleSEOContent } from "@/components/collapsible-seo-content";
 import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero";
+import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
 import { getCategorySeoContent } from "@/data/category-seo-content";
@@ -15,7 +16,9 @@ type CategoryGridLandingProps = {
   calculators: CalculatorMeta[];
 };
 
-/** Category route: hero schematic + tool grid inside Grid-to-Modal shell. */
+/**
+ * Shared category template: hero → tools → category nav grid → SEO accordion.
+ */
 export function CategoryGridLanding({
   category,
   calculators,
@@ -30,6 +33,7 @@ export function CategoryGridLanding({
     >
       <CategoryEcosystemHero category={category} />
       <ToolGrid calculators={calculators} />
+      <CategoryNavigationGrid activeCategory={category} />
 
       <section className="grid-modal-seo-inline" aria-labelledby="category-seo-heading">
         <h2 id="category-seo-heading" className="sr-only">
