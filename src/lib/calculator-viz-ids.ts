@@ -27,6 +27,19 @@ const VIZ_CALCULATOR_IDS = [
   "solar-battery-bank",
   "solar-charge-controller-size",
   "solar-daily-yield",
+  "ev-charging-cost",
+  "ev-charge-time",
+  "ev-cost-per-mile",
+  "ev-battery-range",
+  "ev-level1-vs-level2",
+  "ev-vs-ice-maintenance",
+  "ev-fast-charging-time",
+  "ev-charging-temperature-impact",
+  "ev-truck-range",
+  "ev-fleet-tco",
+  "ev-bus-battery",
+  "ev-forklift-runtime",
+  "ev-delivery-van-efficiency",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);

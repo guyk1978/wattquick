@@ -14230,6 +14230,410 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* EV Charging Cost multiply + bill bar */
+.evc-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.evc-viz-meter-dot {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.evc-viz-multiply {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.evc-viz-cost-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.evc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Charge Time fill + clock */
+.ect-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.ect-viz-bolt {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.ect-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 4s ease-in-out infinite;
+}
+
+.ect-viz-fill-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+.ect-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 24px 24px;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+.ect-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Cost Per Mile multiply + cost bar */
+.ecpm-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.ecpm-viz-meter-dot {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.ecpm-viz-multiply {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.ecpm-viz-cost-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.ecpm-viz-car {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.ecpm-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Battery Range pack + road */
+.ebr-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.ebr-viz-usable-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.ebr-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 4s ease-in-out infinite;
+}
+
+.ebr-viz-range-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+.ebr-viz-car {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.ebr-viz-road-dash {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.ebr-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Level 1 vs Level 2 dual timeline */
+.el12-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.el12-viz-bolt {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.el12-viz-bar-l1 {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 5.5s ease-in-out infinite;
+}
+
+.el12-viz-bar-l2 {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 2.4s ease-in-out infinite;
+}
+
+.el12-viz-clock-l1 {
+  transform-box: fill-box;
+  transform-origin: 14px 14px;
+  animation: br-viz-clock-tick 8s linear infinite;
+}
+
+.el12-viz-clock-l2 {
+  transform-box: fill-box;
+  transform-origin: 14px 14px;
+  animation: br-viz-clock-tick 3s linear infinite;
+}
+
+.el12-viz-output-l1,
+.el12-viz-output-l2 {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV vs ICE Maintenance dual stacks */
+.eim-viz-car,
+.eim-viz-road {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.eim-viz-bar-ice {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 5s ease-in-out infinite;
+}
+
+.eim-viz-bar-ev {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 2.6s ease-in-out infinite;
+}
+
+.eim-viz-output-ice,
+.eim-viz-output-ev,
+.eim-viz-output-save {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV DC Fast Charge curve + SoC */
+.efc-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.efc-viz-bolt {
+  animation: cl-viz-dot-blink 1.4s ease-in-out infinite;
+}
+
+.efc-viz-curve {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: efc-viz-curve-draw 4s ease-in-out infinite;
+}
+
+@keyframes efc-viz-curve-draw {
+  0%,
+  12% {
+    stroke-dashoffset: 100;
+  }
+  55%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes efc-viz-cursor-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.efc-viz-cursor {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: efc-viz-cursor-pulse 2.4s ease-in-out infinite;
+}
+
+.efc-viz-soc-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.efc-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 24px 24px;
+  animation: br-viz-clock-tick 3.2s linear infinite;
+}
+
+.efc-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Charging Temperature Impact thermal path */
+.eti-viz-thermo-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 3.2s ease-in-out infinite;
+}
+
+.eti-viz-temp-dot {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.eti-viz-power-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.8s ease-in-out infinite;
+}
+
+.eti-viz-output-base,
+.eti-viz-output-delay,
+.eti-viz-output-total {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Truck Range vs Payload load path */
+.etr-viz-truck {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.etr-viz-cargo-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 3.4s ease-in-out infinite;
+}
+
+.etr-viz-range-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4s ease-in-out infinite;
+}
+
+.etr-viz-output-loss,
+.etr-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Fleet TCO dual OpEx bars */
+.eft-viz-fleet {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.eft-viz-bar-gas {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.8s ease-in-out infinite;
+}
+
+.eft-viz-bar-ev {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3s ease-in-out infinite;
+}
+
+.eft-viz-output-gas,
+.eft-viz-output-ev,
+.eft-viz-output-save {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Transit Bus Battery kWh/mi */
+.ebb-viz-bus,
+.ebb-viz-road {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.ebb-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.ebb-viz-route-bar,
+.ebb-viz-energy-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.8s ease-in-out infinite;
+}
+
+.ebb-viz-divide {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.ebb-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Electric Forklift Shift Runtime discharge */
+.efr-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.efr-viz-fork {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.efr-viz-drain-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+.efr-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: bp-viz-soc-rise 4s ease-in-out infinite;
+}
+
+.efr-viz-clock-hand {
+  transform-box: fill-box;
+  transform-origin: 24px 24px;
+  animation: br-viz-clock-tick 4s linear infinite;
+}
+
+.efr-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Delivery Van Stop-and-Go urban cycle */
+.edv-viz-van,
+.edv-viz-road-hwy {
+  animation: cl-viz-dot-blink 2s ease-in-out infinite;
+}
+
+.edv-viz-stop {
+  animation: cl-viz-dot-blink 1.5s ease-in-out infinite;
+}
+
+.edv-viz-hwy-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.edv-viz-cycle {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: efc-viz-curve-draw 3.8s ease-in-out infinite;
+}
+
+.edv-viz-urban-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+.edv-viz-output-delta,
+.edv-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
 @keyframes ups-viz-drain {
   0% {
     transform: scaleX(1);
@@ -14434,7 +14838,91 @@ body:has(.legal-modal) .grid-modal-shell {
   .sdy-viz-sun,
   .sdy-viz-sun-rays,
   .sdy-viz-yield-bar,
-  .sdy-viz-output-value {
+  .sdy-viz-output-value,
+  .evc-viz-battery-fill,
+  .evc-viz-meter-dot,
+  .evc-viz-multiply,
+  .evc-viz-cost-bar,
+  .evc-viz-output-value,
+  .ect-viz-battery-fill,
+  .ect-viz-bolt,
+  .ect-viz-pack-fill,
+  .ect-viz-fill-bar,
+  .ect-viz-clock-hand,
+  .ect-viz-output-value,
+  .ecpm-viz-pack-fill,
+  .ecpm-viz-meter-dot,
+  .ecpm-viz-multiply,
+  .ecpm-viz-cost-bar,
+  .ecpm-viz-car,
+  .ecpm-viz-output-value,
+  .ebr-viz-battery-fill,
+  .ebr-viz-usable-bar,
+  .ebr-viz-pack-fill,
+  .ebr-viz-range-bar,
+  .ebr-viz-car,
+  .ebr-viz-road-dash,
+  .ebr-viz-output-value,
+  .el12-viz-battery-fill,
+  .el12-viz-bolt,
+  .el12-viz-bar-l1,
+  .el12-viz-bar-l2,
+  .el12-viz-clock-l1,
+  .el12-viz-clock-l2,
+  .el12-viz-output-l1,
+  .el12-viz-output-l2,
+  .eim-viz-car,
+  .eim-viz-road,
+  .eim-viz-bar-ice,
+  .eim-viz-bar-ev,
+  .eim-viz-output-ice,
+  .eim-viz-output-ev,
+  .eim-viz-output-save,
+  .efc-viz-battery-fill,
+  .efc-viz-bolt,
+  .efc-viz-curve,
+  .efc-viz-cursor,
+  .efc-viz-soc-bar,
+  .efc-viz-clock-hand,
+  .efc-viz-output-value,
+  .eti-viz-thermo-fill,
+  .eti-viz-temp-dot,
+  .eti-viz-power-bar,
+  .eti-viz-output-base,
+  .eti-viz-output-delay,
+  .eti-viz-output-total,
+  .etr-viz-truck,
+  .etr-viz-cargo-fill,
+  .etr-viz-range-bar,
+  .etr-viz-output-loss,
+  .etr-viz-output-value,
+  .eft-viz-fleet,
+  .eft-viz-bar-gas,
+  .eft-viz-bar-ev,
+  .eft-viz-output-gas,
+  .eft-viz-output-ev,
+  .eft-viz-output-save,
+  .ebb-viz-bus,
+  .ebb-viz-road,
+  .ebb-viz-battery-fill,
+  .ebb-viz-route-bar,
+  .ebb-viz-energy-bar,
+  .ebb-viz-divide,
+  .ebb-viz-output-value,
+  .efr-viz-battery-fill,
+  .efr-viz-fork,
+  .efr-viz-drain-bar,
+  .efr-viz-pack-fill,
+  .efr-viz-clock-hand,
+  .efr-viz-output-value,
+  .edv-viz-van,
+  .edv-viz-road-hwy,
+  .edv-viz-stop,
+  .edv-viz-hwy-bar,
+  .edv-viz-cycle,
+  .edv-viz-urban-bar,
+  .edv-viz-output-delta,
+  .edv-viz-output-value {
     animation: none;
   }
 
@@ -14571,6 +15059,113 @@ body:has(.legal-modal) .grid-modal-shell {
   .sdy-viz-yield-bar {
     transform: scaleX(1);
     opacity: 0.85;
+  }
+
+  .evc-viz-cost-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ect-viz-pack-fill {
+    transform: scaleY(1);
+    opacity: 0.7;
+  }
+
+  .ect-viz-fill-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ecpm-viz-pack-fill,
+  .ecpm-viz-cost-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ebr-viz-usable-bar,
+  .ebr-viz-range-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ebr-viz-pack-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .el12-viz-bar-l1,
+  .el12-viz-bar-l2 {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .eim-viz-bar-ice,
+  .eim-viz-bar-ev {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .efc-viz-curve {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .efc-viz-soc-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .eti-viz-thermo-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .eti-viz-power-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .etr-viz-cargo-fill {
+    transform: scaleY(1);
+    opacity: 0.7;
+  }
+
+  .etr-viz-range-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .eft-viz-bar-gas,
+  .eft-viz-bar-ev {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .ebb-viz-route-bar,
+  .ebb-viz-energy-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .efr-viz-drain-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .efr-viz-pack-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .edv-viz-hwy-bar,
+  .edv-viz-urban-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .edv-viz-cycle {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
   }
 }
 

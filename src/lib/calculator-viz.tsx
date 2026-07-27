@@ -14,6 +14,19 @@ import { EbikeChargeTimeViz } from "@/components/calculator/viz/ebike-charge-tim
 import { EbikeChargingCostViz } from "@/components/calculator/viz/ebike-charging-cost-viz";
 import { EbikeMaxSpeedViz } from "@/components/calculator/viz/ebike-max-speed-viz";
 import { EbikeRangeViz } from "@/components/calculator/viz/ebike-range-viz";
+import { EvBatteryRangeViz } from "@/components/calculator/viz/ev-battery-range-viz";
+import { EvChargeTimeViz } from "@/components/calculator/viz/ev-charge-time-viz";
+import { EvChargingCostViz } from "@/components/calculator/viz/ev-charging-cost-viz";
+import { EvCostPerMileViz } from "@/components/calculator/viz/ev-cost-per-mile-viz";
+import { EvChargingTemperatureImpactViz } from "@/components/calculator/viz/ev-charging-temperature-impact-viz";
+import { EvFastChargingTimeViz } from "@/components/calculator/viz/ev-fast-charging-time-viz";
+import { EvBusBatteryViz } from "@/components/calculator/viz/ev-bus-battery-viz";
+import { EvDeliveryVanEfficiencyViz } from "@/components/calculator/viz/ev-delivery-van-efficiency-viz";
+import { EvFleetTcoViz } from "@/components/calculator/viz/ev-fleet-tco-viz";
+import { EvForkliftRuntimeViz } from "@/components/calculator/viz/ev-forklift-runtime-viz";
+import { EvLevel1VsLevel2Viz } from "@/components/calculator/viz/ev-level1-vs-level2-viz";
+import { EvTruckRangeViz } from "@/components/calculator/viz/ev-truck-range-viz";
+import { EvVsIceMaintenanceViz } from "@/components/calculator/viz/ev-vs-ice-maintenance-viz";
 import { InverterSizingViz } from "@/components/calculator/viz/inverter-sizing-viz";
 import { OhmsLawViz } from "@/components/calculator/viz/ohms-law-viz";
 import { ResidentialVoltageDropViz } from "@/components/calculator/viz/residential-voltage-drop-viz";
@@ -119,6 +132,58 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "solar-daily-yield": {
       calculatorTitle: "Solar Daily Yield",
       Viz: SolarDailyYieldViz,
+    },
+    "ev-charging-cost": {
+      calculatorTitle: "EV Charging Cost",
+      Viz: EvChargingCostViz,
+    },
+    "ev-charge-time": {
+      calculatorTitle: "EV Charge Time",
+      Viz: EvChargeTimeViz,
+    },
+    "ev-cost-per-mile": {
+      calculatorTitle: "EV Cost Per Mile Calculator",
+      Viz: EvCostPerMileViz,
+    },
+    "ev-battery-range": {
+      calculatorTitle: "EV Battery Range Calculator",
+      Viz: EvBatteryRangeViz,
+    },
+    "ev-level1-vs-level2": {
+      calculatorTitle: "Level 1 vs Level 2 EV Charging Time",
+      Viz: EvLevel1VsLevel2Viz,
+    },
+    "ev-vs-ice-maintenance": {
+      calculatorTitle: "EV vs ICE Maintenance Cost Calculator",
+      Viz: EvVsIceMaintenanceViz,
+    },
+    "ev-fast-charging-time": {
+      calculatorTitle: "EV DC Fast Charging Calculator (10–80%)",
+      Viz: EvFastChargingTimeViz,
+    },
+    "ev-charging-temperature-impact": {
+      calculatorTitle: "EV Charging Temperature Impact Calculator",
+      Viz: EvChargingTemperatureImpactViz,
+    },
+    "ev-truck-range": {
+      calculatorTitle: "EV Truck Range vs. Payload Calculator",
+      Viz: EvTruckRangeViz,
+    },
+    "ev-fleet-tco": {
+      calculatorTitle: "EV Fleet TCO vs. Gas Calculator",
+      Viz: EvFleetTcoViz,
+    },
+    "ev-bus-battery": {
+      calculatorTitle: "Transit Bus Battery kWh per Mile",
+      Viz: EvBusBatteryViz,
+    },
+    "ev-forklift-runtime": {
+      calculatorTitle: "Electric Forklift Shift Runtime Calculator",
+      Viz: EvForkliftRuntimeViz,
+    },
+    "ev-delivery-van-efficiency": {
+      calculatorTitle: "Delivery Van Stop-and-Go Efficiency",
+      Viz: EvDeliveryVanEfficiencyViz,
     },
   };
 
