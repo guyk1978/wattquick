@@ -6,8 +6,10 @@ import { useRouter } from "next/navigation";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
+import { ToolModalViz } from "@/components/grid-modal/tool-modal-viz";
 import type { CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
+import { hasCalculatorViz } from "@/lib/calculator-viz-ids";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { categoryThemeStyle } from "@/lib/category-theme";
 import { getCategoryPageHref } from "@/lib/category-routes";
@@ -180,6 +182,7 @@ export function ToolWorkspaceModal({
   activeTabRef.current = activeTab;
   const hasDocumentation = documentation != null;
   const hasRelated = related != null;
+  const hasViz = hasCalculatorViz(calculatorId);
 
   const close = useCallback(() => {
     router.push(categoryHref, { scroll: false });
@@ -244,6 +247,7 @@ export function ToolWorkspaceModal({
           title={meta.title}
           activeTab={activeTab}
           onTabChange={setActiveTab}
+          hasVizTab={hasViz}
           hasDocTab={hasDocumentation}
           hasRelatedTab={hasRelated}
           calculatorId={calculatorId}
@@ -306,6 +310,22 @@ export function ToolWorkspaceModal({
               className="h-full min-h-0 w-full max-w-full"
             />
           </div>
+
+          {hasViz ? (
+            <div
+              className={cn(
+                "tool-workspace-modal__view tool-workspace-modal__view--viz",
+                activeTab === "viz" && "tool-workspace-modal__view--active"
+              )}
+              aria-hidden={activeTab !== "viz"}
+            >
+              {activeTab === "viz" ? (
+                <div className="tool-workspace-modal__docs-scroll">
+                  <ToolModalViz id={calculatorId} />
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
           {hasDocumentation ? (
             <div

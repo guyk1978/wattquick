@@ -15,10 +15,11 @@ import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
-export type ToolHeaderTab = "calc" | "doc" | "related";
+export type ToolHeaderTab = "calc" | "viz" | "doc" | "related";
 
 const TAB_LABELS: Record<ToolHeaderTab, string> = {
   calc: "[CALC]",
+  viz: "[VIZ]",
   doc: "[DOC]",
   related: "[RELATED]",
 };
@@ -30,6 +31,7 @@ interface ToolHeaderProps {
   activeTab?: ToolHeaderTab;
   onTabChange?: (tab: ToolHeaderTab) => void;
   /** Tabs to render; CALC is always present. */
+  hasVizTab?: boolean;
   hasDocTab?: boolean;
   hasRelatedTab?: boolean;
   /** Enables the favorite toggle and interactive rating for this tool. */
@@ -48,13 +50,14 @@ interface ToolHeaderProps {
 
 /**
  * Unified tool window header: title + rating on the left,
- * [CALC]/[DOC]/[RELATED] tabs in the middle, controls on the right.
+ * [CALC]/[VIZ]/[DOC]/[RELATED] tabs in the middle, controls on the right.
  * Shared across every WattQuick calculator tool.
  */
 export function ToolHeader({
   title,
   activeTab = "calc",
   onTabChange,
+  hasVizTab = false,
   hasDocTab = false,
   hasRelatedTab = false,
   calculatorId,
@@ -131,6 +134,7 @@ export function ToolHeader({
 
   const tabs: ToolHeaderTab[] = [
     "calc",
+    ...(hasVizTab ? (["viz"] as const) : []),
     ...(hasDocTab ? (["doc"] as const) : []),
     ...(hasRelatedTab ? (["related"] as const) : []),
   ];

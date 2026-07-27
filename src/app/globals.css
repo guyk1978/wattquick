@@ -3043,12 +3043,13 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: color-mix(in srgb, var(--star-rating-accent) 62%, #525252);
+  /* Unrated outlines stay accent-tinted but bright enough to read. */
+  color: color-mix(in srgb, var(--star-rating-accent) 55%, #737373);
   transition: color 220ms ease, transform 220ms ease;
 }
 
 .dark .star-rating__star {
-  color: color-mix(in srgb, var(--star-rating-accent) 58%, #737373);
+  color: color-mix(in srgb, var(--star-rating-accent) 50%, #a3a3a3);
 }
 
 .star-rating__star--button {
@@ -3155,7 +3156,8 @@
   gap: 0.375rem;
   min-height: 1rem;
   font-size: 0.75rem;
-  color: var(--muted-foreground);
+  /* Base score/count text: brighter than muted so unrated + rated states read. */
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .calculator-rating-summary--loading {
@@ -12212,7 +12214,7 @@ body:has(.legal-modal) .grid-modal-shell {
   align-items: center;
   justify-content: center;
   color: var(--category-color, #a3e635);
-  opacity: 0.9;
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -12294,7 +12296,8 @@ body:has(.legal-modal) .grid-modal-shell {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+  /* Always readable — never rely on hover to discover the control. */
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
   cursor: pointer;
   transition: color 0.15s ease;
 }
@@ -12341,8 +12344,8 @@ body:has(.legal-modal) .grid-modal-shell {
   min-height: 0;
 }
 
-/* Smaller than the card description to keep hierarchy; foreground mixes keep
-   it readable on both dark matte and light tech-hub cards. */
+/* Smaller than the card description to keep hierarchy; bright body text so
+   the example stays legible on dark matte and light tech-hub cards. */
 .tool-card-example__text {
   display: block;
   margin-top: 0.45rem;
@@ -12352,12 +12355,12 @@ body:has(.legal-modal) .grid-modal-shell {
   padding: 0.5rem 0.6rem;
   font-size: 0.6875rem;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+  color: color-mix(in srgb, var(--foreground) 92%, transparent);
 }
 
 .tool-card-example__label {
   font-weight: 650;
-  color: color-mix(in srgb, var(--foreground) 88%, transparent);
+  color: var(--foreground);
 }
 
 /*
@@ -12378,7 +12381,8 @@ body:has(.legal-modal) .grid-modal-shell {
   height: 1.7rem;
   border: 1px solid transparent;
   background: transparent;
-  color: color-mix(in srgb, var(--foreground) 38%, transparent);
+  /* Medium grey — permanently visible without requiring hover. */
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
   cursor: pointer;
   transition:
     color 0.15s ease,
@@ -12570,10 +12574,30 @@ body:has(.legal-modal) .grid-modal-shell {
 .tool-card-focus__rating {
   gap: 0.6rem;
   font-size: 1.2rem;
+  color: #a3a3a3;
+}
+
+.tool-card-focus__rating .calculator-rating-summary__average,
+.tool-card-focus__rating .calculator-rating-summary__empty,
+.tool-card-focus__rating .calculator-rating-summary__thanks {
+  color: var(--star-rating-color, var(--category-color, #a3e635));
 }
 
 .tool-card-focus__rating .star-rating {
   gap: 0.3rem;
+}
+
+.tool-card-focus__rating .star-rating__star {
+  color: color-mix(
+    in srgb,
+    var(--star-rating-color, var(--category-color, #a3e635)) 45%,
+    #a3a3a3
+  );
+}
+
+.tool-card-focus__rating .star-rating__star--filled,
+.tool-card-focus__rating .star-rating__star--partial {
+  color: var(--star-rating-color, var(--category-color, #a3e635));
 }
 
 .tool-card-focus__rating .star-rating__icon {
@@ -12631,8 +12655,26 @@ body:has(.legal-modal) .grid-modal-shell {
     color-mix(in srgb, var(--category-color, #a3e635) 18%, transparent);
 }
 
+.wq-card-rating .calculator-rating-summary {
+  color: #a3a3a3;
+}
+
 .wq-card-rating .calculator-rating-summary__average,
+.wq-card-rating .calculator-rating-summary__empty,
 .wq-card-rating .calculator-rating-summary__thanks {
+  color: var(--star-rating-color, var(--category-color, #a3e635));
+}
+
+.wq-card-rating .star-rating__star {
+  color: color-mix(
+    in srgb,
+    var(--star-rating-color, var(--category-color, #a3e635)) 45%,
+    #a3a3a3
+  );
+}
+
+.wq-card-rating .star-rating__star--filled,
+.wq-card-rating .star-rating__star--partial {
   color: var(--star-rating-color, var(--category-color, #a3e635));
 }
 
@@ -12806,7 +12848,7 @@ body:has(.legal-modal) .grid-modal-shell {
   align-items: center;
   gap: 0.4rem;
   /* Isolate star clicks from tabs / controls — rating must not steal or
-     be stolen by [CALC]/[DOC]/[RELATED] hit targets. */
+     be stolen by [CALC]/[VIZ]/[DOC]/[RELATED] hit targets. */
   pointer-events: auto;
 }
 
@@ -13270,6 +13312,384 @@ body:has(.legal-modal) .grid-modal-shell {
 .tool-workspace-modal__docs-scroll::-webkit-scrollbar-thumb {
   background: #404040;
   border-radius: 999px;
+}
+
+/* —— Tool [VIZ] tab: Industrial Matte animated schematic —— */
+.tool-modal-viz {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tool-viz {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 0.35rem 0.15rem 0.75rem;
+  color: #ededed;
+}
+
+.tool-viz__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 42rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid #262626;
+}
+
+.tool-viz__eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #888888;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.tool-viz__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: #ededed;
+  line-height: 1.25;
+}
+
+.tool-viz__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #888888;
+  max-width: 40rem;
+}
+
+.tool-viz__stage {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 0;
+  width: 100%;
+  border: 1px solid #262626;
+  border-radius: 0.5rem;
+  background: #0a0a0a;
+  overflow: hidden;
+}
+
+.tool-viz__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(70vh, 640px);
+  min-height: 280px;
+  aspect-ratio: 960 / 560;
+}
+
+/* Flow pulse: dash travels along connector paths */
+.tool-viz-flow__pulse,
+.cl-viz-flow__pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.tool-viz-flow__pulse--delay,
+.cl-viz-flow__pulse--2 {
+  animation-delay: 0.35s;
+}
+
+.cl-viz-flow__pulse--3 {
+  animation-delay: 0.7s;
+}
+
+.cl-viz-flow__pulse--4 {
+  animation-delay: 1.05s;
+}
+
+.tool-viz-flow__pulse--out,
+.cl-viz-flow__pulse--out {
+  animation-duration: 2.8s;
+  animation-delay: 0.5s;
+}
+
+.cl-viz-pulse-dot {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.cl-viz-battery-fill,
+.ups-viz-battery-fill,
+.ebike-viz-battery-fill {
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 2.8s ease-in-out infinite;
+}
+
+.cl-viz-battery-fill--delay {
+  animation-delay: 0.45s;
+}
+
+.cl-viz-output-value,
+.ups-viz-output-value,
+.ebike-viz-output-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+.ups-viz-drain-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ups-viz-drain 3.6s ease-in-out infinite;
+}
+
+.ups-viz-load-bolt {
+  animation: cl-viz-dot-blink 1.8s ease-in-out infinite;
+}
+
+.ebike-viz-road-progress {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-viz-road 4s ease-in-out infinite;
+}
+
+.ebike-viz-bike-hub {
+  animation: cl-viz-dot-blink 1.4s ease-in-out infinite;
+}
+
+.ebike-cost-viz-meter-dot {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.ebike-cost-viz-multiply {
+  animation: cl-viz-value-glow 2.4s ease-in-out infinite;
+}
+
+.ebike-max-speed-viz-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ebike-max-speed-spin 2.8s linear infinite;
+}
+
+.ebike-max-speed-viz-motor {
+  animation: cl-viz-dot-blink 1.5s ease-in-out infinite;
+}
+
+.ebike-max-speed-viz-speed-arrow {
+  stroke-dasharray: 6 14;
+  animation: ebike-max-speed-arrow 1.8s ease-in-out infinite;
+}
+
+@keyframes ebike-max-speed-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ebike-max-speed-arrow {
+  0%,
+  100% {
+    stroke-dashoffset: 20;
+    opacity: 0.5;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+.ebike-charge-time-viz-bolt {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+}
+
+.ebike-charge-time-viz-flow-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-flow 2.4s linear infinite;
+}
+
+.ebike-charge-time-viz-fill-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 4.2s ease-in-out infinite;
+}
+
+@keyframes ebike-charge-time-flow {
+  0% {
+    transform: scaleX(0.15);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scaleX(0.15);
+    opacity: 0.45;
+  }
+}
+
+@keyframes ebike-charge-time-fill {
+  0% {
+    transform: scaleX(0.08);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.08);
+    opacity: 0.55;
+  }
+}
+
+@keyframes ups-viz-drain {
+  0% {
+    transform: scaleX(1);
+    opacity: 0.95;
+  }
+  70% {
+    transform: scaleX(0.18);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes ebike-viz-road {
+  0% {
+    transform: scaleX(0.12);
+    opacity: 0.7;
+  }
+  55% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0.12);
+    opacity: 0.7;
+  }
+}
+
+@keyframes cl-viz-flow-pulse {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cl-viz-dot-blink {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes cl-viz-battery-fill {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes cl-viz-value-glow {
+  0%,
+  100% {
+    fill: #a3e635;
+    opacity: 0.88;
+  }
+  50% {
+    fill: #bef264;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .tool-viz {
+    gap: 0.65rem;
+    padding: 0.15rem 0 0.5rem;
+  }
+
+  .tool-viz__title {
+    font-size: 1rem;
+  }
+
+  .tool-viz__subtitle {
+    font-size: 0.8125rem;
+  }
+
+  .tool-viz__stage {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tool-viz__svg {
+    max-height: none;
+    min-height: 220px;
+    min-width: 640px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-viz-flow__pulse,
+  .cl-viz-flow__pulse,
+  .cl-viz-pulse-dot,
+  .cl-viz-battery-fill,
+  .ups-viz-battery-fill,
+  .ebike-viz-battery-fill,
+  .cl-viz-output-value,
+  .ups-viz-output-value,
+  .ebike-viz-output-value,
+  .ups-viz-drain-bar,
+  .ups-viz-load-bolt,
+  .ebike-viz-road-progress,
+  .ebike-viz-bike-hub,
+  .ebike-cost-viz-meter-dot,
+  .ebike-cost-viz-multiply,
+  .ebike-max-speed-viz-wheel,
+  .ebike-max-speed-viz-motor,
+  .ebike-max-speed-viz-speed-arrow,
+  .ebike-charge-time-viz-bolt,
+  .ebike-charge-time-viz-flow-bar,
+  .ebike-charge-time-viz-fill-bar {
+    animation: none;
+  }
+
+  .tool-viz-flow__pulse,
+  .cl-viz-flow__pulse {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: #a3e635;
+    stroke-opacity: 0.45;
+  }
+
+  .ups-viz-drain-bar {
+    transform: scaleX(0.55);
+    opacity: 0.75;
+  }
+
+  .ebike-viz-road-progress {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
 }
 
 .tool-modal-docs {
