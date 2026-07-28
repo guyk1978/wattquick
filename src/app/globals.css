@@ -18126,6 +18126,714 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* E-Bike Controller Watts · V×I → η → shaft W */
+.ecw-viz-pack-node,
+.ecw-viz-ctrl-node,
+.ecw-viz-motor-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ecw-viz-timeline-pulse,
+.ecw-viz-power-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ecw-viz-in-bar,
+.ecw-viz-eta-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ecw-viz-v-value,
+.ecw-viz-a-value,
+.ecw-viz-eta-value,
+.ecw-viz-pack-chip,
+.ecw-viz-ctrl-chip,
+.ecw-viz-in-chip,
+.ecw-viz-loss-chip,
+.ecw-viz-shaft-chip,
+.ecw-viz-ratio-chip,
+.ecw-viz-output-value,
+.ecw-viz-shaft-out,
+.ecw-viz-eta-out,
+.ecw-viz-math-value,
+.ecw-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Bike Battery Cycle Life · k×DoD⁻¹·⁵ · remaining cycles */
+.ebcl-viz-curve,
+.ebcl-viz-op-dot {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ebcl-viz-op-dot {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.ebcl-viz-timeline-pulse,
+.ebcl-viz-wear-pulse,
+.ebcl-viz-curve-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ebcl-viz-used-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ebcl-viz-n-value,
+.ebcl-viz-dod-value,
+.ebcl-viz-k-value,
+.ebcl-viz-mfr-value,
+.ebcl-viz-formula-chip,
+.ebcl-viz-op-chip,
+.ebcl-viz-output-value,
+.ebcl-viz-total-out,
+.ebcl-viz-used-out,
+.ebcl-viz-soh-out,
+.ebcl-viz-math-value,
+.ebcl-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Mobility TCO · 3-yr car vs e-bike vs e-scooter */
+.mtco-viz-car-node,
+.mtco-viz-ebike-node,
+.mtco-viz-esc-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.mtco-viz-timeline-pulse,
+.mtco-viz-cash-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.mtco-viz-car-bar,
+.mtco-viz-ebike-bar,
+.mtco-viz-esc-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.mtco-viz-car-value,
+.mtco-viz-ebike-value,
+.mtco-viz-esc-value,
+.mtco-viz-car-chip,
+.mtco-viz-ebike-chip,
+.mtco-viz-esc-chip,
+.mtco-viz-stack-chip,
+.mtco-viz-best-chip,
+.mtco-viz-horizon-chip,
+.mtco-viz-output-value,
+.mtco-viz-ebike-out,
+.mtco-viz-esc-out,
+.mtco-viz-totals-out,
+.mtco-viz-math-value,
+.mtco-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Peak Amps · V×I burst · Ah×C pack limit */
+.espa-viz-batt-node,
+.espa-viz-motor-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.espa-viz-timeline-pulse,
+.espa-viz-surge-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.espa-viz-w-bar,
+.espa-viz-pack-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.espa-viz-v-value,
+.espa-viz-a-value,
+.espa-viz-ctrl-value,
+.espa-viz-pack-value,
+.espa-viz-batt-chip,
+.espa-viz-burst-chip,
+.espa-viz-motor-chip,
+.espa-viz-w-chip,
+.espa-viz-max-chip,
+.espa-viz-ok-ctrl,
+.espa-viz-ok-pack,
+.espa-viz-output-value,
+.espa-viz-max-out,
+.espa-viz-head-out,
+.espa-viz-flags-out,
+.espa-viz-math-value,
+.espa-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Brake Pad Wear · regen offset → km & weeks per pad set */
+.esbpw-viz-scooter,
+.esbpw-viz-wheel,
+.esbpw-viz-pad,
+.esbpw-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.esbpw-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.esbpw-viz-regen-flow,
+.esbpw-viz-friction-flow {
+  stroke-dasharray: 6 10;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.esbpw-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.esbpw-viz-regen-bar,
+.esbpw-viz-friction-bar,
+.esbpw-viz-life-bar,
+.esbpw-viz-weeks-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.esbpw-viz-km-value,
+.esbpw-viz-regen-value,
+.esbpw-viz-hill-value,
+.esbpw-viz-regen-chip,
+.esbpw-viz-friction-chip,
+.esbpw-viz-math-value,
+.esbpw-viz-output-value,
+.esbpw-viz-weeks-out,
+.esbpw-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Connector Power Loss · I²R contact heat → W & Wh */
+.escl-viz-pack,
+.escl-viz-plug,
+.escl-viz-pin,
+.escl-viz-contact,
+.escl-viz-load,
+.escl-viz-heat,
+.escl-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.escl-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.escl-viz-current-flow {
+  stroke-dasharray: 10 14;
+  stroke-dashoffset: 48;
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.escl-viz-current-flow--delay {
+  animation-delay: 0.4s;
+}
+
+.escl-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.escl-viz-loss-bar,
+.escl-viz-energy-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.escl-viz-a-value,
+.escl-viz-conn-value,
+.escl-viz-min-value,
+.escl-viz-a-chip,
+.escl-viz-math-value,
+.escl-viz-compare-value,
+.escl-viz-output-value,
+.escl-viz-energy-out,
+.escl-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* E-Scooter Maintenance Schedule · odo % intervals → next service km & weeks */
+.esmsch-viz-scooter,
+.esmsch-viz-wheel,
+.esmsch-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.esmsch-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.esmsch-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.esmsch-viz-tire-bar,
+.esmsch-viz-brake-bar,
+.esmsch-viz-bolt-bar,
+.esmsch-viz-out-bar,
+.esmsch-viz-weeks-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.esmsch-viz-odo-value,
+.esmsch-viz-wk-value,
+.esmsch-viz-int-value,
+.esmsch-viz-tire-chip,
+.esmsch-viz-brake-chip,
+.esmsch-viz-bolt-chip,
+.esmsch-viz-math-value,
+.esmsch-viz-output-value,
+.esmsch-viz-weeks-out,
+.esmsch-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Standby Power Waste · W × n × 8760h → annual kWh & $ cost */
+.spw-viz-devices,
+.spw-viz-led,
+.spw-viz-leak,
+.spw-viz-clock,
+.spw-viz-hand,
+.spw-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.spw-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.spw-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.spw-viz-cost-bar,
+.spw-viz-kwh-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.spw-viz-w-value,
+.spw-viz-n-value,
+.spw-viz-rate-value,
+.spw-viz-total-w,
+.spw-viz-math-value,
+.spw-viz-output-value,
+.spw-viz-kwh-out,
+.spw-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Generator Fuel Consumption · rated gal/hr × kW → burn & runtime */
+.gfc-viz-gen,
+.gfc-viz-fan,
+.gfc-viz-tank,
+.gfc-viz-exhaust,
+.gfc-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.gfc-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.gfc-viz-fuel-flow {
+  stroke-dasharray: 10 14;
+  stroke-dashoffset: 48;
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.gfc-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.gfc-viz-fuel-fill {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.gfc-viz-runtime-bar,
+.gfc-viz-burn-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.gfc-viz-load-value,
+.gfc-viz-rated-value,
+.gfc-viz-tank-value,
+.gfc-viz-factor-chip,
+.gfc-viz-math-value,
+.gfc-viz-output-value,
+.gfc-viz-burn-out,
+.gfc-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Heat Pump vs Resistance · COP divide → kWh & $ savings */
+.hpvr-viz-resist-coil,
+.hpvr-viz-hp-unit,
+.hpvr-viz-fan,
+.hpvr-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.hpvr-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.hpvr-viz-heat-flow {
+  stroke-dasharray: 6 10;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.hpvr-viz-heat-flow--delay {
+  animation-delay: 0.35s;
+}
+
+.hpvr-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.hpvr-viz-resist-bar,
+.hpvr-viz-hp-bar,
+.hpvr-viz-save-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.hpvr-viz-kw-value,
+.hpvr-viz-cop-value,
+.hpvr-viz-hrs-value,
+.hpvr-viz-rate-value,
+.hpvr-viz-resist-kwh,
+.hpvr-viz-hp-kwh,
+.hpvr-viz-resist-cost,
+.hpvr-viz-hp-cost,
+.hpvr-viz-math-value,
+.hpvr-viz-output-value,
+.hpvr-viz-resist-out,
+.hpvr-viz-hp-out,
+.hpvr-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Whole House Energy Budget · Σ daily categories → mo/yr $ */
+.wheb-viz-house,
+.wheb-viz-stack-hvac,
+.wheb-viz-stack-wh,
+.wheb-viz-stack-kl,
+.wheb-viz-stack-other,
+.wheb-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.wheb-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.wheb-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.wheb-viz-mo-bar,
+.wheb-viz-yr-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.wheb-viz-hvac-value,
+.wheb-viz-wh-value,
+.wheb-viz-kl-value,
+.wheb-viz-other-value,
+.wheb-viz-rate-value,
+.wheb-viz-legend,
+.wheb-viz-daily-value,
+.wheb-viz-math-value,
+.wheb-viz-output-value,
+.wheb-viz-yr-out,
+.wheb-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Lighting Circuit Load · n×W → A ÷ breaker · 80% continuous */
+.lcl-viz-fixtures,
+.lcl-viz-bulb,
+.lcl-viz-breaker,
+.lcl-viz-toggle,
+.lcl-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.lcl-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.lcl-viz-current-flow {
+  stroke-dasharray: 10 14;
+  stroke-dashoffset: 48;
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.lcl-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.lcl-viz-util-bar,
+.lcl-viz-load-bar,
+.lcl-viz-pct-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.lcl-viz-n-value,
+.lcl-viz-w-value,
+.lcl-viz-v-value,
+.lcl-viz-bkr-value,
+.lcl-viz-total-w,
+.lcl-viz-util-chip,
+.lcl-viz-head-chip,
+.lcl-viz-math-value,
+.lcl-viz-output-value,
+.lcl-viz-pct-out,
+.lcl-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* AC Inverter Savings · on/off vs modulate → $/mo & payback */
+.acis-viz-square,
+.acis-viz-sine,
+.acis-viz-unit,
+.acis-viz-fan,
+.acis-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.acis-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.acis-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.acis-viz-onoff-bar,
+.acis-viz-inv-bar,
+.acis-viz-pay-bar,
+.acis-viz-save-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.acis-viz-cap-value,
+.acis-viz-hrs-value,
+.acis-viz-pct-value,
+.acis-viz-prem-value,
+.acis-viz-onoff-w,
+.acis-viz-inv-w,
+.acis-viz-onoff-cost,
+.acis-viz-inv-cost,
+.acis-viz-math-value,
+.acis-viz-output-value,
+.acis-viz-save-out,
+.acis-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Water Heater Efficiency · L×ΔT vs m²×h → η% */
+.swhe-viz-sun,
+.swhe-viz-collector,
+.swhe-viz-tank,
+.swhe-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.swhe-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.swhe-viz-ray,
+.swhe-viz-loop {
+  stroke-dasharray: 8 12;
+  stroke-dashoffset: 40;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.swhe-viz-ray--delay {
+  animation-delay: 0.35s;
+}
+
+.swhe-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.swhe-viz-water {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: cl-viz-battery-fill 3.2s ease-in-out infinite;
+}
+
+.swhe-viz-eff-bar,
+.swhe-viz-yield-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.swhe-viz-vol-value,
+.swhe-viz-dt-value,
+.swhe-viz-sun-value,
+.swhe-viz-area-value,
+.swhe-viz-dt-chip,
+.swhe-viz-incident,
+.swhe-viz-absorbed,
+.swhe-viz-math-value,
+.swhe-viz-output-value,
+.swhe-viz-yield-out,
+.swhe-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Small Wind Turbine Yield · ½ρAv³η → W & annual kWh */
+.swty-viz-wind,
+.swty-viz-hub,
+.swty-viz-sweep,
+.swty-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.swty-viz-blades {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: esms-viz-spin 2.8s linear infinite;
+}
+
+.swty-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.swty-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.swty-viz-power-bar,
+.swty-viz-year-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.swty-viz-d-value,
+.swty-viz-v-value,
+.swty-viz-eta-value,
+.swty-viz-p-chip,
+.swty-viz-mean-chip,
+.swty-viz-math-value,
+.swty-viz-output-value,
+.swty-viz-year-out,
+.swty-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Standby Power Aggregator · Σ device rows → annual vampire $ */
+.spagg-viz-devices,
+.spagg-viz-led,
+.spagg-viz-leak,
+.spagg-viz-tick {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.spagg-viz-tick--end {
+  animation: cl-viz-dot-blink 1.6s ease-in-out infinite;
+  animation-delay: 0.35s;
+}
+
+.spagg-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.spagg-viz-cost-bar,
+.spagg-viz-kwh-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.spagg-viz-tv-value,
+.spagg-viz-con-value,
+.spagg-viz-chg-value,
+.spagg-viz-total-w,
+.spagg-viz-math-value,
+.spagg-viz-output-value,
+.spagg-viz-kwh-out,
+.spagg-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
 @keyframes aic-viz-surge-pulse {
   0%,
   100% {
@@ -19859,7 +20567,339 @@ body:has(.legal-modal) .grid-modal-shell {
   .esoc-viz-span-out,
   .esoc-viz-band-out,
   .esoc-viz-math-value,
-  .esoc-viz-detail-value {
+  .esoc-viz-detail-value,
+  .ecw-viz-pack-node,
+  .ecw-viz-ctrl-node,
+  .ecw-viz-motor-node,
+  .ecw-viz-timeline-pulse,
+  .ecw-viz-power-pulse,
+  .ecw-viz-in-bar,
+  .ecw-viz-eta-bar,
+  .ecw-viz-v-value,
+  .ecw-viz-a-value,
+  .ecw-viz-eta-value,
+  .ecw-viz-pack-chip,
+  .ecw-viz-ctrl-chip,
+  .ecw-viz-in-chip,
+  .ecw-viz-loss-chip,
+  .ecw-viz-shaft-chip,
+  .ecw-viz-ratio-chip,
+  .ecw-viz-output-value,
+  .ecw-viz-shaft-out,
+  .ecw-viz-eta-out,
+  .ecw-viz-math-value,
+  .ecw-viz-detail-value,
+  .ebcl-viz-curve,
+  .ebcl-viz-op-dot,
+  .ebcl-viz-timeline-pulse,
+  .ebcl-viz-wear-pulse,
+  .ebcl-viz-curve-pulse,
+  .ebcl-viz-used-bar,
+  .ebcl-viz-n-value,
+  .ebcl-viz-dod-value,
+  .ebcl-viz-k-value,
+  .ebcl-viz-mfr-value,
+  .ebcl-viz-formula-chip,
+  .ebcl-viz-op-chip,
+  .ebcl-viz-output-value,
+  .ebcl-viz-total-out,
+  .ebcl-viz-used-out,
+  .ebcl-viz-soh-out,
+  .ebcl-viz-math-value,
+  .ebcl-viz-detail-value,
+  .mtco-viz-car-node,
+  .mtco-viz-ebike-node,
+  .mtco-viz-esc-node,
+  .mtco-viz-timeline-pulse,
+  .mtco-viz-cash-pulse,
+  .mtco-viz-car-bar,
+  .mtco-viz-ebike-bar,
+  .mtco-viz-esc-bar,
+  .mtco-viz-car-value,
+  .mtco-viz-ebike-value,
+  .mtco-viz-esc-value,
+  .mtco-viz-car-chip,
+  .mtco-viz-ebike-chip,
+  .mtco-viz-esc-chip,
+  .mtco-viz-stack-chip,
+  .mtco-viz-best-chip,
+  .mtco-viz-horizon-chip,
+  .mtco-viz-output-value,
+  .mtco-viz-ebike-out,
+  .mtco-viz-esc-out,
+  .mtco-viz-totals-out,
+  .mtco-viz-math-value,
+  .mtco-viz-detail-value,
+  .espa-viz-batt-node,
+  .espa-viz-motor-node,
+  .espa-viz-timeline-pulse,
+  .espa-viz-surge-pulse,
+  .espa-viz-w-bar,
+  .espa-viz-pack-bar,
+  .espa-viz-v-value,
+  .espa-viz-a-value,
+  .espa-viz-ctrl-value,
+  .espa-viz-pack-value,
+  .espa-viz-batt-chip,
+  .espa-viz-burst-chip,
+  .espa-viz-motor-chip,
+  .espa-viz-w-chip,
+  .espa-viz-max-chip,
+  .espa-viz-ok-ctrl,
+  .espa-viz-ok-pack,
+  .espa-viz-output-value,
+  .espa-viz-max-out,
+  .espa-viz-head-out,
+  .espa-viz-flags-out,
+  .espa-viz-math-value,
+  .espa-viz-detail-value,
+  .esbpw-viz-scooter,
+  .esbpw-viz-wheel,
+  .esbpw-viz-pad,
+  .esbpw-viz-tick,
+  .esbpw-viz-tick--end,
+  .esbpw-viz-regen-flow,
+  .esbpw-viz-friction-flow,
+  .esbpw-viz-timeline-pulse,
+  .esbpw-viz-regen-bar,
+  .esbpw-viz-friction-bar,
+  .esbpw-viz-life-bar,
+  .esbpw-viz-weeks-bar,
+  .esbpw-viz-km-value,
+  .esbpw-viz-regen-value,
+  .esbpw-viz-hill-value,
+  .esbpw-viz-regen-chip,
+  .esbpw-viz-friction-chip,
+  .esbpw-viz-math-value,
+  .esbpw-viz-output-value,
+  .esbpw-viz-weeks-out,
+  .esbpw-viz-detail-value,
+  .escl-viz-pack,
+  .escl-viz-plug,
+  .escl-viz-pin,
+  .escl-viz-contact,
+  .escl-viz-load,
+  .escl-viz-heat,
+  .escl-viz-tick,
+  .escl-viz-tick--end,
+  .escl-viz-current-flow,
+  .escl-viz-current-flow--delay,
+  .escl-viz-timeline-pulse,
+  .escl-viz-loss-bar,
+  .escl-viz-energy-bar,
+  .escl-viz-a-value,
+  .escl-viz-conn-value,
+  .escl-viz-min-value,
+  .escl-viz-a-chip,
+  .escl-viz-math-value,
+  .escl-viz-compare-value,
+  .escl-viz-output-value,
+  .escl-viz-energy-out,
+  .escl-viz-detail-value,
+  .esmsch-viz-scooter,
+  .esmsch-viz-wheel,
+  .esmsch-viz-tick,
+  .esmsch-viz-tick--end,
+  .esmsch-viz-timeline-pulse,
+  .esmsch-viz-tire-bar,
+  .esmsch-viz-brake-bar,
+  .esmsch-viz-bolt-bar,
+  .esmsch-viz-out-bar,
+  .esmsch-viz-weeks-bar,
+  .esmsch-viz-odo-value,
+  .esmsch-viz-wk-value,
+  .esmsch-viz-int-value,
+  .esmsch-viz-tire-chip,
+  .esmsch-viz-brake-chip,
+  .esmsch-viz-bolt-chip,
+  .esmsch-viz-math-value,
+  .esmsch-viz-output-value,
+  .esmsch-viz-weeks-out,
+  .esmsch-viz-detail-value,
+  .spw-viz-devices,
+  .spw-viz-led,
+  .spw-viz-leak,
+  .spw-viz-clock,
+  .spw-viz-hand,
+  .spw-viz-tick,
+  .spw-viz-tick--end,
+  .spw-viz-timeline-pulse,
+  .spw-viz-cost-bar,
+  .spw-viz-kwh-bar,
+  .spw-viz-w-value,
+  .spw-viz-n-value,
+  .spw-viz-rate-value,
+  .spw-viz-total-w,
+  .spw-viz-math-value,
+  .spw-viz-output-value,
+  .spw-viz-kwh-out,
+  .spw-viz-detail-value,
+  .gfc-viz-gen,
+  .gfc-viz-fan,
+  .gfc-viz-tank,
+  .gfc-viz-exhaust,
+  .gfc-viz-tick,
+  .gfc-viz-tick--end,
+  .gfc-viz-fuel-flow,
+  .gfc-viz-timeline-pulse,
+  .gfc-viz-fuel-fill,
+  .gfc-viz-runtime-bar,
+  .gfc-viz-burn-bar,
+  .gfc-viz-load-value,
+  .gfc-viz-rated-value,
+  .gfc-viz-tank-value,
+  .gfc-viz-factor-chip,
+  .gfc-viz-math-value,
+  .gfc-viz-output-value,
+  .gfc-viz-burn-out,
+  .gfc-viz-detail-value,
+  .hpvr-viz-resist-coil,
+  .hpvr-viz-hp-unit,
+  .hpvr-viz-fan,
+  .hpvr-viz-tick,
+  .hpvr-viz-tick--end,
+  .hpvr-viz-heat-flow,
+  .hpvr-viz-heat-flow--delay,
+  .hpvr-viz-timeline-pulse,
+  .hpvr-viz-resist-bar,
+  .hpvr-viz-hp-bar,
+  .hpvr-viz-save-bar,
+  .hpvr-viz-kw-value,
+  .hpvr-viz-cop-value,
+  .hpvr-viz-hrs-value,
+  .hpvr-viz-rate-value,
+  .hpvr-viz-resist-kwh,
+  .hpvr-viz-hp-kwh,
+  .hpvr-viz-resist-cost,
+  .hpvr-viz-hp-cost,
+  .hpvr-viz-math-value,
+  .hpvr-viz-output-value,
+  .hpvr-viz-resist-out,
+  .hpvr-viz-hp-out,
+  .hpvr-viz-detail-value,
+  .wheb-viz-house,
+  .wheb-viz-stack-hvac,
+  .wheb-viz-stack-wh,
+  .wheb-viz-stack-kl,
+  .wheb-viz-stack-other,
+  .wheb-viz-tick,
+  .wheb-viz-tick--end,
+  .wheb-viz-timeline-pulse,
+  .wheb-viz-mo-bar,
+  .wheb-viz-yr-bar,
+  .wheb-viz-hvac-value,
+  .wheb-viz-wh-value,
+  .wheb-viz-kl-value,
+  .wheb-viz-other-value,
+  .wheb-viz-rate-value,
+  .wheb-viz-legend,
+  .wheb-viz-daily-value,
+  .wheb-viz-math-value,
+  .wheb-viz-output-value,
+  .wheb-viz-yr-out,
+  .wheb-viz-detail-value,
+  .lcl-viz-fixtures,
+  .lcl-viz-bulb,
+  .lcl-viz-breaker,
+  .lcl-viz-toggle,
+  .lcl-viz-tick,
+  .lcl-viz-tick--end,
+  .lcl-viz-current-flow,
+  .lcl-viz-timeline-pulse,
+  .lcl-viz-util-bar,
+  .lcl-viz-load-bar,
+  .lcl-viz-pct-bar,
+  .lcl-viz-n-value,
+  .lcl-viz-w-value,
+  .lcl-viz-v-value,
+  .lcl-viz-bkr-value,
+  .lcl-viz-total-w,
+  .lcl-viz-util-chip,
+  .lcl-viz-head-chip,
+  .lcl-viz-math-value,
+  .lcl-viz-output-value,
+  .lcl-viz-pct-out,
+  .lcl-viz-detail-value,
+  .acis-viz-square,
+  .acis-viz-sine,
+  .acis-viz-unit,
+  .acis-viz-fan,
+  .acis-viz-tick,
+  .acis-viz-tick--end,
+  .acis-viz-timeline-pulse,
+  .acis-viz-onoff-bar,
+  .acis-viz-inv-bar,
+  .acis-viz-pay-bar,
+  .acis-viz-save-bar,
+  .acis-viz-cap-value,
+  .acis-viz-hrs-value,
+  .acis-viz-pct-value,
+  .acis-viz-prem-value,
+  .acis-viz-onoff-w,
+  .acis-viz-inv-w,
+  .acis-viz-onoff-cost,
+  .acis-viz-inv-cost,
+  .acis-viz-math-value,
+  .acis-viz-output-value,
+  .acis-viz-save-out,
+  .acis-viz-detail-value,
+  .swhe-viz-sun,
+  .swhe-viz-collector,
+  .swhe-viz-tank,
+  .swhe-viz-tick,
+  .swhe-viz-tick--end,
+  .swhe-viz-ray,
+  .swhe-viz-ray--delay,
+  .swhe-viz-loop,
+  .swhe-viz-timeline-pulse,
+  .swhe-viz-water,
+  .swhe-viz-eff-bar,
+  .swhe-viz-yield-bar,
+  .swhe-viz-vol-value,
+  .swhe-viz-dt-value,
+  .swhe-viz-sun-value,
+  .swhe-viz-area-value,
+  .swhe-viz-dt-chip,
+  .swhe-viz-incident,
+  .swhe-viz-absorbed,
+  .swhe-viz-math-value,
+  .swhe-viz-output-value,
+  .swhe-viz-yield-out,
+  .swhe-viz-detail-value,
+  .swty-viz-wind,
+  .swty-viz-hub,
+  .swty-viz-sweep,
+  .swty-viz-blades,
+  .swty-viz-tick,
+  .swty-viz-tick--end,
+  .swty-viz-timeline-pulse,
+  .swty-viz-power-bar,
+  .swty-viz-year-bar,
+  .swty-viz-d-value,
+  .swty-viz-v-value,
+  .swty-viz-eta-value,
+  .swty-viz-p-chip,
+  .swty-viz-mean-chip,
+  .swty-viz-math-value,
+  .swty-viz-output-value,
+  .swty-viz-year-out,
+  .swty-viz-detail-value,
+  .spagg-viz-devices,
+  .spagg-viz-led,
+  .spagg-viz-leak,
+  .spagg-viz-tick,
+  .spagg-viz-tick--end,
+  .spagg-viz-timeline-pulse,
+  .spagg-viz-cost-bar,
+  .spagg-viz-kwh-bar,
+  .spagg-viz-tv-value,
+  .spagg-viz-con-value,
+  .spagg-viz-chg-value,
+  .spagg-viz-total-w,
+  .spagg-viz-math-value,
+  .spagg-viz-output-value,
+  .spagg-viz-kwh-out,
+  .spagg-viz-detail-value {
     animation: none;
   }
 
@@ -20521,7 +21561,106 @@ body:has(.legal-modal) .grid-modal-shell {
   .epre-viz-energy-bar,
   .etwc-viz-ice-bar,
   .etwc-viz-ev-bar,
-  .eccl-viz-loss-bar {
+  .eccl-viz-loss-bar,
+  .ecw-viz-in-bar,
+  .ecw-viz-eta-bar,
+  .ebcl-viz-used-bar,
+  .mtco-viz-car-bar,
+  .mtco-viz-ebike-bar,
+  .mtco-viz-esc-bar,
+  .espa-viz-w-bar,
+  .espa-viz-pack-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .esbpw-viz-regen-bar,
+  .esbpw-viz-friction-bar,
+  .esbpw-viz-life-bar,
+  .esbpw-viz-weeks-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .escl-viz-loss-bar,
+  .escl-viz-energy-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .esmsch-viz-tire-bar,
+  .esmsch-viz-brake-bar,
+  .esmsch-viz-bolt-bar,
+  .esmsch-viz-out-bar,
+  .esmsch-viz-weeks-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .spw-viz-cost-bar,
+  .spw-viz-kwh-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .gfc-viz-runtime-bar,
+  .gfc-viz-burn-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .gfc-viz-fuel-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .hpvr-viz-resist-bar,
+  .hpvr-viz-hp-bar,
+  .hpvr-viz-save-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .wheb-viz-mo-bar,
+  .wheb-viz-yr-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .lcl-viz-util-bar,
+  .lcl-viz-load-bar,
+  .lcl-viz-pct-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .acis-viz-onoff-bar,
+  .acis-viz-inv-bar,
+  .acis-viz-pay-bar,
+  .acis-viz-save-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .swhe-viz-eff-bar,
+  .swhe-viz-yield-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .swhe-viz-water {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .swty-viz-power-bar,
+  .swty-viz-year-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .spagg-viz-cost-bar,
+  .spagg-viz-kwh-bar {
     transform: scaleX(1);
     opacity: 0.85;
   }
@@ -20595,7 +21734,16 @@ body:has(.legal-modal) .grid-modal-shell {
   .eccl-viz-cable-pulse,
   .esoc-viz-timeline-pulse,
   .esoc-viz-map-pulse,
-  .esoc-viz-curve-pulse {
+  .esoc-viz-curve-pulse,
+  .ecw-viz-timeline-pulse,
+  .ecw-viz-power-pulse,
+  .ebcl-viz-timeline-pulse,
+  .ebcl-viz-wear-pulse,
+  .ebcl-viz-curve-pulse,
+  .mtco-viz-timeline-pulse,
+  .mtco-viz-cash-pulse,
+  .espa-viz-timeline-pulse,
+  .espa-viz-surge-pulse {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
   }
