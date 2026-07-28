@@ -30,10 +30,9 @@ export function CategoryCalculatorFavoriteButton({
       title={favorited ? "Remove from favorites" : "Add to favorites"}
       className={cn(
         "calculator-favorite-btn absolute top-5 right-5 z-10",
-        "opacity-0 transition-all duration-200",
-        "group-hover/card-wrap:opacity-100",
-        "group-hover/card-wrap:text-yellow-500/80",
-        favorited && "calculator-favorite-btn--active text-yellow-500 opacity-100",
+        "transition-all duration-200",
+        "hover:text-yellow-500/80",
+        favorited && "calculator-favorite-btn--active text-yellow-500",
         className
       )}
     >

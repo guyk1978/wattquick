@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
+import { ToolModalReviews } from "@/components/grid-modal/tool-modal-reviews";
 import { ToolModalViz } from "@/components/grid-modal/tool-modal-viz";
 import type { CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
@@ -25,7 +26,7 @@ type ToolWorkspaceModalProps = {
   calculatorId: CalculatorId;
   open?: boolean;
   className?: string;
-  /** Initial header tab when the modal opens (client may also read `?view=viz`). */
+  /** Initial header tab when the modal opens (client may also read `?view=viz` / `?view=reviews`). */
   initialTab?: ToolHeaderTab;
   /** Guide + SEO article content shown in the documentation pane. */
   documentation?: ReactNode;
@@ -200,8 +201,12 @@ export function ToolWorkspaceModal({
     }
     const wantsViz =
       initialTab === "viz" || viewFromUrl === "viz";
+    const wantsReviews =
+      initialTab === "reviews" || viewFromUrl === "reviews";
     if (wantsViz && hasCalculatorViz(calculatorId)) {
       setActiveTab("viz");
+    } else if (wantsReviews) {
+      setActiveTab("reviews");
     } else if (initialTab && initialTab !== "calc") {
       setActiveTab(initialTab);
     }
@@ -266,6 +271,7 @@ export function ToolWorkspaceModal({
           hasVizTab={hasViz}
           hasDocTab={hasDocumentation}
           hasRelatedTab={hasRelated}
+          hasReviewsTab
           calculatorId={calculatorId}
           onSaveProject={onRequestSaveProject}
           fullscreenTargetRef={panelRef}
@@ -370,6 +376,20 @@ export function ToolWorkspaceModal({
               </div>
             </div>
           ) : null}
+
+          <div
+            className={cn(
+              "tool-workspace-modal__view tool-workspace-modal__view--reviews",
+              activeTab === "reviews" && "tool-workspace-modal__view--active"
+            )}
+            aria-hidden={activeTab !== "reviews"}
+          >
+            {activeTab === "reviews" ? (
+              <div className="tool-workspace-modal__docs-scroll">
+                <ToolModalReviews id={calculatorId} />
+              </div>
+            ) : null}
+          </div>
         </div>
       </motion.div>
     </div>
