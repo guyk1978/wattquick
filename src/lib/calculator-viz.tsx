@@ -2,6 +2,7 @@
 
 import type { ComponentType } from "react";
 import type { CalculatorId } from "@/lib/calculators";
+import { AcInrushCurrentViz } from "@/components/calculator/viz/ac-inrush-current-viz";
 import { AhToWhViz } from "@/components/calculator/viz/ah-to-wh-viz";
 import { AmpsToWattsViz } from "@/components/calculator/viz/amps-to-watts-viz";
 import { ApplianceDailyCostViz } from "@/components/calculator/viz/appliance-daily-cost-viz";
@@ -11,9 +12,13 @@ import { BatteryArbitrageRoiViz } from "@/components/calculator/viz/battery-arbi
 import { BatteryBankSizeViz } from "@/components/calculator/viz/battery-bank-size-viz";
 import { BatteryChargingTimeViz } from "@/components/calculator/viz/battery-charging-time-viz";
 import { BatteryCostViz } from "@/components/calculator/viz/battery-cost-viz";
+import { BatteryCRateViz } from "@/components/calculator/viz/battery-c-rate-viz";
+import { BatteryDepthOfDischargeViz } from "@/components/calculator/viz/battery-depth-of-discharge-viz";
+import { BatteryEfficiencyViz } from "@/components/calculator/viz/battery-efficiency-viz";
 import { BatteryEnergyViz } from "@/components/calculator/viz/battery-energy-viz";
 import { BatteryPercentageViz } from "@/components/calculator/viz/battery-percentage-viz";
 import { BatteryRuntimeViz } from "@/components/calculator/viz/battery-runtime-viz";
+import { BatterySeriesParallelViz } from "@/components/calculator/viz/battery-series-parallel-viz";
 import { CampingFridgeRuntimeViz } from "@/components/calculator/viz/camping-fridge-runtime-viz";
 import { ConductorResistanceTemperatureViz } from "@/components/calculator/viz/conductor-resistance-temperature-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
@@ -62,7 +67,10 @@ import { SolarDailyYieldViz } from "@/components/calculator/viz/solar-daily-yiel
 import { SolarPanelSizeViz } from "@/components/calculator/viz/solar-panel-size-viz";
 import { UpsRuntimeViz } from "@/components/calculator/viz/ups-runtime-viz";
 import { V2gFinancialReturnViz } from "@/components/calculator/viz/v2g-financial-return-viz";
+import { VoltsToWattsViz } from "@/components/calculator/viz/volts-to-watts-viz";
+import { PowerFactorViz } from "@/components/calculator/viz/power-factor-viz";
 import { WattsToAmpsViz } from "@/components/calculator/viz/watts-to-amps-viz";
+import { WattsToVoltsViz } from "@/components/calculator/viz/watts-to-volts-viz";
 import { WhToAhViz } from "@/components/calculator/viz/wh-to-ah-viz";
 import { hasCalculatorViz } from "@/lib/calculator-viz-ids";
 
@@ -324,6 +332,38 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "conductor-resistance-temperature": {
       calculatorTitle: "Conductor Resistance & Temperature Calculator",
       Viz: ConductorResistanceTemperatureViz,
+    },
+    "battery-depth-of-discharge": {
+      calculatorTitle: "Battery Depth of Discharge Calculator",
+      Viz: BatteryDepthOfDischargeViz,
+    },
+    "battery-efficiency": {
+      calculatorTitle: "Battery Efficiency Calculator",
+      Viz: BatteryEfficiencyViz,
+    },
+    "battery-series-parallel": {
+      calculatorTitle: "Battery Series & Parallel Calculator",
+      Viz: BatterySeriesParallelViz,
+    },
+    "battery-c-rate": {
+      calculatorTitle: "Battery C-Rate Calculator",
+      Viz: BatteryCRateViz,
+    },
+    "volts-to-watts": {
+      calculatorTitle: "Volts to Watts Calculator",
+      Viz: VoltsToWattsViz,
+    },
+    "watts-to-volts": {
+      calculatorTitle: "Watts to Volts Calculator",
+      Viz: WattsToVoltsViz,
+    },
+    "power-factor": {
+      calculatorTitle: "Power Factor Calculator",
+      Viz: PowerFactorViz,
+    },
+    "ac-inrush-current": {
+      calculatorTitle: "AC Inrush Current Limit Calculator",
+      Viz: AcInrushCurrentViz,
     },
   };
 

@@ -68,6 +68,14 @@ const VIZ_CALCULATOR_IDS = [
   "wh-to-ah",
   "kva-to-kw",
   "conductor-resistance-temperature",
+  "battery-depth-of-discharge",
+  "battery-efficiency",
+  "battery-series-parallel",
+  "battery-c-rate",
+  "volts-to-watts",
+  "watts-to-volts",
+  "power-factor",
+  "ac-inrush-current",
 ] as const satisfies readonly CalculatorId[];
 
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);

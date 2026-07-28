@@ -15800,6 +15800,312 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* Battery Depth of Discharge · used ÷ total → DoD % */
+.bdod-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bdod-viz-used-fill {
+  transform-box: fill-box;
+  transform-origin: top center;
+  animation: bdod-viz-used-pulse 3.6s ease-in-out infinite;
+}
+
+.bdod-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.6s ease-in-out infinite;
+}
+
+.bdod-viz-scale-bar,
+.bdod-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bdod-viz-used-value,
+.bdod-viz-total-value,
+.bdod-viz-used-chip,
+.bdod-viz-remain-chip,
+.bdod-viz-math-value,
+.bdod-viz-output-value,
+.bdod-viz-soc-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery Efficiency · Wh out ÷ Wh in → % */
+.bef-viz-pack,
+.bef-viz-loss {
+  animation: cl-viz-dot-blink 2.2s ease-in-out infinite;
+}
+
+.bef-viz-loss {
+  animation-delay: 0.35s;
+}
+
+.bef-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.4s ease-in-out infinite;
+}
+
+.bef-viz-charge-path,
+.bef-viz-discharge-path {
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.bef-viz-discharge-path {
+  animation-delay: 0.4s;
+}
+
+.bef-viz-in-bar,
+.bef-viz-out-bar,
+.bef-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bef-viz-out-value,
+.bef-viz-in-value,
+.bef-viz-in-chip,
+.bef-viz-out-chip,
+.bef-viz-math-value,
+.bef-viz-output-value,
+.bef-viz-loss-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery Series & Parallel · S×V · P×Ah → Wh */
+.bsp-viz-cell {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bsp-viz-cell:nth-of-type(odd) {
+  animation-delay: 0.2s;
+}
+
+.bsp-viz-series-bus,
+.bsp-viz-parallel-bus {
+  animation: cl-viz-flow-pulse 2.6s linear infinite;
+}
+
+.bsp-viz-parallel-bus {
+  animation-delay: 0.35s;
+}
+
+.bsp-viz-scale-bar,
+.bsp-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bsp-viz-config-value,
+.bsp-viz-v-value,
+.bsp-viz-ah-value,
+.bsp-viz-math-value,
+.bsp-viz-output-value,
+.bsp-viz-pack-v,
+.bsp-viz-pack-ah {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery C-Rate · A ÷ Ah → C */
+.bcr-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bcr-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: ups-viz-drain 3.8s ease-in-out infinite;
+}
+
+.bcr-viz-current-path {
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.bcr-viz-current-dot {
+  offset-path: path("M 450 175 L 520 175");
+  offset-rotate: 0deg;
+  animation: bcr-viz-current-travel 2.4s linear infinite;
+}
+
+.bcr-viz-scale-bar,
+.bcr-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bcr-viz-ah-value,
+.bcr-viz-amps-value,
+.bcr-viz-load-chip,
+.bcr-viz-math-value,
+.bcr-viz-output-value,
+.bcr-viz-runtime-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Volts to Watts · V × A → W */
+.vtw-viz-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.vtw-viz-current-flow {
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.vtw-viz-scale-bar,
+.vtw-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.vtw-viz-v-value,
+.vtw-viz-a-value,
+.vtw-viz-v-chip,
+.vtw-viz-a-chip,
+.vtw-viz-w-chip,
+.vtw-viz-math-value,
+.vtw-viz-output-value,
+.vtw-viz-kw-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Watts to Volts · W ÷ A → V */
+.wtv-viz-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.wtv-viz-current-flow {
+  animation: cl-viz-flow-pulse 2.2s linear infinite;
+}
+
+.wtv-viz-scale-bar,
+.wtv-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.wtv-viz-w-value,
+.wtv-viz-a-value,
+.wtv-viz-w-chip,
+.wtv-viz-a-chip,
+.wtv-viz-v-chip,
+.wtv-viz-math-value,
+.wtv-viz-output-value,
+.wtv-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Power Factor · P ÷ S → PF (cos φ) */
+.pf-viz-s-hyp,
+.pf-viz-p-leg,
+.pf-viz-vertex,
+.pf-viz-angle-arc {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.pf-viz-q-leg {
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.pf-viz-triangle-fill {
+  animation: cl-viz-dot-blink 3.4s ease-in-out infinite;
+}
+
+.pf-viz-scale-bar,
+.pf-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.pf-viz-kw-value,
+.pf-viz-kva-value,
+.pf-viz-p-label,
+.pf-viz-s-label,
+.pf-viz-phi-label,
+.pf-viz-math-value,
+.pf-viz-output-value,
+.pf-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* AC Inrush Current · (P ÷ V) × factor → I_peak */
+.aic-viz-wave-stroke {
+  stroke-dasharray: 12 8;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.aic-viz-wave-fill {
+  animation: cl-viz-dot-blink 3.2s ease-in-out infinite;
+}
+
+.aic-viz-surge-dot {
+  animation: aic-viz-surge-pulse 2.2s ease-in-out infinite;
+}
+
+.aic-viz-output-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.aic-viz-w-value,
+.aic-viz-v-value,
+.aic-viz-factor-value,
+.aic-viz-run-chip,
+.aic-viz-factor-chip,
+.aic-viz-math-value,
+.aic-viz-output-value,
+.aic-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+@keyframes aic-viz-surge-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  70% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+}
+
+@keyframes bcr-viz-current-travel {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes bdod-viz-used-pulse {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.45;
+  }
+  40%,
+  60% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 @keyframes bar-viz-soc-pulse {
   0%,
   100% {
@@ -16434,7 +16740,110 @@ body:has(.legal-modal) .grid-modal-shell {
   .crt-viz-base-math,
   .crt-viz-factor-math,
   .crt-viz-output-value,
-  .crt-viz-r20-value {
+  .crt-viz-r20-value,
+  .bdod-viz-pack,
+  .bdod-viz-used-fill,
+  .bdod-viz-soc-fill,
+  .bdod-viz-scale-bar,
+  .bdod-viz-output-bar,
+  .bdod-viz-used-value,
+  .bdod-viz-total-value,
+  .bdod-viz-used-chip,
+  .bdod-viz-remain-chip,
+  .bdod-viz-math-value,
+  .bdod-viz-output-value,
+  .bdod-viz-soc-value,
+  .bef-viz-pack,
+  .bef-viz-loss,
+  .bef-viz-soc-fill,
+  .bef-viz-charge-path,
+  .bef-viz-discharge-path,
+  .bef-viz-in-bar,
+  .bef-viz-out-bar,
+  .bef-viz-output-bar,
+  .bef-viz-out-value,
+  .bef-viz-in-value,
+  .bef-viz-in-chip,
+  .bef-viz-out-chip,
+  .bef-viz-math-value,
+  .bef-viz-output-value,
+  .bef-viz-loss-value,
+  .bsp-viz-cell,
+  .bsp-viz-series-bus,
+  .bsp-viz-parallel-bus,
+  .bsp-viz-scale-bar,
+  .bsp-viz-output-bar,
+  .bsp-viz-config-value,
+  .bsp-viz-v-value,
+  .bsp-viz-ah-value,
+  .bsp-viz-math-value,
+  .bsp-viz-output-value,
+  .bsp-viz-pack-v,
+  .bsp-viz-pack-ah,
+  .bcr-viz-pack,
+  .bcr-viz-soc-fill,
+  .bcr-viz-current-path,
+  .bcr-viz-current-dot,
+  .bcr-viz-scale-bar,
+  .bcr-viz-output-bar,
+  .bcr-viz-ah-value,
+  .bcr-viz-amps-value,
+  .bcr-viz-load-chip,
+  .bcr-viz-math-value,
+  .bcr-viz-output-value,
+  .bcr-viz-runtime-value,
+  .vtw-viz-node,
+  .vtw-viz-current-flow,
+  .vtw-viz-scale-bar,
+  .vtw-viz-output-bar,
+  .vtw-viz-v-value,
+  .vtw-viz-a-value,
+  .vtw-viz-v-chip,
+  .vtw-viz-a-chip,
+  .vtw-viz-w-chip,
+  .vtw-viz-math-value,
+  .vtw-viz-output-value,
+  .vtw-viz-kw-value,
+  .wtv-viz-node,
+  .wtv-viz-current-flow,
+  .wtv-viz-scale-bar,
+  .wtv-viz-output-bar,
+  .wtv-viz-w-value,
+  .wtv-viz-a-value,
+  .wtv-viz-w-chip,
+  .wtv-viz-a-chip,
+  .wtv-viz-v-chip,
+  .wtv-viz-math-value,
+  .wtv-viz-output-value,
+  .wtv-viz-detail-value,
+  .pf-viz-s-hyp,
+  .pf-viz-p-leg,
+  .pf-viz-q-leg,
+  .pf-viz-vertex,
+  .pf-viz-angle-arc,
+  .pf-viz-triangle-fill,
+  .pf-viz-scale-bar,
+  .pf-viz-output-bar,
+  .pf-viz-kw-value,
+  .pf-viz-kva-value,
+  .pf-viz-p-label,
+  .pf-viz-s-label,
+  .pf-viz-phi-label,
+  .pf-viz-math-value,
+  .pf-viz-output-value,
+  .pf-viz-detail-value,
+  .aic-viz-wave-stroke,
+  .aic-viz-wave-fill,
+  .aic-viz-surge-dot,
+  .aic-viz-output-bar,
+  .aic-viz-w-value,
+  .aic-viz-v-value,
+  .aic-viz-factor-value,
+  .aic-viz-run-chip,
+  .aic-viz-factor-chip,
+  .aic-viz-math-value,
+  .aic-viz-output-value,
+  .aic-viz-detail-value {
     animation: none;
   }
 
@@ -16821,6 +17230,80 @@ body:has(.legal-modal) .grid-modal-shell {
   .crt-viz-output-bar {
     transform: scaleX(1);
     opacity: 0.85;
+  }
+
+  .bdod-viz-scale-bar,
+  .bdod-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bdod-viz-used-fill,
+  .bdod-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .bef-viz-in-bar,
+  .bef-viz-out-bar,
+  .bef-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bef-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .bsp-viz-scale-bar,
+  .bsp-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bcr-viz-scale-bar,
+  .bcr-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .bcr-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+
+  .bcr-viz-current-dot {
+    offset-distance: 55%;
+    opacity: 0.85;
+  }
+
+  .vtw-viz-scale-bar,
+  .vtw-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .wtv-viz-scale-bar,
+  .wtv-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .pf-viz-scale-bar,
+  .pf-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .aic-viz-output-bar {
+    transform: scaleX(1);
+    opacity: 0.85;
+  }
+
+  .aic-viz-surge-dot {
+    opacity: 0.85;
+    transform: none;
   }
 
   .petc-viz-cover {
