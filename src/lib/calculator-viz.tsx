@@ -12,8 +12,14 @@ import { VampirePowerCostViz } from "@/components/calculator/viz/vampire-power-c
 import { SmartThermostatSavingsViz } from "@/components/calculator/viz/smart-thermostat-savings-viz";
 import { WindowSolarHeatGainViz } from "@/components/calculator/viz/window-solar-heat-gain-viz";
 import { MicrogridRoiViz } from "@/components/calculator/viz/microgrid-roi-viz";
+import { BatteryCalendarAgingViz } from "@/components/calculator/viz/battery-calendar-aging-viz";
+import { BatteryVoltageDropViz } from "@/components/calculator/viz/battery-voltage-drop-viz";
+import { BessRoiViz } from "@/components/calculator/viz/bess-roi-viz";
 import { BessCarbonCostViz } from "@/components/calculator/viz/bess-carbon-cost-viz";
 import { CarbonFootprintOffsetViz } from "@/components/calculator/viz/carbon-footprint-offset-viz";
+import { GeneratorRuntimeSavingsViz } from "@/components/calculator/viz/generator-runtime-savings-viz";
+import { GeneratorVsSolarHybridViz } from "@/components/calculator/viz/generator-vs-solar-hybrid-viz";
+import { WaterPumpSolarSizingViz } from "@/components/calculator/viz/water-pump-solar-sizing-viz";
 import { GridFrequencyRewardViz } from "@/components/calculator/viz/grid-frequency-reward-viz";
 import { PeakShavingPotentialViz } from "@/components/calculator/viz/peak-shaving-potential-viz";
 import { ElectricityRatePlanViz } from "@/components/calculator/viz/electricity-rate-plan-viz";
@@ -37,6 +43,7 @@ import { CampingFridgeRuntimeViz } from "@/components/calculator/viz/camping-fri
 import { ConductorResistanceTemperatureViz } from "@/components/calculator/viz/conductor-resistance-temperature-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
 import { DcCableSizeViz } from "@/components/calculator/viz/dc-cable-size-viz";
+import { DcCableVoltageDropViz } from "@/components/calculator/viz/dc-cable-voltage-drop-viz";
 import { DemandChargeCalculatorViz } from "@/components/calculator/viz/demand-charge-calculator-viz";
 import { EbikeBatteryCRateViz } from "@/components/calculator/viz/ebike-battery-c-rate-viz";
 import { EbikeChargeTimeViz } from "@/components/calculator/viz/ebike-charge-time-viz";
@@ -60,7 +67,12 @@ import { EvBatteryDegradationViz } from "@/components/calculator/viz/ev-battery-
 import { EvBatteryDepletionValueLossViz } from "@/components/calculator/viz/ev-battery-depletion-value-loss-viz";
 import { EvBatteryRangeViz } from "@/components/calculator/viz/ev-battery-range-viz";
 import { EvChargeTimeViz } from "@/components/calculator/viz/ev-charge-time-viz";
+import { EvChargingCableLossViz } from "@/components/calculator/viz/ev-charging-cable-loss-viz";
 import { EvChargingCostViz } from "@/components/calculator/viz/ev-charging-cost-viz";
+import { EvPreconditioningCostViz } from "@/components/calculator/viz/ev-preconditioning-cost-viz";
+import { EvPublicChargingCostViz } from "@/components/calculator/viz/ev-public-charging-cost-viz";
+import { EvSocCalculatorViz } from "@/components/calculator/viz/ev-soc-calculator-viz";
+import { EvTireWearCostViz } from "@/components/calculator/viz/ev-tire-wear-cost-viz";
 import { EvCostPerMileViz } from "@/components/calculator/viz/ev-cost-per-mile-viz";
 import { EvChargingTemperatureImpactViz } from "@/components/calculator/viz/ev-charging-temperature-impact-viz";
 import { EvFastChargingTimeViz } from "@/components/calculator/viz/ev-fast-charging-time-viz";
@@ -75,7 +87,11 @@ import { EvVsIceMaintenanceViz } from "@/components/calculator/viz/ev-vs-ice-mai
 import { EvWinterRangeLossViz } from "@/components/calculator/viz/ev-winter-range-loss-viz";
 import { HeaterCostViz } from "@/components/calculator/viz/heater-cost-viz";
 import { HeatLossInsulationViz } from "@/components/calculator/viz/heat-loss-insulation-viz";
+import { HomeBackupSizingViz } from "@/components/calculator/viz/home-backup-sizing-viz";
 import { HomeInsulationSavingsViz } from "@/components/calculator/viz/home-insulation-savings-viz";
+import { InverterLoadingCurveViz } from "@/components/calculator/viz/inverter-loading-curve-viz";
+import { InverterLossCalculatorViz } from "@/components/calculator/viz/inverter-loss-calculator-viz";
+import { InverterPeakLoadSurgeViz } from "@/components/calculator/viz/inverter-peak-load-surge-viz";
 import { InverterSizingViz } from "@/components/calculator/viz/inverter-sizing-viz";
 import { KvaToKwViz } from "@/components/calculator/viz/kva-to-kw-viz";
 import { KwToHpViz } from "@/components/calculator/viz/kw-to-hp-viz";
@@ -88,11 +104,18 @@ import { PoolEnergyThermalCoverViz } from "@/components/calculator/viz/pool-ener
 import { PortablePowerStationRechargeViz } from "@/components/calculator/viz/portable-power-station-recharge-viz";
 import { ResidentialVoltageDropViz } from "@/components/calculator/viz/residential-voltage-drop-viz";
 import { RvSolarCalculatorViz } from "@/components/calculator/viz/rv-solar-calculator-viz";
+import { SolarAngleOptimizerViz } from "@/components/calculator/viz/solar-angle-optimizer-viz";
 import { SolarArrayCurrentViz } from "@/components/calculator/viz/solar-array-current-viz";
 import { SolarBatteryBankViz } from "@/components/calculator/viz/solar-battery-bank-viz";
 import { SolarChargeControllerSizeViz } from "@/components/calculator/viz/solar-charge-controller-size-viz";
 import { SolarDailyYieldViz } from "@/components/calculator/viz/solar-daily-yield-viz";
+import { SolarDegradation20YearRoiViz } from "@/components/calculator/viz/solar-degradation-20-year-roi-viz";
+import { SolarDegradationViz } from "@/components/calculator/viz/solar-degradation-viz";
+import { SolarRoiAnalysisViz } from "@/components/calculator/viz/solar-roi-analysis-viz";
+import { SolarShadingAnalysisViz } from "@/components/calculator/viz/solar-shading-analysis-viz";
 import { SolarInverterEfficiencyViz } from "@/components/calculator/viz/solar-inverter-efficiency-viz";
+import { SolarNetMeteringViz } from "@/components/calculator/viz/solar-net-metering-viz";
+import { SolarPaybackRoiViz } from "@/components/calculator/viz/solar-payback-roi-viz";
 import { SolarPanelSizeViz } from "@/components/calculator/viz/solar-panel-size-viz";
 import { SolarPanelTiltViz } from "@/components/calculator/viz/solar-panel-tilt-viz";
 import { SolarRoofSpaceViz } from "@/components/calculator/viz/solar-roof-space-viz";
@@ -163,6 +186,34 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "inverter-sizing": {
       calculatorTitle: "Inverter Sizing",
       Viz: InverterSizingViz,
+    },
+    "inverter-loss-calculator": {
+      calculatorTitle: "Inverter Loss Calculator",
+      Viz: InverterLossCalculatorViz,
+    },
+    "inverter-peak-load-surge": {
+      calculatorTitle: "Inverter Peak Load & Surge Calculator",
+      Viz: InverterPeakLoadSurgeViz,
+    },
+    "inverter-loading-curve": {
+      calculatorTitle: "Inverter Loading Curve",
+      Viz: InverterLoadingCurveViz,
+    },
+    "home-backup-sizing": {
+      calculatorTitle: "Home Backup Battery Sizing Calculator",
+      Viz: HomeBackupSizingViz,
+    },
+    "battery-voltage-drop": {
+      calculatorTitle: "Battery Voltage Drop Calculator",
+      Viz: BatteryVoltageDropViz,
+    },
+    "battery-calendar-aging": {
+      calculatorTitle: "Battery Calendar Aging Calculator",
+      Viz: BatteryCalendarAgingViz,
+    },
+    "bess-roi": {
+      calculatorTitle: "BESS ROI Calculator (Battery Energy Storage System)",
+      Viz: BessRoiViz,
     },
     "dc-cable-size": {
       calculatorTitle: "DC Cable Size Calculator",
@@ -475,6 +526,70 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "solar-inverter-efficiency": {
       calculatorTitle: "Solar Inverter Efficiency Calculator",
       Viz: SolarInverterEfficiencyViz,
+    },
+    "solar-payback-roi": {
+      calculatorTitle: "Solar Payback Period (ROI) Calculator",
+      Viz: SolarPaybackRoiViz,
+    },
+    "solar-angle-optimizer": {
+      calculatorTitle: "Solar Panel Angle & Tilt Optimizer",
+      Viz: SolarAngleOptimizerViz,
+    },
+    "solar-net-metering": {
+      calculatorTitle: "Grid-Tie Net Metering Calculator",
+      Viz: SolarNetMeteringViz,
+    },
+    "solar-degradation": {
+      calculatorTitle: "Solar Panel Degradation Calculator",
+      Viz: SolarDegradationViz,
+    },
+    "generator-vs-solar-hybrid": {
+      calculatorTitle: "Off-Grid Generator vs. Solar Hybrid Calculator",
+      Viz: GeneratorVsSolarHybridViz,
+    },
+    "generator-runtime-savings": {
+      calculatorTitle: "Generator Run-Time Savings Calculator",
+      Viz: GeneratorRuntimeSavingsViz,
+    },
+    "water-pump-solar-sizing": {
+      calculatorTitle: "Water Pump Solar Sizing Calculator",
+      Viz: WaterPumpSolarSizingViz,
+    },
+    "dc-cable-voltage-drop": {
+      calculatorTitle: "DC Cable Size & Voltage Drop Calculator",
+      Viz: DcCableVoltageDropViz,
+    },
+    "solar-degradation-20-year-roi": {
+      calculatorTitle: "Solar System Degradation & 20-Year ROI Calculator",
+      Viz: SolarDegradation20YearRoiViz,
+    },
+    "solar-shading-analysis": {
+      calculatorTitle: "Solar Shading Analysis",
+      Viz: SolarShadingAnalysisViz,
+    },
+    "solar-roi-analysis": {
+      calculatorTitle: "Solar ROI Analysis",
+      Viz: SolarRoiAnalysisViz,
+    },
+    "ev-public-charging-cost": {
+      calculatorTitle: "EV Public Charging & Idle Fee Calculator",
+      Viz: EvPublicChargingCostViz,
+    },
+    "ev-preconditioning-cost": {
+      calculatorTitle: "EV Battery Pre-conditioning Cost Calculator",
+      Viz: EvPreconditioningCostViz,
+    },
+    "ev-tire-wear-cost": {
+      calculatorTitle: "EV Tire Wear Cost Calculator",
+      Viz: EvTireWearCostViz,
+    },
+    "ev-charging-cable-loss": {
+      calculatorTitle: "EV Charging Cable Power Loss Calculator",
+      Viz: EvChargingCableLossViz,
+    },
+    "ev-soc-calculator": {
+      calculatorTitle: "EV Battery State of Charge (SoC) Calculator",
+      Viz: EvSocCalculatorViz,
     },
     "solar-array-current": {
       calculatorTitle: "Solar Array Current Calculator",

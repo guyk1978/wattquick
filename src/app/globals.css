@@ -17176,6 +17176,956 @@ body:has(.legal-modal) .grid-modal-shell {
   animation: cl-viz-value-glow 3.2s ease-in-out infinite;
 }
 
+/* Inverter Loss · DC × η → AC · loss heat */
+.ilc-viz-chassis,
+.ilc-viz-convert,
+.ilc-viz-heat {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ilc-viz-ac-bar,
+.ilc-viz-loss-bar,
+.ilc-viz-out-bar,
+.ilc-viz-loss-out-bar,
+.ilc-viz-eff-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ilc-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ilc-viz-dc-value,
+.ilc-viz-eff-value,
+.ilc-viz-math-value,
+.ilc-viz-loss-chip,
+.ilc-viz-output-value,
+.ilc-viz-loss-out,
+.ilc-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Inverter Peak Load & Surge · cont + margins → tier */
+.ipls-viz-load,
+.ipls-viz-wave,
+.ipls-viz-spike {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ipls-viz-spike {
+  animation: aic-viz-surge-pulse 2.2s ease-in-out infinite;
+}
+
+.ipls-viz-wave-pulse,
+.ipls-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ipls-viz-cont-bar,
+.ipls-viz-peak-bar,
+.ipls-viz-need-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ipls-viz-load-value,
+.ipls-viz-cont-chip,
+.ipls-viz-peak-chip,
+.ipls-viz-margin-chip,
+.ipls-viz-math-value,
+.ipls-viz-out-cont,
+.ipls-viz-out-peak,
+.ipls-viz-output-value,
+.ipls-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Inverter Loading Curve · derate + overload countdown */
+.ilcv-viz-curve,
+.ilcv-viz-op-point,
+.ilcv-viz-op-drop,
+.ilcv-viz-heat {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ilcv-viz-op-point {
+  animation: aic-viz-surge-pulse 2.4s ease-in-out infinite;
+}
+
+.ilcv-viz-curve-pulse,
+.ilcv-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ilcv-viz-timer-bar,
+.ilcv-viz-pct-bar,
+.ilcv-viz-window-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ilcv-viz-nom-value,
+.ilcv-viz-load-value,
+.ilcv-viz-temp-value,
+.ilcv-viz-math-value,
+.ilcv-viz-pct-chip,
+.ilcv-viz-warn-chip,
+.ilcv-viz-output-value,
+.ilcv-viz-pct-out,
+.ilcv-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Home Backup Sizing · W×hrs ÷ η ÷ DoD → Ah / kWh */
+.hbs-viz-pack {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.hbs-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bar-viz-soc-pulse 3.6s ease-in-out infinite;
+}
+
+.hbs-viz-step1-bar,
+.hbs-viz-step2-bar,
+.hbs-viz-step3-bar,
+.hbs-viz-ah-bar,
+.hbs-viz-wh-bar,
+.hbs-viz-kwh-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.hbs-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.hbs-viz-load-value,
+.hbs-viz-hrs-value,
+.hbs-viz-sys-value,
+.hbs-viz-dod-value,
+.hbs-viz-step1-chip,
+.hbs-viz-step2-chip,
+.hbs-viz-step3-chip,
+.hbs-viz-math-value,
+.hbs-viz-output-value,
+.hbs-viz-wh-out,
+.hbs-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery Voltage Drop · I · length · AWG → V at load */
+.bvd-viz-battery,
+.bvd-viz-load,
+.bvd-viz-wire,
+.bvd-viz-length-dot,
+.bvd-viz-drop-mark {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bvd-viz-current-flow {
+  stroke-dasharray: 10 70;
+  stroke-dashoffset: 80;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.bvd-viz-current-flow--return {
+  animation-delay: 0.35s;
+}
+
+.bvd-viz-vload-bar,
+.bvd-viz-drop-bar,
+.bvd-viz-pct-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bvd-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.bvd-viz-amps-value,
+.bvd-viz-len-value,
+.bvd-viz-v-value,
+.bvd-viz-load-chip,
+.bvd-viz-drop-chip,
+.bvd-viz-math-value,
+.bvd-viz-output-value,
+.bvd-viz-drop-out,
+.bvd-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Battery Calendar Aging · temp × SOC × years → SoH */
+.bca-viz-curve,
+.bca-viz-pack,
+.bca-viz-op-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.bca-viz-op-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.bca-viz-soh-fill {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.6s ease-in-out infinite;
+}
+
+.bca-viz-soh-bar,
+.bca-viz-loss-bar,
+.bca-viz-stress-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.bca-viz-curve-pulse,
+.bca-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.bca-viz-temp-value,
+.bca-viz-soc-value,
+.bca-viz-age-value,
+.bca-viz-tf-chip,
+.bca-viz-sf-chip,
+.bca-viz-math-value,
+.bca-viz-op-chip,
+.bca-viz-loss-chip,
+.bca-viz-output-value,
+.bca-viz-loss-out,
+.bca-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* BESS ROI · CapEx vs TOU arbitrage → payback / LCOS */
+.broi-viz-cash-curve,
+.broi-viz-capex-line,
+.broi-viz-be-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.broi-viz-be-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.broi-viz-cash-pulse,
+.broi-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.broi-viz-capex-bar,
+.broi-viz-yr-bar,
+.broi-viz-pb-bar,
+.broi-viz-save-bar,
+.broi-viz-accum-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.broi-viz-cap-value,
+.broi-viz-cost-value,
+.broi-viz-rates-value,
+.broi-viz-params-value,
+.broi-viz-math-value,
+.broi-viz-spread-chip,
+.broi-viz-yr-chip,
+.broi-viz-be-chip,
+.broi-viz-lcos-chip,
+.broi-viz-output-value,
+.broi-viz-save-out,
+.broi-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Payback ROI · net cost ÷ annual $ → years / 25-yr ROI */
+.sproi-viz-cash-curve,
+.sproi-viz-net-line,
+.sproi-viz-be-point,
+.sproi-viz-panel {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.sproi-viz-be-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.sproi-viz-cash-pulse,
+.sproi-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.sproi-viz-gross-bar,
+.sproi-viz-net-bar,
+.sproi-viz-pb-bar,
+.sproi-viz-roi-bar,
+.sproi-viz-accum-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.sproi-viz-cost-value,
+.sproi-viz-kwh-value,
+.sproi-viz-rate-value,
+.sproi-viz-itc-value,
+.sproi-viz-math-value,
+.sproi-viz-save-chip,
+.sproi-viz-net-chip,
+.sproi-viz-be-chip,
+.sproi-viz-life-chip,
+.sproi-viz-output-value,
+.sproi-viz-roi-out,
+.sproi-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Angle Optimizer · lat + season → tilt / azimuth */
+.sao-viz-sun,
+.sao-viz-pivot,
+.sao-viz-panel,
+.sao-viz-arc {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.sao-viz-ray {
+  animation: cl-viz-dot-blink 2.8s ease-in-out infinite;
+}
+
+.sao-viz-ray--delay {
+  animation-delay: 0.35s;
+}
+
+.sao-viz-tilt-bar,
+.sao-viz-az-bar,
+.sao-viz-scale-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.sao-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.sao-viz-lat-value,
+.sao-viz-goal-value,
+.sao-viz-angle-label,
+.sao-viz-summer-chip,
+.sao-viz-winter-chip,
+.sao-viz-year-chip,
+.sao-viz-output-value,
+.sao-viz-az-out,
+.sao-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Net Metering · self / export / import → bill savings */
+.snm-viz-pv,
+.snm-viz-home,
+.snm-viz-grid-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.snm-viz-self-flow,
+.snm-viz-export-flow,
+.snm-viz-timeline-pulse {
+  stroke-dasharray: 10 70;
+  stroke-dashoffset: 80;
+  animation: cl-viz-flow-pulse 2.4s linear infinite;
+}
+
+.snm-viz-export-flow {
+  animation-delay: 0.3s;
+}
+
+.snm-viz-self-bar,
+.snm-viz-export-bar,
+.snm-viz-save-bar,
+.snm-viz-bill-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.snm-viz-prod-value,
+.snm-viz-use-value,
+.snm-viz-retail-value,
+.snm-viz-export-value,
+.snm-viz-self-chip,
+.snm-viz-exp-chip,
+.snm-viz-math-value,
+.snm-viz-bill-chip,
+.snm-viz-output-value,
+.snm-viz-grid-out,
+.snm-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Degradation · year-1 × (1−d)^age → current kWh */
+.spd-viz-curve,
+.spd-viz-baseline,
+.spd-viz-panel,
+.spd-viz-op-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.spd-viz-op-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.spd-viz-curve-pulse,
+.spd-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.spd-viz-out-bar,
+.spd-viz-loss-bar,
+.spd-viz-cap-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.spd-viz-y1-value,
+.spd-viz-age-value,
+.spd-viz-rate-value,
+.spd-viz-math-value,
+.spd-viz-op-chip,
+.spd-viz-loss-chip,
+.spd-viz-output-value,
+.spd-viz-loss-out,
+.spd-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Generator vs Solar Hybrid · gen OPEX vs hybrid CapEx payback */
+.gvsh-viz-gen-node,
+.gvsh-viz-hybrid-node,
+.gvsh-viz-gen-curve,
+.gvsh-viz-hyb-curve,
+.gvsh-viz-be-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.gvsh-viz-be-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.gvsh-viz-hyb-pulse,
+.gvsh-viz-timeline-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.gvsh-viz-gen-bar,
+.gvsh-viz-hyb-bar,
+.gvsh-viz-save-bar,
+.gvsh-viz-ten-bar,
+.gvsh-viz-cum-gen {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.gvsh-viz-kwh-value,
+.gvsh-viz-fuel-value,
+.gvsh-viz-lph-value,
+.gvsh-viz-capex-value,
+.gvsh-viz-gen-chip,
+.gvsh-viz-hyb-chip,
+.gvsh-viz-be-chip,
+.gvsh-viz-math-value,
+.gvsh-viz-output-value,
+.gvsh-viz-ten-out,
+.gvsh-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Generator Run-Time Savings · PV+battery offset genset hours */
+.grs-viz-gen-node,
+.grs-viz-hyb-node,
+.grs-viz-after-dot {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.grs-viz-after-dot {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.grs-viz-timeline-pulse,
+.grs-viz-offset-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.grs-viz-solar-bar,
+.grs-viz-batt-bar,
+.grs-viz-before-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.grs-viz-hrs-value,
+.grs-viz-kw-value,
+.grs-viz-batt-value,
+.grs-viz-rate-value,
+.grs-viz-gen-kwh,
+.grs-viz-hyb-kwh,
+.grs-viz-offset-chip,
+.grs-viz-saved-chip,
+.grs-viz-output-value,
+.grs-viz-mo-value,
+.grs-viz-hrs-out,
+.grs-viz-life-value,
+.grs-viz-math-value,
+.grs-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Water Pump Solar Sizing · Wh → ÷ PSH×η → kWp */
+.wps-viz-pump-node,
+.wps-viz-head-node,
+.wps-viz-sun-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.wps-viz-timeline-pulse,
+.wps-viz-flow-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.wps-viz-wh-bar,
+.wps-viz-eff-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.wps-viz-w-value,
+.wps-viz-hrs-value,
+.wps-viz-head-value,
+.wps-viz-psh-value,
+.wps-viz-pump-chip,
+.wps-viz-head-chip,
+.wps-viz-wh-chip,
+.wps-viz-div-chip,
+.wps-viz-kwp-chip,
+.wps-viz-panel-chip,
+.wps-viz-output-value,
+.wps-viz-kwh-out,
+.wps-viz-panels-out,
+.wps-viz-mppt-value,
+.wps-viz-math-value,
+.wps-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* DC Cable Voltage Drop · I×R sag · I²R loss · mm² pick */
+.dcvd-viz-src-node,
+.dcvd-viz-load-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.dcvd-viz-timeline-pulse,
+.dcvd-viz-flow-pulse,
+.dcvd-viz-cable-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.dcvd-viz-min-bar,
+.dcvd-viz-drop-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.dcvd-viz-a-value,
+.dcvd-viz-v-value,
+.dcvd-viz-len-value,
+.dcvd-viz-max-value,
+.dcvd-viz-src-chip,
+.dcvd-viz-load-chip,
+.dcvd-viz-min-chip,
+.dcvd-viz-r-chip,
+.dcvd-viz-dv-chip,
+.dcvd-viz-p-chip,
+.dcvd-viz-output-value,
+.dcvd-viz-pct-out,
+.dcvd-viz-loss-out,
+.dcvd-viz-ok-value,
+.dcvd-viz-math-value,
+.dcvd-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Degradation 20-Year ROI · yield fade × escalating savings → CapEx BE */
+.sdroi-viz-yield-curve,
+.sdroi-viz-save-curve,
+.sdroi-viz-capex-line,
+.sdroi-viz-be-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.sdroi-viz-be-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.sdroi-viz-timeline-pulse,
+.sdroi-viz-cash-pulse,
+.sdroi-viz-curve-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.sdroi-viz-kwp-value,
+.sdroi-viz-yield-value,
+.sdroi-viz-cost-value,
+.sdroi-viz-params-value,
+.sdroi-viz-be-chip,
+.sdroi-viz-y1-chip,
+.sdroi-viz-y20-chip,
+.sdroi-viz-cap-chip,
+.sdroi-viz-output-value,
+.sdroi-viz-be-out,
+.sdroi-viz-save-out,
+.sdroi-viz-net-out,
+.sdroi-viz-math-value,
+.sdroi-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar Shading Analysis · bypass diodes · mismatch · kWh/$ loss */
+.ssa-viz-panel,
+.ssa-viz-panel-shade,
+.ssa-viz-diode-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.ssa-viz-panel-shade {
+  animation: aic-viz-surge-pulse 2.8s ease-in-out infinite;
+}
+
+.ssa-viz-timeline-pulse,
+.ssa-viz-shade-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.ssa-viz-direct-bar,
+.ssa-viz-bypass-bar,
+.ssa-viz-mismatch-bar,
+.ssa-viz-total-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.ssa-viz-n-value,
+.ssa-viz-w-value,
+.ssa-viz-shade-value,
+.ssa-viz-cov-value,
+.ssa-viz-bypass-chip,
+.ssa-viz-loss-chip,
+.ssa-viz-output-value,
+.ssa-viz-money-out,
+.ssa-viz-pct-out,
+.ssa-viz-note-out,
+.ssa-viz-math-value,
+.ssa-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* Solar ROI Analysis · incentives → cumulative savings → BE / NPV */
+.sra-viz-save-curve,
+.sra-viz-sq-curve,
+.sra-viz-capex-line,
+.sra-viz-be-point {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.sra-viz-be-point {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.sra-viz-timeline-pulse,
+.sra-viz-cash-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.sra-viz-save-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.sra-viz-cost-value,
+.sra-viz-itc-value,
+.sra-viz-kwh-value,
+.sra-viz-params-value,
+.sra-viz-net-chip,
+.sra-viz-y1-chip,
+.sra-viz-be-chip,
+.sra-viz-output-value,
+.sra-viz-save-out,
+.sra-viz-npv-out,
+.sra-viz-net-out,
+.sra-viz-math-value,
+.sra-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Public Charging Cost · energy + idle fee → session total */
+.epcc-viz-charger-node,
+.epcc-viz-ev-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.epcc-viz-timeline-pulse,
+.epcc-viz-energy-pulse,
+.epcc-viz-idle-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.epcc-viz-energy-bar,
+.epcc-viz-idle-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.epcc-viz-kwh-value,
+.epcc-viz-rate-value,
+.epcc-viz-idle-value,
+.epcc-viz-fee-value,
+.epcc-viz-energy-chip,
+.epcc-viz-idle-chip,
+.epcc-viz-session-chip,
+.epcc-viz-eff-chip,
+.epcc-viz-output-value,
+.epcc-viz-energy-out,
+.epcc-viz-idle-out,
+.epcc-viz-split-value,
+.epcc-viz-math-value,
+.epcc-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Pre-conditioning Cost · ambient ΔT · BMS heat · kWh × rate */
+.epre-viz-ambient-node,
+.epre-viz-pack-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.epre-viz-timeline-pulse,
+.epre-viz-heat-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.epre-viz-delta-bar,
+.epre-viz-energy-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.epre-viz-pack-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bdod-viz-used-pulse 3.2s ease-in-out infinite;
+}
+
+.epre-viz-temp-value,
+.epre-viz-kw-value,
+.epre-viz-min-value,
+.epre-viz-rate-value,
+.epre-viz-amb-chip,
+.epre-viz-mode-chip,
+.epre-viz-delta-chip,
+.epre-viz-energy-chip,
+.epre-viz-time-chip,
+.epre-viz-mode-out,
+.epre-viz-output-value,
+.epre-viz-kwh-out,
+.epre-viz-mode-label,
+.epre-viz-band-value,
+.epre-viz-math-value,
+.epre-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Tire Wear Cost · ICE vs EV life · annual depreciation */
+.etwc-viz-tire-node,
+.etwc-viz-factor-node {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.etwc-viz-timeline-pulse,
+.etwc-viz-wear-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.etwc-viz-ice-bar,
+.etwc-viz-ev-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.etwc-viz-km-value,
+.etwc-viz-cost-value,
+.etwc-viz-ice-value,
+.etwc-viz-wear-value,
+.etwc-viz-factor-chip,
+.etwc-viz-ice-chip,
+.etwc-viz-ev-chip,
+.etwc-viz-sets-chip,
+.etwc-viz-output-value,
+.etwc-viz-cpk-out,
+.etwc-viz-life-out,
+.etwc-viz-timeline-out,
+.etwc-viz-math-value,
+.etwc-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV Charging Cable Loss · I²R heat along Cu run */
+.eccl-viz-evse-node,
+.eccl-viz-ev-node,
+.eccl-viz-heat-wisp {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.eccl-viz-heat-wisp {
+  animation: aic-viz-surge-pulse 2.4s ease-in-out infinite;
+}
+
+.eccl-viz-timeline-pulse,
+.eccl-viz-heat-pulse,
+.eccl-viz-cable-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.eccl-viz-loss-bar {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: ebike-charge-time-fill 3.4s ease-in-out infinite;
+}
+
+.eccl-viz-heat-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bdod-viz-used-pulse 3.2s ease-in-out infinite;
+}
+
+.eccl-viz-a-value,
+.eccl-viz-len-value,
+.eccl-viz-mm-value,
+.eccl-viz-hrs-value,
+.eccl-viz-a-chip,
+.eccl-viz-pack-chip,
+.eccl-viz-r-chip,
+.eccl-viz-w-chip,
+.eccl-viz-pct-chip,
+.eccl-viz-ref-chip,
+.eccl-viz-output-value,
+.eccl-viz-kwh-out,
+.eccl-viz-cost-out,
+.eccl-viz-eff-out,
+.eccl-viz-math-value,
+.eccl-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
+/* EV SoC Calculator · resting V → linear empty/full map */
+.esoc-viz-rest-node,
+.esoc-viz-rest-dot,
+.esoc-viz-curve {
+  animation: cl-viz-dot-blink 2.4s ease-in-out infinite;
+}
+
+.esoc-viz-rest-dot {
+  animation: aic-viz-surge-pulse 2.6s ease-in-out infinite;
+}
+
+.esoc-viz-timeline-pulse,
+.esoc-viz-map-pulse,
+.esoc-viz-curve-pulse {
+  stroke-dasharray: 12 88;
+  stroke-dashoffset: 100;
+  animation: cl-viz-flow-pulse 2.8s linear infinite;
+}
+
+.esoc-viz-soc-fill {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: bdod-viz-used-pulse 3.2s ease-in-out infinite;
+}
+
+.esoc-viz-v-value,
+.esoc-viz-empty-value,
+.esoc-viz-full-value,
+.esoc-viz-rest-chip,
+.esoc-viz-delta-chip,
+.esoc-viz-formula-chip,
+.esoc-viz-output-value,
+.esoc-viz-delta-out,
+.esoc-viz-span-out,
+.esoc-viz-band-out,
+.esoc-viz-math-value,
+.esoc-viz-detail-value {
+  animation: cl-viz-value-glow 3.2s ease-in-out infinite;
+}
+
 @keyframes aic-viz-surge-pulse {
   0%,
   100% {
@@ -18437,7 +19387,479 @@ body:has(.legal-modal) .grid-modal-shell {
   .kth-viz-output-unit,
   .kth-viz-detail-value,
   .kth-viz-kw-chip,
-  .kth-viz-hp-chip {
+  .kth-viz-hp-chip,
+  .ilc-viz-chassis,
+  .ilc-viz-convert,
+  .ilc-viz-heat,
+  .ilc-viz-ac-bar,
+  .ilc-viz-loss-bar,
+  .ilc-viz-out-bar,
+  .ilc-viz-loss-out-bar,
+  .ilc-viz-eff-bar,
+  .ilc-viz-timeline-pulse,
+  .ilc-viz-dc-value,
+  .ilc-viz-eff-value,
+  .ilc-viz-math-value,
+  .ilc-viz-loss-chip,
+  .ilc-viz-output-value,
+  .ilc-viz-loss-out,
+  .ilc-viz-detail-value,
+  .ipls-viz-load,
+  .ipls-viz-wave,
+  .ipls-viz-spike,
+  .ipls-viz-wave-pulse,
+  .ipls-viz-timeline-pulse,
+  .ipls-viz-cont-bar,
+  .ipls-viz-peak-bar,
+  .ipls-viz-need-bar,
+  .ipls-viz-load-value,
+  .ipls-viz-cont-chip,
+  .ipls-viz-peak-chip,
+  .ipls-viz-margin-chip,
+  .ipls-viz-math-value,
+  .ipls-viz-out-cont,
+  .ipls-viz-out-peak,
+  .ipls-viz-output-value,
+  .ipls-viz-detail-value,
+  .ilcv-viz-curve,
+  .ilcv-viz-op-point,
+  .ilcv-viz-op-drop,
+  .ilcv-viz-heat,
+  .ilcv-viz-curve-pulse,
+  .ilcv-viz-timeline-pulse,
+  .ilcv-viz-timer-bar,
+  .ilcv-viz-pct-bar,
+  .ilcv-viz-window-bar,
+  .ilcv-viz-nom-value,
+  .ilcv-viz-load-value,
+  .ilcv-viz-temp-value,
+  .ilcv-viz-math-value,
+  .ilcv-viz-pct-chip,
+  .ilcv-viz-warn-chip,
+  .ilcv-viz-output-value,
+  .ilcv-viz-pct-out,
+  .ilcv-viz-detail-value,
+  .hbs-viz-pack,
+  .hbs-viz-pack-fill,
+  .hbs-viz-step1-bar,
+  .hbs-viz-step2-bar,
+  .hbs-viz-step3-bar,
+  .hbs-viz-ah-bar,
+  .hbs-viz-wh-bar,
+  .hbs-viz-kwh-bar,
+  .hbs-viz-timeline-pulse,
+  .hbs-viz-load-value,
+  .hbs-viz-hrs-value,
+  .hbs-viz-sys-value,
+  .hbs-viz-dod-value,
+  .hbs-viz-step1-chip,
+  .hbs-viz-step2-chip,
+  .hbs-viz-step3-chip,
+  .hbs-viz-math-value,
+  .hbs-viz-output-value,
+  .hbs-viz-wh-out,
+  .hbs-viz-detail-value,
+  .bvd-viz-battery,
+  .bvd-viz-load,
+  .bvd-viz-wire,
+  .bvd-viz-length-dot,
+  .bvd-viz-drop-mark,
+  .bvd-viz-current-flow,
+  .bvd-viz-vload-bar,
+  .bvd-viz-drop-bar,
+  .bvd-viz-pct-bar,
+  .bvd-viz-timeline-pulse,
+  .bvd-viz-amps-value,
+  .bvd-viz-len-value,
+  .bvd-viz-v-value,
+  .bvd-viz-load-chip,
+  .bvd-viz-drop-chip,
+  .bvd-viz-math-value,
+  .bvd-viz-output-value,
+  .bvd-viz-drop-out,
+  .bvd-viz-detail-value,
+  .bca-viz-curve,
+  .bca-viz-pack,
+  .bca-viz-op-point,
+  .bca-viz-soh-fill,
+  .bca-viz-soh-bar,
+  .bca-viz-loss-bar,
+  .bca-viz-stress-bar,
+  .bca-viz-curve-pulse,
+  .bca-viz-timeline-pulse,
+  .bca-viz-temp-value,
+  .bca-viz-soc-value,
+  .bca-viz-age-value,
+  .bca-viz-tf-chip,
+  .bca-viz-sf-chip,
+  .bca-viz-math-value,
+  .bca-viz-op-chip,
+  .bca-viz-loss-chip,
+  .bca-viz-output-value,
+  .bca-viz-loss-out,
+  .bca-viz-detail-value,
+  .broi-viz-cash-curve,
+  .broi-viz-capex-line,
+  .broi-viz-be-point,
+  .broi-viz-cash-pulse,
+  .broi-viz-timeline-pulse,
+  .broi-viz-capex-bar,
+  .broi-viz-yr-bar,
+  .broi-viz-pb-bar,
+  .broi-viz-save-bar,
+  .broi-viz-accum-bar,
+  .broi-viz-cap-value,
+  .broi-viz-cost-value,
+  .broi-viz-rates-value,
+  .broi-viz-params-value,
+  .broi-viz-math-value,
+  .broi-viz-spread-chip,
+  .broi-viz-yr-chip,
+  .broi-viz-be-chip,
+  .broi-viz-lcos-chip,
+  .broi-viz-output-value,
+  .broi-viz-save-out,
+  .broi-viz-detail-value,
+  .sproi-viz-cash-curve,
+  .sproi-viz-net-line,
+  .sproi-viz-be-point,
+  .sproi-viz-panel,
+  .sproi-viz-cash-pulse,
+  .sproi-viz-timeline-pulse,
+  .sproi-viz-gross-bar,
+  .sproi-viz-net-bar,
+  .sproi-viz-pb-bar,
+  .sproi-viz-roi-bar,
+  .sproi-viz-accum-bar,
+  .sproi-viz-cost-value,
+  .sproi-viz-kwh-value,
+  .sproi-viz-rate-value,
+  .sproi-viz-itc-value,
+  .sproi-viz-math-value,
+  .sproi-viz-save-chip,
+  .sproi-viz-net-chip,
+  .sproi-viz-be-chip,
+  .sproi-viz-life-chip,
+  .sproi-viz-output-value,
+  .sproi-viz-roi-out,
+  .sproi-viz-detail-value,
+  .sao-viz-sun,
+  .sao-viz-pivot,
+  .sao-viz-panel,
+  .sao-viz-arc,
+  .sao-viz-ray,
+  .sao-viz-tilt-bar,
+  .sao-viz-az-bar,
+  .sao-viz-scale-bar,
+  .sao-viz-timeline-pulse,
+  .sao-viz-lat-value,
+  .sao-viz-goal-value,
+  .sao-viz-angle-label,
+  .sao-viz-summer-chip,
+  .sao-viz-winter-chip,
+  .sao-viz-year-chip,
+  .sao-viz-output-value,
+  .sao-viz-az-out,
+  .sao-viz-detail-value,
+  .snm-viz-pv,
+  .snm-viz-home,
+  .snm-viz-grid-node,
+  .snm-viz-self-flow,
+  .snm-viz-export-flow,
+  .snm-viz-timeline-pulse,
+  .snm-viz-self-bar,
+  .snm-viz-export-bar,
+  .snm-viz-save-bar,
+  .snm-viz-bill-bar,
+  .snm-viz-prod-value,
+  .snm-viz-use-value,
+  .snm-viz-retail-value,
+  .snm-viz-export-value,
+  .snm-viz-self-chip,
+  .snm-viz-exp-chip,
+  .snm-viz-math-value,
+  .snm-viz-bill-chip,
+  .snm-viz-output-value,
+  .snm-viz-grid-out,
+  .snm-viz-detail-value,
+  .spd-viz-curve,
+  .spd-viz-baseline,
+  .spd-viz-panel,
+  .spd-viz-op-point,
+  .spd-viz-curve-pulse,
+  .spd-viz-timeline-pulse,
+  .spd-viz-out-bar,
+  .spd-viz-loss-bar,
+  .spd-viz-cap-bar,
+  .spd-viz-y1-value,
+  .spd-viz-age-value,
+  .spd-viz-rate-value,
+  .spd-viz-math-value,
+  .spd-viz-op-chip,
+  .spd-viz-loss-chip,
+  .spd-viz-output-value,
+  .spd-viz-loss-out,
+  .spd-viz-detail-value,
+  .gvsh-viz-gen-node,
+  .gvsh-viz-hybrid-node,
+  .gvsh-viz-gen-curve,
+  .gvsh-viz-hyb-curve,
+  .gvsh-viz-be-point,
+  .gvsh-viz-hyb-pulse,
+  .gvsh-viz-timeline-pulse,
+  .gvsh-viz-gen-bar,
+  .gvsh-viz-hyb-bar,
+  .gvsh-viz-save-bar,
+  .gvsh-viz-ten-bar,
+  .gvsh-viz-cum-gen,
+  .gvsh-viz-kwh-value,
+  .gvsh-viz-fuel-value,
+  .gvsh-viz-lph-value,
+  .gvsh-viz-capex-value,
+  .gvsh-viz-gen-chip,
+  .gvsh-viz-hyb-chip,
+  .gvsh-viz-be-chip,
+  .gvsh-viz-math-value,
+  .gvsh-viz-output-value,
+  .gvsh-viz-ten-out,
+  .gvsh-viz-detail-value,
+  .grs-viz-gen-node,
+  .grs-viz-hyb-node,
+  .grs-viz-after-dot,
+  .grs-viz-timeline-pulse,
+  .grs-viz-offset-pulse,
+  .grs-viz-solar-bar,
+  .grs-viz-batt-bar,
+  .grs-viz-before-bar,
+  .grs-viz-hrs-value,
+  .grs-viz-kw-value,
+  .grs-viz-batt-value,
+  .grs-viz-rate-value,
+  .grs-viz-gen-kwh,
+  .grs-viz-hyb-kwh,
+  .grs-viz-offset-chip,
+  .grs-viz-saved-chip,
+  .grs-viz-output-value,
+  .grs-viz-mo-value,
+  .grs-viz-hrs-out,
+  .grs-viz-life-value,
+  .grs-viz-math-value,
+  .grs-viz-detail-value,
+  .wps-viz-pump-node,
+  .wps-viz-head-node,
+  .wps-viz-sun-node,
+  .wps-viz-timeline-pulse,
+  .wps-viz-flow-pulse,
+  .wps-viz-wh-bar,
+  .wps-viz-eff-bar,
+  .wps-viz-w-value,
+  .wps-viz-hrs-value,
+  .wps-viz-head-value,
+  .wps-viz-psh-value,
+  .wps-viz-pump-chip,
+  .wps-viz-head-chip,
+  .wps-viz-wh-chip,
+  .wps-viz-div-chip,
+  .wps-viz-kwp-chip,
+  .wps-viz-panel-chip,
+  .wps-viz-output-value,
+  .wps-viz-kwh-out,
+  .wps-viz-panels-out,
+  .wps-viz-mppt-value,
+  .wps-viz-math-value,
+  .wps-viz-detail-value,
+  .dcvd-viz-src-node,
+  .dcvd-viz-load-node,
+  .dcvd-viz-timeline-pulse,
+  .dcvd-viz-flow-pulse,
+  .dcvd-viz-cable-pulse,
+  .dcvd-viz-min-bar,
+  .dcvd-viz-drop-bar,
+  .dcvd-viz-a-value,
+  .dcvd-viz-v-value,
+  .dcvd-viz-len-value,
+  .dcvd-viz-max-value,
+  .dcvd-viz-src-chip,
+  .dcvd-viz-load-chip,
+  .dcvd-viz-min-chip,
+  .dcvd-viz-r-chip,
+  .dcvd-viz-dv-chip,
+  .dcvd-viz-p-chip,
+  .dcvd-viz-output-value,
+  .dcvd-viz-pct-out,
+  .dcvd-viz-loss-out,
+  .dcvd-viz-ok-value,
+  .dcvd-viz-math-value,
+  .dcvd-viz-detail-value,
+  .sdroi-viz-yield-curve,
+  .sdroi-viz-save-curve,
+  .sdroi-viz-capex-line,
+  .sdroi-viz-be-point,
+  .sdroi-viz-timeline-pulse,
+  .sdroi-viz-cash-pulse,
+  .sdroi-viz-curve-pulse,
+  .sdroi-viz-kwp-value,
+  .sdroi-viz-yield-value,
+  .sdroi-viz-cost-value,
+  .sdroi-viz-params-value,
+  .sdroi-viz-be-chip,
+  .sdroi-viz-y1-chip,
+  .sdroi-viz-y20-chip,
+  .sdroi-viz-cap-chip,
+  .sdroi-viz-output-value,
+  .sdroi-viz-be-out,
+  .sdroi-viz-save-out,
+  .sdroi-viz-net-out,
+  .sdroi-viz-math-value,
+  .sdroi-viz-detail-value,
+  .ssa-viz-panel,
+  .ssa-viz-panel-shade,
+  .ssa-viz-diode-node,
+  .ssa-viz-timeline-pulse,
+  .ssa-viz-shade-pulse,
+  .ssa-viz-direct-bar,
+  .ssa-viz-bypass-bar,
+  .ssa-viz-mismatch-bar,
+  .ssa-viz-total-bar,
+  .ssa-viz-n-value,
+  .ssa-viz-w-value,
+  .ssa-viz-shade-value,
+  .ssa-viz-cov-value,
+  .ssa-viz-bypass-chip,
+  .ssa-viz-loss-chip,
+  .ssa-viz-output-value,
+  .ssa-viz-money-out,
+  .ssa-viz-pct-out,
+  .ssa-viz-note-out,
+  .ssa-viz-math-value,
+  .ssa-viz-detail-value,
+  .sra-viz-save-curve,
+  .sra-viz-sq-curve,
+  .sra-viz-capex-line,
+  .sra-viz-be-point,
+  .sra-viz-timeline-pulse,
+  .sra-viz-cash-pulse,
+  .sra-viz-save-bar,
+  .sra-viz-cost-value,
+  .sra-viz-itc-value,
+  .sra-viz-kwh-value,
+  .sra-viz-params-value,
+  .sra-viz-net-chip,
+  .sra-viz-y1-chip,
+  .sra-viz-be-chip,
+  .sra-viz-output-value,
+  .sra-viz-save-out,
+  .sra-viz-npv-out,
+  .sra-viz-net-out,
+  .sra-viz-math-value,
+  .sra-viz-detail-value,
+  .epcc-viz-charger-node,
+  .epcc-viz-ev-node,
+  .epcc-viz-timeline-pulse,
+  .epcc-viz-energy-pulse,
+  .epcc-viz-idle-pulse,
+  .epcc-viz-energy-bar,
+  .epcc-viz-idle-bar,
+  .epcc-viz-kwh-value,
+  .epcc-viz-rate-value,
+  .epcc-viz-idle-value,
+  .epcc-viz-fee-value,
+  .epcc-viz-energy-chip,
+  .epcc-viz-idle-chip,
+  .epcc-viz-session-chip,
+  .epcc-viz-eff-chip,
+  .epcc-viz-output-value,
+  .epcc-viz-energy-out,
+  .epcc-viz-idle-out,
+  .epcc-viz-split-value,
+  .epcc-viz-math-value,
+  .epcc-viz-detail-value,
+  .epre-viz-ambient-node,
+  .epre-viz-pack-node,
+  .epre-viz-timeline-pulse,
+  .epre-viz-heat-pulse,
+  .epre-viz-delta-bar,
+  .epre-viz-energy-bar,
+  .epre-viz-pack-fill,
+  .epre-viz-temp-value,
+  .epre-viz-kw-value,
+  .epre-viz-min-value,
+  .epre-viz-rate-value,
+  .epre-viz-amb-chip,
+  .epre-viz-mode-chip,
+  .epre-viz-delta-chip,
+  .epre-viz-energy-chip,
+  .epre-viz-time-chip,
+  .epre-viz-mode-out,
+  .epre-viz-output-value,
+  .epre-viz-kwh-out,
+  .epre-viz-mode-label,
+  .epre-viz-band-value,
+  .epre-viz-math-value,
+  .epre-viz-detail-value,
+  .etwc-viz-tire-node,
+  .etwc-viz-factor-node,
+  .etwc-viz-timeline-pulse,
+  .etwc-viz-wear-pulse,
+  .etwc-viz-ice-bar,
+  .etwc-viz-ev-bar,
+  .etwc-viz-km-value,
+  .etwc-viz-cost-value,
+  .etwc-viz-ice-value,
+  .etwc-viz-wear-value,
+  .etwc-viz-factor-chip,
+  .etwc-viz-ice-chip,
+  .etwc-viz-ev-chip,
+  .etwc-viz-sets-chip,
+  .etwc-viz-output-value,
+  .etwc-viz-cpk-out,
+  .etwc-viz-life-out,
+  .etwc-viz-timeline-out,
+  .etwc-viz-math-value,
+  .etwc-viz-detail-value,
+  .eccl-viz-evse-node,
+  .eccl-viz-ev-node,
+  .eccl-viz-heat-wisp,
+  .eccl-viz-timeline-pulse,
+  .eccl-viz-heat-pulse,
+  .eccl-viz-cable-pulse,
+  .eccl-viz-loss-bar,
+  .eccl-viz-heat-fill,
+  .eccl-viz-a-value,
+  .eccl-viz-len-value,
+  .eccl-viz-mm-value,
+  .eccl-viz-hrs-value,
+  .eccl-viz-a-chip,
+  .eccl-viz-pack-chip,
+  .eccl-viz-r-chip,
+  .eccl-viz-w-chip,
+  .eccl-viz-pct-chip,
+  .eccl-viz-ref-chip,
+  .eccl-viz-output-value,
+  .eccl-viz-kwh-out,
+  .eccl-viz-cost-out,
+  .eccl-viz-eff-out,
+  .eccl-viz-math-value,
+  .eccl-viz-detail-value,
+  .esoc-viz-rest-node,
+  .esoc-viz-rest-dot,
+  .esoc-viz-curve,
+  .esoc-viz-timeline-pulse,
+  .esoc-viz-map-pulse,
+  .esoc-viz-curve-pulse,
+  .esoc-viz-soc-fill,
+  .esoc-viz-v-value,
+  .esoc-viz-empty-value,
+  .esoc-viz-full-value,
+  .esoc-viz-rest-chip,
+  .esoc-viz-delta-chip,
+  .esoc-viz-formula-chip,
+  .esoc-viz-output-value,
+  .esoc-viz-delta-out,
+  .esoc-viz-span-out,
+  .esoc-viz-band-out,
+  .esoc-viz-math-value,
+  .esoc-viz-detail-value {
     animation: none;
   }
 
@@ -19031,7 +20453,75 @@ body:has(.legal-modal) .grid-modal-shell {
   .kth-viz-scale-bar,
   .kth-viz-output-bar,
   .kth-viz-kw-bar,
-  .kth-viz-hp-bar {
+  .kth-viz-hp-bar,
+  .ilc-viz-ac-bar,
+  .ilc-viz-loss-bar,
+  .ilc-viz-out-bar,
+  .ilc-viz-loss-out-bar,
+  .ilc-viz-eff-bar,
+  .ipls-viz-cont-bar,
+  .ipls-viz-peak-bar,
+  .ipls-viz-need-bar,
+  .ilcv-viz-timer-bar,
+  .ilcv-viz-pct-bar,
+  .ilcv-viz-window-bar,
+  .hbs-viz-step1-bar,
+  .hbs-viz-step2-bar,
+  .hbs-viz-step3-bar,
+  .hbs-viz-ah-bar,
+  .hbs-viz-wh-bar,
+  .hbs-viz-kwh-bar,
+  .bvd-viz-vload-bar,
+  .bvd-viz-drop-bar,
+  .bvd-viz-pct-bar,
+  .bca-viz-soh-fill,
+  .bca-viz-soh-bar,
+  .bca-viz-loss-bar,
+  .bca-viz-stress-bar,
+  .broi-viz-capex-bar,
+  .broi-viz-yr-bar,
+  .broi-viz-pb-bar,
+  .broi-viz-save-bar,
+  .broi-viz-accum-bar,
+  .sproi-viz-gross-bar,
+  .sproi-viz-net-bar,
+  .sproi-viz-pb-bar,
+  .sproi-viz-roi-bar,
+  .sproi-viz-accum-bar,
+  .sao-viz-tilt-bar,
+  .sao-viz-az-bar,
+  .sao-viz-scale-bar,
+  .snm-viz-self-bar,
+  .snm-viz-export-bar,
+  .snm-viz-save-bar,
+  .snm-viz-bill-bar,
+  .spd-viz-out-bar,
+  .spd-viz-loss-bar,
+  .spd-viz-cap-bar,
+  .gvsh-viz-gen-bar,
+  .gvsh-viz-hyb-bar,
+  .gvsh-viz-save-bar,
+  .gvsh-viz-ten-bar,
+  .gvsh-viz-cum-gen,
+  .grs-viz-solar-bar,
+  .grs-viz-batt-bar,
+  .grs-viz-before-bar,
+  .wps-viz-wh-bar,
+  .wps-viz-eff-bar,
+  .dcvd-viz-min-bar,
+  .dcvd-viz-drop-bar,
+  .ssa-viz-direct-bar,
+  .ssa-viz-bypass-bar,
+  .ssa-viz-mismatch-bar,
+  .ssa-viz-total-bar,
+  .sra-viz-save-bar,
+  .epcc-viz-energy-bar,
+  .epcc-viz-idle-bar,
+  .epre-viz-delta-bar,
+  .epre-viz-energy-bar,
+  .etwc-viz-ice-bar,
+  .etwc-viz-ev-bar,
+  .eccl-viz-loss-bar {
     transform: scaleX(1);
     opacity: 0.85;
   }
@@ -19056,16 +20546,73 @@ body:has(.legal-modal) .grid-modal-shell {
   .rpc-viz-timeline-pulse,
   .bdey-viz-timeline-pulse,
   .kth-viz-timeline-pulse,
-  .kth-viz-shaft-pulse {
+  .kth-viz-shaft-pulse,
+  .ilc-viz-timeline-pulse,
+  .ipls-viz-timeline-pulse,
+  .ipls-viz-wave-pulse,
+  .ilcv-viz-timeline-pulse,
+  .ilcv-viz-curve-pulse,
+  .hbs-viz-timeline-pulse,
+  .bvd-viz-timeline-pulse,
+  .bvd-viz-current-flow,
+  .bca-viz-timeline-pulse,
+  .bca-viz-curve-pulse,
+  .broi-viz-timeline-pulse,
+  .broi-viz-cash-pulse,
+  .sproi-viz-timeline-pulse,
+  .sproi-viz-cash-pulse,
+  .sao-viz-timeline-pulse,
+  .snm-viz-timeline-pulse,
+  .snm-viz-self-flow,
+  .snm-viz-export-flow,
+  .spd-viz-timeline-pulse,
+  .spd-viz-curve-pulse,
+  .gvsh-viz-timeline-pulse,
+  .gvsh-viz-hyb-pulse,
+  .grs-viz-timeline-pulse,
+  .grs-viz-offset-pulse,
+  .wps-viz-timeline-pulse,
+  .wps-viz-flow-pulse,
+  .dcvd-viz-timeline-pulse,
+  .dcvd-viz-flow-pulse,
+  .dcvd-viz-cable-pulse,
+  .sdroi-viz-timeline-pulse,
+  .sdroi-viz-cash-pulse,
+  .sdroi-viz-curve-pulse,
+  .ssa-viz-timeline-pulse,
+  .ssa-viz-shade-pulse,
+  .sra-viz-timeline-pulse,
+  .sra-viz-cash-pulse,
+  .epcc-viz-timeline-pulse,
+  .epcc-viz-energy-pulse,
+  .epcc-viz-idle-pulse,
+  .epre-viz-timeline-pulse,
+  .epre-viz-heat-pulse,
+  .etwc-viz-timeline-pulse,
+  .etwc-viz-wear-pulse,
+  .eccl-viz-timeline-pulse,
+  .eccl-viz-heat-pulse,
+  .eccl-viz-cable-pulse,
+  .esoc-viz-timeline-pulse,
+  .esoc-viz-map-pulse,
+  .esoc-viz-curve-pulse {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
+  }
+
+  .epre-viz-pack-fill,
+  .eccl-viz-heat-fill,
+  .esoc-viz-soc-fill {
+    transform: scaleY(1);
+    opacity: 0.85;
   }
 
   .esct-viz-pack-fill,
   .cmp-viz-load-fill,
   .shgc-viz-pass,
   .bdey-viz-usable-fill,
-  .bdey-viz-reserve-fill {
+  .bdey-viz-reserve-fill,
+  .hbs-viz-pack-fill {
     transform: scaleY(1);
     opacity: 0.85;
   }
