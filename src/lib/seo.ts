@@ -49,6 +49,8 @@ export function createPageMetadata({
   keywords,
   noIndex = false,
   ogImage = DEFAULT_OG_IMAGE,
+  ogImageWidth = OG_IMAGE_WIDTH,
+  ogImageHeight = OG_IMAGE_HEIGHT,
   openGraphType = "website",
   articlePublishedTime,
   ogTitle,
@@ -59,6 +61,10 @@ export function createPageMetadata({
   keywords?: string[];
   noIndex?: boolean;
   ogImage?: string;
+  /** Declared OG image width (defaults to site header OG size). */
+  ogImageWidth?: number;
+  /** Declared OG image height (defaults to site header OG size). */
+  ogImageHeight?: number;
   openGraphType?: "website" | "article";
   articlePublishedTime?: string;
   /** Override OG/Twitter headline (defaults to title | site) */
@@ -90,8 +96,8 @@ export function createPageMetadata({
       images: [
         {
           url: imageUrl,
-          width: OG_IMAGE_WIDTH,
-          height: OG_IMAGE_HEIGHT,
+          width: ogImageWidth,
+          height: ogImageHeight,
           alt: shareTitle,
         },
       ],

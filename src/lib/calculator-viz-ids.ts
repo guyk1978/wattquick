@@ -148,6 +148,9 @@ const VIZ_CALCULATOR_IDS = [
   "ebike-commute-savings",
 ] as const satisfies readonly CalculatorId[];
 
+/** Ordered list of calculator IDs that ship a [VIZ] Data Flow schematic. */
+export const CALCULATOR_VIZ_ID_LIST = VIZ_CALCULATOR_IDS;
+
 export const CALCULATOR_VIZ_IDS = new Set<string>(VIZ_CALCULATOR_IDS);
 
 export function hasCalculatorViz(id: CalculatorId): boolean {

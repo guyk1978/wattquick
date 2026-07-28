@@ -87,6 +87,7 @@ export type CalculatorShareEntry = {
  * Per-calculator share copy and OG preview image.
  * Add a key + image file only — ShareButtons and metadata pick it up automatically.
  * Generated from public/images/share/*.{webp,jpg,jpeg} via scripts/generate-calculator-share-data.ts
+ * Prefer regenerating images with: npm run generate:share-images (VIZ Data Flow frames)
  */
 export const calculatorShareData: Partial<
   Record<CalculatorId, CalculatorShareEntry>

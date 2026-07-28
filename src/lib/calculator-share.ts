@@ -4,6 +4,10 @@ import {
   type CalculatorShareEntry,
 } from "@/constants/calculatorShareData";
 import type { CalculatorId } from "@/lib/calculators";
+import {
+  CALCULATOR_SHARE_OG_HEIGHT,
+  CALCULATOR_SHARE_OG_WIDTH,
+} from "@/lib/og-image";
 import { absoluteAssetUrl, createPageMetadata, SITE_NAME } from "@/lib/seo";
 
 export function getCalculatorShareData(
@@ -59,7 +63,10 @@ export function getCalculatorPageMetadata(
     description: share.description,
     path: fallback.path,
     keywords: fallback.keywords,
+    /** VIZ Data Flow preview frame (see generate:share-images). */
     ogImage: share.imageUrl,
+    ogImageWidth: CALCULATOR_SHARE_OG_WIDTH,
+    ogImageHeight: CALCULATOR_SHARE_OG_HEIGHT,
     ogTitle: share.title,
   });
 }

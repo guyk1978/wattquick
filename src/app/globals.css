@@ -23545,3 +23545,183 @@ body:has(.legal-modal) .grid-modal-shell {
     transform: scale(1) translateY(0);
   }
 }
+
+/* ?? VIZ share preview (OG / Twitter capture surface) ?? */
+body:has(.viz-share-preview-root) {
+  background: #0a0a0a !important;
+}
+
+body:has(.viz-share-preview-root) .site-header,
+body:has(.viz-share-preview-root) .site-footer,
+body:has(.viz-share-preview-root) .nav-loading-overlay,
+body:has(.viz-share-preview-root) [aria-labelledby="cookie-consent-title"],
+body:has(.viz-share-preview-root) .cookie-consent-banner,
+body:has(.viz-share-preview-root) nextjs-portal,
+body:has(.viz-share-preview-root) [data-nextjs-toast],
+body:has(.viz-share-preview-root) [data-nextjs-dialog-overlay],
+body:has(.viz-share-preview-root) [data-next-mark-loading] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body:has(.viz-share-preview-root) .site-ambient::before {
+  display: none !important;
+}
+
+body:has(.viz-share-preview-root) main {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.viz-share-preview-root,
+.viz-share-preview-page {
+  min-height: 100vh;
+  background: #0a0a0a;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.viz-share-frame {
+  box-sizing: border-box;
+  width: 1200px;
+  height: 630px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 28px 32px 28px;
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 0%, color-mix(in srgb, var(--category-color, #a3e635) 14%, transparent), transparent 55%),
+    linear-gradient(180deg, #101010 0%, #0a0a0a 100%);
+  border: 1px solid #1f1f1f;
+  color: #ededed;
+  overflow: hidden;
+}
+
+.viz-share-frame__chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 12px;
+}
+
+.viz-share-frame__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.viz-share-frame__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--category-color, #a3e635) 22%, #121212);
+  color: var(--category-color, #a3e635);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.viz-share-frame__site {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #f5f5f5;
+}
+
+.viz-share-frame__eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #888888;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.viz-share-frame__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.viz-share-frame__title {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #fafafa;
+}
+
+.viz-share-frame__stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  border: 1px solid #262626;
+  border-radius: 0.55rem;
+  background: #050505;
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.viz-share-frame__viz.tool-viz {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.viz-share-frame__viz .tool-viz__header {
+  display: none;
+}
+
+.viz-share-frame__viz .tool-viz__stage {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+
+.viz-share-frame__viz .tool-viz__svg {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.viz-share-frame--missing {
+  align-items: center;
+  justify-content: center;
+}
+
+.viz-share-frame__missing {
+  margin: 0;
+  color: #888;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viz-share-frame .tool-viz-flow__pulse,
+  .viz-share-frame .cl-viz-flow__pulse {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke: var(--category-color, #a3e635);
+    stroke-opacity: 0.55;
+  }
+}

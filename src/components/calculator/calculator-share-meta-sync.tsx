@@ -9,7 +9,13 @@ import {
   resolveCalculatorShareImageUrl,
 } from "@/lib/calculator-share";
 import { setMetaContent } from "@/lib/meta-tags";
-import { getOgImageUrl, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "@/lib/og-image";
+import {
+  CALCULATOR_SHARE_OG_HEIGHT,
+  CALCULATOR_SHARE_OG_WIDTH,
+  getOgImageUrl,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_WIDTH,
+} from "@/lib/og-image";
 
 const CALCULATOR_SHARE_FLAG = "data-calculator-share";
 
@@ -35,8 +41,16 @@ export function CalculatorShareMetaSync() {
     setMetaContent("property", "og:title", headline);
     setMetaContent("property", "og:description", share.description);
     setMetaContent("property", "og:image", imageUrl);
-    setMetaContent("property", "og:image:width", String(OG_IMAGE_WIDTH));
-    setMetaContent("property", "og:image:height", String(OG_IMAGE_HEIGHT));
+    setMetaContent(
+      "property",
+      "og:image:width",
+      String(CALCULATOR_SHARE_OG_WIDTH)
+    );
+    setMetaContent(
+      "property",
+      "og:image:height",
+      String(CALCULATOR_SHARE_OG_HEIGHT)
+    );
     setMetaContent("name", "twitter:title", headline);
     setMetaContent("name", "twitter:description", share.description);
     setMetaContent("name", "twitter:image", imageUrl);
