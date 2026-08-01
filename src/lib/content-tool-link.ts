@@ -8,8 +8,8 @@ export interface ToolLaunchContext {
   toolId: CalculatorId;
 }
 
+/** Keep in sync with TOOL_LAUNCH_CONTEXT_STORAGE_KEY in legacy-query.ts */
 const CONTEXT_KEY = "wattquick-tool-launch-context";
-const URL_PARAM = "fromArticle";
 
 export function getArticleUrl(slug: string): string {
   return `/articles/${slug}/`;
@@ -54,23 +54,12 @@ export function clearToolLaunchContext(): void {
   }
 }
 
-/** Read ?fromArticle=slug from calculator page URL (client) */
-export function getArticleSlugFromSearchParams(
-  params: URLSearchParams
-): string | null {
-  const slug = params.get(URL_PARAM)?.trim();
-  return slug || null;
-}
-
-/** Calculator page URL with optional return-to-article query param */
-export function buildCalculatorUrl(
-  calculatorHref: string,
-  options?: { fromArticle?: string }
-): string {
-  const base = calculatorHref.endsWith("/") ? calculatorHref : `${calculatorHref}/`;
-  const articleSlug = options?.fromArticle?.trim();
-  if (!articleSlug) return base;
-  return `${base}?${URL_PARAM}=${encodeURIComponent(articleSlug)}`;
+/**
+ * Canonical calculator URL — always a clean path with no legacy query params
+ * such as `?fromArticle=`. Article return context uses sessionStorage instead.
+ */
+export function buildCalculatorUrl(calculatorHref: string): string {
+  return calculatorHref.endsWith("/") ? calculatorHref : `${calculatorHref}/`;
 }
 
 /** True when modal should show “Back to article” for this tool */

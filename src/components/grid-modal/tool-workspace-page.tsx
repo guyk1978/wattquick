@@ -19,7 +19,6 @@ import {
   type ProjectSavePayload,
 } from "@/lib/project-store";
 import { cn } from "@/lib/utils";
-
 type ToolWorkspacePageProps = {
   calculatorId: CalculatorId;
   className?: string;
@@ -99,6 +98,8 @@ export function ToolWorkspacePage({
     if (typeof window === "undefined") return;
     try {
       const url = new URL(window.location.href);
+      // Drop deprecated params if present (e.g. bookmarked ?fromArticle=).
+      url.searchParams.delete("fromArticle");
       if (tab === "calc") url.searchParams.delete("view");
       else url.searchParams.set("view", tab);
       const next = `${url.pathname}${url.search}${url.hash}`;

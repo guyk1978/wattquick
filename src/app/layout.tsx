@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GridPinnedCalculatorProvider } from "@/components/grid-modal/grid-pinned-calculator-context";
+import { LegacyUrlSanitizer } from "@/components/legacy-url-sanitizer";
 import { NavigationLoadingOverlay } from "@/components/navigation-loading-overlay";
 import { PageTransition } from "@/components/transitions/PageTransition";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
@@ -13,6 +14,7 @@ import { getAllCalculatorMeta } from "@/lib/calculators";
 import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
 import { consentInitScript } from "@/lib/consent-init";
+import { legacyQueryInitScript } from "@/lib/legacy-query";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
@@ -59,6 +61,7 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: legacyQueryInitScript }} />
         <script async src={ADSENSE_SCRIPT_SRC} crossOrigin="anonymous" />
         {jsonLd}
         <link rel="stylesheet" href="/assets/css/site-search.css" />
@@ -71,6 +74,7 @@ export default function RootLayout({
       <body className="site-ambient flex min-h-full flex-col bg-bg-primary text-text-primary">
         <ThemeProvider>
           <GridPinnedCalculatorProvider>
+            <LegacyUrlSanitizer />
             <NavigationLoadingOverlay />
             <AnalyticsRouteTracker />
             <SiteHeader />

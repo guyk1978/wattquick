@@ -20,7 +20,7 @@ export function createBlogPostMetadata(post: BlogPost): Metadata {
   const base = createPageMetadata({
     title: post.title,
     description: socialDescription,
-    path: `/blog/${post.slug}`,
+    path: `/articles/${post.slug}`,
     ogImage: post.ogImage,
     openGraphType: "article",
     articlePublishedTime: post.publishedAt,

@@ -1,9 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
-import { getArticleUrl, getArticleSlugFromSearchParams } from "@/lib/content-tool-link";
+import {
+  getArticleUrl,
+  getToolLaunchContext,
+} from "@/lib/content-tool-link";
 import { cn } from "@/lib/utils";
 
 interface CalculatorPageBackLinkProps {
@@ -17,8 +20,11 @@ export function CalculatorPageBackLink({
   categoryLabel,
   className,
 }: CalculatorPageBackLinkProps) {
-  const searchParams = useSearchParams();
-  const articleSlug = getArticleSlugFromSearchParams(searchParams);
+  const [articleSlug, setArticleSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    setArticleSlug(getToolLaunchContext()?.articleSlug ?? null);
+  }, []);
 
   if (articleSlug) {
     return (

@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
+import { ContentToolLaunchLink } from "@/components/content/content-tool-launch-link";
 import type { CalculatorId } from "@/lib/calculators";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import {
   categoryThemeVars,
   getCategoryTheme,
 } from "@/lib/calculator-category-theme";
-import { buildCalculatorUrl } from "@/lib/content-tool-link";
 import { cn } from "@/lib/utils";
 
 interface BlogToolCardProps {
@@ -27,7 +26,6 @@ export function BlogToolCard({
   const meta = getCalculatorMeta(calculatorId);
   const Icon = meta.icon;
   const theme = getCategoryTheme(meta.category);
-  const href = buildCalculatorUrl(meta.href, { fromArticle: articleSlug });
   const isWidget = variant === "widget";
 
   return (
@@ -67,10 +65,15 @@ export function BlogToolCard({
         </div>
       </div>
 
-      <Link href={href} className="blog-tool-card__action">
+      <ContentToolLaunchLink
+        calculatorHref={meta.href}
+        calculatorId={meta.id}
+        articleSlug={articleSlug}
+        className="blog-tool-card__action"
+      >
         Open tool
         <ArrowUpRight className="size-4" strokeWidth={2.5} aria-hidden />
-      </Link>
+      </ContentToolLaunchLink>
     </aside>
   );
 }

@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ArrowUpRight, Lightbulb } from "lucide-react";
+import { ContentToolLaunchLink } from "@/components/content/content-tool-launch-link";
 import { calculators } from "@/data/calculators";
+import type { CalculatorId } from "@/lib/calculators";
 import { buildCalculatorUrl } from "@/lib/content-tool-link";
+import { isCalculatorId } from "@/lib/calculators/utils";
 import { cn } from "@/lib/utils";
 
 interface CalculatorSpotlightProps {
@@ -18,11 +21,16 @@ export function CalculatorSpotlight({
   compact = false,
 }: CalculatorSpotlightProps) {
   const calc = calculators.find((c) => c.slug === slug);
-  if (!calc) return null;
+  if (!calc || !isCalculatorId(calc.slug)) return null;
 
-  const href = buildCalculatorUrl(calc.href, {
-    fromArticle: articleSlug,
-  });
+  const calculatorId: CalculatorId = calc.slug;
+  const href = buildCalculatorUrl(calc.href);
+  const action = (
+    <>
+      Open calculator
+      <ArrowUpRight className="size-4" strokeWidth={2.5} aria-hidden />
+    </>
+  );
 
   return (
     <aside
@@ -50,10 +58,20 @@ export function CalculatorSpotlight({
         </div>
       </div>
 
-      <Link href={href} className="blog-tool-card__action">
-        Open calculator
-        <ArrowUpRight className="size-4" strokeWidth={2.5} aria-hidden />
-      </Link>
+      {articleSlug ? (
+        <ContentToolLaunchLink
+          calculatorHref={calc.href}
+          calculatorId={calculatorId}
+          articleSlug={articleSlug}
+          className="blog-tool-card__action"
+        >
+          {action}
+        </ContentToolLaunchLink>
+      ) : (
+        <Link href={href} className="blog-tool-card__action">
+          {action}
+        </Link>
+      )}
     </aside>
   );
 }

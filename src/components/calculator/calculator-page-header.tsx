@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Suspense } from "react";
 import { CalculatorPageBackLink } from "@/components/calculator/calculator-page-back-link";
 import { CalculatorRatingCompact } from "@/components/calculator/calculator-rating-compact";
 import {
@@ -23,16 +22,10 @@ export function CalculatorPageHeader({ calculator, className }: CalculatorPageHe
 
   return (
     <header className={cn("calculator-page-header calculator-page-header--blueprint", className)}>
-      <Suspense
-        fallback={
-          <span className="calculator-page-header__back inline-flex h-4 w-24 animate-pulse rounded-none bg-muted/40" />
-        }
-      >
-        <CalculatorPageBackLink
-          categoryHref={categoryHref}
-          categoryLabel={categoryLabel}
-        />
-      </Suspense>
+      <CalculatorPageBackLink
+        categoryHref={categoryHref}
+        categoryLabel={categoryLabel}
+      />
 
       <div className="calculator-page-header__meta">
         <div className="calculator-page-header__title-row">
