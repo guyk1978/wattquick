@@ -4,7 +4,8 @@ export const HEADER_NAV_SHORT_LABELS: Record<string, string> = {
   "/calculators": "Calculators",
   "/favorites": "Favorites",
   "/projects": "Projects",
-  "/blog": "Blog",
+  "/articles": "Articles",
+  "/blog": "Articles",
   "/about": "About",
   "/contact": "Contact",
 };

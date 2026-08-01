@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { BookOpen, Library } from "lucide-react";
+import { BookOpen, Library, Menu, X } from "lucide-react";
 import { LibraryPanel } from "@/components/grid-modal/library-panel";
+import { MobileMenuSheet } from "@/components/mobile-menu-sheet";
 import { PWAInstaller } from "@/components/pwa-installer";
 import { SiteHeaderSearch } from "@/components/site-header-search";
 import { cn } from "@/lib/utils";
@@ -19,9 +20,10 @@ type GridNavProps = {
   className?: string;
 };
 
-/** Fixed logo + breadcrumbs + Ctrl+K search + Articles + Library for Grid-to-Modal pages. */
+/** Sticky logo + breadcrumbs + search + Articles + Library for Grid-to-Modal pages. */
 export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
   const [libraryOpen, setLibraryOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const articlesActive =
     pathname === "/articles" ||
@@ -63,7 +65,10 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
             </Link>
 
             {breadcrumbs.length > 0 ? (
-              <nav className="grid-nav__crumbs" aria-label="Breadcrumb">
+              <nav
+                className="grid-nav__crumbs grid-nav__desktop-only"
+                aria-label="Breadcrumb"
+              >
                 <ol className="grid-nav__crumb-list">
                   {breadcrumbs.map((crumb, index) => {
                     const last = index === breadcrumbs.length - 1;
@@ -92,7 +97,7 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
             ) : null}
           </div>
 
-          <div className="grid-nav__trailing">
+          <div className="grid-nav__trailing grid-nav__desktop-only">
             <div className="grid-nav__search">
               <SiteHeaderSearch />
             </div>
@@ -121,8 +126,31 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
             </button>
             <PWAInstaller variant="grid" />
           </div>
+
+          <button
+            type="button"
+            className="grid-nav__menu-btn"
+            onClick={() => setMenuOpen((value) => !value)}
+            aria-expanded={menuOpen}
+            aria-controls="grid-mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? (
+              <X className="size-5" strokeWidth={2} aria-hidden />
+            ) : (
+              <Menu className="size-5" strokeWidth={2} aria-hidden />
+            )}
+          </button>
         </div>
       </header>
+
+      <MobileMenuSheet
+        id="grid-mobile-menu"
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onOpenLibrary={() => setLibraryOpen(true)}
+        className="mobile-menu-sheet--grid"
+      />
 
       <LibraryPanel open={libraryOpen} onClose={() => setLibraryOpen(false)} />
     </>
