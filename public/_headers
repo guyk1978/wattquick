@@ -1,4 +1,8 @@
+# Allow same-origin embeds plus JoinMyPDF Device Preview (and local Next ports).
+# Prefer CSP frame-ancestors (multi-origin) — do not set X-Frame-Options here.
+# CORP cross-origin lets JoinMyPDF pages with COEP: require-corp load us in an iframe.
 /*
-  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'self' https://joinmypdf.com https://www.joinmypdf.com http://localhost:3000 http://localhost:3001 http://127.0.0.1:3000 http://127.0.0.1:3001
+  Cross-Origin-Resource-Policy: cross-origin
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
