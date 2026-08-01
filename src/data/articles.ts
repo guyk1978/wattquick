@@ -2,10 +2,10 @@ import "server-only";
 import { getAllBlogPosts } from "@/lib/blog/posts";
 
 export type Article = {
-  /** Blog slug — used as the portal id */
+  /** Blog slug — used as the article id */
   id: string;
   title: string;
-  /** Full markdown body (tool embeds stripped for portal reading) */
+  /** Full markdown body (tool embeds stripped for plain reading) */
   content: string;
   /** Short excerpt for lists / cards */
   snippet: string;
@@ -21,8 +21,8 @@ function stripInlineToolTags(content: string): string {
 }
 
 /**
- * Central article catalog for the Article Portal modal.
- * Built from existing blog markdown — no per-click page fetch.
+ * Central article catalog derived from blog markdown.
+ * Prefer full post pages under `/articles/[slug]/` for UI.
  */
 export function getArticles(): Article[] {
   return getAllBlogPosts().map((post) => ({

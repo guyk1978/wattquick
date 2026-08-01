@@ -1,7 +1,5 @@
-"use client";
-
+import Link from "next/link";
 import { BookOpen } from "lucide-react";
-import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import type { RelatedArticleForModal } from "@/lib/calculators/related-articles";
 import { cn } from "@/lib/utils";
 
@@ -10,13 +8,8 @@ type RelatedArticlesProps = {
   className?: string;
 };
 
-/**
- * Further Reading cards for calculator Documentation.
- * Opens the site-wide Article Portal — no route navigation.
- */
+/** Further Reading cards for calculator Documentation — links to article pages. */
 export function RelatedArticles({ articles, className }: RelatedArticlesProps) {
-  const { openArticle } = useArticlePortal();
-
   if (articles.length === 0) return null;
 
   return (
@@ -32,16 +25,15 @@ export function RelatedArticles({ articles, className }: RelatedArticlesProps) {
       <ul className="related-articles__grid" role="list">
         {articles.map((article) => (
           <li key={article.slug}>
-            <button
-              type="button"
+            <Link
+              href={`/articles/${article.slug}/`}
               className="related-articles__card"
-              onClick={() => openArticle(article.slug)}
             >
               <span className="related-articles__card-title">{article.title}</span>
               <span className="related-articles__card-excerpt">
                 {article.description}
               </span>
-            </button>
+            </Link>
           </li>
         ))}
       </ul>

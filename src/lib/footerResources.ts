@@ -308,7 +308,7 @@ const STATIC_FOOTER_RESOURCES: Record<
   ],
   company: [
     { href: "/about/", label: "About", category: "company" },
-    { href: "/blog/", label: "Blog", category: "company" },
+    { href: "/articles/", label: "Articles", category: "company" },
     { href: "/contact/", label: "Contact", category: "company" },
   ],
   legal: [

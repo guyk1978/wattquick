@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BookOpen, Library } from "lucide-react";
-import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import { LibraryPanel } from "@/components/grid-modal/library-panel";
 import { PWAInstaller } from "@/components/pwa-installer";
 import { SiteHeaderSearch } from "@/components/site-header-search";
@@ -22,7 +22,14 @@ type GridNavProps = {
 /** Fixed logo + breadcrumbs + Ctrl+K search + Articles + Library for Grid-to-Modal pages. */
 export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
   const [libraryOpen, setLibraryOpen] = useState(false);
-  const { openArticle, isOpen: articlesOpen } = useArticlePortal();
+  const pathname = usePathname();
+  const articlesActive =
+    pathname === "/articles" ||
+    pathname === "/articles/" ||
+    pathname.startsWith("/articles/") ||
+    pathname === "/blog" ||
+    pathname === "/blog/" ||
+    pathname.startsWith("/blog/");
 
   return (
     <>
@@ -89,16 +96,18 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
             <div className="grid-nav__search">
               <SiteHeaderSearch />
             </div>
-            <button
-              type="button"
-              className="grid-nav__library-btn"
-              onClick={() => openArticle()}
-              aria-pressed={articlesOpen}
-              aria-label="Open articles"
+            <Link
+              href="/articles/"
+              className={cn(
+                "grid-nav__library-btn",
+                articlesActive && "grid-nav__library-btn--active"
+              )}
+              aria-current={articlesActive ? "page" : undefined}
+              aria-label="Articles"
             >
               <BookOpen className="size-4" aria-hidden />
               <span className="grid-nav__library-label">Articles</span>
-            </button>
+            </Link>
             <button
               type="button"
               className="grid-nav__library-btn"

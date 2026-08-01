@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
-import { ArticlePortalRoot } from "@/components/article-portal/article-portal-root";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GridPinnedCalculatorProvider } from "@/components/grid-modal/grid-pinned-calculator-context";
 import { NavigationLoadingOverlay } from "@/components/navigation-loading-overlay";
 import { PageTransition } from "@/components/transitions/PageTransition";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
@@ -70,7 +70,7 @@ export default function RootLayout({
       </head>
       <body className="site-ambient flex min-h-full flex-col bg-bg-primary text-text-primary">
         <ThemeProvider>
-          <ArticlePortalRoot>
+          <GridPinnedCalculatorProvider>
             <NavigationLoadingOverlay />
             <AnalyticsRouteTracker />
             <SiteHeader />
@@ -80,7 +80,7 @@ export default function RootLayout({
             <SiteFooter />
             <CookieConsentBanner />
             <ServiceWorkerRegistration />
-          </ArticlePortalRoot>
+          </GridPinnedCalculatorProvider>
         </ThemeProvider>
       </body>
     </html>

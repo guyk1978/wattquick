@@ -20,6 +20,7 @@ export const SITEMAP_STATIC_PATHS = [
   "/favorites",
   "/wizard",
   "/blog",
+  "/articles",
   "/about",
   "/contact",
   "/privacy",
@@ -74,11 +75,18 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     })
   );
 
+  const articleEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: absoluteUrl(`/articles/${post.slug}`),
+    lastModified: new Date(post.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.65,
+  }));
+
   const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: absoluteUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.publishedAt),
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.5,
   }));
 
   return [
@@ -86,6 +94,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
     ...categoryEntries,
     ...toolEntries,
     ...guideLandingEntries,
+    ...articleEntries,
     ...blogEntries,
   ];
 }

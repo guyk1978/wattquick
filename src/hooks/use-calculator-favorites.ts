@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   FAVORITES_CHANGED_EVENT,
   FAVORITES_STORAGE_KEY,
+  addCalculatorFavorites,
   readFavoriteCalculatorIds,
   toggleCalculatorFavorite,
 } from "@/lib/calculator-favorites";
@@ -44,11 +45,18 @@ export function useCalculatorFavorites() {
     return favorited;
   }, []);
 
+  const addMany = useCallback((nextIds: CalculatorId[]) => {
+    const next = addCalculatorFavorites(nextIds);
+    setIds(next);
+    return next;
+  }, []);
+
   return {
     ids,
     hydrated,
     isFavorite,
     toggle,
+    addMany,
     refresh,
   };
 }

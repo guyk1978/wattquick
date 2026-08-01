@@ -1,10 +1,8 @@
-import Link from "next/link";
-import { CalculatorRatingSummary } from "@/components/calculator/calculator-rating-summary";
-import { ToolCardExample } from "@/components/calculator/tool-card-example";
-import { ToolCardHeaderActions } from "@/components/calculator/tool-card-header-actions";
+"use client";
+
+import { ToolGridClient } from "@/components/grid-modal/tool-grid-client";
 import type { CalculatorId } from "@/lib/calculators";
 import { getRelatedCalculators } from "@/lib/calculators/related";
-import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 type ToolModalRelatedProps = {
@@ -24,36 +22,10 @@ export function ToolModalRelated({ id, className }: ToolModalRelatedProps) {
       aria-label="Related tools"
     >
       <h3 className="tool-modal-related__title">Related tools</h3>
-      <ul className="wq-tool-grid tool-modal-related__grid" role="list">
-        {related.map((tool) => {
-          const Icon = tool.icon;
-          const accent = getCategoryColor(tool.category);
-          return (
-            <li key={tool.id}>
-              <div className="wq-tool-card">
-                <Link
-                  href={tool.href}
-                  className="wq-card-overlay-link"
-                  aria-label={`Open ${tool.title}`}
-                />
-                <ToolCardHeaderActions calculatorId={tool.id} />
-                <span className="wq-tool-card__icon" aria-hidden>
-                  <Icon strokeWidth={1.75} className="size-5" />
-                </span>
-                <span className="wq-tool-card__title">{tool.title}</span>
-                <span className="wq-tool-card__meta">{tool.description}</span>
-                <span className="wq-tool-card__benefit">{tool.benefit}</span>
-                <ToolCardExample example={tool.example} />
-                <CalculatorRatingSummary
-                  calculatorId={tool.id}
-                  color={accent}
-                  className="wq-card-rating"
-                />
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+      <ToolGridClient
+        toolIds={related.map((tool) => tool.id)}
+        className="tool-modal-related__grid"
+      />
     </section>
   );
 }

@@ -4,16 +4,28 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
 import type { CalculatorId } from "@/lib/calculators";
+import {
+  readPinnedCalculatorIds,
+  writePinnedCalculatorIds,
+} from "@/lib/calculator-pinned";
 
 type GridPinnedCalculatorContextValue = {
-  pinnedId: CalculatorId | null;
+  /** Pinned tools in pin order (newest last). */
+  pinnedIds: CalculatorId[];
+  /** True after localStorage has been read on the client. */
+  hydrated: boolean;
+  /** Add a tool to the pinned stack (no-op if already pinned). */
   pin: (id: CalculatorId) => void;
-  unpin: () => void;
+  /** Remove one pinned tool. */
+  unpin: (id: CalculatorId) => void;
+  /** Clear the entire pinned stack. */
+  unpinAll: () => void;
   isPinned: (id: CalculatorId) => boolean;
 };
 
@@ -21,25 +33,45 @@ const GridPinnedCalculatorContext = createContext<
   GridPinnedCalculatorContextValue | null
 >(null);
 
-export function GridPinnedCalculatorProvider({ children }: { children: ReactNode }) {
-  const [pinnedId, setPinnedId] = useState<CalculatorId | null>(null);
+export function GridPinnedCalculatorProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
+  const [pinnedIds, setPinnedIds] = useState<CalculatorId[]>([]);
+  const [hydrated, setHydrated] = useState(false);
 
-  const pin = useCallback((id: CalculatorId) => {
-    setPinnedId(id);
+  // Restore pins once on mount — do not write until after this completes.
+  useEffect(() => {
+    setPinnedIds(readPinnedCalculatorIds());
+    setHydrated(true);
   }, []);
 
-  const unpin = useCallback(() => {
-    setPinnedId(null);
+  useEffect(() => {
+    if (!hydrated) return;
+    writePinnedCalculatorIds(pinnedIds);
+  }, [pinnedIds, hydrated]);
+
+  const pin = useCallback((id: CalculatorId) => {
+    setPinnedIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
+  }, []);
+
+  const unpin = useCallback((id: CalculatorId) => {
+    setPinnedIds((prev) => prev.filter((pinnedId) => pinnedId !== id));
+  }, []);
+
+  const unpinAll = useCallback(() => {
+    setPinnedIds([]);
   }, []);
 
   const isPinned = useCallback(
-    (id: CalculatorId) => pinnedId === id,
-    [pinnedId]
+    (id: CalculatorId) => pinnedIds.includes(id),
+    [pinnedIds]
   );
 
   const value = useMemo(
-    () => ({ pinnedId, pin, unpin, isPinned }),
-    [pinnedId, pin, unpin, isPinned]
+    () => ({ pinnedIds, hydrated, pin, unpin, unpinAll, isPinned }),
+    [pinnedIds, hydrated, pin, unpin, unpinAll, isPinned]
   );
 
   return (
@@ -59,7 +91,6 @@ export function useGridPinnedCalculator(): GridPinnedCalculatorContextValue {
   return ctx;
 }
 
-export function useGridPinnedCalculatorOptional():
-  GridPinnedCalculatorContextValue | null {
+export function useGridPinnedCalculatorOptional(): GridPinnedCalculatorContextValue | null {
   return useContext(GridPinnedCalculatorContext);
 }

@@ -1,12 +1,7 @@
-import { Suspense } from "react";
 import { GridShell } from "@/components/grid-modal/grid-shell";
-import { ToolGrid } from "@/components/grid-modal/tool-grid";
-import {
-  ToolModalDocumentation,
-  ToolModalDocumentationCrawl,
-} from "@/components/grid-modal/tool-modal-documentation";
+import { ToolModalDocumentation } from "@/components/grid-modal/tool-modal-documentation";
 import { ToolModalRelated } from "@/components/grid-modal/tool-modal-related";
-import { ToolWorkspaceModal } from "@/components/grid-modal/tool-workspace-modal";
+import { ToolWorkspacePage } from "@/components/grid-modal/tool-workspace-page";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorId,
@@ -15,7 +10,7 @@ import {
   getRelatedArticleCardsForCalculator,
   getRelatedArticlesForCalculator,
 } from "@/lib/calculators/related-articles";
-import { getCalculatorMeta, getCalculatorsByCategory } from "@/lib/calculators/registry";
+import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { getCategoryColor } from "@/lib/category-theme";
 import { getCategoryPageHref } from "@/lib/category-routes";
 
@@ -24,46 +19,32 @@ type CalculatorGridModalPageProps = {
 };
 
 /**
- * Tool route UI: category tool grid behind a glassmorphic calculator modal.
- * Canonical URL remains `/tools/{seo-category}/{slug}/`.
+ * Canonical tool route UI: GridNav/GridFooter chrome (same as hub + category
+ * pages) around a standalone workspace with vertical section nav and open SEO docs.
  */
 export function CalculatorGridModalPage({ id }: CalculatorGridModalPageProps) {
   const meta = getCalculatorMeta(id);
-  const peers = getCalculatorsByCategory(meta.category);
   const categoryLabel = CALCULATOR_CATEGORY_LABELS[meta.category];
   const categoryHref = getCategoryPageHref(meta.category);
   const relatedArticleCards = getRelatedArticleCardsForCalculator(id);
   const relatedArticles = getRelatedArticlesForCalculator(id);
 
   return (
-    <>
-      <GridShell
-        modalOpen
-        breadcrumbs={[
-          { label: categoryLabel, href: categoryHref },
-          { label: meta.title },
-        ]}
-        title={categoryLabel}
-        description={`Browse ${peers.length} ${categoryLabel.toLowerCase()} tools. Opening ${meta.title}.`}
-        themeColor={getCategoryColor(meta.category)}
-      >
-        <ToolGrid calculators={peers} activeId={id} />
-      </GridShell>
-
-      <Suspense fallback={null}>
-        <ToolWorkspaceModal
-          calculatorId={id}
-          open
-          relatedArticles={relatedArticleCards}
-          documentation={
-            <ToolModalDocumentation id={id} relatedArticles={relatedArticles} />
-          }
-          related={<ToolModalRelated id={id} />}
-        />
-      </Suspense>
-
-      {/* Crawl-only copy: always in DOM for indexing, never shown to users */}
-      <ToolModalDocumentationCrawl id={id} />
-    </>
+    <GridShell
+      breadcrumbs={[
+        { label: categoryLabel, href: categoryHref },
+        { label: meta.title },
+      ]}
+      themeColor={getCategoryColor(meta.category)}
+    >
+    <ToolWorkspacePage
+      calculatorId={id}
+      relatedArticles={relatedArticleCards}
+      documentation={
+        <ToolModalDocumentation id={id} relatedArticles={relatedArticles} />
+      }
+      related={<ToolModalRelated id={id} />}
+    />
+    </GridShell>
   );
 }

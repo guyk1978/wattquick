@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { Pin, PinOff } from "lucide-react";
 import type { MouseEvent } from "react";
+import { Pin, PinOff } from "lucide-react";
 import { ToolCardFocus } from "@/components/calculator/tool-card-focus";
 import { useGridPinnedCalculatorOptional } from "@/components/grid-modal/grid-pinned-calculator-context";
 import type { CalculatorId } from "@/lib/calculators";
-import { hasCalculatorViz } from "@/lib/calculator-viz-ids";
 import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { cn } from "@/lib/utils";
 
@@ -21,52 +19,35 @@ function stopOverlayNavigation(event: MouseEvent) {
 }
 
 /**
- * Top-right card controls: pin dock, [VIZ] fullscreen schematic, focus expand.
+ * Side-rail card controls: Expand (focus) + Pin — two square buttons
+ * matching the tool card height (JoinMyPDF-style action column).
  */
 export function ToolCardHeaderActions({
   calculatorId,
   className,
 }: ToolCardHeaderActionsProps) {
-  const router = useRouter();
   const pinnedCtx = useGridPinnedCalculatorOptional();
   const meta = getCalculatorMeta(calculatorId);
-  const hasViz = hasCalculatorViz(calculatorId);
   const pinned = pinnedCtx?.isPinned(calculatorId) ?? false;
-
-  const onViz = (event: MouseEvent) => {
-    stopOverlayNavigation(event);
-    router.push(`${meta.href}?view=viz`, { scroll: false });
-  };
 
   const onPinToggle = (event: MouseEvent) => {
     stopOverlayNavigation(event);
     if (!pinnedCtx) return;
     if (pinned) {
-      pinnedCtx.unpin();
+      pinnedCtx.unpin(calculatorId);
     } else {
       pinnedCtx.pin(calculatorId);
     }
   };
 
   return (
-    <div className={cn("tool-card-actions", className)}>
+    <div className={cn("wq-tool-card-side", className)} role="group" aria-label="Card actions">
       <ToolCardFocus calculatorId={calculatorId} />
-      {hasViz ? (
-        <button
-          type="button"
-          className="tool-card-action-btn tool-card-action-btn--viz"
-          aria-label={`Open ${meta.title} schematic`}
-          title="Full-screen [VIZ]"
-          onClick={onViz}
-        >
-          <span className="tool-card-action-btn__viz-label">[VIZ]</span>
-        </button>
-      ) : null}
       {pinnedCtx ? (
         <button
           type="button"
           className={cn(
-            "tool-card-action-btn tool-card-action-btn--pin",
+            "tool-card-action-btn tool-card-action-btn--side tool-card-action-btn--pin",
             pinned && "tool-card-action-btn--pin-active"
           )}
           aria-label={
@@ -82,7 +63,10 @@ export function ToolCardHeaderActions({
             <Pin className="tool-card-action-btn__icon" strokeWidth={2} aria-hidden />
           )}
         </button>
-      ) : null}
+      ) : (
+        /* Keep a second square so Expand isn't alone when pin context is absent. */
+        <span className="tool-card-action-btn tool-card-action-btn--side tool-card-action-btn--ghost" aria-hidden />
+      )}
     </div>
   );
 }

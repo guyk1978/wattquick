@@ -15,7 +15,7 @@ export function BlogArticleBlueprintLayout({
 }: BlogArticleBlueprintLayoutProps) {
   const navItems = getBlogPostsByCategory(post.category).map((item) => ({
     id: item.slug,
-    href: `/blog/${item.slug}/`,
+    href: `/articles/${item.slug}/`,
     label: item.title,
     iconKey: "book-open" as const,
   }));

@@ -93,7 +93,7 @@ export interface CalculatorDataEntry {
   icon: LucideIcon;
   tag: string;
   suggestions: string[];
-  /** Primary complementary blog article slug (under /blog/) */
+  /** Primary complementary article slug (under /articles/) */
   relatedArticleId?: string;
   /** Additional related blog articles for documentation modal */
   relatedArticleIds?: string[];

@@ -9,7 +9,7 @@ export const MAIN_NAV = [
   { href: "/calculators/", label: "Calculators" },
   { href: "/favorites/", label: "Favorites" },
   { href: "/projects/", label: "My Projects" },
-  { href: "/blog/", label: "Blog" },
+  { href: "/articles/", label: "Articles" },
   { href: "/about/", label: "About" },
   { href: "/contact/", label: "Contact" },
 ] as const;
@@ -41,7 +41,7 @@ export const FOOTER_LINKS = {
   ],
   company: [
     { href: "/about", label: "About" },
-    { href: "/blog", label: "Blog" },
+    { href: "/articles", label: "Articles" },
     { href: "/contact", label: "Contact" },
   ],
   legal: [

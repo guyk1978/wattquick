@@ -4,7 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { BlueprintHubShell } from "@/components/blueprint/blueprint-hub-shell";
 import { BlueprintListNav } from "@/components/blueprint/blueprint-list-nav";
-import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { ProjectDetail } from "@/components/project-detail";
 import { ProjectsBlueprintHeader } from "@/components/projects/projects-blueprint-header";
 import { ProjectsDashboard } from "@/components/projects-dashboard";
@@ -53,7 +52,6 @@ export function ProjectsBlueprintPage() {
           <ProjectsBlueprintHeader
             projectCount={hydrated ? projectCount : undefined}
           />
-          <CalculatorAdSlots />
           {!hydrated ? (
             <p className="hub-blueprint__loading">Loading projects…</p>
           ) : (

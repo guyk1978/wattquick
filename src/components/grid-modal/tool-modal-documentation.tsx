@@ -4,7 +4,6 @@ import {
   CALCULATOR_CONTENT_HEADINGS,
   getCalculatorContentSection,
 } from "@/data/calculator-content";
-import { CollapsibleSection } from "@/components/collapsible-section";
 import { RelatedArticles } from "@/components/grid-modal/related-articles";
 import { getCalculatorDefinition, type CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleForModal } from "@/lib/calculators/related-articles";
@@ -61,13 +60,13 @@ function CalculatorDocsBody({
             About {title}
           </h4>
           {seo.sections.map((section) => (
-            <CollapsibleSection
+            <section
               key={section.heading}
-              title={section.heading}
-              headingLevel="h5"
+              className="tool-modal-docs__section"
             >
+              <h5 className="tool-modal-docs__subheading">{section.heading}</h5>
               <p className="tool-modal-docs__paragraph">{section.body}</p>
-            </CollapsibleSection>
+            </section>
           ))}
         </div>
       ) : null}
@@ -77,7 +76,7 @@ function CalculatorDocsBody({
   );
 }
 
-/** Documentation pane — Further Reading opens the unified Article Portal. */
+/** Documentation — always rendered openly for readers and search crawlers. */
 export function ToolModalDocumentation({
   id,
   className,
@@ -92,7 +91,10 @@ export function ToolModalDocumentation({
   );
 }
 
-/** Crawl-only SEO block — static calculator docs, no interactive articles. */
+/**
+ * @deprecated Prefer the visible `ToolModalDocumentation` block on tool pages.
+ * Kept for any legacy crawl-only embeds.
+ */
 export function ToolModalDocumentationCrawl({ id }: { id: CalculatorId }) {
   return (
     <div className="grid-modal-seo--crawl-only" data-seo-content aria-hidden="true">

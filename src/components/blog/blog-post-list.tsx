@@ -1,6 +1,4 @@
-"use client";
-
-import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
+import Link from "next/link";
 import { getBlogCategoryTheme } from "@/lib/blog-category-theme";
 import type { BlogPost } from "@/lib/blog/posts";
 import { cn } from "@/lib/utils";
@@ -21,8 +19,6 @@ interface BlogPostListProps {
 }
 
 export function BlogPostList({ posts, className }: BlogPostListProps) {
-  const { openArticle } = useArticlePortal();
-
   return (
     <ul className={cn("blog-results-list", className)}>
       {posts.map((post) => {
@@ -30,23 +26,24 @@ export function BlogPostList({ posts, className }: BlogPostListProps) {
 
         return (
           <li key={post.slug} className="blog-result">
-            <button
-              type="button"
+            <Link
+              href={`/articles/${post.slug}/`}
               className="blog-result__title article-link"
-              onClick={() => openArticle(post.slug)}
             >
               {post.title}
-            </button>
+            </Link>
             <p className="blog-result__url">
               {SITE_HOST}
               <span aria-hidden> › </span>
-              blog
+              articles
               <span aria-hidden> › </span>
               {post.slug}
               <span aria-hidden> · </span>
               {theme.label}
               <span aria-hidden> · </span>
-              <time dateTime={post.publishedAt}>{formatPublishedDate(post.publishedAt)}</time>
+              <time dateTime={post.publishedAt}>
+                {formatPublishedDate(post.publishedAt)}
+              </time>
               <span aria-hidden> · </span>
               {post.readMinutes} min read
             </p>

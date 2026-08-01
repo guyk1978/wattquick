@@ -1,6 +1,5 @@
-import { ToolGridCard } from "@/components/grid-modal/tool-grid-card";
+import { ToolGridClient } from "@/components/grid-modal/tool-grid-client";
 import type { CalculatorMeta } from "@/lib/calculators";
-import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
 type ToolGridProps = {
@@ -9,19 +8,16 @@ type ToolGridProps = {
   className?: string;
 };
 
-/** Responsive tool cards within a category — step 2 of Grid-to-Modal. */
+/**
+ * Server-safe tool grid — passes only serializable ids into the client
+ * selection/favorites shell (icons stay looked up on the client).
+ */
 export function ToolGrid({ calculators, activeId, className }: ToolGridProps) {
   return (
-    <ul className={cn("wq-tool-grid", className)} role="list">
-      {calculators.map((tool) => {
-        const active = activeId != null && tool.id === activeId;
-        const accent = getCategoryColor(tool.category);
-        return (
-          <li key={tool.id}>
-            <ToolGridCard toolId={tool.id} active={active} accent={accent} />
-          </li>
-        );
-      })}
-    </ul>
+    <ToolGridClient
+      toolIds={calculators.map((tool) => tool.id)}
+      activeId={activeId}
+      className={cn(className)}
+    />
   );
 }

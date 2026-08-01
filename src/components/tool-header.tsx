@@ -31,6 +31,11 @@ interface ToolHeaderProps {
   /** Currently active view tab. CALC is the calculator itself. */
   activeTab?: ToolHeaderTab;
   onTabChange?: (tab: ToolHeaderTab) => void;
+  /**
+   * When false, horizontal tabs are omitted (standalone pages use
+   * `ToolWorkspaceNav` instead). Defaults to true for legacy modal chrome.
+   */
+  showTabs?: boolean;
   /** Tabs to render; CALC is always present. REVIEWS is always available when enabled. */
   hasVizTab?: boolean;
   hasDocTab?: boolean;
@@ -45,20 +50,23 @@ interface ToolHeaderProps {
   /** Share metadata; defaults to `title` and the current URL. */
   shareText?: string;
   onClose?: () => void;
-  /** id for the <h2> so dialogs can point aria-labelledby at it. */
+  /** id for the title heading so dialogs/pages can point aria-labelledby at it. */
   titleId?: string;
+  /** Heading level for the tool title. Standalone pages should use h1. */
+  titleAs?: "h1" | "h2";
   className?: string;
 }
 
 /**
  * Unified tool window header: title + rating on the left,
- * [CALC]/[VIZ]/[DOC]/[RELATED]/[REVIEWS] tabs in the middle, controls on the right.
- * Shared across every WattQuick calculator tool.
+ * optional horizontal tabs in the middle, controls on the right.
+ * Standalone tool pages hide tabs and use the vertical sidebar instead.
  */
 export function ToolHeader({
   title,
   activeTab = "calc",
   onTabChange,
+  showTabs = true,
   hasVizTab = false,
   hasDocTab = false,
   hasRelatedTab = false,
@@ -69,6 +77,7 @@ export function ToolHeader({
   shareText,
   onClose,
   titleId,
+  titleAs: TitleTag = "h2",
   className,
 }: ToolHeaderProps) {
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -146,9 +155,9 @@ export function ToolHeader({
   return (
     <header className={cn("wq-tool-header", className)}>
       <div className="wq-tool-header__lead">
-        <h2 id={titleId} className="wq-tool-header__title">
+        <TitleTag id={titleId} className="wq-tool-header__title">
           {title}
-        </h2>
+        </TitleTag>
         {calculatorId ? (
           <CalculatorRatingSummary
             calculatorId={calculatorId}
@@ -158,7 +167,7 @@ export function ToolHeader({
         ) : null}
       </div>
 
-      {tabs.length > 1 ? (
+      {showTabs && tabs.length > 1 ? (
         <nav className="wq-tool-header__tabs" aria-label="Tool views">
           {tabs.map((tab) => (
             <button

@@ -1,8 +1,8 @@
-import { CollapsibleSEOContent } from "@/components/collapsible-seo-content";
 import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
+import { SEOContentBlock } from "@/components/seo-content-block";
 import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
   CALCULATOR_CATEGORY_LABELS,
@@ -17,7 +17,7 @@ type CategoryGridLandingProps = {
 };
 
 /**
- * Shared category template: hero → tools → category nav grid → SEO accordion.
+ * Shared category template: hero → tools → category nav grid → SEO copy.
  */
 export function CategoryGridLanding({
   category,
@@ -39,7 +39,7 @@ export function CategoryGridLanding({
         <h2 id="category-seo-heading" className="sr-only">
           About {label} calculators
         </h2>
-        <CollapsibleSEOContent title={seo.eyebrow} content={seo.paragraphs} />
+        <SEOContentBlock title={seo.eyebrow} content={seo.paragraphs} />
       </section>
     </GridShell>
   );

@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ArrowLeft, BookOpen, X } from "lucide-react";
-import { useArticlePortal } from "@/components/article-portal/article-portal-provider";
 import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { calculatorCommandShareBtn } from "@/lib/glass-ui";
 import type { CalculatorId } from "@/lib/calculators";
@@ -29,10 +30,10 @@ export function CalculatorLaunchModal({
   launchContext: launchContextProp,
   footer,
 }: CalculatorLaunchModalProps) {
+  const router = useRouter();
   const meta = calculatorId ? getCalculatorMeta(calculatorId) : null;
   const definition = calculatorId ? getCalculatorDefinition(calculatorId) : null;
   const [ctx, setCtx] = useState<ToolLaunchContext | null>(launchContextProp ?? null);
-  const { openArticle } = useArticlePortal();
 
   useEffect(() => {
     if (launchContextProp) {
@@ -95,8 +96,8 @@ export function CalculatorLaunchModal({
             <button
               type="button"
               onClick={() => {
-                openArticle(ctx.articleSlug);
                 onClose();
+                router.push(`/articles/${ctx.articleSlug}/`);
               }}
               className="inline-flex w-fit items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -139,12 +140,9 @@ export function CalculatorLaunchModal({
             <p className="mb-2 text-[0.625rem] font-semibold uppercase tracking-widest text-muted-foreground">
               Complementary guide
             </p>
-            <button
-              type="button"
-              onClick={() => {
-                openArticle(relatedArticle);
-                onClose();
-              }}
+            <Link
+              href={`/articles/${relatedArticle}/`}
+              onClick={onClose}
               className={cn(
                 "calculator-launch-modal__guide-link group flex w-full items-center gap-2.5 rounded-none px-3 py-2 text-left",
                 "bg-muted/40 transition-colors hover:bg-muted/60",
@@ -160,10 +158,10 @@ export function CalculatorLaunchModal({
                   Read the full article
                 </span>
                 <span className="mt-0.5 block truncate text-xs text-muted-foreground">
-                  /blog/{relatedArticle}/
+                  /articles/{relatedArticle}/
                 </span>
               </span>
-            </button>
+            </Link>
           </div>
         ) : null}
       </div>

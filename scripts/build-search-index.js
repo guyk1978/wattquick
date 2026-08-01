@@ -42,9 +42,9 @@ function readBlogPosts() {
         group,
         title,
         description,
-        href: ensureTrailingSlash(`/blog/${slug}`),
+        href: ensureTrailingSlash(`/articles/${slug}`),
         tag: group,
-        keywords: [group, "blog", "article"],
+        keywords: [group, "blog", "article", "articles"],
       };
     });
 }
@@ -95,14 +95,14 @@ function readSitePages() {
       keywords: ["command center", "energy flow", "dashboard"],
     },
     {
-      id: "blog",
+      id: "articles",
       type: "page",
       category: "Site",
       group: "Content",
-      title: "Blog",
+      title: "Articles",
       description: "Expert guides on batteries, solar, EV charging, and home energy.",
-      href: "/blog/",
-      tag: "Blog",
+      href: "/articles/",
+      tag: "Articles",
       keywords: ["articles", "guides", "blog"],
     },
     {

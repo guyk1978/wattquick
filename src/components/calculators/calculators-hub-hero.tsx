@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { CalculatorsRecentHistory } from "@/components/calculators/calculators-recent-history";
-import { CalculatorsSpotlightAdSlot } from "@/components/calculators/calculators-spotlight-ad-slot";
 import { CategoryCarousel } from "@/components/calculators/category-carousel";
 import { CATEGORY_DISPLAY_ORDER } from "@/lib/calculator-category-icons";
 import { cn } from "@/lib/utils";
@@ -19,7 +18,10 @@ export function CalculatorsHubHero({
   categoryCount = CATEGORY_DISPLAY_ORDER.length,
 }: CalculatorsHubHeroProps) {
   return (
-    <section className={cn("calculators-hub-hero", className)} aria-labelledby="calculators-hub-hero-heading">
+    <section
+      className={cn("calculators-hub-hero", className)}
+      aria-labelledby="calculators-hub-hero-heading"
+    >
       <div className="calculators-hub-hero__surface">
         <p className="calculators-hub-hero__eyebrow">WattQuick Tool Suite</p>
 
@@ -36,16 +38,21 @@ export function CalculatorsHubHero({
         </p>
 
         <div className="calculators-hub-hero__actions">
-          <Link href="#calculators-tool-grid" className="calculators-hub-hero__cta">
+          <Link
+            href="#calculators-tool-grid"
+            className="calculators-hub-hero__cta"
+          >
             Browse all {toolCount} tools →
           </Link>
         </div>
 
-        <CategoryCarousel variant="hero" className="calculators-hub-hero__carousel" />
+        <CategoryCarousel
+          variant="hero"
+          className="calculators-hub-hero__carousel"
+        />
       </div>
 
-      <div className="calculators-hub-hero__below mt-4 grid gap-4 lg:grid-cols-2">
-        <CalculatorsSpotlightAdSlot />
+      <div className="calculators-hub-hero__below mt-4">
         <CalculatorsRecentHistory />
       </div>
     </section>

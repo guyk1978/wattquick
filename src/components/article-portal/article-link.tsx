@@ -1,35 +1,27 @@
-"use client";
-
+import Link from "next/link";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { useArticlePortalOptional } from "@/components/article-portal/article-portal-provider";
 import { cn } from "@/lib/utils";
 
 type ArticleLinkProps = {
   articleId: string;
   children: ReactNode;
   className?: string;
-} & Omit<ComponentPropsWithoutRef<"button">, "onClick" | "type" | "children">;
+} & Omit<ComponentPropsWithoutRef<"a">, "href" | "children">;
 
-/**
- * Opens the Article Portal at the given article id (no route navigation).
- * Falls back to a plain button if the portal provider is unavailable.
- */
+/** Navigates to the dedicated article page at `/articles/[slug]/`. */
 export function ArticleLink({
   articleId,
   children,
   className,
   ...rest
 }: ArticleLinkProps) {
-  const portal = useArticlePortalOptional();
-
   return (
-    <button
-      type="button"
+    <Link
+      href={`/articles/${articleId}/`}
       className={cn("article-link", className)}
-      onClick={() => portal?.openArticle(articleId)}
       {...rest}
     >
       {children}
-    </button>
+    </Link>
   );
 }

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { CalculatorBlueprintCategoryNav } from "@/components/calculator/calculator-blueprint-category-nav";
 import { CalculatorBlueprintCategorySidebar } from "@/components/calculator/calculator-blueprint-category-sidebar";
 import { CalculatorBlueprintStatsBar } from "@/components/calculator/calculator-blueprint-stats-bar";
@@ -57,8 +56,6 @@ export function CategoryLandingPage({
               category={category}
               toolCount={calculators.length}
             />
-
-            <CalculatorAdSlots />
 
             <section
               aria-labelledby="category-seo-intro-heading"

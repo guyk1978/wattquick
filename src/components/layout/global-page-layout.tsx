@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { GridFooter } from "@/components/grid-modal/grid-footer";
 import { GridNav, type GridBreadcrumb } from "@/components/grid-modal/grid-nav";
+import { GridPinnedCalculatorBar } from "@/components/grid-modal/grid-pinned-calculator-bar";
 import { LegalModalProvider } from "@/components/grid-modal/legal-modal-provider";
 import { getAllLegalDocuments } from "@/lib/legal-docs";
 import { cn } from "@/lib/utils";
@@ -37,6 +38,7 @@ export function GlobalPageLayout({
     <LegalModalProvider documents={legalDocuments}>
       <div className={cn("global-page-layout", className)}>
         <GridNav breadcrumbs={breadcrumbs} />
+        <GridPinnedCalculatorBar />
 
         <div className="global-page-layout__shell">
           <div

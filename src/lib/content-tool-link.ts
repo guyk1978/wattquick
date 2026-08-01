@@ -12,7 +12,7 @@ const CONTEXT_KEY = "wattquick-tool-launch-context";
 const URL_PARAM = "fromArticle";
 
 export function getArticleUrl(slug: string): string {
-  return `/blog/${slug}/`;
+  return `/articles/${slug}/`;
 }
 
 /** Persist launch context (client-only) */

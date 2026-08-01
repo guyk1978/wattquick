@@ -49,6 +49,22 @@ export function addCalculatorFavorite(id: CalculatorId): CalculatorId[] {
   return next;
 }
 
+/** Add many tools to favorites in one write (skips ids already favorited). */
+export function addCalculatorFavorites(ids: CalculatorId[]): CalculatorId[] {
+  const current = readFavoriteCalculatorIds();
+  const seen = new Set(current);
+  let changed = false;
+  const next = [...current];
+  for (const id of ids) {
+    if (!VALID_IDS.has(id) || seen.has(id)) continue;
+    seen.add(id);
+    next.push(id);
+    changed = true;
+  }
+  if (changed) writeFavoriteCalculatorIds(next);
+  return next;
+}
+
 export function removeCalculatorFavorite(id: CalculatorId): CalculatorId[] {
   const next = readFavoriteCalculatorIds().filter((item) => item !== id);
   writeFavoriteCalculatorIds(next);

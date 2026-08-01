@@ -63,7 +63,7 @@ function resolveStepRef(
     slug: ref.slug,
     title: post.title,
     description: post.description,
-    href: `/blog/${ref.slug}/`,
+    href: `/articles/${ref.slug}/`,
     stepNumber,
   };
 }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-28T02:32:46.246Z",
+  "generatedAt": "2026-08-01T09:02:07.789Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -2341,12 +2341,13 @@
       "group": "Guides",
       "title": "AC Inrush Current: Size Breakers Without Nuisance Trips",
       "description": "Calculate running amps, peak inrush, and recommended breaker curve from watts, voltage, and startup multiplier.",
-      "href": "/blog/ac-inrush-current-guide/",
+      "href": "/articles/ac-inrush-current-guide/",
       "tag": "Guides",
       "keywords": [
         "Guides",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2356,12 +2357,13 @@
       "group": "Guides",
       "title": "Why Does the Breaker Trip on Startup? Inrush Current Physics",
       "description": "Inrush in motors, transformers, and power supplies—and how to use the AC inrush calculator to stop nuisance AFCI/MCB trips.",
-      "href": "/blog/ac-inrush-current-physics/",
+      "href": "/articles/ac-inrush-current-physics/",
       "tag": "Guides",
       "keywords": [
         "Guides",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2371,12 +2373,13 @@
       "group": "Battery",
       "title": "Why Batteries Age at Rest: Understanding Calendar Aging",
       "description": "Temperature- and voltage-driven side reactions in Li-ion cells—and why 100% charge in heat destroys packs fastest.",
-      "href": "/blog/battery-calendar-aging-explained/",
+      "href": "/articles/battery-calendar-aging-explained/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2386,12 +2389,13 @@
       "group": "Battery",
       "title": "Battery Calendar Aging: Storage Conditions vs. Long-Term Health",
       "description": "Model Li-ion calendar fade from average temperature, SOC, and pack age—capacity loss % and remaining SoH.",
-      "href": "/blog/battery-calendar-aging-guide/",
+      "href": "/articles/battery-calendar-aging-guide/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2401,12 +2405,13 @@
       "group": "Battery",
       "title": "How to Preserve Batteries for Years: Optimal Storage Tips",
       "description": "Ideal storage temperatures and SOC targets for Li-ion—plus using the calendar aging calculator for backup and idle EV packs.",
-      "href": "/blog/battery-optimal-storage-tips/",
+      "href": "/articles/battery-optimal-storage-tips/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2416,12 +2421,13 @@
       "group": "Green Home",
       "title": "BESS Round-trip Carbon Cost: Is Your Battery Storage Truly Green?",
       "description": "Quantify kg CO₂ per year from battery conversion losses and see how much carbon renewable charging avoids versus grid mix.",
-      "href": "/blog/bess-carbon-cost-guide/",
+      "href": "/articles/bess-carbon-cost-guide/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2431,12 +2437,13 @@
       "group": "Green Home",
       "title": "From Storage to Environmental Optimization: Scheduling BESS for Low Carbon",
       "description": "Use bess-carbon-cost outputs to time battery charging when grid carbon intensity is lowest—or when solar surplus is available.",
-      "href": "/blog/bess-charge-scheduling-low-carbon/",
+      "href": "/articles/bess-charge-scheduling-low-carbon/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2446,12 +2453,13 @@
       "group": "Green Home",
       "title": "Calculating Home Heat Loss and Insulation Upgrades",
       "description": "R-values, envelope leaks, and heating load reduction—how better insulation lowers BTU demand before you upsize HVAC.",
-      "href": "/blog/calculating-home-heat-loss-insulation/",
+      "href": "/articles/calculating-home-heat-loss-insulation/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2461,12 +2469,13 @@
       "group": "Appliances",
       "title": "Crypto Mining Electricity Costs vs. Profitability Basics",
       "description": "How to model rig watts, uptime, and $/kWh before hash rate ever enters the spreadsheet.",
-      "href": "/blog/crypto-mining-electricity-profitability/",
+      "href": "/articles/crypto-mining-electricity-profitability/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2476,12 +2485,13 @@
       "group": "Solar",
       "title": "Cumulative Savings: The Economics Behind Going Solar Hybrid",
       "description": "Fuel price trends, falling PV and battery costs, and how to model 5- and 10-year totals when replacing generator-first off-grid power.",
-      "href": "/blog/cumulative-savings-solar-hybrid-economics/",
+      "href": "/articles/cumulative-savings-solar-hybrid-economics/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2491,12 +2501,13 @@
       "group": "Utility Tariffs",
       "title": "Cutting Electric Bills With Time-of-Use Load Shifting",
       "description": "Move EV charging, laundry, and dishwashers into off-peak windows—and when home batteries earn arbitrage on top of TOU.",
-      "href": "/blog/cutting-bills-with-time-of-use-shifting/",
+      "href": "/articles/cutting-bills-with-time-of-use-shifting/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2506,12 +2517,13 @@
       "group": "Appliances",
       "title": "Building a Daily Watt-Hour Budget for a Sustainable Home",
       "description": "Split household use into categories, sum kWh, and connect daily budgets to bills and solar sizing.",
-      "href": "/blog/daily-watt-hour-budget-sustainable-home/",
+      "href": "/articles/daily-watt-hour-budget-sustainable-home/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2521,12 +2533,13 @@
       "group": "E-Bike",
       "title": "How to Prevent Premature E-Bike Battery Wear: DOD, Cycles, and SOH",
       "description": "Cycle life vs calendar aging, depth of discharge (DOD), state of health (SOH), and data-backed habits that extend lithium e-bike pack life.",
-      "href": "/blog/ebike-battery-cycle-life-guide/",
+      "href": "/articles/ebike-battery-cycle-life-guide/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2536,12 +2549,13 @@
       "group": "E-Bike",
       "title": "36V vs 48V vs 52V E-Bike Batteries: A Performance Comparison",
       "description": "Nominal voltage tiers (10S, 13S, 14S), current for the same watts, sag, range, and regulatory context — with max-speed and sag calculators.",
-      "href": "/blog/ebike-battery-voltage-comparison/",
+      "href": "/articles/ebike-battery-voltage-comparison/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2551,12 +2565,13 @@
       "group": "E-Bike",
       "title": "How to Choose an E-Bike Controller: Current, Watts, and C-Rating",
       "description": "Controller role in the drive system, mapping amps to motor watts, continuous vs peak current, and matching the BMS and pack C-rating.",
-      "href": "/blog/ebike-controller-selection-guide/",
+      "href": "/articles/ebike-controller-selection-guide/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2566,12 +2581,13 @@
       "group": "E-Bike",
       "title": "The Complete Guide to E-Bike Battery Range: Wh, Assist, and Weight",
       "description": "What actually determines how far an e-bike rides on one charge? Wh/km model, assist levels, mass, wind, BMS limits, and a free range calculator.",
-      "href": "/blog/ebike-range-guide/",
+      "href": "/articles/ebike-range-guide/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2581,12 +2597,13 @@
       "group": "E-Bike",
       "title": "E-Bike Voltage Sag: An Engineering Guide to Voltage Drop Under Load",
       "description": "Why terminal voltage falls when the motor draws current, how S×P pack layout sets internal resistance, and how to calculate sag before the BMS limits assist.",
-      "href": "/blog/ebike-voltage-sag-guide/",
+      "href": "/articles/ebike-voltage-sag-guide/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2596,12 +2613,13 @@
       "group": "Commercial EV",
       "title": "Electric vs. Gas Fleet TCO: A Logistics Owner's Workbook",
       "description": "Per-mile energy, maintenance intervals, and depot charging capex—how to compare diesel vans and electric delivery fleets on one spreadsheet.",
-      "href": "/blog/electric-vs-gas-fleet-tco-guide/",
+      "href": "/articles/electric-vs-gas-fleet-tco-guide/",
       "tag": "Commercial EV",
       "keywords": [
         "Commercial EV",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2611,12 +2629,13 @@
       "group": "E-Scooter",
       "title": "Small-Pack Battery Care on E-Scooters: Charging Heat, C-Rates, and Longevity",
       "description": "Light 36–48 V scooter packs heat faster than e-bike batteries. Charge rates, taper curves, storage SOC, and when 2 A beats 4 A for cell life.",
-      "href": "/blog/escooter-battery-care/",
+      "href": "/articles/escooter-battery-care/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2626,12 +2645,13 @@
       "group": "E-Scooter",
       "title": "E-Scooter Braking Safety: Why Regen Alone Fails on Steep Downhills",
       "description": "Friction pads, regen limits, heat fade, and pad life on standing micro-EVs. Engineering reasons to keep mechanical brakes maintained on scooter commutes.",
-      "href": "/blog/escooter-brakes-safety/",
+      "href": "/articles/escooter-brakes-safety/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2641,12 +2661,13 @@
       "group": "E-Scooter",
       "title": "E-Scooter Commute Optimization: More Range and Lower Cost per Kilometre",
       "description": "Wh/km tuning, transit fare comparison, tyre pressure, route choice, and charging strategy for daily e-scooter commuters.",
-      "href": "/blog/escooter-commute-optimization/",
+      "href": "/articles/escooter-commute-optimization/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2656,12 +2677,13 @@
       "group": "E-Scooter",
       "title": "E-Scooter Motor Power Truth: 500W vs 1000W — Is More Always Better?",
       "description": "Continuous watts, burst current, hill grade physics, and controller limits on light EV scooters. When a bigger motor helps — and when it only drains faster.",
-      "href": "/blog/escooter-motor-power-guide/",
+      "href": "/articles/escooter-motor-power-guide/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2671,12 +2693,13 @@
       "group": "E-Scooter",
       "title": "Why Your E-Scooter Slows Down at Half Battery: Voltage Sag, SOC, and Torque",
       "description": "Technical guide to power drop below 50 % SOC — internal resistance, voltage sag under load, effective motor watts, and when hill climbing fails on light EVs.",
-      "href": "/blog/escooter-power-drop-guide/",
+      "href": "/articles/escooter-power-drop-guide/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2686,12 +2709,13 @@
       "group": "E-Scooter",
       "title": "E-Scooter Tyre Engineering: Why Air Pressure Is the #1 Range and Comfort Factor",
       "description": "Small 8–10″ wheels amplify rolling resistance. Learn how bar pressure, rider stance, and pack voltage set Wh/km and real commute range on electric scooters.",
-      "href": "/blog/escooter-range-guide/",
+      "href": "/articles/escooter-range-guide/",
       "tag": "E-Scooter",
       "keywords": [
         "E-Scooter",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2701,12 +2725,13 @@
       "group": "EV Charging",
       "title": "Why Your EV Battery Needs Preconditioning: A Guide to Thermal Management",
       "description": "How pack temperature limits DC fast-charge speed, what BMS heating and cooling cost while you wait, and why plugged-in conditioning beats range loss on the road.",
-      "href": "/blog/ev-battery-preconditioning-thermal-guide/",
+      "href": "/articles/ev-battery-preconditioning-thermal-guide/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2716,12 +2741,13 @@
       "group": "EV Charging",
       "title": "Where Did the Power Go? Engineering EV Charging Cable Efficiency",
       "description": "Joule heating, conductor sizing, and how to pick home EV cables that stay cool under sustained Level 2 current.",
-      "href": "/blog/ev-charging-cable-efficiency-engineering/",
+      "href": "/articles/ev-charging-cable-efficiency-engineering/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2731,12 +2757,13 @@
       "group": "EV Charging",
       "title": "EV Charging Cable Power Loss: Stop Paying for Heat in the Cord",
       "description": "Calculate I²R watts, wasted kWh, and session cost from charging amps, cable length, and copper mm² cross-section.",
-      "href": "/blog/ev-charging-cable-loss-guide/",
+      "href": "/articles/ev-charging-cable-loss-guide/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2746,12 +2773,13 @@
       "group": "EV Charging",
       "title": "Saving Energy in Your EV: How to Cut Charging Costs in Summer and Winter",
       "description": "Smart preconditioning, tariff timing, and seasonal habits that lower thermal and charging spend—plus a calculator for battery heat and cool costs.",
-      "href": "/blog/ev-charging-cost-summer-winter-tips/",
+      "href": "/articles/ev-charging-cost-summer-winter-tips/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2761,12 +2789,13 @@
       "group": "EV Charging",
       "title": "How to Estimate EV Home Charging Cost",
       "description": "Calculate what it costs to charge your EV at home using kWh and your utility rate.",
-      "href": "/blog/ev-home-charging-cost/",
+      "href": "/articles/ev-home-charging-cost/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2776,12 +2805,13 @@
       "group": "EV Charging",
       "title": "Is Your EV Charging Cable Too Long? Cumulative Cost Over Vehicle Life",
       "description": "Lifetime dollars lost to I²R heat in extension cords—and when relocating the EVSE beats buying a heavier cable.",
-      "href": "/blog/ev-long-cable-lifetime-cost/",
+      "href": "/articles/ev-long-cable-lifetime-cost/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2791,12 +2821,13 @@
       "group": "EV Charging",
       "title": "EV Total Cost of Ownership: Beyond Electricity",
       "description": "Fuel and oil savings vs. variable costs like tires—use the EV tire wear calculator to expose the hidden line item in private and fleet TCO.",
-      "href": "/blog/ev-tco-beyond-electricity-costs/",
+      "href": "/articles/ev-tco-beyond-electricity-costs/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2806,12 +2837,13 @@
       "group": "EV Charging",
       "title": "EV Tire Wear Economics: The Hidden Maintenance Line in Your Budget",
       "description": "Why instant torque and battery mass shorten tread life—and how to model annual tire depreciation vs. a comparable gas car before you buy or fleet an EV.",
-      "href": "/blog/ev-tire-wear-cost-guide/",
+      "href": "/articles/ev-tire-wear-cost-guide/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2821,12 +2853,13 @@
       "group": "Commercial EV",
       "title": "How Payload Weight Steals Range From Electric Semi-Trucks",
       "description": "Cargo mass, rolling resistance, and aerodynamic drag compound on highway EV trucks—how to model real-world range before you dispatch a load.",
-      "href": "/blog/ev-truck-payload-range-impact/",
+      "href": "/articles/ev-truck-payload-range-impact/",
       "tag": "Commercial EV",
       "keywords": [
         "Commercial EV",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2836,12 +2869,13 @@
       "group": "Utility Tariffs",
       "title": "What Is Frequency Response Compensation? A Guide for Energy Investors",
       "description": "How batteries support grid stability, how FCR and FRR products pay, and why virtual power plants are becoming the default DER interface.",
-      "href": "/blog/frequency-response-compensation-investor-guide/",
+      "href": "/articles/frequency-response-compensation-investor-guide/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2851,12 +2885,13 @@
       "group": "Solar",
       "title": "Generator or Solar? Choosing the Right Off-Grid Backup System",
       "description": "Compare diesel generator OPEX against solar hybrid CAPEX—fuel burn, maintenance, reliability, and quiet hours when you live off the grid.",
-      "href": "/blog/generator-vs-solar-off-grid-backup-guide/",
+      "href": "/articles/generator-vs-solar-off-grid-backup-guide/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2866,12 +2901,13 @@
       "group": "Power",
       "title": "Choosing the Right Wire Size for Your Green Home Project",
       "description": "Link cable length and current for HVAC, EV chargers, and solar subpanels—use the residential voltage drop calculator before you pull wire.",
-      "href": "/blog/green-home-wire-sizing-voltage-drop/",
+      "href": "/articles/green-home-wire-sizing-voltage-drop/",
       "tag": "Power",
       "keywords": [
         "Power",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2881,12 +2917,13 @@
       "group": "Utility Tariffs",
       "title": "Grid Frequency Response Rewards: Why Your Battery Can Earn Grid-Stability Payments",
       "description": "Understand capacity and energy compensation for frequency regulation, how availability affects revenue, and how to model monthly earnings before VPP enrollment.",
-      "href": "/blog/grid-frequency-response-rewards-guide/",
+      "href": "/articles/grid-frequency-response-rewards-guide/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2896,12 +2933,13 @@
       "group": "Appliances",
       "title": "Heat Pumps vs. Electric Resistance Heat: Efficiency Compared",
       "description": "COP explains why heat pumps move more BTUs per kWh than baseboard strips—and when resistance still appears.",
-      "href": "/blog/heat-pumps-vs-electric-heaters-efficiency/",
+      "href": "/articles/heat-pumps-vs-electric-heaters-efficiency/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2911,12 +2949,13 @@
       "group": "EV Charging",
       "title": "Hidden Costs of Public EV Charging (Session Fees, Idle Penalties, and More)",
       "description": "Per-kWh rates are only part of the story—learn how session fees and idle charges inflate real public charging cost.",
-      "href": "/blog/hidden-costs-public-ev-charging/",
+      "href": "/articles/hidden-costs-public-ev-charging/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2926,12 +2965,13 @@
       "group": "Backup",
       "title": "Home Backup Planning: How to Calculate Critical Load Energy for Power Outages",
       "description": "Engineering guide to home backup systems (UPS and solar storage). Map essential loads, size Wh capacity, and plan outage runtime with a safety margin.",
-      "href": "/blog/home-backup-load-guide/",
+      "href": "/articles/home-backup-load-guide/",
       "tag": "Backup",
       "keywords": [
         "Backup",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2941,12 +2981,13 @@
       "group": "Utility Tariffs",
       "title": "Turning Your Home Battery Into a Revenue Asset: Is It Worth It?",
       "description": "Compare battery degradation cost against frequency-response and VPP revenue—use the grid frequency reward calculator to stress-test ROI.",
-      "href": "/blog/home-battery-grid-services-roi/",
+      "href": "/articles/home-battery-grid-services-roi/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2956,12 +2997,13 @@
       "group": "Appliances",
       "title": "Home Electrical Safety: Are Your Lighting Circuits Up to Code?",
       "description": "Self-check steps for lighting branch loads during remodels—use the lighting circuit load calculator before you close walls.",
-      "href": "/blog/home-lighting-circuit-safety/",
+      "href": "/articles/home-lighting-circuit-safety/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2971,12 +3013,13 @@
       "group": "EV Charging",
       "title": "How Fast Can You DC Charge an EV? The 10–80% Window Explained",
       "description": "Learn why DC fast charging slows after 80% SOC, how taper curves work, and how to estimate session time without guesswork.",
-      "href": "/blog/how-fast-can-you-dc-charge/",
+      "href": "/articles/how-fast-can-you-dc-charge/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -2986,12 +3029,13 @@
       "group": "EV Charging",
       "title": "How long do EV batteries really last?",
       "description": "Calendar aging, BMS protection, warranty thresholds, and when a pack replacement actually belongs in your cost model.",
-      "href": "/blog/how-long-do-ev-batteries-really-last/",
+      "href": "/articles/how-long-do-ev-batteries-really-last/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3001,12 +3045,13 @@
       "group": "Green Home",
       "title": "HVAC Savings With Smart Thermostats and Window Solar Control",
       "description": "Temperature setbacks, summer peak cooling loads, and how window SHGC cuts heat gain before your AC runs longer.",
-      "href": "/blog/hvac-savings-with-smart-thermostats/",
+      "href": "/articles/hvac-savings-with-smart-thermostats/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3016,12 +3061,13 @@
       "group": "Green Home",
       "title": "Hybrid Solar and Wind: A Winning Home Energy Combo?",
       "description": "How wind complements solar for night and cloudy production—and using the small wind yield calculator to vet your site.",
-      "href": "/blog/hybrid-solar-wind-home-energy/",
+      "href": "/articles/hybrid-solar-wind-home-energy/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3031,12 +3077,13 @@
       "group": "Guides",
       "title": "Thermal Limits: Managing Inverter Overload in Extreme Heat",
       "description": "Why do inverters shut down in July? Learn how to calculate derating, manage overload cycles, and document backup plans with the WattQuick Project Dashboard.",
-      "href": "/blog/inverter-thermal-management-guide/",
+      "href": "/articles/inverter-thermal-management-guide/",
       "tag": "Guides",
       "keywords": [
         "Guides",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3046,12 +3093,13 @@
       "group": "Green Home",
       "title": "Is Your Battery Really Green? Carbon Math for Storage Systems",
       "description": "How round-trip energy losses create indirect CO₂ emissions—and why charging from renewables is what makes BESS carbon-neutral in operation.",
-      "href": "/blog/is-bess-storage-really-green/",
+      "href": "/articles/is-bess-storage-really-green/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3061,12 +3109,13 @@
       "group": "EV Charging",
       "title": "Is an EV Cheaper Than Gas? A Straightforward Cost Comparison",
       "description": "Compare per-mile energy cost, home charging rates, and when electric driving beats gasoline for your actual mileage.",
-      "href": "/blog/is-ev-cheaper-than-gas/",
+      "href": "/articles/is-ev-cheaper-than-gas/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3076,12 +3125,13 @@
       "group": "Green Home",
       "title": "LED Lighting Retrofit ROI for Residential Upgrades",
       "description": "Lumen matching, watt reduction, and payback timelines when you replace incandescent and halogen with modern LEDs.",
-      "href": "/blog/led-lighting-retrofit-roi-calculator/",
+      "href": "/articles/led-lighting-retrofit-roi-calculator/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3091,12 +3141,13 @@
       "group": "Appliances",
       "title": "Lighting Design Done Right: Don't Overload the Home Breaker",
       "description": "The 80% continuous-load rule for lighting branches, and why LED wattages must come from real nameplates—not old incandescent habits.",
-      "href": "/blog/lighting-circuit-80-percent-rule/",
+      "href": "/articles/lighting-circuit-80-percent-rule/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3106,12 +3157,13 @@
       "group": "Appliances",
       "title": "Lighting Circuit Load: Safe Sizing for Home Branch Circuits",
       "description": "Add fixture watts, voltage, and breaker rating—check amps and the 80% continuous-load limit before lights flicker or breakers trip.",
-      "href": "/blog/lighting-circuit-load-guide/",
+      "href": "/articles/lighting-circuit-load-guide/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3121,12 +3173,13 @@
       "group": "Utility Tariffs",
       "title": "Making Money With Vehicle-to-Grid (V2G) Charging",
       "description": "Bidirectional EV exports, grid services revenue, and how carbon offsets stack on top of tariff arbitrage.",
-      "href": "/blog/making-money-with-v2g-charging/",
+      "href": "/articles/making-money-with-v2g-charging/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3136,12 +3189,13 @@
       "group": "Battery",
       "title": "Managing Inverter Efficiency Losses in Off-Grid and Backup Systems",
       "description": "Why DC-to-AC conversion eats watts, how to size input power, and where efficiency curves matter.",
-      "href": "/blog/managing-inverter-efficiency-losses/",
+      "href": "/articles/managing-inverter-efficiency-losses/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3151,12 +3205,13 @@
       "group": "RV & Marine",
       "title": "Marine Trolling Motor Batteries: Amp Draw, Chemistry, and Safety",
       "description": "Continuous amp draw on lakes and rivers, AGM vs LiFePO4 tradeoffs, and how to avoid a dead bank miles from the ramp.",
-      "href": "/blog/marine-trolling-motor-battery-guide/",
+      "href": "/articles/marine-trolling-motor-battery-guide/",
       "tag": "RV & Marine",
       "keywords": [
         "RV & Marine",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3166,12 +3221,13 @@
       "group": "Green Home",
       "title": "How to Calculate Break-Even on Your Microgrid: Formulas Behind the ROI Tool",
       "description": "Step-by-step break-even and cumulative ROI math for solar-plus-storage microgrids—with inflation on energy savings and O&M in the cash-flow stack.",
-      "href": "/blog/microgrid-break-even-calculator-explained/",
+      "href": "/articles/microgrid-break-even-calculator-explained/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3181,12 +3237,13 @@
       "group": "Green Home",
       "title": "The Complete Guide to Microgrid ROI: Costs, Benefits, and Energy Independence",
       "description": "Compare upfront microgrid capex against self-generation savings, resilience value, and avoided infrastructure costs—before you sign an EPC contract.",
-      "href": "/blog/microgrid-roi-complete-guide/",
+      "href": "/articles/microgrid-roi-complete-guide/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3196,12 +3253,13 @@
       "group": "E-Bike",
       "title": "The True Cost of Commuting: Why E-Mobility is Cheaper Than a Car",
       "description": "Is your car costing more than you think? We break down 3-year total cost of ownership (TCO) for cars vs e-bikes and e-scooters—including parking and depreciation.",
-      "href": "/blog/mobility-tco-guide/",
+      "href": "/articles/mobility-tco-guide/",
       "tag": "E-Bike",
       "keywords": [
         "E-Bike",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3211,12 +3269,13 @@
       "group": "Guides",
       "title": "Choosing Motor Breakers: Type B, C, and D Explained",
       "description": "How breaker curves handle inrush peaks—and planning shop and lab panels before equipment arrives.",
-      "href": "/blog/motor-breaker-selection-guide/",
+      "href": "/articles/motor-breaker-selection-guide/",
       "tag": "Guides",
       "keywords": [
         "Guides",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3226,12 +3285,13 @@
       "group": "Solar",
       "title": "How to Optimize Solar Panel Tilt and Angle for Your Latitude",
       "description": "Year-round vs. seasonal tilt, azimuth basics, and when roof pitch already gives you a free optimization.",
-      "href": "/blog/optimize-solar-panel-tilt-angle/",
+      "href": "/articles/optimize-solar-panel-tilt-angle/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3241,12 +3301,13 @@
       "group": "Utility Tariffs",
       "title": "Peak Shaving: From Commercial Strategy to Home Bill Control",
       "description": "Why intelligent load management beats raw consumption cuts as energy prices rise—and how to operationalize home schedules with the peak shaving calculator.",
-      "href": "/blog/peak-shaving-home-strategy/",
+      "href": "/articles/peak-shaving-home-strategy/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3256,12 +3317,13 @@
       "group": "Utility Tariffs",
       "title": "Peak Shaving Potential: Shift Loads and Trim Your TOU Bill",
       "description": "Model monthly and annual savings from moving peak kWh to off-peak windows—see before/after bills and your home shift potential.",
-      "href": "/blog/peak-shaving-potential-guide/",
+      "href": "/articles/peak-shaving-potential-guide/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3271,12 +3333,13 @@
       "group": "Commercial EV",
       "title": "Planning Electric Bus Routes and Warehouse Shift Charging",
       "description": "Municipal bus battery sizing, inter-shift charging windows, and forklift cycle economics for electrified depots.",
-      "href": "/blog/planning-electric-bus-transit-routes/",
+      "href": "/articles/planning-electric-bus-transit-routes/",
       "tag": "Commercial EV",
       "keywords": [
         "Commercial EV",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3286,12 +3349,13 @@
       "group": "Appliances",
       "title": "Portable Generator Fuel Consumption and Runtime Planning",
       "description": "Estimate gallons per hour and tank runtime from load watts and manufacturer fuel curves.",
-      "href": "/blog/portable-generator-fuel-consumption-runtime/",
+      "href": "/articles/portable-generator-fuel-consumption-runtime/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3301,12 +3365,13 @@
       "group": "RV & Marine",
       "title": "Preventing Inverter Surge Overload While Camping",
       "description": "Continuous vs peak watts, 12 V to 120 V conversion losses, and why your fridge and coffee maker cannot share the same blind plug.",
-      "href": "/blog/preventing-inverter-surge-overload-camping/",
+      "href": "/articles/preventing-inverter-surge-overload-camping/",
       "tag": "RV & Marine",
       "keywords": [
         "RV & Marine",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3316,12 +3381,13 @@
       "group": "EV Charging",
       "title": "How to Prolong EV Battery Life: Habits That Actually Matter",
       "description": "Daily charge limits, DC fast-charging frequency, and temperature habits that slow degradation—without myth-heavy advice.",
-      "href": "/blog/prolong-ev-battery-life/",
+      "href": "/articles/prolong-ev-battery-life/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3331,12 +3397,13 @@
       "group": "Power",
       "title": "Residential AC Voltage Drop: Why Your Cables Matter More Than You Think",
       "description": "Model voltage loss in home copper runs from amps, length, and AWG or mm²—stay within 3–5% guidelines for safe appliance and EV charger operation.",
-      "href": "/blog/residential-voltage-drop-guide/",
+      "href": "/articles/residential-voltage-drop-guide/",
       "tag": "Power",
       "keywords": [
         "Power",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3346,12 +3413,13 @@
       "group": "Battery",
       "title": "Series vs. Parallel Battery Configurations Explained",
       "description": "How 4S2P wiring changes voltage and amp-hours, and why matched cells matter for DIY packs.",
-      "href": "/blog/series-vs-parallel-battery-configurations/",
+      "href": "/articles/series-vs-parallel-battery-configurations/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3361,12 +3429,13 @@
       "group": "Solar",
       "title": "Shading & Strings: Why Your Central Inverter is Limiting Your Yield",
       "description": "Why does one shaded panel drag down a whole string? Bypass diodes, MPPT mismatch, and when optimizers pay for themselves—plus a tool to quantify kWh and dollar loss.",
-      "href": "/blog/shading-and-strings-guide/",
+      "href": "/articles/shading-and-strings-guide/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3376,12 +3445,13 @@
       "group": "Battery",
       "title": "How to Size a Home Emergency Backup Battery Bank",
       "description": "Essential loads, hours of autonomy, depth of discharge, and inverter losses in one sizing path.",
-      "href": "/blog/size-home-emergency-backup-battery/",
+      "href": "/articles/size-home-emergency-backup-battery/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3391,12 +3461,13 @@
       "group": "Green Home",
       "title": "Wind at Home: Is a Small Turbine Actually Worth It?",
       "description": "How wind speed cubed drives small turbine payback—and why tower height and obstacles matter more than brochure kW.",
-      "href": "/blog/small-wind-home-economics/",
+      "href": "/articles/small-wind-home-economics/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3406,12 +3477,13 @@
       "group": "Green Home",
       "title": "Small Wind Turbine Yield: Is Breeze Power Right for Your Property?",
       "description": "Estimate watts, daily kWh, and annual output from rotor diameter, average wind speed, and system efficiency.",
-      "href": "/blog/small-wind-turbine-yield-guide/",
+      "href": "/articles/small-wind-turbine-yield-guide/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3421,12 +3493,13 @@
       "group": "Solar",
       "title": "Solar Panel Degradation: What to Expect Over 25 Years",
       "description": "First-year stabilization, annual fade rates, and how degradation affects long-term ROI planning.",
-      "href": "/blog/solar-panel-degradation-expectations/",
+      "href": "/articles/solar-panel-degradation-expectations/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3436,12 +3509,13 @@
       "group": "Solar",
       "title": "Solar Panel Roof Space Requirements: How Many Modules Fit?",
       "description": "Roof area, setbacks, panel dimensions, and usable coverage—how to estimate max array size before you order gear.",
-      "href": "/blog/solar-panel-roof-space-requirements/",
+      "href": "/articles/solar-panel-roof-space-requirements/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3451,12 +3525,13 @@
       "group": "Solar",
       "title": "Solar Panel Sizing Basics for Off-Grid Systems",
       "description": "How peak sun hours, daily energy use, and system efficiency determine the panel wattage you need.",
-      "href": "/blog/solar-panel-sizing-basics/",
+      "href": "/articles/solar-panel-sizing-basics/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3466,12 +3541,13 @@
       "group": "Solar",
       "title": "Solar ROI and Payback Period: A Practical Guide for Homeowners",
       "description": "Turn installed cost, incentives, and annual kWh into a realistic payback timeline—without sales-deck optimism.",
-      "href": "/blog/solar-roi-payback-period-guide/",
+      "href": "/articles/solar-roi-payback-period-guide/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3481,12 +3557,13 @@
       "group": "Green Home",
       "title": "Why Isn't the Tank Hot Enough? Engineering Solar Water Heater Efficiency",
       "description": "How scale, collector tilt, and direct beam radiation affect solar thermal efficiency—and how to self-measure performance with temperature data.",
-      "href": "/blog/solar-water-heater-efficiency-engineering/",
+      "href": "/articles/solar-water-heater-efficiency-engineering/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3496,12 +3573,13 @@
       "group": "Green Home",
       "title": "Solar Water Heater Efficiency: Are Your Collectors at Peak Performance?",
       "description": "Model thermal efficiency, absorbed kWh, and electric heating savings from tank volume, temperature rise, sun hours, and collector area.",
-      "href": "/blog/solar-water-heater-efficiency-guide/",
+      "href": "/articles/solar-water-heater-efficiency-guide/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3511,12 +3589,13 @@
       "group": "Green Home",
       "title": "Maximizing Savings: Solar Water Heaters as a Green Home Strategy",
       "description": "Compare system cost to monthly electric savings and use the solar water heater efficiency calculator to monitor health over time.",
-      "href": "/blog/solar-water-heater-green-home-savings-strategy/",
+      "href": "/articles/solar-water-heater-green-home-savings-strategy/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3526,12 +3605,13 @@
       "group": "Solar",
       "title": "Solar Energy for Agriculture: How to Choose a Water Pump System",
       "description": "Compare DC solar pumps and AC infrastructure for farm irrigation—how pumping depth changes energy demand and what to spec before you buy panels.",
-      "href": "/blog/solar-water-pumping-agriculture/",
+      "href": "/articles/solar-water-pumping-agriculture/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3541,12 +3621,13 @@
       "group": "Solar",
       "title": "System Oversizing & Efficiency: When Bigger Isn't Better",
       "description": "Oversizing solar and backup systems can lead to efficiency losses and higher costs. Learn how to right-size your projects for peak performance and profit.",
-      "href": "/blog/system-oversizing-efficiency/",
+      "href": "/articles/system-oversizing-efficiency/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3556,12 +3637,13 @@
       "group": "Solar",
       "title": "The 20-Year Solar Ledger: Understanding Your Solar ROI",
       "description": "Solar isn't just an expense; it's a 20-year financial asset. We break down degradation, inflation, and net metering to show how your system truly pays off.",
-      "href": "/blog/the-20-year-solar-ledger/",
+      "href": "/articles/the-20-year-solar-ledger/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3571,12 +3653,13 @@
       "group": "Green Home",
       "title": "The impact of thermal insulation on home energy bills",
       "description": "How U-value, air sealing, and glazing upgrades translate envelope improvements into lower annual heating and cooling spend.",
-      "href": "/blog/thermal-insulation-home-energy-bills/",
+      "href": "/articles/thermal-insulation-home-energy-bills/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3586,12 +3669,13 @@
       "group": "Utility Tariffs",
       "title": "Smart at Peak: Lower Your Bill by Shifting Loads at Home",
       "description": "How Time-of-Use tariffs affect residential bills—and which appliances to run off-peak for the biggest TOU savings.",
-      "href": "/blog/tou-load-shifting-home-tips/",
+      "href": "/articles/tou-load-shifting-home-tips/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3601,12 +3685,13 @@
       "group": "EV Charging",
       "title": "The true cost of EV ownership vs Gas cars",
       "description": "Fuel and oil are only part of TCO—compare five years of scheduled maintenance for electric vs. gasoline vehicles.",
-      "href": "/blog/true-cost-ev-ownership-vs-gas-cars/",
+      "href": "/articles/true-cost-ev-ownership-vs-gas-cars/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3616,12 +3701,13 @@
       "group": "RV & Marine",
       "title": "The Ultimate Guide to RV Solar Sizing (Roof Space and Daily Load)",
       "description": "Audit boondocking loads, usable roof area, and portable power station recharge times before you drill the first mounting hole.",
-      "href": "/blog/ultimate-guide-rv-solar-sizing/",
+      "href": "/articles/ultimate-guide-rv-solar-sizing/",
       "tag": "RV & Marine",
       "keywords": [
         "RV & Marine",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3631,12 +3717,13 @@
       "group": "Battery",
       "title": "Understanding Battery Voltage Sag Under Load",
       "description": "Why voltage drops on DC cables and heavy loads, and how to keep inverters online.",
-      "href": "/blog/understanding-battery-voltage-sag/",
+      "href": "/articles/understanding-battery-voltage-sag/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3646,12 +3733,13 @@
       "group": "Guides",
       "title": "Understanding Battery Watt-Hours (Wh)",
       "description": "What watt-hours mean, how to convert from Ah, and why Wh matters for solar and EV planning.",
-      "href": "/blog/understanding-battery-watt-hours/",
+      "href": "/articles/understanding-battery-watt-hours/",
       "tag": "Guides",
       "keywords": [
         "Guides",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3661,12 +3749,13 @@
       "group": "Utility Tariffs",
       "title": "Understanding Commercial Demand Charges on Your Power Bill",
       "description": "Peak kW billing, concurrent motor startups, and strategies to flatten your facility load profile without throttling production.",
-      "href": "/blog/understanding-commercial-demand-charges/",
+      "href": "/articles/understanding-commercial-demand-charges/",
       "tag": "Utility Tariffs",
       "keywords": [
         "Utility Tariffs",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3676,12 +3765,13 @@
       "group": "Solar",
       "title": "Understanding Net Metering for Home Solar (Credits, Exports, and Bills)",
       "description": "How grid-tied billing treats exported kWh, import charges, and why NEM policy changes your payback.",
-      "href": "/blog/understanding-net-metering-solar/",
+      "href": "/articles/understanding-net-metering-solar/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3691,12 +3781,13 @@
       "group": "Appliances",
       "title": "Vampire Energy and Standby Power Waste in the Home",
       "description": "Find phantom loads, estimate annual cost, and cut waste without living like it's 1899.",
-      "href": "/blog/vampire-energy-standby-power-waste/",
+      "href": "/articles/vampire-energy-standby-power-waste/",
       "tag": "Appliances",
       "keywords": [
         "Appliances",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3706,12 +3797,13 @@
       "group": "Green Home",
       "title": "10 Devices Stealing Your Power at Night: How to Kill Vampire Power",
       "description": "What is phantom load? The standby devices that drain electricity while you sleep—and how our Standby Power Aggregator shows what that waste costs per year.",
-      "href": "/blog/vampire-power-guide/",
+      "href": "/articles/vampire-power-guide/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3721,12 +3813,13 @@
       "group": "Solar",
       "title": "Water Independence: The Complete Guide to Sizing Solar Panels for Pumps",
       "description": "Use the water pump solar sizing calculator for kWp and panel count, then maintain controllers and current limits for reliable field operation.",
-      "href": "/blog/water-independence-solar-panel-guide/",
+      "href": "/articles/water-independence-solar-panel-guide/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3736,12 +3829,13 @@
       "group": "Solar",
       "title": "Solar Water Pump Sizing: Why Array kWp Matters More Than Panel Stickers",
       "description": "Learn how pump watts, daily run hours, pumping head, and peak sun hours drive kWp, panel count, and MPPT controller choice for off-grid water.",
-      "href": "/blog/water-pump-solar-sizing-guide/",
+      "href": "/articles/water-pump-solar-sizing-guide/",
       "tag": "Solar",
       "keywords": [
         "Solar",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3751,12 +3845,13 @@
       "group": "Battery",
       "title": "What Is Battery C-Rate? Discharge Speed in Plain Language",
       "description": "Convert between amps, capacity, and how long a pack can sustain a load at 1C, 2C, or higher.",
-      "href": "/blog/what-is-battery-c-rate/",
+      "href": "/articles/what-is-battery-c-rate/",
       "tag": "Battery",
       "keywords": [
         "Battery",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3766,12 +3861,13 @@
       "group": "EV Charging",
       "title": "Why EV Range Drops in Winter (and What You Can Do About It)",
       "description": "Cold batteries, cabin heat, and winter driving physics explain seasonal range loss—and how to plan realistic winter miles.",
-      "href": "/blog/why-ev-range-drops-in-winter/",
+      "href": "/articles/why-ev-range-drops-in-winter/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3781,12 +3877,13 @@
       "group": "EV Charging",
       "title": "Why Do EV Tires Wear Out Faster?",
       "description": "High instant torque, battery mass, and EV-specific compounds explain shorter tread life—and why tire pressure maintenance matters more than ever.",
-      "href": "/blog/why-ev-tires-wear-faster/",
+      "href": "/articles/why-ev-tires-wear-faster/",
       "tag": "EV Charging",
       "keywords": [
         "EV Charging",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3796,12 +3893,13 @@
       "group": "Power",
       "title": "Why Do Home Devices Struggle? Voltage Drop in Electrical Systems",
       "description": "How cable resistance wastes energy as heat, why motors suffer on low voltage, and why tire pressure–level maintenance includes checking conductor size.",
-      "href": "/blog/why-home-voltage-drop-matters/",
+      "href": "/articles/why-home-voltage-drop-matters/",
       "tag": "Power",
       "keywords": [
         "Power",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3811,12 +3909,13 @@
       "group": "Green Home",
       "title": "Why LED is the best investment for your home's energy efficiency",
       "description": "Low payback, lower operating cost, and side benefits that make LED retrofits one of the smartest home energy upgrades.",
-      "href": "/blog/why-led-best-investment-home-energy-efficiency/",
+      "href": "/articles/why-led-best-investment-home-energy-efficiency/",
       "tag": "Green Home",
       "keywords": [
         "Green Home",
         "blog",
-        "article"
+        "article",
+        "articles"
       ]
     },
     {
@@ -3850,14 +3949,14 @@
       ]
     },
     {
-      "id": "blog",
+      "id": "articles",
       "type": "page",
       "category": "Site",
       "group": "Content",
-      "title": "Blog",
+      "title": "Articles",
       "description": "Expert guides on batteries, solar, EV charging, and home energy.",
-      "href": "/blog/",
-      "tag": "Blog",
+      "href": "/articles/",
+      "tag": "Articles",
       "keywords": [
         "articles",
         "guides",

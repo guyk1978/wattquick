@@ -1,4 +1,4 @@
-import { CollapsibleSEOContent } from "@/components/collapsible-seo-content";
+import { SEOContentBlock } from "@/components/seo-content-block";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { cn } from "@/lib/utils";
 
@@ -19,8 +19,8 @@ type PlatformOverviewProps = {
 };
 
 /**
- * Home-page SEO overview of WattQuick's value, collapsed by default so the
- * category grid stays the primary focus while the copy remains in the HTML.
+ * Home-page SEO overview of WattQuick's value — always visible so crawlers
+ * and readers get the full copy without interaction.
  */
 export function PlatformOverview({ className }: PlatformOverviewProps) {
   const count = getAllCalculatorMeta().length;
@@ -34,7 +34,7 @@ export function PlatformOverview({ className }: PlatformOverviewProps) {
       <h2 id="platform-overview-heading" className="sr-only">
         About WattQuick
       </h2>
-      <CollapsibleSEOContent
+      <SEOContentBlock
         title={PLATFORM_OVERVIEW_TITLE}
         content={paragraphs}
       />

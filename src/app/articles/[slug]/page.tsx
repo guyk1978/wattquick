@@ -4,7 +4,7 @@ import { BlogArticleHeader } from "@/components/blog/blog-article-header";
 import { BlogContent } from "@/components/blog/blog-content";
 import { BlogQuickLaunchWidget } from "@/components/blog/blog-quick-launch-widget";
 import { GridShell } from "@/components/grid-modal/grid-shell";
-import { createBlogPostMetadata } from "@/lib/blog/metadata";
+import { createArticlePostMetadata } from "@/lib/articles/metadata";
 import { getAllBlogPosts, getBlogPost } from "@/lib/blog/posts";
 
 export const dynamicParams = false;
@@ -21,11 +21,10 @@ export async function generateMetadata({ params }: PageProps) {
   const post = getBlogPost(slug);
   if (!post) return {};
 
-  return createBlogPostMetadata(post);
+  return createArticlePostMetadata(post);
 }
 
-/** Legacy `/blog/[slug]` — same dedicated article page chrome as `/articles/[slug]`. */
-export default async function BlogArticlePage({ params }: PageProps) {
+export default async function ArticlePage({ params }: PageProps) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();

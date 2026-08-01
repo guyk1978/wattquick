@@ -49,7 +49,7 @@ export function ToolCardFocus({ calculatorId, className }: ToolCardFocusProps) {
       <button
         type="button"
         className={cn(
-          "tool-card-action-btn tool-card-focus__expand",
+          "tool-card-action-btn tool-card-action-btn--side tool-card-focus__expand",
           className
         )}
         aria-label={`Expand ${meta.title}`}
@@ -104,7 +104,12 @@ export function ToolCardFocus({ calculatorId, className }: ToolCardFocusProps) {
                     calculatorId={calculatorId}
                     className="tool-card-focus__rating"
                   />
-                  <Link href={meta.href} className="tool-card-focus__open">
+                  <Link
+                    href={meta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="tool-card-focus__open"
+                  >
                     Open calculator
                     <ArrowUpRight className="size-5" strokeWidth={2.25} aria-hidden />
                   </Link>

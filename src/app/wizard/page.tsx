@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { EnergyWizard } from "@/components/EnergyWizard";
 import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import { createPageMetadata } from "@/lib/seo";
@@ -27,7 +26,6 @@ export default function WizardPage() {
       title="Start planning"
       description="The WattQuick Wizard builds a structured path—tools and articles in the order that matches your goal and experience level."
     >
-      <CalculatorAdSlots />
       <EnergyWizard catalog={catalog} />
     </GlobalPageLayout>
   );

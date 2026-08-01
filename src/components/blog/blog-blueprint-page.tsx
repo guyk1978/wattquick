@@ -1,5 +1,4 @@
 import { BlogPostList } from "@/components/blog/blog-post-list";
-import { CalculatorAdSlots } from "@/components/calculator/calculator-ad-slots";
 import { GlobalPageLayout } from "@/components/layout/global-page-layout";
 import type { BlogPost } from "@/lib/blog/posts";
 
@@ -19,8 +18,6 @@ export function BlogBlueprintPage({ posts }: BlogBlueprintPageProps) {
       description={`Expert guides on EV charging, solar, batteries, and home energy—${countLabel}, each paired with interactive WattQuick tools.`}
       width="wide"
     >
-      <CalculatorAdSlots />
-
       <div className="blog-hub blog-hub--matte">
         {posts.length === 0 ? (
           <div className="blog-hub__empty" role="status">
