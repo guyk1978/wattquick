@@ -2,6 +2,7 @@ import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero
 import { CategoryPromoStrip } from "@/components/home/category-promo-strip";
 import { CategoryEngineeringGuide } from "@/components/category/category-engineering-guide";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
+import { GridSection } from "@/components/grid-modal/grid-section";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
 import {
@@ -34,8 +35,24 @@ export function CategoryGridLanding({
       <CategoryEcosystemHero category={category} />
       <CategoryPromoStrip category={category} />
       <CategoryEngineeringGuide category={category} />
-      <ToolGrid calculators={calculators} />
-      <CategoryNavigationGrid activeCategory={category} />
+
+      <GridSection
+        title={`${label} Calculators`}
+        description={`Interactive tools for ${label.toLowerCase()} planning, diagnostics, and system sizing.`}
+        headingId={`category-tools-${category}`}
+        className="wq-grid-section--tools"
+      >
+        <ToolGrid calculators={calculators} />
+      </GridSection>
+
+      <GridSection
+        title="Explore All Categories"
+        description="Jump to any WattQuick calculator category across battery, solar, EV, and power infrastructure."
+        headingId="explore-all-categories"
+        className="wq-grid-section--categories"
+      >
+        <CategoryNavigationGrid activeCategory={category} />
+      </GridSection>
     </GridShell>
   );
 }

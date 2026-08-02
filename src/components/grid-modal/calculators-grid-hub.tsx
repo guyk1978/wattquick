@@ -1,5 +1,6 @@
 import { WattQuickEcosystem } from "@/components/home/wattquick-ecosystem";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
+import { GridSection } from "@/components/grid-modal/grid-section";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import type { LegalDocId } from "@/lib/legal-types";
 import dynamic from "next/dynamic";
@@ -31,7 +32,16 @@ export function CalculatorsGridHub({
       description="Advanced engineering tools, real-world calculators, and interactive system diagnostics for battery, solar, EV, and power infrastructure."
     >
       <WattQuickEcosystem />
-      <CategoryNavigationGrid />
+
+      <GridSection
+        title="Explore All Categories"
+        description="Browse every calculator category — battery, solar, EV, backup, and more."
+        headingId="home-explore-categories"
+        className="wq-grid-section--categories"
+      >
+        <CategoryNavigationGrid />
+      </GridSection>
+
       <PlatformOverview />
     </GridShell>
   );

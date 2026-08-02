@@ -12446,6 +12446,55 @@ body:has(.legal-modal) .grid-modal-shell {
   margin-top: 1.15rem;
 }
 
+/* —— Labeled tool / category grid sections —— */
+.wq-grid-section {
+  margin: 1.75rem 0 0;
+  min-width: 0;
+}
+
+.wq-grid-section--tools {
+  margin-top: 2rem;
+}
+
+.wq-grid-section--categories {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #262626;
+}
+
+.wq-grid-section__header {
+  margin-bottom: 0.95rem;
+  max-width: 44rem;
+}
+
+.wq-grid-section__title {
+  margin: 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: #ededed;
+}
+
+.wq-grid-section__description {
+  margin: 0.4rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #a3a3a3;
+}
+
+.wq-grid-section__body {
+  min-width: 0;
+}
+
+.wq-grid-section .wq-cat-nav {
+  margin-top: 0;
+}
+
+.wq-grid-section .wq-tool-grid {
+  margin-top: 0;
+}
+
 /* —— Dedicated Articles pages (hub + article) —— */
 .articles-page {
   width: 100%;

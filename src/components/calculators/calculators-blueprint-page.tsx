@@ -47,6 +47,9 @@ export function CalculatorsBlueprintPage({
           id="calculators-tool-grid"
           className="mt-5 border-t border-black/8 pt-5 dark:border-white/10"
         >
+          <h2 className="mb-4 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-black/55 dark:text-white/55">
+            Available Calculators
+          </h2>
           <CalculatorBlueprintToolGrid calculators={calculators} variant="tech-hub" />
         </div>
       </div>

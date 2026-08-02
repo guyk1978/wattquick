@@ -60,7 +60,7 @@ export function CategoryLandingPage({
 
             <section aria-labelledby="category-tools-heading">
               <h2 id="category-tools-heading" className="category-blueprint-tools__title">
-                {label} calculators
+                {label} Calculators
               </h2>
               {calculators.length === 0 ? (
                 <p className="category-blueprint-tools__empty">

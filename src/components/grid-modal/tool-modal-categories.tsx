@@ -20,7 +20,7 @@ export function ToolModalCategories({
       className={cn("tool-modal-categories", className)}
       aria-label="All site categories"
     >
-      <h3 className="tool-modal-categories__title">Categories</h3>
+      <h3 className="tool-modal-categories__title">Explore All Categories</h3>
       <p className="tool-modal-categories__lead">
         Browse every WattQuick calculator category. Accents match this tool&apos;s
         theme.
