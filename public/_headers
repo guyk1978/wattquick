@@ -6,3 +6,27 @@
   Cross-Origin-Resource-Policy: cross-origin
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# Fingerprinted Next build assets — immutable long cache for repeat visits.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Site static assets (search CSS/JS, vendor).
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Share / marketing images.
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Icons and brand marks (may update without hash — one-day cache).
+/icons/*
+  Cache-Control: public, max-age=86400
+/icon.svg
+  Cache-Control: public, max-age=86400
+/icon-192.png
+  Cache-Control: public, max-age=86400
+/icon-512.png
+  Cache-Control: public, max-age=86400
+/favicon.ico
+  Cache-Control: public, max-age=86400

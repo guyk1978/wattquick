@@ -220,20 +220,9 @@ export function CategoryEcosystemHero({
                   strokeLinejoin="miter"
                   filter={`url(#wq-cat-glow-${category})`}
                   className="wq-cat-hero__trace"
-                  initial={
-                    reduceMotion
-                      ? { pathLength: 1, opacity: 0.55 }
-                      : { pathLength: 0, opacity: 0 }
-                  }
+                  initial={false}
                   animate={{ pathLength: 1, opacity: 0.55 }}
-                  transition={{
-                    pathLength: {
-                      duration: reduceMotion ? 0 : 0.95,
-                      delay: reduceMotion ? 0 : 0.12 + i * 0.1,
-                      ease: "easeInOut",
-                    },
-                    opacity: { duration: 0.3 },
-                  }}
+                  transition={{ opacity: { duration: reduceMotion ? 0 : 0.3 } }}
                 />
                 <FlowDot
                   path={d}
@@ -249,9 +238,9 @@ export function CategoryEcosystemHero({
           {/* Hub — outer <g> keeps SVG translate; motion only fades opacity */}
           <g transform={`translate(${hub.x} ${hub.y})`}>
             <motion.g
-              initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
-              transition={{ duration: reduceMotion ? 0 : 0.5, delay: 0.15 }}
+              transition={{ duration: 0 }}
             >
               <HubGlyph category={category} color={color} />
               <text
@@ -272,12 +261,9 @@ export function CategoryEcosystemHero({
           {sats.map((node, i) => (
             <g key={`node-${node.id}`} transform={`translate(${node.x} ${node.y})`}>
               <motion.g
-                initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+                initial={false}
                 animate={{ opacity: 1 }}
-                transition={{
-                  duration: reduceMotion ? 0 : 0.45,
-                  delay: reduceMotion ? 0 : 0.35 + i * 0.08,
-                }}
+                transition={{ duration: 0 }}
               >
                 <circle
                   r={16}

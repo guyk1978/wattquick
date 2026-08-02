@@ -69,8 +69,18 @@ export function SiteHeaderSearch() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [loadError, setLoadError] = useState(false);
+  const [shouldLoadIndex, setShouldLoadIndex] = useState(false);
+  const indexRequestedRef = useRef(false);
+
+  const requestIndex = useCallback(() => {
+    if (indexRequestedRef.current) return;
+    indexRequestedRef.current = true;
+    setShouldLoadIndex(true);
+  }, []);
 
   useEffect(() => {
+    if (!shouldLoadIndex) return;
+
     let cancelled = false;
 
     fetch(SITE_SEARCH_INDEX_URL)
@@ -90,7 +100,7 @@ export function SiteHeaderSearch() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [shouldLoadIndex]);
 
   const flatResults = useMemo(() => {
     if (!index) return [];
@@ -114,9 +124,10 @@ export function SiteHeaderSearch() {
   }, [groupedResults]);
 
   const open = useCallback(() => {
+    requestIndex();
     setIsOpen(true);
     requestAnimationFrame(() => inputRef.current?.focus());
-  }, []);
+  }, [requestIndex]);
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -195,7 +206,10 @@ export function SiteHeaderSearch() {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          onFocus={() => setIsOpen(true)}
+          onFocus={() => {
+            requestIndex();
+            setIsOpen(true);
+          }}
           onKeyDown={onInputKeydown}
           placeholder="Search tools, articles, pages…"
           aria-label="Search WattQuick"

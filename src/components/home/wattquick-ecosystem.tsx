@@ -622,23 +622,13 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                     dimmed && "wq-eco__trace--dim",
                     hovered === node.id && "wq-eco__trace--hot"
                   )}
-                  initial={
-                    reduceMotion
-                      ? { pathLength: 1, opacity: 0.55 }
-                      : { pathLength: 0, opacity: 0 }
-                  }
+                  /* initial={false}: paint final state in SSR so LCP is not gated on hydration. */
+                  initial={false}
                   animate={{
                     pathLength: 1,
                     opacity: dimmed ? 0.15 : hovered === node.id ? 1 : 0.55,
                   }}
-                  transition={{
-                    pathLength: {
-                      duration: reduceMotion ? 0 : 1.1,
-                      delay: reduceMotion ? 0 : 0.15 + i * 0.07,
-                      ease: "easeInOut",
-                    },
-                    opacity: { duration: 0.25 },
-                  }}
+                  transition={{ opacity: { duration: reduceMotion ? 0 : 0.25 } }}
                 />
                 <FlowDot
                   path={
@@ -688,20 +678,14 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                     active && "wq-eco__node--active",
                     dimmed && "wq-eco__node--dim"
                   )}
-                  initial={
-                    reduceMotion
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: 0, scale: 0.86 }
-                  }
+                  /* initial={false}: nodes visible in first HTML paint (mobile LCP). */
+                  initial={false}
                   animate={{
                     opacity: dimmed ? 0.35 : 1,
                     scale: active ? 1.08 : 1,
                   }}
                   transition={{
-                    opacity: {
-                      duration: reduceMotion ? 0 : 0.55,
-                      delay: reduceMotion ? 0 : 0.45 + i * 0.07,
-                    },
+                    opacity: { duration: reduceMotion ? 0 : 0.2 },
                     scale: { duration: 0.2 },
                   }}
                   style={{ transformOrigin: "0px 0px" }}

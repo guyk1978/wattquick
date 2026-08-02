@@ -50,6 +50,7 @@ export function CategoryNavigationGrid({
             <li key={category}>
               <Link
                 href={getCategoryPageHref(category)}
+                prefetch={false}
                 className={cn(
                   "wq-cat-nav__card",
                   isActive && "wq-cat-nav__card--active"

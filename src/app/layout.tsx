@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
 import { CookieConsentBanner } from "@/components/cookie-consent-banner";
+import { DeferredAdSense } from "@/components/deferred-adsense";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -11,7 +12,6 @@ import { NavigationLoadingOverlay } from "@/components/navigation-loading-overla
 import { PageTransition } from "@/components/transitions/PageTransition";
 import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { getAllCalculatorMeta } from "@/lib/calculators";
-import { ADSENSE_SCRIPT_SRC } from "@/lib/adsense";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
 import { consentInitScript } from "@/lib/consent-init";
 import { legacyQueryInitScript } from "@/lib/legacy-query";
@@ -23,11 +23,13 @@ const calculatorCount = getAllCalculatorMeta().length;
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -62,9 +64,27 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: consentInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: legacyQueryInitScript }} />
-        <script async src={ADSENSE_SCRIPT_SRC} crossOrigin="anonymous" />
         {jsonLd}
-        <link rel="stylesheet" href="/assets/css/site-search.css" />
+        {/* Non-critical search chrome — defer apply so mobile FCP isn't blocked. */}
+        <link
+          rel="preload"
+          href="/assets/css/site-search.css"
+          as="style"
+        />
+        <link
+          id="wq-site-search-css"
+          rel="stylesheet"
+          href="/assets/css/site-search.css"
+          media="print"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.getElementById("wq-site-search-css");if(!l)return;if(l.sheet){l.media="all";return;}l.addEventListener("load",function(){l.media="all"});})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href="/assets/css/site-search.css" />
+        </noscript>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0a0a0a" />
         <meta property="fb:app_id" content={FACEBOOK_APP_ID} />
@@ -83,6 +103,7 @@ export default function RootLayout({
             </PageTransition>
             <SiteFooter />
             <CookieConsentBanner />
+            <DeferredAdSense />
             <ServiceWorkerRegistration />
           </GridPinnedCalculatorProvider>
         </ThemeProvider>

@@ -79,13 +79,36 @@ function injectGoogleAnalytics(measurementId: string): Promise<void> {
       send_page_view: true,
     });
 
-    const script = document.createElement("script");
-    script.id = "wq-consent-ga";
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Failed to load Google Analytics"));
-    document.head.appendChild(script);
+    const inject = () => {
+      const script = document.createElement("script");
+      script.id = "wq-consent-ga";
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error("Failed to load Google Analytics"));
+      document.head.appendChild(script);
+    };
+
+    // Defer past load so GA never contends with mobile FCP/LCP.
+    if (document.readyState === "complete") {
+      if (typeof window.requestIdleCallback === "function") {
+        window.requestIdleCallback(() => inject(), { timeout: 2000 });
+      } else {
+        window.setTimeout(inject, 1);
+      }
+    } else {
+      window.addEventListener(
+        "load",
+        () => {
+          if (typeof window.requestIdleCallback === "function") {
+            window.requestIdleCallback(() => inject(), { timeout: 2000 });
+          } else {
+            window.setTimeout(inject, 1);
+          }
+        },
+        { once: true }
+      );
+    }
   });
 }
 
