@@ -6,8 +6,8 @@ import { CalculatorBlueprintToolGrid } from "@/components/calculator/calculator-
 import { BlueprintShellFrame } from "@/components/blueprint/blueprint-shell-frame";
 import { BlueprintShellWorkspace } from "@/components/blueprint/blueprint-shell-workspace";
 import { CategoryBlueprintHeader } from "@/components/category/category-blueprint-header";
+import { CategoryEngineeringGuide } from "@/components/category/category-engineering-guide";
 import { CategoryToolsFocus } from "@/components/category/category-tools-focus";
-import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
@@ -24,7 +24,6 @@ export function CategoryLandingPage({
   calculators,
 }: CategoryLandingPageProps) {
   const label = CALCULATOR_CATEGORY_LABELS[category];
-  const seo = getCategorySeoContent(category);
 
   return (
     <div className="calculator-route calculator-route--blueprint">
@@ -57,20 +56,7 @@ export function CategoryLandingPage({
               toolCount={calculators.length}
             />
 
-            <section
-              aria-labelledby="category-seo-intro-heading"
-              className="category-blueprint-intro"
-            >
-              <p className="category-blueprint-intro__eyebrow">{seo.eyebrow}</p>
-              <h2 id="category-seo-intro-heading" className="sr-only">
-                About {label} calculators
-              </h2>
-              <div className="category-blueprint-intro__body">
-                {seo.paragraphs.map((paragraph) => (
-                  <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-                ))}
-              </div>
-            </section>
+            <CategoryEngineeringGuide category={category} />
 
             <section aria-labelledby="category-tools-heading">
               <h2 id="category-tools-heading" className="category-blueprint-tools__title">

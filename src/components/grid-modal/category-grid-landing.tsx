@@ -1,10 +1,9 @@
 import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero";
 import { CategoryPromoStrip } from "@/components/home/category-promo-strip";
+import { CategoryEngineeringGuide } from "@/components/category/category-engineering-guide";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
-import { SEOContentBlock } from "@/components/seo-content-block";
-import { getCategorySeoContent } from "@/data/category-seo-content";
 import {
   CALCULATOR_CATEGORY_LABELS,
   type CalculatorCategory,
@@ -18,14 +17,14 @@ type CategoryGridLandingProps = {
 };
 
 /**
- * Shared category template: hero → optional promo → tools → category nav → SEO.
+ * Shared category template:
+ * hero → optional promo → engineering guide → tools → category nav.
  */
 export function CategoryGridLanding({
   category,
   calculators,
 }: CategoryGridLandingProps) {
   const label = CALCULATOR_CATEGORY_LABELS[category];
-  const seo = getCategorySeoContent(category);
 
   return (
     <GridShell
@@ -34,15 +33,9 @@ export function CategoryGridLanding({
     >
       <CategoryEcosystemHero category={category} />
       <CategoryPromoStrip category={category} />
+      <CategoryEngineeringGuide category={category} />
       <ToolGrid calculators={calculators} />
       <CategoryNavigationGrid activeCategory={category} />
-
-      <section className="grid-modal-seo-inline" aria-labelledby="category-seo-heading">
-        <h2 id="category-seo-heading" className="sr-only">
-          About {label} calculators
-        </h2>
-        <SEOContentBlock title={seo.eyebrow} content={seo.paragraphs} />
-      </section>
     </GridShell>
   );
 }

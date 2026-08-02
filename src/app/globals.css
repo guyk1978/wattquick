@@ -12302,18 +12302,148 @@ body:has(.legal-modal) .grid-modal-shell {
 
 .grid-modal-shell__title {
   margin: 0;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  max-width: 48rem;
+  font-size: clamp(1.375rem, 3.2vw, 2rem);
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: 1.2;
   color: #ededed;
+  text-wrap: balance;
 }
 
 .grid-modal-shell__description {
-  margin: 0.5rem 0 0;
-  max-width: 40rem;
-  font-size: 0.9375rem;
+  margin: 0.65rem 0 0;
+  max-width: 44rem;
+  font-size: clamp(0.875rem, 1.6vw, 0.9375rem);
   line-height: 1.55;
   color: #a3a3a3;
+  text-wrap: pretty;
+}
+
+/* —— Category engineering / marketing guide (mid-page SEO) —— */
+.wq-cat-guide {
+  margin: 1.75rem 0 2rem;
+  padding: 1.35rem 1.15rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--category-color, #a3e635) 22%, #262626);
+  border-radius: 0.35rem;
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--category-color, #a3e635) 8%, #121212) 0%,
+      #101010 42%,
+      #0c0c0c 100%
+    );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--category-color, #a3e635) 10%, transparent);
+}
+
+@media (min-width: 768px) {
+  .wq-cat-guide {
+    margin: 2rem 0 2.25rem;
+    padding: 1.65rem 1.5rem 1.75rem;
+  }
+}
+
+.wq-cat-guide__header {
+  max-width: 48rem;
+  margin-bottom: 1.25rem;
+}
+
+.wq-cat-guide__eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--category-color, #a3e635);
+}
+
+.wq-cat-guide__title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: #ededed;
+  text-wrap: balance;
+}
+
+.wq-cat-guide__lead {
+  margin: 0.65rem 0 0;
+  max-width: 42rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  line-height: 1.6;
+  color: #bdbdbd;
+  text-wrap: pretty;
+}
+
+.wq-cat-guide__highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 0 0 1.35rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 640px) {
+  .wq-cat-guide__highlights {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+}
+
+.wq-cat-guide__highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0.9rem 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--category-color, #a3e635) 18%, #262626);
+  border-radius: 0.3rem;
+  background: color-mix(in srgb, #0a0a0a 88%, var(--category-color, #a3e635));
+}
+
+.wq-cat-guide__highlight-title {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  color: var(--category-color, #a3e635);
+}
+
+.wq-cat-guide__highlight-body {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: #a8a8a8;
+}
+
+.wq-cat-guide__body {
+  max-width: 48rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid #262626;
+}
+
+.wq-cat-guide__body-heading {
+  margin: 1rem 0 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+
+.wq-cat-guide__body p {
+  margin: 0;
+  font-size: clamp(0.9375rem, 1.4vw, 1.0625rem);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: #c4c4c4;
+}
+
+.wq-cat-guide__body p + p {
+  margin-top: 1.15rem;
 }
 
 /* —— Dedicated Articles pages (hub + article) —— */
