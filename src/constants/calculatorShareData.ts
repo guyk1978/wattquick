@@ -146,6 +146,11 @@ export const calculatorShareData: Partial<
     description: "kg CO₂ avoided from clean kWh vs. grid emissions factor.",
     imageUrl: "/images/share/carbon-footprint-offset.webp",
   },
+  "commercial-ev-planner": {
+    title: "Commercial EV Fleet Range Planner Calculator",
+    description: "Plan real-world commercial EV range under payload, refrigeration aux loads, route duty, tire wear, and diesel cost comparison.",
+    imageUrl: "/images/share/commercial-ev-planner.webp",
+  },
   "conductor-resistance-temperature": {
     title: "Conductor Resistance & Temperature Calculator",
     description: "Calculate copper or aluminum conductor resistance from cross-section, length, and operating temperature.",
@@ -216,6 +221,11 @@ export const calculatorShareData: Partial<
     description: "Physics-based range estimate from battery Wh, assist level, rider weight, and wind/terrain factors.",
     imageUrl: "/images/share/ebike-range-estimator.webp",
   },
+  "ebike-range-performance": {
+    title: "E-Bike Range & Performance Calculator",
+    description: "Estimate real-world e-bike range, PAS modes, speed profiles, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+    imageUrl: "/images/share/ebike-range-performance.webp",
+  },
   "ebike-voltage-sag": {
     title: "E-Bike Voltage Sag Calculator",
     description: "Calculate dynamic voltage sag from cell resistance, S×P pack layout, and max controller current.",
@@ -285,6 +295,11 @@ export const calculatorShareData: Partial<
     title: "E-Scooter Range Calculator",
     description: "Estimate remaining range with SOC slider, tyre pressure, and voltage sag at 36 / 48 / 52 V.",
     imageUrl: "/images/share/escooter-range.webp",
+  },
+  "escooter-range-performance": {
+    title: "E-Scooter Range & Performance Calculator",
+    description: "Estimate real-world e-scooter range, speed on hills, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+    imageUrl: "/images/share/escooter-range-performance.webp",
   },
   "escooter-tire-pressure": {
     title: "E-Scooter Tyre Pressure & Rolling Resistance Calculator",
@@ -546,6 +561,11 @@ export const calculatorShareData: Partial<
     description: "Calculate power factor from real power (kW) and apparent power (kVA).",
     imageUrl: "/images/share/power-factor.webp",
   },
+  "power-station-planner": {
+    title: "Portable Power Station & RV Off-Grid Energy Planner Calculator",
+    description: "Plan camping and RV energy: daily Wh balance, off-grid autonomy days, solar and alternator recharge, and appliance surge limits.",
+    imageUrl: "/images/share/power-station-planner.webp",
+  },
   "reactive-power-calculator": {
     title: "Reactive Power & Power Factor Calculator",
     description: "Convert kVA to real kW and reactive kVAR for motor and driver loads—plan inverter and conductor sizing.",
@@ -580,6 +600,11 @@ export const calculatorShareData: Partial<
     title: "Solar Array Current Calculator",
     description: "Estimate array current from total panel watts and system voltage.",
     imageUrl: "/images/share/solar-array-current.webp",
+  },
+  "solar-backup-calculator": {
+    title: "Home Solar Backup & UPS Energy Storage Calculator",
+    description: "Calculate blackout backup hours, inverter surge limits, battery degradation, and peak shaving savings for home energy storage.",
+    imageUrl: "/images/share/solar-backup-calculator.webp",
   },
   "solar-battery-bank": {
     title: "Solar Battery Bank Size Calculator",

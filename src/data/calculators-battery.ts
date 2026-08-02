@@ -1,4 +1,4 @@
-import { BatteryCharging, Cable, Calendar, Cpu, Gauge, Home, Layers, Shield, Zap } from "lucide-react";
+import { BatteryCharging, Cable, Calendar, Cpu, Gauge, Home, Layers, Shield, Sun, Zap } from "lucide-react";
 import {
   formatCurrency,
   formatNumber,
@@ -26,6 +26,14 @@ import {
   type InverterMotorLoad,
   type InverterMotorLoadPreset,
 } from "@/lib/calculators/electrical";
+import {
+  formatSolarBackupResult,
+  SOLAR_BACKUP_BATTERY_PRESETS,
+  SOLAR_BACKUP_INVERTER_PRESETS,
+  SOLAR_BACKUP_MODE_OPTIONS,
+  SOLAR_BACKUP_REGION_OPTIONS,
+  SOLAR_BACKUP_SOLAR_PRESETS,
+} from "@/lib/calculators/solar-backup-calculator";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
 const INVERTER_LOAD_PRESET_OPTIONS = Object.entries(INVERTER_MOTOR_LOAD_PRESETS).map(
@@ -521,6 +529,7 @@ export const calculatorsBattery = [
     tag: "Battery",
     category: "battery",
     suggestions: [
+      "solar-backup-calculator",
       "inverter-peak-load-surge",
       "generator-runtime-savings",
       "battery-bank-size",
@@ -915,6 +924,140 @@ export const calculatorsBattery = [
     },
   },
   {
+    slug: "solar-backup-calculator",
+    href: "/solar-backup-calculator",
+    title: "Home Solar Backup & UPS Energy Storage Calculator",
+    description:
+      "Calculate blackout backup hours, inverter surge limits, battery degradation, and peak shaving savings for home energy storage.",
+    keywords: [
+      "solar backup calculator",
+      "home ups battery runtime",
+      "home energy storage blackout",
+      "peak shaving savings calculator",
+      "lithium backup inverter surge",
+    ],
+    icon: Sun,
+    tag: "Backup",
+    category: "backup",
+    suggestions: [
+      "critical-load-analysis",
+      "home-backup-sizing",
+      "ups-runtime",
+      "inverter-peak-load-surge",
+      "battery-arbitrage-roi",
+    ],
+    fields: [
+      {
+        id: "batteryPreset",
+        label: "Lithium battery capacity",
+        inputType: "select",
+        defaultValue: "10",
+        options: [...SOLAR_BACKUP_BATTERY_PRESETS],
+      },
+      {
+        id: "batteryKwhCustom",
+        label: "Custom battery capacity",
+        unit: "kWh",
+        placeholder: "12",
+        defaultValue: "12",
+        advanced: true,
+      },
+      {
+        id: "inverterPreset",
+        label: "Inverter power rating",
+        inputType: "select",
+        defaultValue: "8",
+        options: [...SOLAR_BACKUP_INVERTER_PRESETS],
+      },
+      {
+        id: "inverterKwCustom",
+        label: "Custom continuous kW",
+        unit: "kW",
+        placeholder: "7.6",
+        defaultValue: "7.6",
+        advanced: true,
+      },
+      {
+        id: "inverterSurgeKwCustom",
+        label: "Custom surge kW",
+        unit: "kW",
+        placeholder: "15",
+        defaultValue: "15",
+        advanced: true,
+      },
+      {
+        id: "solarPreset",
+        label: "Solar panels",
+        inputType: "select",
+        defaultValue: "6",
+        options: [...SOLAR_BACKUP_SOLAR_PRESETS],
+      },
+      {
+        id: "solarKwCustom",
+        label: "Custom solar capacity",
+        unit: "kW",
+        placeholder: "8",
+        defaultValue: "8",
+        advanced: true,
+      },
+      {
+        id: "mode",
+        label: "Operation mode",
+        inputType: "select",
+        defaultValue: "ups",
+        options: [...SOLAR_BACKUP_MODE_OPTIONS],
+      },
+      {
+        id: "region",
+        label: "Sunlight profile",
+        inputType: "select",
+        defaultValue: "moderate",
+        options: [...SOLAR_BACKUP_REGION_OPTIONS],
+      },
+      {
+        id: "sunHoursCustom",
+        label: "Custom peak sun hours",
+        unit: "hrs",
+        placeholder: "5",
+        defaultValue: "5",
+        advanced: true,
+      },
+      {
+        id: "peakRatePerKwh",
+        label: "Peak electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.32",
+        defaultValue: "0.32",
+        advanced: true,
+      },
+      {
+        id: "offPeakRatePerKwh",
+        label: "Off-peak / solar cost",
+        unit: "$/kWh",
+        placeholder: "0.12",
+        defaultValue: "0.12",
+        advanced: true,
+      },
+    ],
+    result: {
+      label: "Essential / eco backup runtime",
+      emptyMessage: "Enter battery, inverter, and appliance details",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Backup runtime & surge model",
+          body: "Usable kWh = pack × 90% DoD × inverter efficiency. Runtime compares full-load vs essential circuits using average blackout-day draw. Surge checks compare motor/compressor starts against inverter continuous and peak ratings. Peak-shaving mode estimates monthly savings from peak vs off-peak rate deltas.",
+        },
+        {
+          heading: "Frequently asked questions",
+          body: "Q: Why is eco runtime longer? A: Essential-only circuits exclude AC and washer-class loads. Q: Does solar help during a blackout? A: Hybrid systems that island can offset daytime draw and stretch hours.",
+        },
+      ],
+    },
+    compute: formatSolarBackupResult,
+  },
+  {
     slug: "critical-load-analysis",
     href: "/critical-load-analysis",
     relatedArticleId: "home-backup-load-guide",
@@ -931,6 +1074,7 @@ export const calculatorsBattery = [
     tag: "Backup",
     category: "backup",
     suggestions: [
+      "solar-backup-calculator",
       "home-backup-sizing",
       "ups-runtime",
       "inverter-peak-load-surge",

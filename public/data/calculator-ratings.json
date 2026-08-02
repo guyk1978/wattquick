@@ -311,6 +311,10 @@
     "sum": 2298,
     "count": 535
   },
+  "solar-backup-calculator": {
+    "sum": 794,
+    "count": 193
+  },
   "critical-load-analysis": {
     "sum": 1347,
     "count": 295
@@ -351,6 +355,10 @@
     "sum": 1517,
     "count": 355
   },
+  "commercial-ev-planner": {
+    "sum": 1072,
+    "count": 244
+  },
   "ev-truck-range": {
     "sum": 720,
     "count": 165
@@ -370,6 +378,10 @@
   "ev-delivery-van-efficiency": {
     "sum": 2177,
     "count": 471
+  },
+  "power-station-planner": {
+    "sum": 1895,
+    "count": 417
   },
   "rv-solar-calculator": {
     "sum": 1484,
@@ -467,6 +479,10 @@
     "sum": 1977,
     "count": 473
   },
+  "ebike-range-performance": {
+    "sum": 1962,
+    "count": 416
+  },
   "ebike-range-estimator": {
     "sum": 1506,
     "count": 369
@@ -506,6 +522,10 @@
   "ebike-battery-cycle-life": {
     "sum": 1925,
     "count": 417
+  },
+  "escooter-range-performance": {
+    "sum": 1673,
+    "count": 373
   },
   "escooter-range": {
     "sum": 1415,

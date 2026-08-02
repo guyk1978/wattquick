@@ -1,4 +1,11 @@
-import { Anchor, BatteryCharging, Refrigerator, Sun, Zap } from "lucide-react";
+import {
+  Anchor,
+  BatteryCharging,
+  Refrigerator,
+  Sun,
+  Tent,
+  Zap,
+} from "lucide-react";
 import { formatDuration, formatNumber, parsePositive } from "@/lib/format";
 import {
   calculateCampingFridgeRuntime,
@@ -7,6 +14,14 @@ import {
   calculatePortableRecharge,
   calculateRvSolar,
 } from "@/lib/calculators/rv-marine";
+import {
+  formatPowerStationPlannerResult,
+  POWER_STATION_ALTERNATOR_PRESETS,
+  POWER_STATION_CAPACITY_PRESETS,
+  POWER_STATION_INVERTER_PRESETS,
+  POWER_STATION_SOLAR_PRESETS,
+  POWER_STATION_WEATHER_OPTIONS,
+} from "@/lib/calculators/power-station-planner";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
 const seo = (heading: string, body: string, faq: string) => ({
@@ -14,6 +29,130 @@ const seo = (heading: string, body: string, faq: string) => ({
 });
 
 export const calculatorsRvMarine = [
+  {
+    slug: "power-station-planner",
+    href: "/power-station-planner",
+    title: "Portable Power Station & RV Off-Grid Energy Planner",
+    description:
+      "Plan camping and RV energy: daily Wh balance, off-grid autonomy days, solar and alternator recharge, and appliance surge limits.",
+    keywords: [
+      "portable power station planner",
+      "rv off-grid energy calculator",
+      "camping power station solar",
+      "power station autonomy days",
+      "rv appliance energy balance",
+    ],
+    icon: Tent,
+    tag: "Off-Grid",
+    category: "rv-marine",
+    suggestions: [
+      "rv-solar-calculator",
+      "portable-power-station-recharge",
+      "camping-fridge-runtime",
+      "12v-to-120v-inverter",
+    ],
+    fields: [
+      {
+        id: "capacityPreset",
+        label: "Power station capacity",
+        inputType: "select",
+        defaultValue: "1000",
+        options: [...POWER_STATION_CAPACITY_PRESETS],
+      },
+      {
+        id: "capacityWhCustom",
+        label: "Custom capacity",
+        unit: "Wh",
+        placeholder: "1500",
+        defaultValue: "1500",
+        advanced: true,
+      },
+      {
+        id: "inverterPreset",
+        label: "Max AC inverter output",
+        inputType: "select",
+        defaultValue: "1000",
+        options: [...POWER_STATION_INVERTER_PRESETS],
+      },
+      {
+        id: "inverterWCustom",
+        label: "Custom continuous watts",
+        unit: "W",
+        placeholder: "1500",
+        defaultValue: "1500",
+        advanced: true,
+      },
+      {
+        id: "inverterSurgeCustom",
+        label: "Custom surge watts",
+        unit: "W",
+        placeholder: "3000",
+        defaultValue: "3000",
+        advanced: true,
+      },
+      {
+        id: "solarPreset",
+        label: "Portable solar panels",
+        inputType: "select",
+        defaultValue: "200",
+        options: [...POWER_STATION_SOLAR_PRESETS],
+      },
+      {
+        id: "solarWCustom",
+        label: "Custom solar watts",
+        unit: "W",
+        placeholder: "600",
+        defaultValue: "600",
+        advanced: true,
+      },
+      {
+        id: "sunHours",
+        label: "Peak sun hours",
+        unit: "hrs",
+        placeholder: "5",
+        defaultValue: "5",
+      },
+      {
+        id: "weather",
+        label: "Weather condition",
+        inputType: "select",
+        defaultValue: "sunny",
+        options: [...POWER_STATION_WEATHER_OPTIONS],
+      },
+      {
+        id: "alternatorPreset",
+        label: "Vehicle DC-DC / alternator",
+        inputType: "select",
+        defaultValue: "none",
+        options: [...POWER_STATION_ALTERNATOR_PRESETS],
+      },
+      {
+        id: "alternatorWCustom",
+        label: "Custom DC-DC watts",
+        unit: "W",
+        placeholder: "400",
+        defaultValue: "400",
+        advanced: true,
+      },
+      {
+        id: "drivingHoursPerDay",
+        label: "Hours driving per day",
+        unit: "hrs",
+        placeholder: "2",
+        defaultValue: "2",
+      },
+    ],
+    result: {
+      label: "Off-grid autonomy",
+      emptyMessage: "Enter station, solar, and appliance details",
+    },
+    seo: seo(
+      "Off-grid power station energy balance",
+      "Daily load Wh is the sum of appliance watts × hours/day. Solar yield = panel W × peak sun hours × weather factor × 85% efficiency. Alternator Wh = DC-DC watts × driving hours. Autonomy uses usable pack Wh (≈90% of capacity) against net daily deficit, with surge checks against inverter continuous and peak ratings.",
+      "Q: Why does my kettle trip the inverter? A: High-draw appliances can exceed continuous AC output even when daily Wh looks fine—check the surge & peak load warning."
+    ),
+    compute: formatPowerStationPlannerResult,
+  },
   {
     slug: "rv-solar-calculator",
     href: "/rv-solar-calculator",
@@ -23,7 +162,7 @@ export const calculatorsRvMarine = [
     icon: Sun,
     tag: "RV Solar",
     category: "rv-marine",
-    suggestions: ["solar-roof-space", "solar-battery-bank", "battery-bank-size"],
+    suggestions: ["power-station-planner", "solar-roof-space", "solar-battery-bank", "battery-bank-size"],
     fields: [
       { id: "panelWatts", label: "Panel watts", unit: "W", placeholder: "400" },
       { id: "sunHours", label: "Peak sun hours", unit: "hrs", placeholder: "5" },
@@ -201,7 +340,7 @@ export const calculatorsRvMarine = [
     icon: Refrigerator,
     tag: "Camping",
     category: "rv-marine",
-    suggestions: ["fridge-energy-usage", "battery-runtime", "rv-solar-calculator"],
+    suggestions: ["power-station-planner", "fridge-energy-usage", "battery-runtime", "rv-solar-calculator"],
     fields: [
       { id: "batteryWh", label: "Battery energy", unit: "Wh", placeholder: "1200" },
       { id: "ratedDailyWh", label: "Fridge rated use", unit: "Wh/day", placeholder: "350", hint: "At 77°F lab rating" },

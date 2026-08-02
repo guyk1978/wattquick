@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-08-01T12:43:50.807Z",
+  "generatedAt": "2026-08-02T14:18:31.857Z",
   "popular": [
     {
       "id": "battery-runtime",
@@ -1370,6 +1370,23 @@
       ]
     },
     {
+      "id": "solar-backup-calculator",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Backup",
+      "title": "Home Solar Backup & UPS Energy Storage Calculator",
+      "description": "Calculate blackout backup hours, inverter surge limits, battery degradation, and peak shaving savings for home energy storage.",
+      "href": "/tools/backup-power/solar-backup-calculator/",
+      "tag": "Backup",
+      "keywords": [
+        "solar backup calculator",
+        "home ups battery runtime",
+        "home energy storage blackout",
+        "peak shaving savings calculator",
+        "lithium backup inverter surge"
+      ]
+    },
+    {
       "id": "critical-load-analysis",
       "type": "calculator",
       "category": "Calculators",
@@ -1528,6 +1545,23 @@
       ]
     },
     {
+      "id": "commercial-ev-planner",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "Commercial EV",
+      "title": "Commercial EV Fleet Range Planner",
+      "description": "Plan real-world commercial EV range under payload, refrigeration aux loads, route duty, tire wear, and diesel cost comparison.",
+      "href": "/tools/commercial-ev/commercial-ev-planner/",
+      "tag": "Commercial EV",
+      "keywords": [
+        "commercial ev range planner",
+        "electric delivery van range",
+        "fleet range under load",
+        "reefer ev range",
+        "commercial ev vs diesel cost"
+      ]
+    },
+    {
       "id": "ev-truck-range",
       "type": "calculator",
       "category": "Calculators",
@@ -1600,6 +1634,23 @@
         "delivery van ev efficiency",
         "stop and go ev kwh",
         "urban courier van"
+      ]
+    },
+    {
+      "id": "power-station-planner",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "RV & Marine",
+      "title": "Portable Power Station & RV Off-Grid Energy Planner",
+      "description": "Plan camping and RV energy: daily Wh balance, off-grid autonomy days, solar and alternator recharge, and appliance surge limits.",
+      "href": "/tools/rv-marine-power/power-station-planner/",
+      "tag": "Off-Grid",
+      "keywords": [
+        "portable power station planner",
+        "rv off-grid energy calculator",
+        "camping power station solar",
+        "power station autonomy days",
+        "rv appliance energy balance"
       ]
     },
     {
@@ -1981,6 +2032,23 @@
       ]
     },
     {
+      "id": "ebike-range-performance",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Bike",
+      "title": "E-Bike Range & Performance Calculator",
+      "description": "Estimate real-world e-bike range, PAS modes, speed profiles, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+      "href": "/tools/e-bike/ebike-range-performance/",
+      "tag": "E-Bike",
+      "keywords": [
+        "ebike range performance calculator",
+        "electric bike range",
+        "pas mode range comparison",
+        "ebike speed estimator",
+        "ebike battery life"
+      ]
+    },
+    {
       "id": "ebike-range-estimator",
       "type": "calculator",
       "category": "Calculators",
@@ -2135,6 +2203,23 @@
         "cycle life calculator",
         "depth of discharge",
         "lithium ebike battery cycles"
+      ]
+    },
+    {
+      "id": "escooter-range-performance",
+      "type": "calculator",
+      "category": "Calculators",
+      "group": "E-Scooter",
+      "title": "E-Scooter Range & Performance Calculator",
+      "description": "Estimate real-world e-scooter range, speed on hills, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+      "href": "/tools/e-scooter/escooter-range-performance/",
+      "tag": "E-Scooter",
+      "keywords": [
+        "escooter range performance calculator",
+        "electric scooter range",
+        "dual motor scooter range",
+        "escooter speed estimator",
+        "scooter tire lifespan"
       ]
     },
     {

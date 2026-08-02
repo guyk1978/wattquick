@@ -191,6 +191,8 @@
 /battery-calendar-aging/ /tools/battery-calculators/battery-calendar-aging/ 301
 /bess-roi /tools/battery-calculators/bess-roi/ 301
 /bess-roi/ /tools/battery-calculators/bess-roi/ 301
+/solar-backup-calculator /tools/backup-power/solar-backup-calculator/ 301
+/solar-backup-calculator/ /tools/backup-power/solar-backup-calculator/ 301
 /critical-load-analysis /tools/backup-power/critical-load-analysis/ 301
 /critical-load-analysis/ /tools/backup-power/critical-load-analysis/ 301
 /crypto-mining-power /tools/home-appliances/crypto-mining-power/ 301
@@ -211,6 +213,8 @@
 /ac-inverter-savings/ /tools/home-appliances/ac-inverter-savings/ 301
 /pool-energy-thermal-cover /tools/pool-power/pool-energy-thermal-cover/ 301
 /pool-energy-thermal-cover/ /tools/pool-power/pool-energy-thermal-cover/ 301
+/commercial-ev-planner /tools/commercial-ev/commercial-ev-planner/ 301
+/commercial-ev-planner/ /tools/commercial-ev/commercial-ev-planner/ 301
 /ev-truck-range /tools/commercial-ev/ev-truck-range/ 301
 /ev-truck-range/ /tools/commercial-ev/ev-truck-range/ 301
 /ev-fleet-tco /tools/commercial-ev/ev-fleet-tco/ 301
@@ -221,6 +225,8 @@
 /ev-forklift-runtime/ /tools/commercial-ev/ev-forklift-runtime/ 301
 /ev-delivery-van-efficiency /tools/commercial-ev/ev-delivery-van-efficiency/ 301
 /ev-delivery-van-efficiency/ /tools/commercial-ev/ev-delivery-van-efficiency/ 301
+/power-station-planner /tools/rv-marine-power/power-station-planner/ 301
+/power-station-planner/ /tools/rv-marine-power/power-station-planner/ 301
 /rv-solar-calculator /tools/rv-marine-power/rv-solar-calculator/ 301
 /rv-solar-calculator/ /tools/rv-marine-power/rv-solar-calculator/ 301
 /marine-battery-bank /tools/rv-marine-power/marine-battery-bank/ 301
@@ -269,6 +275,8 @@
 /small-wind-turbine-yield/ /tools/green-home-efficiency/small-wind-turbine-yield/ 301
 /standby-power-aggregator /tools/green-home-efficiency/standby-power-aggregator/ 301
 /standby-power-aggregator/ /tools/green-home-efficiency/standby-power-aggregator/ 301
+/ebike-range-performance /tools/e-bike/ebike-range-performance/ 301
+/ebike-range-performance/ /tools/e-bike/ebike-range-performance/ 301
 /ebike-range-estimator /tools/e-bike/ebike-range-estimator/ 301
 /ebike-range-estimator/ /tools/e-bike/ebike-range-estimator/ 301
 /ebike-charging-cost /tools/e-bike/ebike-charging-cost/ 301
@@ -289,6 +297,8 @@
 /ebike-controller-watts/ /tools/e-bike/ebike-controller-watts/ 301
 /ebike-battery-cycle-life /tools/e-bike/ebike-battery-cycle-life/ 301
 /ebike-battery-cycle-life/ /tools/e-bike/ebike-battery-cycle-life/ 301
+/escooter-range-performance /tools/e-scooter/escooter-range-performance/ 301
+/escooter-range-performance/ /tools/e-scooter/escooter-range-performance/ 301
 /escooter-range /tools/e-scooter/escooter-range/ 301
 /escooter-range/ /tools/e-scooter/escooter-range/ 301
 /escooter-tire-pressure /tools/e-scooter/escooter-tire-pressure/ 301

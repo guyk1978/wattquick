@@ -1,4 +1,4 @@
-import { Bus, Forklift, Package, Truck, Users } from "lucide-react";
+import { Bus, Forklift, Package, Route, Truck, Users } from "lucide-react";
 import { formatCurrency, formatNumber, parsePositive } from "@/lib/format";
 import {
   calculateBusBatteryKwhPerMile,
@@ -7,6 +7,17 @@ import {
   calculateForkliftRuntime,
   calculateTruckRange,
 } from "@/lib/calculators/commercial-ev";
+import {
+  COMMERCIAL_EV_AUX_OPTIONS,
+  COMMERCIAL_EV_BATTERY_PRESETS,
+  COMMERCIAL_EV_DRIVETRAIN,
+  COMMERCIAL_EV_MOTOR_PRESETS,
+  COMMERCIAL_EV_ROUTE_OPTIONS,
+  COMMERCIAL_EV_STYLE_OPTIONS,
+  COMMERCIAL_EV_TIRE_OPTIONS,
+  COMMERCIAL_EV_VEHICLE_CLASSES,
+  formatCommercialEvPlannerResult,
+} from "@/lib/calculators/commercial-ev-planner";
 import type { CalculatorDataEntry } from "@/data/calculator-types";
 
 const seo = (heading: string, body: string, faq: string) => ({
@@ -21,6 +32,166 @@ const seo = (heading: string, body: string, faq: string) => ({
 
 export const calculatorsCommercialEv = [
   {
+    slug: "commercial-ev-planner",
+    href: "/commercial-ev-planner",
+    title: "Commercial EV Fleet Range Planner",
+    description:
+      "Plan real-world commercial EV range under payload, refrigeration aux loads, route duty, tire wear, and diesel cost comparison.",
+    keywords: [
+      "commercial ev range planner",
+      "electric delivery van range",
+      "fleet range under load",
+      "reefer ev range",
+      "commercial ev vs diesel cost",
+    ],
+    icon: Route,
+    tag: "Commercial EV",
+    category: "commercial-ev",
+    suggestions: [
+      "ev-truck-range",
+      "ev-delivery-van-efficiency",
+      "ev-fleet-tco",
+      "ev-cost-per-mile",
+    ],
+    fields: [
+      {
+        id: "vehicleClass",
+        label: "Vehicle class",
+        inputType: "select",
+        defaultValue: "delivery-van",
+        options: [...COMMERCIAL_EV_VEHICLE_CLASSES],
+      },
+      {
+        id: "batteryPreset",
+        label: "Battery capacity",
+        inputType: "select",
+        defaultValue: "100",
+        options: [...COMMERCIAL_EV_BATTERY_PRESETS],
+      },
+      {
+        id: "batteryKwhCustom",
+        label: "Custom battery capacity",
+        unit: "kWh",
+        placeholder: "120",
+        defaultValue: "120",
+        advanced: true,
+      },
+      {
+        id: "drivetrain",
+        label: "Drivetrain",
+        inputType: "select",
+        defaultValue: "single",
+        options: [...COMMERCIAL_EV_DRIVETRAIN],
+      },
+      {
+        id: "motorPreset",
+        label: "Motor power",
+        inputType: "select",
+        defaultValue: "250",
+        options: [...COMMERCIAL_EV_MOTOR_PRESETS],
+      },
+      {
+        id: "motorKwCustom",
+        label: "Custom motor power",
+        unit: "kW",
+        placeholder: "280",
+        defaultValue: "280",
+        advanced: true,
+      },
+      {
+        id: "tire",
+        label: "Tire type",
+        inputType: "select",
+        defaultValue: "hd-single",
+        options: [...COMMERCIAL_EV_TIRE_OPTIONS],
+      },
+      {
+        id: "gvwrKg",
+        label: "GVWR",
+        unit: "kg",
+        placeholder: "4500",
+        defaultValue: "4500",
+      },
+      {
+        id: "crewWeightKg",
+        label: "Driver & crew weight",
+        unit: "kg",
+        placeholder: "180",
+        defaultValue: "180",
+      },
+      {
+        id: "cargoWeightKg",
+        label: "Cargo weight",
+        unit: "kg",
+        placeholder: "1200",
+        defaultValue: "1200",
+      },
+      {
+        id: "auxPreset",
+        label: "Auxiliary power",
+        inputType: "select",
+        defaultValue: "climate",
+        options: [...COMMERCIAL_EV_AUX_OPTIONS],
+      },
+      {
+        id: "auxKwCustom",
+        label: "Custom aux draw",
+        unit: "kW",
+        placeholder: "5",
+        defaultValue: "5",
+        advanced: true,
+      },
+      {
+        id: "route",
+        label: "Route profile",
+        inputType: "select",
+        defaultValue: "urban",
+        options: [...COMMERCIAL_EV_ROUTE_OPTIONS],
+      },
+      {
+        id: "drivingStyle",
+        label: "Driving style",
+        inputType: "select",
+        defaultValue: "mixed",
+        options: [...COMMERCIAL_EV_STYLE_OPTIONS],
+      },
+      {
+        id: "electricityRate",
+        label: "Electricity rate",
+        unit: "$/kWh",
+        placeholder: "0.16",
+        defaultValue: "0.16",
+        advanced: true,
+      },
+      {
+        id: "dieselPrice",
+        label: "Diesel price",
+        unit: "$/gal",
+        placeholder: "4.25",
+        defaultValue: "4.25",
+        advanced: true,
+      },
+      {
+        id: "dieselMpg",
+        label: "Diesel MPG",
+        unit: "mpg",
+        placeholder: "12",
+        defaultValue: "12",
+        advanced: true,
+      },
+    ],
+    result: {
+      label: "Real-world range under load",
+      emptyMessage: "Enter vehicle, payload, aux, and route details",
+    },
+    seo: seo(
+      "Loaded commercial EV range model",
+      "Usable kWh = pack × 0.9. Consumption adds class baseline kWh/km, tire rolling, mass vs curb, route and driving style, plus auxiliary kW divided by average route speed. Compare EV $/km to diesel using your rate and mpg assumptions.",
+      "Q: Does refrigeration reduce range linearly? A: Aux kW is converted to kWh/km using route average speed—slower urban duty burns more of the pack on climate/reefer."
+    ),
+    compute: formatCommercialEvPlannerResult,
+  },
+  {
     slug: "ev-truck-range",
     href: "/ev-truck-range",
     title: "EV Truck Range vs. Payload Calculator",
@@ -30,7 +201,12 @@ export const calculatorsCommercialEv = [
     icon: Truck,
     tag: "Commercial EV",
     category: "commercial-ev",
-    suggestions: ["ev-battery-range", "ev-fleet-tco", "ev-delivery-van-efficiency"],
+    suggestions: [
+      "commercial-ev-planner",
+      "ev-battery-range",
+      "ev-fleet-tco",
+      "ev-delivery-van-efficiency",
+    ],
     fields: [
       { id: "baseRangeMiles", label: "Rated range (empty)", unit: "mi", placeholder: "250" },
       { id: "payloadLbs", label: "Payload weight", unit: "lbs", placeholder: "8000" },

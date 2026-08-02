@@ -184,8 +184,12 @@ export const CALCULATOR_EXAMPLES: Record<CalculatorSlug, string> = {
     "A 900 Wh UPS running a 150 W server = about 5 hours of backup.",
   "critical-load-analysis":
     "Fridge, router, and lights for 12 hours = about 3.2 kWh of backup to plan for.",
+  "solar-backup-calculator":
+    "A 10 kWh lithium pack on eco circuits (fridge + router + lights) ≈ 10–14 hours of blackout backup; A/C surge may still trip an undersized inverter.",
 
   // Commercial EV
+  "commercial-ev-planner":
+    "A 100 kWh delivery van with 1,200 kg cargo + light reefer = roughly 200–240 km on urban multi-stop duty.",
   "ev-truck-range":
     "A 300-mile empty rating with 8 tons of cargo = closer to 210 usable miles.",
   "ev-fleet-tco":
@@ -198,6 +202,8 @@ export const CALCULATOR_EXAMPLES: Record<CalculatorSlug, string> = {
     "A 0.35 kWh/mile highway baseline with 4 stops per mile = closer to 0.55 kWh/mile in town.",
 
   // RV & Marine
+  "power-station-planner":
+    "A 1000 Wh station with fridge + Starlink and 200 W solar ≈ multi-day buffer when sunny; kettle surge may still trip a 1000 W inverter.",
   "rv-solar-calculator":
     "400 W of roof solar vs 1.5 kWh of daily loads = fully covered on a sunny day.",
   "marine-battery-bank":
@@ -256,6 +262,8 @@ export const CALCULATOR_EXAMPLES: Record<CalculatorSlug, string> = {
     "A COP-5 heat pump plus a thermal cover = often 70%+ off pool heating costs.",
 
   // E-Bike
+  "ebike-range-performance":
+    "A 750W / 48V 15Ah setup on mixed hills = roughly 35–55 km, with Eco PAS lasting much longer.",
   "ebike-range-estimator":
     "A 500 Wh pack at mid assist = roughly 45–60 km for an average rider.",
   "ebike-charging-cost":
@@ -280,6 +288,8 @@ export const CALCULATOR_EXAMPLES: Record<CalculatorSlug, string> = {
     "3 years of commuting = often $2,000 by e-bike vs $15,000+ by car.",
 
   // E-Scooter
+  "escooter-range-performance":
+    "A dual 1000W / 52V 20Ah scooter on mixed hills = roughly 35–55 km in normal mode.",
   "escooter-range":
     "60% charge on a 48 V, 15 Ah scooter = about 20–25 km left.",
   "escooter-tire-pressure":

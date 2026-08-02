@@ -36,7 +36,12 @@ import { HomeInsulationSavingsCalculator } from "@/components/calculators/HomeIn
 import { PoolEnergyThermalCoverCalculator } from "@/components/calculators/PoolEnergyThermalCoverCalculator";
 import { AcInverterSavingsCalculator } from "@/components/calculators/AcInverterSavingsCalculator";
 import { EvVsIceMaintenanceCalculator } from "@/components/calculators/EvVsIceMaintenanceCalculator";
+import { CommercialEvPlannerCalculator } from "@/components/calculators/CommercialEvPlannerCalculator";
+import { PowerStationPlannerCalculator } from "@/components/calculators/PowerStationPlannerCalculator";
+import { SolarBackupCalculator } from "@/components/calculators/SolarBackupCalculator";
 import { EbikeRangeEstimatorCalculator } from "@/components/calculators/EbikeRangeEstimatorCalculator";
+import { EbikeRangePerformanceCalculator } from "@/components/calculators/EbikeRangePerformanceCalculator";
+import { EscooterRangePerformanceCalculator } from "@/components/calculators/EscooterRangePerformanceCalculator";
 import { EscooterCalculatorShell } from "@/components/calculators/EscooterCalculatorShell";
 import { ESCOOTER_CALCULATOR_IDS } from "@/lib/calculators/escooter";
 import { EbikeVoltageSagCalculator } from "@/components/calculators/EbikeVoltageSagCalculator";
@@ -210,6 +215,21 @@ function CalculatorPanelInner({
   }
   if (id === "ev-vs-ice-maintenance") {
     return <EvVsIceMaintenanceCalculator className={shellClassName} />;
+  }
+  if (id === "commercial-ev-planner") {
+    return <CommercialEvPlannerCalculator className={shellClassName} />;
+  }
+  if (id === "power-station-planner") {
+    return <PowerStationPlannerCalculator className={shellClassName} />;
+  }
+  if (id === "solar-backup-calculator") {
+    return <SolarBackupCalculator className={shellClassName} />;
+  }
+  if (id === "ebike-range-performance") {
+    return <EbikeRangePerformanceCalculator className={shellClassName} />;
+  }
+  if (id === "escooter-range-performance") {
+    return <EscooterRangePerformanceCalculator className={shellClassName} />;
   }
   if (id === "ebike-range-estimator") {
     return <EbikeRangeEstimatorCalculator className={shellClassName} />;

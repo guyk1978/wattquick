@@ -197,8 +197,12 @@ export const CALCULATOR_BENEFITS: Record<CalculatorSlug, string> = {
     "Use this to know how long your UPS keeps things alive when the power cuts out.",
   "critical-load-analysis":
     "Use this to plan exactly what stays on during an outage and for how long.",
+  "solar-backup-calculator":
+    "Use this to plan blackout backup hours, inverter surge limits, battery life, and peak-shaving savings.",
 
   // Commercial EV
+  "commercial-ev-planner":
+    "Use this to plan loaded commercial EV range, refrigeration drain, and diesel cost savings.",
   "ev-truck-range":
     "Use this to plan routes with a realistic loaded range, not the brochure number.",
   "ev-fleet-tco":
@@ -211,6 +215,8 @@ export const CALCULATOR_BENEFITS: Record<CalculatorSlug, string> = {
     "Use this to predict real urban energy use and size your delivery fleet's charging.",
 
   // RV & Marine
+  "power-station-planner":
+    "Use this to plan camping loads, solar recovery, and how many days your power station lasts off-grid.",
   "rv-solar-calculator":
     "Use this to camp off-grid longer without draining your house battery.",
   "marine-battery-bank":
@@ -269,6 +275,8 @@ export const CALCULATOR_BENEFITS: Record<CalculatorSlug, string> = {
     "Use this to cut pool running costs with the right pump, heater, and cover choices.",
 
   // E-Bike
+  "ebike-range-performance":
+    "Use this to size motor, battery, and controller for real-world range, speed, and longevity.",
   "ebike-range-estimator":
     "Use this to plan rides confidently without fear of running out mid-route.",
   "ebike-charging-cost":
@@ -293,6 +301,8 @@ export const CALCULATOR_BENEFITS: Record<CalculatorSlug, string> = {
     "Use this to compare the true 3-year cost of car, e-bike, and e-scooter commuting.",
 
   // E-Scooter
+  "escooter-range-performance":
+    "Use this to size motors, battery, and controller for real scooter range, hills, and tire life.",
   "escooter-range":
     "Use this to know how far you can still ride before finding a charger.",
   "escooter-tire-pressure":

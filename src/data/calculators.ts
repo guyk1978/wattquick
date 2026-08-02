@@ -1402,7 +1402,7 @@ export const calculators = [
   icon: Shield,
   tag: "Backup",
   category: "backup",
-  suggestions: ["battery-runtime", "amps-to-watts", "battery-percentage"],
+  suggestions: ["solar-backup-calculator", "battery-runtime", "amps-to-watts", "critical-load-analysis"],
   fields: [
     { id: "wh", label: "Battery energy", unit: "Wh", placeholder: "500" },
     { id: "load", label: "Load power", unit: "W", placeholder: "150" },

@@ -25,12 +25,155 @@ import {
   formatEbikeWeightPerformanceResult,
   TERRAIN_PRESETS,
 } from "@/lib/calculators/ebike";
+import {
+  EBIKE_BATTERY_PRESETS,
+  EBIKE_BODY_BUILD_OPTIONS,
+  EBIKE_CONTROLLER_PRESETS,
+  EBIKE_MOTOR_PRESETS,
+  EBIKE_STYLE_OPTIONS,
+  EBIKE_TERRAIN_OPTIONS,
+  EBIKE_TIRE_OPTIONS,
+  formatEbikeRangePerformanceResult,
+} from "@/lib/calculators/ebike-range-performance";
 
 const EBIKE_SEO_INTRO =
   "Estimates are for planning rides, charging, and battery health—not a substitute for manufacturer specs or professional e-bike service.";
 
 /** E-bike micro-calculators */
 export const calculatorsEbike = [
+  {
+    slug: "ebike-range-performance",
+    href: "/ebike-range-performance",
+    title: "E-Bike Range & Performance Calculator",
+    description:
+      "Estimate real-world e-bike range, PAS modes, speed profiles, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+    keywords: [
+      "ebike range performance calculator",
+      "electric bike range",
+      "pas mode range comparison",
+      "ebike speed estimator",
+      "ebike battery life",
+    ],
+    icon: Bike,
+    tag: "E-Bike",
+    category: "ebike",
+    suggestions: [
+      "ebike-range-estimator",
+      "ebike-max-speed",
+      "ebike-controller-watts",
+      "ebike-battery-cycle-life",
+    ],
+    fields: [
+      {
+        id: "motorPreset",
+        label: "Motor power preset",
+        inputType: "select",
+        defaultValue: "500",
+        options: [...EBIKE_MOTOR_PRESETS],
+      },
+      {
+        id: "motorWattsCustom",
+        label: "Custom motor power",
+        unit: "W",
+        placeholder: "650",
+        defaultValue: "650",
+        advanced: true,
+      },
+      {
+        id: "batteryPreset",
+        label: "Battery preset",
+        inputType: "select",
+        defaultValue: "48/15",
+        options: EBIKE_BATTERY_PRESETS.map(({ value, label }) => ({
+          value,
+          label,
+        })),
+      },
+      {
+        id: "batteryVoltsCustom",
+        label: "Custom voltage",
+        unit: "V",
+        placeholder: "48",
+        defaultValue: "48",
+        advanced: true,
+      },
+      {
+        id: "batteryAhCustom",
+        label: "Custom capacity",
+        unit: "Ah",
+        placeholder: "15",
+        defaultValue: "15",
+        advanced: true,
+      },
+      {
+        id: "tire",
+        label: "Tire type",
+        inputType: "select",
+        defaultValue: "urban",
+        options: EBIKE_TIRE_OPTIONS.map(({ value, label }) => ({
+          value,
+          label,
+        })),
+      },
+      {
+        id: "controllerPreset",
+        label: "Controller amps preset",
+        inputType: "select",
+        defaultValue: "22",
+        options: [...EBIKE_CONTROLLER_PRESETS],
+      },
+      {
+        id: "controllerAmpsCustom",
+        label: "Custom controller amps",
+        unit: "A",
+        placeholder: "28",
+        defaultValue: "28",
+        advanced: true,
+      },
+      {
+        id: "riderWeightKg",
+        label: "Rider weight",
+        unit: "kg",
+        placeholder: "75",
+        defaultValue: "75",
+      },
+      {
+        id: "bodyBuild",
+        label: "Body build",
+        inputType: "select",
+        defaultValue: "average",
+        options: [...EBIKE_BODY_BUILD_OPTIONS],
+      },
+      {
+        id: "terrain",
+        label: "Terrain profile",
+        inputType: "select",
+        defaultValue: "flat",
+        options: [...EBIKE_TERRAIN_OPTIONS],
+      },
+      {
+        id: "ridingStyle",
+        label: "Riding style",
+        inputType: "select",
+        defaultValue: "mixed",
+        options: [...EBIKE_STYLE_OPTIONS],
+      },
+    ],
+    result: {
+      label: "Real battery range",
+      emptyMessage: "Enter hardware, rider, and terrain to estimate range & performance",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Range, PAS, speed & longevity model",
+          body: "Usable Wh = V × Ah × 0.9. Consumption starts at 8.5 Wh/km and scales with tire rolling resistance, rider mass/body build, terrain, and riding style. PAS Eco / Standard / Throttle compare assist intensity. System watts = min(motor W, V × A × 0.92). Battery cycles and tire life adjust for C-rate and usage severity; hardware warnings flag mismatched motor, pack, and controller combos.",
+        },
+        { heading: "Planning note", body: EBIKE_SEO_INTRO },
+      ],
+    },
+    compute: formatEbikeRangePerformanceResult,
+  },
   {
     slug: "ebike-range-estimator",
     href: "/ebike-range-estimator",
@@ -47,10 +190,10 @@ export const calculatorsEbike = [
     tag: "E-Bike",
     category: "ebike",
     suggestions: [
+      "ebike-range-performance",
       "ebike-charging-cost",
       "ebike-weight-performance",
       "ebike-charge-time",
-      "ebike-battery-cycle-life",
     ],
     fields: [
       {

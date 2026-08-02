@@ -17,11 +17,24 @@ import {
   ESCOOTER_VOLTAGE_PRESETS,
   formatEscooterResult,
 } from "@/lib/calculators/escooter";
+import {
+  ESCOOTER_BATTERY_PRESETS,
+  ESCOOTER_BODY_BUILD_OPTIONS,
+  ESCOOTER_CONTROLLER_PRESETS,
+  ESCOOTER_MODEL_PRESETS,
+  ESCOOTER_MOTOR_LAYOUTS,
+  ESCOOTER_MOTOR_PRESETS,
+  ESCOOTER_STYLE_OPTIONS,
+  ESCOOTER_TERRAIN_OPTIONS,
+  ESCOOTER_TIRE_OPTIONS,
+  formatEscooterRangePerformanceResult,
+} from "@/lib/calculators/escooter-range-performance";
 
 const ESCOOTER_SEO =
   "Planning estimates for e-scooters—verify against manufacturer specs. Small wheels and light packs behave differently from e-bikes.";
 
 const escooterSlugs = [
+  "escooter-range-performance",
   "escooter-range",
   "escooter-tire-pressure",
   "escooter-max-speed",
@@ -39,6 +52,154 @@ const escooterSlugs = [
 /** E-scooter micro-calculators */
 export const calculatorsEscooter = [
   {
+    slug: "escooter-range-performance",
+    href: "/escooter-range-performance",
+    title: "E-Scooter Range & Performance Calculator",
+    description:
+      "Estimate real-world e-scooter range, speed on hills, and component lifespan from motor, battery, tires, controller, rider, and terrain.",
+    keywords: [
+      "escooter range performance calculator",
+      "electric scooter range",
+      "dual motor scooter range",
+      "escooter speed estimator",
+      "scooter tire lifespan",
+    ],
+    icon: Zap,
+    tag: "E-Scooter",
+    category: "escooter",
+    suggestions: [
+      "escooter-range",
+      "escooter-max-speed",
+      "escooter-hill-climb",
+      "escooter-tire-wear",
+    ],
+    fields: [
+      {
+        id: "modelPreset",
+        label: "Scooter model / brand",
+        inputType: "select",
+        defaultValue: "ninebot",
+        options: [...ESCOOTER_MODEL_PRESETS],
+      },
+      {
+        id: "motorLayout",
+        label: "Motor configuration",
+        inputType: "select",
+        defaultValue: "single",
+        options: [...ESCOOTER_MOTOR_LAYOUTS],
+      },
+      {
+        id: "motorPreset",
+        label: "Motor wattage preset",
+        inputType: "select",
+        defaultValue: "1000",
+        options: [...ESCOOTER_MOTOR_PRESETS],
+      },
+      {
+        id: "motorWattsCustom",
+        label: "Custom motor power",
+        unit: "W",
+        placeholder: "1500",
+        defaultValue: "1500",
+        advanced: true,
+      },
+      {
+        id: "batteryPreset",
+        label: "Battery preset",
+        inputType: "select",
+        defaultValue: "52/20",
+        options: ESCOOTER_BATTERY_PRESETS.map(({ value, label }) => ({
+          value,
+          label,
+        })),
+      },
+      {
+        id: "batteryVoltsCustom",
+        label: "Custom voltage",
+        unit: "V",
+        placeholder: "52",
+        defaultValue: "52",
+        advanced: true,
+      },
+      {
+        id: "batteryAhCustom",
+        label: "Custom capacity",
+        unit: "Ah",
+        placeholder: "20",
+        defaultValue: "20",
+        advanced: true,
+      },
+      {
+        id: "tire",
+        label: "Tire type & size",
+        inputType: "select",
+        defaultValue: "pneumatic-10",
+        options: ESCOOTER_TIRE_OPTIONS.map(({ value, label }) => ({
+          value,
+          label,
+        })),
+      },
+      {
+        id: "controllerPreset",
+        label: "Controller amps preset",
+        inputType: "select",
+        defaultValue: "25",
+        options: [...ESCOOTER_CONTROLLER_PRESETS],
+      },
+      {
+        id: "controllerAmpsCustom",
+        label: "Custom controller amps",
+        unit: "A",
+        placeholder: "35",
+        defaultValue: "35",
+        advanced: true,
+      },
+      {
+        id: "riderWeightKg",
+        label: "Rider weight",
+        unit: "kg",
+        placeholder: "75",
+        defaultValue: "75",
+      },
+      {
+        id: "bodyBuild",
+        label: "Body build",
+        inputType: "select",
+        defaultValue: "average",
+        options: [...ESCOOTER_BODY_BUILD_OPTIONS],
+      },
+      {
+        id: "terrain",
+        label: "Terrain profile",
+        inputType: "select",
+        defaultValue: "flat",
+        options: [...ESCOOTER_TERRAIN_OPTIONS],
+      },
+      {
+        id: "ridingStyle",
+        label: "Riding style",
+        inputType: "select",
+        defaultValue: "mixed",
+        options: [...ESCOOTER_STYLE_OPTIONS],
+      },
+    ],
+    result: {
+      label: "Real battery range",
+      emptyMessage:
+        "Enter hardware, rider, and terrain to estimate range & performance",
+    },
+    seo: {
+      sections: [
+        {
+          heading: "Range, speed & longevity model",
+          body: "Usable Wh = V × Ah × 0.88. Scooter consumption starts near 14.5 Wh/km (higher than e-bikes due to stance and small wheels) and scales with tire rolling resistance, rider mass, terrain, dual-motor load, and riding style. System watts = min(motor W, V × A × 0.92). Battery cycles and tire life adjust for C-rate and usage severity; hardware warnings flag mismatched motors, packs, and controllers.",
+        },
+        { heading: "Planning note", body: ESCOOTER_SEO },
+      ],
+    },
+    compute: formatEscooterRangePerformanceResult,
+  },
+  {
     slug: "escooter-range",
     href: "/escooter-range",
     title: "E-Scooter Range Calculator",
@@ -48,7 +209,12 @@ export const calculatorsEscooter = [
     icon: Navigation,
     tag: "E-Scooter",
     category: "escooter",
-    suggestions: ["escooter-tire-pressure", "escooter-cost-per-km", "escooter-charge-time"],
+    suggestions: [
+      "escooter-range-performance",
+      "escooter-tire-pressure",
+      "escooter-cost-per-km",
+      "escooter-charge-time",
+    ],
     fields: [
       {
         id: "nominalVoltage",

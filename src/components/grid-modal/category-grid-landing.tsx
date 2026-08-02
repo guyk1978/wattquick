@@ -1,4 +1,5 @@
 import { CategoryEcosystemHero } from "@/components/home/category-ecosystem-hero";
+import { CategoryPromoStrip } from "@/components/home/category-promo-strip";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
 import { ToolGrid } from "@/components/grid-modal/tool-grid";
@@ -17,7 +18,7 @@ type CategoryGridLandingProps = {
 };
 
 /**
- * Shared category template: hero → tools → category nav grid → SEO copy.
+ * Shared category template: hero → optional promo → tools → category nav → SEO.
  */
 export function CategoryGridLanding({
   category,
@@ -32,6 +33,7 @@ export function CategoryGridLanding({
       themeColor={getCategoryColor(category)}
     >
       <CategoryEcosystemHero category={category} />
+      <CategoryPromoStrip category={category} />
       <ToolGrid calculators={calculators} />
       <CategoryNavigationGrid activeCategory={category} />
 

@@ -43,6 +43,9 @@ import { BatterySeriesParallelViz } from "@/components/calculator/viz/battery-se
 import { CampingFridgeRuntimeViz } from "@/components/calculator/viz/camping-fridge-runtime-viz";
 import { ConductorResistanceTemperatureViz } from "@/components/calculator/viz/conductor-resistance-temperature-viz";
 import { CriticalLoadAnalysisViz } from "@/components/calculator/viz/critical-load-analysis-viz";
+import { CommercialEvPlannerViz } from "@/components/calculator/viz/commercial-ev-planner-viz";
+import { PowerStationPlannerViz } from "@/components/calculator/viz/power-station-planner-viz";
+import { SolarBackupCalculatorViz } from "@/components/calculator/viz/solar-backup-calculator-viz";
 import { DcCableSizeViz } from "@/components/calculator/viz/dc-cable-size-viz";
 import { DcCableVoltageDropViz } from "@/components/calculator/viz/dc-cable-voltage-drop-viz";
 import { DemandChargeCalculatorViz } from "@/components/calculator/viz/demand-charge-calculator-viz";
@@ -53,6 +56,7 @@ import { EbikeChargingCostViz } from "@/components/calculator/viz/ebike-charging
 import { EbikeCommuteSavingsViz } from "@/components/calculator/viz/ebike-commute-savings-viz";
 import { EbikeControllerWattsViz } from "@/components/calculator/viz/ebike-controller-watts-viz";
 import { EbikeMaxSpeedViz } from "@/components/calculator/viz/ebike-max-speed-viz";
+import { EbikeRangePerformanceViz } from "@/components/calculator/viz/ebike-range-performance-viz";
 import { EbikeRangeViz } from "@/components/calculator/viz/ebike-range-viz";
 import { EbikeVoltageSagViz } from "@/components/calculator/viz/ebike-voltage-sag-viz";
 import { EbikeWeightPerformanceViz } from "@/components/calculator/viz/ebike-weight-performance-viz";
@@ -73,6 +77,7 @@ import { AcInverterSavingsViz } from "@/components/calculator/viz/ac-inverter-sa
 import { SolarWaterHeaterEfficiencyViz } from "@/components/calculator/viz/solar-water-heater-efficiency-viz";
 import { SmallWindTurbineYieldViz } from "@/components/calculator/viz/small-wind-turbine-yield-viz";
 import { StandbyPowerAggregatorViz } from "@/components/calculator/viz/standby-power-aggregator-viz";
+import { EscooterRangePerformanceViz } from "@/components/calculator/viz/escooter-range-performance-viz";
 import { EscooterRangeViz } from "@/components/calculator/viz/escooter-range-viz";
 import { EscooterTirePressureViz } from "@/components/calculator/viz/escooter-tire-pressure-viz";
 import { EscooterTireWearViz } from "@/components/calculator/viz/escooter-tire-wear-viz";
@@ -166,6 +171,10 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "ebike-range-estimator": {
       calculatorTitle: "E-Bike Range Estimator",
       Viz: EbikeRangeViz,
+    },
+    "ebike-range-performance": {
+      calculatorTitle: "E-Bike Range & Performance Calculator",
+      Viz: EbikeRangePerformanceViz,
     },
     "ebike-charging-cost": {
       calculatorTitle: "E-Bike Full Charge Cost Calculator",
@@ -303,6 +312,18 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
       calculatorTitle: "EV Truck Range vs. Payload Calculator",
       Viz: EvTruckRangeViz,
     },
+    "commercial-ev-planner": {
+      calculatorTitle: "Commercial EV Fleet Range Planner",
+      Viz: CommercialEvPlannerViz,
+    },
+    "power-station-planner": {
+      calculatorTitle: "Portable Power Station & RV Off-Grid Energy Planner",
+      Viz: PowerStationPlannerViz,
+    },
+    "solar-backup-calculator": {
+      calculatorTitle: "Home Solar Backup & UPS Energy Storage Calculator",
+      Viz: SolarBackupCalculatorViz,
+    },
     "ev-fleet-tco": {
       calculatorTitle: "EV Fleet TCO vs. Gas Calculator",
       Viz: EvFleetTcoViz,
@@ -322,6 +343,10 @@ export const CALCULATOR_VIZ: Partial<Record<CalculatorId, CalculatorVizConfig>> 
     "escooter-range": {
       calculatorTitle: "E-Scooter Range Calculator",
       Viz: EscooterRangeViz,
+    },
+    "escooter-range-performance": {
+      calculatorTitle: "E-Scooter Range & Performance Calculator",
+      Viz: EscooterRangePerformanceViz,
     },
     "escooter-tire-pressure": {
       calculatorTitle: "E-Scooter Tyre Pressure & Rolling Resistance",
