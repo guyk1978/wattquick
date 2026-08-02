@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
 import { DeferredAdSense } from "@/components/deferred-adsense";
+import { DeferredClientChrome } from "@/components/deferred-client-chrome";
 import { LayoutChrome } from "@/components/layout-chrome";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GridPinnedCalculatorProvider } from "@/components/grid-modal/grid-pinned-calculator-context";
@@ -33,37 +33,6 @@ const geistMono = Geist_Mono({
   adjustFontFallback: true,
 });
 
-const NavigationLoadingOverlay = dynamic(
-  () =>
-    import("@/components/navigation-loading-overlay").then((mod) => ({
-      default: mod.NavigationLoadingOverlay,
-    })),
-  { ssr: false }
-);
-
-const AnalyticsRouteTracker = dynamic(
-  () =>
-    import("@/components/analytics-route-tracker").then((mod) => ({
-      default: mod.AnalyticsRouteTracker,
-    })),
-  { ssr: false }
-);
-
-const CookieConsentBanner = dynamic(
-  () =>
-    import("@/components/cookie-consent-banner").then((mod) => ({
-      default: mod.CookieConsentBanner,
-    })),
-  { ssr: false }
-);
-
-const ServiceWorkerRegistration = dynamic(
-  () =>
-    import("@/components/service-worker-registration").then((mod) => ({
-      default: mod.ServiceWorkerRegistration,
-    })),
-  { ssr: false }
-);
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...createPageMetadata({
@@ -127,16 +96,14 @@ export default function RootLayout({
         <ThemeProvider>
           <GridPinnedCalculatorProvider>
             <LegacyUrlSanitizer />
-            <NavigationLoadingOverlay />
-            <AnalyticsRouteTracker />
-            <LayoutChrome>
-              <PageTransition>
-                <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
-              </PageTransition>
-            </LayoutChrome>
-            <CookieConsentBanner />
-            <DeferredAdSense />
-            <ServiceWorkerRegistration />
+            <DeferredClientChrome>
+              <LayoutChrome>
+                <PageTransition>
+                  <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
+                </PageTransition>
+              </LayoutChrome>
+              <DeferredAdSense />
+            </DeferredClientChrome>
           </GridPinnedCalculatorProvider>
         </ThemeProvider>
       </body>
