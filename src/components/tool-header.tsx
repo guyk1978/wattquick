@@ -15,13 +15,20 @@ import { getCalculatorMeta } from "@/lib/calculators/registry";
 import { getCategoryColor } from "@/lib/category-theme";
 import { cn } from "@/lib/utils";
 
-export type ToolHeaderTab = "calc" | "viz" | "doc" | "related" | "reviews";
+export type ToolHeaderTab =
+  | "calc"
+  | "viz"
+  | "doc"
+  | "related"
+  | "categories"
+  | "reviews";
 
 const TAB_LABELS: Record<ToolHeaderTab, string> = {
   calc: "[CALC]",
   viz: "[VIZ]",
   doc: "[DOC]",
   related: "[RELATED]",
+  categories: "[CATEGORIES]",
   reviews: "[REVIEWS]",
 };
 
@@ -40,6 +47,7 @@ interface ToolHeaderProps {
   hasVizTab?: boolean;
   hasDocTab?: boolean;
   hasRelatedTab?: boolean;
+  hasCategoriesTab?: boolean;
   hasReviewsTab?: boolean;
   /** Enables the favorite toggle and interactive rating for this tool. */
   calculatorId?: CalculatorId;
@@ -70,6 +78,7 @@ export function ToolHeader({
   hasVizTab = false,
   hasDocTab = false,
   hasRelatedTab = false,
+  hasCategoriesTab = false,
   hasReviewsTab = false,
   calculatorId,
   onSaveProject,
@@ -149,6 +158,7 @@ export function ToolHeader({
     ...(hasVizTab ? (["viz"] as const) : []),
     ...(hasDocTab ? (["doc"] as const) : []),
     ...(hasRelatedTab ? (["related"] as const) : []),
+    ...(hasCategoriesTab ? (["categories"] as const) : []),
     ...(hasReviewsTab ? (["reviews"] as const) : []),
   ];
 

@@ -7,6 +7,7 @@ const NAV_LABELS: Record<Exclude<ToolHeaderTab, "doc">, string> = {
   calc: "Calculator",
   viz: "Visualization",
   related: "Related tools",
+  categories: "Categories",
   reviews: "Reviews",
 };
 
@@ -14,6 +15,7 @@ const NAV_HINTS: Record<Exclude<ToolHeaderTab, "doc">, string> = {
   calc: "Inputs & results",
   viz: "Animated schematic",
   related: "Similar calculators",
+  categories: "All site categories",
   reviews: "Ratings & feedback",
 };
 
@@ -22,6 +24,7 @@ type ToolWorkspaceNavProps = {
   onTabChange: (tab: ToolHeaderTab) => void;
   hasVizTab?: boolean;
   hasRelatedTab?: boolean;
+  hasCategoriesTab?: boolean;
   hasReviewsTab?: boolean;
   className?: string;
 };
@@ -35,6 +38,7 @@ export function ToolWorkspaceNav({
   onTabChange,
   hasVizTab = false,
   hasRelatedTab = false,
+  hasCategoriesTab = true,
   hasReviewsTab = false,
   className,
 }: ToolWorkspaceNavProps) {
@@ -42,6 +46,7 @@ export function ToolWorkspaceNav({
     "calc",
     ...(hasVizTab ? (["viz"] as const) : []),
     ...(hasRelatedTab ? (["related"] as const) : []),
+    ...(hasCategoriesTab ? (["categories"] as const) : []),
     ...(hasReviewsTab ? (["reviews"] as const) : []),
   ];
 

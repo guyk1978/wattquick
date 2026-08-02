@@ -7,6 +7,7 @@ import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
 import { ToolModalReviews } from "@/components/grid-modal/tool-modal-reviews";
+import { ToolModalCategories } from "@/components/grid-modal/tool-modal-categories";
 import { ToolModalViz } from "@/components/grid-modal/tool-modal-viz";
 import type { CalculatorId } from "@/lib/calculators";
 import type { RelatedArticleCard } from "@/lib/calculators/related-articles";
@@ -203,10 +204,14 @@ export function ToolWorkspaceModal({
       initialTab === "viz" || viewFromUrl === "viz";
     const wantsReviews =
       initialTab === "reviews" || viewFromUrl === "reviews";
+    const wantsCategories =
+      initialTab === "categories" || viewFromUrl === "categories";
     if (wantsViz && hasCalculatorViz(calculatorId)) {
       setActiveTab("viz");
     } else if (wantsReviews) {
       setActiveTab("reviews");
+    } else if (wantsCategories) {
+      setActiveTab("categories");
     } else if (initialTab && initialTab !== "calc") {
       setActiveTab(initialTab);
     }
@@ -271,6 +276,7 @@ export function ToolWorkspaceModal({
           hasVizTab={hasViz}
           hasDocTab={hasDocumentation}
           hasRelatedTab={hasRelated}
+          hasCategoriesTab
           hasReviewsTab
           calculatorId={calculatorId}
           onSaveProject={onRequestSaveProject}
@@ -376,6 +382,20 @@ export function ToolWorkspaceModal({
               </div>
             </div>
           ) : null}
+
+          <div
+            className={cn(
+              "tool-workspace-modal__view tool-workspace-modal__view--categories",
+              activeTab === "categories" && "tool-workspace-modal__view--active"
+            )}
+            aria-hidden={activeTab !== "categories"}
+          >
+            {activeTab === "categories" ? (
+              <div className="tool-workspace-modal__docs-scroll">
+                <ToolModalCategories activeCategory={meta.category} />
+              </div>
+            ) : null}
+          </div>
 
           <div
             className={cn(

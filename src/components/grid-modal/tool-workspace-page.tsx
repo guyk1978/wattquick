@@ -5,6 +5,7 @@ import { CalculatorPanel } from "@/components/calculator/calculator-panel";
 import { RelatedArticlesWorkspaceProvider } from "@/components/calculator/calculator-modal-wrapper";
 import { ToolHeader, type ToolHeaderTab } from "@/components/tool-header";
 import { ToolModalReviews } from "@/components/grid-modal/tool-modal-reviews";
+import { ToolModalCategories } from "@/components/grid-modal/tool-modal-categories";
 import { ToolModalViz } from "@/components/grid-modal/tool-modal-viz";
 import { ToolWorkspaceNav } from "@/components/grid-modal/tool-workspace-nav";
 import type { CalculatorId } from "@/lib/calculators";
@@ -50,6 +51,9 @@ function resolveInitialTab(
     return "viz";
   }
   if (initialTab === "reviews" || viewFromUrl === "reviews") return "reviews";
+  if (initialTab === "categories" || viewFromUrl === "categories") {
+    return "categories";
+  }
   if (initialTab === "related" || viewFromUrl === "related") return "related";
   if (initialTab && initialTab !== "calc" && initialTab !== "doc") {
     return initialTab;
@@ -59,7 +63,7 @@ function resolveInitialTab(
 
 /**
  * Standalone full-page tool workspace: site chrome stays visible, vertical
- * section nav switches Calculator / Viz / Related / Reviews, and documentation
+ * section nav switches Calculator / Viz / Related / Categories / Reviews, and documentation
  * is always open below for crawlers and readers.
  */
 export function ToolWorkspacePage({
@@ -315,6 +319,7 @@ export function ToolWorkspacePage({
                 onTabChange={handleTabChange}
                 hasVizTab={hasViz}
                 hasRelatedTab={hasRelated}
+                hasCategoriesTab
                 hasReviewsTab
               />
 
@@ -370,6 +375,24 @@ export function ToolWorkspacePage({
                     <div className="tool-workspace-page__scroll">{related}</div>
                   </div>
                 ) : null}
+
+                <div
+                  id="tool-section-panel-categories"
+                  role="tabpanel"
+                  aria-labelledby="tool-section-tab-categories"
+                  hidden={activeTab !== "categories"}
+                  className={cn(
+                    "tool-workspace-page__view tool-workspace-page__view--categories",
+                    activeTab === "categories" &&
+                      "tool-workspace-page__view--active"
+                  )}
+                >
+                  {activeTab === "categories" ? (
+                    <div className="tool-workspace-page__scroll">
+                      <ToolModalCategories activeCategory={meta.category} />
+                    </div>
+                  ) : null}
+                </div>
 
                 <div
                   id="tool-section-panel-reviews"
