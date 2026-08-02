@@ -1,7 +1,8 @@
 import Fuse from "fuse.js";
 import type { SiteSearchItem } from "@/lib/site-search-types";
+import { SITE_SEARCH_INDEX_URL } from "@/lib/site-search-types";
 
-export const SITE_SEARCH_INDEX_URL = "/data/search-index.json";
+export { SITE_SEARCH_INDEX_URL };
 
 export function createSiteSearchEngine(items: SiteSearchItem[]) {
   return new Fuse(items, {

@@ -24,3 +24,5 @@ export const SITE_SEARCH_CATEGORY_ORDER = [
   "Blog Articles",
   "Site",
 ] as const;
+
+export const SITE_SEARCH_INDEX_URL = "/data/search-index.json";

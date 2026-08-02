@@ -12381,23 +12381,34 @@ body:has(.legal-modal) .grid-modal-shell {
 }
 
 .wq-eco__trace {
+  opacity: 0.55;
   transition: opacity 0.2s ease;
 }
 
 .wq-eco__trace--dim {
+  opacity: 0.15;
   filter: none;
 }
 
 .wq-eco__trace--hot {
+  opacity: 1;
   stroke-width: 2;
 }
 
 .wq-eco__node {
-  transition: opacity 0.2s ease;
+  opacity: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .wq-eco__node--dim {
+  opacity: 0.35;
   pointer-events: auto;
+}
+
+.wq-eco__node--active {
+  transform: scale(1.08);
 }
 
 .wq-eco__badge-dot {
@@ -12471,8 +12482,13 @@ body:has(.legal-modal) .grid-modal-shell {
   .wq-eco__sun-rays,
   .wq-eco__turbine,
   .wq-eco__battery-fill,
-  .wq-eco__water {
+  .wq-eco__water,
+  .wq-eco__flow-dot {
     animation: none;
+  }
+
+  .wq-eco__flow-dot {
+    display: none;
   }
 
   .wq-eco__turbine {

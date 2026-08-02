@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Fuse from "fuse.js";
 import { Search } from "lucide-react";
 import {
   useCallback,
@@ -12,16 +11,16 @@ import {
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import {
-  createSiteSearchEngine,
-  searchSiteItems,
-  SITE_SEARCH_INDEX_URL,
-} from "@/lib/site-search-engine";
-import {
   SITE_SEARCH_CATEGORY_ORDER,
+  SITE_SEARCH_INDEX_URL,
   type SiteSearchIndex,
   type SiteSearchItem,
 } from "@/lib/site-search-types";
 import { cn } from "@/lib/utils";
+
+type SearchEngine = {
+  search: (query: string) => Array<{ item: SiteSearchItem }>;
+};
 
 function isMacPlatform() {
   if (typeof navigator === "undefined") return false;
@@ -64,7 +63,7 @@ export function SiteHeaderSearch() {
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [index, setIndex] = useState<SiteSearchIndex | null>(null);
-  const [engine, setEngine] = useState<Fuse<SiteSearchItem> | null>(null);
+  const [engine, setEngine] = useState<SearchEngine | null>(null);
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -83,19 +82,21 @@ export function SiteHeaderSearch() {
 
     let cancelled = false;
 
-    fetch(SITE_SEARCH_INDEX_URL)
-      .then((res) => {
+    void (async () => {
+      try {
+        const [{ createSiteSearchEngine }, res] = await Promise.all([
+          import("@/lib/site-search-engine"),
+          fetch(SITE_SEARCH_INDEX_URL),
+        ]);
         if (!res.ok) throw new Error("Search index failed to load");
-        return res.json() as Promise<SiteSearchIndex>;
-      })
-      .then((data) => {
+        const data = (await res.json()) as SiteSearchIndex;
         if (cancelled) return;
         setIndex(data);
-        setEngine(createSiteSearchEngine(data.items ?? []));
-      })
-      .catch(() => {
+        setEngine(createSiteSearchEngine(data.items ?? []) as SearchEngine);
+      } catch {
         if (!cancelled) setLoadError(true);
-      });
+      }
+    })();
 
     return () => {
       cancelled = true;
@@ -106,7 +107,15 @@ export function SiteHeaderSearch() {
     if (!index) return [];
     const q = query.trim();
     if (!q) return index.popular.slice(0, 4);
-    return searchSiteItems(engine, index.items, q);
+    if (engine) {
+      return engine.search(q).map((result) => result.item);
+    }
+    const lower = q.toLowerCase();
+    return index.items.filter(
+      (item) =>
+        item.title.toLowerCase().includes(lower) ||
+        item.description.toLowerCase().includes(lower)
+    );
   }, [engine, index, query]);
 
   const groupedResults = useMemo(() => groupResults(flatResults), [flatResults]);

@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AnalyticsRouteTracker } from "@/components/analytics-route-tracker";
-import { CookieConsentBanner } from "@/components/cookie-consent-banner";
 import { DeferredAdSense } from "@/components/deferred-adsense";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { LayoutChrome } from "@/components/layout-chrome";
 import { ThemeProvider } from "@/components/theme-provider";
 import { GridPinnedCalculatorProvider } from "@/components/grid-modal/grid-pinned-calculator-context";
 import { LegacyUrlSanitizer } from "@/components/legacy-url-sanitizer";
-import { NavigationLoadingOverlay } from "@/components/navigation-loading-overlay";
 import { PageTransition } from "@/components/transitions/PageTransition";
-import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import { createPageMetadata, FACEBOOK_APP_ID, SITE_URL } from "@/lib/seo";
 import { consentInitScript } from "@/lib/consent-init";
@@ -24,14 +20,50 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
 });
 
+/** Mono is decorative — don't compete with LCP font preload on mobile. */
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
+  adjustFontFallback: true,
 });
 
+const NavigationLoadingOverlay = dynamic(
+  () =>
+    import("@/components/navigation-loading-overlay").then((mod) => ({
+      default: mod.NavigationLoadingOverlay,
+    })),
+  { ssr: false }
+);
+
+const AnalyticsRouteTracker = dynamic(
+  () =>
+    import("@/components/analytics-route-tracker").then((mod) => ({
+      default: mod.AnalyticsRouteTracker,
+    })),
+  { ssr: false }
+);
+
+const CookieConsentBanner = dynamic(
+  () =>
+    import("@/components/cookie-consent-banner").then((mod) => ({
+      default: mod.CookieConsentBanner,
+    })),
+  { ssr: false }
+);
+
+const ServiceWorkerRegistration = dynamic(
+  () =>
+    import("@/components/service-worker-registration").then((mod) => ({
+      default: mod.ServiceWorkerRegistration,
+    })),
+  { ssr: false }
+);
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...createPageMetadata({
@@ -97,11 +129,11 @@ export default function RootLayout({
             <LegacyUrlSanitizer />
             <NavigationLoadingOverlay />
             <AnalyticsRouteTracker />
-            <SiteHeader />
-            <PageTransition>
-              <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
-            </PageTransition>
-            <SiteFooter />
+            <LayoutChrome>
+              <PageTransition>
+                <main className="min-w-0 flex-1 overflow-x-clip">{children}</main>
+              </PageTransition>
+            </LayoutChrome>
             <CookieConsentBanner />
             <DeferredAdSense />
             <ServiceWorkerRegistration />

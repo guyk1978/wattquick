@@ -8,9 +8,17 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import dynamic from "next/dynamic";
 import { usePathname, useRouter } from "next/navigation";
-import { LegalModal } from "@/components/grid-modal/legal-modal";
 import type { LegalDocId, LegalDocument } from "@/lib/legal-types";
+
+const LegalModal = dynamic(
+  () =>
+    import("@/components/grid-modal/legal-modal").then((mod) => ({
+      default: mod.LegalModal,
+    })),
+  { ssr: true }
+);
 
 type LegalModalContextValue = {
   openLegal: (id: LegalDocId) => void;
@@ -59,11 +67,9 @@ export function LegalModalProvider({
   return (
     <LegalModalContext.Provider value={value}>
       {children}
-      <LegalModal
-        open={document !== null}
-        document={document}
-        onClose={closeLegal}
-      />
+      {document ? (
+        <LegalModal open document={document} onClose={closeLegal} />
+      ) : null}
     </LegalModalContext.Provider>
   );
 }

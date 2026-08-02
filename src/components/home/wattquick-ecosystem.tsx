@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { useCallback, useState, type ReactNode } from "react";
 import type { CalculatorCategory } from "@/data/calculator-types";
 import { CALCULATOR_CATEGORY_LABELS } from "@/data/calculator-types";
@@ -224,15 +223,12 @@ function FlowDot({
   color,
   delay,
   duration,
-  reduceMotion,
 }: {
   path: string;
   color: string;
   delay: number;
   duration: number;
-  reduceMotion: boolean;
 }) {
-  if (reduceMotion) return null;
   return (
     <circle r="2.75" fill={color} className="wq-eco__flow-dot" opacity="0.95">
       <animateMotion
@@ -520,7 +516,6 @@ type WattQuickEcosystemProps = {
  * categories radiating from a central battery hub.
  */
 export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
-  const reduceMotion = useReducedMotion() ?? false;
   const [hovered, setHovered] = useState<string | null>(null);
 
   const onEnter = useCallback((id: string) => setHovered(id), []);
@@ -609,7 +604,7 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
 
             return (
               <g key={`trace-${node.id}`}>
-                <motion.path
+                <path
                   d={d}
                   fill="none"
                   stroke={tone.stroke}
@@ -622,13 +617,6 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                     dimmed && "wq-eco__trace--dim",
                     hovered === node.id && "wq-eco__trace--hot"
                   )}
-                  /* initial={false}: paint final state in SSR so LCP is not gated on hydration. */
-                  initial={false}
-                  animate={{
-                    pathLength: 1,
-                    opacity: dimmed ? 0.15 : hovered === node.id ? 1 : 0.55,
-                  }}
-                  transition={{ opacity: { duration: reduceMotion ? 0 : 0.25 } }}
                 />
                 <FlowDot
                   path={
@@ -639,7 +627,6 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                   color={tone.stroke}
                   delay={0.8 + i * 0.18}
                   duration={3.2 + (i % 4) * 0.45}
-                  reduceMotion={reduceMotion}
                 />
                 <FlowDot
                   path={
@@ -650,14 +637,13 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                   color={tone.stroke}
                   delay={2.2 + i * 0.18}
                   duration={3.2 + (i % 4) * 0.45}
-                  reduceMotion={reduceMotion}
                 />
               </g>
             );
           })}
 
           {/* Nodes */}
-          {NODES.map((node, i) => {
+          {NODES.map((node) => {
             const Glyph = GLYPHS[node.id] ?? GlyphBattery;
             const href = getCategoryPageHref(node.category);
             const active = hovered === node.id;
@@ -672,23 +658,12 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                 onFocus={() => onEnter(node.id)}
                 onBlur={onLeave}
               >
-                <motion.g
+                <g
                   className={cn(
                     "wq-eco__node",
                     active && "wq-eco__node--active",
                     dimmed && "wq-eco__node--dim"
                   )}
-                  /* initial={false}: nodes visible in first HTML paint (mobile LCP). */
-                  initial={false}
-                  animate={{
-                    opacity: dimmed ? 0.35 : 1,
-                    scale: active ? 1.08 : 1,
-                  }}
-                  transition={{
-                    opacity: { duration: reduceMotion ? 0 : 0.2 },
-                    scale: { duration: 0.2 },
-                  }}
-                  style={{ transformOrigin: "0px 0px" }}
                 >
                   <a
                     href={href}
@@ -704,7 +679,7 @@ export function WattQuickEcosystem({ className }: WattQuickEcosystemProps) {
                       active={active}
                     />
                   </a>
-                </motion.g>
+                </g>
               </g>
             );
           })}

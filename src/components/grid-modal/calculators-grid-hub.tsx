@@ -1,9 +1,20 @@
 import { WattQuickEcosystem } from "@/components/home/wattquick-ecosystem";
 import { CategoryNavigationGrid } from "@/components/grid-modal/category-navigation-grid";
 import { GridShell } from "@/components/grid-modal/grid-shell";
-import { PlatformOverview } from "@/components/grid-modal/platform-overview";
 import { getAllCalculatorMeta } from "@/lib/calculators";
 import type { LegalDocId } from "@/lib/legal-types";
+import dynamic from "next/dynamic";
+
+const PlatformOverview = dynamic(
+  () =>
+    import("@/components/grid-modal/platform-overview").then((mod) => ({
+      default: mod.PlatformOverview,
+    })),
+  {
+    ssr: true,
+    loading: () => null,
+  }
+);
 
 type CalculatorsGridHubProps = {
   /** Deep-link into LegalModal (used by /privacy and /terms). */

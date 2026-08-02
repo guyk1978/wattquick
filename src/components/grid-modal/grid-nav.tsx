@@ -1,14 +1,36 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BookOpen, Library, Menu, X } from "lucide-react";
-import { LibraryPanel } from "@/components/grid-modal/library-panel";
-import { MobileMenuSheet } from "@/components/mobile-menu-sheet";
 import { PWAInstaller } from "@/components/pwa-installer";
-import { SiteHeaderSearch } from "@/components/site-header-search";
 import { cn } from "@/lib/utils";
+
+const SiteHeaderSearch = dynamic(
+  () =>
+    import("@/components/site-header-search").then((mod) => ({
+      default: mod.SiteHeaderSearch,
+    })),
+  { ssr: false }
+);
+
+const LibraryPanel = dynamic(
+  () =>
+    import("@/components/grid-modal/library-panel").then((mod) => ({
+      default: mod.LibraryPanel,
+    })),
+  { ssr: false }
+);
+
+const MobileMenuSheet = dynamic(
+  () =>
+    import("@/components/mobile-menu-sheet").then((mod) => ({
+      default: mod.MobileMenuSheet,
+    })),
+  { ssr: false }
+);
 
 export type GridBreadcrumb = {
   label: string;
@@ -24,6 +46,7 @@ type GridNavProps = {
 export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [desktopChrome, setDesktopChrome] = useState(false);
   const pathname = usePathname();
   const articlesActive =
     pathname === "/articles" ||
@@ -32,6 +55,14 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
     pathname === "/blog" ||
     pathname === "/blog/" ||
     pathname.startsWith("/blog/");
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const sync = () => setDesktopChrome(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   return (
     <>
@@ -99,7 +130,7 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
 
           <div className="grid-nav__trailing grid-nav__desktop-only">
             <div className="grid-nav__search">
-              <SiteHeaderSearch />
+              {desktopChrome ? <SiteHeaderSearch /> : null}
             </div>
             <Link
               href="/articles/"
@@ -144,15 +175,19 @@ export function GridNav({ breadcrumbs = [], className }: GridNavProps) {
         </div>
       </header>
 
-      <MobileMenuSheet
-        id="grid-mobile-menu"
-        open={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        onOpenLibrary={() => setLibraryOpen(true)}
-        className="mobile-menu-sheet--grid"
-      />
+      {menuOpen ? (
+        <MobileMenuSheet
+          id="grid-mobile-menu"
+          open={menuOpen}
+          onClose={() => setMenuOpen(false)}
+          onOpenLibrary={() => setLibraryOpen(true)}
+          className="mobile-menu-sheet--grid"
+        />
+      ) : null}
 
-      <LibraryPanel open={libraryOpen} onClose={() => setLibraryOpen(false)} />
+      {libraryOpen ? (
+        <LibraryPanel open={libraryOpen} onClose={() => setLibraryOpen(false)} />
+      ) : null}
     </>
   );
 }

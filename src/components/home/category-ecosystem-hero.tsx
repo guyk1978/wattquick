@@ -1,6 +1,5 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import type { CSSProperties } from "react";
 import {
   CALCULATOR_CATEGORY_DESCRIPTIONS,
@@ -26,17 +25,19 @@ function FlowDot({
   color,
   delay,
   duration,
-  reduceMotion,
 }: {
   path: string;
   color: string;
   delay: number;
   duration: number;
-  reduceMotion: boolean;
 }) {
-  if (reduceMotion) return null;
   return (
-    <circle r="2.5" fill={color} opacity="0.95">
+    <circle
+      r="2.5"
+      fill={color}
+      opacity="0.95"
+      className="wq-cat-hero__flow-dot"
+    >
       <animateMotion
         dur={`${duration}s`}
         begin={`${delay}s`}
@@ -141,7 +142,6 @@ export function CategoryEcosystemHero({
   category,
   className,
 }: CategoryEcosystemHeroProps) {
-  const reduceMotion = useReducedMotion() ?? false;
   const color = getCategoryColor(category);
   const label = CALCULATOR_CATEGORY_LABELS[category];
   const description = CALCULATOR_CATEGORY_DESCRIPTIONS[category];
@@ -211,7 +211,7 @@ export function CategoryEcosystemHero({
             const d = pcbPath(hub.x, hub.y, node.x, node.y);
             return (
               <g key={node.id}>
-                <motion.path
+                <path
                   d={d}
                   fill="none"
                   stroke={color}
@@ -220,28 +220,21 @@ export function CategoryEcosystemHero({
                   strokeLinejoin="miter"
                   filter={`url(#wq-cat-glow-${category})`}
                   className="wq-cat-hero__trace"
-                  initial={false}
-                  animate={{ pathLength: 1, opacity: 0.55 }}
-                  transition={{ opacity: { duration: reduceMotion ? 0 : 0.3 } }}
+                  opacity={0.55}
                 />
                 <FlowDot
                   path={d}
                   color={color}
                   delay={0.7 + i * 0.25}
                   duration={3.4 + (i % 3) * 0.4}
-                  reduceMotion={reduceMotion}
                 />
               </g>
             );
           })}
 
-          {/* Hub — outer <g> keeps SVG translate; motion only fades opacity */}
+          {/* Hub — outer <g> keeps SVG translate */}
           <g transform={`translate(${hub.x} ${hub.y})`}>
-            <motion.g
-              initial={false}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0 }}
-            >
+            <g>
               <HubGlyph category={category} color={color} />
               <text
                 y={46}
@@ -254,17 +247,13 @@ export function CategoryEcosystemHero({
               >
                 {hub.label}
               </text>
-            </motion.g>
+            </g>
           </g>
 
           {/* Satellites */}
-          {sats.map((node, i) => (
+          {sats.map((node) => (
             <g key={`node-${node.id}`} transform={`translate(${node.x} ${node.y})`}>
-              <motion.g
-                initial={false}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0 }}
-              >
+              <g>
                 <circle
                   r={16}
                   fill="#0a0a0a"
@@ -283,7 +272,7 @@ export function CategoryEcosystemHero({
                 >
                   {node.label}
                 </text>
-              </motion.g>
+              </g>
             </g>
           ))}
 

@@ -1,10 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { FeedbackModal } from "@/components/grid-modal/feedback-modal";
+import dynamic from "next/dynamic";
 import { useLegalModal } from "@/components/grid-modal/legal-modal-provider";
 import type { LegalDocId } from "@/lib/legal-types";
 import { cn } from "@/lib/utils";
+
+const FeedbackModal = dynamic(
+  () =>
+    import("@/components/grid-modal/feedback-modal").then((mod) => ({
+      default: mod.FeedbackModal,
+    })),
+  { ssr: false }
+);
 
 const LEGAL_TRIGGERS: { id: LegalDocId; label: string }[] = [
   { id: "privacy", label: "Privacy Policy" },
@@ -52,10 +60,12 @@ export function GridFooter({ className }: GridFooterProps) {
         </div>
       </footer>
 
-      <FeedbackModal
-        open={feedbackOpen}
-        onClose={() => setFeedbackOpen(false)}
-      />
+      {feedbackOpen ? (
+        <FeedbackModal
+          open={feedbackOpen}
+          onClose={() => setFeedbackOpen(false)}
+        />
+      ) : null}
     </>
   );
 }
